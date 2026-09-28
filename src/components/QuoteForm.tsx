@@ -1,8 +1,68 @@
 "use client";
 
+import { FormEvent, useState } from "react";
 import { cars } from "@/data/cars";
 
 export default function QuoteForm() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [message, setMessage] = useState("");
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    const customerName = String(formData.get("customerName") || "").trim();
+    const phone = String(formData.get("phone") || "").trim();
+    const car = String(formData.get("car") || "").trim();
+
+    if (!customerName || !phone || !car) {
+      setMessage("Vui lòng nhập đầy đủ họ tên, số điện thoại và mẫu xe.");
+      return;
+    }
+
+    const apiUrl = process.env.NEXT_PUBLIC_QUOTE_API_URL;
+
+    if (!apiUrl) {
+      setMessage("Hệ thống nhận báo giá chưa được cấu hình.");
+      return;
+    }
+
+    try {
+      setIsSubmitting(true);
+      setMessage("");
+
+      await fetch(apiUrl, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "text/plain;charset=utf-8",
+        },
+        body: JSON.stringify({
+          customerName,
+          phone,
+          car,
+          source: "Website Mitsubishi",
+        }),
+      });
+
+      setMessage(
+        "Đã gửi yêu cầu báo giá. Lưu Hoàng Phúc sẽ liên hệ tư vấn sớm."
+      );
+
+      form.reset();
+    } catch (error) {
+      console.error(error);
+
+      setMessage(
+        "Chưa gửi được yêu cầu. Vui lòng thử lại hoặc liên hệ trực tiếp qua Zalo."
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
+
   return (
     <section id="bao-gia" className="bg-white">
       <div className="mx-auto max-w-7xl px-6 py-16">
@@ -22,7 +82,10 @@ export default function QuoteForm() {
             </p>
           </div>
 
-          <form className="mt-10 rounded-2xl border border-gray-200 bg-gray-50 p-6 shadow-sm sm:p-8">
+          <form
+            onSubmit={handleSubmit}
+            className="mt-10 rounded-2xl border border-gray-200 bg-gray-50 p-6 shadow-sm sm:p-8"
+          >
             <div className="grid gap-6 sm:grid-cols-2">
               <div>
                 <label
@@ -36,16 +99,14 @@ export default function QuoteForm() {
                   id="customerName"
                   name="customerName"
                   type="text"
+                  required
                   placeholder="Nhập họ và tên"
                   className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 outline-none transition focus:border-red-600"
                 />
               </div>
 
               <div>
-                <label
-                  htmlFor="phone"
-                  className="mb-2 block font-semibold"
-                >
+                <label htmlFor="phone" className="mb-2 block font-semibold">
                   Số điện thoại
                 </label>
 
@@ -54,16 +115,14 @@ export default function QuoteForm() {
                   name="phone"
                   type="tel"
                   inputMode="tel"
+                  required
                   placeholder="Nhập số điện thoại"
                   className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 outline-none transition focus:border-red-600"
                 />
               </div>
 
               <div className="sm:col-span-2">
-                <label
-                  htmlFor="car"
-                  className="mb-2 block font-semibold"
-                >
+                <label htmlFor="car" className="mb-2 block font-semibold">
                   Mẫu xe quan tâm
                 </label>
 
@@ -71,6 +130,7 @@ export default function QuoteForm() {
                   id="car"
                   name="car"
                   defaultValue=""
+                  required
                   className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 outline-none transition focus:border-red-600"
                 >
                   <option value="" disabled>
@@ -88,10 +148,17 @@ export default function QuoteForm() {
 
             <button
               type="submit"
-              className="mt-8 w-full rounded-lg bg-red-600 px-6 py-4 font-bold text-white transition hover:bg-red-700"
+              disabled={isSubmitting}
+              className="mt-8 w-full rounded-lg bg-red-600 px-6 py-4 font-bold text-white transition hover:bg-red-700 disabled:cursor-not-allowed disabled:bg-gray-400"
             >
-              Nhận báo giá ngay
+              {isSubmitting ? "Đang gửi..." : "Nhận báo giá ngay"}
             </button>
+
+            {message && (
+              <p className="mt-4 text-center font-semibold text-gray-700">
+                {message}
+              </p>
+            )}
 
             <p className="mt-4 text-center text-sm text-gray-500">
               Thông tin được sử dụng để liên hệ tư vấn theo yêu cầu của khách hàng.
