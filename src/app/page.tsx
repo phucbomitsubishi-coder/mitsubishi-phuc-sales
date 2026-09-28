@@ -1,5 +1,6 @@
 import { cars } from "@/data/cars";
 import { siteConfig } from "@/config/site";
+import QuoteForm from "@/components/QuoteForm";
 
 export default function Home() {
   return (
@@ -211,7 +212,12 @@ export default function Home() {
       ))}
     </div>
   </div>
-</section>{/* LIÊN HỆ */}
+</section>
+
+{/* NHẬN BÁO GIÁ */}
+<QuoteForm />
+
+{/* LIÊN HỆ */}
 <section id="lien-he" className="bg-neutral-950 text-white">
   <div className="mx-auto max-w-7xl px-6 py-16">
     <p className="font-semibold uppercase tracking-wider text-red-500">
