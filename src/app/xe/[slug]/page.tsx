@@ -80,12 +80,11 @@ export default async function CarDetailPage({
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
   <a
-    href="tel:0858678929"
-    className="rounded bg-red-600 px-6 py-3 font-semibold text-white hover:bg-red-700"
-  >
-    Nhận báo giá
-  </a>
-
+  href={`/?car=${encodeURIComponent(car.name)}#bao-gia`}
+  className="rounded bg-red-600 px-6 py-3 font-semibold text-white hover:bg-red-700"
+>
+  Nhận báo giá
+</a>
   <a
     href="https://zalo.me/0858678929"
     target="_blank"

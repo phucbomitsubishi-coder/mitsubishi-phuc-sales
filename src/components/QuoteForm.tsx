@@ -2,10 +2,13 @@
 
 import { FormEvent, useState } from "react";
 import { cars } from "@/data/cars";
+import { useSearchParams } from "next/navigation";
 
 export default function QuoteForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [message, setMessage] = useState("");
+  const searchParams = useSearchParams();
+const selectedCar = searchParams.get("car") || "";
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -155,7 +158,7 @@ if (!/^0\d{9}$/.test(normalizedPhone)) {
                 <select
                   id="car"
                   name="car"
-                  defaultValue=""
+                  defaultValue={selectedCar}
                   required
                   className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 outline-none transition focus:border-red-600"
                 >
