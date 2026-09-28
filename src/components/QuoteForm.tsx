@@ -7,13 +7,18 @@ export default function QuoteForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [message, setMessage] = useState("");
   const [selectedCar, setSelectedCar] = useState("");
+  const [selectedVariant, setSelectedVariant] = useState("");
 
 useEffect(() => {
   const params = new URLSearchParams(window.location.search);
   const carFromUrl = params.get("car");
+  const variantFromUrl = params.get("variant");
 
   if (carFromUrl && cars.some((car) => car.name === carFromUrl)) {
     setSelectedCar(carFromUrl);
+    if (variantFromUrl) {
+  setSelectedVariant(variantFromUrl);
+}
   }
 }, []);
 
@@ -26,6 +31,7 @@ useEffect(() => {
     const customerName = String(formData.get("customerName") || "").trim();
     const phone = String(formData.get("phone") || "").trim();
     const car = String(formData.get("car") || "").trim();
+    const variant = String(formData.get("variant") || "").trim();
 
     const website = String(formData.get("website") || "").trim();
 
@@ -66,6 +72,7 @@ if (!/^0\d{9}$/.test(normalizedPhone)) {
           customerName,
           phone: normalizedPhone,
           car,
+          variant,
           source: "Website Mitsubishi",
         }),
       });
@@ -181,6 +188,25 @@ onChange={(event) => setSelectedCar(event.target.value)}
                   ))}
                 </select>
               </div>
+              {selectedVariant && (
+  <div>
+    <label
+      htmlFor="variant"
+      className="mb-2 block text-sm font-semibold text-gray-700"
+    >
+      Phiên bản quan tâm
+    </label>
+
+    <input
+      id="variant"
+      name="variant"
+      type="text"
+      value={selectedVariant}
+      readOnly
+      className="w-full rounded-lg border border-gray-300 bg-gray-100 px-4 py-3 text-gray-700 outline-none"
+    />
+  </div>
+)}
             </div>
 
             <button
