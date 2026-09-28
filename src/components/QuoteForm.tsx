@@ -17,6 +17,13 @@ export default function QuoteForm() {
     const phone = String(formData.get("phone") || "").trim();
     const car = String(formData.get("car") || "").trim();
 
+    const website = String(formData.get("website") || "").trim();
+
+if (website) {
+  form.reset();
+  return;
+}
+
     if (!customerName || !phone || !car) {
       setMessage("Vui lòng nhập đầy đủ họ tên, số điện thoại và mẫu xe.");
       return;
@@ -92,6 +99,19 @@ if (!/^0\d{9}$/.test(normalizedPhone)) {
             onSubmit={handleSubmit}
             className="mt-10 rounded-2xl border border-gray-200 bg-gray-50 p-6 shadow-sm sm:p-8"
           >
+            <div
+  className="absolute -left-[9999px] top-auto h-px w-px overflow-hidden"
+  aria-hidden="true"
+>
+  <label htmlFor="website">Website</label>
+  <input
+    id="website"
+    name="website"
+    type="text"
+    tabIndex={-1}
+    autoComplete="off"
+  />
+</div>
             <div className="grid gap-6 sm:grid-cols-2">
               <div>
                 <label
