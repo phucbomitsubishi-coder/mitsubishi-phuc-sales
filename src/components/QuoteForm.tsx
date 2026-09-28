@@ -1,14 +1,21 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { cars } from "@/data/cars";
-import { useSearchParams } from "next/navigation";
 
 export default function QuoteForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [message, setMessage] = useState("");
-  const searchParams = useSearchParams();
-const selectedCar = searchParams.get("car") || "";
+  const [selectedCar, setSelectedCar] = useState("");
+
+useEffect(() => {
+  const params = new URLSearchParams(window.location.search);
+  const carFromUrl = params.get("car");
+
+  if (carFromUrl && cars.some((car) => car.name === carFromUrl)) {
+    setSelectedCar(carFromUrl);
+  }
+}, []);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -158,7 +165,8 @@ if (!/^0\d{9}$/.test(normalizedPhone)) {
                 <select
                   id="car"
                   name="car"
-                  defaultValue={selectedCar}
+                  value={selectedCar}
+onChange={(event) => setSelectedCar(event.target.value)}
                   required
                   className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 outline-none transition focus:border-red-600"
                 >
