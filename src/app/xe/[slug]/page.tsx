@@ -2,13 +2,30 @@ import { getCarBySlug } from "@/data/cars";
 import { notFound } from "next/navigation";
 import VariantSelector from "./VariantSelector";
 import { siteConfig } from "@/config/site";
+import type { Metadata } from "next";
 
 type CarDetailPageProps = {
   params: Promise<{
     slug: string;
   }>;
 };
+export async function generateMetadata({
+  params,
+}: CarDetailPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const car = getCarBySlug(slug);
 
+  if (!car) {
+    return {
+      title: "Mitsubishi Bình Dương | Lưu Hoàng Phúc",
+    };
+  }
+
+  return {
+    title: `${car.name} | Giá xe & ưu đãi | Lưu Hoàng Phúc`,
+    description: `${car.name} tại Bình Dương. Xem giá xe, phiên bản, thông số kỹ thuật và ưu đãi mới. Liên hệ Lưu Hoàng Phúc để nhận báo giá và tư vấn.`,
+  };
+}
 export default async function CarDetailPage({
   params,
 }: CarDetailPageProps) {
