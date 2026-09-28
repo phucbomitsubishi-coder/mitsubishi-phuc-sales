@@ -16,6 +16,9 @@ export const metadata: Metadata = {
   title: "Mitsubishi Bình Dương | Lưu Hoàng Phúc",
   description:
     "Mitsubishi Bình Dương - Tư vấn mua xe Mitsubishi, báo giá, khuyến mãi, hỗ trợ trả góp và đăng ký lái thử. Liên hệ Lưu Hoàng Phúc: 0858 678 929.",
+  verification: {
+    google: "lQesEnQkjgxVoGmnCBwKvD8J8v8y5wlsF178d9ddSZI",
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
