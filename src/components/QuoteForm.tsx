@@ -21,6 +21,12 @@ export default function QuoteForm() {
       setMessage("Vui lòng nhập đầy đủ họ tên, số điện thoại và mẫu xe.");
       return;
     }
+    const normalizedPhone = phone.replace(/[\s.-]/g, "");
+
+if (!/^0\d{9}$/.test(normalizedPhone)) {
+  setMessage("Số điện thoại chưa đúng. Vui lòng nhập 10 số, bắt đầu bằng số 0.");
+  return;
+}
 
     const apiUrl = process.env.NEXT_PUBLIC_QUOTE_API_URL;
 
@@ -41,7 +47,7 @@ export default function QuoteForm() {
         },
         body: JSON.stringify({
           customerName,
-          phone,
+          phone: normalizedPhone,
           car,
           source: "Website Mitsubishi",
         }),
