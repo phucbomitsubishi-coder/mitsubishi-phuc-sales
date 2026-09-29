@@ -66,6 +66,12 @@ export default function SiteHeader() {
           >
             Khuyến mãi
           </a>
+          <a
+  href="/#tin-tuc"
+  className="transition hover:text-red-600"
+>
+  Tin tức & Tư vấn
+</a>
 
           <a
             href="/#lien-he"

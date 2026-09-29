@@ -43,24 +43,32 @@ export default function MobileMenu({ cars }: MobileMenuProps) {
           </div>
 
           <div className="mt-5 border-t border-gray-800 pt-4">
-            <a
-              href="/#khuyen-mai"
-              onClick={() => setIsOpen(false)}
-              className="block py-3 font-semibold"
-            >
-              Khuyến mãi
-            </a>
+  <a
+    href="/#khuyen-mai"
+    onClick={() => setIsOpen(false)}
+    className="block py-3 font-semibold"
+  >
+    Khuyến mãi
+  </a>
 
-            <a
-              href="/#lien-he"
-              onClick={() => setIsOpen(false)}
-              className="block py-3 font-semibold"
-            >
-              Liên hệ
-            </a>
-          </div>
-        </div>
-      )}
-    </div>
-  );
+  <a
+    href="/#tin-tuc"
+    onClick={() => setIsOpen(false)}
+    className="block py-3 font-semibold"
+  >
+    Tin tức & Tư vấn
+  </a>
+
+  <a
+    href="/#lien-he"
+    onClick={() => setIsOpen(false)}
+    className="block py-3 font-semibold"
+  >
+    Liên hệ
+  </a>
+</div>
+</div>
+)}
+</div>
+);
 }
