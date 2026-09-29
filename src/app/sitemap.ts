@@ -37,5 +37,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
   changeFrequency: "monthly",
   priority: 0.7,
 },
+{
+  url: `${baseUrl}/du-toan/gia-lan-banh`,
+  lastModified: new Date(),
+  changeFrequency: "monthly",
+  priority: 0.8,
+},
 ];
 }
