@@ -1,4 +1,5 @@
 import { getCarBySlug } from "@/data/cars";
+import SiteHeader from "@/components/SiteHeader";
 import { notFound } from "next/navigation";
 import VariantSelector from "./VariantSelector";
 import { siteConfig } from "@/config/site";
@@ -38,15 +39,17 @@ export default async function CarDetailPage({
 
   return (
     <main className="min-h-screen bg-white text-black">
-      <section className="mx-auto max-w-7xl px-6 py-12">
+  <SiteHeader />
+
+  <section className="mx-auto max-w-7xl px-6 py-6 md:py-12">
         <a
           href="/#san-pham"
-          className="mb-8 inline-block font-semibold text-red-600"
+          className="mb-4 inline-block font-semibold text-red-600 md:mb-8"
         >
           ← Quay lại danh sách xe
         </a>
 
-        <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
+        <div className="grid gap-5 md:gap-10 lg:grid-cols-2 lg:items-center">
           <div>
             <img
               src={car.image}
