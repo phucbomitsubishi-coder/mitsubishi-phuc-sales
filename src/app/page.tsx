@@ -224,19 +224,26 @@ export default function Home() {
       </article>
 
       <article className="rounded-xl border border-gray-200 bg-gray-50 p-6">
-        <p className="text-sm font-semibold uppercase text-red-600">
-          Chi phí mua xe
-        </p>
+  <p className="text-sm font-semibold uppercase text-red-600">
+    Chi phí mua xe
+  </p>
 
-        <h3 className="mt-3 text-xl font-bold">
-          Giá lăn bánh Mitsubishi gồm những khoản nào?
-        </h3>
+  <h3 className="mt-3 text-xl font-bold">
+    Giá lăn bánh Mitsubishi gồm những khoản nào?
+  </h3>
 
-        <p className="mt-3 leading-7 text-gray-600">
-          Tìm hiểu các khoản chi phí dự kiến khi đăng ký xe để chủ động
-          chuẩn bị ngân sách.
-        </p>
-      </article>
+  <p className="mt-3 leading-7 text-gray-600">
+    Tìm hiểu các khoản chi phí dự kiến khi đăng ký xe để chủ động
+    chuẩn bị ngân sách.
+  </p>
+
+  <a
+    href="/tu-van/chi-phi-lan-banh-mitsubishi"
+    className="mt-5 inline-block font-semibold text-red-600 transition hover:text-red-700"
+  >
+    Đọc bài tư vấn →
+  </a>
+</article>
 
       <article className="rounded-xl border border-gray-200 bg-gray-50 p-6">
         <p className="text-sm font-semibold uppercase text-red-600">
