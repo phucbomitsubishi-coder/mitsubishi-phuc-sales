@@ -58,6 +58,13 @@ export default function MobileMenu({ cars }: MobileMenuProps) {
   >
     Tính giá lăn bánh
   </a>
+  <a
+  href="/du-toan/tra-gop"
+  onClick={() => setIsOpen(false)}
+  className="block py-3 font-semibold"
+>
+  Dự tính trả góp
+</a>
 
   <a
     href="/#tin-tuc"

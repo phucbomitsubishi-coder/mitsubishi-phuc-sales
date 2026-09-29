@@ -83,6 +83,12 @@ export default function SiteHeader() {
                 >
                   Tính giá lăn bánh
                 </a>
+                <a
+  href="/du-toan/tra-gop"
+  className="block rounded-lg px-4 py-3 text-sm font-semibold text-gray-800 transition hover:bg-gray-50 hover:text-red-600"
+>
+  Dự tính trả góp
+</a>
               </div>
             </div>
           </div>
