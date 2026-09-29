@@ -67,20 +67,28 @@ export default function MobileMenu({ cars }: MobileMenuProps) {
 </a>
 
   <a
-    href="/#tin-tuc"
-    onClick={() => setIsOpen(false)}
-    className="block py-3 font-semibold"
-  >
-    Tin tức & Tư vấn
-  </a>
+  href="/#tin-tuc"
+  onClick={() => setIsOpen(false)}
+  className="block py-3 font-semibold"
+>
+  Tin tức & Tư vấn
+</a>
 
-  <a
-    href="/#lien-he"
-    onClick={() => setIsOpen(false)}
-    className="block py-3 font-semibold"
-  >
-    Liên hệ
-  </a>
+<a
+  href="/xe-cu"
+  onClick={() => setIsOpen(false)}
+  className="block py-3 font-semibold"
+>
+  Xe đã qua sử dụng
+</a>
+
+<a
+  href="/#lien-he"
+  onClick={() => setIsOpen(false)}
+  className="block py-3 font-semibold"
+>
+  Liên hệ
+</a>
 </div>
 </div>
 )}

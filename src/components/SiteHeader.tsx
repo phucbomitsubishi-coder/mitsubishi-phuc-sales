@@ -99,12 +99,19 @@ export default function SiteHeader() {
   Tin tức & Tư vấn
 </a>
 
-          <a
-            href="/#lien-he"
-            className="transition hover:text-red-600"
-          >
-            Liên hệ
-          </a>
+<a
+  href="/xe-cu"
+  className="whitespace-nowrap transition hover:text-red-600"
+>
+  Xe đã qua sử dụng
+</a>
+
+<a
+  href="/#lien-he"
+  className="transition hover:text-red-600"
+>
+  Liên hệ
+</a>
         </nav>
 
         {/* Liên hệ desktop */}
