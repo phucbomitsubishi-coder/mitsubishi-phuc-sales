@@ -2,6 +2,48 @@ import readline from "node:readline/promises";
 import { stdin as input, stdout as output } from "node:process";
 import fs from "node:fs";
 
+function renameCarImages(folderPath, expectedCount) {
+  const files = fs
+    .readdirSync(folderPath)
+    .filter((file) => /\.(jpg|jpeg|png|webp)$/i.test(file))
+    .sort();
+
+  if (files.length !== Number(expectedCount)) {
+    console.log("");
+    console.log(
+      `Chưa đổi tên ảnh: cần ${expectedCount} ảnh nhưng hiện có ${files.length} ảnh.`
+    );
+    return false;
+  }
+
+  console.log(
+    `Đã kiểm tra: thư mục có đủ ${files.length}/${expectedCount} ảnh.`
+  );
+
+  const tempFiles = [];
+
+files.forEach((file, index) => {
+  const oldPath = `${folderPath}/${file}`;
+  const tempName = `__temp_${String(index + 1).padStart(2, "0")}`;
+  const tempPath = `${folderPath}/${tempName}`;
+
+  fs.renameSync(oldPath, tempPath);
+  tempFiles.push(tempName);
+});
+
+tempFiles.forEach((file, index) => {
+  const oldPath = `${folderPath}/${file}`;
+  const newName = `${String(index + 1).padStart(2, "0")}.jpg`;
+  const newPath = `${folderPath}/${newName}`;
+
+  fs.renameSync(oldPath, newPath);
+});
+
+console.log(`Đã đổi tên ${files.length} ảnh thành 01.jpg → ${String(files.length).padStart(2, "0")}.jpg.`);
+
+  return true;
+}
+
 const rl = readline.createInterface({
   input,
   output,
@@ -197,8 +239,26 @@ fs.writeFileSync(
   updatedFile,
   "utf8"
 );
+const imageDirectory = `public/images/used-cars/${slug}`;
+
+fs.mkdirSync(imageDirectory, {
+  recursive: true,
+});
 
 console.log(`Đã thêm xe ${carName} vào usedCars.ts.`);
+
+console.log(`Thư mục ảnh: ${imageDirectory}`);
+console.log(`Hãy lưu ${imageCount} ảnh của xe vào thư mục trên.`);
+const renameNow = await rl.question(
+  "Bạn đã lưu đủ ảnh và muốn đổi tên ngay? (y/n): "
+);
+
+if (renameNow.toLowerCase() === "y") {
+  renameCarImages(imageDirectory, imageCount);
+} else {
+  console.log("Chưa đổi tên ảnh. Bạn có thể thực hiện sau.");
+}
+
 } else {
   console.log("Đã hủy. Không có dữ liệu nào bị thay đổi.");
 }
