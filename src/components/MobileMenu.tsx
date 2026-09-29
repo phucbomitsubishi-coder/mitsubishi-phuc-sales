@@ -44,7 +44,7 @@ export default function MobileMenu({ cars }: MobileMenuProps) {
 
           <div className="mt-5 border-t border-gray-800 pt-4">
             <a
-              href="#khuyen-mai"
+              href="/#khuyen-mai"
               onClick={() => setIsOpen(false)}
               className="block py-3 font-semibold"
             >
@@ -52,7 +52,7 @@ export default function MobileMenu({ cars }: MobileMenuProps) {
             </a>
 
             <a
-              href="#lien-he"
+              href="/#lien-he"
               onClick={() => setIsOpen(false)}
               className="block py-3 font-semibold"
             >
