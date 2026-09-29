@@ -12,12 +12,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
 
   return [
-    {
-      url: baseUrl,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 1,
-    },
-    ...carPages,
-  ];
+  {
+    url: baseUrl,
+    lastModified: new Date(),
+    changeFrequency: "weekly",
+    priority: 1,
+  },
+  ...carPages,
+  {
+    url: `${baseUrl}/tu-van/chon-xe-mitsubishi-phu-hop`,
+    lastModified: new Date(),
+    changeFrequency: "monthly",
+    priority: 0.7,
+  },
+];
 }
