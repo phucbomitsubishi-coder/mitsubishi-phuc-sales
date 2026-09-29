@@ -64,4 +64,55 @@ equipment: [
   "Bảo vệ giá bán lại lên đến 90% khi sử dụng xe dưới 12 tháng.",
 ],
   },
+  {
+  id: "xpander-cross-2025-002",
+  name: "Mitsubishi Xpander Cross",
+  slug: "mitsubishi-xpander-cross-2025-002",
+  modelYear: 2025,
+  firstRegistration: "09/2025",
+  owners: "1 chủ từ mới",
+  variant: "Xpander Cross",
+  mileage: 26436,
+  price: 579_000_000,
+  color: "Xám",
+  transmission: "Số tự động",
+  fuel: "Xăng",
+  location: "Bình Dương",
+  status: "available",
+
+  image: "/images/used-cars/xpander-cross-2025-002/01.jpg",
+
+  images: [
+    "/images/used-cars/xpander-cross-2025-002/01.jpg",
+    "/images/used-cars/xpander-cross-2025-002/02.jpg",
+    "/images/used-cars/xpander-cross-2025-002/03.jpg",
+    "/images/used-cars/xpander-cross-2025-002/04.jpg",
+    "/images/used-cars/xpander-cross-2025-002/05.jpg",
+    "/images/used-cars/xpander-cross-2025-002/06.jpg",
+    "/images/used-cars/xpander-cross-2025-002/07.jpg",
+    "/images/used-cars/xpander-cross-2025-002/08.jpg",
+    "/images/used-cars/xpander-cross-2025-002/09.jpg",
+    "/images/used-cars/xpander-cross-2025-002/10.jpg",
+  ],
+
+  description:
+    "Mitsubishi Xpander Cross sản xuất năm 2025, đăng ký lần đầu 09/2025, xe một chủ sử dụng từ mới. Xe đang có sẵn, phù hợp với nhu cầu sử dụng gia đình và đi lại hằng ngày.",
+
+  serviceHistory: "Bảo dưỡng đầy đủ tại hãng",
+
+  equipment: [
+    "Lót sàn",
+    "Dán phim",
+    "Camera hành trình",
+    "Thảm cách nhiệt taplo",
+    "Bọc trần",
+  ],
+
+  commitments: [
+    "Động cơ, hộp số nguyên bản; xe không tai nạn.",
+    "Bảo vệ giá bán lại lên đến 90% khi sử dụng xe dưới 12 tháng.",
+    "Xe đã được kiểm định chính hãng 160 chi tiết.",
+    "Không thủy kích, hỗ trợ kiểm tra xe tại hãng.",
+  ],
+},
 ];
