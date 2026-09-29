@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import VariantSelector from "./VariantSelector";
 import { siteConfig } from "@/config/site";
 import type { Metadata } from "next";
+import BackToPrevious from "@/components/BackToPrevious";
 
 type CarDetailPageProps = {
   params: Promise<{
@@ -42,12 +43,7 @@ export default async function CarDetailPage({
   <SiteHeader />
 
   <section className="mx-auto max-w-7xl px-6 py-6 md:py-12">
-        <a
-          href="/#san-pham"
-          className="mb-4 inline-block font-semibold text-red-600 md:mb-8"
-        >
-          ← Quay lại danh sách xe
-        </a>
+        <BackToPrevious />
 
         <div className="grid gap-5 md:gap-10 lg:grid-cols-2 lg:items-center">
           <div>

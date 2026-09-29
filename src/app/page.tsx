@@ -246,19 +246,26 @@ export default function Home() {
 </article>
 
       <article className="rounded-xl border border-gray-200 bg-gray-50 p-6">
-        <p className="text-sm font-semibold uppercase text-red-600">
-          Phiên bản & ưu đãi
-        </p>
+  <p className="text-sm font-semibold uppercase text-red-600">
+    Phiên bản & ưu đãi
+  </p>
 
-        <h3 className="mt-3 text-xl font-bold">
-          Nên chọn phiên bản xe Mitsubishi như thế nào?
-        </h3>
+  <h3 className="mt-3 text-xl font-bold">
+    Nên chọn phiên bản xe Mitsubishi như thế nào?
+  </h3>
 
-        <p className="mt-3 leading-7 text-gray-600">
-          So sánh nhu cầu sử dụng, trang bị và ngân sách trước khi lựa chọn
-          phiên bản phù hợp.
-        </p>
-      </article>
+  <p className="mt-3 leading-7 text-gray-600">
+    So sánh nhu cầu sử dụng, trang bị và ngân sách trước khi lựa chọn
+    phiên bản phù hợp.
+  </p>
+
+  <a
+    href="/tu-van/chon-phien-ban-xe-mitsubishi"
+    className="mt-5 inline-block font-semibold text-red-600 transition hover:text-red-700"
+  >
+    Đọc bài tư vấn →
+  </a>
+</article>
     </div>
   </div>
 </section>
