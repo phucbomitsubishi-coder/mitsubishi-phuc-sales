@@ -25,5 +25,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: "monthly",
     priority: 0.7,
   },
+  {
+  url: `${baseUrl}/tu-van/chi-phi-lan-banh-mitsubishi`,
+  lastModified: new Date(),
+  changeFrequency: "monthly",
+  priority: 0.7,
+},
 ];
 }
