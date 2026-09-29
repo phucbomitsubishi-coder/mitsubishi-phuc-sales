@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import type { CarVariant } from "@/data/cars";
+import OnRoadPriceCalculator from "@/components/OnRoadPriceCalculator";
 
 type Props = {
   carName: string;
@@ -417,31 +418,44 @@ const selectedImage =
             </>
             )}
 
-            {selectedVariant.features &&
-              selectedVariant.features.length > 0 && (
-                <div className="mt-8">
-                  <h4 className="text-lg font-bold">
-                    Trang bị nổi bật
-                  </h4>
+            <div className="mt-8 grid items-start gap-8 lg:grid-cols-[1fr_480px]">
+  <div>
+    {selectedVariant.features &&
+      selectedVariant.features.length > 0 && (
+        <div>
+          <h4 className="text-lg font-bold">
+            Trang bị nổi bật
+          </h4>
 
-                  <div className="mt-4 grid gap-2 sm:grid-cols-2">
-                    {selectedVariant.features.map((feature) => (
-                      <p key={feature} className="text-gray-600">
-                        ✓ {feature}
-                      </p>
-                    ))}
-                  </div>
-                </div>
-              )}
+          <div className="mt-4 grid gap-2 sm:grid-cols-2">
+            {selectedVariant.features.map((feature) => (
+              <p key={feature} className="text-gray-600">
+                ✓ {feature}
+              </p>
+            ))}
+          </div>
+        </div>
+      )}
 
-            <a
-  href={`/?car=${encodeURIComponent(carName)}&variant=${encodeURIComponent(
-    selectedVariant.name
-  )}#bao-gia`}
-  className="mt-8 inline-block rounded bg-red-600 px-6 py-3 font-semibold text-white hover:bg-red-700"
->
-  Nhận báo giá phiên bản này
-</a>
+    <a
+      href={`/?car=${encodeURIComponent(
+        carName
+      )}&variant=${encodeURIComponent(
+        selectedVariant.name
+      )}#bao-gia`}
+      className="mt-8 inline-block rounded bg-red-600 px-6 py-3 font-semibold text-white hover:bg-red-700"
+    >
+      Nhận báo giá phiên bản này
+    </a>
+  </div>
+
+  <OnRoadPriceCalculator
+    carName={carName}
+    variantName={selectedVariant.name}
+    price={selectedVariant.price}
+    seats={selectedVariant.specifications?.seats}
+  />
+</div>
           </div>
         )}
       </div>
