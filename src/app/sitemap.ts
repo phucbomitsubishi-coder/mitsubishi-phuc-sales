@@ -31,5 +31,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
   changeFrequency: "monthly",
   priority: 0.7,
 },
+{
+  url: `${baseUrl}/tu-van/chon-phien-ban-xe-mitsubishi`,
+  lastModified: new Date(),
+  changeFrequency: "monthly",
+  priority: 0.7,
+},
 ];
 }
