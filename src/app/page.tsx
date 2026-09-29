@@ -182,6 +182,80 @@ export default function Home() {
   </div>
 </section>
 
+{/* TIN TỨC & TƯ VẤN */}
+<section
+  id="tin-tuc"
+  className="scroll-mt-28 bg-white md:scroll-mt-24"
+>
+  <div className="mx-auto max-w-7xl px-6 py-16">
+    <p className="font-semibold uppercase tracking-wider text-red-600">
+      Tin tức & Tư vấn
+    </p>
+
+    <h2 className="mt-2 text-3xl font-bold">
+      Kinh nghiệm chọn mua xe Mitsubishi
+    </h2>
+
+    <p className="mt-4 max-w-2xl leading-7 text-gray-600">
+      Thông tin tham khảo giúp khách hàng lựa chọn mẫu xe, phiên bản và
+      phương án mua xe phù hợp với nhu cầu sử dụng.
+    </p>
+
+    <div className="mt-8 grid gap-6 md:grid-cols-3">
+      <article className="rounded-xl border border-gray-200 bg-gray-50 p-6">
+        <p className="text-sm font-semibold uppercase text-red-600">
+          Tư vấn chọn xe
+        </p>
+
+        <h3 className="mt-3 text-xl font-bold">
+          Chọn Mitsubishi nào phù hợp với nhu cầu của bạn?
+        </h3>
+
+        <p className="mt-3 leading-7 text-gray-600">
+          Gợi ý lựa chọn dòng xe phù hợp cho gia đình, công việc và nhu cầu
+          di chuyển hằng ngày.
+        </p>
+        <a
+  href="/tu-van/chon-xe-mitsubishi-phu-hop"
+  className="mt-5 inline-block font-semibold text-red-600 transition hover:text-red-700"
+>
+  Đọc bài tư vấn →
+</a>
+      </article>
+
+      <article className="rounded-xl border border-gray-200 bg-gray-50 p-6">
+        <p className="text-sm font-semibold uppercase text-red-600">
+          Chi phí mua xe
+        </p>
+
+        <h3 className="mt-3 text-xl font-bold">
+          Giá lăn bánh Mitsubishi gồm những khoản nào?
+        </h3>
+
+        <p className="mt-3 leading-7 text-gray-600">
+          Tìm hiểu các khoản chi phí dự kiến khi đăng ký xe để chủ động
+          chuẩn bị ngân sách.
+        </p>
+      </article>
+
+      <article className="rounded-xl border border-gray-200 bg-gray-50 p-6">
+        <p className="text-sm font-semibold uppercase text-red-600">
+          Phiên bản & ưu đãi
+        </p>
+
+        <h3 className="mt-3 text-xl font-bold">
+          Nên chọn phiên bản xe Mitsubishi như thế nào?
+        </h3>
+
+        <p className="mt-3 leading-7 text-gray-600">
+          So sánh nhu cầu sử dụng, trang bị và ngân sách trước khi lựa chọn
+          phiên bản phù hợp.
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
+
 {/* NHẬN BÁO GIÁ */}
 <QuoteForm />
 
