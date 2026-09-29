@@ -109,7 +109,10 @@ export default function Home() {
         </div>
       </section>
       {/* KHUYẾN MÃI */}
-<section id="khuyen-mai" className="bg-gray-100">
+<section
+  id="khuyen-mai"
+  className="scroll-mt-28 bg-gray-100 md:scroll-mt-24"
+>
   <div className="mx-auto max-w-7xl px-6 py-16">
     <p className="font-semibold uppercase tracking-wider text-red-600">
       Khuyến mãi
@@ -130,6 +133,13 @@ export default function Home() {
           key={car.id}
           className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm"
         >
+          <div className="mb-5 flex h-40 items-center justify-center overflow-hidden rounded-lg bg-gray-50">
+  <img
+    src={car.image}
+    alt={`Ưu đãi ${car.name}`}
+    className="h-full w-full object-contain p-3 transition duration-300 hover:scale-105"
+  />
+</div>
           <p className="text-sm font-semibold uppercase text-red-600">
             Ưu đãi
           </p>
@@ -137,6 +147,15 @@ export default function Home() {
           <h3 className="mt-2 text-xl font-bold">
             {car.name}
           </h3>
+          <div className="mt-3 flex items-baseline gap-2">
+  <span className="text-sm text-gray-500">Giá từ</span>
+  <span className="text-xl font-bold text-red-600">
+    {Math.min(...car.variants.map((variant) => variant.price)).toLocaleString(
+      "vi-VN"
+    )}{" "}
+    đ
+  </span>
+</div>
 
           <p className="mt-4 text-gray-600">
             {car.promotion.description}
@@ -151,13 +170,11 @@ export default function Home() {
             </a>
 
             <a
-              href={siteConfig.contact.zaloUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded border border-blue-600 bg-white px-4 py-3 font-semibold text-blue-600 transition hover:bg-blue-50"
-            >
-              Nhận ưu đãi
-            </a>
+  href={`/?car=${encodeURIComponent(car.name)}#bao-gia`}
+  className="rounded border border-red-600 bg-white px-4 py-3 font-semibold text-red-600 transition hover:bg-red-50"
+>
+  Nhận ưu đãi
+</a>
           </div>
         </div>
       ))}
