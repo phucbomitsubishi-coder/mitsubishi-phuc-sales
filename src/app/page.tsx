@@ -1,21 +1,30 @@
 import { cars } from "@/data/cars";
 import { siteConfig } from "@/config/site";
 import QuoteForm from "@/components/QuoteForm";
+import MobileMenu from "@/components/MobileMenu";
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-white text-black">
       {/* HEADER */}
-      <header className="border-b border-gray-200">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
+      <header className="relative border-b border-gray-800 bg-black text-white md:border-gray-200 md:bg-white md:text-black">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 md:px-6 md:py-5">
           <div className="flex min-w-0 items-center gap-2 sm:gap-4">
-  <img
-    src="/images/logo/logo-black.svg"
-    alt="Mitsubishi Motors"
-    className="h-9 w-auto shrink-0 sm:h-12"
-  />
+  {/* Logo mobile - dùng trên nền đen */}
+<img
+  src="/images/logo/logo-mobile-new.png"
+  alt="Mitsubishi Motors - Vững Tiến"
+  className="h-20 w-auto shrink-0 object-contain md:hidden"
+/>
 
-  <div className="min-w-0">
+{/* Logo desktop - giữ nguyên */}
+<img
+  src="/images/logo/logo-black.svg"
+  alt="Mitsubishi Motors"
+  className="hidden h-12 w-auto shrink-0 md:block"
+/>
+
+  <div className="hidden min-w-0 md:block">
     <p className="text-sm font-bold leading-tight sm:text-lg">
       Mitsubishi Motors Bình Dương
     </p>
@@ -26,9 +35,37 @@ export default function Home() {
   </div>
 </div>
 <nav className="hidden items-center gap-8 font-semibold md:flex">
-  <a href="#san-pham" className="transition hover:text-red-600">
+  <div className="group relative">
+  <a
+    href="#san-pham"
+    className="flex items-center gap-1 transition hover:text-red-600"
+  >
     Sản phẩm
+    <span className="text-xs">▼</span>
   </a>
+
+  <div className="invisible absolute left-1/2 top-full z-50 w-[720px] -translate-x-1/2 pt-3 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100">
+    <div className="grid grid-cols-3 gap-2 rounded-2xl border border-gray-200 bg-white p-4 shadow-xl">
+      {cars.map((car) => (
+        <a
+          key={car.slug}
+          href={`/xe/${car.slug}`}
+          className="group/car rounded-xl p-3 text-center transition hover:bg-gray-50"
+        >
+          <img
+            src={car.image}
+            alt={car.name}
+            className="mx-auto h-24 w-full object-contain transition duration-200 group-hover/car:scale-105"
+          />
+
+          <p className="mt-2 text-sm font-semibold text-gray-800 transition group-hover/car:text-red-600">
+            {car.name}
+          </p>
+        </a>
+      ))}
+    </div>
+  </div>
+</div>
 
   <a href="#khuyen-mai" className="transition hover:text-red-600">
     Khuyến mãi
@@ -50,10 +87,12 @@ export default function Home() {
 
   <a
   href={siteConfig.contact.phoneUrl}
-  className="whitespace-nowrap rounded bg-red-600 px-3 py-3 text-sm font-semibold text-white transition hover:bg-red-700 sm:px-5 sm:text-base"
+  className="hidden whitespace-nowrap rounded bg-red-600 px-5 py-3 font-semibold text-white transition hover:bg-red-700 md:block"
 >
   Gọi ngay
 </a>
+
+<MobileMenu cars={cars} />
 </div>
         </div>
       </header>
