@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 import { newsArticles } from "@/data/news";
+import NewsPromotionCover from "@/components/NewsPromotionCover";
 
 export const metadata: Metadata = {
   title: "Tin tức & Tư vấn Mitsubishi | Lưu Hoàng Phúc",
@@ -49,6 +50,11 @@ export default function NewsPage() {
               khách hàng.
             </p>
           </div>
+        </section>
+
+                {/* Promotion Cover */}
+        <section className="mx-auto max-w-7xl px-4 pt-10 sm:px-6 lg:px-8">
+          <NewsPromotionCover />
         </section>
 
         {/* Featured */}
