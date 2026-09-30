@@ -12,6 +12,9 @@ export default function UsedCarsPage() {
   const availableCars = usedCars.filter(
     (car) => car.status === "available"
   );
+  const soldCars = usedCars.filter(
+  (car) => car.status === "sold"
+);
 
   return (
     <>
@@ -121,6 +124,88 @@ export default function UsedCarsPage() {
     </div>
   </article>
 ))}
+              </div>
+            )}
+                        {soldCars.length > 0 && (
+              <div className="mt-16 border-t border-gray-200 pt-10">
+                <div>
+                  <p className="mb-2 font-semibold uppercase tracking-wide text-gray-500">
+                    Xe tham khảo
+                  </p>
+
+                  <h2 className="text-2xl font-bold text-gray-900 md:text-3xl">
+                    Xe đã bán
+                  </h2>
+
+                  <p className="mt-3 max-w-3xl leading-7 text-gray-600">
+                    Những xe dưới đây đã được bán và được lưu lại để khách hàng
+                    tham khảo thông tin, phiên bản và tình trạng xe.
+                  </p>
+                </div>
+
+                <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                  {soldCars.map((car) => (
+                    <article
+                      key={car.id}
+                      className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm"
+                    >
+                      <div className="relative aspect-[4/3] overflow-hidden bg-gray-100">
+                        <img
+                          src={car.image}
+                          alt={`${car.name} ${car.modelYear}`}
+                          className="h-full w-full object-cover"
+                        />
+
+                        <div className="absolute left-4 top-4 rounded-lg bg-gray-900 px-4 py-2 text-sm font-bold text-white shadow">
+                          ĐÃ BÁN
+                        </div>
+                      </div>
+
+                      <div className="p-6">
+                        <h3 className="text-xl font-bold text-gray-900">
+                          {car.name}
+                        </h3>
+
+                        <div className="mt-4 grid grid-cols-2 gap-3 text-sm text-gray-600">
+                          <p>
+                            <span className="font-semibold text-gray-900">
+                              Năm:
+                            </span>{" "}
+                            {car.modelYear}
+                          </p>
+
+                          <p>
+                            <span className="font-semibold text-gray-900">
+                              ODO:
+                            </span>{" "}
+                            {car.mileage.toLocaleString("vi-VN")} km
+                          </p>
+
+                          <p>
+                            <span className="font-semibold text-gray-900">
+                              Phiên bản:
+                            </span>{" "}
+                            {car.variant}
+                          </p>
+
+                          <p>
+                            <span className="font-semibold text-gray-900">
+                              Màu:
+                            </span>{" "}
+                            {car.color}
+                          </p>
+                        </div>
+
+                        <a
+                          href={`/xe-cu/${car.slug}`}
+                          className="mt-5 block rounded-xl border border-gray-300 px-5 py-3 text-center font-semibold text-gray-700 transition hover:border-gray-900 hover:text-gray-900"
+                        >
+                          Xem xe đã bán
+                        </a>
+                      </div>
+                    </article>
+                  ))}
+                </div>
               </div>
             )}
           </div>

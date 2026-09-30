@@ -164,4 +164,52 @@ equipment: [
     "Không thủy kích, hỗ trợ kiểm tra xe tại hãng."
   ]
 },
+{
+  "id": "mitsubishi-xpander-premium-2025-004",
+  "name": "Mitsubishi Xpander Premium",
+  "slug": "mitsubishi-xpander-premium-2025-004",
+  "modelYear": 2025,
+  "firstRegistration": "12/2025",
+  "owners": "1 chủ từ mới",
+  "variant": "Premium",
+  "mileage": 5000,
+  "price": 589000000,
+  "color": "Đỏ",
+  "transmission": "Số Tự Động",
+  "fuel": "Xăng",
+  "location": "Bình Dương",
+  "status": "sold",
+  "image": "/images/used-cars/mitsubishi-xpander-premium-2025-004/01.jpg",
+  "images": [
+    "/images/used-cars/mitsubishi-xpander-premium-2025-004/01.jpg",
+    "/images/used-cars/mitsubishi-xpander-premium-2025-004/02.jpg",
+    "/images/used-cars/mitsubishi-xpander-premium-2025-004/03.jpg",
+    "/images/used-cars/mitsubishi-xpander-premium-2025-004/04.jpg",
+    "/images/used-cars/mitsubishi-xpander-premium-2025-004/05.jpg",
+    "/images/used-cars/mitsubishi-xpander-premium-2025-004/06.jpg",
+    "/images/used-cars/mitsubishi-xpander-premium-2025-004/07.jpg",
+    "/images/used-cars/mitsubishi-xpander-premium-2025-004/08.jpg",
+    "/images/used-cars/mitsubishi-xpander-premium-2025-004/09.jpg",
+    "/images/used-cars/mitsubishi-xpander-premium-2025-004/10.jpg",
+    "/images/used-cars/mitsubishi-xpander-premium-2025-004/11.jpg",
+    "/images/used-cars/mitsubishi-xpander-premium-2025-004/12.jpg",
+    "/images/used-cars/mitsubishi-xpander-premium-2025-004/13.jpg",
+    "/images/used-cars/mitsubishi-xpander-premium-2025-004/14.jpg",
+    "/images/used-cars/mitsubishi-xpander-premium-2025-004/15.jpg"
+  ],
+  "description": "Mitsubishi Xpander Premium sản xuất năm 2025, đăng ký lần đầu 12/2025, xe 1 chủ từ mới. Xe đang có sẵn, phù hợp với nhu cầu sử dụng gia đình và đi lại hằng ngày.",
+  "serviceHistory": "Bảo dưỡng đầy đủ tại hãng",
+  "equipment": [
+    "Lót sàn",
+    "Dán phim",
+    "Camera hành trình",
+    "Thảm cách nhiệt taplo"
+  ],
+  "commitments": [
+    "Động cơ, hộp số nguyên bản; xe không tai nạn.",
+    "Bảo vệ giá bán lại lên đến 90% khi sử dụng xe dưới 12 tháng.",
+    "Xe đã được kiểm định chính hãng 160 chi tiết.",
+    "Không thủy kích, hỗ trợ kiểm tra xe tại hãng."
+  ]
+},
 ];
