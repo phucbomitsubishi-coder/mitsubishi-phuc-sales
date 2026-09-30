@@ -67,7 +67,7 @@ export default function MobileMenu({ cars }: MobileMenuProps) {
 </a>
 
   <a
-  href="/#tin-tuc"
+  href="/tin-tuc"
   onClick={() => setIsOpen(false)}
   className="block py-3 font-semibold"
 >

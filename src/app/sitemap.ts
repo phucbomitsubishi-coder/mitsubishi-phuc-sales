@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { cars } from "@/data/cars";
 import { usedCars } from "@/data/usedCars";
+import { newsArticles } from "@/data/news";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://mitsubishi-phuc-sales.vercel.app";
@@ -18,6 +19,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: "weekly" as const,
     priority: 0.7,
   }));
+  const newsPages = newsArticles.map((article) => ({
+  url: `${baseUrl}/tin-tuc/${article.slug}`,
+  lastModified: new Date(`${article.publishedAt}T00:00:00+07:00`),
+  changeFrequency: "monthly" as const,
+  priority: 0.7,
+}));
 
   return [
     {
@@ -37,6 +44,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
 
     ...usedCarPages,
+
+    {
+  url: `${baseUrl}/tin-tuc`,
+  lastModified: new Date(),
+  changeFrequency: "daily",
+  priority: 0.8,
+},
+
+...newsPages,
 
     {
       url: `${baseUrl}/tu-van/chon-xe-mitsubishi-phu-hop`,

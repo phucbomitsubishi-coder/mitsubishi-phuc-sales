@@ -93,7 +93,7 @@ export default function SiteHeader() {
             </div>
           </div>
           <a
-  href="/#tin-tuc"
+  href="/tin-tuc"
   className="transition hover:text-red-600"
 >
   Tin tức & Tư vấn

@@ -266,6 +266,15 @@ export default function Home() {
     Đọc bài tư vấn →
   </a>
 </article>
+        </div>
+
+    <div className="mt-10 flex justify-center">
+      <a
+        href="/tin-tuc"
+        className="inline-flex items-center rounded-lg bg-red-600 px-6 py-3 font-semibold text-white transition hover:bg-red-700"
+      >
+        Xem tất cả Tin tức & Tư vấn →
+      </a>
     </div>
   </div>
 </section>
