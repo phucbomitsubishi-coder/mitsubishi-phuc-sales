@@ -2,10 +2,23 @@ import readline from "node:readline/promises";
 import { stdin as input, stdout as output } from "node:process";
 import fs from "node:fs";
 
+
 function renameCarImages(folderPath, expectedCount) {
+
+  const unsupportedFiles = fs
+  .readdirSync(folderPath)
+  .filter((file) => /\.(png|webp)$/i.test(file));
+
+if (unsupportedFiles.length > 0) {
+  console.log("");
+  console.log("Phát hiện ảnh PNG hoặc WebP:");
+  unsupportedFiles.forEach((file) => console.log(`- ${file}`));
+  console.log("Vui lòng chuyển các ảnh này sang JPG trước khi tiếp tục.");
+  return false;
+}
   const files = fs
     .readdirSync(folderPath)
-    .filter((file) => /\.(jpg|jpeg|png|webp)$/i.test(file))
+    .filter((file) => /\.(jpg|jpeg)$/i.test(file))
     .sort();
 
   if (files.length !== Number(expectedCount)) {
@@ -47,6 +60,13 @@ console.log(`Đã đổi tên ${files.length} ảnh thành 01.jpg → ${String(f
 const rl = readline.createInterface({
   input,
   output,
+});
+
+rl.on("SIGINT", () => {
+  console.log("");
+  console.log("Đã thoát công cụ.");
+  rl.close();
+  process.exit(0);
 });
 
 console.log("");
@@ -123,6 +143,15 @@ const slugBase = carName
 
 const slug = `${slugBase}-${modelYear}-${numberText}`;
 const id = slug;
+
+// Kiểm tra để tránh thêm trùng xe
+if (usedCarsFile.includes(`slug: "${slug}"`)) {
+  console.log("");
+  console.log(`Xe có slug "${slug}" đã tồn tại trong website.`);
+  console.log("Đã dừng để tránh thêm trùng dữ liệu.");
+  rl.close();
+  process.exit(0);
+}
 
 const imageFolder = `/images/used-cars/${slug}`;
 
