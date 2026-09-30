@@ -38,18 +38,22 @@ export default function NewsPromotionCover() {
 
       {/* Heading */}
       <div className="relative px-6 pb-4 pt-8 text-center sm:px-10 sm:pt-10">
-        <p className="text-xs font-bold uppercase tracking-[0.22em] text-red-600 sm:text-sm">
-          Chương trình tháng 09/2026
-        </p>
+       <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-red-600 sm:text-sm sm:tracking-[0.28em]">
+  Ưu đãi tháng 09/2026
+</p>
 
-        <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-gray-950 sm:text-4xl lg:text-5xl">
-          Khuyến mãi Mitsubishi
-        </h2>
+<h2 className="mt-3 whitespace-nowrap text-[27px] font-extrabold tracking-[0.02em] text-gray-950 sm:text-4xl sm:tracking-[0.04em] lg:text-[46px]">
+  MITSUBISHI MOTORS
+</h2>
 
-        <p className="mt-3 text-lg font-bold text-gray-700 sm:text-xl">
-          Ưu đãi phí trước bạ
-          <span className="text-red-600"> & nhiều quà tặng hấp dẫn</span>
-        </p>
+<div className="mx-auto mt-3 h-[3px] w-12 rounded-full bg-red-600 sm:mt-4 sm:w-14" />
+
+<p className="mx-auto mt-4 max-w-[310px] text-sm font-medium leading-6 text-gray-600 sm:max-w-none sm:text-lg">
+  Ưu đãi phí trước bạ
+  <span className="ml-1 font-semibold text-red-600 sm:ml-2">
+    • Nhiều quà tặng hấp dẫn
+  </span>
+</p>
       </div>
 
       {/* Car lineup */}
@@ -68,6 +72,7 @@ export default function NewsPromotionCover() {
                   alt={`Mitsubishi ${car.name}`}
                   width={car.width}
                   height={car.height}
+                  loading="eager"
                   className="max-h-full w-full object-contain"
                 />
               </div>
