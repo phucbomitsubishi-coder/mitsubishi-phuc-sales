@@ -144,11 +144,90 @@ export default async function NewsDetailPage({
         ? images[imageIndex]
         : undefined;
 
+        const hasTable =
+  paragraph.includes("[TABLE]") &&
+  paragraph.endsWith("[/TABLE]");
+
+const tableStartIndex = paragraph.indexOf("[TABLE]");
+
+const tableHeading =
+  hasTable && tableStartIndex > 0
+    ? paragraph.slice(0, tableStartIndex).trim()
+    : "";
+
+const tableContent = hasTable
+  ? paragraph
+      .slice(tableStartIndex + "[TABLE]".length)
+      .replace("[/TABLE]", "")
+      .trim()
+  : "";
+
     return (
       <div key={paragraphIndex}>
-        <p className="text-[17px] leading-8 text-gray-700">
-          {paragraph}
-        </p>
+       {hasTable ? (
+  <>
+    {tableHeading && (
+      <h3 className="mb-4 mt-6 text-xl font-bold text-gray-900">
+        {tableHeading}
+      </h3>
+    )}
+
+    <p className="mb-2 text-sm text-gray-500 md:hidden">
+  ← Vuốt sang ngang để xem đầy đủ →
+</p>
+
+    <div className="mb-8 mt-3 overflow-x-auto rounded-xl border border-gray-200">
+      <table className="w-full min-w-[760px] border-collapse text-left">
+        <tbody>
+          {tableContent
+            .split("\n")
+            .filter(Boolean)
+            .map((row, rowIndex) => {
+              const cells = row
+                .split("|")
+                .map((cell) => cell.trim());
+
+              return (
+                <tr
+                  key={rowIndex}
+                  className={
+                    rowIndex === 0
+                      ? "bg-gray-100 font-bold text-gray-900"
+                      : "border-t border-gray-200 text-gray-700"
+                  }
+                >
+                  {cells.map((cell, cellIndex) => (
+                    <td
+                      key={cellIndex}
+                      className={`px-4 py-4 align-top ${
+                        cellIndex < cells.length - 1
+                          ? "border-r border-gray-200"
+                          : ""
+                      } ${
+                        cellIndex === 0
+                          ? "w-[18%] font-semibold"
+                          : cellIndex === 1
+                            ? "w-[16%]"
+                            : cellIndex === 2
+                              ? "w-[20%]"
+                              : "w-[46%]"
+                      }`}
+                    >
+                      {cell}
+                    </td>
+                  ))}
+                </tr>
+              );
+            })}
+        </tbody>
+      </table>
+    </div>
+  </>
+  ) : (
+  <p className="text-[17px] leading-8 text-gray-700">
+    {paragraph}
+  </p>
+)}
 
         {image && (
           <figure className="my-8">

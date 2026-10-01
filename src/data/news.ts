@@ -33,6 +33,59 @@ export type NewsArticle = {
 
 export const newsArticles: NewsArticle[] = [
   {
+    id: "news-1790872088537",
+
+    title: "CHƯƠNG TRÌNH KHUYẾN MÃI MUA XE THÁNG 10/2026 - Mitsubishi Motors Việt Nam",
+
+    slug: "chuong-trinh-khuyen-mai-mua-xe-thang-10-2026-mitsubishi-motors-viet-nam",
+
+    category: "Khuyến mãi",
+
+    excerpt:
+      "Trong tháng 10/2026, Mitsubishi Motors Việt Nam phối hợp cùng hệ thống NPP ủy quyền toàn quốc triển khai chương trình ưu đãi cùng nhiều quà tặng giá trị…",
+
+    publishedAt: "2026-10-01",
+
+    image: "/images/news/chuong-trinh-khuyen-mai-mua-xe-thang-10-2026-mitsubishi-motors-viet-nam.jpg",
+
+    featured: true,
+
+    content: [
+      {
+        heading: "CHƯƠNG TRÌNH KHUYẾN MÃI MUA XE THÁNG 10/2026 - Mitsubishi Motors Việt Nam",
+
+        paragraphs: [
+          "Trong tháng 10/2026, Mitsubishi Motors Việt Nam phối hợp cùng hệ thống NPP ủy quyền toàn quốc triển khai chương trình ưu đãi cùng nhiều quà tặng giá trị dành cho khách hàng mua xe Destinator, Xpander, Xpander Cross, Xforce, Attrage và All New Triton.",
+          "DESTINATOR",
+          "[TABLE]\nPhiên bản | Năm sản xuất | Giá bán lẻ (VNĐ) | Ưu đãi\nPremium | 2026 | 780.000.000 | – Ưu đãi tương đương 100% phí trước bạ (~ 78 triệu VNĐ)\nUltimate | 2026 | 855.000.000 | – Ưu đãi tương đương 50% phí trước bạ (~ 43 triệu VNĐ) – Phiếu nhiên liệu (~ 25 triệu VNĐ)\n[/TABLE]",
+          "XPANDER",
+          "[TABLE]\nPhiên bản | Năm sản xuất | Giá bán lẻ (VNĐ) | Ưu đãi\nMT | 2026 | 568.000.000 | – Ưu đãi tương đương 100% phí trước bạ (~ 57 triệu VNĐ) – Phiếu nhiên liệu (~ 10 triệu VNĐ)\nAT | 2026 | 598.000.000 | – Ưu đãi tương đương 100% phí trước bạ (~ 59 triệu VNĐ) – Phiếu nhiên liệu (~ 36 triệu VNĐ)\nAT Premium | 2026 | 659.000.000 | – Ưu đãi tương đương 100% phí trước bạ (~ 66 triệu VNĐ) – Phiếu nhiên liệu (~ 24 triệu VNĐ)\n[/TABLE]",
+          "XPANDER CROSS",
+          "[TABLE]\nPhiên bản | Năm sản xuất | Giá bán lẻ (VNĐ) | Ưu đãi\nXpander Cross | 2026 | 699.000.000 | – Ưu đãi tương đương 100% phí trước bạ (~ 70 triệu VNĐ) – Phiếu nhiên liệu (~ 20 triệu VNĐ)\n[/TABLE]",
+          "XFORCE",
+          "[TABLE]\nPhiên bản | Năm sản xuất | Giá bán lẻ (VNĐ) | Ưu đãi\nGLX | 2026 | 605.000.000 | – Ưu đãi tương đương 100% phí trước bạ (~ 60 triệu VNĐ)\nLuxury | 2026 | 665.000.000 | – Ưu đãi tương đương 100% phí trước bạ (~ 66 triệu VNĐ)\nUltimate | 2026 | 720.000.000 | – Ưu đãi tương đương 100% phí trước bạ (~ 72 triệu VNĐ)\n[/TABLE]",
+          "ATTRAGE",
+          "[TABLE]\nPhiên bản | Năm sản xuất | Giá bán lẻ (VNĐ) | Ưu đãi\nMT | 2026 | 380.000.000 | – Ưu đãi tương đương 100% phí trước bạ (38 triệu VNĐ) – Phiếu nhiên liệu (~ 8 triệu VNĐ) – Camera lùi (2,5 triệu VNĐ)\nCVT Premium | 2026 | 490.000.000 | – Ưu đãi tương đương 50% phí trước bạ (24,5 triệu VNĐ) – Phiếu nhiên liệu (~ 11 triệu VNĐ) – Ăngten vây cá (1,5 triệu VNĐ)\n[/TABLE]",
+          "ALL NEW TRITON\n[TABLE]\nPhiên bản | Năm sản xuất | Giá bán lẻ (VNĐ) | Ưu đãi\n2WD AT GLX | 2026 | 655.000.000 | – Ưu đãi tương đương 100% phí trước bạ (~ 39 triệu VNĐ) – Phiếu nhiên liệu (~ 10 triệu VNĐ)\n2WD AT Premium | 2026 | 782.000.000 | – Ưu đãi tương đương 100% phí trước bạ (~ 46 triệu VNĐ)\n4WD AT Premium | 2026 | 782.000.000 | – Ưu đãi tương đương 100% phí trước bạ (~ 46 triệu VNĐ) – Gói quà tặng phụ kiện (~ 12 triệu VNĐ)\n4WD AT Athlete | 2026 | 924.000.000 | – Ưu đãi tương đương 100% phí trước bạ (~ 56 triệu VNĐ)\n[/TABLE]",
+          "(*) Phí trước bạ được ước tính tối đa 10% và có thể thay đổi theo từng dòng xe và địa phương.",
+          "(**) Chương trình ưu đãi từ NPP, để biết thêm chi tiết về điều kiện, điều khoản áp dụng, quý khách hàng vui lòng liên hệ Nhà Phân phối ủy quyền gần nhất.",
+          "Công ty TNHH Ô tô Mitsubishi Việt Nam được thành lập năm 1994, là nhà phân phối chính thức của Mitsubishi Motors Nhật Bản tại Việt Nam và là một trong những công ty liên doanh sản xuất và phân phối ô tô đầu tiên tại Việt Nam.",
+          "Trải qua hơn 30 năm “Vững tiến mỗi hành trình” cùng người Việt, Mitsubishi Motors Việt Nam luôn đổi mới, mang đến các mẫu xe tối ưu cho địa hình và thời tiết Việt Nam, đảm bảo An toàn, An tâm và Thoải mái. Chúng tôi không ngừng cải tiến sản phẩm lẫn dịch vụ nhằm tạo ra trải nghiệm hài lòng nhất cho khách hàng. Mitsubishi Motors Việt Nam cam kết là người bạn đồng hành tin cậy, khơi dậy tinh thần phiêu lưu và chinh phục mọi thử thách.",
+        ],
+      },
+    ],
+
+    source: {
+      name: "Mitsubishi Motors Việt Nam",
+      url: "https://www.mitsubishi-motors.com.vn/tin-tuc/chuong-trinh-khuyen-mai-mua-xe-thang-102026-n154227.html",
+    },
+  },
+
+  
+
+  
+
+  {
     id: "news-1790842128387",
 
     title: "Mitsubishi Pajero 2026 sẽ ra mắt Đông Nam Á vào tháng 10: Có 3 phiên bản, máy diesel 204 mã lực",

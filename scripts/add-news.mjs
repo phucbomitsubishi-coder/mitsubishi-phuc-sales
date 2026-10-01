@@ -27,7 +27,7 @@ function escapeText(text = "") {
   return text
     .replace(/\\/g, "\\\\")
     .replace(/"/g, '\\"')
-    .replace(/\r?\n/g, " ")
+    .replace(/\r?\n/g, "\\n")
     .trim();
 }
 
@@ -200,6 +200,12 @@ function collectImagesFromContainer(
     }
 
     const normalizedSrc = url.split("?")[0];
+    // Bỏ ảnh popup / modal không thuộc nội dung bài viết.
+if (
+  normalizedSrc.includes("/public/img/modal-xpander/")
+) {
+  return;
+}
 
     // Không lấy lại ảnh đại diện.
     if (
@@ -354,6 +360,38 @@ function uniqueImages(images) {
     return true;
   });
 }
+function extractTableText($, tableElement) {
+  const rows = [];
+
+  $(tableElement)
+    .find("tr")
+    .each((_, row) => {
+      const cells = $(row)
+        .find("th, td")
+        .map((__, cell) => cleanText($(cell).text()))
+        .get()
+        .filter(Boolean);
+
+      if (cells.length > 0) {
+        rows.push(cells.join(" | "));
+      }
+    });
+
+  if (rows.length === 0) {
+    return "";
+  }
+
+  const tableText = rows.join("\n");
+
+if (
+  tableText.includes("2WD AT GLX") &&
+  tableText.includes("4WD AT Athlete")
+) {
+  return `ALL NEW TRITON\n[TABLE]\n${tableText}\n[/TABLE]`;
+}
+
+return `[TABLE]\n${tableText}\n[/TABLE]`;
+}
 
 function uniqueParagraphs(items) {
   const seen = new Set();
@@ -362,7 +400,8 @@ function uniqueParagraphs(items) {
     const normalized = cleanText(text);
 
     if (
-      normalized.length < 60 ||
+      (normalized.length < 60 &&
+  !/^(DESTINATOR|XPANDER|XPANDER CROSS|XFORCE|ATTRAGE|ALL NEW TRITON)$/i.test(normalized)) ||
       normalized.length > 5000 ||
       seen.has(normalized)
     ) {
@@ -682,13 +721,33 @@ async function fetchArticle(url) {
         const container = $(element);
 
         const found = container
-          .find("p")
-          .map((__, paragraphElement) =>
-            cleanText($(paragraphElement).text())
-          )
-          .get();
+  .find("p, h2, h3, h4, h5, h6, table")
+  .map((__, element) => {
+    const tagName = element.tagName?.toLowerCase();
 
-        const usable = uniqueParagraphs(found);
+    if (tagName === "table") {
+      return extractTableText($, element);
+    }
+
+    return cleanText($(element).text());
+  })
+  .get()
+  .filter(Boolean);
+
+        const stopIndex = found.findIndex((text) =>
+  [
+    "Cám ơn Quý khách đã quan tâm và đăng ký thông tin",
+    "Chính sách bảo mật",
+    "dữ liệu cá nhân",
+  ].some((marker) =>
+    text.toLowerCase().includes(marker.toLowerCase())
+  )
+);
+
+const articleOnly =
+  stopIndex >= 0 ? found.slice(0, stopIndex) : found;
+
+const usable = uniqueParagraphs(articleOnly);
 
         if (
           usable.length > bestParagraphs.length
