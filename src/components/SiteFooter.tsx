@@ -15,7 +15,7 @@ export default function SiteFooter() {
     </h2>
 
     <p className="mt-4 text-sm leading-6 text-gray-300">
-      Tư vấn bán hàng:{" "}
+      Tư vấn Kinh doanh:{" "}
       <span className="font-semibold text-white">
         {sales.name}
       </span>

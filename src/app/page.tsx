@@ -334,7 +334,7 @@ export default function Home() {
     </div>
 
     <div className="mt-10 border-t border-gray-800 pt-6 text-sm text-gray-400">
-      Mitsubishi Motors Bình Dương • Tư vấn bán hàng: Lưu Hoàng Phúc
+      Mitsubishi Motors Bình Dương • Tư vấn Kinh doanh: Lưu Hoàng Phúc
     </div>
   </div>
 </section>
