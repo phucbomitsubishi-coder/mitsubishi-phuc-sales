@@ -2,6 +2,7 @@ import { cars } from "@/data/cars";
 import { siteConfig } from "@/config/site";
 import QuoteForm from "@/components/QuoteForm";
 import SiteHeader from "@/components/SiteHeader";
+import HeroSlider from "@/components/HeroSlider";
 
 export default function Home() {
   return (
@@ -9,45 +10,8 @@ export default function Home() {
       {/* HEADER */}
       <SiteHeader />
 
-      {/* HERO */}
-      <section
-  className="relative bg-cover bg-bottom bg-no-repeat text-white"
-  style={{
-    backgroundImage:
-      "linear-gradient(90deg, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.42) 45%, rgba(0,0,0,0.05) 100%), url('/images/hero/hero-main.jpg')",
-  }}
->
-        <div className="mx-auto max-w-7xl px-6 py-12 sm:py-16">
-          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-red-500">
-            Mitsubishi Motors
-          </p>
-
-          <h1 className="max-w-3xl text-3xl font-bold leading-tight sm:text-4xl md:text-6xl">
-            Mitsubishi Bình Dương
-          </h1>
-
-          <p className="mt-4 max-w-2xl text-base font-medium leading-7 text-white drop-shadow-md sm:mt-6 sm:text-lg">
-            Tư vấn các dòng xe Mitsubishi, báo giá và chương trình
-            khuyến mãi mới.
-          </p>
-
-          <div className="mt-8 flex flex-wrap gap-4">
-            <a
-              href={siteConfig.contact.phoneUrl}
-              className="rounded bg-red-600 px-6 py-3 font-semibold text-white"
-            >
-              Gọi ngay
-            </a>
-
-            <a
-              href={siteConfig.contact.zaloUrl}
-              className="rounded border border-white px-6 py-3 font-semibold"
-            >
-              Tư vấn Zalo
-            </a>
-          </div>
-        </div>
-      </section>
+      {/* HERO SLIDER */}
+<HeroSlider />
 
       {/* DANH SÁCH XE */}
       <section id="san-pham" className="mx-auto max-w-7xl px-6 py-16">
