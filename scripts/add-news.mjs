@@ -1715,7 +1715,11 @@ if (promotionFileContent) {
 
   console.log("");
   console.log("========================================");
-  console.log("ĐÃ THÊM BÀI VIẾT");
+  console.log(
+  articleAlreadyExists
+    ? "ĐÃ CẬP NHẬT DỮ LIỆU LIÊN QUAN"
+    : "ĐÃ XỬ LÝ BÀI VIẾT"
+);
   console.log("========================================");
   console.log(`Tiêu đề: ${title}`);
   console.log(
