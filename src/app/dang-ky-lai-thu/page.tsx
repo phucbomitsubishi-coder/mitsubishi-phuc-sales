@@ -2,6 +2,7 @@
 
 import { FormEvent, Suspense, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import SiteHeader from "@/components/SiteHeader";
 
 const SCRIPT_URL =
   "https://script.google.com/macros/s/AKfycbzw49PlAEA9ajztoKPK5oAs1vb3HOzLXO1sikV0cjROOaLwn3eb2WLNtVBAM--ll-6t/exec";
@@ -237,16 +238,20 @@ function DangKyLaiThuForm() {
 
 export default function DangKyLaiThuPage() {
   return (
-    <Suspense
-      fallback={
-        <main className="flex min-h-[60vh] items-center justify-center bg-gray-50">
-          <p className="text-gray-600">
-            Đang tải form đăng ký lái thử...
-          </p>
-        </main>
-      }
-    >
-      <DangKyLaiThuForm />
-    </Suspense>
+    <>
+      <SiteHeader />
+
+      <Suspense
+        fallback={
+          <main className="flex min-h-[60vh] items-center justify-center bg-gray-50">
+            <p className="text-gray-600">
+              Đang tải form đăng ký lái thử...
+            </p>
+          </main>
+        }
+      >
+        <DangKyLaiThuForm />
+      </Suspense>
+    </>
   );
 }
