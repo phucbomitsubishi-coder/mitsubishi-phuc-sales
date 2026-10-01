@@ -114,16 +114,66 @@ export default async function NewsDetailPage({
                   </h2>
                 )}
 
-                <div className="mt-4 space-y-4">
-                  {section.paragraphs.map((paragraph, paragraphIndex) => (
-                    <p
-                      key={paragraphIndex}
-                      className="text-[17px] leading-8 text-gray-700"
-                    >
-                      {paragraph}
-                    </p>
-                  ))}
-                </div>
+                <div className="mt-4 space-y-6">
+  {section.paragraphs.map((paragraph, paragraphIndex) => {
+    /*
+     * Phân bổ ảnh vào giữa các đoạn văn.
+     * Ví dụ 10 đoạn + 5 ảnh:
+     * ảnh sẽ được trải đều trong bài thay vì dồn xuống cuối.
+     */
+    const images = section.images ?? [];
+
+    const imageIndex =
+      images.length > 0
+        ? Math.floor(
+            ((paragraphIndex + 1) * images.length) /
+              section.paragraphs.length
+          ) - 1
+        : -1;
+
+    const previousImageIndex =
+      images.length > 0 && paragraphIndex > 0
+        ? Math.floor(
+            (paragraphIndex * images.length) /
+              section.paragraphs.length
+          ) - 1
+        : -1;
+
+    const image =
+      imageIndex >= 0 && imageIndex !== previousImageIndex
+        ? images[imageIndex]
+        : undefined;
+
+    return (
+      <div key={paragraphIndex}>
+        <p className="text-[17px] leading-8 text-gray-700">
+          {paragraph}
+        </p>
+
+        {image && (
+          <figure className="my-8">
+            <div className="overflow-hidden rounded-2xl bg-gray-100 shadow-sm">
+              <Image
+                src={image.src}
+                alt={image.alt || article.title}
+                width={1200}
+                height={800}
+                sizes="(max-width: 896px) 100vw, 896px"
+                className="h-auto w-full object-cover"
+              />
+            </div>
+
+            {image.caption && (
+              <figcaption className="mt-3 text-center text-sm leading-6 text-gray-500">
+                {image.caption}
+              </figcaption>
+            )}
+          </figure>
+        )}
+      </div>
+    );
+  })}
+</div>
               </section>
             ))}
           </div>

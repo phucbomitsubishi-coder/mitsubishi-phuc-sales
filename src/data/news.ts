@@ -18,6 +18,11 @@ export type NewsArticle = {
   content: {
     heading?: string;
     paragraphs: string[];
+    images?: {
+      src: string;
+      alt?: string;
+      caption?: string;
+    }[];
   }[];
 
   source?: {
