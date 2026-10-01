@@ -187,7 +187,7 @@ export default function SiteFooter() {
         {/* Bottom */}
         <div className="mt-10 border-t border-gray-800 pt-6">
           <p className="text-xs leading-5 text-gray-400">
-            Website tư vấn bán hàng Mitsubishi của {sales.name}.
+            Website Tư vấn Kinh doanh Mitsubishi của {sales.name}.
             Thông tin giá bán, khuyến mãi và chính sách có thể thay đổi
             theo từng thời điểm. Vui lòng liên hệ trực tiếp để nhận thông
             tin cập nhật.

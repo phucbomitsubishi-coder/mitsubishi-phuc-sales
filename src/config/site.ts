@@ -1,7 +1,7 @@
 export const siteConfig = {
   sales: {
     name: "Lưu Hoàng Phúc",
-    title: "Tư vấn bán hàng Mitsubishi",
+    title: "Tư vấn Kinh doanh Mitsubishi",
     phone: "0858678929",
     phoneDisplay: "0858 678 929",
     email: "phucbo.mitsubishi@gmail.com",

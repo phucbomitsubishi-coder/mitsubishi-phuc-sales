@@ -17,9 +17,9 @@ export default function Home() {
       {/* DANH SÁCH XE */}
       <section
   id="san-pham"
-  className="mx-auto max-w-7xl px-6 py-10 sm:py-16"
+  className="mx-auto max-w-7xl px-6 py-8 sm:py-10"
 >
-        <div className="mb-10">
+        <div className="mb-6">
           <p className="font-semibold uppercase tracking-wider text-red-600">
             Sản phẩm
           </p>
@@ -35,16 +35,16 @@ export default function Home() {
               key={car.slug}
               className="rounded-xl border border-gray-200 p-6 shadow-sm"
             >
-<img
-  src={car.image}
-  alt={car.name}
-  className="mb-6 h-52 w-full object-contain"
-/>
+<div className="mb-3 h-40 overflow-hidden">
+  <img
+    src={car.image}
+    alt={car.name}
+    className="h-52 w-full -translate-y-6 object-contain"
+  />
+</div>
 <h3 className="text-2xl font-bold">{car.name}</h3>
 
-              <p className="mt-3 text-gray-600">
-                {car.shortDescription}
-              </p>
+              
 
               <div className="mt-6">
                 <span className="text-sm text-gray-500">
@@ -270,7 +270,7 @@ export default function Home() {
     </h2>
 
     <p className="mt-2 text-lg font-semibold text-gray-200">
-      Tư vấn bán hàng Mitsubishi
+      Tư vấn Kinh doanh Mitsubishi
     </p>
 
     <p className="mt-4 max-w-2xl leading-7 text-gray-300">
