@@ -28,6 +28,48 @@ export type NewsArticle = {
 
 export const newsArticles: NewsArticle[] = [
   {
+    id: "news-1790838921934",
+
+    title: "Ảnh thực tế Mitsubishi Outlander PHEV 2026 tại ĐNÁ: SUV cỡ C mạnh 302 mã lực, chạy 100 km không tốn xăng",
+
+    slug: "anh-thuc-te-mitsubishi-outlander-phev-2026-tai-dna-suv-co-c-manh-302-ma-luc-chay-100-km-khong-ton-xang",
+
+    category: "Tin Mitsubishi",
+
+    excerpt:
+      "Thương hiệu xe Nhật Bản vừa chính thức trình làng mẫu SUV Mitsubishi Outlander PHEV phiên bản mới tại thị trường Đông Nam Á.",
+
+    publishedAt: "2026-10-01",
+
+    image: "/images/news/anh-thuc-te-mitsubishi-outlander-phev-2026-tai-dna-suv-co-c-manh-302-ma-luc-chay-100-km-khong-ton-xang.jpg",
+
+    featured: true,
+
+    content: [
+      {
+        heading: "Ảnh thực tế Mitsubishi Outlander PHEV 2026 tại ĐNÁ: SUV cỡ C mạnh 302 mã lực, chạy 100 km không tốn xăng",
+        paragraphs: [
+          "Ở thế hệ mới, Mitsubishi Outlander PHEV sở hữu kích thước tổng thể với chiều dài 4.710 mm, rộng 1.862 mm, cao 1.740 mm và chiều dài cơ sở đạt 2.706 mm, đi cùng khoảng sáng gầm xe khoảng 210 mm. Các thông số này đều gia tăng đáng kể so với thế hệ trước đó. Xe tiếp tục duy trì kết cấu 3 hàng ghế dạng 5+2, trong đó hàng ghế thứ ba có khả năng gập phẳng để mở rộng không gian chứa đồ.",
+          "Ngoại thất của xe ghi nhận sự thay đổi toàn diện theo ngôn ngữ thiết kế Dynamic Shield hiện đại, mang nhiều nét tương đồng với mẫu MPV Xpander. Phần đầu xe nổi bật với dải đèn LED định vị ban ngày đặt cao, cụm đèn chiếu sáng chính LED được di chuyển xuống vị trí thấp hơn.",
+          "Bên trong khoang cabin, mẫu SUV cỡ C này được tích hợp nhiều trang bị hiện đại như: màn hình cảm ứng trung tâm 12,3 inch kết nối Apple CarPlay/Android Auto không dây, bảng đồng hồ kỹ thuật số, màn hình hiển thị thông tin trên kính lái (HUD), đế sạc không dây, hệ thống âm thanh Yamaha, điều hòa tự động 3 vùng độc lập và cửa sổ trời toàn cảnh.",
+          "Điểm đáng chú ý của Outlander PHEV 2026 là hệ thống plug-in hybrid gồm động cơ xăng MIVEC 2.4L, hai mô-tơ điện và bộ pin dung lượng 22,7 kWh.",
+          "Cấu hình này tạo ra tổng công suất 302 mã lực cùng mô-men xoắn cực đại 450 Nm. Theo Mitsubishi, xe có thể di chuyển khoảng 100 km chỉ bằng năng lượng điện, trong khi phạm vi vận hành kết hợp giữa động cơ xăng và mô-tơ điện đạt gần 1.000 km.",
+          "Hệ truyền động được kết hợp với hệ thống Super All-Wheel Control (S-AWC), công nghệ dẫn động 4 bánh đặc trưng của Mitsubishi. Hệ thống có khả năng điều phối lực kéo giữa các bánh xe, đồng thời phối hợp với Active Yaw Control và những công nghệ kiểm soát ổn định khác để duy trì độ bám đường trong các điều kiện vận hành khác nhau.",
+          "Về an toàn, Outlander PHEV được trang bị gói Mitsubishi Safety Sensing với nhiều chức năng hỗ trợ người lái.",
+          "Hệ thống bao gồm công nghệ giảm thiểu va chạm phía trước, cảnh báo điểm mù, hỗ trợ chuyển làn, cảnh báo phương tiện cắt ngang phía sau và cảnh báo chệch làn. Xe cũng có tính năng theo dõi sự chú ý của người lái nhằm phát hiện dấu hiệu mất tập trung trong quá trình vận hành.",
+          "Ngoài ra, Mitsubishi trang bị hệ thống túi khí cho hành khách và camera quan sát 360 độ, hỗ trợ người lái khi di chuyển hoặc đỗ xe trong không gian hẹp.",
+          "Tại Philippines, Mitsubishi Outlander PHEV 2026 có giá niêm yết 2,848 triệu peso (1,2 tỷ VNĐ).",
+        ],
+      },
+    ],
+
+    source: {
+      name: "XeHay",
+      url: "https://xehay.vn/anh-thuc-te-mitsubishi-outlander-phev-2026-tai-dna-suv-co-c-manh-302-ma-luc-chay-100-km-khong-ton-xang.html",
+    },
+  },
+
+  {
     id: "news-1790836010186",
 
     title: "Mitsubishi Outlander thế hệ mới có thể ra mắt vào năm 2028",
