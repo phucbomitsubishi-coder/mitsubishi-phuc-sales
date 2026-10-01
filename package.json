@@ -3,15 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-  "dev": "next dev",
-  "build": "next build",
-  "start": "next start",
-  "lint": "eslint",
-  "add-used-car": "node scripts/add-used-car.mjs",
-  "sold-used-car": "node scripts/sold-used-car.mjs",
-  "add-news": "node scripts/add-news.mjs"
-},
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "add-used-car": "node scripts/add-used-car.mjs",
+    "sold-used-car": "node scripts/sold-used-car.mjs",
+    "add-news": "node scripts/add-news.mjs"
+  },
   "dependencies": {
+    "cheerio": "^1.2.0",
     "next": "16.3.6",
     "react": "19.2.8",
     "react-dom": "19.2.8"

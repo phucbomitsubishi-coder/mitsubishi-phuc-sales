@@ -28,6 +28,48 @@ export type NewsArticle = {
 
 export const newsArticles: NewsArticle[] = [
   {
+    id: "news-1790836010186",
+
+    title: "Mitsubishi Outlander thế hệ mới có thể ra mắt vào năm 2028",
+
+    slug: "mitsubishi-outlander-the-he-moi-co-the-ra-mat-vao-nam-2028",
+
+    category: "Tin Mitsubishi",
+
+    excerpt:
+      "Mitsubishi Outlander thế hệ thứ tư được giới thiệu từ năm 2021 và vẫn duy trì doanh số khá tốt. Tuy nhiên, thế hệ hoàn toàn mới có thể xuất hiện trong khoảng hai năm tới, với thiết kế được làm mới mạnh mẽ cùng hệ truyền động hybrid cắm sạc (PHEV) cải tiến. Những thay đổi này được kỳ vọng sẽ giúp...",
+
+    publishedAt: "2026-10-01",
+
+    image: "/images/news/mitsubishi-outlander-the-he-moi-co-the-ra-mat-vao-nam-2028.jpg",
+
+    featured: false,
+
+    content: [
+      {
+        heading: "Mitsubishi Outlander thế hệ mới có thể ra mắt vào năm 2028",
+        paragraphs: [
+          "Mitsubishi Outlander thế hệ thứ tư được giới thiệu từ năm 2021 và vẫn duy trì doanh số khá tốt. Tuy nhiên, thế hệ hoàn toàn mới có thể xuất hiện trong khoảng hai năm tới, với thiết kế được làm mới mạnh mẽ cùng hệ truyền động hybrid cắm sạc (PHEV) cải tiến. Những thay đổi này được kỳ vọng sẽ giúp Outlander tăng sức hút và cạnh tranh tốt hơn trong phân khúc.",
+          "Outlander hiện vẫn là một trong những mẫu xe quan trọng của Mitsubishi, đặc biệt tại thị trường Mỹ. Trong năm ngoái, hãng bán được 35.895 chiếc Outlander, giảm so với mức 45.253 xe của năm trước đó nhưng vẫn đủ để mẫu SUV này giữ vị trí xe bán chạy nhất của Mitsubishi tại thị trường này.",
+          "Theo một báo cáo từ Nhật Bản, Outlander thế hệ thứ năm có thể lấy cảm hứng thiết kế từ Elevance Concept, mẫu xe ý tưởng Mitsubishi giới thiệu vào năm ngoái. Dù có kích thước và kiểu dáng tổng thể tương đồng với Outlander hiện tại, Elevance Concept sở hữu diện mạo hoàn toàn mới, có thể trở thành nền tảng thiết kế cho thế hệ tiếp theo.",
+          "Một số chi tiết từ Elevance Concept được cho là có khả năng xuất hiện trên phiên bản thương mại, trong đó đáng chú ý là cụm đèn pha và đèn LED ban ngày được thiết kế mới, tạo hiệu ứng kéo dài xuống khu vực mặt trước. Xe cũng có thể được trang bị lưới tản nhiệt đồng màu thân xe.",
+          "Elevance Concept từng gây chú ý với phần cửa sổ bên có kích thước lớn. Tuy nhiên, chi tiết này nhiều khả năng sẽ không được giữ lại trên Outlander thương mại.",
+          "Ở phía sau, nếu tiếp tục phát triển theo phong cách của mẫu concept, Outlander thế hệ mới có thể sở hữu dải đèn LED kéo dài toàn chiều rộng đuôi xe, kết hợp cụm đèn hậu mới kéo dài lên trụ D và hai bên thân xe.",
+          "Đáng chú ý hơn thiết kế ngoại thất sẽ là hệ truyền động trên Outlander 2028. Phiên bản PHEV hiện tại sử dụng động cơ xăng 4 xi-lanh hút khí tự nhiên 2.4L, kết hợp hai mô-tơ điện và bộ pin lithium-ion dung lượng 22,7 kWh.",
+          "Hệ thống này cho công suất tổng cộng 297 mã lực và mô-men xoắn 450 Nm, đồng thời cho phép xe di chuyển hoàn toàn bằng điện tối đa khoảng 106 km theo thông số được đề cập.",
+          "Với thế hệ thứ năm, Mitsubishi được cho là có thể bổ sung thêm hai mô-tơ điện, nâng tổng số lên bốn mô-tơ. Không chỉ gia tăng công suất, cấu hình này còn có thể đóng vai trò quan trọng trong hệ thống Super All-Wheel Control (S-AWC) thế hệ mới.",
+          "Công nghệ này từng được Mitsubishi giới thiệu trên Elevance Concept, với khả năng phân bổ lực kéo chính xác tới từng bánh xe, qua đó hỗ trợ cải thiện khả năng kiểm soát và vận hành của Outlander thế hệ mới",
+        ],
+      },
+    ],
+
+    source: {
+      name: "Autodaily - Cộng đồng xe Việt Nam",
+      url: "https://forum.autodaily.vn/threads/mitsubishi-outlander-the-he-moi-co-the-ra-mat-vao-nam-2028.57647/",
+    },
+  },
+
+  {
     id: "news-1790758742014",
 
     title: "Khuyến mãi Mitsubishi tháng 09/2026: Ưu đãi phí trước bạ và nhiều quà tặng",

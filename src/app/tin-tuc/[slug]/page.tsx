@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import SiteHeader from "@/components/SiteHeader";
 import {
@@ -85,6 +86,22 @@ export default async function NewsDetailPage({
             </p>
           </div>
         </section>
+        {/* Ảnh đại diện bài viết */}
+{article.image && (
+  <section className="mx-auto max-w-5xl px-4 pt-10 sm:px-6 lg:px-8">
+    <div className="relative aspect-[16/9] overflow-hidden rounded-2xl bg-gray-100 shadow-sm">
+      <Image
+        src={article.image}
+        alt={article.title}
+        fill
+        priority
+        sizes="(max-width: 1024px) 100vw, 1024px"
+        className="object-cover"
+      />
+    </div>
+  </section>
+)}
+
 
         {/* Article content */}
         <article className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
