@@ -33,6 +33,87 @@ export type NewsArticle = {
 
 export const newsArticles: NewsArticle[] = [
   {
+    id: "news-1790842128387",
+
+    title: "Mitsubishi Pajero 2026 sẽ ra mắt Đông Nam Á vào tháng 10: Có 3 phiên bản, máy diesel 204 mã lực",
+
+    slug: "mitsubishi-pajero-2026-se-ra-mat-dong-nam-a-vao-thang-10-co-3-phien-ban-may-diesel-204-ma-luc",
+
+    category: "Tin Mitsubishi",
+
+    excerpt:
+      "Sau thời gian dài vắng bóng, Mitsubishi Pajero thế hệ mới sẽ tái xuất với vị trí là mẫu SUV đầu bảng của Mitsubishi tại Đông Nam Á, nằm trên Pajero Sport trong danh mục sản phẩm.",
+
+    publishedAt: "2026-10-01",
+
+    image: "/images/news/mitsubishi-pajero-2026-se-ra-mat-dong-nam-a-vao-thang-10-co-3-phien-ban-may-diesel-204-ma-luc.jpg",
+
+    featured: false,
+
+    content: [
+      {
+        heading: "Mitsubishi Pajero 2026 sẽ ra mắt Đông Nam Á vào tháng 10: Có 3 phiên bản, máy diesel 204 mã lực",
+
+        paragraphs: [
+          "Sau thời gian dài vắng bóng, Mitsubishi Pajero thế hệ mới sẽ tái xuất với vị trí là mẫu SUV đầu bảng của Mitsubishi tại Đông Nam Á, nằm trên Pajero Sport trong danh mục sản phẩm.",
+          "Theo kế hoạch, xe sẽ chính thức ra mắt vào ngày 19/10 với ba phiên bản gồm GLS 2WD, GSR 2WD và Super Exceed 4WD. Xe có giá dự kiến nằm trong khoảng 1,6 - 1,9 triệu baht (khoảng 1,23 - 1,47 tỷ VNĐ).",
+          "Mitsubishi Pajero thế hệ mới tiếp tục được phát triển trên hệ thống khung gầm rời (body-on-frame), dựa trên nền tảng Triton nhưng được gia cố và tinh chỉnh lại nhằm đáp ứng yêu cầu của một mẫu SUV cỡ lớn.",
+          "Chiều dài tổng thể của xe đạt 4.920 mm, chiều rộng 1.925 mm, chiều cao dao động từ 1.900 đến 1.910 mm cùng chiều dài cơ sở 2.870 mm. Xe sở hữu khoảng sáng gầm 230 mm, kèm các góc tiếp cận, góc vượt đỉnh dốc và góc thoát lần lượt là 30,4 độ, 22,6 độ và 25,8 độ.",
+          "Không gian nội thất của Pajero được thiết kế theo cấu hình ba hàng ghế với tổng cộng 7 chỗ ngồi. Đáng chú ý, phiên bản GLS tiêu chuẩn đã có bảng đồng hồ kỹ thuật số và màn hình giải trí trung tâm cùng kích thước 12,3 inch.",
+          "Hệ thống giải trí hỗ trợ Apple CarPlay và Android Auto không dây. Các trang bị tiện dụng khác gồm sạc điện thoại không dây, cổng USB Type-C và dàn âm thanh 6 loa.",
+          "Hàng ghế thứ hai có khả năng trượt 150 mm, đồng thời có thể gập theo tỷ lệ 60:40. Hàng ghế cuối chia theo tỷ lệ 50:50, cho phép mở rộng khoang hành lý khi không sử dụng đủ 7 vị trí ngồi.",
+          "Về an toàn, Pajero GLS sở hữu một loạt công nghệ hỗ trợ người lái ngay từ phiên bản đầu tiên. Danh sách này gồm kiểm soát hành trình thích ứng, cảnh báo điểm mù, hỗ trợ chuyển làn, hỗ trợ giữ làn và cảnh báo lệch làn.",
+          "Hệ thống cũng có khả năng cảnh báo và giảm thiểu nguy cơ va chạm phía trước, nhận diện phương tiện cắt ngang ở phía trước và phía sau. Camera quan sát 360 độ cùng 7 túi khí được trang bị tiêu chuẩn.",
+          "Nếu GLS tập trung vào những trang bị thiết yếu, GSR được Mitsubishi bổ sung thêm một số tiện nghi và tính năng cao cấp hơn. Phiên bản này sử dụng mâm 20 inch phối hai tông màu, đèn LED thích ứng và hệ thống đèn Dynamic Flow Light ở cả phía trước và phía sau.",
+          "Khoang cabin GSR có điều hòa hai vùng độc lập, hệ thống lọc không khí Nanoe-X, ghế và vô-lăng tích hợp nhớ vị trí. Tựa lưng ghế chỉnh điện và một hộp làm mát được bố trí bên trong bệ tỳ tay trung tâm.",
+          "Hệ thống âm thanh trên GSR cũng được nâng cấp lên Yamaha Dynamic Sound Ultimate với 12 loa.",
+          "Đối với bản Super Exceed 4WD cao cấp nhất, xe sẽ được nhận diện bằng bộ mâm riêng, lưới tản nhiệt dạng tổ ong và các chi tiết bảo vệ phần gầm. Nội thất sử dụng tông màu đen kết hợp nâu.",
+          "Bản này có thêm cửa sổ trời toàn cảnh, ghế da Semi-Aniline tích hợp thông gió, gương chiếu hậu kỹ thuật số, kết nối Mitsubishi CONNECT và hệ thống hỗ trợ lái MI-PILOT.",
+          "Điểm khác biệt lớn nhất của Super Exceed nằm ở hệ thống S-AWC. Người lái có thể lựa chọn các cấu hình 2H, 4H, 4HLC và 4LLC tùy điều kiện vận hành.",
+          "Hệ thống này đi kèm 7 chế độ lái gồm Eco, Normal, Gravel, Snow, Mud, Sand và Rock. Các thiết lập được Mitsubishi thiết kế để hỗ trợ xe khi di chuyển trên đường thông thường cũng như các bề mặt có độ bám thấp hoặc địa hình phức tạp.",
+          "Cả 3 phiên bản của Pajero mới đều mang trong mình khối động cơ diesel 4 cylinder 2.4L mã hiệu 4N16, tích hợp bộ tăng áp VGT Wide-Range. Cấu hình này sản sinh công suất cực đại 204 mã lực tại 3.500 vòng/phút và mô-men xoắn tối đa 480 Nm tại dải vòng tua 1.750 - 2.500 vòng/phút. Sức mạnh động cơ truyền tới bánh xe thông qua hộp số tự động 8 cấp có chế độ thể thao cùng lẫy chuyển số tích hợp sau vô-lăng. Biến thể GLS và GSR sử dụng hệ dẫn động cầu sau, trong khi bản Super Exceed sở hữu hệ dẫn động 4 bánh S-AWC.",
+          "Dù phát triển trên nền tảng máy dầu 2.4L tương tự dòng bán tải Triton, động cơ của Pajero đã được tái thiết kế nhiều linh kiện bên trong, cải tiến bộ tăng áp và tinh chỉnh lại các thông số. Nhờ đó, lực kéo của xe tăng thêm 10 Nm so với Triton, đồng thời hộp số cũng được nâng cấp từ 6 cấp lên 8 cấp. Đáng chú ý, phiên bản phân phối tại Thái Lan không cần sử dụng dung dịch AdBlue mà vẫn đáp ứng đầy đủ các tiêu chí về khí thải tại thị trường này.",
+        ],
+        images: [
+          {
+            src: "/images/news/mitsubishi-pajero-2026-se-ra-mat-dong-nam-a-vao-thang-10-co-3-phien-ban-may-diesel-204-ma-luc/image-01.jpg",
+            alt: "Mitsubishi Pajero 2026 sẽ ra mắt Đông Nam Á vào tháng 10: Có 3 phiên bản, máy diesel 204 mã lực",
+          },
+          {
+            src: "/images/news/mitsubishi-pajero-2026-se-ra-mat-dong-nam-a-vao-thang-10-co-3-phien-ban-may-diesel-204-ma-luc/image-02.jpg",
+            alt: "Mitsubishi Pajero 2026 sẽ ra mắt Đông Nam Á vào tháng 10: Có 3 phiên bản, máy diesel 204 mã lực",
+          },
+          {
+            src: "/images/news/mitsubishi-pajero-2026-se-ra-mat-dong-nam-a-vao-thang-10-co-3-phien-ban-may-diesel-204-ma-luc/image-03.jpg",
+            alt: "Mitsubishi Pajero 2026 sẽ ra mắt Đông Nam Á vào tháng 10: Có 3 phiên bản, máy diesel 204 mã lực",
+          },
+          {
+            src: "/images/news/mitsubishi-pajero-2026-se-ra-mat-dong-nam-a-vao-thang-10-co-3-phien-ban-may-diesel-204-ma-luc/image-04.jpg",
+            alt: "Mitsubishi Pajero 2026 sẽ ra mắt Đông Nam Á vào tháng 10: Có 3 phiên bản, máy diesel 204 mã lực",
+          },
+          {
+            src: "/images/news/mitsubishi-pajero-2026-se-ra-mat-dong-nam-a-vao-thang-10-co-3-phien-ban-may-diesel-204-ma-luc/image-05.jpg",
+            alt: "Mitsubishi Pajero 2026 sẽ ra mắt Đông Nam Á vào tháng 10: Có 3 phiên bản, máy diesel 204 mã lực",
+          },
+          {
+            src: "/images/news/mitsubishi-pajero-2026-se-ra-mat-dong-nam-a-vao-thang-10-co-3-phien-ban-may-diesel-204-ma-luc/image-06.jpg",
+            alt: "Mitsubishi Pajero 2026 sẽ ra mắt Đông Nam Á vào tháng 10: Có 3 phiên bản, máy diesel 204 mã lực",
+          },
+          {
+            src: "/images/news/mitsubishi-pajero-2026-se-ra-mat-dong-nam-a-vao-thang-10-co-3-phien-ban-may-diesel-204-ma-luc/image-07.jpg",
+            alt: "Mitsubishi Pajero 2026 sẽ ra mắt Đông Nam Á vào tháng 10: Có 3 phiên bản, máy diesel 204 mã lực",
+          },
+        ],
+      },
+    ],
+
+    source: {
+      name: "xehay.vn",
+      url: "https://xehay.vn/mitsubishi-pajero-2026-se-ra-mat-dong-nam-a-vao-thang-10-co-3-phien-ban-may-diesel-204-ma-luc.html",
+    },
+  },
+
+  {
     id: "news-1790838921934",
 
     title: "Ảnh thực tế Mitsubishi Outlander PHEV 2026 tại ĐNÁ: SUV cỡ C mạnh 302 mã lực, chạy 100 km không tốn xăng",
