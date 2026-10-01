@@ -9,7 +9,7 @@ export default function SiteHeader() {
         <a
           href="/"
           aria-label="Về trang chủ"
-          className="inline-flex shrink-0 items-center"
+          className="inline-flex shrink-0 items-center md:-ml-4"
         >
           {/* Logo mobile */}
           <img
@@ -27,8 +27,15 @@ export default function SiteHeader() {
         </a>
 
         {/* Menu desktop */}
-        <nav className="hidden items-center gap-7 font-semibold md:flex">
-          <div className="group relative">
+<nav className="hidden items-center gap-7 font-semibold md:flex">
+  <a
+    href="/gioi-thieu"
+    className="whitespace-nowrap transition hover:text-red-600"
+  >
+    Giới thiệu
+  </a>
+
+  <div className="group relative">
             <a
               href="/#san-pham"
               className="flex items-center gap-1 transition hover:text-red-600"

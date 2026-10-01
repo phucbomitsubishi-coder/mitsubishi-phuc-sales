@@ -43,6 +43,13 @@ export default function MobileMenu({ cars }: MobileMenuProps) {
           </div>
 
           <div className="mt-5 border-t border-gray-800 pt-4">
+              <a
+    href="/gioi-thieu"
+    onClick={() => setIsOpen(false)}
+    className="block py-3 font-semibold"
+  >
+    Giới thiệu
+  </a>
   <a
     href="/#khuyen-mai"
     onClick={() => setIsOpen(false)}

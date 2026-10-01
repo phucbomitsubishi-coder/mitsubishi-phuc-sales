@@ -59,17 +59,17 @@ export default function HeroSlider() {
           className="object-cover"
           style={{ objectPosition: slide.position }}
         />
-        <div className="absolute bottom-8 right-8 z-10 flex gap-3 sm:bottom-10 sm:right-12 lg:right-20">
+        <div className="absolute bottom-3 left-1/2 z-10 flex -translate-x-1/2 gap-2 whitespace-nowrap sm:bottom-10 sm:left-auto sm:right-12 sm:translate-x-0 sm:gap-3 lg:right-20">
   <a
     href={slide.href}
-    className="rounded-lg border-2 border-white bg-black/60 px-5 py-3 text-sm font-bold text-white shadow-xl backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:text-black sm:px-7"
+    className="rounded-lg border-2 border-white bg-black/60 px-3 py-2 text-xs font-bold text-white shadow-xl backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:text-black sm:px-7 sm:py-3 sm:text-sm"
   >
     Tìm hiểu thêm →
   </a>
 
   <a
     href={`/dang-ky-lai-thu?xe=${slide.id}`}
-    className="rounded-lg border-2 border-red-600 bg-red-600 px-5 py-3 text-sm font-bold text-white shadow-xl shadow-black/30 transition-all duration-300 hover:-translate-y-1 hover:border-red-700 hover:bg-red-700 sm:px-7"
+    className="rounded-lg border-2 border-red-600 bg-red-600 px-3 py-2 text-xs font-bold text-white shadow-xl shadow-black/30 transition-all duration-300 hover:-translate-y-1 hover:border-red-700 hover:bg-red-700 sm:px-7 sm:py-3 sm:text-sm"
   >
     Đăng ký lái thử
   </a>

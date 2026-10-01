@@ -14,7 +14,10 @@ export default function Home() {
 <HeroSlider />
 
       {/* DANH SÁCH XE */}
-      <section id="san-pham" className="mx-auto max-w-7xl px-6 py-16">
+      <section
+  id="san-pham"
+  className="mx-auto max-w-7xl px-6 py-10 sm:py-16"
+>
         <div className="mb-10">
           <p className="font-semibold uppercase tracking-wider text-red-600">
             Sản phẩm
