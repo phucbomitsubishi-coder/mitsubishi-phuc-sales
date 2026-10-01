@@ -1,4 +1,5 @@
 import { cars } from "@/data/cars";
+import { getMaxPromotionValue } from "@/data/promotions";
 import { siteConfig } from "@/config/site";
 import QuoteForm from "@/components/QuoteForm";
 import SiteHeader from "@/components/SiteHeader";
@@ -124,9 +125,17 @@ export default function Home() {
   </span>
 </div>
 
-          <p className="mt-4 text-gray-600">
-            {car.promotion.description}
-          </p>
+          {getMaxPromotionValue(car.id) > 0 && (
+  <div className="mt-4 rounded-lg bg-red-50 px-4 py-3">
+    <p className="text-sm font-medium text-gray-600">
+      Ưu đãi lên đến
+    </p>
+
+    <p className="mt-1 text-2xl font-bold text-red-600">
+      {getMaxPromotionValue(car.id).toLocaleString("vi-VN")} đ
+    </p>
+  </div>
+)}
 
           <div className="mt-6 flex flex-wrap gap-3">
             <a

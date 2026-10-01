@@ -12,6 +12,12 @@ const newsPath = path.join(
   "data",
   "news.ts"
 );
+const promotionsPath = path.join(
+  process.cwd(),
+  "src",
+  "data",
+  "promotions.ts"
+);
 
 const categories = [
   "Tin Mitsubishi",
@@ -391,6 +397,283 @@ if (
 }
 
 return `[TABLE]\n${tableText}\n[/TABLE]`;
+}
+
+function getPromotionTables(paragraphs = []) {
+  const promotionTables = [];
+  let currentCarId = null;
+
+  for (const item of paragraphs) {
+    if (typeof item !== "string") {
+      continue;
+    }
+
+    const detectedCarId = detectPromotionCar(item);
+
+    if (detectedCarId) {
+      currentCarId = detectedCarId;
+    }
+
+    if (
+      item.includes("[TABLE]") &&
+      item.includes("[/TABLE]")
+    ) {
+      promotionTables.push({
+        carId: detectedCarId ?? currentCarId,
+        tableText: item,
+      });
+    }
+  }
+
+  return promotionTables;
+}
+
+function detectPromotionCar(text = "") {
+  const normalized = text.toUpperCase();
+
+  if (normalized.includes("DESTINATOR")) {
+    return "destinator";
+  }
+
+  if (normalized.includes("XPANDER CROSS")) {
+    return "xpander-cross";
+  }
+
+  if (normalized.includes("XPANDER")) {
+    return "xpander";
+  }
+
+  if (normalized.includes("XFORCE")) {
+    return "xforce";
+  }
+
+  if (normalized.includes("ATTRAGE")) {
+    return "attrage";
+  }
+
+  if (
+    normalized.includes("ALL NEW TRITON") ||
+    normalized.includes("2WD AT GLX") ||
+    normalized.includes("4WD AT ATHLETE")
+  ) {
+    return "triton";
+  }
+
+  return null;
+}
+
+function parsePromotionTableRows(tableText = "") {
+  const cleanTable = tableText
+    .replace(/^ALL NEW TRITON\s*/i, "")
+    .replace("[TABLE]", "")
+    .replace("[/TABLE]", "")
+    .trim();
+
+  const lines = cleanTable
+    .split("\n")
+    .map((line) => line.trim())
+    .filter(Boolean);
+
+  if (lines.length < 2) {
+    return [];
+  }
+
+  return lines.slice(1).map((line) => {
+    const cells = line
+      .split("|")
+      .map((cell) => cell.trim());
+
+    return {
+      variantName: cells[0] || "",
+      modelYear: cells[1] || "",
+      retailPrice: cells[2] || "",
+      offer: cells.slice(3).join(" | ").trim(),
+    };
+  });
+}
+
+function parseMoneyValue(value = "") {
+  const digits = String(value).replace(/[^\d]/g, "");
+
+  if (!digits) {
+    return undefined;
+  }
+
+  const amount = Number(digits);
+
+  return Number.isFinite(amount) ? amount : undefined;
+}
+
+function parseBenefitValue(text = "") {
+  const match = text.match(
+    /(?:~\s*)?(\d+(?:[.,]\d+)?)\s*triệu\s*VNĐ/i
+  );
+
+  if (!match) {
+    return undefined;
+  }
+
+  const millionValue = Number(
+    match[1].replace(",", ".")
+  );
+
+  if (!Number.isFinite(millionValue)) {
+    return undefined;
+  }
+
+  return Math.round(millionValue * 1000000);
+}
+
+function parsePromotionBenefits(offer = "") {
+  if (!offer) {
+    return [];
+  }
+
+  return offer
+    .split(/\n|•|–|-|;/)
+    .map((item) => cleanText(item))
+    .filter(Boolean)
+    .map((item) => {
+  const value = parseBenefitValue(item);
+
+  return {
+    label: item,
+    ...(value !== undefined ? { value } : {}),
+    description: item,
+    calculable: false,
+  };
+});
+}
+
+function buildPromotionCars(paragraphs = []) {
+  const tables = getPromotionTables(paragraphs);
+
+  return tables
+    .map(({ carId, tableText }) => {
+      if (!carId) {
+        return null;
+      }
+
+      const rows = parsePromotionTableRows(tableText);
+
+      const variants = rows
+        .filter((row) => row.variantName)
+        .map((row) => ({
+          variantName: row.variantName,
+          modelYear: row.modelYear,
+          retailPrice: parseMoneyValue(row.retailPrice),
+          benefits: parsePromotionBenefits(row.offer),
+        }));
+
+      if (variants.length === 0) {
+        return null;
+      }
+
+      return {
+        carId,
+        variants,
+      };
+    })
+    .filter(Boolean);
+}
+
+function detectPromotionPeriod(title = "") {
+ const match = title.match(
+  /(?:tháng|thang)\s*(\d{1,2})\s*[\/\-]\s*(\d{4})/i
+);
+
+  if (!match) {
+    return null;
+  }
+
+  const month = Number(match[1]);
+  const year = Number(match[2]);
+
+  if (
+    !Number.isInteger(month) ||
+    month < 1 ||
+    month > 12 ||
+    !Number.isInteger(year)
+  ) {
+    return null;
+  }
+
+  return {
+    month,
+    year,
+  };
+}
+
+function buildPromotionFileContent({
+  title,
+  paragraphs,
+}) {
+  const period = detectPromotionPeriod(title);
+  const cars = buildPromotionCars(paragraphs);
+
+  if (!period || cars.length === 0) {
+    return null;
+  }
+
+  return `export type PromotionBenefit = {
+  label: string;
+  value?: number;
+  description?: string;
+  calculable: boolean;
+};
+
+export type VariantPromotion = {
+  variantName: string;
+  modelYear?: string;
+  retailPrice?: number;
+  benefits: PromotionBenefit[];
+};
+
+export type CarPromotion = {
+  carId: string;
+  variants: VariantPromotion[];
+};
+
+export type PromotionProgram = {
+  month: number;
+  year: number;
+  title: string;
+  source: string;
+  cars: CarPromotion[];
+};
+
+export const currentPromotion: PromotionProgram = ${JSON.stringify(
+    {
+      month: period.month,
+      year: period.year,
+      title,
+      source: "Mitsubishi Motors Việt Nam",
+      cars,
+    },
+        null,
+    2
+  )};
+
+export function getMaxPromotionValue(carId: string) {
+  const carPromotion = currentPromotion.cars.find(
+    (car) => car.carId === carId
+  );
+
+  if (!carPromotion) {
+    return 0;
+  }
+
+  return Math.max(
+    0,
+    ...carPromotion.variants.map((variant) =>
+      variant.benefits.reduce(
+        (total, benefit) => total + (benefit.value ?? 0),
+        0
+      )
+    )
+  );
+}
+`;
 }
 
 function uniqueParagraphs(items) {
@@ -1142,6 +1425,8 @@ async function main() {
     return;
   }
 
+  let articleAlreadyExists = false;
+
   if (
     newsFile.includes(`slug: "${slug}"`) ||
     newsFile.includes(`"slug": "${slug}"`)
@@ -1153,9 +1438,9 @@ async function main() {
     console.log(slug);
     console.log("");
     console.log(
-      "Để test V2 bằng bài cũ, hãy dùng một bài URL khác."
-    );
-    return;
+  "Bài viết sẽ không được thêm lại vào Tin tức."
+);
+    articleAlreadyExists = true;
   }
 
   console.log("");
@@ -1328,7 +1613,6 @@ async function main() {
     console.log(
       "Đã hủy. news.ts không bị thay đổi."
     );
-    return;
   }
 
   // ========================================
@@ -1394,11 +1678,40 @@ async function main() {
     articleCode +
     newsFile.slice(insertPosition);
 
+    let promotionFileContent = null;
+
+if (category === "Khuyến mãi") {
+  promotionFileContent = buildPromotionFileContent({
+    title,
+    paragraphs: article.paragraphs,
+  });
+
+  if (!promotionFileContent) {
+    console.log(
+      "\n⚠️ Không thể tạo dữ liệu khuyến mãi tự động. promotions.ts sẽ không bị thay đổi."
+    );
+  }
+}
+
+if (promotionFileContent) {
+  fs.writeFileSync(
+    promotionsPath,
+    promotionFileContent,
+    "utf8"
+  );
+
+  console.log(
+    "✓ Đã cập nhật dữ liệu khuyến mãi hiện hành."
+  );
+}
+
+  if (!articleAlreadyExists) {
   fs.writeFileSync(
     newsPath,
     updatedFile,
     "utf8"
   );
+}
 
   console.log("");
   console.log("========================================");

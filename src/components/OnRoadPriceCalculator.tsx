@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import type { VariantPromotion } from "@/data/promotions";
 
 type RegistrationArea = "hcm" | "hanoi" | "province";
 type PlateType = "white" | "yellow";
@@ -10,6 +11,7 @@ type Props = {
   variantName: string;
   price: number;
   seats?: number;
+  promotion?: VariantPromotion;
 };
 
 export default function OnRoadPriceCalculator({
@@ -17,11 +19,17 @@ export default function OnRoadPriceCalculator({
   variantName,
   price,
   seats,
+  promotion,
 }: Props) {
   const [registrationArea, setRegistrationArea] =
     useState<RegistrationArea>("hcm");
 
   const [plateType, setPlateType] = useState<PlateType>("white");
+  const totalPromotionValue =
+  promotion?.benefits.reduce(
+    (total, benefit) => total + (benefit.value ?? 0),
+    0
+  ) ?? 0;
   const isTriton = carName === "Mitsubishi Triton";
 
 const registrationTaxRate = isTriton
@@ -70,6 +78,10 @@ const licensePlateFee = isTriton
   roadUseFee +
   insuranceFee +
   (registrationServiceFee ?? 0);
+  const onRoadPriceAfterPromotion = Math.max(
+  0,
+  onRoadPrice - totalPromotionValue
+);
 
   return (
     <div className="w-full rounded-xl border border-gray-200 bg-white p-4 shadow-sm">
@@ -208,6 +220,59 @@ const licensePlateFee = isTriton
       Vui lòng liên hệ để được xác nhận theo Tỉnh/Thành đăng ký.
     </p>
   )}
+
+  {promotion && promotion.benefits.length > 0 && (
+  <div className="mt-5 rounded-xl border border-red-200 bg-red-50 p-4">
+    <p className="text-sm font-bold uppercase text-red-600">
+      Ưu đãi hiện hành
+    </p>
+
+    {totalPromotionValue > 0 && (
+  <div className="mt-3 space-y-2">
+    <div className="flex items-center justify-between gap-4 text-sm">
+      <span className="text-gray-700">
+        Tổng giá trị quyền lợi
+      </span>
+      <span className="font-bold text-red-600">
+        -{totalPromotionValue.toLocaleString("vi-VN")} đ
+      </span>
+    </div>
+
+    <div className="flex items-end justify-between gap-4 border-t border-red-200 pt-3">
+      <span className="font-bold uppercase text-gray-900">
+        Dự kiến sau ưu đãi
+      </span>
+      <span className="whitespace-nowrap text-xl font-bold text-red-600">
+        {onRoadPriceAfterPromotion.toLocaleString("vi-VN")} đ
+      </span>
+    </div>
+  </div>
+)}
+
+    <ul className="mt-3 space-y-2 text-sm text-gray-700">
+      {promotion.benefits.map((benefit, index) => (
+        <li key={index} className="flex gap-2">
+          <span className="font-bold text-red-600">•</span>
+          <span>{benefit.label}</span>
+        </li>
+      ))}
+    </ul>
+
+    <p className="mt-3 text-xs leading-5 text-gray-500">
+      Giá sau ưu đãi được quy đổi tham khảo từ tổng giá trị quyền lợi
+của chương trình. Một số quyền lợi có thể là nhiên liệu, phụ kiện
+hoặc hỗ trợ khác, không phải tiền mặt. Vui lòng nhận báo giá để
+xác nhận ưu đãi thực tế.
+    </p>
+  </div>
+)}
+
+<a
+  href="/#bao-gia"
+  className="mt-4 flex w-full items-center justify-center rounded-lg bg-red-600 px-5 py-3 font-bold text-white transition hover:bg-red-700"
+>
+  Nhận báo giá
+</a>
 
   <p className="mt-3 text-xs leading-5 text-gray-500">
     Chi phí lăn bánh mang tính dự tính và tham khảo. Chi phí thực tế có

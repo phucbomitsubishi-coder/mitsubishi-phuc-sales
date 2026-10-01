@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { cars } from "@/data/cars";
+import { currentPromotion } from "@/data/promotions";
 import OnRoadPriceCalculator from "@/components/OnRoadPriceCalculator";
 
 export default function OnRoadPricePage() {
@@ -29,6 +30,12 @@ export default function OnRoadPricePage() {
   if (!selectedCar || !selectedVariant) {
     return null;
   }
+
+const selectedPromotion = currentPromotion.cars
+  .find((car) => car.carId === selectedCar.id)
+  ?.variants.find(
+    (variant) => variant.variantName === selectedVariant.name
+  );
 
   return (
     <div className="space-y-6">
@@ -99,6 +106,7 @@ export default function OnRoadPricePage() {
         variantName={selectedVariant.name}
         price={selectedVariant.price}
         seats={selectedVariant.specifications?.seats}
+        promotion={selectedPromotion}
       />
     </div>
   );
