@@ -232,7 +232,9 @@ const selectedImage =
             </p>
 
             <h3 className="mt-2 text-2xl font-bold">
-              {carName} {selectedVariant.name}
+              {selectedVariant.name === carName.replace("Mitsubishi ", "")
+  ? carName
+  : `${carName} ${selectedVariant.name}`}
             </h3>
 {selectedImage && (
   <div className="mt-4 flex h-[280px] items-center justify-center rounded-2xl bg-white p-2 md:h-[320px]">
@@ -500,8 +502,10 @@ const selectedImage =
     </p>
 
     <h4 className="mt-2 text-2xl font-bold">
-      {carName} {selectedVariant.name}
-    </h4>
+  {selectedVariant.name === carName.replace("Mitsubishi ", "")
+    ? carName
+    : `${carName} ${selectedVariant.name}`}
+</h4>
 
     <div className="mt-5 grid gap-5 sm:grid-cols-2">
       {selectedVariant.equipment.exterior &&

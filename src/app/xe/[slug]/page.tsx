@@ -52,7 +52,7 @@ export default async function CarDetailPage({
         <BackToPrevious />
 
         <div className="grid gap-5 md:gap-10 lg:grid-cols-2 lg:items-center">
-         <CarGallery />
+         <CarGallery carName={car.name} />
 
           <div>
             <p className="mb-2 font-semibold uppercase tracking-wider text-red-600">
@@ -72,14 +72,58 @@ export default async function CarDetailPage({
     Điểm nổi bật
   </p>
 
-  <div className="mt-3 grid gap-2 text-gray-700">
-    <p>✓ Dynamic Shield thế hệ mới</p>
-    <p>✓ Khoảng sáng gầm lên đến 222 mm</p>
-    <p>✓ 4 chế độ lái</p>
-    <p>✓ Màn hình lên đến 12,3 inch</p>
-    <p>✓ Hệ thống an toàn Diamond Sense</p>
-  </div>
+ <div className="mt-3 grid gap-2 text-gray-700">
+  {car.id === "xpander" ? (
+    <>
+      <p>✓ MPV 7 chỗ rộng rãi, linh hoạt</p>
+      <p>✓ Khoảng sáng gầm 225 mm</p>
+      <p>✓ Động cơ 1.5L MIVEC</p>
+      <p>✓ Mâm hợp kim lên đến 17 inch</p>
+      <p>✓ Phanh tay điện tử & Auto Hold</p>
+    </>
+  ) : car.id === "xpander-cross" ? (
+    <>
+      <p>✓ MPV 7 chỗ phong cách SUV mạnh mẽ</p>
+      <p>✓ Khoảng sáng gầm 225 mm</p>
+      <p>✓ Động cơ 1.5L MIVEC</p>
+      <p>✓ Mâm hợp kim 17 inch</p>
+      <p>✓ Hệ thống kiểm soát vào cua chủ động AYC</p>
+    </>
+  ) : car.id === "attrage" ? (
+    <>
+      <p>✓ Sedan 5 chỗ nhỏ gọn, linh hoạt</p>
+      <p>✓ Động cơ 1.2L MIVEC</p>
+      <p>✓ Khoảng sáng gầm 170 mm</p>
+      <p>✓ Mâm hợp kim 15 inch</p>
+      <p>✓ Phiên bản CVT Premium trang bị tiện nghi nổi bật</p>
+    </>
+    ) : car.id === "triton" ? (
+  <>
+    <p>✓ Động cơ Diesel 2.4L MIVEC mạnh mẽ</p>
+    <p>✓ Công suất lên đến 204 PS, mô-men xoắn 470 Nm</p>
+    <p>✓ Hệ dẫn động Super Select 4WD-II</p>
+    <p>✓ 7 chế độ lái hỗ trợ đa địa hình</p>
+    <p>✓ Mitsubishi Motors Safety Sensing (MMSS) trên bản Athlete</p>
+  </>
+  ) : car.id === "destinator" ? (
+  <>
+    <p>✓ SUV 7 chỗ rộng rãi dành cho gia đình</p>
+    <p>✓ Động cơ Turbo 1.5L MIVEC, công suất 163 PS</p>
+    <p>✓ Mô-men xoắn cực đại 250 Nm</p>
+    <p>✓ Khoảng sáng gầm 214 mm, mâm hợp kim 18 inch</p>
+    <p>✓ Hệ thống an toàn Diamond Sense trên bản Ultimate</p>
+  </>
+  ) : (
+    <>
+      <p>✓ Dynamic Shield thế hệ mới</p>
+      <p>✓ Khoảng sáng gầm lên đến 222 mm</p>
+      <p>✓ 4 chế độ lái</p>
+      <p>✓ Màn hình lên đến 12,3 inch</p>
+      <p>✓ Hệ thống an toàn Diamond Sense</p>
+    </>
 
+  )}
+</div>
   <div className="mt-6 flex flex-wrap gap-4">
     <a
       href={`/?car=${encodeURIComponent(car.name)}#bao-gia`}

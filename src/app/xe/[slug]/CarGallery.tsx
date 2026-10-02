@@ -4,28 +4,114 @@ import { useState } from "react";
 
 type GalleryType = "exterior" | "interior";
 
-const galleries: Record<GalleryType, string[]> = {
+const carGalleries: Record<
+  string,
+  Record<GalleryType, string[]>
+> = {
+  "Mitsubishi Xforce": {
+    exterior: [
+      "/images/cars/xforce/gallery/exterior/exterior-01.jpg",
+      "/images/cars/xforce/gallery/exterior/exterior-02.jpg",
+      "/images/cars/xforce/gallery/exterior/exterior-03.jpg",
+      "/images/cars/xforce/gallery/exterior/exterior-04.jpg",
+    ],
+    interior: [
+      "/images/cars/xforce/gallery/interior/interior-01.jpg",
+      "/images/cars/xforce/gallery/interior/interior-02.jpg",
+      "/images/cars/xforce/gallery/interior/interior-03.jpg",
+      "/images/cars/xforce/gallery/interior/interior-04.jpg",
+    ],
+    },
+
+  "Mitsubishi Xpander": {
+    exterior: [
+      "/images/cars/xpander/gallery/exterior/exterior-01.jpg",
+      "/images/cars/xpander/gallery/exterior/exterior-02.jpg",
+      "/images/cars/xpander/gallery/exterior/exterior-03.jpg",
+      "/images/cars/xpander/gallery/exterior/exterior-04.jpg",
+    ],
+    interior: [
+      "/images/cars/xpander/gallery/interior/interior-01.jpg",
+      "/images/cars/xpander/gallery/interior/interior-02.jpg",
+      "/images/cars/xpander/gallery/interior/interior-03.jpg",
+      "/images/cars/xpander/gallery/interior/interior-04.jpg",
+    ],
+  },
+    "Mitsubishi Xpander Cross": {
+    exterior: [
+      "/images/cars/xpander-cross/gallery/exterior/exterior-01.jpg",
+      "/images/cars/xpander-cross/gallery/exterior/exterior-02.jpg",
+      "/images/cars/xpander-cross/gallery/exterior/exterior-03.jpg",
+      "/images/cars/xpander-cross/gallery/exterior/exterior-04.jpg",
+    ],
+    interior: [
+      "/images/cars/xpander-cross/gallery/interior/interior-01.jpg",
+      "/images/cars/xpander-cross/gallery/interior/interior-02.jpg",
+      "/images/cars/xpander-cross/gallery/interior/interior-03.jpg",
+      "/images/cars/xpander-cross/gallery/interior/interior-04.jpg",
+    ],
+  },
+    "Mitsubishi Attrage": {
+    exterior: [
+      "/images/cars/attrage/gallery/exterior/exterior-01.jpg",
+      "/images/cars/attrage/gallery/exterior/exterior-02.jpg",
+      "/images/cars/attrage/gallery/exterior/exterior-03.jpg",
+      "/images/cars/attrage/gallery/exterior/exterior-04.jpg",
+    ],
+    interior: [
+      "/images/cars/attrage/gallery/interior/interior-01.jpg",
+      "/images/cars/attrage/gallery/interior/interior-02.jpg",
+      "/images/cars/attrage/gallery/interior/interior-03.jpg",
+      "/images/cars/attrage/gallery/interior/interior-04.jpg",
+    ],
+  },
+    "Mitsubishi Triton": {
+    exterior: [
+      "/images/cars/triton/gallery/exterior/exterior-01.jpg",
+      "/images/cars/triton/gallery/exterior/exterior-02.jpg",
+      "/images/cars/triton/gallery/exterior/exterior-03.jpg",
+      "/images/cars/triton/gallery/exterior/exterior-04.jpg",
+    ],
+    interior: [
+      "/images/cars/triton/gallery/interior/interior-01.jpg",
+      "/images/cars/triton/gallery/interior/interior-02.jpg",
+      "/images/cars/triton/gallery/interior/interior-03.jpg",
+      "/images/cars/triton/gallery/interior/interior-04.jpg",
+    ],
+  },
+  "Mitsubishi Destinator": {
   exterior: [
-    "/images/cars/xforce/gallery/exterior/exterior-01.jpg",
-    "/images/cars/xforce/gallery/exterior/exterior-02.jpg",
-    "/images/cars/xforce/gallery/exterior/exterior-03.jpg",
-    "/images/cars/xforce/gallery/exterior/exterior-04.jpg",
+    "/images/cars/destinator/gallery/exterior/exterior-01.jpg",
+    "/images/cars/destinator/gallery/exterior/exterior-02.jpg",
+    "/images/cars/destinator/gallery/exterior/exterior-03.jpg",
+    "/images/cars/destinator/gallery/exterior/exterior-04.jpg",
   ],
   interior: [
-    "/images/cars/xforce/gallery/interior/interior-01.jpg",
-    "/images/cars/xforce/gallery/interior/interior-02.jpg",
-    "/images/cars/xforce/gallery/interior/interior-03.jpg",
-    "/images/cars/xforce/gallery/interior/interior-04.jpg",
+    "/images/cars/destinator/gallery/interior/interior-01.jpg",
+    "/images/cars/destinator/gallery/interior/interior-02.jpg",
+    "/images/cars/destinator/gallery/interior/interior-03.jpg",
+    "/images/cars/destinator/gallery/interior/interior-04.jpg",
   ],
+},
 };
 
-export default function CarGallery() {
+
+type Props = {
+  carName: string;
+  galleries?: Record<GalleryType, string[]>;
+};
+
+export default function CarGallery({
+  carName,
+  galleries: customGalleries,
+}: Props) {
   const [galleryType, setGalleryType] =
     useState<GalleryType>("exterior");
 
   const [selectedIndex, setSelectedIndex] = useState(0);
 
-  const images = galleries[galleryType];
+  const images =
+  (customGalleries ?? carGalleries[carName])?.[galleryType] ?? [];
   const selectedImage = images[selectedIndex];
 
   function changeGallery(type: GalleryType) {
@@ -40,10 +126,10 @@ export default function CarGallery() {
         <img
           src={selectedImage}
           alt={
-            galleryType === "exterior"
-              ? "Ngoại thất Mitsubishi Xforce"
-              : "Nội thất Mitsubishi Xforce"
-          }
+  galleryType === "exterior"
+    ? `Ngoại thất ${carName}`
+    : `Nội thất ${carName}`
+}
           className="h-full w-full object-contain"
         />
       </div>

@@ -522,7 +522,73 @@ specifications: {
     fuelTank: "45 L",
     wheels: "195/65R16 - Mâm hợp kim 16 inch",
   },
-  colors: ["Trắng"],
+   colors: ["Trắng"],
+
+  equipment: {
+    exterior: [
+      "Đèn chiếu sáng Halogen",
+      "Đèn hậu LED",
+      "Gương chiếu hậu chỉnh điện",
+      "Mâm hợp kim 16 inch",
+    ],
+
+    interior: [
+      "Nội thất 7 chỗ",
+      "Ghế bọc nỉ",
+      "Hàng ghế thứ hai gập 60:40",
+      "Hàng ghế thứ ba gập 50:50",
+    ],
+
+    convenience: [
+      "Điều hòa chỉnh cơ",
+      "Cửa gió điều hòa cho hàng ghế sau",
+      "Hệ thống giải trí hỗ trợ kết nối cơ bản",
+      "Nhiều ngăn chứa đồ trong khoang cabin",
+    ],
+
+    safety: [
+      "2 túi khí phía trước",
+      "Camera lùi",
+    ],
+  },
+  safetyTechnologies: [
+  {
+    code: "ABS",
+    name: "Chống bó cứng phanh",
+    description:
+      "Giúp hạn chế bánh xe bị khóa cứng khi phanh gấp, hỗ trợ người lái duy trì khả năng điều khiển xe.",
+  },
+  {
+    code: "EBD",
+    name: "Phân phối lực phanh điện tử",
+    description:
+      "Hỗ trợ phân bổ lực phanh phù hợp giữa các bánh xe để tăng hiệu quả phanh.",
+  },
+  {
+    code: "BA",
+    name: "Hỗ trợ lực phanh khẩn cấp",
+    description:
+      "Hỗ trợ tăng lực phanh khi hệ thống nhận biết tình huống phanh khẩn cấp.",
+  },
+  {
+    code: "ASC",
+    name: "Cân bằng điện tử",
+    description:
+      "Hỗ trợ duy trì độ ổn định của xe khi hệ thống phát hiện nguy cơ mất cân bằng hoặc trượt bánh.",
+  },
+  {
+    code: "TCL",
+    name: "Kiểm soát lực kéo",
+    description:
+      "Hỗ trợ hạn chế bánh xe quay trượt khi tăng tốc trên bề mặt có độ bám thấp.",
+  },
+  {
+    code: "HSA",
+    name: "Hỗ trợ khởi hành ngang dốc",
+    description:
+      "Hỗ trợ giữ phanh trong thời gian ngắn khi khởi hành trên dốc, hạn chế xe bị trôi về phía sau.",
+  },
+],
 },
   {
   name: "AT",
@@ -543,6 +609,72 @@ specifications: {
     wheels: "195/65R16 - Mâm hợp kim 16 inch",
   },
   colors: ["Trắng", "Đen", "Nâu", "Xám"],
+
+equipment: {
+  exterior: [
+    "Đèn chiếu sáng Halogen",
+    "Đèn hậu LED",
+    "Gương chiếu hậu chỉnh điện",
+    "Mâm hợp kim 16 inch",
+  ],
+
+  interior: [
+    "Nội thất 7 chỗ",
+    "Ghế bọc nỉ",
+    "Hàng ghế thứ hai gập 60:40",
+    "Hàng ghế thứ ba gập 50:50",
+  ],
+
+  convenience: [
+    "Điều hòa chỉnh cơ",
+    "Cửa gió điều hòa cho hàng ghế sau",
+    "Hệ thống giải trí hỗ trợ kết nối cơ bản",
+    "Nhiều ngăn chứa đồ trong khoang cabin",
+  ],
+
+  safety: [
+    "2 túi khí phía trước",
+    "Camera lùi",
+  ],
+},
+safetyTechnologies: [
+  {
+    code: "ABS",
+    name: "Chống bó cứng phanh",
+    description:
+      "Giúp hạn chế bánh xe bị khóa cứng khi phanh gấp, hỗ trợ người lái duy trì khả năng điều khiển xe.",
+  },
+  {
+    code: "EBD",
+    name: "Phân phối lực phanh điện tử",
+    description:
+      "Hỗ trợ phân bổ lực phanh phù hợp giữa các bánh xe để tăng hiệu quả phanh.",
+  },
+  {
+    code: "BA",
+    name: "Hỗ trợ lực phanh khẩn cấp",
+    description:
+      "Hỗ trợ tăng lực phanh khi hệ thống nhận biết tình huống phanh khẩn cấp.",
+  },
+  {
+    code: "ASC",
+    name: "Cân bằng điện tử",
+    description:
+      "Hỗ trợ duy trì độ ổn định của xe khi hệ thống phát hiện nguy cơ mất cân bằng hoặc trượt bánh.",
+  },
+  {
+    code: "TCL",
+    name: "Kiểm soát lực kéo",
+    description:
+      "Hỗ trợ hạn chế bánh xe quay trượt khi tăng tốc trên bề mặt có độ bám thấp.",
+  },
+  {
+    code: "HSA",
+    name: "Hỗ trợ khởi hành ngang dốc",
+    description:
+      "Hỗ trợ giữ phanh trong thời gian ngắn khi khởi hành trên dốc, hạn chế xe bị trôi về phía sau.",
+  },
+],
 },  
   
 
@@ -565,6 +697,77 @@ specifications: {
     wheels: "205/55R17 - Mâm hợp kim 17 inch",
   },
   colors: ["Trắng", "Đen", "Xám", "Đỏ"],
+
+equipment: {
+  exterior: [
+    "Đèn chiếu sáng LED",
+    "Đèn định vị ban ngày LED",
+    "Đèn hậu LED",
+    "Gương chiếu hậu chỉnh điện, gập điện",
+    "Mâm hợp kim 17 inch",
+  ],
+
+  interior: [
+    "Nội thất 7 chỗ",
+    "Ghế bọc da",
+    "Vô lăng bọc da",
+    "Hàng ghế thứ hai gập 60:40",
+    "Hàng ghế thứ ba gập 50:50",
+  ],
+
+  convenience: [
+    "Màn hình giải trí cảm ứng",
+    "Điều hòa tự động",
+    "Cửa gió điều hòa cho hàng ghế sau",
+    "Phanh tay điện tử và Auto Hold",
+    "Chìa khóa thông minh và khởi động nút bấm",
+    "Nhiều ngăn chứa đồ trong khoang cabin",
+  ],
+
+  safety: [
+    "2 túi khí phía trước",
+    "Camera lùi",
+    "Cảm biến hỗ trợ đỗ xe",
+  ],
+},
+safetyTechnologies: [
+  {
+    code: "ABS",
+    name: "Chống bó cứng phanh",
+    description:
+      "Giúp hạn chế bánh xe bị khóa cứng khi phanh gấp, hỗ trợ người lái duy trì khả năng điều khiển xe.",
+  },
+  {
+    code: "EBD",
+    name: "Phân phối lực phanh điện tử",
+    description:
+      "Hỗ trợ phân bổ lực phanh phù hợp giữa các bánh xe để tăng hiệu quả phanh.",
+  },
+  {
+    code: "BA",
+    name: "Hỗ trợ lực phanh khẩn cấp",
+    description:
+      "Hỗ trợ tăng lực phanh khi hệ thống nhận biết tình huống phanh khẩn cấp.",
+  },
+  {
+    code: "ASC",
+    name: "Cân bằng điện tử",
+    description:
+      "Hỗ trợ duy trì độ ổn định của xe khi hệ thống phát hiện nguy cơ mất cân bằng hoặc trượt bánh.",
+  },
+  {
+    code: "TCL",
+    name: "Kiểm soát lực kéo",
+    description:
+      "Hỗ trợ hạn chế bánh xe quay trượt khi tăng tốc trên bề mặt có độ bám thấp.",
+  },
+  {
+    code: "HSA",
+    name: "Hỗ trợ khởi hành ngang dốc",
+    description:
+      "Hỗ trợ giữ phanh trong thời gian ngắn khi khởi hành trên dốc, hạn chế xe bị trôi về phía sau.",
+  },
+],
 },
 ],
     colors: ["Trắng", "Đen", "Bạc", "Xám"],
@@ -637,7 +840,46 @@ specifications: {
     groundClearance: "170 mm",
     fuelTank: "42 L",
     wheels: "Mâm hợp kim 15 inch",
+    curbWeight: "875 kg",
+turningRadius: "4,8 m",
   },
+  equipment: {
+  exterior: [
+    "Đèn chiếu sáng Halogen",
+    "Đèn hậu",
+    "Gương chiếu hậu chỉnh điện",
+    "Mâm hợp kim 15 inch",
+  ],
+  interior: [
+    "Nội thất 5 chỗ",
+    "Ghế bọc nỉ",
+    "Vô lăng 3 chấu",
+    "Hàng ghế sau có tựa đầu",
+  ],
+  convenience: [
+    "Điều hòa chỉnh cơ",
+    "Hệ thống âm thanh 2 loa",
+    "Kết nối USB",
+    "Khoang hành lý rộng rãi",
+  ],
+  safety: [
+    "2 túi khí phía trước",
+  ],
+},
+safetyTechnologies: [
+  {
+    code: "ABS",
+    name: "Chống bó cứng phanh",
+    description:
+      "Giúp hạn chế bánh xe bị khóa cứng khi phanh gấp, hỗ trợ người lái duy trì khả năng điều khiển xe.",
+  },
+  {
+    code: "EBD",
+    name: "Phân phối lực phanh điện tử",
+    description:
+      "Hỗ trợ phân bổ lực phanh phù hợp giữa các bánh xe để tăng hiệu quả phanh.",
+  },
+],
   colors: ["Trắng", "Xám"],
 },
   {
@@ -657,7 +899,69 @@ specifications: {
     groundClearance: "170 mm",
     fuelTank: "42 L",
     wheels: "Mâm hợp kim 15 inch",
+    curbWeight: "905 kg",
+turningRadius: "4,8 m",
   },
+  equipment: {
+  exterior: [
+    "Đèn chiếu sáng Bi-LED",
+    "Đèn định vị ban ngày LED",
+    "Đèn hậu",
+    "Gương chiếu hậu chỉnh điện, gập điện",
+    "Mâm hợp kim 15 inch",
+  ],
+  interior: [
+    "Nội thất 5 chỗ",
+    "Ghế bọc da",
+    "Vô lăng bọc da",
+    "Hàng ghế sau có tựa đầu",
+  ],
+  convenience: [
+    "Màn hình giải trí cảm ứng",
+    "Điều hòa tự động",
+    "Kết nối Apple CarPlay và Android Auto",
+    "Chìa khóa thông minh và khởi động nút bấm",
+    "Kiểm soát hành trình Cruise Control",
+    "Khoang hành lý rộng rãi",
+  ],
+  safety: [
+    "2 túi khí phía trước",
+    "Camera lùi",
+    "Cảm biến hỗ trợ đỗ xe",
+  ],
+},
+safetyTechnologies: [
+  {
+    code: "ABS",
+    name: "Chống bó cứng phanh",
+    description:
+      "Giúp hạn chế bánh xe bị khóa cứng khi phanh gấp, hỗ trợ người lái duy trì khả năng điều khiển xe.",
+  },
+  {
+    code: "EBD",
+    name: "Phân phối lực phanh điện tử",
+    description:
+      "Hỗ trợ phân bổ lực phanh phù hợp giữa các bánh xe để tăng hiệu quả phanh.",
+  },
+  {
+    code: "ASC",
+    name: "Cân bằng điện tử",
+    description:
+      "Hỗ trợ duy trì độ ổn định của xe khi hệ thống phát hiện nguy cơ mất cân bằng hoặc trượt bánh.",
+  },
+  {
+    code: "TCL",
+    name: "Kiểm soát lực kéo",
+    description:
+      "Hỗ trợ hạn chế bánh xe quay trượt khi tăng tốc trên bề mặt có độ bám thấp.",
+  },
+  {
+    code: "HSA",
+    name: "Hỗ trợ khởi hành ngang dốc",
+    description:
+      "Hỗ trợ giữ phanh trong thời gian ngắn khi khởi hành trên dốc, hạn chế xe bị trôi về phía sau.",
+  },
+],
   colors: ["Trắng", "Xám", "Đỏ"],
 },
 ],
@@ -717,7 +1021,74 @@ specifications: {
   wheelbase: "3.130 mm",
   groundClearance: "222 mm",
   wheels: "Mâm hợp kim 16 inch",
+  fuelTank: "75 L",
+curbWeight: "1.935 kg",
+turningRadius: "6,2 m",
 },
+equipment: {
+  exterior: [
+    "Đèn chiếu sáng phía trước",
+    "Đèn hậu",
+    "Gương chiếu hậu chỉnh điện",
+    "Mâm hợp kim 16 inch",
+    "Bậc lên xuống hai bên",
+  ],
+  interior: [
+    "Nội thất 5 chỗ",
+    "Ghế bọc nỉ",
+    "Vô lăng đa chức năng",
+    "Cụm đồng hồ kỹ thuật số 7 inch",
+  ],
+  convenience: [
+    "Màn hình giải trí 8 inch",
+    "Kết nối điện thoại thông minh",
+    "Điều hòa",
+    "Cruise Control",
+    "Cổng kết nối USB",
+  ],
+  safety: [
+    "Túi khí phía trước",
+    "Camera lùi",
+  ],
+},
+safetyTechnologies: [
+  {
+    code: "ABS",
+    name: "Chống bó cứng phanh",
+    description:
+      "Giúp hạn chế bánh xe bị khóa cứng khi phanh gấp, hỗ trợ người lái duy trì khả năng điều khiển xe.",
+  },
+  {
+    code: "EBD",
+    name: "Phân phối lực phanh điện tử",
+    description:
+      "Hỗ trợ phân bổ lực phanh phù hợp giữa các bánh xe để tăng hiệu quả phanh.",
+  },
+  {
+    code: "BA",
+    name: "Hỗ trợ lực phanh khẩn cấp",
+    description:
+      "Hỗ trợ tăng lực phanh khi hệ thống nhận biết tình huống phanh khẩn cấp.",
+  },
+  {
+    code: "ASC",
+    name: "Cân bằng điện tử",
+    description:
+      "Hỗ trợ duy trì độ ổn định của xe khi hệ thống phát hiện nguy cơ mất cân bằng hoặc trượt bánh.",
+  },
+  {
+    code: "TCL",
+    name: "Kiểm soát lực kéo",
+    description:
+      "Hỗ trợ hạn chế bánh xe quay trượt khi tăng tốc trên bề mặt có độ bám thấp.",
+  },
+  {
+    code: "HSA",
+    name: "Hỗ trợ khởi hành ngang dốc",
+    description:
+      "Hỗ trợ giữ phanh trong thời gian ngắn khi khởi hành trên dốc, hạn chế xe bị trôi về phía sau.",
+  },
+],
     features: [
   "Mâm hợp kim 16 inch",
   "Màn hình giải trí 8 inch",
@@ -744,7 +1115,76 @@ specifications: {
   wheelbase: "3.130 mm",
   groundClearance: "222 mm",
   wheels: "Mâm hợp kim 18 inch",
+  fuelTank: "75 L",
+curbWeight: "1.970 kg",
+turningRadius: "6,2 m",
 },
+equipment: {
+  exterior: [
+    "Đèn LED T-Shape",
+    "Đèn định vị ban ngày LED",
+    "Gương chiếu hậu chỉnh điện, gập điện",
+    "Mâm hợp kim 18 inch",
+    "Bậc lên xuống hai bên",
+  ],
+  interior: [
+    "Nội thất 5 chỗ",
+    "Ghế bọc da",
+    "Ghế lái chỉnh điện 8 hướng",
+    "Vô lăng đa chức năng",
+    "Cụm đồng hồ kỹ thuật số 7 inch",
+  ],
+  convenience: [
+    "Màn hình giải trí 9 inch",
+    "Apple CarPlay và Android Auto",
+    "Điều hòa tự động",
+    "Cruise Control",
+    "Chìa khóa thông minh và khởi động nút bấm",
+    "Cổng kết nối USB",
+  ],
+  safety: [
+    "7 túi khí",
+    "Camera lùi",
+  ],
+},
+safetyTechnologies: [
+  {
+    code: "ABS",
+    name: "Chống bó cứng phanh",
+    description:
+      "Giúp hạn chế bánh xe bị khóa cứng khi phanh gấp, hỗ trợ người lái duy trì khả năng điều khiển xe.",
+  },
+  {
+    code: "EBD",
+    name: "Phân phối lực phanh điện tử",
+    description:
+      "Hỗ trợ phân bổ lực phanh phù hợp giữa các bánh xe để tăng hiệu quả phanh.",
+  },
+  {
+    code: "BA",
+    name: "Hỗ trợ lực phanh khẩn cấp",
+    description:
+      "Hỗ trợ tăng lực phanh khi hệ thống nhận biết tình huống phanh khẩn cấp.",
+  },
+  {
+    code: "ASC",
+    name: "Cân bằng điện tử",
+    description:
+      "Hỗ trợ duy trì độ ổn định của xe khi hệ thống phát hiện nguy cơ mất cân bằng hoặc trượt bánh.",
+  },
+  {
+    code: "TCL",
+    name: "Kiểm soát lực kéo",
+    description:
+      "Hỗ trợ hạn chế bánh xe quay trượt khi tăng tốc trên bề mặt có độ bám thấp.",
+  },
+  {
+    code: "HSA",
+    name: "Hỗ trợ khởi hành ngang dốc",
+    description:
+      "Hỗ trợ giữ phanh trong thời gian ngắn khi khởi hành trên dốc, hạn chế xe bị trôi về phía sau.",
+  },
+],
     features: [
   "7 túi khí",
   "Đèn LED T-Shape",
@@ -774,7 +1214,87 @@ specifications: {
   wheelbase: "3.130 mm",
   groundClearance: "222 mm",
   wheels: "Mâm hợp kim 18 inch",
+  fuelTank: "75 L",
+curbWeight: "2.045 kg",
+turningRadius: "6,2 m",
 },
+equipment: {
+  exterior: [
+    "Đèn LED T-Shape",
+    "Đèn định vị ban ngày LED",
+    "Gương chiếu hậu chỉnh điện, gập điện",
+    "Mâm hợp kim 18 inch",
+    "Bậc lên xuống hai bên",
+  ],
+  interior: [
+    "Nội thất 5 chỗ",
+    "Ghế bọc da",
+    "Ghế lái chỉnh điện 8 hướng",
+    "Vô lăng đa chức năng",
+    "Cụm đồng hồ kỹ thuật số 7 inch",
+  ],
+  convenience: [
+    "Màn hình giải trí 9 inch",
+    "Apple CarPlay và Android Auto",
+    "Điều hòa tự động",
+    "Cruise Control",
+    "Chìa khóa thông minh và khởi động nút bấm",
+    "Cổng kết nối USB",
+  ],
+  safety: [
+    "7 túi khí",
+    "Camera lùi",
+  ],
+  drivingSupport: [
+    "Hệ dẫn động Super Select 4WD-II",
+    "7 chế độ lái",
+    "Khóa vi sai cầu sau",
+  ],
+},
+safetyTechnologies: [
+  {
+    code: "ABS",
+    name: "Chống bó cứng phanh",
+    description:
+      "Giúp hạn chế bánh xe bị khóa cứng khi phanh gấp, hỗ trợ người lái duy trì khả năng điều khiển xe.",
+  },
+  {
+    code: "EBD",
+    name: "Phân phối lực phanh điện tử",
+    description:
+      "Hỗ trợ phân bổ lực phanh phù hợp giữa các bánh xe để tăng hiệu quả phanh.",
+  },
+  {
+    code: "BA",
+    name: "Hỗ trợ lực phanh khẩn cấp",
+    description:
+      "Hỗ trợ tăng lực phanh khi hệ thống nhận biết tình huống phanh khẩn cấp.",
+  },
+  {
+    code: "ASC",
+    name: "Cân bằng điện tử",
+    description:
+      "Hỗ trợ duy trì độ ổn định của xe khi hệ thống phát hiện nguy cơ mất cân bằng hoặc trượt bánh.",
+  },
+  {
+    code: "TCL",
+    name: "Kiểm soát lực kéo",
+    description:
+      "Hỗ trợ hạn chế bánh xe quay trượt khi tăng tốc trên bề mặt có độ bám thấp.",
+  },
+  {
+    code: "HSA",
+    name: "Hỗ trợ khởi hành ngang dốc",
+    description:
+      "Hỗ trợ giữ phanh trong thời gian ngắn khi khởi hành trên dốc, hạn chế xe bị trôi về phía sau.",
+  },
+  {
+    code: "HDC",
+    name: "Hỗ trợ xuống dốc",
+    description:
+      "Hỗ trợ kiểm soát tốc độ xe khi xuống dốc, giúp người lái tập trung hơn vào việc điều khiển hướng di chuyển.",
+  },
+],
     features: [
   "Hệ dẫn động Super Select 4WD-II",
   "7 chế độ lái",
@@ -804,7 +1324,123 @@ specifications: {
   wheelbase: "3.130 mm",
   groundClearance: "222 mm",
   wheels: "Mâm hợp kim 18 inch",
+  fuelTank: "75 L",
+curbWeight: "2.115 kg",
+turningRadius: "6,2 m",
 },
+equipment: {
+  exterior: [
+    "Đèn LED T-Shape",
+    "Đèn định vị ban ngày LED",
+    "Gương chiếu hậu chỉnh điện, gập điện",
+    "Mâm hợp kim 18 inch",
+    "Bậc lên xuống hai bên",
+    "Ngoại thất phong cách Athlete thể thao",
+  ],
+  interior: [
+    "Nội thất 5 chỗ",
+    "Ghế da phối da lộn",
+    "Ghế lái chỉnh điện 8 hướng",
+    "Vô lăng đa chức năng",
+    "Cụm đồng hồ kỹ thuật số 7 inch",
+  ],
+  convenience: [
+    "Màn hình giải trí 9 inch",
+    "Apple CarPlay và Android Auto",
+    "Điều hòa tự động",
+    "Cruise Control",
+    "Chìa khóa thông minh và khởi động nút bấm",
+    "Cổng kết nối USB",
+  ],
+  safety: [
+    "7 túi khí",
+    "Camera toàn cảnh 360 độ",
+  ],
+  drivingSupport: [
+    "Hệ dẫn động Super Select 4WD-II",
+    "7 chế độ lái",
+    "Khóa vi sai cầu sau",
+    "Kiểm soát vào cua chủ động AYC",
+  ],
+},
+safetyTechnologies: [
+  {
+    code: "ABS",
+    name: "Chống bó cứng phanh",
+    description:
+      "Giúp hạn chế bánh xe bị khóa cứng khi phanh gấp, hỗ trợ người lái duy trì khả năng điều khiển xe.",
+  },
+  {
+    code: "EBD",
+    name: "Phân phối lực phanh điện tử",
+    description:
+      "Hỗ trợ phân bổ lực phanh phù hợp giữa các bánh xe để tăng hiệu quả phanh.",
+  },
+  {
+    code: "BA",
+    name: "Hỗ trợ lực phanh khẩn cấp",
+    description:
+      "Hỗ trợ tăng lực phanh khi hệ thống nhận biết tình huống phanh khẩn cấp.",
+  },
+  {
+    code: "ASC",
+    name: "Cân bằng điện tử",
+    description:
+      "Hỗ trợ duy trì độ ổn định của xe khi hệ thống phát hiện nguy cơ mất cân bằng hoặc trượt bánh.",
+  },
+  {
+    code: "TCL",
+    name: "Kiểm soát lực kéo",
+    description:
+      "Hỗ trợ hạn chế bánh xe quay trượt khi tăng tốc trên bề mặt có độ bám thấp.",
+  },
+  {
+    code: "HSA",
+    name: "Hỗ trợ khởi hành ngang dốc",
+    description:
+      "Hỗ trợ giữ phanh trong thời gian ngắn khi khởi hành trên dốc, hạn chế xe bị trôi về phía sau.",
+  },
+  {
+    code: "HDC",
+    name: "Hỗ trợ xuống dốc",
+    description:
+      "Hỗ trợ kiểm soát tốc độ xe khi xuống dốc.",
+  },
+  {
+    code: "AYC",
+    name: "Kiểm soát vào cua chủ động",
+    description:
+      "Hỗ trợ kiểm soát lực phanh giữa các bánh xe để tăng độ ổn định khi vào cua.",
+  },
+  {
+    code: "FCM",
+    name: "Cảnh báo và giảm thiểu va chạm phía trước",
+    description:
+      "Hỗ trợ cảnh báo nguy cơ va chạm phía trước và can thiệp phanh trong một số tình huống.",
+    group: "MMSS",
+  },
+  {
+    code: "BSW",
+    name: "Cảnh báo điểm mù",
+    description:
+      "Hỗ trợ cảnh báo khi phát hiện phương tiện trong khu vực điểm mù.",
+    group: "MMSS",
+  },
+  {
+    code: "LCA",
+    name: "Hỗ trợ chuyển làn",
+    description:
+      "Hỗ trợ cảnh báo phương tiện tiếp cận khi người lái có ý định chuyển làn.",
+    group: "MMSS",
+  },
+  {
+    code: "RCTA",
+    name: "Cảnh báo phương tiện cắt ngang khi lùi",
+    description:
+      "Hỗ trợ cảnh báo phương tiện đang di chuyển cắt ngang phía sau khi xe lùi.",
+    group: "MMSS",
+  },
+],
     features: [
   "Hệ thống Mitsubishi Motors Safety Sensing (MMSS)",
   "Hệ dẫn động Super Select 4WD-II",
@@ -878,7 +1514,84 @@ specifications: {
     groundClearance: "214 mm",
     fuelTank: "45 L",
     wheels: "225/55R18 - Mâm hợp kim 18 inch",
+    curbWeight: "1.495 kg",
+turningRadius: "5,4 m",
+fuelConsumptionCombined: "Khoảng 6,8 L/100 km",
   },
+  equipment: {
+  exterior: [
+    "Đèn chiếu sáng LED",
+    "Đèn định vị ban ngày LED",
+    "Đèn hậu LED",
+    "Gương chiếu hậu chỉnh điện, gập điện",
+    "Mâm hợp kim 18 inch",
+    "Thanh giá nóc",
+  ],
+  interior: [
+    "Nội thất 7 chỗ",
+    "Ghế bọc da",
+    "Vô lăng bọc da đa chức năng",
+    "Hàng ghế thứ hai gập linh hoạt",
+    "Hàng ghế thứ ba gập linh hoạt",
+  ],
+  convenience: [
+    "Màn hình giải trí cảm ứng",
+    "Kết nối Apple CarPlay và Android Auto",
+    "Điều hòa tự động",
+    "Cửa gió điều hòa cho hàng ghế sau",
+    "Chìa khóa thông minh và khởi động nút bấm",
+    "Phanh tay điện tử và Auto Hold",
+  ],
+  safety: [
+    "Túi khí",
+    "Camera lùi",
+    "Cảm biến hỗ trợ đỗ xe",
+  ],
+},
+safetyTechnologies: [
+  {
+    code: "ABS",
+    name: "Chống bó cứng phanh",
+    description:
+      "Giúp hạn chế bánh xe bị khóa cứng khi phanh gấp, hỗ trợ người lái duy trì khả năng điều khiển xe.",
+  },
+  {
+    code: "EBD",
+    name: "Phân phối lực phanh điện tử",
+    description:
+      "Hỗ trợ phân bổ lực phanh phù hợp giữa các bánh xe để tăng hiệu quả phanh.",
+  },
+  {
+    code: "BA",
+    name: "Hỗ trợ lực phanh khẩn cấp",
+    description:
+      "Hỗ trợ tăng lực phanh khi hệ thống nhận biết tình huống phanh khẩn cấp.",
+  },
+  {
+    code: "ASC",
+    name: "Cân bằng điện tử",
+    description:
+      "Hỗ trợ duy trì độ ổn định của xe khi hệ thống phát hiện nguy cơ mất cân bằng hoặc trượt bánh.",
+  },
+  {
+    code: "TCL",
+    name: "Kiểm soát lực kéo",
+    description:
+      "Hỗ trợ hạn chế bánh xe quay trượt khi tăng tốc trên bề mặt có độ bám thấp.",
+  },
+  {
+    code: "HSA",
+    name: "Hỗ trợ khởi hành ngang dốc",
+    description:
+      "Hỗ trợ giữ phanh trong thời gian ngắn khi khởi hành trên dốc, hạn chế xe bị trôi về phía sau.",
+  },
+  {
+    code: "AYC",
+    name: "Kiểm soát vào cua chủ động",
+    description:
+      "Hỗ trợ kiểm soát lực phanh giữa các bánh xe để tăng độ ổn định và khả năng kiểm soát khi vào cua.",
+  },
+],
   colors: ["Trắng", "Xám", "Đen", "Đỏ"],
 },
   {
@@ -898,7 +1611,122 @@ specifications: {
     groundClearance: "214 mm",
     fuelTank: "45 L",
     wheels: "225/55R18 - Mâm hợp kim 18 inch",
+    curbWeight: "1.495 kg",
+turningRadius: "5,4 m",
+fuelConsumptionCombined: "Khoảng 6,8 L/100 km",
   },
+  equipment: {
+  exterior: [
+    "Đèn chiếu sáng LED",
+    "Đèn định vị ban ngày LED",
+    "Đèn hậu LED",
+    "Gương chiếu hậu chỉnh điện, gập điện",
+    "Mâm hợp kim 18 inch",
+    "Thanh giá nóc",
+    "Ngoại thất phối hai tông màu",
+  ],
+  interior: [
+    "Nội thất 7 chỗ",
+    "Ghế bọc da",
+    "Ghế lái chỉnh điện",
+    "Vô lăng bọc da đa chức năng",
+    "Hàng ghế thứ hai gập linh hoạt",
+    "Hàng ghế thứ ba gập linh hoạt",
+  ],
+  convenience: [
+    "Màn hình giải trí cảm ứng",
+    "Kết nối Apple CarPlay và Android Auto",
+    "Điều hòa tự động",
+    "Cửa gió điều hòa cho hàng ghế sau",
+    "Chìa khóa thông minh và khởi động nút bấm",
+    "Phanh tay điện tử và Auto Hold",
+    "Hệ thống âm thanh cao cấp",
+  ],
+  safety: [
+    "Túi khí",
+    "Camera toàn cảnh 360 độ",
+    "Cảm biến hỗ trợ đỗ xe",
+  ],
+},
+safetyTechnologies: [
+  {
+    code: "ABS",
+    name: "Chống bó cứng phanh",
+    description:
+      "Giúp hạn chế bánh xe bị khóa cứng khi phanh gấp, hỗ trợ người lái duy trì khả năng điều khiển xe.",
+  },
+  {
+    code: "EBD",
+    name: "Phân phối lực phanh điện tử",
+    description:
+      "Hỗ trợ phân bổ lực phanh phù hợp giữa các bánh xe để tăng hiệu quả phanh.",
+  },
+  {
+    code: "BA",
+    name: "Hỗ trợ lực phanh khẩn cấp",
+    description:
+      "Hỗ trợ tăng lực phanh khi hệ thống nhận biết tình huống phanh khẩn cấp.",
+  },
+  {
+    code: "ASC",
+    name: "Cân bằng điện tử",
+    description:
+      "Hỗ trợ duy trì độ ổn định của xe khi hệ thống phát hiện nguy cơ mất cân bằng hoặc trượt bánh.",
+  },
+  {
+    code: "TCL",
+    name: "Kiểm soát lực kéo",
+    description:
+      "Hỗ trợ hạn chế bánh xe quay trượt khi tăng tốc trên bề mặt có độ bám thấp.",
+  },
+  {
+    code: "HSA",
+    name: "Hỗ trợ khởi hành ngang dốc",
+    description:
+      "Hỗ trợ giữ phanh trong thời gian ngắn khi khởi hành trên dốc, hạn chế xe bị trôi về phía sau.",
+  },
+  {
+    code: "AYC",
+    name: "Kiểm soát vào cua chủ động",
+    description:
+      "Hỗ trợ kiểm soát lực phanh giữa các bánh xe để tăng độ ổn định và khả năng kiểm soát khi vào cua.",
+  },
+  {
+    code: "FCM",
+    name: "Cảnh báo và giảm thiểu va chạm phía trước",
+    description:
+      "Hỗ trợ cảnh báo nguy cơ va chạm phía trước và can thiệp phanh trong một số tình huống.",
+    group: "Diamond Sense",
+  },
+  {
+    code: "BSW",
+    name: "Cảnh báo điểm mù",
+    description:
+      "Hỗ trợ cảnh báo khi phát hiện phương tiện trong khu vực điểm mù.",
+    group: "Diamond Sense",
+  },
+  {
+    code: "LCA",
+    name: "Hỗ trợ chuyển làn",
+    description:
+      "Hỗ trợ cảnh báo phương tiện tiếp cận khi người lái có ý định chuyển làn.",
+    group: "Diamond Sense",
+  },
+  {
+    code: "RCTA",
+    name: "Cảnh báo phương tiện cắt ngang khi lùi",
+    description:
+      "Hỗ trợ cảnh báo phương tiện đang di chuyển cắt ngang phía sau khi xe lùi.",
+    group: "Diamond Sense",
+  },
+  {
+    code: "ACC",
+    name: "Kiểm soát hành trình thích ứng",
+    description:
+      "Hỗ trợ duy trì tốc độ và khoảng cách phù hợp với phương tiện phía trước.",
+    group: "Diamond Sense",
+  },
+],
   colors: ["Trắng Đen", "Xanh Đen", "Đỏ Đen", "Đen"],
 },
 ],
@@ -974,7 +1802,88 @@ image: "/images/cars/xpander-cross.png",
   groundClearance: "225 mm",
   fuelTank: "45 L",
   wheels: "205/55R17 - Mâm hợp kim 17 inch",
+curbWeight: "1.275 kg",
+turningRadius: "5,2 m",
+fuelConsumptionCombined: "7,10 L/100 km",
+fuelConsumptionUrban: "8,60 L/100 km",
 },
+equipment: {
+  exterior: [
+    "Đèn chiếu sáng LED",
+    "Đèn định vị ban ngày LED",
+    "Đèn hậu LED",
+    "Gương chiếu hậu chỉnh điện, gập điện",
+    "Mâm hợp kim 17 inch",
+    "Ốp ngoại thất phong cách SUV",
+  ],
+  interior: [
+    "Nội thất 7 chỗ",
+    "Ghế bọc da",
+    "Vô lăng bọc da",
+    "Hàng ghế thứ hai gập 60:40",
+    "Hàng ghế thứ ba gập 50:50",
+  ],
+  convenience: [
+    "Màn hình giải trí cảm ứng",
+    "Điều hòa tự động",
+    "Cửa gió điều hòa cho hàng ghế sau",
+    "Phanh tay điện tử và Auto Hold",
+    "Chìa khóa thông minh và khởi động nút bấm",
+    "Nhiều ngăn chứa đồ trong khoang cabin",
+  ],
+  safety: [
+    "2 túi khí phía trước",
+    "Camera lùi",
+    "Cảm biến hỗ trợ đỗ xe",
+  ],
+  drivingSupport: [
+    "Hệ thống kiểm soát vào cua chủ động AYC",
+  ],
+},
+safetyTechnologies: [
+  {
+    code: "ABS",
+    name: "Chống bó cứng phanh",
+    description:
+      "Giúp hạn chế bánh xe bị khóa cứng khi phanh gấp, hỗ trợ người lái duy trì khả năng điều khiển xe.",
+  },
+  {
+    code: "EBD",
+    name: "Phân phối lực phanh điện tử",
+    description:
+      "Hỗ trợ phân bổ lực phanh phù hợp giữa các bánh xe để tăng hiệu quả phanh.",
+  },
+  {
+    code: "BA",
+    name: "Hỗ trợ lực phanh khẩn cấp",
+    description:
+      "Hỗ trợ tăng lực phanh khi hệ thống nhận biết tình huống phanh khẩn cấp.",
+  },
+  {
+    code: "ASC",
+    name: "Cân bằng điện tử",
+    description:
+      "Hỗ trợ duy trì độ ổn định của xe khi hệ thống phát hiện nguy cơ mất cân bằng hoặc trượt bánh.",
+  },
+  {
+    code: "TCL",
+    name: "Kiểm soát lực kéo",
+    description:
+      "Hỗ trợ hạn chế bánh xe quay trượt khi tăng tốc trên bề mặt có độ bám thấp.",
+  },
+  {
+    code: "HSA",
+    name: "Hỗ trợ khởi hành ngang dốc",
+    description:
+      "Hỗ trợ giữ phanh trong thời gian ngắn khi khởi hành trên dốc, hạn chế xe bị trôi về phía sau.",
+  },
+  {
+    code: "AYC",
+    name: "Kiểm soát vào cua chủ động",
+    description:
+      "Hỗ trợ kiểm soát lực phanh giữa các bánh xe để tăng độ ổn định và khả năng kiểm soát khi vào cua.",
+  },
+],
     colors: ["Trắng", "Đen", "Nâu"],
   },
 ],colors: ["Trắng", "Đen", "Nâu"],

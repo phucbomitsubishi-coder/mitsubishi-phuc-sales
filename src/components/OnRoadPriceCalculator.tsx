@@ -94,7 +94,9 @@ const licensePlateFee = isTriton
       </h3>
 
       <p className="mt-2 text-gray-600">
-        {carName} {variantName}
+        {variantName === carName.replace("Mitsubishi ", "")
+  ? carName
+  : `${carName} ${variantName}`}
       </p>
 
       <p className="mt-1 text-xl font-bold text-red-600">
