@@ -114,7 +114,7 @@ export default function SiteHeader() {
 </a>
 
 <a
-  href="/#lien-he"
+  href="/lien-he"
   className="transition hover:text-red-600"
 >
   Liên hệ

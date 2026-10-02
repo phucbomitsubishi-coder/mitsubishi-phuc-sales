@@ -92,7 +92,7 @@ export default function SiteFooter() {
         Xe đã qua sử dụng
       </Link>
 
-      <Link href="/#lien-he" className="hover:text-white">
+      <Link href="/lien-he" className="hover:text-white">
         Yêu cầu báo giá
       </Link>
     </div>

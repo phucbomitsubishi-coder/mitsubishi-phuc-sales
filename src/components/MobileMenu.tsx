@@ -90,7 +90,7 @@ export default function MobileMenu({ cars }: MobileMenuProps) {
 </a>
 
 <a
-  href="/#lien-he"
+  href="/lien-he"
   onClick={() => setIsOpen(false)}
   className="block py-3 font-semibold"
 >
