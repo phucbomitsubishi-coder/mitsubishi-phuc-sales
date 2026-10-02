@@ -33,6 +33,75 @@ export type NewsArticle = {
 
 export const newsArticles: NewsArticle[] = [
   {
+    id: "news-1790904201775",
+
+    title: "Mitsubishi Attrage mới lộ thông số tiêu thụ nhiên liệu tại Việt Nam, đại lý mạnh tay ưu đãi xả hàng tồn",
+
+    slug: "mitsubishi-attrage-moi-lo-thong-so-tieu-thu-nhien-lieu-tai-viet-nam-dai-ly-manh-tay-uu-dai-xa-hang-ton",
+
+    category: "Tin Mitsubishi",
+
+    excerpt:
+      "Thông tin mới từ Cục Đăng kiểm Việt Nam đang làm dấy lên đồn đoán Mitsubishi Attrage sắp có bản nâng cấp mới tại thị trường trong nước.",
+
+    publishedAt: "2026-10-02",
+
+    image: "/images/news/mitsubishi-attrage-moi-lo-thong-so-tieu-thu-nhien-lieu-tai-viet-nam-dai-ly-manh-tay-uu-dai-xa-hang-ton.jpg",
+
+    featured: false,
+
+    content: [
+      {
+        heading: "Mitsubishi Attrage mới lộ thông số tiêu thụ nhiên liệu tại Việt Nam, đại lý mạnh tay ưu đãi xả hàng tồn",
+
+        paragraphs: [
+          "Thông tin mới từ Cục Đăng kiểm Việt Nam đang làm dấy lên đồn đoán Mitsubishi Attrage sắp có bản nâng cấp mới tại thị trường trong nước.",
+          "Cục Đăng kiểm Việt Nam mới công bố dữ liệu nhãn năng lượng dành cho hai phiên bản Mitsubishi Attrage mang tên GLX và GLS-P. Hồ sơ này do Công ty TNHH Ô tô Mitsubishi Việt Nam cung cấp.",
+          "Theo dữ liệu được công bố, Mitsubishi Attrage GLX ghi nhận mức tiêu thụ nhiên liệu trung bình ở mức 5,32 lít/100km, trong khi bản GLS-P có chỉ số tương ứng là 5,34 lít/100km. Mức tiêu thụ này gần như tương đồng với con số 5,3 lít/100km trên dải sản phẩm hiện hành. Cả hai phiên bản mới tiếp tục được trang bị khối động cơ xăng 1.2L 3 xi-lanh (mã 3A92), sản sinh công suất tối đa 77 mã lực cùng mô-men xoắn cực đại 100 Nm.",
+          "Mặc dù Mitsubishi Việt Nam chưa đưa ra thông báo chính thức về thời điểm ra mắt phiên bản mới, động thái cập nhật hồ sơ đăng kiểm kết hợp cùng hoạt động kích cầu tại các đại lý cho thấy ngày mở bán Attrage mới không còn xa.",
+          "Hiện tại, giá niêm yết của Attrage đang dao động từ 380 triệu đồng cho bản số sàn đến 490 triệu đồng cho bản AT Premium. Tuy nhiên, nhiều đại lý đang áp dụng mức ưu đãi sâu cho các lô xe sản xuất năm 2025 (VIN 2025), đưa giá bán thực tế xuống mốc khoảng 300 triệu đồng. Khoảng giá này đưa mẫu sedan hạng B của Mitsubishi tiệm cận trực tiếp với nhóm xe đô thị cỡ A như Kia Morning, Toyota Wigo hay Hyundai Grand i10.",
+          "Trước đó, vào đầu tháng 7 năm nay, phiên bản nâng cấp của Mitsubishi Attrage đã chính thức ra mắt thị trường Thái Lan. Bước sang đời mới, thiết kế tổng thể của xe nhận được một số cải tiến thị giác dù khung gầm cơ sở đã trải qua chặng đường phát triển gần 15 năm.",
+          "Điểm thay đổi dễ nhận thấy nhất nằm ở phần đầu xe. Attrage 2026 sở hữu thiết kế Dynamic Shield được tinh chỉnh với nhiều chi tiết sơn đen hơn trước, kết hợp lưới tản nhiệt hình lục giác mới. Cụm đèn pha cũng được thiết kế lại để đồng bộ với diện mạo phía trước, trong khi bộ mâm hợp kim sở hữu kiểu dáng mới.",
+          "Tại Thái Lan, Mitsubishi Attrage được phân phối với hai phiên bản gồm Active và Smart.",
+          "Phiên bản Active được trang bị đèn pha halogen dạng chóa phản xạ, đèn hậu LED, gương chiếu hậu chỉnh điện, các chi tiết ốp nội thất màu đen bóng kết hợp họa tiết vân carbon, cụm đồng hồ analog tích hợp màn hình hiển thị đa thông tin và điều hòa chỉnh tay.",
+          "Xe còn được trang bị vô-lăng đa chức năng, màn hình cảm ứng 7 inch hỗ trợ Apple CarPlay và Android Auto, ghế bọc vải, chìa khóa thông minh cùng bộ mâm thép kích thước 14 inch.",
+          "Trong khi đó, phiên bản Smart được bổ sung nhiều tiện nghi hơn với cụm đèn pha LED tự động tích hợp đèn định vị ban ngày, đèn báo rẽ trên gương chiếu hậu, vô-lăng và cần số bọc da, điều hòa tự động, hệ thống kiểm soát hành trình, gương chiếu hậu chống chói tự động, ghế bọc da tổng hợp, khởi động bằng nút bấm, camera lùi và bộ mâm hợp kim hai tông màu kích thước 15 inch.",
+          "Trang bị an toàn tiêu chuẩn trên cả hai phiên bản của Mitsubishi Attrage 2026 gồm hai túi khí, hệ thống chống bó cứng phanh ABS, phân bổ lực phanh điện tử EBD, cân bằng điện tử, kiểm soát lực kéo và hỗ trợ khởi hành ngang dốc.",
+          "Ngoài các tính năng cơ bản, Attrage còn được bổ sung một số hệ thống hỗ trợ người lái. Phiên bản Active được trang bị camera ADAS với chức năng cảnh báo va chạm phía trước và cảnh báo chệch làn đường.",
+          "Trong khi đó, phiên bản Smart được trang bị hệ thống giảm thiểu va chạm phía trước hoạt động ở dải tốc độ thấp, đồng thời bổ sung cảm biến radar hỗ trợ giảm thiểu tình huống đạp nhầm chân ga trong phạm vi khoảng 4 m phía trước xe.",
+        ],
+        images: [
+          {
+            src: "/images/news/mitsubishi-attrage-moi-lo-thong-so-tieu-thu-nhien-lieu-tai-viet-nam-dai-ly-manh-tay-uu-dai-xa-hang-ton/image-01.jpg",
+            alt: "Mitsubishi Attrage mới lộ thông số tiêu thụ nhiên liệu tại Việt Nam, đại lý mạnh tay ưu đãi xả hàng tồn",
+          },
+          {
+            src: "/images/news/mitsubishi-attrage-moi-lo-thong-so-tieu-thu-nhien-lieu-tai-viet-nam-dai-ly-manh-tay-uu-dai-xa-hang-ton/image-02.jpg",
+            alt: "Mitsubishi Attrage mới lộ thông số tiêu thụ nhiên liệu tại Việt Nam, đại lý mạnh tay ưu đãi xả hàng tồn",
+          },
+          {
+            src: "/images/news/mitsubishi-attrage-moi-lo-thong-so-tieu-thu-nhien-lieu-tai-viet-nam-dai-ly-manh-tay-uu-dai-xa-hang-ton/image-03.jpg",
+            alt: "Mitsubishi Attrage mới lộ thông số tiêu thụ nhiên liệu tại Việt Nam, đại lý mạnh tay ưu đãi xả hàng tồn",
+          },
+          {
+            src: "/images/news/mitsubishi-attrage-moi-lo-thong-so-tieu-thu-nhien-lieu-tai-viet-nam-dai-ly-manh-tay-uu-dai-xa-hang-ton/image-04.jpg",
+            alt: "Mitsubishi Attrage mới lộ thông số tiêu thụ nhiên liệu tại Việt Nam, đại lý mạnh tay ưu đãi xả hàng tồn",
+          },
+          {
+            src: "/images/news/mitsubishi-attrage-moi-lo-thong-so-tieu-thu-nhien-lieu-tai-viet-nam-dai-ly-manh-tay-uu-dai-xa-hang-ton/image-05.jpg",
+            alt: "Mitsubishi Attrage mới lộ thông số tiêu thụ nhiên liệu tại Việt Nam, đại lý mạnh tay ưu đãi xả hàng tồn",
+          },
+        ],
+      },
+    ],
+
+    source: {
+      name: "xehay.vn",
+      url: "https://xehay.vn/mitsubishi-attrage-moi-lo-thong-so-tieu-thu-nhien-lieu-tai-viet-nam-dai-ly-manh-tay-uu-dai-xa-hang-ton.html",
+    },
+  },
+
+  {
     id: "news-1790872088537",
 
     title: "CHƯƠNG TRÌNH KHUYẾN MÃI MUA XE THÁNG 10/2026 - Mitsubishi Motors Việt Nam",
