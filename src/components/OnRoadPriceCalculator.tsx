@@ -163,7 +163,7 @@ const licensePlateFee = isTriton
     Lệ phí cấp đăng ký & biển số
   </span>
 
-  <span className="font-bold">
+  <span className="shrink-0 whitespace-nowrap font-bold">
     {licensePlateFee.toLocaleString("vi-VN")} đ
   </span>
 </div>
@@ -181,7 +181,7 @@ const licensePlateFee = isTriton
     Phí sử dụng đường bộ (12 tháng)
   </span>
 
-  <span className="font-bold">
+  <span className="shrink-0 whitespace-nowrap font-bold">
     {roadUseFee.toLocaleString("vi-VN")} đ
   </span>
 </div>
