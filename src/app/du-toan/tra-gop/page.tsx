@@ -14,7 +14,7 @@ export default function TraGopPage() {
       <SiteHeader />
 
       <main className="bg-gray-50">
-        <section className="mx-auto max-w-7xl px-6 py-10 md:py-16">
+        <section className="mx-auto max-w-7xl px-6 pb-10 pt-20 md:py-16">
           <div className="mx-auto max-w-4xl">
             <p className="mb-2 font-semibold uppercase tracking-wide text-red-600">
               Dự toán chi phí
