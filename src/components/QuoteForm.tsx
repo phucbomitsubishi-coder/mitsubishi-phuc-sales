@@ -14,12 +14,19 @@ useEffect(() => {
   const carFromUrl = params.get("car");
   const variantFromUrl = params.get("variant");
 
-  if (carFromUrl && cars.some((car) => car.name === carFromUrl)) {
-    setSelectedCar(carFromUrl);
+  if (carFromUrl) {
+  const matchedCar = cars.find(
+    (car) => car.id === carFromUrl || car.name === carFromUrl
+  );
+
+  if (matchedCar) {
+    setSelectedCar(matchedCar.name);
+
     if (variantFromUrl) {
-  setSelectedVariant(variantFromUrl);
-}
+      setSelectedVariant(variantFromUrl);
+    }
   }
+}
 }, []);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {

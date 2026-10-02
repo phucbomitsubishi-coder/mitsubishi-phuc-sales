@@ -44,6 +44,7 @@ export default function TraGopPage() {
               số tiền trả trước và khoản thanh toán thực tế có thể thay đổi theo
               ngân hàng, hồ sơ khách hàng và chính sách tại từng thời điểm.
             </p>
+            
           </div>
         </section>
       </main>

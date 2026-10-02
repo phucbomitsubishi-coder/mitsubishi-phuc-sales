@@ -308,6 +308,14 @@ onBlur={(event) => {
 </div>
   </div>
 </div>
+<a
+  href={`/?form=tra-gop&car=${encodeURIComponent(
+    selectedCar.id
+  )}&variant=${encodeURIComponent(selectedVariant.name)}#bao-gia`}
+  className="flex w-full items-center justify-center rounded-lg bg-red-600 px-6 py-4 text-base font-bold text-white transition hover:bg-red-700"
+>
+  Nhận tư vấn trả góp
+</a>
     </div>
   );
 }
