@@ -39,7 +39,11 @@ export default function NewsPromotionCover() {
       {/* Heading */}
       <div className="relative px-6 pb-4 pt-8 text-center sm:px-10 sm:pt-10">
        <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-red-600 sm:text-sm sm:tracking-[0.28em]">
-  Ưu đãi tháng 09/2026
+  Ưu đãi tháng {new Intl.DateTimeFormat("en-GB", {
+  month: "2-digit",
+  year: "numeric",
+  timeZone: "Asia/Ho_Chi_Minh",
+}).format(new Date())}
 </p>
 
 <h2 className="mt-3 whitespace-nowrap text-[27px] font-extrabold tracking-[0.02em] text-gray-950 sm:text-4xl sm:tracking-[0.04em] lg:text-[46px]">
