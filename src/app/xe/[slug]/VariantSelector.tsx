@@ -3,11 +3,13 @@
 import Image from "next/image";
 import { useState } from "react";
 import type { CarVariant } from "@/data/cars";
+import type { VariantPromotion } from "@/data/promotions";
 import OnRoadPriceCalculator from "@/components/OnRoadPriceCalculator";
 
 type Props = {
   carName: string;
   variants: CarVariant[];
+  promotions?: VariantPromotion[];
 };
 const tritonVariantImages: Record<string, Record<string, string>> = {
   "2WD AT GLX": {
@@ -118,15 +120,22 @@ const destinatorVariantImages: Record<string, Record<string, string>> = {
 export default function VariantSelector({
   carName,
   variants,
+  promotions,
 }: Props) {
   const [selectedIndex, setSelectedIndex] = useState(0);
 const [selectedColor, setSelectedColor] = useState("");
 const [isSpecsOpen, setIsSpecsOpen] = useState(false);
+const [isSafetyInfoOpen, setIsSafetyInfoOpen] = useState(false);
+const [isBasicSafetyOpen, setIsBasicSafetyOpen] = useState(false);
   const selectedVariant = variants[selectedIndex];
 
   if (!selectedVariant) {
     return null;
   }
+const selectedPromotion = promotions?.find(
+  (promotion) => promotion.variantName === selectedVariant.name
+);
+
 const vehicleImages =
   carName === "Mitsubishi Triton"
     ? tritonVariantImages
@@ -155,7 +164,7 @@ const selectedImage =
   
   return (
     <section className="bg-white">
-      <div className="mx-auto max-w-7xl px-6 py-16">
+      <div className="mx-auto max-w-7xl px-6 py-8 sm:py-10">
         <p className="font-semibold uppercase tracking-wider text-red-600">
           Phiên bản
         </p>
@@ -164,7 +173,15 @@ const selectedImage =
           Phiên bản & Giá xe
         </h2>
 
-        <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div
+  className={`mt-8 grid gap-5 sm:grid-cols-2 ${
+    variants.length === 2
+      ? "lg:grid-cols-2"
+      : variants.length === 3
+        ? "lg:grid-cols-3"
+        : "lg:grid-cols-4"
+  }`}
+>
           {variants.map((variant, index) => (
             <button
               key={variant.name}
@@ -181,7 +198,7 @@ const selectedImage =
     setSelectedColor(nextVariant.colors?.[0] ?? "");
   }
 }}
-              className={`rounded-xl border p-6 text-left transition ${
+              className={`rounded-xl border p-4 text-left transition ${
                 selectedIndex === index
                   ? "border-red-600 bg-red-50 shadow-md"
                   : "border-gray-200 bg-white shadow-sm hover:border-red-300"
@@ -195,7 +212,7 @@ const selectedImage =
                 {variant.name}
               </h3>
 
-              <p className="mt-5 text-sm text-gray-500">
+              <p className="mt-3 text-sm text-gray-500">
                 Giá tham khảo
               </p>
 
@@ -209,7 +226,7 @@ const selectedImage =
         </div>
 
         {(selectedVariant.specifications || selectedImage) && (
-          <div className="mt-10 rounded-2xl bg-gray-50 p-6 md:p-8">
+          <div className="mt-6 rounded-2xl bg-gray-50 p-4 md:p-6">
             <p className="text-sm font-semibold uppercase text-red-600">
               Phiên bản đang chọn
             </p>
@@ -218,20 +235,20 @@ const selectedImage =
               {carName} {selectedVariant.name}
             </h3>
 {selectedImage && (
-  <div className="mt-8 flex justify-center rounded-2xl bg-white p-4">
+  <div className="mt-4 flex h-[280px] items-center justify-center rounded-2xl bg-white p-2 md:h-[320px]">
     <Image
-  key={selectedImage}
-  src={selectedImage}
-  alt={`${carName} ${selectedColor || "Trắng"}`}
-  width={900}
-  height={600}
-  className="h-auto w-full max-w-3xl object-contain"
-/>
+      key={selectedImage}
+      src={selectedImage}
+      alt={`${carName} ${selectedColor || "Trắng"}`}
+      width={900}
+      height={600}
+      className="h-full w-full object-contain"
+    />
   </div>
 )}
 {selectedVariant.colors &&
   selectedVariant.colors.length > 0 && (
-    <div className="mt-6">
+    <div className="mt-4">
       <p className="text-sm font-semibold text-gray-500">
         Màu xe
       </p>
@@ -277,10 +294,11 @@ const selectedImage =
       </div>
     </div>
   )}
+
 <button
   type="button"
   onClick={() => setIsSpecsOpen(!isSpecsOpen)}
-  className="mt-8 flex w-full items-center justify-between border-y border-gray-300 py-4 text-left"
+  className="mt-5 flex w-full items-center justify-between border-y border-gray-300 py-4 text-left"
 >
   <span className="text-lg font-bold uppercase">
     Thông số kỹ thuật
@@ -296,146 +314,394 @@ const selectedImage =
 </button>
 {isSpecsOpen && (
   <>
-            <p className="mt-6 mb-4 text-sm font-bold uppercase tracking-wide text-gray-900">
-  Động cơ & Vận hành
-</p>
-            <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              {selectedVariant.specifications?.engine && (
-                <div>
-                  <p className="text-sm text-gray-500">Động cơ</p>
-                  <p className="mt-1 font-semibold">
-                    {selectedVariant.specifications?.engine}
-                  </p>
-                </div>
-              )}{selectedVariant.specifications?.displacement && (
-  <div>
-    <p className="text-sm text-gray-500">Dung tích động cơ</p>
-    <p className="mt-1 font-semibold">
-      {selectedVariant.specifications?.displacement}
+           {/* ĐỘNG CƠ & VẬN HÀNH */}
+<div className="col-span-full">
+  <div className="border-b border-gray-300 pb-3">
+    <p className="text-lg font-bold uppercase text-gray-900">
+      Động cơ & Vận hành
     </p>
   </div>
-)}
 
-            {selectedVariant.specifications?.power && (
-                <div>
-                  <p className="text-sm text-gray-500">Công suất</p>
-                  <p className="mt-1 font-semibold">
-                    {selectedVariant.specifications?.power}
-                  </p>
-                </div>
-              )} 
-              {selectedVariant.specifications?.torque && (
-                <div>
-                  <p className="text-sm text-gray-500">Mô-men xoắn</p>
-                  <p className="mt-1 font-semibold">
-                    {selectedVariant.specifications?.torque}
-                  </p>
-                </div>
-              )}
-              {selectedVariant.specifications?.fuel && (
-                <div>
-                  <p className="text-sm text-gray-500">Nhiên liệu</p>
-                  <p className="mt-1 font-semibold">
-                    {selectedVariant.specifications?.fuel}
-                  </p>
-                </div>
-                )}
-              <p className="col-span-full mt-4 border-t border-gray-200 pt-5 text-sm font-bold uppercase tracking-wide text-gray-900">
-  Truyền động & Khả năng chở
-</p>
-              {selectedVariant.specifications?.transmission && (
-                <div>
-                  <p className="text-sm text-gray-500">Hộp số</p>
-                  <p className="mt-1 font-semibold">
-                    {selectedVariant.specifications?.transmission}
-                  </p>
-                </div>
-              )}
+  <div className="mt-5 grid gap-x-6 gap-y-3 sm:grid-cols-2 lg:grid-cols-3">
+    {selectedVariant.specifications?.engine && (
+      <div>
+        <p className="mb-2 text-sm text-gray-700">
+          Động cơ
+        </p>
+        <div className="flex min-h-[44px] items-center justify-center bg-gray-100 px-4 py-3 text-center font-semibold">
+          {selectedVariant.specifications.engine}
+        </div>
+      </div>
+    )}
 
-              {selectedVariant.specifications?.drivetrain && (
-                <div>
-                  <p className="text-sm text-gray-500">Dẫn động</p>
-                  <p className="mt-1 font-semibold">
-                    {selectedVariant.specifications?.drivetrain}
-                  </p>
-                </div>
-              )}
+    {selectedVariant.specifications?.displacement && (
+      <div>
+        <p className="mb-2 text-sm text-gray-700">
+          Dung tích động cơ
+        </p>
+        <div className="flex min-h-[44px] items-center justify-center bg-gray-100 px-4 py-3 text-center font-semibold">
+          {selectedVariant.specifications.displacement}
+        </div>
+      </div>
+    )}
 
-              
+    {selectedVariant.specifications?.power && (
+      <div>
+        <p className="mb-2 text-sm text-gray-700">
+          Công suất
+        </p>
+        <div className="flex min-h-[44px] items-center justify-center bg-gray-100 px-4 py-3 text-center font-semibold">
+          {selectedVariant.specifications.power}
+        </div>
+      </div>
+    )}
 
-              
+    {selectedVariant.specifications?.torque && (
+      <div>
+        <p className="mb-2 text-sm text-gray-700">
+          Mô-men xoắn
+        </p>
+        <div className="flex min-h-[44px] items-center justify-center bg-gray-100 px-4 py-3 text-center font-semibold">
+          {selectedVariant.specifications.torque}
+        </div>
+      </div>
+    )}
 
-              {selectedVariant.specifications?.seats && (
-                <div>
-                  <p className="text-sm text-gray-500">Số chỗ</p>
-                  <p className="mt-1 font-semibold">
-                    {selectedVariant.specifications?.seats} chỗ
-                  </p>
-                </div>
-              )}
-
-              
-                <p className="col-span-full mt-4 border-t border-gray-200 pt-5 text-sm font-bold uppercase tracking-wide text-gray-900">
-  Kích thước & Khung xe
-</p>
-              {selectedVariant.specifications?.dimensions && (
-  <div>
-    <p className="text-sm text-gray-500">Kích thước D × R × C</p>
-    <p className="mt-1 font-semibold">
-      {selectedVariant.specifications?.dimensions}
+    {selectedVariant.specifications?.fuel && (
+      <div>
+        <p className="mb-2 text-sm text-gray-700">
+          Nhiên liệu
+        </p>
+        <div className="flex min-h-[44px] items-center justify-center bg-gray-100 px-4 py-3 text-center font-semibold">
+          {selectedVariant.specifications.fuel}
+        </div>
+      </div>
+    )}
+  </div>
+</div>
+              {/* TRUYỀN ĐỘNG & KHẢ NĂNG CHỞ */}
+<div className="col-span-full mt-5">
+  <div className="border-b border-gray-300 pb-3">
+    <p className="text-lg font-bold uppercase text-gray-900">
+      Truyền động & Khả năng chở
     </p>
   </div>
-)}{selectedVariant.specifications?.wheelbase && (
-  <div>
-    <p className="text-sm text-gray-500">Chiều dài cơ sở</p>
-    <p className="mt-1 font-semibold">
-      {selectedVariant.specifications?.wheelbase}
+
+  <div className="mt-5 grid gap-x-6 gap-y-5 sm:grid-cols-2 lg:grid-cols-3">
+    {selectedVariant.specifications?.transmission && (
+      <div>
+        <p className="mb-2 text-sm text-gray-700">
+          Hộp số
+        </p>
+        <div className="flex min-h-[44px] items-center justify-center bg-gray-100 px-4 py-3 text-center font-semibold">
+          {selectedVariant.specifications.transmission}
+        </div>
+      </div>
+    )}
+
+    {selectedVariant.specifications?.drivetrain && (
+      <div>
+        <p className="mb-2 text-sm text-gray-700">
+          Dẫn động
+        </p>
+        <div className="flex min-h-[44px] items-center justify-center bg-gray-100 px-4 py-3 text-center font-semibold">
+          {selectedVariant.specifications.drivetrain}
+        </div>
+      </div>
+    )}
+
+    {selectedVariant.specifications?.seats && (
+      <div>
+        <p className="mb-2 text-sm text-gray-700">
+          Số chỗ
+        </p>
+        <div className="flex min-h-[44px] items-center justify-center bg-gray-100 px-4 py-3 text-center font-semibold">
+          {selectedVariant.specifications.seats} chỗ
+        </div>
+      </div>
+    )}
+  </div>
+</div>
+
+{/* KÍCH THƯỚC & KHUNG XE */}
+<div className="col-span-full mt-5">
+  <div className="border-b border-gray-300 pb-3">
+    <p className="text-lg font-bold uppercase text-gray-900">
+      Kích thước & Khung xe
     </p>
   </div>
-)}{selectedVariant.specifications?.groundClearance && (
-  <div>
-    <p className="text-sm text-gray-500">Khoảng sáng gầm</p>
-    <p className="mt-1 font-semibold">
-      {selectedVariant.specifications?.groundClearance}
-    </p>
+
+  <div className="mt-5 grid gap-x-6 gap-y-5 sm:grid-cols-2 lg:grid-cols-3">
+    {selectedVariant.specifications?.dimensions && (
+      <div>
+        <p className="mb-2 text-sm text-gray-700">
+          Kích thước D × R × C
+        </p>
+        <div className="flex min-h-[44px] items-center justify-center bg-gray-100 px-4 py-3 text-center font-semibold">
+          {selectedVariant.specifications.dimensions}
+        </div>
+      </div>
+    )}
+
+    {selectedVariant.specifications?.wheelbase && (
+      <div>
+        <p className="mb-2 text-sm text-gray-700">
+          Chiều dài cơ sở
+        </p>
+        <div className="flex min-h-[44px] items-center justify-center bg-gray-100 px-4 py-3 text-center font-semibold">
+          {selectedVariant.specifications.wheelbase}
+        </div>
+      </div>
+    )}
+
+    {selectedVariant.specifications?.groundClearance && (
+      <div>
+        <p className="mb-2 text-sm text-gray-700">
+          Khoảng sáng gầm
+        </p>
+        <div className="flex min-h-[44px] items-center justify-center bg-gray-100 px-4 py-3 text-center font-semibold">
+          {selectedVariant.specifications.groundClearance}
+        </div>
+      </div>
+    )}
+
+    {selectedVariant.specifications?.fuelTank && (
+      <div>
+        <p className="mb-2 text-sm text-gray-700">
+          Dung tích bình nhiên liệu
+        </p>
+        <div className="flex min-h-[44px] items-center justify-center bg-gray-100 px-4 py-3 text-center font-semibold">
+          {selectedVariant.specifications.fuelTank}
+        </div>
+      </div>
+    )}
+
+    {selectedVariant.specifications?.wheels && (
+      <div>
+        <p className="mb-2 text-sm text-gray-700">
+          Mâm / Lốp
+        </p>
+        <div className="flex min-h-[44px] items-center justify-center bg-gray-100 px-4 py-3 text-center font-semibold">
+          {selectedVariant.specifications.wheels}
+        </div>
+      </div>
+    )}
   </div>
-)}{selectedVariant.specifications?.fuelTank && (
-  <div>
-    <p className="text-sm text-gray-500">Dung tích bình nhiên liệu</p>
-    <p className="mt-1 font-semibold">
-      {selectedVariant.specifications?.fuelTank}
-    </p>
-  </div>
-)}{selectedVariant.specifications?.wheels && (
-  <div>
-    <p className="text-sm text-gray-500">Mâm / Lốp</p>
-    <p className="mt-1 font-semibold">
-      {selectedVariant.specifications?.wheels}
-    </p>
-  </div>
-)}
-            </div>
+</div>
             </>
             )}
 
             <div className="mt-8 grid items-start gap-8 lg:grid-cols-[1fr_480px]">
   <div>
-    {selectedVariant.features &&
-      selectedVariant.features.length > 0 && (
-        <div>
-          <h4 className="text-lg font-bold">
-            Trang bị nổi bật
-          </h4>
+    {selectedVariant.equipment && (
+  <div>
+    <p className="text-sm font-semibold uppercase tracking-wide text-red-600">
+      Trang bị phiên bản
+    </p>
 
-          <div className="mt-4 grid gap-2 sm:grid-cols-2">
-            {selectedVariant.features.map((feature) => (
-              <p key={feature} className="text-gray-600">
-                ✓ {feature}
-              </p>
-            ))}
+    <h4 className="mt-2 text-2xl font-bold">
+      {carName} {selectedVariant.name}
+    </h4>
+
+    <div className="mt-5 grid gap-5 sm:grid-cols-2">
+      {selectedVariant.equipment.exterior &&
+        selectedVariant.equipment.exterior.length > 0 && (
+          <div>
+            <p className="font-bold text-gray-900">
+              Ngoại thất
+            </p>
+
+            <div className="mt-2 space-y-2">
+              {selectedVariant.equipment.exterior.map((item) => (
+                <p key={item} className="text-sm leading-6 text-gray-600">
+                  ✓ {item}
+                </p>
+              ))}
+            </div>
           </div>
+        )}
+
+      {selectedVariant.equipment.interior &&
+        selectedVariant.equipment.interior.length > 0 && (
+          <div>
+            <p className="font-bold text-gray-900">
+              Nội thất
+            </p>
+
+            <div className="mt-2 space-y-2">
+              {selectedVariant.equipment.interior.map((item) => (
+                <p key={item} className="text-sm leading-6 text-gray-600">
+                  ✓ {item}
+                </p>
+              ))}
+            </div>
+          </div>
+        )}
+
+      {selectedVariant.equipment.convenience &&
+        selectedVariant.equipment.convenience.length > 0 && (
+          <div>
+            <p className="font-bold text-gray-900">
+              Tiện nghi
+            </p>
+
+            <div className="mt-2 space-y-2">
+              {selectedVariant.equipment.convenience.map((item) => (
+                <p key={item} className="text-sm leading-6 text-gray-600">
+                  ✓ {item}
+                </p>
+              ))}
+            </div>
+          </div>
+        )}
+
+      {selectedVariant.equipment.safety &&
+        selectedVariant.equipment.safety.length > 0 && (
+          <div>
+            <p className="font-bold text-gray-900">
+              An toàn
+            </p>
+
+            <div className="mt-2 space-y-2">
+              {selectedVariant.equipment.safety.map((item) => (
+                <p key={item} className="text-sm leading-6 text-gray-600">
+                  ✓ {item}
+                </p>
+              ))}
+            </div>
+          </div>
+        )}
+    </div>
+  </div>
+)}
+
+{selectedVariant.safetyTechnologies &&
+  selectedVariant.safetyTechnologies.length > 0 && (
+    <div className="mt-6">
+      <p className="text-sm font-semibold uppercase tracking-wide text-red-600">
+        An toàn & hỗ trợ lái
+      </p>
+
+      <div className="mt-3 grid gap-x-4 gap-y-2 lg:grid-cols-2">
+        {selectedVariant.safetyTechnologies
+  .filter((technology) => technology.group !== "Diamond Sense")
+  .map((technology) => (
+          <div
+            key={technology.code}
+            className="flex items-start gap-2 text-sm"
+          >
+            <span className="min-w-12 font-bold text-gray-900">
+              {technology.code}
+            </span>
+
+           <span className="leading-5 text-gray-600">
+  {technology.name}
+</span>
+          </div>
+                ))}
+      </div>
+
+      <button
+        type="button"
+        onClick={() => setIsBasicSafetyOpen(!isBasicSafetyOpen)}
+        className="mt-4 text-sm font-semibold text-red-600 hover:text-red-700"
+      >
+        {isBasicSafetyOpen
+          ? "Thu gọn hệ thống an toàn ↑"
+          : "Giải thích các hệ thống an toàn ↓"}
+      </button>
+
+      {isBasicSafetyOpen && (
+  <div className="mt-4 space-y-3 rounded-xl border border-gray-200 bg-white p-4">
+    {selectedVariant.safetyTechnologies
+      .filter(
+        (technology) => technology.group !== "Diamond Sense"
+      )
+      .map((technology) => (
+        <div key={technology.code}>
+          <p className="text-sm font-bold text-gray-900">
+            <span className="mr-2 text-red-600">
+              {technology.code}
+            </span>
+            {technology.name}
+          </p>
+
+          <p className="mt-1 text-sm leading-6 text-gray-600">
+            {technology.description}
+          </p>
         </div>
-      )}
+      ))}
+  </div>
+)}
+
+    </div>
+  )}
+
+  {selectedVariant.safetyTechnologies?.some(
+  (technology) => technology.group === "Diamond Sense"
+) && (
+  <div className="mt-6">
+    <p className="text-sm font-semibold uppercase tracking-wide text-red-600">
+      Diamond Sense
+    </p>
+
+    <p className="mt-1 text-sm text-gray-500">
+      Hệ thống an toàn chủ động thông minh
+    </p>
+
+    <div className="mt-3 grid gap-x-5 gap-y-2 sm:grid-cols-2">
+      {selectedVariant.safetyTechnologies
+        .filter(
+          (technology) => technology.group === "Diamond Sense"
+        )
+        .map((technology) => (
+          <div
+            key={technology.code}
+            className="flex items-start gap-2 text-sm"
+          >
+            <span className="min-w-12 font-bold text-red-600">
+              {technology.code}
+            </span>
+
+            <span className="leading-5 text-gray-600">
+              {technology.name}
+            </span>
+          </div>
+        ))}
+    </div>
+    <button
+  type="button"
+  onClick={() => setIsSafetyInfoOpen(!isSafetyInfoOpen)}
+  className="mt-4 text-sm font-semibold text-red-600 hover:text-red-700"
+>
+  {isSafetyInfoOpen
+    ? "Thu gọn Diamond Sense ↑"
+: "Tìm hiểu Diamond Sense ↓"}
+</button>
+{isSafetyInfoOpen && (
+  <div className="mt-4 space-y-3 rounded-xl border border-gray-200 bg-white p-4">
+    {selectedVariant.safetyTechnologies
+      ?.filter(
+        (technology) => technology.group === "Diamond Sense"
+      )
+      .map((technology) => (
+        <div key={technology.code}>
+          <p className="text-sm font-bold text-gray-900">
+            <span className="mr-2 text-red-600">
+              {technology.code}
+            </span>
+            {technology.name}
+          </p>
+
+          <p className="mt-1 text-sm leading-6 text-gray-600">
+            {technology.description}
+          </p>
+        </div>
+      ))}
+  </div>
+)}
+  </div>
+)}
 
     <a
       href={`/?car=${encodeURIComponent(
@@ -450,11 +716,12 @@ const selectedImage =
   </div>
 
   <OnRoadPriceCalculator
-    carName={carName}
-    variantName={selectedVariant.name}
-    price={selectedVariant.price}
-    seats={selectedVariant.specifications?.seats}
-  />
+  carName={carName}
+  variantName={selectedVariant.name}
+  price={selectedVariant.price}
+  seats={selectedVariant.specifications?.seats}
+  promotion={selectedPromotion}
+/>
 </div>
           </div>
         )}

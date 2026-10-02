@@ -4,25 +4,47 @@ export type CarVariant = {
   promotionalPrice?: number;
 
   specifications?: {
-  engine?: string;
-  displacement?: string;
-  transmission?: string;
-  drivetrain?: string;
-  power?: string;
-  torque?: string;
-  seats?: number;
-  fuel?: string;
-  dimensions?: string;
-  wheelbase?: string;
-  groundClearance?: string;
-  fuelTank?: string;
-  wheels?: string;
-};
+    engine?: string;
+    displacement?: string;
+    transmission?: string;
+    drivetrain?: string;
+    power?: string;
+    torque?: string;
+    seats?: number;
+    fuel?: string;
+
+    dimensions?: string;
+    wheelbase?: string;
+    groundClearance?: string;
+    fuelTank?: string;
+    wheels?: string;
+
+    curbWeight?: string;
+    turningRadius?: string;
+
+    fuelConsumptionCombined?: string;
+    fuelConsumptionUrban?: string;
+    fuelConsumptionExtraUrban?: string;
+  };
+
+  equipment?: {
+    exterior?: string[];
+    interior?: string[];
+    convenience?: string[];
+    safety?: string[];
+    drivingSupport?: string[];
+  };
+
+  safetyTechnologies?: {
+  code: string;
+  name: string;
+  description: string;
+  group?: string;
+}[];
 
   features?: string[];
-colors?: string[];
+  colors?: string[];
 };
-
 export type Car = {
   id: string;
   name: string;
@@ -95,7 +117,83 @@ image: "/images/cars/xforce.png",
   groundClearance: "219 mm",
   fuelTank: "42 L",
   wheels: "205/60R17 - Mâm hợp kim 17 inch",
+  curbWeight: "1.210 kg",
+turningRadius: "5,2 m",
+fuelConsumptionCombined: "6,30 L/100 km",
+fuelConsumptionUrban: "7,70 L/100 km",
+fuelConsumptionExtraUrban: "5,50 L/100 km",
 },
+
+equipment: {
+  exterior: [
+    "Đèn chiếu sáng LED T-Shape",
+    "Đèn sương mù phía trước LED",
+    "Cảm biến bật/tắt đèn chiếu sáng và gạt mưa tự động",
+    "Mâm hợp kim 17 inch",
+  ],
+  interior: [
+    "Màn hình giải trí 8 inch kết nối Android Auto và Apple CarPlay",
+    "Hệ thống âm thanh 6 loa",
+  ],
+  convenience: [
+    "Phanh tay điện tử và Auto Hold",
+    "Cổng sạc USB-A và USB-C cho cả hai hàng ghế",
+    "Khoang hành lý rộng rãi",
+  ],
+  safety: [
+    "4 túi khí",
+    "Cảm biến lùi",
+  ],
+  drivingSupport: [
+    "Hệ thống kiểm soát vào cua chủ động AYC",
+  ],
+},
+
+safetyTechnologies: [
+  {
+    code: "ABS",
+    name: "Chống bó cứng phanh",
+    description:
+      "Giúp hạn chế bánh xe bị khóa cứng khi phanh gấp, hỗ trợ người lái duy trì khả năng điều khiển xe.",
+  },
+  {
+    code: "EBD",
+    name: "Phân phối lực phanh điện tử",
+    description:
+      "Hỗ trợ phân bổ lực phanh phù hợp giữa các bánh xe để tăng hiệu quả phanh.",
+  },
+  {
+    code: "BA",
+    name: "Hỗ trợ lực phanh khẩn cấp",
+    description:
+      "Hỗ trợ tăng lực phanh khi hệ thống nhận biết tình huống phanh khẩn cấp.",
+  },
+  {
+    code: "ASC",
+    name: "Cân bằng điện tử",
+    description:
+      "Hỗ trợ duy trì độ ổn định của xe khi hệ thống phát hiện nguy cơ mất cân bằng hoặc trượt bánh.",
+  },
+  {
+    code: "TCL",
+    name: "Kiểm soát lực kéo",
+    description:
+      "Hỗ trợ hạn chế bánh xe quay trượt khi tăng tốc trên bề mặt có độ bám thấp.",
+  },
+  {
+    code: "HSA",
+    name: "Hỗ trợ khởi hành ngang dốc",
+    description:
+      "Hỗ trợ giữ phanh trong thời gian ngắn khi khởi hành trên dốc, hạn chế xe bị trôi về phía sau.",
+  },
+  {
+    code: "AYC",
+    name: "Kiểm soát vào cua chủ động",
+    description:
+      "Hỗ trợ kiểm soát lực phanh giữa các bánh xe để tăng độ ổn định và khả năng kiểm soát khi vào cua.",
+  },
+],
+
     colors: ["Trắng", "Đen", "Đỏ"],
   },
   {
@@ -115,7 +213,87 @@ image: "/images/cars/xforce.png",
   groundClearance: "222 mm",
   fuelTank: "42 L",
   wheels: "225/50R18 - Mâm hợp kim 18 inch",
+  curbWeight: "1.240 kg",
+turningRadius: "5,2 m",
+fuelConsumptionCombined: "6,30 L/100 km",
+fuelConsumptionUrban: "7,70 L/100 km",
+fuelConsumptionExtraUrban: "5,50 L/100 km",
 },
+
+equipment: {
+  exterior: [
+    "Đèn chiếu sáng LED T-Shape",
+    "Đèn sương mù phía trước LED",
+    "Cảm biến bật/tắt đèn chiếu sáng và gạt mưa tự động",
+    "Mâm hợp kim 18 inch",
+  ],
+  interior: [
+    "Màn hình giải trí 12,3 inch",
+    "Màn hình thông tin kỹ thuật số 8 inch",
+    "Vô lăng bọc da",
+  ],
+  convenience: [
+    "Phanh tay điện tử và Auto Hold",
+    "Điều hòa tự động",
+    "Cổng sạc USB-A và USB-C",
+    "Chìa khóa thông minh và khởi động nút bấm",
+  ],
+  safety: [
+    "6 túi khí",
+    "Camera lùi",
+    "Cảm biến hỗ trợ đỗ xe",
+  ],
+  drivingSupport: [
+    "Hệ thống kiểm soát vào cua chủ động AYC",
+    "4 chế độ lái",
+  ],
+},
+
+safetyTechnologies: [
+  {
+    code: "ABS",
+    name: "Chống bó cứng phanh",
+    description:
+      "Giúp hạn chế bánh xe bị khóa cứng khi phanh gấp, hỗ trợ người lái duy trì khả năng điều khiển xe.",
+  },
+  {
+    code: "EBD",
+    name: "Phân phối lực phanh điện tử",
+    description:
+      "Hỗ trợ phân bổ lực phanh phù hợp giữa các bánh xe để tăng hiệu quả phanh.",
+  },
+  {
+    code: "BA",
+    name: "Hỗ trợ lực phanh khẩn cấp",
+    description:
+      "Hỗ trợ tăng lực phanh khi hệ thống nhận biết tình huống phanh khẩn cấp.",
+  },
+  {
+    code: "ASC",
+    name: "Cân bằng điện tử",
+    description:
+      "Hỗ trợ duy trì độ ổn định của xe khi hệ thống phát hiện nguy cơ mất cân bằng hoặc trượt bánh.",
+  },
+  {
+    code: "TCL",
+    name: "Kiểm soát lực kéo",
+    description:
+      "Hỗ trợ hạn chế bánh xe quay trượt khi tăng tốc trên bề mặt có độ bám thấp.",
+  },
+  {
+    code: "HSA",
+    name: "Hỗ trợ khởi hành ngang dốc",
+    description:
+      "Hỗ trợ giữ phanh trong thời gian ngắn khi khởi hành trên dốc, hạn chế xe bị trôi về phía sau.",
+  },
+  {
+    code: "AYC",
+    name: "Kiểm soát vào cua chủ động",
+    description:
+      "Hỗ trợ kiểm soát lực phanh giữa các bánh xe để tăng độ ổn định và khả năng kiểm soát khi vào cua.",
+  },
+],
+
     colors: ["Trắng", "Đen", "Đỏ", "Xám"],
   },
   {
@@ -135,7 +313,139 @@ image: "/images/cars/xforce.png",
   groundClearance: "222 mm",
   fuelTank: "42 L",
   wheels: "225/50R18 - Mâm hợp kim 18 inch",
+  curbWeight: "1.250 kg",
+turningRadius: "5,2 m",
+fuelConsumptionCombined: "6,30 L/100 km",
+fuelConsumptionUrban: "7,70 L/100 km",
+fuelConsumptionExtraUrban: "5,50 L/100 km",
 },
+
+equipment: {
+  exterior: [
+    "Đèn chiếu sáng LED T-Shape",
+    "Đèn sương mù phía trước LED",
+    "Cảm biến bật/tắt đèn chiếu sáng và gạt mưa tự động",
+    "Mâm hợp kim 18 inch",
+    "Cốp sau đóng/mở điện rảnh tay",
+  ],
+  interior: [
+    "Màn hình giải trí 12,3 inch",
+    "Màn hình thông tin kỹ thuật số 8 inch",
+    "Hệ thống âm thanh Dynamic Sound Yamaha Premium 8 loa",
+    "Ghế lái chỉnh điện",
+  ],
+  convenience: [
+    "Phanh tay điện tử và Auto Hold",
+    "Điều hòa tự động hai vùng độc lập",
+    "Cổng sạc USB-A và USB-C",
+    "Chìa khóa thông minh và khởi động nút bấm",
+  ],
+  safety: [
+    "6 túi khí",
+    "Camera toàn cảnh 360 độ",
+    "Cảm biến hỗ trợ đỗ xe",
+  ],
+  drivingSupport: [
+    "Hệ thống kiểm soát vào cua chủ động AYC",
+    "4 chế độ lái",
+    "Hệ thống an toàn chủ động Mitsubishi Motors Safety Sensing - Diamond Sense",
+  ],
+},
+
+safetyTechnologies: [
+    {
+    code: "ABS",
+    name: "Chống bó cứng phanh",
+    description:
+      "Giúp hạn chế bánh xe bị khóa cứng khi phanh gấp, hỗ trợ người lái duy trì khả năng điều khiển xe.",
+  },
+  {
+    code: "EBD",
+    name: "Phân phối lực phanh điện tử",
+    description:
+      "Hỗ trợ phân bổ lực phanh phù hợp giữa các bánh xe để tăng hiệu quả phanh.",
+  },
+  {
+    code: "BA",
+    name: "Hỗ trợ lực phanh khẩn cấp",
+    description:
+      "Hỗ trợ tăng lực phanh khi hệ thống nhận biết tình huống phanh khẩn cấp.",
+  },
+  {
+    code: "ASC",
+    name: "Cân bằng điện tử",
+    description:
+      "Hỗ trợ duy trì độ ổn định của xe khi hệ thống phát hiện nguy cơ mất cân bằng hoặc trượt bánh.",
+  },
+  {
+    code: "TCL",
+    name: "Kiểm soát lực kéo",
+    description:
+      "Hỗ trợ hạn chế bánh xe quay trượt khi tăng tốc trên bề mặt có độ bám thấp.",
+  },
+  {
+    code: "HSA",
+    name: "Hỗ trợ khởi hành ngang dốc",
+    description:
+      "Hỗ trợ giữ phanh trong thời gian ngắn khi khởi hành trên dốc, hạn chế xe bị trôi về phía sau.",
+  },
+  {
+    code: "AYC",
+    name: "Kiểm soát vào cua chủ động",
+    description:
+      "Hỗ trợ kiểm soát lực phanh giữa các bánh xe để tăng độ ổn định và khả năng kiểm soát khi vào cua.",
+  },
+  {
+    code: "BSW",
+    name: "Cảnh báo điểm mù",
+    description:
+      "Hỗ trợ cảnh báo khi phát hiện phương tiện nằm trong vùng điểm mù bên hông xe.",
+    group: "Diamond Sense",
+  },
+  {
+    code: "LCA",
+    name: "Hỗ trợ chuyển làn",
+    description:
+      "Hỗ trợ cảnh báo phương tiện đang tiếp cận khi người lái có ý định chuyển làn.",
+    group: "Diamond Sense",
+  },
+  {
+    code: "RCTA",
+    name: "Cảnh báo phương tiện cắt ngang khi lùi",
+    description:
+      "Hỗ trợ phát hiện và cảnh báo phương tiện đang di chuyển cắt ngang phía sau khi lùi xe.",
+    group: "Diamond Sense",
+  },
+  {
+    code: "ACC",
+    name: "Kiểm soát hành trình thích ứng",
+    description:
+      "Hỗ trợ tự động điều chỉnh tốc độ để duy trì khoảng cách phù hợp với phương tiện phía trước.",
+    group: "Diamond Sense",
+  },
+  {
+    code: "AHB",
+    name: "Đèn pha tự động",
+    description:
+      "Hỗ trợ tự động chuyển đổi đèn chiếu xa và chiếu gần theo điều kiện giao thông.",
+    group: "Diamond Sense",
+  },
+  {
+    code: "FCM",
+    name: "Cảnh báo và giảm thiểu va chạm phía trước",
+    description:
+      "Hỗ trợ cảnh báo nguy cơ va chạm phía trước và can thiệp phanh nhằm giảm thiểu va chạm.",
+    group: "Diamond Sense",
+  },
+  {
+    code: "LCDN",
+    name: "Thông báo xe phía trước khởi hành",
+    description:
+      "Thông báo cho người lái khi phương tiện phía trước đã bắt đầu di chuyển.",
+    group: "Diamond Sense",
+  },
+],
+
     colors: ["Trắng Đen", "Đỏ Đen", "Đen"],
   },
 ],
