@@ -9,6 +9,9 @@ export const metadata: Metadata = {
   title: "Tin tức & Tư vấn Mitsubishi | Lưu Hoàng Phúc",
   description:
     "Tin tức Mitsubishi, tư vấn mua xe, kinh nghiệm sử dụng, khuyến mãi và thông tin thị trường ô tô.",
+  alternates: {
+    canonical: "/tin-tuc",
+  },
 };
 
 function formatDate(date: string) {
