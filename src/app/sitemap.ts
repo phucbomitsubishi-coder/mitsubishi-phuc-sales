@@ -4,7 +4,7 @@ import { usedCars } from "@/data/usedCars";
 import { newsArticles } from "@/data/news";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://mitsubishi-phuc-sales.vercel.app";
+  const baseUrl = "https://www.mitsubishiauto.vn";
 
   const carPages = cars.map((car) => ({
     url: `${baseUrl}/xe/${car.slug}`,
