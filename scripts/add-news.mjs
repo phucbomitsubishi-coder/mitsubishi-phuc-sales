@@ -907,6 +907,13 @@ async function fetchArticle(url) {
 
   let paragraphs = [];
   let contentImages = [];
+  if (
+    new URL(url).hostname.includes("xehay.vn") &&
+    new URL(url).pathname.includes("/video/detail/") &&
+    description
+  ) {
+    paragraphs = [description];
+  }
 
   // ========================================
   // 1. XenForo / AutoDaily
@@ -1059,8 +1066,13 @@ const usable = uniqueParagraphs(articleOnly);
   // ========================================
   // 3. Phương án cuối cùng
   // ========================================
-
-  if (paragraphs.length < 2) {
+    if (
+    paragraphs.length < 2 &&
+    !(
+      new URL(url).hostname.includes("xehay.vn") &&
+      new URL(url).pathname.includes("/video/detail/")
+    )
+  ) {
     paragraphs = uniqueParagraphs(
       $("p")
         .map((_, element) =>
@@ -1613,6 +1625,7 @@ async function main() {
     console.log(
       "Đã hủy. news.ts không bị thay đổi."
     );
+    return;
   }
 
   // ========================================
