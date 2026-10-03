@@ -44,6 +44,9 @@ export async function generateMetadata({
   return {
     title: `${article.title} | Mitsubishi Lưu Hoàng Phúc`,
     description: article.excerpt,
+    alternates: {
+      canonical: `/tin-tuc/${slug}`,
+    },
   };
 }
 
