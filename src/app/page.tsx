@@ -5,6 +5,13 @@ import QuoteForm from "@/components/QuoteForm";
 import SiteHeader from "@/components/SiteHeader";
 import HeroSlider from "@/components/HeroSlider";
 
+export const metadata = {
+  alternates: {
+    canonical: "/",
+  },
+};
+
+
 export default function Home() {
   return (
     <main className="min-h-screen bg-white text-black">

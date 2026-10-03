@@ -16,6 +16,7 @@ const beVietnamPro = Be_Vietnam_Pro({
 
 
 export const metadata: Metadata = {
+   metadataBase: new URL("https://www.mitsubishiauto.vn"),
   title: "Mitsubishi Bình Dương | Lưu Hoàng Phúc",
   description:
     "Mitsubishi Bình Dương - Tư vấn mua xe Mitsubishi, báo giá, khuyến mãi, hỗ trợ trả góp và đăng ký lái thử. Liên hệ Lưu Hoàng Phúc: 0858 678 929.",
