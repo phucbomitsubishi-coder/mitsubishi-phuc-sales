@@ -35,6 +35,9 @@ export async function generateMetadata({
     description: `${car.name} ${car.modelYear}, ${car.mileage.toLocaleString(
       "vi-VN"
     )} km, giá ${car.price.toLocaleString("vi-VN")} đồng.`,
+    alternates: {
+      canonical: `/xe-cu/${slug}`,
+    },
   };
 }
 
