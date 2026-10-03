@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: "Tính giá lăn bánh Mitsubishi | Lưu Hoàng Phúc",
   description:
     "Dự tính chi phí lăn bánh xe Mitsubishi theo mẫu xe, phiên bản và khu vực đăng ký.",
+  alternates: {
+    canonical: "/du-toan/gia-lan-banh",
+  },
 };
 
 export default function GiaLanBanhPage() {
