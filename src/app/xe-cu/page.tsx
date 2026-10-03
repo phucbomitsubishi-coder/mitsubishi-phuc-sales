@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: "Xe Mitsubishi đã qua sử dụng | Lưu Hoàng Phúc",
   description:
     "Thông tin xe Mitsubishi đã qua sử dụng, xe cũ đang có sẵn và tư vấn lựa chọn xe phù hợp.",
+  alternates: {
+    canonical: "/xe-cu",
+  },
 };
 
 export default function UsedCarsPage() {
