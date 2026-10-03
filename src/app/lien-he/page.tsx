@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: "Liên hệ tư vấn Mitsubishi",
   description:
     "Liên hệ tư vấn xe Mitsubishi, báo giá, ưu đãi, trả góp và đăng ký lái thử tại Mitsubishi Moveo New City.",
+      alternates: {
+    canonical: "/lien-he",
+  },
 };
 
 export default function ContactPage() {

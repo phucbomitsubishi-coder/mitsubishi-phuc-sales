@@ -4,6 +4,15 @@ import MoveoTimeline from "@/components/MoveoTimeline";
 import MoveoLocation from "@/components/MoveoLocation";
 import { siteConfig } from "@/config/site";
 
+export const metadata = {
+  title: "Giới thiệu Mitsubishi Motors – Moveo New City",
+  description:
+    "Giới thiệu Mitsubishi Motors – Moveo New City, nhà phân phối Mitsubishi Motors chính thức, hỗ trợ tư vấn mua xe, lái thử, dịch vụ và phụ tùng.",
+  alternates: {
+    canonical: "/gioi-thieu",
+  },
+};
+
 export default function GioiThieuPage() {
   return (
     <main className="min-h-screen bg-white text-black">

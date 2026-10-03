@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: "Tư vấn mua xe Mitsubishi",
   description:
     "Thông tin tư vấn giúp khách hàng chọn mẫu xe Mitsubishi phù hợp, lựa chọn phiên bản, tham khảo chi phí lăn bánh và nhận báo giá.",
+      alternates: {
+    canonical: "/tu-van",
+  },
 };
 
 const advisoryItems = [

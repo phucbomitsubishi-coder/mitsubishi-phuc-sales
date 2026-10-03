@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: "Hỗ trợ khách hàng Mitsubishi",
   description:
     "Thông tin bảo hành, bảo dưỡng định kỳ, phụ tùng chính hãng, hướng dẫn sử dụng và giải đáp các câu hỏi thường gặp dành cho khách hàng Mitsubishi.",
+      alternates: {
+    canonical: "/ho-tro",
+  },
 };
 
 const supportItems = [
