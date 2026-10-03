@@ -28,6 +28,9 @@ export async function generateMetadata({
   return {
     title: `${car.name} | Giá xe & ưu đãi | Lưu Hoàng Phúc`,
     description: `${car.name} tại Bình Dương. Xem giá xe, phiên bản, thông số kỹ thuật và ưu đãi mới. Liên hệ Lưu Hoàng Phúc để nhận báo giá và tư vấn.`,
+    alternates: {
+      canonical: `/xe/${slug}`,
+    },
   };
 }
 export default async function CarDetailPage({
