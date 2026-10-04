@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: "Chọn xe Mitsubishi phù hợp với nhu cầu | Lưu Hoàng Phúc",
   description:
     "Tư vấn lựa chọn xe Mitsubishi phù hợp với nhu cầu gia đình, đi phố, đi xa, công việc và ngân sách.",
+  alternates: {
+    canonical: "/tu-van/chon-xe-mitsubishi-phu-hop",
+  },
 };
 
 export default function MitsubishiBuyingGuidePage() {
