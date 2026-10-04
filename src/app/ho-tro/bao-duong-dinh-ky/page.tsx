@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   title: "Bảo dưỡng định kỳ Mitsubishi | Lưu Hoàng Phúc",
   description:
     "Thông tin tham khảo về chu kỳ bảo dưỡng định kỳ xe Mitsubishi và hỗ trợ khách hàng tại Mitsubishi Moveo New City.",
+  alternates: {
+    canonical: "/ho-tro/bao-duong-dinh-ky",
+  },
 };
 
 export default function MaintenancePage() {
