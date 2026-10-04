@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: "Dự tính trả góp xe Mitsubishi | Lưu Hoàng Phúc",
   description:
     "Công cụ dự tính khoản vay và số tiền trả góp hàng tháng khi mua xe Mitsubishi theo mẫu xe, phiên bản, số tiền trả trước và thời hạn vay.",
+  alternates: {
+    canonical: "/du-toan/tra-gop",
+  },
 };
 
 export default function TraGopPage() {
