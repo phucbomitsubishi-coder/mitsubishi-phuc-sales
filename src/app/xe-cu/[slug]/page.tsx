@@ -38,6 +38,28 @@ export async function generateMetadata({
     alternates: {
       canonical: `/xe-cu/${slug}`,
     },
+    openGraph: {
+      type: "website",
+      url: `/xe-cu/${slug}`,
+      title: `${car.name} ${car.modelYear} đã qua sử dụng | Lưu Hoàng Phúc`,
+      description: `${car.name} ${car.modelYear}, ${car.mileage.toLocaleString(
+        "vi-VN"
+      )} km, giá ${car.price.toLocaleString("vi-VN")} đồng.`,
+      images: [
+        {
+          url: car.image,
+          alt: `${car.name} ${car.modelYear}`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${car.name} ${car.modelYear} đã qua sử dụng | Lưu Hoàng Phúc`,
+      description: `${car.name} ${car.modelYear}, ${car.mileage.toLocaleString(
+        "vi-VN"
+      )} km, giá ${car.price.toLocaleString("vi-VN")} đồng.`,
+      images: [car.image],
+    },
   };
 }
 
@@ -49,9 +71,48 @@ export default async function UsedCarDetailPage({ params }: Props) {
   if (!car) {
     notFound();
   }
-
+  const vehicleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Vehicle",
+    "@id": `https://www.mitsubishiauto.vn/xe-cu/${car.slug}#vehicle`,
+    name: `${car.name} ${car.modelYear}`,
+    url: `https://www.mitsubishiauto.vn/xe-cu/${car.slug}`,
+    description: car.description,
+    image: `https://www.mitsubishiauto.vn${car.image}`,
+    brand: {
+      "@type": "Brand",
+      name: "Mitsubishi Motors",
+    },
+    modelDate: String(car.modelYear),
+    vehicleConfiguration: car.variant,
+    mileageFromOdometer: {
+      "@type": "QuantitativeValue",
+      value: car.mileage,
+      unitCode: "KMT",
+    },
+    fuelType: car.fuel,
+    vehicleTransmission: car.transmission,
+    color: car.color,
+    itemCondition: "https://schema.org/UsedCondition",
+    offers: {
+      "@type": "Offer",
+      priceCurrency: "VND",
+      price: car.price,
+      availability:
+        car.status === "available"
+          ? "https://schema.org/InStock"
+          : "https://schema.org/OutOfStock",
+      url: `https://www.mitsubishiauto.vn/xe-cu/${car.slug}`,
+    },
+  };
   return (
     <>
+          <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(vehicleSchema),
+        }}
+      />
       <SiteHeader />
 
       <main className="bg-gray-50">
