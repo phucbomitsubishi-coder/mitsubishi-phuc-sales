@@ -31,6 +31,24 @@ export async function generateMetadata({
     alternates: {
       canonical: `/xe/${slug}`,
     },
+    openGraph: {
+      type: "website",
+      url: `/xe/${slug}`,
+      title: `${car.name} | Giá xe & ưu đãi | Lưu Hoàng Phúc`,
+      description: `${car.name} tại Bình Dương. Xem giá xe, phiên bản, thông số kỹ thuật và ưu đãi mới. Liên hệ Lưu Hoàng Phúc để nhận báo giá và tư vấn.`,
+      images: [
+        {
+          url: car.image,
+          alt: car.name,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${car.name} | Giá xe & ưu đãi | Lưu Hoàng Phúc`,
+      description: `${car.name} tại Bình Dương. Xem giá xe, phiên bản, thông số kỹ thuật và ưu đãi mới. Liên hệ Lưu Hoàng Phúc để nhận báo giá và tư vấn.`,
+      images: [car.image],
+    },
   };
 }
 export default async function CarDetailPage({
