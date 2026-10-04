@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   title: "Chính sách bảo hành Mitsubishi | Lưu Hoàng Phúc",
   description:
     "Thông tin tham khảo về chính sách bảo hành xe Mitsubishi, thời hạn bảo hành và hỗ trợ khách hàng tại Mitsubishi Moveo New City.",
+  alternates: {
+    canonical: "/ho-tro/chinh-sach-bao-hanh",
+  },
 };
 
 export default function WarrantyPage() {
