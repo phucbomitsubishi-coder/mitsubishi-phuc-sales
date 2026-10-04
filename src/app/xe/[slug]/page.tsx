@@ -46,9 +46,42 @@ export default async function CarDetailPage({
   const carPromotion = currentPromotion.cars.find(
   (promotionCar) => promotionCar.carId === car.id
 );
+const variantPrices = car.variants.map((variant) => variant.price);
+
+const vehicleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Vehicle",
+  "@id": `https://www.mitsubishiauto.vn/xe/${car.slug}#vehicle`,
+  name: car.name,
+  url: `https://www.mitsubishiauto.vn/xe/${car.slug}`,
+  description: car.shortDescription,
+  image: `https://www.mitsubishiauto.vn${car.image}`,
+  brand: {
+    "@type": "Brand",
+    name: "Mitsubishi Motors",
+  },
+  vehicleConfiguration: car.category,
+  vehicleSeatingCapacity: car.specifications.seats,
+  fuelType: car.specifications.fuel,
+  offers: {
+    "@type": "AggregateOffer",
+    priceCurrency: "VND",
+    lowPrice: Math.min(...variantPrices),
+    highPrice: Math.max(...variantPrices),
+    offerCount: car.variants.length,
+    availability: "https://schema.org/InStock",
+    url: `https://www.mitsubishiauto.vn/xe/${car.slug}`,
+  },
+};
 
   return (
     <main className="min-h-screen bg-white text-black">
+      <script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{
+    __html: JSON.stringify(vehicleSchema),
+  }}
+/>
   <SiteHeader />
 
   <section className="mx-auto max-w-7xl px-6 pt-4 pb-2 md:pt-6 md:pb-3">
