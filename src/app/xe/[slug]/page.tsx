@@ -73,6 +73,30 @@ const vehicleSchema = {
     url: `https://www.mitsubishiauto.vn/xe/${car.slug}`,
   },
 };
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Trang chủ",
+      item: "https://www.mitsubishiauto.vn",
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Xe Mitsubishi",
+      item: "https://www.mitsubishiauto.vn/#xe-mitsubishi",
+    },
+    {
+      "@type": "ListItem",
+      position: 3,
+      name: car.name,
+      item: `https://www.mitsubishiauto.vn/xe/${car.slug}`,
+    },
+  ],
+};
 
   return (
     <main className="min-h-screen bg-white text-black">
@@ -80,6 +104,12 @@ const vehicleSchema = {
   type="application/ld+json"
   dangerouslySetInnerHTML={{
     __html: JSON.stringify(vehicleSchema),
+  }}
+/>
+<script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{
+    __html: JSON.stringify(breadcrumbSchema),
   }}
 />
   <SiteHeader />
