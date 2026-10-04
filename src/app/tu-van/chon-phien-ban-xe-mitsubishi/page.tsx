@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: "Nên chọn phiên bản xe Mitsubishi như thế nào? | Lưu Hoàng Phúc",
   description:
     "Tư vấn cách lựa chọn phiên bản xe Mitsubishi phù hợp với nhu cầu sử dụng, trang bị và ngân sách dự kiến.",
+  alternates: {
+    canonical: "/tu-van/chon-phien-ban-xe-mitsubishi",
+  },
 };
 
 export default function MitsubishiVariantGuidePage() {
