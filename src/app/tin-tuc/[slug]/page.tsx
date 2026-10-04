@@ -61,9 +61,31 @@ export default async function NewsDetailPage({
   }
 
   const { sales, contact } = siteConfig;
+  const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "@id": `https://www.mitsubishiauto.vn/tin-tuc/${article.slug}#article`,
+  headline: article.title,
+  description: article.excerpt,
+  datePublished: article.publishedAt,
+  image: `https://www.mitsubishiauto.vn${article.image}`,
+  mainEntityOfPage: {
+    "@type": "WebPage",
+    "@id": `https://www.mitsubishiauto.vn/tin-tuc/${article.slug}`,
+  },
+  publisher: {
+    "@id": "https://www.mitsubishiauto.vn/#autodealer",
+  },
+};
 
   return (
     <>
+    <script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{
+    __html: JSON.stringify(articleSchema),
+  }}
+/>
       <SiteHeader />
 
       <main className="bg-white text-gray-900">
