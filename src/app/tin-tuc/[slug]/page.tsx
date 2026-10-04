@@ -47,6 +47,24 @@ export async function generateMetadata({
     alternates: {
       canonical: `/tin-tuc/${slug}`,
     },
+    openGraph: {
+      type: "article",
+      url: `/tin-tuc/${slug}`,
+      title: `${article.title} | Mitsubishi Lưu Hoàng Phúc`,
+      description: article.excerpt,
+      images: [
+        {
+          url: article.image,
+          alt: article.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${article.title} | Mitsubishi Lưu Hoàng Phúc`,
+      description: article.excerpt,
+      images: [article.image],
+    },
   };
 }
 
