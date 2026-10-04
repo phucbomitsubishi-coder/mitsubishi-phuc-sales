@@ -23,6 +23,30 @@ export const metadata: Metadata = {
   verification: {
     google: "lQesEnQkjgxVoGmnCBwKvD8J8v8y5wlsF178d9ddSZI",
   },
+  openGraph: {
+  type: "website",
+  locale: "vi_VN",
+  url: "https://www.mitsubishiauto.vn",
+  siteName: "Mitsubishi Lưu Hoàng Phúc",
+  title: "Mitsubishi Bình Dương | Lưu Hoàng Phúc",
+  description:
+    "Mitsubishi Bình Dương - Tư vấn mua xe Mitsubishi, báo giá, khuyến mãi, hỗ trợ trả góp và đăng ký lái thử. Liên hệ Lưu Hoàng Phúc: 0858 678 929.",
+  images: [
+    {
+      url: "/images/og/og-default.jpg",
+      width: 1200,
+      height: 630,
+      alt: "Mitsubishi Bình Dương - Lưu Hoàng Phúc",
+    },
+  ],
+},
+twitter: {
+  card: "summary_large_image",
+  title: "Mitsubishi Bình Dương | Lưu Hoàng Phúc",
+  description:
+    "Mitsubishi Bình Dương - Tư vấn mua xe Mitsubishi, báo giá, khuyến mãi, hỗ trợ trả góp và đăng ký lái thử. Liên hệ Lưu Hoàng Phúc: 0858 678 929.",
+  images: ["/images/og/og-default.jpg"],
+},
 };
 const localBusinessSchema = {
   "@context": "https://schema.org",
