@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: "Giá lăn bánh Mitsubishi gồm những khoản nào? | Lưu Hoàng Phúc",
   description:
     "Tìm hiểu các khoản chi phí dự kiến khi tính giá lăn bánh xe Mitsubishi và cách tham khảo chi phí theo mẫu xe, phiên bản và khu vực đăng ký.",
+  alternates: {
+    canonical: "/tu-van/chi-phi-lan-banh-mitsubishi",
+  },
 };
 
 export default function MitsubishiOnRoadCostGuidePage() {
