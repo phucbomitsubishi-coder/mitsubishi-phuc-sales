@@ -24,6 +24,24 @@ export const metadata: Metadata = {
     google: "lQesEnQkjgxVoGmnCBwKvD8J8v8y5wlsF178d9ddSZI",
   },
 };
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "AutoDealer",
+  "@id": "https://www.mitsubishiauto.vn/#autodealer",
+  name: "Mitsubishi Moveo New City",
+  url: "https://www.mitsubishiauto.vn",
+  logo: "https://www.mitsubishiauto.vn/images/logo/logo-black.svg",
+  image: "https://www.mitsubishiauto.vn/images/logo/logo-mobile-new.png",
+  telephone: "+84858678929",
+  email: "phucbo.mitsubishi@gmail.com",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Lô C1C, Đường Hùng Vương",
+    addressLocality: "Phường Bình Dương",
+    addressRegion: "Thành phố Hồ Chí Minh",
+    addressCountry: "VN",
+  },
+};
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
@@ -33,6 +51,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
 >
     
       <body className="min-h-full flex flex-col">
+        <script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{
+    __html: JSON.stringify(localBusinessSchema),
+  }}
+/>
   <main className="flex-1">{children}</main>
   <SiteFooter />
 </body>
