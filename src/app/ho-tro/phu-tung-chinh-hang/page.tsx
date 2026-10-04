@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   title: "Phụ tùng chính hãng Mitsubishi | Lưu Hoàng Phúc",
   description:
     "Thông tin tham khảo về phụ tùng chính hãng Mitsubishi và hỗ trợ khách hàng tại Mitsubishi Moveo New City.",
+  alternates: {
+    canonical: "/ho-tro/phu-tung-chinh-hang",
+  },
 };
 
 export default function GenuinePartsPage() {
