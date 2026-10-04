@@ -77,6 +77,30 @@ export default async function NewsDetailPage({
     "@id": "https://www.mitsubishiauto.vn/#autodealer",
   },
 };
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Trang chủ",
+      item: "https://www.mitsubishiauto.vn",
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Tin tức",
+      item: "https://www.mitsubishiauto.vn/tin-tuc",
+    },
+    {
+      "@type": "ListItem",
+      position: 3,
+      name: article.title,
+      item: `https://www.mitsubishiauto.vn/tin-tuc/${article.slug}`,
+    },
+  ],
+};
 
   return (
     <>
@@ -84,6 +108,12 @@ export default async function NewsDetailPage({
   type="application/ld+json"
   dangerouslySetInnerHTML={{
     __html: JSON.stringify(articleSchema),
+  }}
+/>
+<script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{
+    __html: JSON.stringify(breadcrumbSchema),
   }}
 />
       <SiteHeader />
