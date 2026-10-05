@@ -4,30 +4,30 @@ import MobileMenu from "@/components/MobileMenu";
 
 export default function SiteHeader() {
   return (
-    <header className="sticky top-0 z-50 border-b border-gray-800 bg-black text-white md:border-gray-200 md:bg-white md:text-black">
+    <header className="sticky top-0 z-50 border-b border-gray-800 bg-black text-white lg:border-gray-200 lg:bg-white lg:text-black">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 md:px-6 md:py-5">
         <a
           href="/"
           aria-label="Về trang chủ"
-          className="inline-flex shrink-0 items-center md:-ml-4"
+          className="inline-flex shrink-0 items-center lg:-ml-4"
         >
           {/* Logo mobile */}
           <img
             src="/images/logo/logo-mobile-new.png"
             alt="Mitsubishi Motors - Vững Tiến"
-            className="h-20 w-auto object-contain md:hidden"
+            className="h-20 w-auto object-contain lg:hidden"
           />
 
           {/* Logo desktop */}
           <img
             src="/images/logo/logo-black.svg"
             alt="Mitsubishi Motors"
-            className="hidden h-12 w-auto md:block"
+            className="hidden h-12 w-auto lg:block"
           />
         </a>
 
         {/* Menu desktop */}
-<nav className="hidden items-center gap-7 font-semibold md:flex">
+<nav className="hidden items-center gap-7 font-semibold lg:flex">
   <a
     href="/gioi-thieu"
     className="whitespace-nowrap transition hover:text-red-600"
@@ -122,7 +122,7 @@ export default function SiteHeader() {
         </nav>
 
         {/* Liên hệ desktop */}
-        <div className="hidden items-center gap-3 md:flex">
+        <div className="hidden items-center gap-3 lg:flex">
           <a
             href={siteConfig.contact.zaloUrl}
             target="_blank"
