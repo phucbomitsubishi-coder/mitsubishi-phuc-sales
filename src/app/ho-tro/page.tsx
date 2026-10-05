@@ -138,7 +138,7 @@ export default function SupportPage() {
               </div>
 
               <Link
-                href="/#bao-gia"
+                href="/?nguon=Ho-tro#bao-gia"
                 className="mt-6 inline-flex rounded-lg bg-red-600 px-6 py-3 font-bold text-white transition hover:bg-red-700 md:mt-0"
               >
                 Gửi yêu cầu tư vấn

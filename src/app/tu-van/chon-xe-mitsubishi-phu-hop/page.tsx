@@ -184,7 +184,7 @@ export default function MitsubishiBuyingGuidePage() {
 
           <div className="mt-6 flex flex-wrap gap-3">
             <a
-              href="/#bao-gia"
+              href="/?nguon=Chon-xe-phu-hop#bao-gia"
               className="rounded bg-red-600 px-5 py-3 font-semibold text-white transition hover:bg-red-700"
             >
               Nhận báo giá

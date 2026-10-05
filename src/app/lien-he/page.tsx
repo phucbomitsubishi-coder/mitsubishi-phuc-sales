@@ -42,7 +42,7 @@ export default function ContactPage() {
               </a>
 
               <Link
-                href="/#bao-gia"
+                href="/?nguon=Lien-he#bao-gia"
                 className="rounded-lg border border-neutral-600 px-6 py-3 font-bold text-white transition hover:border-white"
               >
                 Nhận báo giá
@@ -176,7 +176,7 @@ export default function ContactPage() {
 
               <div className="mt-7 flex flex-wrap gap-3">
                 <Link
-                  href="/#bao-gia"
+                  href="/?nguon=Lien-he#bao-gia"
                   className="rounded-lg bg-red-600 px-5 py-3 font-bold text-white transition hover:bg-red-700"
                 >
                   Nhận báo giá

@@ -153,7 +153,7 @@ export default function Home() {
             </a>
 
             <a
-  href={`/?car=${encodeURIComponent(car.name)}#bao-gia`}
+  href={`/?car=${encodeURIComponent(car.name)}&nguon=Trang-chu-san-pham#bao-gia`}
   className="rounded border border-red-600 bg-white px-4 py-3 font-semibold text-red-600 transition hover:bg-red-50"
 >
   Nhận ưu đãi

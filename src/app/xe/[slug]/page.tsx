@@ -210,7 +210,7 @@ const breadcrumbSchema = {
 </div>
   <div className="mt-6 flex flex-wrap gap-4">
     <a
-      href={`/?car=${encodeURIComponent(car.name)}#bao-gia`}
+      href={`/?car=${encodeURIComponent(car.name)}&nguon=Chi-tiet-xe#bao-gia`}
       className="rounded bg-red-600 px-6 py-3 font-semibold text-white hover:bg-red-700"
     >
       Nhận báo giá

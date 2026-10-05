@@ -712,7 +712,7 @@ const selectedImage =
         carName
       )}&variant=${encodeURIComponent(
         selectedVariant.name
-      )}#bao-gia`}
+      )}&nguon=Chon-phien-ban#bao-gia`}
       className="mt-8 inline-block rounded bg-red-600 px-6 py-3 font-semibold text-white hover:bg-red-700"
     >
       Nhận báo giá phiên bản này

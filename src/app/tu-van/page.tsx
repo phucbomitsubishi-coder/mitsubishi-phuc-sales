@@ -59,7 +59,7 @@ export default function AdvisoryPage() {
 
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
-                href="/#bao-gia"
+                href="/?nguon=Tu-van#bao-gia"
                 className="rounded-lg bg-red-600 px-6 py-3 font-bold text-white transition hover:bg-red-700"
               >
                 Nhận báo giá
@@ -195,7 +195,7 @@ export default function AdvisoryPage() {
               </div>
 
               <Link
-                href="/#bao-gia"
+                href="/?nguon=Tu-van#bao-gia"
                 className="mt-6 inline-flex rounded-lg bg-red-600 px-6 py-3 font-bold text-white transition hover:bg-red-700 md:mt-0"
               >
                 Nhận tư vấn ngay
