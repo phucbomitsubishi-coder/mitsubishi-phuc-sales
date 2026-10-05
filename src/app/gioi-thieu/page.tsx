@@ -114,10 +114,10 @@ export default function GioiThieuPage() {
         </div>
       </section>
 
-            {/* HÀNH TRÌNH PHÁT TRIỂN MOVEO */}
+      {/* HÀNH TRÌNH PHÁT TRIỂN MOVEO */}
       <MoveoTimeline />
 
-            {/* HỆ SINH THÁI MOVEO */}
+      {/* HỆ SINH THÁI MOVEO */}
       <MoveoEcosystem />
 
       {/* WEBSITE GIÚP GÌ CHO KHÁCH HÀNG */}
@@ -142,27 +142,27 @@ export default function GioiThieuPage() {
 
             <div className="grid gap-3 sm:grid-cols-2">
               {[
-  { label: "Tìm hiểu các dòng xe", href: "/#san-pham" },
-  { label: "Tham khảo giá & chi phí", href: "/du-toan/gia-lan-banh" },
-{ label: "Dự tính phương án trả góp", href: "/du-toan/tra-gop" },
-  { label: "Theo dõi thông tin & ưu đãi", href: "/tin-tuc" },
-  { label: "Đăng ký lái thử", href: "/dang-ky-lai-thu" },
-  { label: "Kết nối tư vấn trực tiếp", href: "https://zalo.me/0858678929" },
-].map((item) => (
+                { label: "Tìm hiểu các dòng xe", href: "/#san-pham" },
+                { label: "Tham khảo giá & chi phí", href: "/du-toan/gia-lan-banh" },
+                { label: "Dự tính phương án trả góp", href: "/du-toan/tra-gop" },
+                { label: "Theo dõi thông tin & ưu đãi", href: "/tin-tuc" },
+                { label: "Đăng ký lái thử", href: "/dang-ky-lai-thu?nguon=Gioi-thieu" },
+                { label: "Kết nối tư vấn trực tiếp", href: "https://zalo.me/0858678929" },
+              ].map((item) => (
                 <a
-  key={item.label}
-  href={item.href}
-  className="rounded-lg border border-gray-700 bg-gray-900 p-4 font-semibold transition hover:border-red-500 hover:bg-gray-800"
->
-  {item.label}
-</a>
+                  key={item.label}
+                  href={item.href}
+                  className="rounded-lg border border-gray-700 bg-gray-900 p-4 font-semibold transition hover:border-red-500 hover:bg-gray-800"
+                >
+                  {item.label}
+                </a>
               ))}
             </div>
           </div>
         </div>
       </section>
 
-            {/* ĐỊA ĐIỂM & LIÊN HỆ */}
+      {/* ĐỊA ĐIỂM & LIÊN HỆ */}
       <MoveoLocation />
 
       {/* CTA CUỐI TRANG */}
