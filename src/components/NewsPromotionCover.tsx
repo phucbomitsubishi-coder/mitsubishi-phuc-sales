@@ -46,7 +46,7 @@ export default function NewsPromotionCover() {
 }).format(new Date())}
 </p>
 
-<h2 className="mt-3 whitespace-nowrap text-[27px] font-extrabold tracking-[0.02em] text-gray-950 sm:text-4xl sm:tracking-[0.04em] lg:text-[46px]">
+<h2 className="mt-3 text-[27px] font-extrabold tracking-[0.02em] text-gray-950 sm:text-4xl sm:tracking-[0.04em] lg:text-[46px]">
   MITSUBISHI MOTORS
 </h2>
 
