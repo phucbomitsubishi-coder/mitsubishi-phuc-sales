@@ -190,7 +190,7 @@ const licensePlateFee = isTriton
     Bảo hiểm BHDS bắt buộc
   </span>
 
-  <span className="font-bold">
+  <span className="shrink-0 whitespace-nowrap font-bold">
     {insuranceFee.toLocaleString("vi-VN")} đ
   </span>
 </div>
@@ -206,7 +206,7 @@ const licensePlateFee = isTriton
   </span>
 </div>
 <div className="mt-6 border-t-2 border-red-600 pt-5">
-  <div className="flex items-end justify-between gap-4">
+  <div className="flex flex-col items-start gap-1 sm:flex-row sm:items-end sm:justify-between sm:gap-4">
     <span className="font-bold uppercase text-gray-900">
       Lăn bánh dự kiến
     </span>
