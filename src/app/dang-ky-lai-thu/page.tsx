@@ -69,6 +69,7 @@ function DangKyLaiThuForm() {
       note,
       source: leadSource,
       type: "test-drive",
+      website,
     };
 
     try {
@@ -133,135 +134,141 @@ function DangKyLaiThuForm() {
             Thông tin đăng ký
           </h2>
 
-          <form
-            onSubmit={handleSubmit}
-            className="grid gap-6 sm:grid-cols-2"
-          >
-            <div
-              className="absolute -left-[9999px] top-auto h-px w-px overflow-hidden"
-              aria-hidden="true"
+          {!successMessage ? (
+            <form
+              onSubmit={handleSubmit}
+              className="grid gap-6 sm:grid-cols-2"
             >
-              <label htmlFor="website">Website</label>
-              <input
-                id="website"
-                name="website"
-                type="text"
-                tabIndex={-1}
-                autoComplete="off"
-              />
-            </div>
-            {/* HỌ TÊN */}
-            <div>
-              <label
-                htmlFor="name"
-                className="mb-2 block text-sm font-semibold text-gray-700"
+              <div
+                className="absolute -left-[9999px] top-auto h-px w-px overflow-hidden"
+                aria-hidden="true"
               >
-                Họ và tên *
-              </label>
-
-              <input
-                id="name"
-                name="name"
-                type="text"
-                autoComplete="name"
-                required
-                placeholder="Nguyễn Văn A"
-                className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none transition focus:border-red-600 focus:ring-2 focus:ring-red-100"
-              />
-            </div>
-
-            {/* SỐ ĐIỆN THOẠI */}
-            <div>
-              <label
-                htmlFor="phone"
-                className="mb-2 block text-sm font-semibold text-gray-700"
-              >
-                Số điện thoại *
-              </label>
-
-              <input
-                id="phone"
-                name="phone"
-                type="tel"
-                inputMode="tel"
-                autoComplete="tel"
-                required
-                placeholder="09xx xxx xxx"
-                className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none transition focus:border-red-600 focus:ring-2 focus:ring-red-100"
-              />
-            </div>
-
-            {/* MẪU XE */}
-            <div className="sm:col-span-2">
-              <label
-                htmlFor="car"
-                className="mb-2 block text-sm font-semibold text-gray-700"
-              >
-                Mẫu xe muốn lái thử *
-              </label>
-
-              <select
-                id="car"
-                name="car"
-                required
-                defaultValue={selectedCar}
-                className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 outline-none transition focus:border-red-600 focus:ring-2 focus:ring-red-100"
-              >
-                <option value="" disabled>
-                  Chọn mẫu xe
-                </option>
-
-                <option value="triton">Mitsubishi Triton</option>
-                <option value="xforce">Mitsubishi Xforce</option>
-                <option value="destinator">Mitsubishi Destinator</option>
-                <option value="xpander">Mitsubishi Xpander</option>
-                <option value="attrage">Mitsubishi Attrage</option>
-                <option value="xpander-cross">Mitsubishi Xpander Cross</option>
-              </select>
-            </div>
-
-            {/* GHI CHÚ */}
-            <div className="sm:col-span-2">
-              <label
-                htmlFor="note"
-                className="mb-2 block text-sm font-semibold text-gray-700"
-              >
-                Ghi chú
-              </label>
-
-              <textarea
-                id="note"
-                name="note"
-                rows={4}
-                placeholder="Thời gian thuận tiện để lái thử hoặc yêu cầu khác..."
-                className="w-full resize-none rounded-lg border border-gray-300 px-4 py-3 outline-none transition focus:border-red-600 focus:ring-2 focus:ring-red-100"
-              />
-            </div>
-
-            {/* THÔNG BÁO */}
-            {successMessage && (
-              <div className="rounded-lg border border-green-200 bg-green-50 p-4 text-sm font-medium text-green-700 sm:col-span-2">
-                ✓ {successMessage}
+                <label htmlFor="website">Website</label>
+                <input
+                  id="website"
+                  name="website"
+                  type="text"
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
               </div>
-            )}
+              {/* HỌ TÊN */}
+              <div>
+                <label
+                  htmlFor="name"
+                  className="mb-2 block text-sm font-semibold text-gray-700"
+                >
+                  Họ và tên *
+                </label>
 
-            {errorMessage && (
-              <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm font-medium text-red-700 sm:col-span-2">
-                {errorMessage}
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  autoComplete="name"
+                  required
+                  placeholder="Nguyễn Văn A"
+                  className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none transition focus:border-red-600 focus:ring-2 focus:ring-red-100"
+                />
               </div>
-            )}
 
-            {/* BUTTON */}
-            <div className="sm:col-span-2">
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full rounded-lg bg-red-600 px-6 py-4 font-bold text-white shadow-lg transition hover:bg-red-700 disabled:cursor-not-allowed disabled:bg-gray-400 sm:w-auto"
-              >
-                {isSubmitting ? "Đang gửi..." : "Gửi đăng ký lái thử"}
-              </button>
+              {/* SỐ ĐIỆN THOẠI */}
+              <div>
+                <label
+                  htmlFor="phone"
+                  className="mb-2 block text-sm font-semibold text-gray-700"
+                >
+                  Số điện thoại *
+                </label>
+
+                <input
+                  id="phone"
+                  name="phone"
+                  type="tel"
+                  inputMode="tel"
+                  autoComplete="tel"
+                  required
+                  placeholder="09xx xxx xxx"
+                  className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none transition focus:border-red-600 focus:ring-2 focus:ring-red-100"
+                />
+              </div>
+
+              {/* MẪU XE */}
+              <div className="sm:col-span-2">
+                <label
+                  htmlFor="car"
+                  className="mb-2 block text-sm font-semibold text-gray-700"
+                >
+                  Mẫu xe muốn lái thử *
+                </label>
+
+                <select
+                  id="car"
+                  name="car"
+                  required
+                  defaultValue={selectedCar}
+                  className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 outline-none transition focus:border-red-600 focus:ring-2 focus:ring-red-100"
+                >
+                  <option value="" disabled>
+                    Chọn mẫu xe
+                  </option>
+
+                  <option value="triton">Mitsubishi Triton</option>
+                  <option value="xforce">Mitsubishi Xforce</option>
+                  <option value="destinator">Mitsubishi Destinator</option>
+                  <option value="xpander">Mitsubishi Xpander</option>
+                  <option value="attrage">Mitsubishi Attrage</option>
+                  <option value="xpander-cross">Mitsubishi Xpander Cross</option>
+                </select>
+              </div>
+
+              {/* GHI CHÚ */}
+              <div className="sm:col-span-2">
+                <label
+                  htmlFor="note"
+                  className="mb-2 block text-sm font-semibold text-gray-700"
+                >
+                  Ghi chú
+                </label>
+
+                <textarea
+                  id="note"
+                  name="note"
+                  rows={4}
+                  placeholder="Thời gian thuận tiện để lái thử hoặc yêu cầu khác..."
+                  className="w-full resize-none rounded-lg border border-gray-300 px-4 py-3 outline-none transition focus:border-red-600 focus:ring-2 focus:ring-red-100"
+                />
+              </div>
+
+              {/* THÔNG BÁO */}
+
+              {errorMessage && (
+                <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm font-medium text-red-700 sm:col-span-2">
+                  {errorMessage}
+                </div>
+              )}
+
+              {/* BUTTON */}
+              <div className="sm:col-span-2">
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full rounded-lg bg-red-600 px-6 py-4 font-bold text-white shadow-lg transition hover:bg-red-700 disabled:cursor-not-allowed disabled:bg-gray-400 sm:w-auto"
+                >
+                  {isSubmitting ? "Đang gửi..." : "Gửi đăng ký lái thử"}
+                </button>
+              </div>
+            </form>
+          ) : (
+            <div className="rounded-xl border border-green-200 bg-green-50 p-6 text-center">
+              <div className="text-2xl font-bold text-green-700">
+                ✓ Đăng ký lái thử thành công
+              </div>
+              <p className="mt-3 text-gray-700">
+                Cảm ơn bạn đã đăng ký. Chúng tôi sẽ liên hệ xác nhận lịch lái thử trong thời gian sớm nhất.
+              </p>
             </div>
-          </form>
+          )}
 
           <p className="mt-6 text-sm leading-6 text-gray-500">
             Thông tin của khách hàng được sử dụng để tư vấn và xác nhận nhu cầu
