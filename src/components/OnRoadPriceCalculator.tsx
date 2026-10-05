@@ -154,7 +154,7 @@ const licensePlateFee = isTriton
       Lệ phí trước bạ ({Math.round(registrationTaxRate * 100)}%)
     </span>
 
-    <span className="font-bold">
+    <span className="shrink-0 whitespace-nowrap font-bold">
       {registrationTax.toLocaleString("vi-VN")} đ
     </span>
   </div>
