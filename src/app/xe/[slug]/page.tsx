@@ -87,7 +87,6 @@ const vehicleSchema = {
     lowPrice: Math.min(...variantPrices),
     highPrice: Math.max(...variantPrices),
     offerCount: car.variants.length,
-    availability: "https://schema.org/InStock",
     url: `https://www.mitsubishiauto.vn/xe/${car.slug}`,
   },
 };
