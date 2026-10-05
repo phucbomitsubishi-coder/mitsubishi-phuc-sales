@@ -13,7 +13,7 @@ export default function MobileMenu({ cars }: MobileMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="lg:hidden">
+    <div className="xl:hidden">
       <button
         type="button"
         aria-label={isOpen ? "Đóng menu" : "Mở menu"}
