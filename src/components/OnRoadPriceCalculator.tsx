@@ -235,12 +235,12 @@ const licensePlateFee = isTriton
       <span className="text-gray-700">
         Tổng giá trị quyền lợi
       </span>
-      <span className="font-bold text-red-600">
+      <span className="shrink-0 whitespace-nowrap font-bold text-red-600">
         -{totalPromotionValue.toLocaleString("vi-VN")} đ
       </span>
     </div>
 
-    <div className="flex items-end justify-between gap-4 border-t border-red-200 pt-3">
+    <div className="flex flex-col items-start gap-1 border-t border-red-200 pt-3 sm:flex-row sm:items-end sm:justify-between sm:gap-4">
       <span className="font-bold uppercase text-gray-900">
         Dự kiến sau ưu đãi
       </span>
