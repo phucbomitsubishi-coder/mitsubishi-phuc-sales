@@ -69,20 +69,29 @@ if (!/^0\d{9}$/.test(normalizedPhone)) {
       setIsSubmitting(true);
       setMessage("");
 
-      await fetch(apiUrl, {
-        method: "POST",
-        mode: "no-cors",
-        headers: {
-          "Content-Type": "text/plain;charset=utf-8",
-        },
-        body: JSON.stringify({
-          customerName,
-          phone: normalizedPhone,
-          car,
-          variant,
-          source: "Website Mitsubishi",
-        }),
-      });
+      const response = await fetch(apiUrl, {
+  method: "POST",
+  headers: {
+    "Content-Type": "text/plain;charset=utf-8",
+  },
+  body: JSON.stringify({
+    customerName,
+    phone: normalizedPhone,
+    car,
+    variant,
+    source: "Website Mitsubishi",
+  }),
+});
+
+if (!response.ok) {
+  throw new Error("Không thể gửi yêu cầu báo giá.");
+}
+
+const result = await response.json();
+
+if (!result.success) {
+  throw new Error(result.message || "Không thể gửi yêu cầu báo giá.");
+}
 
       setMessage(
         "Đã gửi yêu cầu báo giá. Lưu Hoàng Phúc sẽ liên hệ tư vấn sớm."
