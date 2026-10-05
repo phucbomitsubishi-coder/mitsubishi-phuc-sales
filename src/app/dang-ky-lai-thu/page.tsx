@@ -42,10 +42,19 @@ function DangKyLaiThuForm() {
       setIsSubmitting(false);
       return;
     }
+    const normalizedPhone = phone.replace(/[\s.-]/g, "");
+
+    if (!/^0\d{9}$/.test(normalizedPhone)) {
+      setErrorMessage(
+        "Số điện thoại chưa đúng. Vui lòng nhập 10 số, bắt đầu bằng số 0."
+      );
+      setIsSubmitting(false);
+      return;
+    }
 
     const payload = {
       customerName: name,
-      phone,
+      phone: normalizedPhone,
       car: carNames[carId] || carId,
       note,
       source: "Hero - Đăng ký lái thử",
