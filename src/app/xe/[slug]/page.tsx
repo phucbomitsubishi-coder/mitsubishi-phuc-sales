@@ -5,6 +5,7 @@ import VariantSelector from "./VariantSelector";
 import { siteConfig } from "@/config/site";
 import type { Metadata } from "next";
 import BackToPrevious from "@/components/BackToPrevious";
+import MobileContactBar from "@/components/MobileContactBar";
 import CarGallery from "./CarGallery";
 import { currentPromotion } from "@/data/promotions";
 
@@ -238,26 +239,11 @@ const breadcrumbSchema = {
   promotions={carPromotion?.variants}
 />
 
-      {/* MOBILE CONTACT BAR */}
-      <div className="fixed inset-x-0 bottom-0 z-50 border-t border-gray-200 bg-white p-3 shadow-lg md:hidden">
-        <div className="mx-auto flex max-w-md gap-3">
-          <a
-            href={siteConfig.contact.zaloUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex-1 rounded border border-blue-600 bg-white px-4 py-3 text-center font-semibold text-blue-600"
-          >
-            Zalo
-          </a>
-
-          <a
-            href={siteConfig.contact.phoneUrl}
-            className="flex-1 rounded bg-red-600 px-4 py-3 text-center font-semibold text-white"
-          >
-            Gọi ngay
-          </a>
-        </div>
-      </div>
+            {/* MOBILE CONTACT BAR */}
+      <MobileContactBar
+        zaloUrl={siteConfig.contact.zaloUrl}
+        phoneUrl={siteConfig.contact.phoneUrl}
+      />
     </main>
   );
 }
