@@ -12,6 +12,8 @@ const carNames: Record<string, string> = {
   xforce: "Mitsubishi Xforce",
   destinator: "Mitsubishi Destinator",
   xpander: "Mitsubishi Xpander",
+  attrage: "Mitsubishi Attrage",
+  "xpander-cross": "Mitsubishi Xpander Cross",
 };
 
 function DangKyLaiThuForm() {
@@ -189,6 +191,8 @@ function DangKyLaiThuForm() {
                 <option value="xforce">Mitsubishi Xforce</option>
                 <option value="destinator">Mitsubishi Destinator</option>
                 <option value="xpander">Mitsubishi Xpander</option>
+                <option value="attrage">Mitsubishi Attrage</option>
+                <option value="xpander-cross">Mitsubishi Xpander Cross</option>
               </select>
             </div>
 
