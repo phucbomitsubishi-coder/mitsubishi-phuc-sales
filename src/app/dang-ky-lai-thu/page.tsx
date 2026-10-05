@@ -19,6 +19,7 @@ const carNames: Record<string, string> = {
 function DangKyLaiThuForm() {
   const searchParams = useSearchParams();
   const selectedCar = searchParams.get("xe") || "";
+  const leadSource = searchParams.get("nguon") || "Đăng ký lái thử";
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
@@ -66,7 +67,7 @@ function DangKyLaiThuForm() {
       phone: normalizedPhone,
       car: carNames[carId] || carId,
       note,
-      source: "Hero - Đăng ký lái thử",
+      source: leadSource,
       type: "test-drive",
     };
 
