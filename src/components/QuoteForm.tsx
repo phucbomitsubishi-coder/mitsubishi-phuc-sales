@@ -103,6 +103,8 @@ if (!result.success) {
       );
 
       form.reset();
+      setSelectedCar("");
+      setSelectedVariant("");
     } catch (error) {
       console.error(error);
 
