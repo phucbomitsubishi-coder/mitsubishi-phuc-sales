@@ -8,11 +8,16 @@ export default function QuoteForm() {
   const [message, setMessage] = useState("");
   const [selectedCar, setSelectedCar] = useState("");
   const [selectedVariant, setSelectedVariant] = useState("");
+  const [leadSource, setLeadSource] = useState("Website Mitsubishi");
 
 useEffect(() => {
   const params = new URLSearchParams(window.location.search);
   const carFromUrl = params.get("car");
   const variantFromUrl = params.get("variant");
+  const formFromUrl = params.get("form");
+  if (formFromUrl === "tra-gop") {
+  setLeadSource("Công cụ tính trả góp");
+}
 
   if (carFromUrl) {
   const matchedCar = cars.find(
@@ -79,7 +84,7 @@ if (!/^0\d{9}$/.test(normalizedPhone)) {
     phone: normalizedPhone,
     car,
     variant,
-    source: "Website Mitsubishi",
+    source: leadSource,
   }),
 });
 
