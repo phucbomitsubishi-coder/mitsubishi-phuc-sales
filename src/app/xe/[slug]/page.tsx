@@ -104,7 +104,7 @@ const breadcrumbSchema = {
       "@type": "ListItem",
       position: 2,
       name: "Xe Mitsubishi",
-      item: "https://www.mitsubishiauto.vn/#xe-mitsubishi",
+      item: "https://www.mitsubishiauto.vn/#san-pham",
     },
     {
       "@type": "ListItem",
