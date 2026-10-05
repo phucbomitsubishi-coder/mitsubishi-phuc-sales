@@ -267,6 +267,12 @@ function DangKyLaiThuForm() {
               <p className="mt-3 text-gray-700">
                 Cảm ơn bạn đã đăng ký. Chúng tôi sẽ liên hệ xác nhận lịch lái thử trong thời gian sớm nhất.
               </p>
+              <a
+                href="/"
+                className="mx-auto mt-6 hidden w-fit rounded-xl bg-red-600 px-8 py-3 font-semibold text-white transition hover:bg-red-700 md:block"
+              >
+                ← Quay về trang chủ
+              </a>
             </div>
           )}
 
