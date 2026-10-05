@@ -189,7 +189,10 @@ if (!result.success) {
                   id="car"
                   name="car"
                   value={selectedCar}
-onChange={(event) => setSelectedCar(event.target.value)}
+onChange={(event) => {
+  setSelectedCar(event.target.value);
+  setSelectedVariant("");
+}}
                   required
                   className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 outline-none transition focus:border-red-600"
                 >
