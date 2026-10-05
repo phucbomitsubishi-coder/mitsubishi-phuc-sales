@@ -33,6 +33,13 @@ function DangKyLaiThuForm() {
 
     const form = event.currentTarget;
     const formData = new FormData(form);
+    const website = String(formData.get("website") || "").trim();
+
+    if (website) {
+      form.reset();
+      setIsSubmitting(false);
+      return;
+    }
 
     const name = String(formData.get("name") || "").trim();
     const phone = String(formData.get("phone") || "").trim();
@@ -129,6 +136,19 @@ function DangKyLaiThuForm() {
             onSubmit={handleSubmit}
             className="grid gap-6 sm:grid-cols-2"
           >
+            <div
+              className="absolute -left-[9999px] top-auto h-px w-px overflow-hidden"
+              aria-hidden="true"
+            >
+              <label htmlFor="website">Website</label>
+              <input
+                id="website"
+                name="website"
+                type="text"
+                tabIndex={-1}
+                autoComplete="off"
+              />
+            </div>
             {/* HỌ TÊN */}
             <div>
               <label
