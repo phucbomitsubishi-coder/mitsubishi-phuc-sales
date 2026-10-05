@@ -16,8 +16,11 @@ export default function QuoteForm() {
     const carFromUrl = params.get("car");
     const variantFromUrl = params.get("variant");
     const formFromUrl = params.get("form");
+    const sourceFromUrl = params.get("nguon");
     if (formFromUrl === "tra-gop") {
       setLeadSource("Công cụ tính trả góp");
+    } else if (sourceFromUrl) {
+      setLeadSource(sourceFromUrl);
     }
 
     if (carFromUrl) {
