@@ -162,6 +162,7 @@ function DangKyLaiThuForm() {
                 id="name"
                 name="name"
                 type="text"
+                autoComplete="name"
                 required
                 placeholder="Nguyễn Văn A"
                 className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none transition focus:border-red-600 focus:ring-2 focus:ring-red-100"
@@ -181,6 +182,8 @@ function DangKyLaiThuForm() {
                 id="phone"
                 name="phone"
                 type="tel"
+                inputMode="tel"
+                autoComplete="tel"
                 required
                 placeholder="09xx xxx xxx"
                 className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none transition focus:border-red-600 focus:ring-2 focus:ring-red-100"

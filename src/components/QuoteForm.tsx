@@ -165,6 +165,7 @@ if (!result.success) {
                   id="customerName"
                   name="customerName"
                   type="text"
+                  autoComplete="name"
                   required
                   placeholder="Nhập họ và tên"
                   className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 outline-none transition focus:border-red-600"
@@ -181,6 +182,7 @@ if (!result.success) {
                   name="phone"
                   type="tel"
                   inputMode="tel"
+                  autoComplete="tel"
                   required
                   placeholder="Nhập số điện thoại"
                   className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 outline-none transition focus:border-red-600"
