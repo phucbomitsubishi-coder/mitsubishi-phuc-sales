@@ -46,6 +46,7 @@ export default function Home() {
   <img
     src={car.image}
     alt={car.name}
+    loading="lazy"
     className="h-52 w-full -translate-y-6 object-contain"
   />
 </div>
@@ -112,6 +113,7 @@ export default function Home() {
   <img
     src={car.image}
     alt={`Ưu đãi ${car.name}`}
+    loading="lazy"
     className="h-full w-full object-contain p-3 transition duration-300 hover:scale-105"
   />
 </div>
