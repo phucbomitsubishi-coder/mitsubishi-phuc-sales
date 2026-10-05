@@ -149,7 +149,7 @@ const licensePlateFee = isTriton
       </div>
 
       <div className="mt-3 border-t border-gray-200 pt-3"></div>
-  <div className="flex items-center justify-between gap-4">
+  <div className="flex flex-col items-start gap-1 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
     <span className="text-gray-600">
       Lệ phí trước bạ ({Math.round(registrationTaxRate * 100)}%)
     </span>
