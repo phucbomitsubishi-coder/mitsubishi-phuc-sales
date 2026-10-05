@@ -66,7 +66,7 @@ export default function AdvisoryPage() {
               </Link>
 
               <Link
-                href="/dang-ky-lai-thu"
+                href="/dang-ky-lai-thu?nguon=Tu-van"
                 className="rounded-lg border border-neutral-600 px-6 py-3 font-bold text-white transition hover:border-white"
               >
                 Đăng ký lái thử

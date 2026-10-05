@@ -183,7 +183,7 @@ export default function ContactPage() {
                 </Link>
 
                 <Link
-                  href="/dang-ky-lai-thu"
+                  href="/dang-ky-lai-thu?nguon=Lien-he"
                   className="rounded-lg border border-neutral-600 px-5 py-3 font-bold text-white transition hover:border-white"
                 >
                   Đăng ký lái thử
