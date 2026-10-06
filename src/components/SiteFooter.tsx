@@ -188,15 +188,23 @@ export default function SiteFooter() {
         {/* Bottom */}
         <div className="mt-10 border-t border-gray-800 pt-6">
           <p className="text-xs leading-5 text-gray-400">
-            Website Tư vấn Kinh doanh Mitsubishi của {sales.name}.
-            Thông tin giá bán, khuyến mãi và chính sách có thể thay đổi
-            theo từng thời điểm. Vui lòng liên hệ trực tiếp để nhận thông
-            tin cập nhật.
+            Website cá nhân của {sales.name}, Tư vấn Kinh doanh tại{" "}
+            {dealer.name}. Đây không phải website chính thức của Mitsubishi
+            Motors Việt Nam hay của đại lý. Tên, logo Mitsubishi và hình ảnh
+            xe thuộc quyền sở hữu của Mitsubishi Motors. Thông tin giá bán,
+            khuyến mãi và chính sách có thể thay đổi theo từng thời điểm.
+            Vui lòng liên hệ trực tiếp để nhận thông tin cập nhật.
           </p>
 
-          <p className="mt-3 text-xs text-gray-400">
-            © {new Date().getFullYear()} {dealer.name}. All rights reserved.
-          </p>
+          <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-gray-400">
+            <p>
+              © {new Date().getFullYear()} {sales.name}.
+            </p>
+
+            <Link href="/chinh-sach-bao-mat" className="underline hover:text-white">
+              Chính sách bảo mật
+            </Link>
+          </div>
         </div>
       </div>
     </footer>

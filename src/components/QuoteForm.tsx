@@ -4,6 +4,7 @@ import { FormEvent, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { cars, upcomingCars } from "@/data/cars";
 import ScrollTopLink from "@/components/ScrollTopLink";
+import Link from "next/link";
 
 type QuoteFormProps = {
   initialCar?: string;
@@ -284,6 +285,11 @@ export default function QuoteForm({
 
               <p className="mt-4 text-center text-sm text-gray-500">
                 Thông tin được sử dụng để liên hệ tư vấn theo yêu cầu của khách hàng.
+                Xem{" "}
+                <Link href="/chinh-sach-bao-mat" className="underline hover:text-red-700">
+                  Chính sách bảo mật
+                </Link>
+                .
               </p>
             </form>
           ) : (

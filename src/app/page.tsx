@@ -50,9 +50,10 @@ export default function Home() {
             Sản phẩm
           </p>
 
-          <h2 className="mt-2 text-3xl font-bold">
+          {/* Hero là slider ảnh, nên đây là tiêu đề chính (h1) duy nhất của trang chủ */}
+          <h1 className="mt-2 text-3xl font-bold">
             Các dòng xe Mitsubishi
-          </h2>
+          </h1>
         </div>
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">

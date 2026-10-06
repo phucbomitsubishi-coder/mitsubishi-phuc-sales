@@ -45,30 +45,51 @@ twitter: {
   images: ["/images/og/og-default.jpg"],
 },
 };
-const localBusinessSchema = {
+// Website cá nhân của tư vấn bán hàng: chủ thể chính là Person (SĐT, email riêng),
+// đại lý chỉ là nơi làm việc. Không gắn SĐT/email/logo cá nhân cho đại lý,
+// tránh khai báo sai danh tính theo hướng dẫn dữ liệu có cấu trúc của Google.
+const siteSchema = {
   "@context": "https://schema.org",
-  "@type": "AutoDealer",
-  "@id": "https://www.mitsubishiauto.vn/#autodealer",
-  name: dealer.name,
-  url: "https://www.mitsubishiauto.vn",
-  logo: "https://www.mitsubishiauto.vn/images/logo/logo-black.svg",
-  image: "https://www.mitsubishiauto.vn/images/logo/logo-mobile-new.png",
-  telephone: `+84${sales.phone.slice(1)}`,
-  email: sales.email,
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "Lô C1C, Đường Hùng Vương",
-    addressLocality: "Phường Bình Dương",
-    addressRegion: "Thành phố Hồ Chí Minh",
-    addressCountry: "VN",
-  },
-  sameAs: [siteConfig.social.facebook, siteConfig.social.tiktok],
-  openingHoursSpecification: {
-    "@type": "OpeningHoursSpecification",
-    dayOfWeek: siteConfig.hours.days,
-    opens: siteConfig.hours.opens,
-    closes: siteConfig.hours.closes,
-  },
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://www.mitsubishiauto.vn/#website",
+      name: siteConfig.seo.siteName,
+      url: "https://www.mitsubishiauto.vn",
+      inLanguage: "vi-VN",
+      publisher: { "@id": "https://www.mitsubishiauto.vn/#person" },
+    },
+    {
+      "@type": "Person",
+      "@id": "https://www.mitsubishiauto.vn/#person",
+      name: sales.name,
+      jobTitle: sales.title,
+      url: "https://www.mitsubishiauto.vn/gioi-thieu",
+      telephone: `+84${sales.phone.slice(1)}`,
+      email: sales.email,
+      sameAs: [siteConfig.social.facebook, siteConfig.social.tiktok],
+      worksFor: { "@id": "https://www.mitsubishiauto.vn/#autodealer" },
+    },
+    {
+      "@type": "AutoDealer",
+      "@id": "https://www.mitsubishiauto.vn/#autodealer",
+      name: dealer.name,
+      brand: { "@type": "Brand", name: dealer.brand },
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "Lô C1C, Đường Hùng Vương",
+        addressLocality: "Phường Bình Dương",
+        addressRegion: "Thành phố Hồ Chí Minh",
+        addressCountry: "VN",
+      },
+      openingHoursSpecification: {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: siteConfig.hours.days,
+        opens: siteConfig.hours.opens,
+        closes: siteConfig.hours.closes,
+      },
+    },
+  ],
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -82,7 +103,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <script
   type="application/ld+json"
   dangerouslySetInnerHTML={{
-    __html: JSON.stringify(localBusinessSchema),
+    __html: JSON.stringify(siteSchema),
   }}
 />
   <main className="flex-1">{children}</main>

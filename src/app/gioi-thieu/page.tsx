@@ -96,6 +96,7 @@ const milestones = [
 const personSchema = {
   "@context": "https://schema.org",
   "@type": "Person",
+  "@id": "https://www.mitsubishiauto.vn/#person",
   name: sales.name,
   jobTitle: sales.title,
   telephone: `+84${sales.phone.slice(1)}`,
@@ -406,8 +407,8 @@ export default function GioiThieuPage() {
               {dealer.brand} – {dealer.name.replace("Mitsubishi ", "")}
             </h2>
             <p className="mt-5 leading-8 text-neutral-600">
-              Nhà phân phối chính thức được ủy quyền bởi Mitsubishi Motors Việt
-              Nam, cung cấp xe mới, dịch vụ bảo dưỡng – sửa chữa, phụ tùng chính
+              Đại lý chính hãng được Mitsubishi Motors Việt Nam ủy quyền, cung
+              cấp xe mới, dịch vụ bảo dưỡng – sửa chữa, phụ tùng chính
               hãng và xe đã qua sử dụng. Thuộc hệ thống Moveo, phục vụ khách
               hàng Mitsubishi khu vực {dealer.salesArea}.
             </p>

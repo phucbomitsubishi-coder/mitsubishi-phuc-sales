@@ -259,6 +259,14 @@ function DangKyLaiThuForm() {
                 >
                   {isSubmitting ? "Đang gửi..." : "Gửi đăng ký lái thử"}
                 </button>
+
+                <p className="mt-4 text-sm text-gray-600">
+                  Thông tin chỉ dùng để liên hệ sắp xếp lịch lái thử. Xem{" "}
+                  <Link href="/chinh-sach-bao-mat" className="underline hover:text-red-700">
+                    Chính sách bảo mật
+                  </Link>
+                  .
+                </p>
               </div>
             </form>
           ) : (

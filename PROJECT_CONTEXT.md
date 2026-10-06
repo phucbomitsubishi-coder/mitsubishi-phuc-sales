@@ -174,6 +174,16 @@ Alias import: `@/` → `src/`.
   (`siteConfig.contact.phoneUrl/zaloUrl/emailUrl`, `siteConfig.sales.phoneDisplay/email`). Riêng địa chỉ tách theo từng phần trong JSON-LD ở `layout.tsx` vẫn ghi cứng.
 - `next.config.ts` có header bảo mật (`X-Frame-Options`, `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`) và redirect `/xe/<id>`.
 - Sitemap: chỉ tin tức có `lastModified` (lấy theo `publishedAt`). Không đặt `new Date()` cho trang tĩnh.
+- **Chính sách Google (rà soát 10/2026):**
+  - Bài tin có `source` không thuộc `mitsubishi-motors.com.vn` (bài chép từ xehay, autodaily...) tự động bị `noindex`
+    và bỏ khỏi sitemap (`isRepublishedArticle` trong `src/lib/news.ts`). Muốn bài được lập chỉ mục thì phải viết lại bằng lời mình rồi xóa `source`.
+  - JSON-LD toàn site (`layout.tsx`) là `@graph`: `WebSite` + `Person #person` (SĐT, email của Phúc) + `AutoDealer #autodealer`
+    (chỉ tên, địa chỉ, giờ mở cửa). **Không gắn SĐT, email hay logo cá nhân vào AutoDealer**, vì như vậy là khai báo website cá nhân thành website đại lý.
+    Bài tin dùng `author/publisher` = `#person`.
+  - Footer ghi rõ đây là website cá nhân, không phải website chính thức, và © thuộc về Lưu Hoàng Phúc (không ghi tên đại lý).
+  - `/chinh-sach-bao-mat` (theo Nghị định 13/2023) có link ở footer và dưới 2 form. Nếu thêm form hoặc thêm công cụ theo dõi
+    (Google Analytics, Facebook Pixel) thì phải cập nhật nội dung trang này và `lastUpdated`.
+  - Không dùng schema `aggregateRating`/`Review` cho chính mình (Google cấm đánh giá tự đăng). Điểm 5,0 (635) chỉ hiển thị dạng chữ.
 - Không có dark mode. Website luôn dùng nền trắng.
 - **Độ tương phản chữ nhỏ** (WCAG 4,5:1, đã đạt 0 lỗi trên toàn site):
   - Trên nền trắng/xám nhạt/hồng nhạt (`bg-gray-50/100`, `bg-red-50`): chữ xám dùng `text-gray-600` trở lên, chữ đỏ dùng `text-red-700`.

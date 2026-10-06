@@ -8,6 +8,7 @@ import {
   newsArticles,
 } from "@/data/news";
 import { siteConfig } from "@/config/site";
+import { isRepublishedArticle } from "@/lib/news";
 
 type NewsDetailPageProps = {
   params: Promise<{
@@ -47,6 +48,10 @@ export async function generateMetadata({
     alternates: {
       canonical: `/tin-tuc/${slug}`,
     },
+    // Bài đăng lại từ báo khác: không cho Google lập chỉ mục (tránh nội dung sao chép)
+    ...(isRepublishedArticle(article)
+      ? { robots: { index: false, follow: true } }
+      : {}),
     openGraph: {
       type: "article",
       url: `/tin-tuc/${slug}`,
@@ -91,8 +96,11 @@ export default async function NewsDetailPage({
     "@type": "WebPage",
     "@id": `https://www.mitsubishiauto.vn/tin-tuc/${article.slug}`,
   },
+  author: {
+    "@id": "https://www.mitsubishiauto.vn/#person",
+  },
   publisher: {
-    "@id": "https://www.mitsubishiauto.vn/#autodealer",
+    "@id": "https://www.mitsubishiauto.vn/#person",
   },
 };
 const breadcrumbSchema = {

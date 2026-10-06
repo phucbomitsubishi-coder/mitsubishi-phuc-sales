@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { cars } from "@/data/cars";
 import { usedCars } from "@/data/usedCars";
 import { newsArticles } from "@/data/news";
+import { isRepublishedArticle } from "@/lib/news";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://www.mitsubishiauto.vn";
@@ -17,7 +18,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: "weekly" as const,
     priority: 0.7,
   }));
-  const newsPages = newsArticles.map((article) => ({
+  // Bài đăng lại từ báo khác đang noindex, nên không đưa vào sitemap
+  const newsPages = newsArticles
+    .filter((article) => !isRepublishedArticle(article))
+    .map((article) => ({
   url: `${baseUrl}/tin-tuc/${article.slug}`,
   lastModified: new Date(`${article.publishedAt}T00:00:00+07:00`),
   changeFrequency: "monthly" as const,
@@ -126,6 +130,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${baseUrl}/ho-tro/cau-hoi-thuong-gap`,
       changeFrequency: "monthly",
       priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/chinh-sach-bao-mat`,
+      changeFrequency: "yearly",
+      priority: 0.3,
     },
   ];
 }
