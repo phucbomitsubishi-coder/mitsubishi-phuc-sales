@@ -40,4 +40,12 @@ export const advisoryArticles: AdvisoryArticle[] = [
     href: "/tu-van/so-sanh-xforce-va-creta",
     carIds: ["xforce"],
   },
+  {
+    number: "05",
+    title: "So sánh Xpander và Toyota Veloz Cross",
+    description:
+      "So sánh giá, không gian, khoảng sáng gầm, hộp số và trang bị an toàn của hai mẫu MPV 7 chỗ phổ biến.",
+    href: "/tu-van/so-sanh-xpander-va-veloz-cross",
+    carIds: ["xpander", "xpander-cross"],
+  },
 ];
