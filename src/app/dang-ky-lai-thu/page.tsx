@@ -110,26 +110,7 @@ function DangKyLaiThuForm() {
   }
 
   return (
-    <main className="bg-gray-50">
-      {/* TIÊU ĐỀ */}
-      <section className="bg-black py-12 text-white">
-        <div className="mx-auto max-w-7xl px-6">
-          <p className="mb-2 text-sm font-semibold uppercase tracking-widest text-red-500">
-            Mitsubishi Motors
-          </p>
-
-          <h1 className="text-3xl font-bold sm:text-4xl">
-            Đăng ký lái thử
-          </h1>
-
-          <p className="mt-3 max-w-2xl text-gray-300">
-            Trải nghiệm thực tế mẫu xe Mitsubishi bạn quan tâm, tại showroom hoặc
-            tại nhà. Vui lòng để lại thông tin, chúng tôi sẽ liên hệ xác nhận lịch
-            lái thử.
-          </p>
-        </div>
-      </section>
-
+    <>
       {/* FORM */}
       <section className="mx-auto max-w-4xl px-6 py-12">
         <div className="rounded-2xl bg-white p-6 shadow-lg sm:p-10">
@@ -258,16 +239,7 @@ function DangKyLaiThuForm() {
                   className="w-full rounded-lg bg-red-600 px-6 py-4 font-bold text-white shadow-lg transition hover:bg-red-700 disabled:cursor-not-allowed disabled:bg-gray-400 sm:w-auto"
                 >
                   {isSubmitting ? "Đang gửi..." : "Gửi đăng ký lái thử"}
-                </button>
-
-                <p className="mt-4 text-sm text-gray-600">
-                  Thông tin chỉ dùng để liên hệ sắp xếp lịch lái thử. Xem{" "}
-                  <Link href="/chinh-sach-bao-mat" className="underline hover:text-red-700">
-                    Chính sách bảo mật
-                  </Link>
-                  .
-                </p>
-              </div>
+                </button>              </div>
             </form>
           ) : (
             <div className="rounded-xl border border-green-200 bg-green-50 p-6 text-center">
@@ -288,11 +260,15 @@ function DangKyLaiThuForm() {
 
           <p className="mt-6 text-sm leading-6 text-gray-500">
             Thông tin của khách hàng được sử dụng để tư vấn và xác nhận nhu cầu
-            đăng ký lái thử.
+            đăng ký lái thử. Xem{" "}
+            <Link href="/chinh-sach-bao-mat" className="underline hover:text-red-700">
+              Chính sách bảo mật
+            </Link>
+            .
           </p>
         </div>
       </section>
-    </main>
+    </>
   );
 }
 
@@ -301,17 +277,38 @@ export default function DangKyLaiThuPage() {
     <>
       <SiteHeader />
 
-      <Suspense
-        fallback={
-          <main className="flex min-h-[60vh] items-center justify-center bg-gray-50">
-            <p className="text-gray-600">
-              Đang tải form đăng ký lái thử...
+      <main className="bg-gray-50">
+        {/* TIÊU ĐỀ: nằm ngoài Suspense để có sẵn trong HTML (Google đọc được H1 ngay) */}
+        <section className="bg-black py-12 text-white">
+          <div className="mx-auto max-w-7xl px-6">
+            <p className="mb-2 text-sm font-semibold uppercase tracking-widest text-red-500">
+              Mitsubishi Motors
             </p>
-          </main>
-        }
-      >
-        <DangKyLaiThuForm />
-      </Suspense>
+
+            <h1 className="text-3xl font-bold sm:text-4xl">
+              Đăng ký lái thử
+            </h1>
+
+            <p className="mt-3 max-w-2xl text-gray-300">
+              Trải nghiệm thực tế mẫu xe Mitsubishi bạn quan tâm, tại showroom hoặc
+              tại nhà. Vui lòng để lại thông tin, chúng tôi sẽ liên hệ xác nhận lịch
+              lái thử.
+            </p>
+          </div>
+        </section>
+
+        <Suspense
+          fallback={
+            <div className="flex min-h-[40vh] items-center justify-center">
+              <p className="text-gray-600">
+                Đang tải form đăng ký lái thử...
+              </p>
+            </div>
+          }
+        >
+          <DangKyLaiThuForm />
+        </Suspense>
+      </main>
     </>
   );
 }

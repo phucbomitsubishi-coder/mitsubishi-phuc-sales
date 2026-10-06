@@ -33,7 +33,7 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${car.name} ${car.modelYear} đã qua sử dụng | Lưu Hoàng Phúc`,
+    title: `${car.name} ${car.modelYear} đã qua sử dụng, ${car.mileage.toLocaleString("vi-VN")} km | Lưu Hoàng Phúc`,
     description: `${car.name} ${car.modelYear}, ${car.mileage.toLocaleString(
       "vi-VN"
     )} km, giá ${car.price.toLocaleString("vi-VN")} đồng.`,
@@ -43,7 +43,7 @@ export async function generateMetadata({
     openGraph: {
       type: "website",
       url: `/xe-cu/${slug}`,
-      title: `${car.name} ${car.modelYear} đã qua sử dụng | Lưu Hoàng Phúc`,
+      title: `${car.name} ${car.modelYear} đã qua sử dụng, ${car.mileage.toLocaleString("vi-VN")} km | Lưu Hoàng Phúc`,
       description: `${car.name} ${car.modelYear}, ${car.mileage.toLocaleString(
         "vi-VN"
       )} km, giá ${car.price.toLocaleString("vi-VN")} đồng.`,
@@ -56,7 +56,7 @@ export async function generateMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      title: `${car.name} ${car.modelYear} đã qua sử dụng | Lưu Hoàng Phúc`,
+      title: `${car.name} ${car.modelYear} đã qua sử dụng, ${car.mileage.toLocaleString("vi-VN")} km | Lưu Hoàng Phúc`,
       description: `${car.name} ${car.modelYear}, ${car.mileage.toLocaleString(
         "vi-VN"
       )} km, giá ${car.price.toLocaleString("vi-VN")} đồng.`,
