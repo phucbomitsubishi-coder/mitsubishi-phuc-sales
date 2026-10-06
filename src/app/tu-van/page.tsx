@@ -32,6 +32,13 @@ const advisoryItems = [
       "Tìm hiểu các khoản chi phí cần chuẩn bị khi mua xe và tham khảo tổng chi phí lăn bánh.",
     href: "/tu-van/chi-phi-lan-banh-mitsubishi",
   },
+  {
+    number: "04",
+    title: "So sánh Xforce và Hyundai Creta",
+    description:
+      "So sánh giá, kích thước, khoảng sáng gầm, động cơ và trang bị để chọn đúng mẫu SUV cỡ B cho nhu cầu.",
+    href: "/tu-van/so-sanh-xforce-va-creta",
+  },
 ];
 
 export default function AdvisoryPage() {
@@ -91,7 +98,7 @@ export default function AdvisoryPage() {
               </p>
             </div>
 
-            <div className="grid gap-5 md:grid-cols-3">
+            <div className="grid gap-5 md:grid-cols-2">
               {advisoryItems.map((item) => (
                 <Link
                   key={item.href}

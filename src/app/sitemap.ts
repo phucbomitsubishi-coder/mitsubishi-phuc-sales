@@ -94,6 +94,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.7,
     },
+    {
+      url: `${baseUrl}/tu-van/so-sanh-xforce-va-creta`,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
 
     {
       url: `${baseUrl}/bang-gia-xe-mitsubishi`,
