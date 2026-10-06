@@ -17,7 +17,7 @@ export const siteConfig = {
 
   social: {
     zalo: "https://zalo.me/0858678929",
-    facebook: "https://www.facebook.com/",
+    facebook: "https://www.facebook.com/phuc.bo.413077",
     tiktok:
       "https://www.tiktok.com/@phucbobinhduong?_r=1&_t=ZS-9A35p5YhZ0J",
   },
