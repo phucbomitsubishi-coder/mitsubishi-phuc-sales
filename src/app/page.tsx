@@ -1,5 +1,7 @@
 import { cars } from "@/data/cars";
-import { getMaxPromotionValue } from "@/data/promotions";
+import { currentPromotion } from "@/data/promotions";
+import { newsArticles } from "@/data/news";
+import PromotionTabs, { type PromotionTabItem } from "@/components/PromotionTabs";
 import { siteConfig } from "@/config/site";
 import { Suspense } from "react";
 import QuoteForm, { QuoteFormFromUrl } from "@/components/QuoteForm";
@@ -14,6 +16,32 @@ export const metadata = {
   },
 };
 
+
+// Ưu đãi từng dòng xe lấy từ promotions.ts (file này bị add-news.mjs ghi đè mỗi tháng,
+// nên xử lý dữ liệu ở đây thay vì thêm hàm vào promotions.ts).
+const promotionItems: PromotionTabItem[] = cars.map((car) => {
+  const promotion = currentPromotion.cars.find((item) => item.carId === car.id);
+
+  const variants = (promotion?.variants ?? []).map((variant) => ({
+    name: [variant.variantName, variant.modelYear].filter(Boolean).join(" "),
+    price: variant.retailPrice,
+    benefits: variant.benefits.map(({ label, value }) => ({ label, value })),
+    total: variant.benefits.reduce((sum, benefit) => sum + (benefit.value ?? 0), 0),
+  }));
+
+  return {
+    carId: car.id,
+    carName: car.name,
+    carSlug: car.slug,
+    maxValue: Math.max(0, ...variants.map((variant) => variant.total)),
+    variants,
+  };
+});
+
+// Bài tin tức của chương trình khuyến mãi hiện tại (add-news tạo bài cùng tiêu đề)
+const promotionArticle = newsArticles.find(
+  (article) => article.title === currentPromotion.title
+);
 
 export default function Home() {
   return (
@@ -101,76 +129,32 @@ export default function Home() {
     </p>
 
     <h2 className="mt-2 text-3xl font-bold">
-      Ưu đãi Mitsubishi mới nhất
+      Ưu đãi Mitsubishi tháng{" "}
+      {String(currentPromotion.month).padStart(2, "0")}/{currentPromotion.year}
     </h2>
 
     <p className="mt-4 max-w-2xl text-gray-600">
-      Tham khảo chương trình ưu đãi theo từng dòng xe. Liên hệ trực tiếp
+      Chọn dòng xe để xem chi tiết ưu đãi từng phiên bản. Liên hệ trực tiếp
       để nhận báo giá và chính sách hiện hành.
     </p>
 
-    <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-      {cars.map((car) => (
-        <div
-          key={car.id}
-          className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm"
-        >
-          <div className="relative mb-5 flex h-40 items-center justify-center overflow-hidden rounded-lg bg-gray-50">
-  <Image
-    src={car.image}
-    alt={`Ưu đãi ${car.name}`}
-    fill
-    sizes="(min-width: 1024px) 400px, (min-width: 768px) 50vw, 100vw"
-    className="object-contain p-3 transition duration-300 hover:scale-105"
-  />
-</div>
-          <p className="text-sm font-semibold uppercase text-red-600">
-            Ưu đãi
-          </p>
+    <PromotionTabs items={promotionItems} />
 
-          <h3 className="mt-2 text-xl font-bold">
-            {car.name}
-          </h3>
-          <div className="mt-3 flex items-baseline gap-2">
-  <span className="text-sm text-gray-500">Giá từ</span>
-  <span className="text-xl font-bold text-red-600">
-    {Math.min(...car.variants.map((variant) => variant.price)).toLocaleString(
-      "vi-VN"
-    )}{" "}
-    đ
-  </span>
-</div>
-
-          {getMaxPromotionValue(car.id) > 0 && (
-  <div className="mt-4 rounded-lg bg-red-50 px-4 py-3">
-    <p className="text-sm font-medium text-gray-600">
-      Ưu đãi lên đến
+    <p className="mt-4 text-sm leading-6 text-gray-600">
+      * Chương trình của {currentPromotion.source}. Giá trị ưu đãi mang tính
+      tham khảo và có thể thay đổi theo từng thời điểm.
+      {promotionArticle && (
+        <>
+          {" "}
+          <Link
+            href={`/tin-tuc/${promotionArticle.slug}`}
+            className="font-semibold text-red-700 underline-offset-2 hover:underline"
+          >
+            Xem bài chi tiết →
+          </Link>
+        </>
+      )}
     </p>
-
-    <p className="mt-1 text-2xl font-bold text-red-600">
-      {getMaxPromotionValue(car.id).toLocaleString("vi-VN")} đ
-    </p>
-  </div>
-)}
-
-          <div className="mt-6 flex flex-wrap gap-3">
-            <Link
-              href={`/xe/${car.slug}`}
-              className="rounded bg-red-600 px-4 py-3 font-semibold text-white transition hover:bg-red-700"
-            >
-              Xem chi tiết
-            </Link>
-
-            <Link
-  href={`/?car=${encodeURIComponent(car.name)}&nguon=Trang-chu-san-pham#bao-gia`}
-  className="rounded border border-red-600 bg-white px-4 py-3 font-semibold text-red-600 transition hover:bg-red-50"
->
-  Nhận ưu đãi
-</Link>
-          </div>
-        </div>
-      ))}
-    </div>
   </div>
 </section>
 
