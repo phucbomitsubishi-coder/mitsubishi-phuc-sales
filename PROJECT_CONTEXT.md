@@ -108,7 +108,7 @@ Alias import: `@/` → `src/`.
   và **ghi đè `promotions.ts`**.
 - Các script sửa file TS bằng **regex hoặc chèn chuỗi**, vì vậy cần giữ định dạng hiện tại của mảng dữ liệu
   (ví dụ `export const usedCars: UsedCar[] = [`) để script không bị hỏng.
-- `scripts/add-news.backup.mjs` và `add-news.before-promotion-v2.mjs` là bản sao lưu chưa commit, không được dùng.
+- Không giữ bản sao script trong repo vì Git đã lưu lịch sử. File `scripts/*.backup.mjs` đã được thêm vào gitignore.
 
 ## 8. Quy ước và lưu ý
 
