@@ -117,8 +117,10 @@ Alias import: `@/` → `src/`.
 - Commit message ngắn, viết **tiếng Việt không dấu** (ví dụ: `Toi uu tai anh xe cu`).
 - Ưu tiên mobile: nhiều commit tối ưu cho màn hình nhỏ, tablet và 1024px. `MobileContactBar` cố định ở dưới cùng
   (CSS trong `globals.css` thêm padding cho footer).
-- Ảnh: phần lớn dùng `<img>` thường (trang chủ, header, gallery, xe cũ) kèm `loading` hoặc `fetchPriority`;
-  `next/image` chỉ dùng ở tin tức, HeroSlider, VariantSelector và NewsPromotionCover. `public/` nặng khoảng 52 MB.
+- Ảnh: **luôn dùng `next/image`**, không dùng `<img>` (lint đang sạch, không còn cảnh báo). Mẫu thường dùng: khung
+  `relative` có kích thước cố định (`h-40`, `aspect-[4/3]`, ...) chứa `<Image fill sizes="..." className="object-contain|object-cover" />`.
+  Ảnh nằm ở đầu trang dùng `loading="eager"` (Next 16 đã deprecate `priority`). SVG (logo) tự động `unoptimized`.
+  `public/` nặng khoảng 51 MB.
 - Link nội bộ luôn dùng `<Link>` từ `next/link`, không dùng `<a>` (lint báo lỗi). Link trong `MobileMenu` phải có `onClick={() => setIsOpen(false)}`.
 - Link tới trang xe phải dùng **slug** (`/xe/mitsubishi-xforce`), không dùng id. `next.config.ts` có redirect 308 từ `/xe/<id>` cũ.
 - Các trang `/xe/[slug]`, `/xe-cu/[slug]`, `/tin-tuc/[slug]` đều có `generateStaticParams` (tạo sẵn HTML khi build).
@@ -126,12 +128,13 @@ Alias import: `@/` → `src/`.
   Khi thêm trang tĩnh mới, **nhớ thêm vào `src/app/sitemap.ts`**.
 - Thông tin liên hệ lấy từ `siteConfig` (kể cả metadata và JSON-LD trong `layout.tsx`; riêng địa chỉ tách theo từng phần trong JSON-LD vẫn ghi cứng).
 - Không có dark mode. Website luôn dùng nền trắng.
-- Ảnh xe dùng cho thẻ `<img>` (ví dụ `public/images/cars/<id>.png`) nên rộng khoảng 1200px và dưới 300 KB. Có thể nén bằng `sharp` (có sẵn trong node_modules).
+- Ảnh gốc trong `public/` nên rộng khoảng 1200–1600px và dưới 300 KB (`next/image` vẫn tự tạo bản nhỏ hơn). Có thể nén bằng `sharp` (có sẵn trong node_modules).
+- Kiểm tra giao diện bằng Edge headless (PowerShell): `msedge --headless --disable-gpu --user-data-dir=<thư mục mới> --window-size=1366,1000 --virtual-time-budget=15000 --screenshot=<file.png> <url>`.
+  Mỗi lần chụp cần profile riêng hoặc phải tắt tiến trình Edge headless cũ trước (nếu không sẽ lỗi exit code 21).
 - Code chưa được format đồng nhất (thụt lề lẫn lộn). Khi sửa code, giữ nguyên phong cách của vùng xung quanh.
 
 ## 9. Điểm cần chú ý hoặc rủi ro đã biết
 
 - Danh sách `categories` trong `add-news.mjs` phải khớp chính xác với union `NewsCategory` trong `news.ts`.
   Khi thêm hoặc đổi danh mục, sửa cả hai nơi, nếu không build sẽ lỗi.
-- `siteConfig.social.facebook` vẫn là `https://www.facebook.com/` (chưa có link thật).
 - `README.md` vẫn là nội dung mặc định của create-next-app.
