@@ -3,7 +3,7 @@
 import { FormEvent, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { cars } from "@/data/cars";
-import Link from "next/link";
+import ScrollTopLink from "@/components/ScrollTopLink";
 
 type QuoteFormProps = {
   initialCar?: string;
@@ -282,12 +282,12 @@ export default function QuoteForm({
               <p className="mt-3 text-gray-700">
                 Cảm ơn bạn đã để lại thông tin. Lưu Hoàng Phúc sẽ liên hệ tư vấn giá xe và ưu đãi trong thời gian sớm nhất.
               </p>
-              <Link
+              <ScrollTopLink
                 href="/"
                 className="mx-auto mt-6 hidden w-fit rounded-xl bg-red-600 px-8 py-3 font-semibold text-white transition hover:bg-red-700 md:block"
               >
                 ← Quay về trang chủ
-              </Link>
+              </ScrollTopLink>
             </div>
           )}
         </div>

@@ -3,12 +3,13 @@ import { siteConfig } from "@/config/site";
 import MobileMenu from "@/components/MobileMenu";
 import Link from "next/link";
 import Image from "next/image";
+import ScrollTopLink from "@/components/ScrollTopLink";
 
 export default function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-gray-800 bg-black text-white xl:border-gray-200 xl:bg-white xl:text-black">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 md:px-6 md:py-5">
-        <Link
+        <ScrollTopLink
           href="/"
           aria-label="Về trang chủ"
           className="inline-flex shrink-0 items-center xl:-ml-4"
@@ -33,7 +34,7 @@ export default function SiteHeader() {
             loading="eager"
             className="hidden h-12 w-auto xl:block"
           />
-        </Link>
+        </ScrollTopLink>
 
         {/* Menu desktop */}
 <nav className="hidden items-center gap-7 font-semibold xl:flex">
