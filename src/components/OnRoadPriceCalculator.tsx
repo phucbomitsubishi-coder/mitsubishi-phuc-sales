@@ -3,8 +3,12 @@
 import { useState } from "react";
 import type { VariantPromotion } from "@/data/promotions";
 import Link from "next/link";
+import {
+  defaultProvinceId,
+  plateFeeByArea,
+  provinces,
+} from "@/data/registrationFees";
 
-type RegistrationArea = "hcm" | "hanoi" | "province";
 type PlateType = "white" | "yellow";
 
 type Props = {
@@ -15,6 +19,60 @@ type Props = {
   promotion?: VariantPromotion;
 };
 
+const plateOptions: { value: PlateType; label: string }[] = [
+  { value: "white", label: "Biển trắng" },
+  { value: "yellow", label: "Biển vàng" },
+];
+
+const vnd = (value: number) => `${value.toLocaleString("vi-VN")} đ`;
+
+// "Ưu đãi tương đương 100% phí trước bạ (~ 59 triệu VNĐ)" -> "100% phí trước bạ"
+function shortBenefit(label: string) {
+  return label
+    .replace(/\s*\(.*?\)\s*$/, "")
+    .replace(/^Ưu đãi tương đương\s*/i, "")
+    .trim();
+}
+
+function OptionGroup<T extends string>({
+  label,
+  options,
+  value,
+  onChange,
+}: {
+  label: string;
+  options: { value: T; label: string }[];
+  value: T;
+  onChange: (value: T) => void;
+}) {
+  return (
+    <div>
+      <p className="mb-2 text-sm font-semibold text-gray-700">{label}</p>
+      <div role="group" aria-label={label} className="flex gap-2">
+        {options.map((option) => {
+          const active = option.value === value;
+
+          return (
+            <button
+              key={option.value}
+              type="button"
+              aria-pressed={active}
+              onClick={() => onChange(option.value)}
+              className={`flex-1 rounded-lg border px-2 py-2 text-sm font-semibold transition ${
+                active
+                  ? "border-red-600 bg-red-600 text-white"
+                  : "border-gray-300 bg-white text-gray-700 hover:border-red-600"
+              }`}
+            >
+              {option.label}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 export default function OnRoadPriceCalculator({
   carName,
   variantName,
@@ -22,267 +80,203 @@ export default function OnRoadPriceCalculator({
   seats,
   promotion,
 }: Props) {
-  const [registrationArea, setRegistrationArea] =
-    useState<RegistrationArea>("hcm");
-
+  const [provinceId, setProvinceId] = useState(defaultProvinceId);
+  const province =
+    provinces.find((item) => item.id === provinceId) ?? provinces[0];
   const [plateType, setPlateType] = useState<PlateType>("white");
+
   const totalPromotionValue =
-  promotion?.benefits.reduce(
-    (total, benefit) => total + (benefit.value ?? 0),
-    0
-  ) ?? 0;
+    promotion?.benefits.reduce(
+      (total, benefit) => total + (benefit.value ?? 0),
+      0
+    ) ?? 0;
   const isTriton = carName === "Mitsubishi Triton";
 
-const registrationTaxRate = isTriton
-  ? registrationArea === "hanoi"
-    ? 0.07
-    : 0.06
-  : registrationArea === "hanoi"
-    ? 0.12
-    : 0.1;
+  // ===== Công thức tính phí (giữ nguyên) =====
+  // Bán tải chở hàng (Triton) chịu 60% mức trước bạ của ô tô con tại địa phương
+  const registrationTaxRate = isTriton
+    ? province.taxRate * 0.6
+    : province.taxRate;
 
-const registrationTax = price * registrationTaxRate;
-const licensePlateFee = isTriton
-  ? registrationArea === "province"
-    ? 100000
-    : 350000
-  : registrationArea === "province"
-    ? 140000
-    : 14000000;
-    const inspectionFee = 90000;
-    const roadUseFee = isTriton
-  ? 2160000
-  : plateType === "yellow"
+  const registrationTax = price * registrationTaxRate;
+  const licensePlateFee =
+    plateFeeByArea[isTriton ? "pickup" : "car"][province.plateArea];
+  const inspectionFee = 90000;
+  const roadUseFee = isTriton
     ? 2160000
-    : 1560000;
-    const insuranceFee =
-  plateType === "yellow"
-    ? seats === 7
-      ? 1203000
-      : 842000
-    : seats === 7
-      ? 944000
-      : 531000;
-      const registrationServiceFee =
-  plateType === "yellow"
-    ? registrationArea === "hcm"
-      ? 4000000
-      : null
-    : registrationArea === "hcm"
-      ? 3000000
-      : 5000000;
-      const onRoadPrice =
-  price +
-  registrationTax +
-  licensePlateFee +
-  inspectionFee +
-  roadUseFee +
-  insuranceFee +
-  (registrationServiceFee ?? 0);
+    : plateType === "yellow"
+      ? 2160000
+      : 1560000;
+  const insuranceFee =
+    plateType === "yellow"
+      ? seats === 7
+        ? 1203000
+        : 842000
+      : seats === 7
+        ? 944000
+        : 531000;
+
+  const fees = [
+    {
+      label: `Lệ phí trước bạ (${(registrationTaxRate * 100).toLocaleString("vi-VN", { maximumFractionDigits: 1 })}%)`,
+      value: registrationTax,
+    },
+    { label: "Lệ phí đăng ký & biển số", value: licensePlateFee },
+    { label: "Phí đăng kiểm", value: inspectionFee },
+    { label: "Phí đường bộ (12 tháng)", value: roadUseFee },
+    { label: "Bảo hiểm TNDS bắt buộc", value: insuranceFee },
+  ];
+
+  const totalFees = fees.reduce((sum, fee) => sum + fee.value, 0);
+  const onRoadPrice = price + totalFees;
   const onRoadPriceAfterPromotion = Math.max(
-  0,
-  onRoadPrice - totalPromotionValue
-);
+    0,
+    onRoadPrice - totalPromotionValue
+  );
+
+  const displayName =
+    variantName === carName.replace("Mitsubishi ", "")
+      ? carName
+      : `${carName} ${variantName}`;
+
+  const benefitSummary = (promotion?.benefits ?? [])
+    .map((benefit) => shortBenefit(benefit.label))
+    .filter(Boolean)
+    .map((text, index) =>
+      index === 0 ? text : text.charAt(0).toLowerCase() + text.slice(1)
+    )
+    .join(", ");
 
   return (
-    <div className="w-full rounded-xl border border-gray-200 bg-white p-4 shadow-sm">
-      <p className="text-sm font-semibold uppercase tracking-wide text-red-600">
+    <div className="w-full rounded-xl border border-gray-200 bg-white p-4 shadow-sm sm:p-5">
+      <p className="text-sm font-semibold uppercase tracking-wide text-red-700">
         Chi phí dự kiến
       </p>
 
-      <h3 className="mt-2 text-2xl font-bold">
-        Dự tính giá lăn bánh
-      </h3>
+      <h3 className="mt-1 text-2xl font-bold">Dự tính giá lăn bánh</h3>
+      <p className="mt-1 text-sm text-gray-600">{displayName}</p>
 
-      <p className="mt-2 text-gray-600">
-        {variantName === carName.replace("Mitsubishi ", "")
-  ? carName
-  : `${carName} ${variantName}`}
-      </p>
-
-      <p className="mt-1 text-xl font-bold text-red-600">
-        {price.toLocaleString("vi-VN")} đ
-      </p>
-
-      <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
+      <div className="mt-4 space-y-3">
         <div>
           <label
-            htmlFor="registration-area"
+            htmlFor="registration-province"
             className="mb-2 block text-sm font-semibold text-gray-700"
           >
             Nơi đăng ký
           </label>
-
           <select
-            id="registration-area"
-            value={registrationArea}
-            onChange={(event) =>
-              setRegistrationArea(event.target.value as RegistrationArea)
-            }
-            className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 outline-none focus:border-red-600"
+            id="registration-province"
+            value={provinceId}
+            onChange={(event) => setProvinceId(event.target.value)}
+            className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2.5 font-semibold text-gray-900 outline-none focus:border-red-600"
           >
-            <option value="hcm">TP. Hồ Chí Minh</option>
-            <option value="hanoi">Hà Nội</option>
-            <option value="province">Tỉnh/Thành khác</option>
+            <optgroup label="Thành phố trực thuộc Trung ương">
+              {provinces
+                .filter((item) => item.type === "city")
+                .map((item) => (
+                  <option key={item.id} value={item.id}>
+                    {item.name}
+                  </option>
+                ))}
+            </optgroup>
+            <optgroup label="Tỉnh">
+              {provinces
+                .filter((item) => item.type === "province")
+                .map((item) => (
+                  <option key={item.id} value={item.id}>
+                    {item.name}
+                  </option>
+                ))}
+            </optgroup>
           </select>
         </div>
-
-        <div>
-          <label
-            htmlFor="plate-type"
-            className="mb-2 block text-sm font-semibold text-gray-700"
-          >
-            Loại đăng ký
-          </label>
-
-          <select
-            id="plate-type"
-            value={plateType}
-            onChange={(event) =>
-              setPlateType(event.target.value as PlateType)
-            }
-            className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 outline-none focus:border-red-600"
-          >
-            <option value="white">Biển trắng</option>
-            <option value="yellow">Biển vàng</option>
-          </select>
-        </div>
+        <OptionGroup
+          label="Loại biển"
+          options={plateOptions}
+          value={plateType}
+          onChange={setPlateType}
+        />
       </div>
 
-      <div className="mt-3 border-t border-gray-200 pt-3"></div>
-  <div className="flex flex-col items-start gap-1 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
-    <span className="text-gray-600">
-      Lệ phí trước bạ ({Math.round(registrationTaxRate * 100)}%)
-    </span>
+      {/* TÓM TẮT */}
+      <dl className="mt-5 space-y-2 text-sm">
+        <div className="flex items-center justify-between gap-4">
+          <dt className="text-gray-600">Giá xe</dt>
+          <dd className="font-semibold tabular-nums">{vnd(price)}</dd>
+        </div>
+        <div className="flex items-center justify-between gap-4">
+          <dt className="text-gray-600">Thuế, phí & đăng ký</dt>
+          <dd className="font-semibold tabular-nums">+ {vnd(totalFees)}</dd>
+        </div>
+      </dl>
 
-    <span className="shrink-0 whitespace-nowrap font-bold">
-      {registrationTax.toLocaleString("vi-VN")} đ
-    </span>
-  </div>
-  <div className="mt-2 flex items-center justify-between gap-4 text-sm">
-  <span className="text-gray-600">
-    Lệ phí cấp đăng ký & biển số
-  </span>
+      <details className="group mt-2 text-sm">
+        <summary className="flex cursor-pointer list-none items-center gap-1 font-semibold text-red-700 [&::-webkit-details-marker]:hidden">
+          <span className="transition group-open:rotate-90" aria-hidden="true">
+            ▸
+          </span>
+          <span className="group-open:hidden">Xem chi tiết {fees.length} khoản phí</span>
+          <span className="hidden group-open:inline">Thu gọn chi tiết</span>
+        </summary>
 
-  <span className="shrink-0 whitespace-nowrap font-bold">
-    {licensePlateFee.toLocaleString("vi-VN")} đ
-  </span>
-</div>
-<div className="mt-2 flex items-center justify-between gap-4 text-sm">
-  <span className="text-gray-600">
-    Phí đăng kiểm
-  </span>
+        <dl className="mt-2 space-y-1.5 rounded-lg bg-gray-50 p-3">
+          {fees.map((fee) => (
+            <div key={fee.label} className="flex items-center justify-between gap-4">
+              <dt className="text-gray-600">{fee.label}</dt>
+              <dd className="shrink-0 tabular-nums text-gray-900">
+                {vnd(fee.value)}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </details>
 
-  <span className="whitespace-nowrap font-bold">
-    {inspectionFee.toLocaleString("vi-VN")} đ
-  </span>
-</div>
-<div className="mt-2 flex items-center justify-between gap-4 text-sm">
-  <span className="text-gray-600">
-    Phí sử dụng đường bộ (12 tháng)
-  </span>
+      <div className="mt-4 flex items-end justify-between gap-4 border-t-2 border-gray-900 pt-3">
+        <span className="whitespace-nowrap text-sm font-bold uppercase text-gray-900 sm:text-base">
+          Lăn bánh dự kiến
+        </span>
+        <span className="whitespace-nowrap text-lg font-bold tabular-nums text-gray-900 sm:text-2xl">
+          {vnd(onRoadPrice)}
+        </span>
+      </div>
 
-  <span className="shrink-0 whitespace-nowrap font-bold">
-    {roadUseFee.toLocaleString("vi-VN")} đ
-  </span>
-</div>
-<div className="mt-2 flex items-center justify-between gap-4 text-sm">
-  <span className="text-gray-600">
-    Bảo hiểm BHDS bắt buộc
-  </span>
+      {/* ƯU ĐÃI */}
+      {totalPromotionValue > 0 && (
+        <div className="mt-4 rounded-xl border border-red-200 bg-red-50 p-4">
+          <div className="flex items-center justify-between gap-4 text-sm">
+            <span className="font-semibold text-gray-700">Ưu đãi hiện hành</span>
+            <span className="shrink-0 font-bold tabular-nums text-red-700">
+              − {vnd(totalPromotionValue)}
+            </span>
+          </div>
 
-  <span className="shrink-0 whitespace-nowrap font-bold">
-    {insuranceFee.toLocaleString("vi-VN")} đ
-  </span>
-</div>
-<div className="mt-2 flex items-center justify-between gap-4 text-sm">
-  <span className="text-gray-600">
-    Dịch vụ đăng ký
-  </span>
+          <div className="mt-2 flex items-end justify-between gap-4 border-t border-red-200 pt-2">
+            <span className="whitespace-nowrap text-sm font-bold uppercase text-gray-900 sm:text-base">Sau ưu đãi</span>
+            <span className="whitespace-nowrap text-lg font-bold tabular-nums text-red-700 sm:text-2xl">
+              {vnd(onRoadPriceAfterPromotion)}
+            </span>
+          </div>
 
-  <span className="font-bold">
-    {registrationServiceFee !== null
-      ? `${registrationServiceFee.toLocaleString("vi-VN")} đ`
-      : "Liên hệ"}
-  </span>
-</div>
-<div className="mt-6 border-t-2 border-red-600 pt-5">
-  <div className="flex flex-col items-start gap-1 sm:flex-row sm:items-end sm:justify-between sm:gap-4">
-    <span className="font-bold uppercase text-gray-900">
-      Lăn bánh dự kiến
-    </span>
+          {benefitSummary && (
+            <p className="mt-2 text-xs leading-5 text-gray-600">
+              Gồm: {benefitSummary}.
+            </p>
+          )}
+        </div>
+      )}
 
-    <span className="whitespace-nowrap text-xl font-bold text-red-600 sm:text-2xl">
-  {onRoadPrice.toLocaleString("vi-VN")} đ
-</span>
-  </div>
+      <Link
+        href={`/?car=${encodeURIComponent(carName)}&variant=${encodeURIComponent(variantName)}&nguon=Gia-lan-banh#bao-gia`}
+        className="mt-4 flex w-full items-center justify-center gap-2 rounded-lg bg-red-600 px-5 py-3 font-bold text-white transition hover:bg-red-700"
+      >
+        Nhận báo giá {displayName.replace(/^Mitsubishi /, "")}
+        <span aria-hidden="true">→</span>
+      </Link>
 
-  {registrationServiceFee === null && (
-    <p className="mt-3 text-sm text-amber-700">
-      * Giá lăn bánh trên chưa bao gồm phí dịch vụ đăng ký biển vàng.
-      Vui lòng liên hệ để được xác nhận theo Tỉnh/Thành đăng ký.
-    </p>
-  )}
-
-  {promotion && promotion.benefits.length > 0 && (
-  <div className="mt-5 rounded-xl border border-red-200 bg-red-50 p-4">
-    <p className="text-sm font-bold uppercase text-red-700">
-      Ưu đãi hiện hành
-    </p>
-
-    {totalPromotionValue > 0 && (
-  <div className="mt-3 space-y-2">
-    <div className="flex items-center justify-between gap-4 text-sm">
-      <span className="text-gray-700">
-        Tổng giá trị quyền lợi
-      </span>
-      <span className="shrink-0 whitespace-nowrap font-bold text-red-700">
-        -{totalPromotionValue.toLocaleString("vi-VN")} đ
-      </span>
+      <p className="mt-3 text-xs leading-5 text-gray-600">
+        * Số liệu tham khảo, có thể thay đổi theo địa phương và thời điểm. Ưu
+        đãi có thể là quà tặng, nhiên liệu, không phải tiền mặt.
+      </p>
     </div>
-
-    <div className="flex flex-col items-start gap-1 border-t border-red-200 pt-3 sm:flex-row sm:items-end sm:justify-between sm:gap-4">
-      <span className="font-bold uppercase text-gray-900">
-        Dự kiến sau ưu đãi
-      </span>
-      <span className="whitespace-nowrap text-xl font-bold text-red-600">
-        {onRoadPriceAfterPromotion.toLocaleString("vi-VN")} đ
-      </span>
-    </div>
-  </div>
-)}
-
-    <ul className="mt-3 space-y-2 text-sm text-gray-700">
-      {promotion.benefits.map((benefit, index) => (
-        <li key={index} className="flex gap-2">
-          <span className="font-bold text-red-600">•</span>
-          <span>{benefit.label}</span>
-        </li>
-      ))}
-    </ul>
-
-    <p className="mt-3 text-xs leading-5 text-gray-600">
-      Giá sau ưu đãi được quy đổi tham khảo từ tổng giá trị quyền lợi
-của chương trình. Một số quyền lợi có thể là nhiên liệu, phụ kiện
-hoặc hỗ trợ khác, không phải tiền mặt. Vui lòng nhận báo giá để
-xác nhận ưu đãi thực tế.
-    </p>
-  </div>
-)}
-
-<Link
-  href="/?nguon=Gia-lan-banh#bao-gia"
-  className="mt-4 flex w-full items-center justify-center rounded-lg bg-red-600 px-5 py-3 font-bold text-white transition hover:bg-red-700"
->
-  Nhận báo giá
-</Link>
-
-  <p className="mt-3 text-xs leading-5 text-gray-600">
-    Chi phí lăn bánh mang tính dự tính và tham khảo. Chi phí thực tế có
-    thể thay đổi theo thời điểm đăng ký, địa phương, hồ sơ xe và chính
-    sách hiện hành.
-  </p>
-</div>
-</div>
   );
 }
