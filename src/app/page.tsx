@@ -33,6 +33,7 @@ const promotionItems: PromotionTabItem[] = cars.map((car) => {
     carId: car.id,
     carName: car.name,
     carSlug: car.slug,
+    carImage: car.image,
     maxValue: Math.max(0, ...variants.map((variant) => variant.total)),
     variants,
   };
@@ -121,39 +122,52 @@ export default function Home() {
       {/* KHUYẾN MÃI */}
 <section
   id="khuyen-mai"
-  className="scroll-mt-28 bg-gray-100 md:scroll-mt-24"
+  className="relative scroll-mt-28 overflow-clip bg-neutral-950 text-white md:scroll-mt-24"
 >
-  <div className="mx-auto max-w-7xl px-6 py-16">
-    <p className="font-semibold uppercase tracking-wider text-red-700">
-      Khuyến mãi
-    </p>
+  {/* Ánh đỏ nền trang trí */}
+  <div
+    aria-hidden="true"
+    className="pointer-events-none absolute -top-40 right-0 h-96 w-96 rounded-full bg-red-600/20 blur-3xl"
+  />
+  <div
+    aria-hidden="true"
+    className="pointer-events-none absolute -bottom-40 -left-20 h-80 w-80 rounded-full bg-red-900/20 blur-3xl"
+  />
 
-    <h2 className="mt-2 text-3xl font-bold">
-      Ưu đãi Mitsubishi tháng{" "}
-      {String(currentPromotion.month).padStart(2, "0")}/{currentPromotion.year}
-    </h2>
+  <div className="relative mx-auto max-w-7xl px-6 py-16 md:py-20">
+    <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+      <div>
+        <p className="text-sm font-bold uppercase tracking-[0.25em] text-red-500">
+          Khuyến mãi
+        </p>
 
-    <p className="mt-4 max-w-2xl text-gray-600">
-      Chọn dòng xe để xem chi tiết ưu đãi từng phiên bản. Liên hệ trực tiếp
-      để nhận báo giá và chính sách hiện hành.
-    </p>
+        <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
+          Ưu đãi Mitsubishi tháng{" "}
+          {String(currentPromotion.month).padStart(2, "0")}/{currentPromotion.year}
+        </h2>
+
+        <p className="mt-4 max-w-2xl leading-7 text-neutral-400">
+          Chọn dòng xe để xem chi tiết ưu đãi từng phiên bản. Liên hệ trực tiếp
+          để nhận báo giá và chính sách hiện hành.
+        </p>
+      </div>
+
+      {promotionArticle && (
+        <Link
+          href={`/tin-tuc/${promotionArticle.slug}`}
+          className="inline-flex w-fit shrink-0 items-center gap-2 rounded-full border border-neutral-700 px-5 py-2.5 text-sm font-semibold text-white transition hover:border-white"
+        >
+          Xem toàn bộ chương trình
+          <span aria-hidden="true">→</span>
+        </Link>
+      )}
+    </div>
 
     <PromotionTabs items={promotionItems} />
 
-    <p className="mt-4 text-sm leading-6 text-gray-600">
+    <p className="mt-5 text-xs leading-5 text-neutral-400">
       * Chương trình của {currentPromotion.source}. Giá trị ưu đãi mang tính
       tham khảo và có thể thay đổi theo từng thời điểm.
-      {promotionArticle && (
-        <>
-          {" "}
-          <Link
-            href={`/tin-tuc/${promotionArticle.slug}`}
-            className="font-semibold text-red-700 underline-offset-2 hover:underline"
-          >
-            Xem bài chi tiết →
-          </Link>
-        </>
-      )}
     </p>
   </div>
 </section>

@@ -19,3 +19,25 @@ body {
     padding-bottom: 5rem;
   }
 }
+
+/* Hiệu ứng mờ dần khi đổi tab khuyến mãi */
+@keyframes promo-fade {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.promo-fade:not([hidden]) {
+  animation: promo-fade 0.35s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .promo-fade:not([hidden]) {
+    animation: none;
+  }
+}
