@@ -174,6 +174,8 @@ export default function CarGallery({
             key={image}
             type="button"
             onClick={() => setSelectedIndex(index)}
+            aria-label={`Xem ảnh ${galleryType === "exterior" ? "ngoại thất" : "nội thất"} ${index + 1} của ${carName}`}
+            aria-pressed={selectedIndex === index}
             className={`relative h-16 overflow-hidden rounded border-2 transition sm:h-20 ${
               selectedIndex === index
                 ? "border-red-600"
