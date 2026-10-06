@@ -118,7 +118,7 @@ export default function OnRoadPriceCalculator({
 
   const fees = [
     {
-      label: `Lệ phí trước bạ (${(registrationTaxRate * 100).toLocaleString("vi-VN", { maximumFractionDigits: 1 })}%)`,
+      label: `Lệ phí trước bạ theo giá niêm yết (${(registrationTaxRate * 100).toLocaleString("vi-VN", { maximumFractionDigits: 1 })}%)`,
       value: registrationTax,
     },
     { label: "Lệ phí đăng ký & biển số", value: licensePlateFee },
@@ -231,39 +231,36 @@ export default function OnRoadPriceCalculator({
         </dl>
       </details>
 
-      <div className="mt-4 flex items-end justify-between gap-4 border-t-2 border-gray-900 pt-3">
-        <span className="whitespace-nowrap text-sm font-bold uppercase text-gray-900 sm:text-base">
-          Lăn bánh dự kiến
-        </span>
-        <span className="whitespace-nowrap text-lg font-bold tabular-nums text-gray-900 sm:text-2xl">
-          {vnd(onRoadPrice)}
-        </span>
-      </div>
-
-      {/* ƯU ĐÃI */}
+      {/* ƯU ĐÃI: trừ trước khi ra tổng, để chỉ có 1 con số lăn bánh cuối cùng */}
       {totalPromotionValue > 0 && (
-        <div className="mt-4 rounded-xl border border-red-200 bg-red-50 p-4">
-          <div className="flex items-center justify-between gap-4 text-sm">
-            <span className="font-semibold text-gray-700">Ưu đãi hiện hành</span>
+        <div className="mt-3 text-sm">
+          <div className="flex items-center justify-between gap-4">
+            <span className="font-semibold text-red-700">Ưu đãi hiện hành</span>
             <span className="shrink-0 font-bold tabular-nums text-red-700">
               − {vnd(totalPromotionValue)}
             </span>
           </div>
-
-          <div className="mt-2 flex items-end justify-between gap-4 border-t border-red-200 pt-2">
-            <span className="whitespace-nowrap text-sm font-bold uppercase text-gray-900 sm:text-base">Sau ưu đãi</span>
-            <span className="whitespace-nowrap text-lg font-bold tabular-nums text-red-700 sm:text-2xl">
-              {vnd(onRoadPriceAfterPromotion)}
-            </span>
-          </div>
-
           {benefitSummary && (
-            <p className="mt-2 text-xs leading-5 text-gray-600">
+            <p className="mt-0.5 text-xs leading-5 text-gray-600">
               Gồm: {benefitSummary}.
             </p>
           )}
         </div>
       )}
+
+      <div className="mt-4 flex items-end justify-between gap-4 border-t-2 border-gray-900 pt-3">
+        <span className="text-sm font-bold uppercase leading-tight text-gray-900 sm:text-base">
+          Lăn bánh dự kiến
+          {totalPromotionValue > 0 && (
+            <span className="block text-xs font-semibold normal-case text-gray-600">
+              (đã trừ ưu đãi)
+            </span>
+          )}
+        </span>
+        <span className="whitespace-nowrap text-xl font-bold tabular-nums text-red-700 sm:text-2xl">
+          {vnd(onRoadPriceAfterPromotion)}
+        </span>
+      </div>
 
       <Link
         href={`/?car=${encodeURIComponent(carName)}&variant=${encodeURIComponent(variantName)}&nguon=Gia-lan-banh#bao-gia`}
