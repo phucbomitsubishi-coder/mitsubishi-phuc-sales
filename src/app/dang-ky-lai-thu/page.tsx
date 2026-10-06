@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, Suspense, useState } from "react";
+import { cars } from "@/data/cars";
 import { useSearchParams } from "next/navigation";
 import SiteHeader from "@/components/SiteHeader";
 import Link from "next/link";
@@ -214,12 +215,11 @@ function DangKyLaiThuForm() {
                     Chọn mẫu xe
                   </option>
 
-                  <option value="triton">Mitsubishi Triton</option>
-                  <option value="xforce">Mitsubishi Xforce</option>
-                  <option value="destinator">Mitsubishi Destinator</option>
-                  <option value="xpander">Mitsubishi Xpander</option>
-                  <option value="attrage">Mitsubishi Attrage</option>
-                  <option value="xpander-cross">Mitsubishi Xpander Cross</option>
+                  {cars.map((car) => (
+                    <option key={car.id} value={car.id}>
+                      {car.name}
+                    </option>
+                  ))}
                 </select>
               </div>
 

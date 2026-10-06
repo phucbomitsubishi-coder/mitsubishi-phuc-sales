@@ -2204,6 +2204,12 @@ export const cars: Car[] = allCars
   .filter((car) => !car.hidden)
   .sort((a, b) => orderOf(a) - orderOf(b));
 
+// Xe đang ẩn (chưa mở bán): chỉ hiện dạng thẻ "Sắp ra mắt" trên trang chủ và trong form báo giá,
+// không có trang chi tiết, không vào sitemap.
+export const upcomingCars: Car[] = allCars
+  .filter((car) => car.hidden)
+  .sort((a, b) => orderOf(a) - orderOf(b));
+
 // Chặn lỡ tay hiển thị xe khi chưa có giá: build sẽ báo lỗi.
 for (const car of cars) {
   if (car.variants.length === 0 || car.variants.some((variant) => !(variant.price > 0))) {

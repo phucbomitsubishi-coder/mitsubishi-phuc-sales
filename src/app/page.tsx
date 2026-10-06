@@ -1,7 +1,8 @@
-import { cars } from "@/data/cars";
+import { cars, upcomingCars } from "@/data/cars";
 import { currentPromotion } from "@/data/promotions";
 import { newsArticles } from "@/data/news";
-import PromotionTabs, { type PromotionTabItem } from "@/components/PromotionTabs";
+import PromotionTabs from "@/components/PromotionTabs";
+import { buildPromotionItem, formatMillion } from "@/lib/promotionItems";
 import { siteConfig } from "@/config/site";
 import { Suspense } from "react";
 import QuoteForm, { QuoteFormFromUrl } from "@/components/QuoteForm";
@@ -17,27 +18,13 @@ export const metadata = {
 };
 
 
-// Ưu đãi từng dòng xe lấy từ promotions.ts (file này bị add-news.mjs ghi đè mỗi tháng,
-// nên xử lý dữ liệu ở đây thay vì thêm hàm vào promotions.ts).
-const promotionItems: PromotionTabItem[] = cars.map((car) => {
-  const promotion = currentPromotion.cars.find((item) => item.carId === car.id);
+const categoryLabel: Record<string, string> = { Pickup: "Bán tải" };
 
-  const variants = (promotion?.variants ?? []).map((variant) => ({
-    name: [variant.variantName, variant.modelYear].filter(Boolean).join(" "),
-    price: variant.retailPrice,
-    benefits: variant.benefits.map(({ label, value }) => ({ label, value })),
-    total: variant.benefits.reduce((sum, benefit) => sum + (benefit.value ?? 0), 0),
-  }));
-
-  return {
-    carId: car.id,
-    carName: car.name,
-    carSlug: car.slug,
-    carImage: car.image,
-    maxValue: Math.max(0, ...variants.map((variant) => variant.total)),
-    variants,
-  };
-});
+// Ưu đãi từng dòng xe (xem src/lib/promotionItems.ts)
+const promotionItems = cars.map(buildPromotionItem);
+const maxPromotionByCar = Object.fromEntries(
+  promotionItems.map((item) => [item.carId, item.maxValue])
+);
 
 // Bài tin tức của chương trình khuyến mãi hiện tại (add-news tạo bài cùng tiêu đề)
 const promotionArticle = newsArticles.find(
@@ -69,52 +56,115 @@ export default function Home() {
         </div>
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {cars.map((car) => (
+          {cars.map((car) => {
+            const minPrice = Math.min(...car.variants.map((variant) => variant.price));
+            const maxPromotion = maxPromotionByCar[car.id] ?? 0;
+
+            return (
+              <article
+                key={car.slug}
+                className="group relative flex flex-col rounded-xl border border-gray-200 p-6 shadow-sm transition hover:shadow-lg"
+              >
+                {maxPromotion > 0 && (
+                  <a
+                    href={`#khuyen-mai-${car.id}`}
+                    className="absolute right-4 top-4 z-10 rounded-full bg-red-600 px-3 py-1 text-xs font-bold text-white shadow-md shadow-red-600/30 transition hover:bg-red-700"
+                  >
+                    Ưu đãi đến {formatMillion(maxPromotion)}
+                  </a>
+                )}
+
+                <div className="mb-3 h-40 overflow-hidden">
+                  <div className="relative h-52 w-full -translate-y-6">
+                    <Image
+                      src={car.image}
+                      alt={car.name}
+                      fill
+                      sizes="(min-width: 1024px) 400px, (min-width: 768px) 50vw, 100vw"
+                      className="object-contain transition duration-300 group-hover:scale-105"
+                    />
+                  </div>
+                </div>
+
+                <h3 className="text-2xl font-bold">{car.name}</h3>
+                <p className="mt-1 text-sm text-gray-600">
+                  {[
+                    categoryLabel[car.category] ?? car.category,
+                    `${car.specifications.seats} chỗ`,
+                    car.specifications.engine,
+                    // Bỏ nhiên liệu nếu tên động cơ đã có (vd "Xăng Turbo 1.5L", "Diesel")
+                    /xăng|diesel|dầu|điện/i.test(car.specifications.engine)
+                      ? null
+                      : car.specifications.fuel,
+                  ]
+                    .filter(Boolean)
+                    .join(" · ")}
+                </p>
+
+                <div className="mt-5">
+                  <span className="text-sm text-gray-600">Giá từ</span>
+                  <p className="text-xl font-bold text-red-700">
+                    {minPrice.toLocaleString("vi-VN")} ₫
+                  </p>
+                </div>
+
+                <div className="mt-6 flex gap-3">
+                  <Link
+                    href={`/xe/${car.slug}`}
+                    className="rounded bg-red-600 px-4 py-2 font-semibold text-white transition hover:bg-red-700"
+                  >
+                    Xem chi tiết
+                  </Link>
+
+                  <Link
+                    href={`/?car=${encodeURIComponent(car.name)}&nguon=Trang-chu-san-pham#bao-gia`}
+                    className="rounded border border-gray-300 px-4 py-2 font-semibold transition hover:border-red-600 hover:text-red-700"
+                  >
+                    Nhận báo giá
+                  </Link>
+                </div>
+              </article>
+            );
+          })}
+
+          {/* XE SẮP RA MẮT (đang ẩn trong cars.ts) */}
+          {upcomingCars.map((car) => (
             <article
               key={car.slug}
-              className="rounded-xl border border-gray-200 p-6 shadow-sm"
+              className="relative flex flex-col overflow-clip rounded-xl border border-dashed border-gray-300 bg-gray-50 p-6"
             >
-<div className="mb-3 h-40 overflow-hidden">
-  <div className="relative h-52 w-full -translate-y-6">
-    <Image
-      src={car.image}
-      alt={car.name}
-      fill
-      sizes="(min-width: 1024px) 400px, (min-width: 768px) 50vw, 100vw"
-      className="object-contain"
-    />
-  </div>
-</div>
-<h3 className="text-2xl font-bold">{car.name}</h3>
+              <span className="absolute right-4 top-4 z-10 rounded-full bg-neutral-950 px-3 py-1 text-xs font-bold uppercase tracking-wide text-white">
+                Sắp ra mắt
+              </span>
 
-              
+              <div className="relative mb-4 h-40 overflow-clip rounded-lg bg-gray-200">
+                <Image
+                  src={car.image}
+                  alt={`${car.name} sắp ra mắt tại Việt Nam`}
+                  fill
+                  sizes="(min-width: 1024px) 400px, (min-width: 768px) 50vw, 100vw"
+                  className="object-cover"
+                />
+              </div>
+
+              <h3 className="text-2xl font-bold">{car.name}</h3>
+              <p className="mt-2 flex-1 text-sm leading-6 text-gray-600">
+                {car.shortDescription}
+              </p>
+
+              <div className="mt-5">
+                <span className="text-sm text-gray-600">Giá dự kiến</span>
+                <p className="text-xl font-bold text-gray-900">Đang cập nhật</p>
+              </div>
 
               <div className="mt-6">
-                <span className="text-sm text-gray-500">
-                  Giá tham khảo
-                </span>
-
-                <p className="text-xl font-bold text-red-600">
-                  {car.variants[0]?.price
-                    ? `${car.variants[0].price.toLocaleString("vi-VN")} ₫`
-                    : "Liên hệ"}
-                </p>
+                <Link
+                  href={`/?car=${encodeURIComponent(car.name)}&nguon=Sap-ra-mat#bao-gia`}
+                  className="inline-block rounded bg-neutral-950 px-4 py-2 font-semibold text-white transition hover:bg-neutral-800"
+                >
+                  Đăng ký nhận thông tin
+                </Link>
               </div>
-              <div className="mt-6 flex gap-3">
-  <Link
-    href={`/xe/${car.slug}`}
-    className="rounded bg-red-600 px-4 py-2 font-semibold text-white transition hover:bg-red-700"
-  >
-    Xem chi tiết
-  </Link>
-
-  <a
-    href={siteConfig.contact.zaloUrl}
-    className="rounded border border-gray-300 px-4 py-2 font-semibold transition hover:border-red-600 hover:text-red-600"
-  >
-    Nhận báo giá
-  </a>
-</div>
             </article>
           ))}
         </div>

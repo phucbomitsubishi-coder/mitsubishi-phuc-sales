@@ -2,7 +2,7 @@
 
 import { FormEvent, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { cars } from "@/data/cars";
+import { cars, upcomingCars } from "@/data/cars";
 import ScrollTopLink from "@/components/ScrollTopLink";
 
 type QuoteFormProps = {
@@ -21,7 +21,9 @@ export function QuoteFormFromUrl() {
   const sourceFromUrl = params.get("nguon");
 
   const matchedCar = carFromUrl
-    ? cars.find((car) => car.id === carFromUrl || car.name === carFromUrl)
+    ? [...cars, ...upcomingCars].find(
+        (car) => car.id === carFromUrl || car.name === carFromUrl
+      )
     : undefined;
 
   const leadSource =
@@ -233,6 +235,16 @@ export default function QuoteForm({
                         {car.name}
                       </option>
                     ))}
+
+                    {upcomingCars.length > 0 && (
+                      <optgroup label="Sắp ra mắt">
+                        {upcomingCars.map((car) => (
+                          <option key={car.slug} value={car.name}>
+                            {car.name} (sắp ra mắt)
+                          </option>
+                        ))}
+                      </optgroup>
+                    )}
                   </select>
                 </div>
                 {selectedVariant && (

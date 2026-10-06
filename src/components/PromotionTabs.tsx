@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -43,11 +43,32 @@ const shortName = (name: string) => name.replace(/^Mitsubishi /, "");
 export default function PromotionTabs({ items }: Props) {
   const [activeId, setActiveId] = useState(items[0]?.carId);
 
+  // Link dạng #khuyen-mai-xforce (nhãn ưu đãi trên thẻ xe) -> chọn đúng tab và cuộn tới phần khuyến mãi
+  useEffect(() => {
+    const applyHash = () => {
+      const match = window.location.hash.match(/^#khuyen-mai-(.+)$/);
+      if (!match || !items.some((item) => item.carId === match[1])) return;
+
+      setActiveId(match[1]);
+      document.getElementById("khuyen-mai")?.scrollIntoView({ behavior: "smooth" });
+    };
+
+    const timer = setTimeout(applyHash, 0);
+    window.addEventListener("hashchange", applyHash);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("hashchange", applyHash);
+    };
+  }, [items]);
+
   if (items.length === 0) return null;
+
+  const showTabs = items.length > 1;
 
   return (
     <div className="mt-10">
-      {/* TAB DÒNG XE */}
+      {/* TAB DÒNG XE (ẩn khi chỉ có 1 xe, ví dụ ở trang chi tiết xe) */}
+      {showTabs && (
       <div
         role="tablist"
         aria-label="Chọn dòng xe"
@@ -98,6 +119,7 @@ export default function PromotionTabs({ items }: Props) {
           );
         })}
       </div>
+      )}
 
       {/* NỘI DUNG ƯU ĐÃI: render đủ các xe (ẩn bằng hidden) để nội dung vẫn có trong HTML cho SEO */}
       {items.map((item) => {
@@ -106,9 +128,9 @@ export default function PromotionTabs({ items }: Props) {
         return (
           <div
             key={item.carId}
-            role="tabpanel"
+            role={showTabs ? "tabpanel" : undefined}
             id={`panel-km-${item.carId}`}
-            aria-labelledby={`tab-km-${item.carId}`}
+            aria-labelledby={showTabs ? `tab-km-${item.carId}` : undefined}
             hidden={item.carId !== activeId}
             className="promo-fade mt-5 overflow-clip rounded-3xl bg-white text-neutral-950 shadow-2xl shadow-black/40 lg:grid lg:grid-cols-[5fr_7fr]"
           >
