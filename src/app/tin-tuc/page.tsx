@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 import { newsArticles } from "@/data/news";
+import { advisoryArticles } from "@/data/advisory";
 import NewsPromotionCover from "@/components/NewsPromotionCover";
 
 export const metadata: Metadata = createPageMetadata({
@@ -114,6 +115,37 @@ export default function NewsPage() {
             </article>
           </section>
         )}
+
+        {/* Tư vấn chọn xe (src/data/advisory.ts) */}
+        <section className="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">
+          <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
+            <div className="flex items-center gap-3">
+              <span className="h-6 w-1 rounded-full bg-red-600" />
+              <h2 className="text-2xl font-bold">Tư vấn chọn xe</h2>
+            </div>
+            <Link href="/tu-van" className="font-semibold text-red-700 hover:underline">
+              Xem tất cả →
+            </Link>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {advisoryArticles.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="group rounded-xl border border-gray-200 p-5 transition hover:border-red-600 hover:shadow-md"
+              >
+                <span className="text-sm font-bold text-red-700">{item.number}</span>
+                <p className="mt-2 font-bold leading-6 group-hover:text-red-700">
+                  {item.title}
+                </p>
+                <p className="mt-2 text-sm leading-6 text-gray-600">
+                  {item.description}
+                </p>
+              </Link>
+            ))}
+          </div>
+        </section>
 
         {/* Other articles */}
         {otherArticles.length > 0 && (

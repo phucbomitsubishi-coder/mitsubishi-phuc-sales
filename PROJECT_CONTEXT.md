@@ -123,6 +123,10 @@ Alias import: `@/` → `src/`.
   - Triton được nhận diện bằng `carName === "Mitsubishi Triton"`, nên đổi tên xe sẽ làm sai logic này.
   - Công thức nằm trong `src/lib/onRoadPrice.ts` (`calculateOnRoadPrice`), dùng chung cho công cụ tính và trang bảng giá.
     Sửa phí ở đó, không viết lại công thức trong component.
+- **Bài tư vấn** (`/tu-van/...`): danh sách nằm ở `src/data/advisory.ts`, dùng chung cho trang `/tu-van`, khối "Tư vấn chọn xe"
+  trên `/tin-tuc` và trang xe (bài có `carIds` chứa id xe hiện ở mục "So sánh và tư vấn" của trang xe đó).
+  Thêm bài mới: tạo trang, thêm vào `advisory.ts` và `sitemap.ts`. `/tu-van` có link ở footer và menu mobile.
+  Bài so sánh Xforce và Creta: giá Creta ghi cứng ở `cretaVariants` (cập nhật khi Hyundai đổi giá).
 - **Bảng giá xe** (`/bang-gia-xe-mitsubishi`, trang SEO chính cho từ khóa "giá xe Mitsubishi"): URL cố định, tiêu đề và nội dung
   tự đổi theo tháng của `currentPromotion`. Giá niêm yết lấy từ `cars.ts`, ưu đãi khớp theo `variantName === variant.name`,
   lăn bánh tính cho TP.HCM. Có link ở menu "Dự toán chi phí", menu mobile và footer. Mỗi tháng chỉ cần cập nhật `promotions.ts`.

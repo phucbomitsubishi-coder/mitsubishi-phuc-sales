@@ -79,6 +79,10 @@ export default function SiteFooter() {
         Dự toán trả góp
       </Link>
 
+      <Link href="/tu-van" className="hover:text-white">
+        Tư vấn mua xe
+      </Link>
+
       <Link href="/xe-cu" className="hover:text-white">
         Xe đã qua sử dụng
       </Link>

@@ -13,6 +13,7 @@ import Image from "next/image";
 import PromotionTabs from "@/components/PromotionTabs";
 import { usedCars } from "@/data/usedCars";
 import { newsArticles } from "@/data/news";
+import { advisoryArticles } from "@/data/advisory";
 import {
   benefitSummary,
   buildPromotionItem,
@@ -106,6 +107,11 @@ const relatedNews = newsArticles
   .filter((article) => article.title.toLowerCase().includes(shortName.toLowerCase()))
   .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
   .slice(0, 3);
+
+// Bài tư vấn, so sánh gắn với dòng xe này (src/data/advisory.ts)
+const relatedAdvisory = advisoryArticles.filter((item) =>
+  item.carIds?.includes(car.id)
+);
 
 // 3 dòng xe khác theo thứ tự hiển thị
 const otherCars = cars.filter((item) => item.id !== car.id).slice(0, 3);
@@ -422,6 +428,33 @@ const breadcrumbSchema = {
       {/* GỢI Ý LIÊN QUAN */}
       <section className="bg-gray-50">
         <div className="mx-auto max-w-7xl space-y-14 px-6 py-14 md:py-16">
+          {relatedAdvisory.length > 0 && (
+            <div>
+              <h2 className="text-2xl font-extrabold tracking-tight">
+                So sánh và tư vấn chọn {shortName}
+              </h2>
+              <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                {relatedAdvisory.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="group rounded-2xl border border-gray-200 bg-white p-5 transition hover:border-red-600 hover:shadow-lg"
+                  >
+                    <p className="font-bold leading-6 group-hover:text-red-700">
+                      {item.title}
+                    </p>
+                    <p className="mt-2 text-sm leading-6 text-gray-600">
+                      {item.description}
+                    </p>
+                    <span className="mt-3 inline-block text-sm font-semibold text-red-700">
+                      Đọc bài so sánh →
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
+
           {relatedUsedCars.length > 0 && (
             <div>
               <h2 className="text-2xl font-extrabold tracking-tight">
