@@ -205,7 +205,7 @@ const selectedImage =
                   : "border-gray-200 bg-white shadow-sm hover:border-red-300"
               }`}
             >
-              <p className="text-sm font-semibold uppercase text-gray-500">
+              <p className="text-sm font-semibold uppercase text-gray-600">
                 {carName}
               </p>
 
@@ -213,7 +213,7 @@ const selectedImage =
                 {variant.name}
               </h3>
 
-              <p className="mt-3 text-sm text-gray-500">
+              <p className="mt-3 text-sm text-gray-600">
                 Giá tham khảo
               </p>
 
@@ -264,7 +264,7 @@ const selectedImage =
   onClick={() => setSelectedColor(color)}
   className={`flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition ${
     selectedColor === color
-      ? "border-red-600 bg-red-50 text-red-600"
+      ? "border-red-600 bg-red-50 text-red-700"
       : "border-gray-300 bg-white text-gray-700 hover:border-red-300"
   }`}
 >

@@ -82,7 +82,7 @@ export default function GioiThieuPage() {
           </div>
 
           <div className="rounded-2xl bg-gray-100 p-8">
-            <p className="text-sm font-bold uppercase tracking-wider text-red-600">
+            <p className="text-sm font-bold uppercase tracking-wider text-red-700">
               Hỗ trợ khách hàng
             </p>
 
@@ -169,7 +169,7 @@ export default function GioiThieuPage() {
       <section className="bg-red-600 text-white">
         <div className="mx-auto flex max-w-7xl flex-col gap-6 px-6 py-12 md:flex-row md:items-center md:justify-between">
           <div>
-            <p className="text-sm font-bold uppercase tracking-wider text-red-100">
+            <p className="text-sm font-bold uppercase tracking-wider text-white">
               Kết nối trực tiếp
             </p>
 
@@ -177,7 +177,7 @@ export default function GioiThieuPage() {
               Bạn đang quan tâm xe Mitsubishi?
             </h2>
 
-            <p className="mt-2 max-w-2xl text-red-100">
+            <p className="mt-2 max-w-2xl text-white">
               Đăng ký lái thử hoặc kết nối trực tiếp để được hỗ trợ thông tin
               sản phẩm và phương án phù hợp tại Mitsubishi Motors – Moveo
               New City.

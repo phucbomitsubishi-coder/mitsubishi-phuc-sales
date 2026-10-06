@@ -84,7 +84,7 @@ export default function NewsPage() {
 
                 <div className="flex flex-col justify-center p-6 sm:p-9">
                   <div className="flex flex-wrap items-center gap-3 text-sm">
-                    <span className="rounded-full bg-red-50 px-3 py-1 font-semibold text-red-600">
+                    <span className="rounded-full bg-red-50 px-3 py-1 font-semibold text-red-700">
                       {featuredArticle.category}
                     </span>
 

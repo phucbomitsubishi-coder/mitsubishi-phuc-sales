@@ -189,7 +189,7 @@ export default function SiteFooter() {
             tin cập nhật.
           </p>
 
-          <p className="mt-3 text-xs text-gray-500">
+          <p className="mt-3 text-xs text-gray-400">
             © {new Date().getFullYear()} {dealer.name}. All rights reserved.
           </p>
         </div>

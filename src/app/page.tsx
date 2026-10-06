@@ -96,7 +96,7 @@ export default function Home() {
   className="scroll-mt-28 bg-gray-100 md:scroll-mt-24"
 >
   <div className="mx-auto max-w-7xl px-6 py-16">
-    <p className="font-semibold uppercase tracking-wider text-red-600">
+    <p className="font-semibold uppercase tracking-wider text-red-700">
       Khuyến mãi
     </p>
 

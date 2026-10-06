@@ -243,7 +243,7 @@ onBlur={(event) => {
     đ/tháng
   </p>
 
-  <p className="mt-1 text-sm text-gray-500">
+  <p className="mt-1 text-sm text-gray-600">
     Khoản thanh toán giảm dần do tiền lãi được tính trên dư nợ còn lại.
   </p>
 </div>
@@ -276,7 +276,7 @@ onBlur={(event) => {
     </div>
 
     <div className="rounded-xl bg-red-600 p-4 text-white">
-      <p className="text-sm text-red-100">
+      <p className="text-sm text-white">
         Thanh toán tháng đầu
       </p>
 

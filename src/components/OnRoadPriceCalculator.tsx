@@ -226,7 +226,7 @@ const licensePlateFee = isTriton
 
   {promotion && promotion.benefits.length > 0 && (
   <div className="mt-5 rounded-xl border border-red-200 bg-red-50 p-4">
-    <p className="text-sm font-bold uppercase text-red-600">
+    <p className="text-sm font-bold uppercase text-red-700">
       Ưu đãi hiện hành
     </p>
 
@@ -236,7 +236,7 @@ const licensePlateFee = isTriton
       <span className="text-gray-700">
         Tổng giá trị quyền lợi
       </span>
-      <span className="shrink-0 whitespace-nowrap font-bold text-red-600">
+      <span className="shrink-0 whitespace-nowrap font-bold text-red-700">
         -{totalPromotionValue.toLocaleString("vi-VN")} đ
       </span>
     </div>
@@ -261,7 +261,7 @@ const licensePlateFee = isTriton
       ))}
     </ul>
 
-    <p className="mt-3 text-xs leading-5 text-gray-500">
+    <p className="mt-3 text-xs leading-5 text-gray-600">
       Giá sau ưu đãi được quy đổi tham khảo từ tổng giá trị quyền lợi
 của chương trình. Một số quyền lợi có thể là nhiên liệu, phụ kiện
 hoặc hỗ trợ khác, không phải tiền mặt. Vui lòng nhận báo giá để
@@ -277,7 +277,7 @@ xác nhận ưu đãi thực tế.
   Nhận báo giá
 </Link>
 
-  <p className="mt-3 text-xs leading-5 text-gray-500">
+  <p className="mt-3 text-xs leading-5 text-gray-600">
     Chi phí lăn bánh mang tính dự tính và tham khảo. Chi phí thực tế có
     thể thay đổi theo thời điểm đăng ký, địa phương, hồ sơ xe và chính
     sách hiện hành.
