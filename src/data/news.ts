@@ -50,7 +50,7 @@ export const newsArticles: NewsArticle[] = [
 
     publishedAt: "2026-10-02",
 
-    image: "/images/news/mitsubishi-attrage-moi-lo-thong-so-tieu-thu-nhien-lieu-tai-viet-nam-dai-ly-manh-tay-uu-dai-xa-hang-ton.jpg",
+    image: "/images/cars/attrage/gallery/exterior/exterior-01.jpg",
 
     featured: false,
 
@@ -78,20 +78,6 @@ export const newsArticles: NewsArticle[] = [
           "Tại Thái Lan, xe có hai bản Active và Smart. Bản Active dùng đèn pha halogen, đèn hậu LED, màn hình cảm ứng 7 inch có Apple CarPlay và Android Auto, chìa khóa thông minh và mâm thép 14 inch. Bản Smart có thêm đèn pha LED tự động, điều hòa tự động, kiểm soát hành trình, gương chiếu hậu chống chói tự động, ghế da tổng hợp, khởi động bằng nút bấm, camera lùi và mâm hợp kim 15 inch.",
           "Điểm đáng chú ý nhất là an toàn. Ngoài 2 túi khí, ABS, EBD, cân bằng điện tử, kiểm soát lực kéo và hỗ trợ khởi hành ngang dốc, bản Active có camera cảnh báo va chạm phía trước và cảnh báo chệch làn. Bản Smart có thêm phanh giảm thiểu va chạm ở tốc độ thấp và cảm biến hạn chế tình huống đạp nhầm chân ga trong khoảng 4 m phía trước. Với một mẫu sedan giá dễ tiếp cận, đây là những trang bị rất hữu ích cho người mới lái.",
           "Trang bị bản Việt Nam có thể khác Thái Lan. Tên phiên bản trong hồ sơ đăng kiểm (GLX, GLS-P) cũng khác, nên cần chờ thông tin chính thức từ Mitsubishi Motors Việt Nam.",
-        ],
-        images: [
-          {
-            src: "/images/news/mitsubishi-attrage-moi-lo-thong-so-tieu-thu-nhien-lieu-tai-viet-nam-dai-ly-manh-tay-uu-dai-xa-hang-ton/image-03.jpg",
-            alt: "Đầu xe Mitsubishi Attrage nâng cấp với lưới tản nhiệt và đèn pha mới",
-          },
-          {
-            src: "/images/news/mitsubishi-attrage-moi-lo-thong-so-tieu-thu-nhien-lieu-tai-viet-nam-dai-ly-manh-tay-uu-dai-xa-hang-ton/image-04.jpg",
-            alt: "Khoang lái Mitsubishi Attrage nâng cấp bản Thái Lan",
-          },
-          {
-            src: "/images/news/mitsubishi-attrage-moi-lo-thong-so-tieu-thu-nhien-lieu-tai-viet-nam-dai-ly-manh-tay-uu-dai-xa-hang-ton/image-05.jpg",
-            alt: "Đuôi xe Mitsubishi Attrage nâng cấp tại Thái Lan",
-          },
         ],
       },
       {
@@ -180,7 +166,7 @@ export const newsArticles: NewsArticle[] = [
 
     publishedAt: "2026-10-01",
 
-    image: "/images/news/mitsubishi-pajero-2026-se-ra-mat-dong-nam-a-vao-thang-10-co-3-phien-ban-may-diesel-204-ma-luc.jpg",
+    image: "/images/news/mitsubishi-pajero-2026-se-ra-mat-dong-nam-a-vao-thang-10-co-3-phien-ban-may-diesel-204-ma-luc/official-cover.jpg",
 
     featured: false,
 
@@ -194,16 +180,12 @@ export const newsArticles: NewsArticle[] = [
         ],
         images: [
           {
-            src: "/images/news/mitsubishi-pajero-2026-se-ra-mat-dong-nam-a-vao-thang-10-co-3-phien-ban-may-diesel-204-ma-luc/image-01.jpg",
-            alt: "Mitsubishi Pajero 2026 màu trắng chạy trên đường",
+            src: "/images/news/mitsubishi-pajero-2026-se-ra-mat-dong-nam-a-vao-thang-10-co-3-phien-ban-may-diesel-204-ma-luc/official-01.jpg",
+            alt: "Mitsubishi Pajero 2026 chạy trên địa hình sa mạc",
           },
           {
-            src: "/images/news/mitsubishi-pajero-2026-se-ra-mat-dong-nam-a-vao-thang-10-co-3-phien-ban-may-diesel-204-ma-luc/image-02.jpg",
-            alt: "Thân xe Mitsubishi Pajero 2026 nhìn ngang",
-          },
-          {
-            src: "/images/news/mitsubishi-pajero-2026-se-ra-mat-dong-nam-a-vao-thang-10-co-3-phien-ban-may-diesel-204-ma-luc/image-07.jpg",
-            alt: "Đuôi xe Mitsubishi Pajero 2026 màu nâu",
+            src: "/images/news/mitsubishi-pajero-2026-se-ra-mat-dong-nam-a-vao-thang-10-co-3-phien-ban-may-diesel-204-ma-luc/official-02.jpg",
+            alt: "Đuôi xe Mitsubishi Pajero 2026 màu nâu đồng",
           },
         ],
       },
@@ -214,6 +196,17 @@ export const newsArticles: NewsArticle[] = [
           "Cả 3 phiên bản dùng động cơ dầu 2.4L 4 xi-lanh (mã 4N16) với tăng áp biến thiên VGT, công suất 204 mã lực tại 3.500 vòng/phút, mô-men xoắn 480 Nm tại 1.750–2.500 vòng/phút, đi kèm hộp số tự động 8 cấp có lẫy chuyển số. GLS và GSR dẫn động cầu sau, Super Exceed dẫn động 4 bánh S-AWC.",
           "So với Triton đang bán tại Việt Nam (204 PS, 470 Nm, hộp số tự động 6 cấp), động cơ của Pajero được chỉnh lại bộ tăng áp và nhiều chi tiết bên trong, mô-men xoắn cao hơn 10 Nm, hộp số tăng lên 8 cấp. Bản Thái Lan đạt tiêu chuẩn khí thải mà không cần dung dịch AdBlue.",
           "Hệ S-AWC trên bản Super Exceed có các chế độ 2H, 4H, 4HLc và 4LLc, cùng 7 chế độ lái: Eco, Normal, Gravel, Snow, Mud, Sand và Rock, dùng cho cả đường thường lẫn bề mặt trơn trượt hoặc địa hình khó.",
+          "Theo Mitsubishi, khung gầm rời lấy từ Triton nhưng khoang cabin, hệ treo trước và sau được phát triển riêng cho Pajero, nhằm giữ khả năng off-road mà vẫn êm ái khi đi đường trường.",
+        ],
+        images: [
+          {
+            src: "/images/news/mitsubishi-pajero-2026-se-ra-mat-dong-nam-a-vao-thang-10-co-3-phien-ban-may-diesel-204-ma-luc/official-03.jpg",
+            alt: "Động cơ dầu 2.4L 4N16 tăng áp VGT của Mitsubishi Pajero 2026",
+          },
+          {
+            src: "/images/news/mitsubishi-pajero-2026-se-ra-mat-dong-nam-a-vao-thang-10-co-3-phien-ban-may-diesel-204-ma-luc/official-04.jpg",
+            alt: "Khung gầm rời (ladder frame) của Mitsubishi Pajero 2026",
+          },
         ],
       },
       {
@@ -224,23 +217,20 @@ export const newsArticles: NewsArticle[] = [
           "GLS: dù là bản tiêu chuẩn nhưng đã có đồng hồ kỹ thuật số và màn hình giải trí cùng kích thước 12,3 inch, Apple CarPlay và Android Auto không dây, sạc không dây, cổng USB-C, 6 loa, 7 túi khí, camera 360 độ. Gói hỗ trợ lái gồm kiểm soát hành trình thích ứng, cảnh báo điểm mù, hỗ trợ chuyển làn, hỗ trợ giữ làn, cảnh báo lệch làn, giảm thiểu va chạm phía trước và cảnh báo phương tiện cắt ngang phía trước, phía sau.",
           "GSR: thêm mâm 20 inch hai tông màu, đèn LED thích ứng, đèn Dynamic Flow Light trước và sau, điều hòa 2 vùng, lọc không khí Nanoe-X, ghế và vô-lăng nhớ vị trí, hộp làm mát ở bệ tỳ tay và hệ thống âm thanh Yamaha Dynamic Sound Ultimate 12 loa.",
           "Super Exceed: mâm và lưới tản nhiệt riêng, ốp bảo vệ gầm, nội thất đen phối nâu, cửa sổ trời toàn cảnh, ghế da Semi-Aniline có thông gió, gương chiếu hậu kỹ thuật số, kết nối Mitsubishi CONNECT và hệ thống hỗ trợ lái MI-PILOT.",
+          "Một chi tiết gợi nhớ các đời Pajero trước là Multi Meter: màn hình hiển thị độ cao, hướng la bàn, nhiệt độ bên ngoài, góc nghiêng dọc, nghiêng ngang của xe và mức phân bổ lực kéo trái phải, rất hữu ích khi đi địa hình.",
         ],
         images: [
           {
-            src: "/images/news/mitsubishi-pajero-2026-se-ra-mat-dong-nam-a-vao-thang-10-co-3-phien-ban-may-diesel-204-ma-luc/image-03.jpg",
-            alt: "Khoang lái Mitsubishi Pajero 2026 với màn hình 12,3 inch và cửa sổ trời toàn cảnh",
+            src: "/images/news/mitsubishi-pajero-2026-se-ra-mat-dong-nam-a-vao-thang-10-co-3-phien-ban-may-diesel-204-ma-luc/official-05.jpg",
+            alt: "Khoang lái Mitsubishi Pajero 2026 với màn hình 12,3 inch, nội thất đen phối nâu",
           },
           {
-            src: "/images/news/mitsubishi-pajero-2026-se-ra-mat-dong-nam-a-vao-thang-10-co-3-phien-ban-may-diesel-204-ma-luc/image-04.jpg",
-            alt: "Hàng ghế trước bọc da đen phối nâu trên Mitsubishi Pajero 2026",
+            src: "/images/news/mitsubishi-pajero-2026-se-ra-mat-dong-nam-a-vao-thang-10-co-3-phien-ban-may-diesel-204-ma-luc/official-06.jpg",
+            alt: "Màn hình Multi Meter hiển thị độ cao, la bàn và góc nghiêng trên Mitsubishi Pajero 2026",
           },
           {
-            src: "/images/news/mitsubishi-pajero-2026-se-ra-mat-dong-nam-a-vao-thang-10-co-3-phien-ban-may-diesel-204-ma-luc/image-05.jpg",
-            alt: "Hàng ghế thứ hai Mitsubishi Pajero 2026",
-          },
-          {
-            src: "/images/news/mitsubishi-pajero-2026-se-ra-mat-dong-nam-a-vao-thang-10-co-3-phien-ban-may-diesel-204-ma-luc/image-06.jpg",
-            alt: "Khoang hành lý Mitsubishi Pajero 2026 khi dựng đủ 3 hàng ghế",
+            src: "/images/news/mitsubishi-pajero-2026-se-ra-mat-dong-nam-a-vao-thang-10-co-3-phien-ban-may-diesel-204-ma-luc/official-07.jpg",
+            alt: "Bố trí 3 hàng ghế 7 chỗ của Mitsubishi Pajero 2026",
           },
         ],
       },
@@ -248,6 +238,7 @@ export const newsArticles: NewsArticle[] = [
         heading: "Khi nào Pajero về Việt Nam?",
 
         paragraphs: [
+          "Pajero mới được Mitsubishi ra mắt toàn cầu ngày 2/9/2026 và sản xuất tại Thái Lan. Theo kế hoạch của hãng, xe bán tại Thái Lan trước, sau đó là Nhật Bản và Úc trong năm tài chính 2026, rồi mở rộng ra khoảng 100 quốc gia, gồm cả khu vực ASEAN, từ năm tài chính 2027.",
           "Mitsubishi Motors Việt Nam chưa công bố kế hoạch bán Pajero thế hệ mới. Nếu về Việt Nam, Pajero sẽ đứng trên Destinator (giá niêm yết 780–855 triệu đồng) trong dải SUV 7 chỗ của Mitsubishi, dành cho khách cần xe khung gầm rời, máy dầu và khả năng đi địa hình thật sự.",
           "Nếu bạn quan tâm, hãy để lại số điện thoại ở thẻ Pajero \"Sắp ra mắt\" trên trang chủ. Lưu Hoàng Phúc sẽ báo ngay khi có giá và lịch mở bán chính thức.",
         ],
@@ -276,7 +267,7 @@ export const newsArticles: NewsArticle[] = [
 
     publishedAt: "2026-10-01",
 
-    image: "/images/news/anh-thuc-te-mitsubishi-outlander-phev-2026-tai-dna-suv-co-c-manh-302-ma-luc-chay-100-km-khong-ton-xang.jpg",
+    image: "/images/news/anh-thuc-te-mitsubishi-outlander-phev-2026-tai-dna-suv-co-c-manh-302-ma-luc-chay-100-km-khong-ton-xang-official.jpg",
 
     featured: true,
 
@@ -293,7 +284,7 @@ export const newsArticles: NewsArticle[] = [
         heading: "Hệ truyền động PHEV hoạt động thế nào",
 
         paragraphs: [
-          "Xe dùng động cơ xăng 2.4L MIVEC, hai mô-tơ điện và pin 22,7 kWh, tổng công suất 302 mã lực, mô-men xoắn 450 Nm. Theo Mitsubishi, xe chạy được khoảng 100 km chỉ bằng điện và gần 1.000 km khi kết hợp xăng và điện.",
+          "Xe dùng động cơ xăng 2.4L MIVEC, hai mô-tơ điện và pin 22,7 kWh, tổng công suất 302 mã lực (306 PS), mô-men xoắn 450 Nm. Theo Mitsubishi, xe chạy được khoảng 100 km chỉ bằng điện và gần 1.000 km khi kết hợp xăng và điện.",
           "Với người đi làm hằng ngày, khoảng 100 km chạy điện đủ cho phần lớn nhu cầu nếu sạc pin tại nhà mỗi tối. Khi đi xa, động cơ xăng hoạt động nên không phải lo hết pin như xe điện thuần. Quãng đường thực tế sẽ thấp hơn con số công bố, tùy tốc độ, tải trọng và việc sử dụng điều hòa.",
           "Hệ dẫn động 4 bánh S-AWC phân bổ lực kéo giữa các bánh, kết hợp kiểm soát mô-men quay vòng chủ động (Active Yaw Control) để giữ xe ổn định khi vào cua hoặc trên đường trơn.",
         ],
@@ -310,7 +301,7 @@ export const newsArticles: NewsArticle[] = [
         heading: "Giá bán và khả năng về Việt Nam",
 
         paragraphs: [
-          "Tại Philippines, Outlander PHEV 2026 có giá niêm yết 2,848 triệu peso, khoảng 1,2 tỷ đồng. Mitsubishi Motors Việt Nam chưa công bố giá và thời gian mở bán. Giá tại Việt Nam còn phụ thuộc thuế và chính sách cho xe hybrid sạc điện, nên chưa thể suy ra từ giá Philippines.",
+          "Ngày 21/8/2026, Mitsubishi Motors Philippines bắt đầu bán Outlander PHEV. Đây là lần đầu Outlander PHEV thế hệ hiện tại có mặt tại khu vực ASEAN. Giá niêm yết tại Philippines là 2,848 triệu peso, khoảng 1,2 tỷ đồng. Mitsubishi Motors Việt Nam chưa công bố giá và thời gian mở bán. Giá tại Việt Nam còn phụ thuộc thuế và chính sách cho xe hybrid sạc điện, nên chưa thể suy ra từ giá Philippines.",
           "Bạn có thể đăng ký nhận thông tin ở thẻ Outlander \"Sắp ra mắt\" trên trang chủ để được Lưu Hoàng Phúc báo ngay khi có giá chính thức.",
         ],
       },
@@ -338,7 +329,7 @@ export const newsArticles: NewsArticle[] = [
 
     publishedAt: "2026-10-01",
 
-    image: "/images/news/mitsubishi-outlander-the-he-moi-co-the-ra-mat-vao-nam-2028.jpg",
+    image: "/images/news/mitsubishi-outlander-the-he-moi-co-the-ra-mat-vao-nam-2028/elevance-cover.jpg",
 
     featured: false,
 
@@ -358,13 +349,30 @@ export const newsArticles: NewsArticle[] = [
           "Theo một báo cáo từ Nhật Bản, Outlander thế hệ thứ năm có thể dựa trên Elevance Concept, mẫu xe ý tưởng Mitsubishi giới thiệu năm 2025. Kích thước tổng thể tương tự Outlander hiện tại nhưng diện mạo hoàn toàn mới.",
           "Những chi tiết có thể được giữ lại gồm cụm đèn pha và đèn LED ban ngày kéo dài xuống mặt trước, lưới tản nhiệt cùng màu thân xe, và ở phía sau là dải đèn LED chạy hết chiều rộng đuôi xe, nối với đèn hậu kéo lên trụ D. Phần cửa sổ bên cỡ lớn của bản concept nhiều khả năng sẽ không xuất hiện trên xe thương mại.",
         ],
+        images: [
+          {
+            src: "/images/news/mitsubishi-outlander-the-he-moi-co-the-ra-mat-vao-nam-2028/elevance-01.jpg",
+            alt: "Mitsubishi Elevance Concept nhìn ngang, kéo theo rơ-moóc cắm trại",
+          },
+          {
+            src: "/images/news/mitsubishi-outlander-the-he-moi-co-the-ra-mat-vao-nam-2028/elevance-02.jpg",
+            alt: "Đuôi xe Mitsubishi Elevance Concept với dải đèn LED nằm ngang",
+          },
+        ],
       },
       {
         heading: "Hệ PHEV 4 mô-tơ và S-AWC thế hệ mới",
 
         paragraphs: [
           "Outlander PHEV hiện tại dùng động cơ xăng 2.4L hút khí tự nhiên, hai mô-tơ điện và pin lithium-ion 22,7 kWh. Thế hệ mới được cho là sẽ dùng bốn mô-tơ điện thay vì hai, vừa tăng công suất, vừa giúp hệ S-AWC thế hệ mới phân bổ lực kéo chính xác tới từng bánh xe, cải thiện độ bám và khả năng vào cua.",
+          "Theo Mitsubishi, Elevance Concept đã dùng hệ dẫn động 4 bánh với 4 mô-tơ điện và S-AWC, cùng hệ PHEV có động cơ tương thích nhiên liệu trung hòa carbon. Đây là cơ sở để báo chí dự đoán cấu hình của Outlander thế hệ mới.",
           "Lưu ý: công suất và quãng đường chạy điện của Outlander PHEV hiện tại được công bố khác nhau giữa các thị trường (khoảng 297–302 mã lực, chạy điện khoảng 100–106 km) do khác phiên bản và tiêu chuẩn đo. Các con số này chỉ nên dùng để tham khảo.",
+        ],
+        images: [
+          {
+            src: "/images/news/mitsubishi-outlander-the-he-moi-co-the-ra-mat-vao-nam-2028/elevance-03.jpg",
+            alt: "Mitsubishi Elevance Concept mở cửa, đang cắm sạc điện",
+          },
         ],
       },
       {

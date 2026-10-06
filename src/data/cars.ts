@@ -1937,7 +1937,7 @@ transmission: "Tự động 4 cấp",
     shortDescription:
       "SUV cỡ C plug-in hybrid 7 chỗ (5+2), mạnh 302 mã lực, chạy thuần điện khoảng 100 km.",
 
-    image: "/images/news/anh-thuc-te-mitsubishi-outlander-phev-2026-tai-dna-suv-co-c-manh-302-ma-luc-chay-100-km-khong-ton-xang.jpg",
+    image: "/images/news/anh-thuc-te-mitsubishi-outlander-phev-2026-tai-dna-suv-co-c-manh-302-ma-luc-chay-100-km-khong-ton-xang-official.jpg",
 
     promotion: {
       title: "Đăng ký nhận thông tin Mitsubishi Outlander",
@@ -2027,7 +2027,7 @@ transmission: "Tự động 4 cấp",
     shortDescription:
       "SUV 7 chỗ khung gầm rời đầu bảng của Mitsubishi, động cơ diesel 2.4L 204 mã lực, hộp số tự động 8 cấp.",
 
-    image: "/images/news/mitsubishi-pajero-2026-se-ra-mat-dong-nam-a-vao-thang-10-co-3-phien-ban-may-diesel-204-ma-luc.jpg",
+    image: "/images/news/mitsubishi-pajero-2026-se-ra-mat-dong-nam-a-vao-thang-10-co-3-phien-ban-may-diesel-204-ma-luc/official-cover.jpg",
 
     promotion: {
       title: "Đăng ký nhận thông tin Mitsubishi Pajero",
