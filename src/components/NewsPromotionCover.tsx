@@ -31,7 +31,6 @@ export default function NewsPromotionCover() {
   return (
     <div
   className="relative overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm"
-  style={{ fontFamily: "var(--font-be-vietnam-pro)" }}
 >
       {/* Red accent */}
       <div className="h-2 w-full bg-red-600" />

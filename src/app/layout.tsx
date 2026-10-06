@@ -1,25 +1,21 @@
 import type { Metadata } from "next";
-import { Be_Vietnam_Pro, Roboto } from "next/font/google";
+import { Roboto } from "next/font/google";
 import "./globals.css";
 import SiteFooter from "@/components/SiteFooter";
+import { siteConfig } from "@/config/site";
 
 const roboto = Roboto({
   subsets: ["latin", "vietnamese"],
   display: "swap",
 });
-const beVietnamPro = Be_Vietnam_Pro({
-  subsets: ["latin", "vietnamese"],
-  weight: ["400", "500", "600", "700", "800"],
-  variable: "--font-be-vietnam-pro",
-  display: "swap",
-});
 
+const { sales, dealer } = siteConfig;
+const siteDescription = `Mitsubishi Bình Dương - Tư vấn mua xe Mitsubishi, báo giá, khuyến mãi, hỗ trợ trả góp và đăng ký lái thử. Liên hệ ${sales.name}: ${sales.phoneDisplay}.`;
 
 export const metadata: Metadata = {
    metadataBase: new URL("https://www.mitsubishiauto.vn"),
   title: "Mitsubishi Bình Dương | Lưu Hoàng Phúc",
-  description:
-    "Mitsubishi Bình Dương - Tư vấn mua xe Mitsubishi, báo giá, khuyến mãi, hỗ trợ trả góp và đăng ký lái thử. Liên hệ Lưu Hoàng Phúc: 0858 678 929.",
+  description: siteDescription,
   alternates: {
     canonical: "/",
   },
@@ -32,8 +28,7 @@ export const metadata: Metadata = {
   url: "https://www.mitsubishiauto.vn",
   siteName: "Mitsubishi Lưu Hoàng Phúc",
   title: "Mitsubishi Bình Dương | Lưu Hoàng Phúc",
-  description:
-    "Mitsubishi Bình Dương - Tư vấn mua xe Mitsubishi, báo giá, khuyến mãi, hỗ trợ trả góp và đăng ký lái thử. Liên hệ Lưu Hoàng Phúc: 0858 678 929.",
+  description: siteDescription,
   images: [
     {
       url: "/images/og/og-default.jpg",
@@ -46,8 +41,7 @@ export const metadata: Metadata = {
 twitter: {
   card: "summary_large_image",
   title: "Mitsubishi Bình Dương | Lưu Hoàng Phúc",
-  description:
-    "Mitsubishi Bình Dương - Tư vấn mua xe Mitsubishi, báo giá, khuyến mãi, hỗ trợ trả góp và đăng ký lái thử. Liên hệ Lưu Hoàng Phúc: 0858 678 929.",
+  description: siteDescription,
   images: ["/images/og/og-default.jpg"],
 },
 };
@@ -55,12 +49,12 @@ const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "AutoDealer",
   "@id": "https://www.mitsubishiauto.vn/#autodealer",
-  name: "Mitsubishi Moveo New City",
+  name: dealer.name,
   url: "https://www.mitsubishiauto.vn",
   logo: "https://www.mitsubishiauto.vn/images/logo/logo-black.svg",
   image: "https://www.mitsubishiauto.vn/images/logo/logo-mobile-new.png",
-  telephone: "+84858678929",
-  email: "phucbo.mitsubishi@gmail.com",
+  telephone: `+84${sales.phone.slice(1)}`,
+  email: sales.email,
   address: {
     "@type": "PostalAddress",
     streetAddress: "Lô C1C, Đường Hùng Vương",
