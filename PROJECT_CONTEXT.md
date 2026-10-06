@@ -46,7 +46,7 @@ src/
   config/site.ts          # siteConfig: tên, SĐT, email, Zalo, Facebook, TikTok, địa chỉ đại lý, SEO mặc định
   lib/metadata.ts         # createPageMetadata({ title, description, path }) cho trang tĩnh
   data/
-    cars.ts               # Xe mới (~1900 dòng): Car, CarVariant, cars[], featuredCars, getCarBySlug()
+    cars.ts               # Xe mới (~2200 dòng): Car, CarVariant, allCars (nội bộ), cars[] (đã lọc + sắp xếp), getCarBySlug()
     usedCars.ts           # Xe cũ: UsedCar, usedCars[]
     news.ts               # Tin tức: NewsArticle, newsArticles[], getNewsArticleBySlug()
     promotions.ts         # Khuyến mãi tháng: currentPromotion, getMaxPromotionValue(carId)
@@ -82,7 +82,24 @@ Alias import: `@/` → `src/`.
   `status` (`available` hoặc `coming-soon`), `featured`, `image`, `promotion`, `variants[]`
   (có `price`, `promotionalPrice?`, `specifications`, `equipment`, `safetyTechnologies`, `colors`),
   `specifications`, `highlights`, ...
-  - Các xe hiện có: `xforce`, `xpander`, `attrage`, `triton`, `destinator`, `xpander-cross`.
+  - Đang bán: `destinator`, `triton`, `xforce`, `xpander-cross`, `xpander`, `attrage`.
+  - **Đang ẩn (chưa mở bán):** `outlander` (PHEV), `pajero`. Thông số lấy theo bản Đông Nam Á từ các bài tin tức, `price: 0`,
+    ảnh tạm lấy từ ảnh tin tức (`public/images/news/...jpg`).
+  - **Thứ tự hiển thị** trên toàn site do mảng `displayOrder` cuối `cars.ts` quyết định, không phụ thuộc vị trí trong `allCars`.
+    Footer, header, menu mobile, trang chủ, form báo giá và công cụ tính đều dùng `cars`, nên tự đổi theo.
+    Các công cụ tính giá dùng `cars[0]` (hiện là Destinator) làm xe mặc định.
+  - **Ẩn/hiện xe:** trường `hidden: true`. Xe ẩn không xuất hiện ở bất kỳ đâu, trang `/xe/<slug>` trả 404 và không có trong sitemap.
+    Khi chạy `npm run dev` vẫn xem trước được `/xe/mitsubishi-outlander` (getCarBySlug dùng `allCars` ở môi trường development).
+  - **Có kiểm tra an toàn:** nếu một xe đang hiển thị mà có phiên bản `price` ≤ 0 thì `cars.ts` sẽ throw, nên build lỗi
+    (tránh mở bán khi chưa có giá).
+  - **Checklist khi mở bán Outlander/Pajero:**
+    1. Cập nhật `price` theo giá Việt Nam, kiểm tra lại tên phiên bản, thông số, `colors`.
+    2. Thêm ảnh PNG nền trong `public/images/cars/<id>.png` (rộng ~1200–1600px, < 300 KB) và sửa `image`. Thêm bộ ảnh vào `carGalleries` trong `CarGallery.tsx`
+       (nếu chưa có thì gallery dùng tạm `car.image`).
+    3. Xóa `hidden: true`, đổi `status` sang `"available"`.
+    4. Tùy chọn: thêm khối "Điểm nổi bật" riêng trong `src/app/xe/[slug]/page.tsx` (mặc định lấy 5 dòng từ `highlights`),
+       thêm slide `HeroSlider`, thêm vào `detectPromotionCar` trong `scripts/add-news.mjs` để nhận diện bảng khuyến mãi.
+    5. `npm run build` → push.
 - **UsedCar**: `id`, `slug`, `modelYear`, `mileage` (km), `price` (đồng), `status` (`available` hoặc `sold`),
   `image`, `images[]`, `equipment[]`, `commitments[]`, ...
 - **NewsArticle**: `slug`, `category` (union `NewsCategory`), `publishedAt` (`YYYY-MM-DD`), `image`,
