@@ -37,27 +37,27 @@ export default function SiteFooter() {
     </h3>
 
     <div className="mt-4 flex flex-col gap-3 text-sm text-gray-300">
-      <Link href="/xe/destinator" className="hover:text-white">
+      <Link href="/xe/mitsubishi-destinator" className="hover:text-white">
         Destinator
       </Link>
 
-      <Link href="/xe/xforce" className="hover:text-white">
+      <Link href="/xe/mitsubishi-xforce" className="hover:text-white">
         Xforce
       </Link>
 
-      <Link href="/xe/xpander" className="hover:text-white">
+      <Link href="/xe/mitsubishi-xpander" className="hover:text-white">
         Xpander
       </Link>
 
-      <Link href="/xe/xpander-cross" className="hover:text-white">
+      <Link href="/xe/mitsubishi-xpander-cross" className="hover:text-white">
         Xpander Cross
       </Link>
 
-      <Link href="/xe/triton" className="hover:text-white">
+      <Link href="/xe/mitsubishi-triton" className="hover:text-white">
         Triton
       </Link>
 
-      <Link href="/xe/attrage" className="hover:text-white">
+      <Link href="/xe/mitsubishi-attrage" className="hover:text-white">
         Attrage
       </Link>
     </div>
