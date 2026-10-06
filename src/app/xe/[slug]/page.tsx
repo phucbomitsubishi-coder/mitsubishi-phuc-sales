@@ -1,4 +1,4 @@
-import { getCarBySlug } from "@/data/cars";
+import { cars, getCarBySlug } from "@/data/cars";
 import SiteHeader from "@/components/SiteHeader";
 import { notFound } from "next/navigation";
 import VariantSelector from "./VariantSelector";
@@ -8,12 +8,20 @@ import BackToPrevious from "@/components/BackToPrevious";
 import MobileContactBar from "@/components/MobileContactBar";
 import CarGallery from "./CarGallery";
 import { currentPromotion } from "@/data/promotions";
+import Link from "next/link";
 
 type CarDetailPageProps = {
   params: Promise<{
     slug: string;
   }>;
 };
+
+export function generateStaticParams() {
+  return cars.map((car) => ({
+    slug: car.slug,
+  }));
+}
+
 export async function generateMetadata({
   params,
 }: CarDetailPageProps): Promise<Metadata> {
@@ -209,12 +217,12 @@ const breadcrumbSchema = {
   )}
 </div>
   <div className="mt-6 flex flex-wrap gap-4">
-    <a
+    <Link
       href={`/?car=${encodeURIComponent(car.name)}&nguon=Chi-tiet-xe#bao-gia`}
       className="rounded bg-red-600 px-6 py-3 font-semibold text-white hover:bg-red-700"
     >
       Nhận báo giá
-    </a>
+    </Link>
 
     <a
       href="https://zalo.me/0858678929"
