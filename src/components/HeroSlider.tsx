@@ -15,7 +15,7 @@ const slides = [
   {
     id: "xforce",
     name: "Mitsubishi Xforce",
-    image: "/images/hero/hero-xforce.png",
+    image: "/images/hero/hero-xforce.jpg",
     position: "center center",
     href: "/xe/mitsubishi-xforce",
   },
@@ -37,29 +37,54 @@ const slides = [
 
 export default function HeroSlider() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  // Trang đã tải xong: lúc này mới tải các slide sau và bắt đầu tự chuyển slide,
+  // để ảnh slide đầu (phần tử lớn nhất đầu trang - LCP) không bị tranh băng thông.
+  const [pageLoaded, setPageLoaded] = useState(false);
 
   useEffect(() => {
+    const markLoaded = () => setPageLoaded(true);
+
+    if (document.readyState === "complete") {
+      const timer = setTimeout(markLoaded, 0);
+      return () => clearTimeout(timer);
+    }
+
+    window.addEventListener("load", markLoaded, { once: true });
+    return () => window.removeEventListener("load", markLoaded);
+  }, []);
+
+  useEffect(() => {
+    if (!pageLoaded) return;
+
     const timer = setInterval(() => {
       setCurrentSlide((current) => (current + 1) % slides.length);
     }, 5000);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [pageLoaded]);
 
   const slide = slides[currentSlide];
 
   return (
     <section className="relative w-full overflow-hidden bg-black">
       <div className="relative aspect-[16/7] w-full">
-        <Image
-          src={slide.image}
-          alt={slide.name}
-          fill
-          preload
-          sizes="100vw"
-          className="object-cover"
-          style={{ objectPosition: slide.position }}
-        />
+        {slides.map((item, index) =>
+          index === 0 || pageLoaded ? (
+            <Image
+              key={item.id}
+              src={item.image}
+              alt={item.name}
+              fill
+              preload={index === 0}
+              sizes="100vw"
+              aria-hidden={index !== currentSlide}
+              className={`object-cover transition-opacity duration-700 ${
+                index === currentSlide ? "opacity-100" : "opacity-0"
+              }`}
+              style={{ objectPosition: item.position }}
+            />
+          ) : null
+        )}
         <div className="absolute bottom-3 left-1/2 z-10 flex -translate-x-1/2 gap-2 whitespace-nowrap sm:bottom-10 sm:left-auto sm:right-12 sm:translate-x-0 sm:gap-3 lg:right-20">
   <Link
     href={slide.href}
