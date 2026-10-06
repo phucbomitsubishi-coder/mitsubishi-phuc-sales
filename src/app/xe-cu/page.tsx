@@ -79,6 +79,7 @@ export default function UsedCarsPage() {
       <img
         src={car.image}
         alt={`${car.name} ${car.modelYear}`}
+        loading="lazy"
         className="h-full w-full object-cover"
       />
     </div>
@@ -156,6 +157,7 @@ export default function UsedCarsPage() {
                         <img
                           src={car.image}
                           alt={`${car.name} ${car.modelYear}`}
+                          loading="lazy"
                           className="h-full w-full object-cover"
                         />
 
