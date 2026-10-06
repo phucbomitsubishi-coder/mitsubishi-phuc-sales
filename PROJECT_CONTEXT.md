@@ -43,7 +43,8 @@ npm run add-news       # CLI lấy bài viết từ URL → src/data/news.ts (+ 
 
 ```
 src/
-  config/site.ts          # siteConfig: tên, SĐT, email, Zalo, TikTok, địa chỉ đại lý, SEO mặc định
+  config/site.ts          # siteConfig: tên, SĐT, email, Zalo, Facebook, TikTok, địa chỉ đại lý, SEO mặc định
+  lib/metadata.ts         # createPageMetadata({ title, description, path }) cho trang tĩnh
   data/
     cars.ts               # Xe mới (~1900 dòng): Car, CarVariant, cars[], featuredCars, getCarBySlug()
     usedCars.ts           # Xe cũ: UsedCar, usedCars[]
@@ -63,6 +64,8 @@ src/
     ho-tro/ (+5 trang: bảo hành, bảo dưỡng, phụ tùng, hướng dẫn sử dụng, FAQ)
     gioi-thieu/, lien-he/, dang-ky-lai-thu/
     sitemap.ts, robots.ts # Sitemap được sinh từ cars/usedCars/news và danh sách trang tĩnh
+    not-found.tsx         # Trang 404 tiếng Việt (có header, nút về trang chủ, gọi, Zalo)
+    favicon.ico, icon.svg, apple-icon.png  # Icon logo 3 hình thoi Mitsubishi (cắt từ logo-black.svg)
 scripts/                  # Script Node ESM tương tác bằng readline, sửa trực tiếp file trong src/data
 public/images/
   cars/<id>/ , cars/<id>.png   # Ảnh xe mới
@@ -124,8 +127,13 @@ Alias import: `@/` → `src/`.
 - Link nội bộ luôn dùng `<Link>` từ `next/link`, không dùng `<a>` (lint báo lỗi). Link trong `MobileMenu` phải có `onClick={() => setIsOpen(false)}`.
 - Link tới trang xe phải dùng **slug** (`/xe/mitsubishi-xforce`), không dùng id. `next.config.ts` có redirect 308 từ `/xe/<id>` cũ.
 - Các trang `/xe/[slug]`, `/xe-cu/[slug]`, `/tin-tuc/[slug]` đều có `generateStaticParams` (tạo sẵn HTML khi build).
-- SEO: mỗi trang động có `generateMetadata`; `layout.tsx` chứa JSON-LD `AutoDealer`; sitemap được sinh tự động.
-  Khi thêm trang tĩnh mới, **nhớ thêm vào `src/app/sitemap.ts`**.
+- SEO: mỗi trang động có `generateMetadata`; `layout.tsx` chứa JSON-LD `AutoDealer` (kèm `sameAs` Facebook/TikTok); sitemap được sinh tự động.
+  Khi thêm trang tĩnh mới:
+  - Dùng `export const metadata: Metadata = createPageMetadata({ title, description, path })` từ `@/lib/metadata`.
+    Nếu chỉ khai báo `title/description`, trang sẽ kế thừa Open Graph của trang chủ, và khi chia sẻ qua Zalo/Facebook sẽ hiện sai tiêu đề và URL.
+    Hàm này tự thêm "| Lưu Hoàng Phúc" vào tiêu đề nếu thiếu.
+  - **Nhớ thêm trang vào `src/app/sitemap.ts`**.
+- Next 16: thuộc tính `priority` của `<Image>` đã bị deprecate. Ảnh lớn ở đầu trang (LCP) dùng `preload`, các ảnh khác ở đầu trang dùng `loading="eager"`.
 - Thông tin liên hệ lấy từ `siteConfig` (kể cả metadata và JSON-LD trong `layout.tsx`; riêng địa chỉ tách theo từng phần trong JSON-LD vẫn ghi cứng).
 - Không có dark mode. Website luôn dùng nền trắng.
 - Ảnh gốc trong `public/` nên rộng khoảng 1200–1600px và dưới 300 KB (`next/image` vẫn tự tạo bản nhỏ hơn). Có thể nén bằng `sharp` (có sẵn trong node_modules).
@@ -137,4 +145,5 @@ Alias import: `@/` → `src/`.
 
 - Danh sách `categories` trong `add-news.mjs` phải khớp chính xác với union `NewsCategory` trong `news.ts`.
   Khi thêm hoặc đổi danh mục, sửa cả hai nơi, nếu không build sẽ lỗi.
-- `README.md` vẫn là nội dung mặc định của create-next-app.
+- Website chạy trên **Vercel**, tự deploy khi push lên `main`. Có thể kiểm tra trạng thái deploy qua
+  `https://api.github.com/repos/phucbomitsubishi-coder/mitsubishi-phuc-sales/commits/<sha>/status` (không cần `gh`, máy chưa cài).
