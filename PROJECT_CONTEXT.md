@@ -121,6 +121,11 @@ Alias import: `@/` → `src/`.
   - Giao diện: tổng trước, 5 khoản phí thu gọn trong `<details>`. Trừ khuyến mãi từ `promotions.ts`.
     Nút "Nhận báo giá" điền sẵn `?car=&variant=`.
   - Triton được nhận diện bằng `carName === "Mitsubishi Triton"`, nên đổi tên xe sẽ làm sai logic này.
+  - Công thức nằm trong `src/lib/onRoadPrice.ts` (`calculateOnRoadPrice`), dùng chung cho công cụ tính và trang bảng giá.
+    Sửa phí ở đó, không viết lại công thức trong component.
+- **Bảng giá xe** (`/bang-gia-xe-mitsubishi`, trang SEO chính cho từ khóa "giá xe Mitsubishi"): URL cố định, tiêu đề và nội dung
+  tự đổi theo tháng của `currentPromotion`. Giá niêm yết lấy từ `cars.ts`, ưu đãi khớp theo `variantName === variant.name`,
+  lăn bánh tính cho TP.HCM. Có link ở menu "Dự toán chi phí", menu mobile và footer. Mỗi tháng chỉ cần cập nhật `promotions.ts`.
 - **Trả góp** (`InstallmentCalculator.tsx`): chọn trả trước 15–70%, nhập lãi suất năm đầu.
 - **Trang Giới thiệu** (`src/app/gioi-thieu/page.tsx`) tập trung vào người tư vấn. Thứ tự các phần: hero có ảnh chân dung,
   số liệu (năm kinh nghiệm, số xe, 24/7) và điểm Google 5,0 (635) → 4 lý do (lấy từ nhận xét thật của khách) →

@@ -99,6 +99,12 @@ export default function SiteHeader() {
             <div className="invisible absolute left-1/2 top-full z-50 w-56 -translate-x-1/2 pt-3 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100">
               <div className="rounded-xl border border-gray-200 bg-white p-2 shadow-xl">
                 <Link
+                  href="/bang-gia-xe-mitsubishi"
+                  className="block rounded-lg px-4 py-3 text-sm font-semibold text-gray-800 transition hover:bg-gray-50 hover:text-red-600"
+                >
+                  Bảng giá xe
+                </Link>
+                <Link
                   href="/du-toan/gia-lan-banh"
                   className="block rounded-lg px-4 py-3 text-sm font-semibold text-gray-800 transition hover:bg-gray-50 hover:text-red-600"
                 >

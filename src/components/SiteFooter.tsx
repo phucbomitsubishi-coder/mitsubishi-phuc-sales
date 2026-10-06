@@ -57,6 +57,10 @@ export default function SiteFooter() {
     </h3>
 
     <div className="mt-4 flex flex-col gap-3 text-sm text-gray-300">
+      <Link href="/bang-gia-xe-mitsubishi" className="hover:text-white">
+        Bảng giá xe
+      </Link>
+
       <Link href="/#khuyen-mai" className="hover:text-white">
         Khuyến mãi
       </Link>

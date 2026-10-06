@@ -3,13 +3,8 @@
 import { useState } from "react";
 import type { VariantPromotion } from "@/data/promotions";
 import Link from "next/link";
-import {
-  defaultProvinceId,
-  plateFeeByArea,
-  provinces,
-} from "@/data/registrationFees";
-
-type PlateType = "white" | "yellow";
+import { defaultProvinceId, provinces } from "@/data/registrationFees";
+import { calculateOnRoadPrice, type PlateType } from "@/lib/onRoadPrice";
 
 type Props = {
   carName: string;
@@ -90,45 +85,14 @@ export default function OnRoadPriceCalculator({
       (total, benefit) => total + (benefit.value ?? 0),
       0
     ) ?? 0;
-  const isTriton = carName === "Mitsubishi Triton";
-
-  // ===== Công thức tính phí (giữ nguyên) =====
-  // Bán tải chở hàng (Triton) chịu 60% mức trước bạ của ô tô con tại địa phương
-  const registrationTaxRate = isTriton
-    ? province.taxRate * 0.6
-    : province.taxRate;
-
-  const registrationTax = price * registrationTaxRate;
-  const licensePlateFee =
-    plateFeeByArea[isTriton ? "pickup" : "car"][province.plateArea];
-  const inspectionFee = 90000;
-  const roadUseFee = isTriton
-    ? 2160000
-    : plateType === "yellow"
-      ? 2160000
-      : 1560000;
-  const insuranceFee =
-    plateType === "yellow"
-      ? seats === 7
-        ? 1203000
-        : 842000
-      : seats === 7
-        ? 944000
-        : 531000;
-
-  const fees = [
-    {
-      label: `Lệ phí trước bạ theo giá niêm yết (${(registrationTaxRate * 100).toLocaleString("vi-VN", { maximumFractionDigits: 1 })}%)`,
-      value: registrationTax,
-    },
-    { label: "Lệ phí đăng ký & biển số", value: licensePlateFee },
-    { label: "Phí đăng kiểm", value: inspectionFee },
-    { label: "Phí đường bộ (12 tháng)", value: roadUseFee },
-    { label: "Bảo hiểm TNDS bắt buộc", value: insuranceFee },
-  ];
-
-  const totalFees = fees.reduce((sum, fee) => sum + fee.value, 0);
-  const onRoadPrice = price + totalFees;
+  // Công thức tính phí: src/lib/onRoadPrice.ts (dùng chung với trang bảng giá)
+  const { fees, totalFees, onRoadPrice } = calculateOnRoadPrice({
+    carName,
+    price,
+    seats,
+    province,
+    plateType,
+  });
   const onRoadPriceAfterPromotion = Math.max(
     0,
     onRoadPrice - totalPromotionValue

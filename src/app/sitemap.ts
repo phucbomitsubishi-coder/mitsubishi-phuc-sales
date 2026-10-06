@@ -96,6 +96,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
 
     {
+      url: `${baseUrl}/bang-gia-xe-mitsubishi`,
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
       url: `${baseUrl}/du-toan/gia-lan-banh`,
       changeFrequency: "monthly",
       priority: 0.8,

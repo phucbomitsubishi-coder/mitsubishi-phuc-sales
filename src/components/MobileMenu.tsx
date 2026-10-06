@@ -61,6 +61,14 @@ export default function MobileMenu({ cars }: MobileMenuProps) {
   </Link>
 
     <Link
+    href="/bang-gia-xe-mitsubishi"
+    onClick={() => setIsOpen(false)}
+    className="block py-3 font-semibold"
+  >
+    Bảng giá xe
+  </Link>
+
+    <Link
     href="/du-toan/gia-lan-banh"
     onClick={() => setIsOpen(false)}
     className="block py-3 font-semibold"
