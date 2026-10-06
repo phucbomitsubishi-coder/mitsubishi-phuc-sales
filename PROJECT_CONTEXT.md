@@ -125,6 +125,8 @@ Alias import: `@/` → `src/`.
   Ảnh nằm ở đầu trang dùng `loading="eager"` (Next 16 đã deprecate `priority`). SVG (logo) tự động `unoptimized`.
   `public/` nặng khoảng 51 MB.
 - Link nội bộ luôn dùng `<Link>` từ `next/link`, không dùng `<a>` (lint báo lỗi). Link trong `MobileMenu` phải có `onClick={() => setIsOpen(false)}`.
+- Link về trang chủ (`href="/"`) nằm **trên chính trang chủ** (logo header, nút trong QuoteForm) phải dùng `ScrollTopLink`
+  (`src/components/ScrollTopLink.tsx`). `<Link>` không cuộn khi đã ở đúng trang, nên nếu dùng `<Link>` thì bấm logo sẽ không về đầu trang.
 - Link tới trang xe phải dùng **slug** (`/xe/mitsubishi-xforce`), không dùng id. `next.config.ts` có redirect 308 từ `/xe/<id>` cũ.
 - Các trang `/xe/[slug]`, `/xe-cu/[slug]`, `/tin-tuc/[slug]` đều có `generateStaticParams` (tạo sẵn HTML khi build).
 - SEO: mỗi trang động có `generateMetadata`; `layout.tsx` chứa JSON-LD `AutoDealer` (kèm `sameAs` Facebook/TikTok); sitemap được sinh tự động.
@@ -134,11 +136,16 @@ Alias import: `@/` → `src/`.
     Hàm này tự thêm "| Lưu Hoàng Phúc" vào tiêu đề nếu thiếu.
   - **Nhớ thêm trang vào `src/app/sitemap.ts`**.
 - Next 16: thuộc tính `priority` của `<Image>` đã bị deprecate. Ảnh lớn ở đầu trang (LCP) dùng `preload`, các ảnh khác ở đầu trang dùng `loading="eager"`.
-- Thông tin liên hệ lấy từ `siteConfig` (kể cả metadata và JSON-LD trong `layout.tsx`; riêng địa chỉ tách theo từng phần trong JSON-LD vẫn ghi cứng).
+- Thông tin liên hệ **luôn lấy từ `siteConfig`**, không ghi cứng số điện thoại, Zalo hay email trong trang
+  (`siteConfig.contact.phoneUrl/zaloUrl/emailUrl`, `siteConfig.sales.phoneDisplay/email`). Riêng địa chỉ tách theo từng phần trong JSON-LD ở `layout.tsx` vẫn ghi cứng.
+- `next.config.ts` có header bảo mật (`X-Frame-Options`, `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`) và redirect `/xe/<id>`.
+- Sitemap: chỉ tin tức có `lastModified` (lấy theo `publishedAt`). Không đặt `new Date()` cho trang tĩnh.
 - Không có dark mode. Website luôn dùng nền trắng.
 - Ảnh gốc trong `public/` nên rộng khoảng 1200–1600px và dưới 300 KB (`next/image` vẫn tự tạo bản nhỏ hơn). Có thể nén bằng `sharp` (có sẵn trong node_modules).
 - Kiểm tra giao diện bằng Edge headless (PowerShell): `msedge --headless --disable-gpu --user-data-dir=<thư mục mới> --window-size=1366,1000 --virtual-time-budget=15000 --screenshot=<file.png> <url>`.
   Mỗi lần chụp cần profile riêng hoặc phải tắt tiến trình Edge headless cũ trước (nếu không sẽ lỗi exit code 21).
+  Để thử bấm thật (click, cuộn, đọc URL): chạy Edge với `--headless=new --remote-debugging-port=9333`, rồi điều khiển qua
+  Chrome DevTools Protocol bằng `WebSocket` có sẵn trong Node 24 (`Input.dispatchMouseEvent`, `Runtime.evaluate`). Không cần cài Playwright.
 - Code chưa được format đồng nhất (thụt lề lẫn lộn). Khi sửa code, giữ nguyên phong cách của vùng xung quanh.
 
 ## 9. Điểm cần chú ý hoặc rủi ro đã biết
