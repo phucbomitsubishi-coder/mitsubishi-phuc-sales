@@ -1,3 +1,5 @@
+import { siteConfig } from "@/config/site";
+
 export default function MoveoLocation() {
   return (
     <section className="bg-gray-50">
@@ -29,7 +31,7 @@ export default function MoveoLocation() {
 </a>
 
               <a
-  href="https://zalo.me/0858678929"
+  href={siteConfig.contact.zaloUrl}
   target="_blank"
   rel="noopener noreferrer"
  className="rounded-lg border border-gray-300 px-6 py-3 text-center font-bold text-black transition hover:bg-gray-100"

@@ -307,7 +307,7 @@ export default function Home() {
           href={siteConfig.contact.phoneUrl}
           className="mt-2 block text-xl font-bold text-white transition hover:text-red-500"
         >
-          0858 678 929
+          {siteConfig.sales.phoneDisplay}
         </a>
 
         <a
@@ -325,7 +325,7 @@ export default function Home() {
         </p>
 
         <p className="mt-2 text-xl font-bold">
-          0858 678 929
+          {siteConfig.sales.phoneDisplay}
         </p>
 
         <a
@@ -348,7 +348,7 @@ export default function Home() {
           href={siteConfig.contact.emailUrl}
           className="mt-2 block break-all font-semibold text-white transition hover:text-red-500"
         >
-          phucbo.mitsubishi@gmail.com
+          {siteConfig.sales.email}
         </a>
 
         <a

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { siteConfig } from "@/config/site";
 import { createPageMetadata } from "@/lib/metadata";
 import SiteHeader from "@/components/SiteHeader";
 import { usedCars } from "@/data/usedCars";
@@ -53,14 +54,14 @@ export default function UsedCarsPage() {
 
                 <div className="mt-6 flex flex-wrap justify-center gap-3">
                   <a
-                    href="tel:0858678929"
+                    href={siteConfig.contact.phoneUrl}
                     className="rounded-xl bg-red-600 px-6 py-3 font-semibold text-white transition hover:bg-red-700"
                   >
                     Gọi tư vấn
                   </a>
 
                   <a
-                    href="https://zalo.me/0858678929"
+                    href={siteConfig.contact.zaloUrl}
                     target="_blank"
                     rel="noreferrer"
                     className="rounded-xl border border-blue-600 px-6 py-3 font-semibold text-blue-600 transition hover:bg-blue-50"

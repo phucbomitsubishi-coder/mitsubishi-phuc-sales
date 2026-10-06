@@ -147,7 +147,7 @@ export default function GioiThieuPage() {
                 { label: "Dự tính phương án trả góp", href: "/du-toan/tra-gop" },
                 { label: "Theo dõi thông tin & ưu đãi", href: "/tin-tuc" },
                 { label: "Đăng ký lái thử", href: "/dang-ky-lai-thu?nguon=Gioi-thieu" },
-                { label: "Kết nối tư vấn trực tiếp", href: "https://zalo.me/0858678929" },
+                { label: "Kết nối tư vấn trực tiếp", href: siteConfig.contact.zaloUrl },
               ].map((item) => (
                 <a
                   key={item.label}

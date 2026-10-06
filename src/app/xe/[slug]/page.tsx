@@ -225,7 +225,7 @@ const breadcrumbSchema = {
     </Link>
 
     <a
-      href="https://zalo.me/0858678929"
+      href={siteConfig.contact.zaloUrl}
       target="_blank"
       rel="noopener noreferrer"
       className="rounded border border-gray-300 px-6 py-3 font-semibold hover:bg-gray-100"

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { siteConfig } from "@/config/site";
 import { createPageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
@@ -34,10 +35,10 @@ export default function ContactPage() {
 
             <div className="mt-8 flex flex-wrap gap-3">
               <a
-                href="tel:0858678929"
+                href={siteConfig.contact.phoneUrl}
                 className="rounded-lg bg-red-600 px-6 py-3 font-bold text-white transition hover:bg-red-700"
               >
-                Gọi ngay: 0858 678 929
+                Gọi ngay: {siteConfig.sales.phoneDisplay}
               </a>
 
               <Link
@@ -93,10 +94,10 @@ export default function ContactPage() {
 
                 <div className="mt-3 space-y-3">
                   <a
-                    href="tel:0858678929"
+                    href={siteConfig.contact.phoneUrl}
                     className="block text-2xl font-bold text-neutral-950 transition hover:text-red-600"
                   >
-                    0858 678 929
+                    {siteConfig.sales.phoneDisplay}
                   </a>
 
                   <a
@@ -120,10 +121,10 @@ export default function ContactPage() {
                 </p>
 
                 <a
-                  href="mailto:phucbo.mitsubishi@gmail.com"
+                  href={siteConfig.contact.emailUrl}
                   className="mt-3 block break-all text-lg font-bold text-neutral-950 transition hover:text-red-600"
                 >
-                  phucbo.mitsubishi@gmail.com
+                  {siteConfig.sales.email}
                 </a>
 
                 <p className="mt-3 leading-7 text-neutral-600">
@@ -203,10 +204,10 @@ export default function ContactPage() {
 
                 <div className="mt-2 flex flex-wrap gap-x-6 gap-y-2">
                   <a
-                    href="tel:0858678929"
+                    href={siteConfig.contact.phoneUrl}
                     className="font-bold text-white transition hover:text-red-500"
                   >
-                    0858 678 929
+                    {siteConfig.sales.phoneDisplay}
                   </a>
 
                   <a
