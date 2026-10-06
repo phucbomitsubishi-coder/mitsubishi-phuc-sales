@@ -177,6 +177,7 @@ export default function CarGallery({
             <img
               src={image}
               alt=""
+              loading="lazy"
               className="h-16 w-full object-cover sm:h-20"
             />
           </button>
