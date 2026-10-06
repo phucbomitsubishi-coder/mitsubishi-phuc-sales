@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import SiteHeader from "@/components/SiteHeader";
 import { siteConfig } from "@/config/site";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Nên chọn phiên bản xe Mitsubishi như thế nào? | Lưu Hoàng Phúc",
@@ -17,12 +18,12 @@ export default function MitsubishiVariantGuidePage() {
       <SiteHeader />
 
       <article className="mx-auto max-w-4xl px-6 py-10 md:py-16">
-        <a
+        <Link
           href="/#tin-tuc"
           className="font-semibold text-red-600 transition hover:text-red-700"
         >
           ← Tin tức & Tư vấn
-        </a>
+        </Link>
 
         <p className="mt-8 font-semibold uppercase tracking-wider text-red-600">
           Phiên bản & ưu đãi
@@ -102,12 +103,12 @@ export default function MitsubishiVariantGuidePage() {
     đâu là lựa chọn phù hợp với nhu cầu sử dụng hằng ngày.
   </p>
 
-  <a
+  <Link
     href="/xe/mitsubishi-xforce"
     className="mt-3 inline-block font-semibold text-red-600 transition hover:text-red-700"
   >
     Xem các phiên bản Mitsubishi Xforce →
-  </a>
+  </Link>
 
   <h3 className="mt-8 text-xl font-bold">
     Mitsubishi Xpander
@@ -120,12 +121,12 @@ export default function MitsubishiVariantGuidePage() {
     nhu cầu sử dụng của gia đình.
   </p>
 
-  <a
+  <Link
     href="/xe/mitsubishi-xpander"
     className="mt-3 inline-block font-semibold text-red-600 transition hover:text-red-700"
   >
     Xem các phiên bản Mitsubishi Xpander →
-  </a>
+  </Link>
   <h3 className="mt-8 text-xl font-bold">
   Mitsubishi Triton
 </h3>
@@ -144,12 +145,12 @@ export default function MitsubishiVariantGuidePage() {
   hành thực tế trước khi quyết định.
 </p>
 
-<a
+<Link
   href="/xe/mitsubishi-triton"
   className="mt-3 inline-block font-semibold text-red-600 transition hover:text-red-700"
 >
   Xem các phiên bản Mitsubishi Triton →
-</a>
+</Link>
 
 <h3 className="mt-8 text-xl font-bold">
   Mitsubishi Attrage
@@ -162,12 +163,12 @@ export default function MitsubishiVariantGuidePage() {
   bản phù hợp với nhu cầu đi lại hằng ngày.
 </p>
 
-<a
+<Link
   href="/xe/mitsubishi-attrage"
   className="mt-3 inline-block font-semibold text-red-600 transition hover:text-red-700"
 >
   Xem các phiên bản Mitsubishi Attrage →
-</a>
+</Link>
 <h3 className="mt-8 text-xl font-bold">
   Mitsubishi Destinator
 </h3>
@@ -186,12 +187,12 @@ export default function MitsubishiVariantGuidePage() {
   vẫn đáp ứng nhu cầu sử dụng cơ bản của dòng xe.
 </p>
 
-<a
+<Link
   href="/xe/mitsubishi-destinator"
   className="mt-3 inline-block font-semibold text-red-600 transition hover:text-red-700"
 >
   Xem các phiên bản Mitsubishi Destinator →
-</a>
+</Link>
 
 <h3 className="mt-8 text-xl font-bold">
   Mitsubishi Xpander Cross
@@ -204,12 +205,12 @@ export default function MitsubishiVariantGuidePage() {
   kế, trang bị và nhu cầu sử dụng thực tế.
 </p>
 
-<a
+<Link
   href="/xe/mitsubishi-xpander-cross"
   className="mt-3 inline-block font-semibold text-red-600 transition hover:text-red-700"
 >
   Xem Mitsubishi Xpander Cross →
-</a>
+</Link>
 </section>
 <section className="mt-12 border-t border-gray-200 pt-10">
   <h2 className="text-2xl font-bold md:text-3xl">
@@ -228,12 +229,12 @@ export default function MitsubishiVariantGuidePage() {
     khác sau khi nhận xe.
   </p>
 
-  <a
+  <Link
     href="/tu-van/chi-phi-lan-banh-mitsubishi"
     className="mt-5 inline-block font-semibold text-red-600 transition hover:text-red-700"
   >
     Tìm hiểu các khoản chi phí lăn bánh Mitsubishi →
-  </a>
+  </Link>
 </section>
 
 
@@ -249,12 +250,12 @@ export default function MitsubishiVariantGuidePage() {
           </p>
 
           <div className="mt-6 flex flex-wrap gap-3">
-            <a
+            <Link
               href="/#san-pham"
               className="rounded bg-red-600 px-5 py-3 font-semibold text-white transition hover:bg-red-700"
             >
               Xem các mẫu xe
-            </a>
+            </Link>
 
             <a
               href={siteConfig.contact.zaloUrl}

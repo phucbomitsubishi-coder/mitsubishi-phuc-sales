@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type { VariantPromotion } from "@/data/promotions";
+import Link from "next/link";
 
 type RegistrationArea = "hcm" | "hanoi" | "province";
 type PlateType = "white" | "yellow";
@@ -269,12 +270,12 @@ xác nhận ưu đãi thực tế.
   </div>
 )}
 
-<a
+<Link
   href="/?nguon=Gia-lan-banh#bao-gia"
   className="mt-4 flex w-full items-center justify-center rounded-lg bg-red-600 px-5 py-3 font-bold text-white transition hover:bg-red-700"
 >
   Nhận báo giá
-</a>
+</Link>
 
   <p className="mt-3 text-xs leading-5 text-gray-500">
     Chi phí lăn bánh mang tính dự tính và tham khảo. Chi phí thực tế có

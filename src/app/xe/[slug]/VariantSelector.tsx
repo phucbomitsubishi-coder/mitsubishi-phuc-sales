@@ -5,6 +5,7 @@ import { useState } from "react";
 import type { CarVariant } from "@/data/cars";
 import type { VariantPromotion } from "@/data/promotions";
 import OnRoadPriceCalculator from "@/components/OnRoadPriceCalculator";
+import Link from "next/link";
 
 type Props = {
   carName: string;
@@ -707,7 +708,7 @@ const selectedImage =
   </div>
 )}
 
-    <a
+    <Link
       href={`/?car=${encodeURIComponent(
         carName
       )}&variant=${encodeURIComponent(
@@ -716,7 +717,7 @@ const selectedImage =
       className="mt-8 inline-block rounded bg-red-600 px-6 py-3 font-semibold text-white hover:bg-red-700"
     >
       Nhận báo giá phiên bản này
-    </a>
+    </Link>
   </div>
 
   <OnRoadPriceCalculator

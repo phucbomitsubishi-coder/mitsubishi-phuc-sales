@@ -3,6 +3,7 @@
 import { FormEvent, Suspense, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import SiteHeader from "@/components/SiteHeader";
+import Link from "next/link";
 
 const SCRIPT_URL =
   "https://script.google.com/macros/s/AKfycbzw49PlAEA9ajztoKPK5oAs1vb3HOzLXO1sikV0cjROOaLwn3eb2WLNtVBAM--ll-6t/exec";
@@ -267,12 +268,12 @@ function DangKyLaiThuForm() {
               <p className="mt-3 text-gray-700">
                 Cảm ơn bạn đã đăng ký. Chúng tôi sẽ liên hệ xác nhận lịch lái thử trong thời gian sớm nhất.
               </p>
-              <a
+              <Link
                 href="/"
                 className="mx-auto mt-6 hidden w-fit rounded-xl bg-red-600 px-8 py-3 font-semibold text-white transition hover:bg-red-700 md:block"
               >
                 ← Quay về trang chủ
-              </a>
+              </Link>
             </div>
           )}
 

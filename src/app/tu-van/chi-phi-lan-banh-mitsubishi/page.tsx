@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import SiteHeader from "@/components/SiteHeader";
 import { siteConfig } from "@/config/site";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Giá lăn bánh Mitsubishi gồm những khoản nào? | Lưu Hoàng Phúc",
@@ -17,12 +18,12 @@ export default function MitsubishiOnRoadCostGuidePage() {
       <SiteHeader />
 
       <article className="mx-auto max-w-4xl px-6 py-10 md:py-16">
-        <a
+        <Link
           href="/#tin-tuc"
           className="font-semibold text-red-600 transition hover:text-red-700"
         >
           ← Tin tức & Tư vấn
-        </a>
+        </Link>
 
         <p className="mt-8 font-semibold uppercase tracking-wider text-red-600">
           Chi phí mua xe
@@ -145,12 +146,12 @@ export default function MitsubishiOnRoadCostGuidePage() {
     theo thời điểm đăng ký, địa phương, hồ sơ xe và chính sách hiện hành.
   </p>
 
-  <a
+  <Link
     href="/#san-pham"
     className="mt-5 inline-block font-semibold text-red-600 transition hover:text-red-700"
   >
     Chọn xe để dự tính giá lăn bánh →
-  </a>
+  </Link>
 </section>
         <div className="mt-10 rounded-2xl bg-gray-100 p-6 md:p-8">
           <h2 className="text-2xl font-bold">
@@ -164,12 +165,12 @@ export default function MitsubishiOnRoadCostGuidePage() {
           </p>
 
           <div className="mt-6 flex flex-wrap gap-3">
-            <a
+            <Link
               href="/#san-pham"
               className="rounded bg-red-600 px-5 py-3 font-semibold text-white transition hover:bg-red-700"
             >
               Chọn mẫu xe
-            </a>
+            </Link>
 
             <a
               href={siteConfig.contact.zaloUrl}

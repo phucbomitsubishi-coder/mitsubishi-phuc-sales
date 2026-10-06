@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { cars } from "@/data/cars";
+import Link from "next/link";
 
 export default function InstallmentCalculator() {
       const [downPaymentPercent, setDownPaymentPercent] = useState(15);
@@ -308,14 +309,14 @@ onBlur={(event) => {
 </div>
   </div>
 </div>
-<a
+<Link
   href={`/?form=tra-gop&car=${encodeURIComponent(
     selectedCar.id
   )}&variant=${encodeURIComponent(selectedVariant.name)}#bao-gia`}
   className="flex w-full items-center justify-center rounded-lg bg-red-600 px-6 py-4 text-base font-bold text-white transition hover:bg-red-700"
 >
   Nhận tư vấn trả góp
-</a>
+</Link>
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import SiteHeader from "@/components/SiteHeader";
 import { siteConfig } from "@/config/site";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Chọn xe Mitsubishi phù hợp với nhu cầu | Lưu Hoàng Phúc",
@@ -17,12 +18,12 @@ export default function MitsubishiBuyingGuidePage() {
       <SiteHeader />
 
       <article className="mx-auto max-w-4xl px-6 py-10 md:py-16">
-        <a
+        <Link
           href="/#tin-tuc"
           className="font-semibold text-red-600 transition hover:text-red-700"
         >
           ← Tin tức & Tư vấn
-        </a>
+        </Link>
 
         <p className="mt-8 font-semibold uppercase tracking-wider text-red-600">
           Tư vấn chọn xe
@@ -54,12 +55,12 @@ export default function MitsubishiBuyingGuidePage() {
     trang bị mong muốn và nhu cầu sử dụng thực tế trước khi quyết định.
   </p>
 
-  <a
+  <Link
     href="/xe/mitsubishi-xforce"
     className="mt-5 inline-block font-semibold text-red-600 transition hover:text-red-700"
   >
     Xem Mitsubishi Xforce →
-  </a>
+  </Link>
 </section>
 <section className="mt-12 border-t border-gray-200 pt-10">
   <h2 className="text-2xl font-bold md:text-3xl">
@@ -81,19 +82,19 @@ export default function MitsubishiBuyingGuidePage() {
   </p>
 
   <div className="mt-5 flex flex-wrap gap-x-6 gap-y-3">
-    <a
+    <Link
       href="/xe/mitsubishi-xpander"
       className="font-semibold text-red-600 transition hover:text-red-700"
     >
       Xem Mitsubishi Xpander →
-    </a>
+    </Link>
 
-    <a
+    <Link
       href="/xe/mitsubishi-xpander-cross"
       className="font-semibold text-red-600 transition hover:text-red-700"
     >
       Xem Mitsubishi Xpander Cross →
-    </a>
+    </Link>
   </div>
 </section>
 <section className="mt-12 border-t border-gray-200 pt-10">
@@ -114,12 +115,12 @@ export default function MitsubishiBuyingGuidePage() {
     thể tham khảo các phiên bản 4WD và so sánh kỹ trước khi lựa chọn.
   </p>
 
-  <a
+  <Link
     href="/xe/mitsubishi-triton"
     className="mt-5 inline-block font-semibold text-red-600 transition hover:text-red-700"
   >
     Xem Mitsubishi Triton →
-  </a>
+  </Link>
 </section>
 <section className="mt-12 border-t border-gray-200 pt-10">
   <h2 className="text-2xl font-bold md:text-3xl">
@@ -139,12 +140,12 @@ export default function MitsubishiBuyingGuidePage() {
     cao hơn.
   </p>
 
-  <a
+  <Link
     href="/xe/mitsubishi-attrage"
     className="mt-5 inline-block font-semibold text-red-600 transition hover:text-red-700"
   >
     Xem Mitsubishi Attrage →
-  </a>
+  </Link>
 </section>
 <section className="mt-12 border-t border-gray-200 pt-10">
   <h2 className="text-2xl font-bold md:text-3xl">
@@ -164,12 +165,12 @@ export default function MitsubishiBuyingGuidePage() {
     chọn phiên bản phù hợp.
   </p>
 
-  <a
+  <Link
     href="/xe/mitsubishi-destinator"
     className="mt-5 inline-block font-semibold text-red-600 transition hover:text-red-700"
   >
     Xem Mitsubishi Destinator →
-  </a>
+  </Link>
 </section>
 
         <div className="mt-10 rounded-2xl bg-gray-100 p-6 md:p-8">
@@ -183,12 +184,12 @@ export default function MitsubishiBuyingGuidePage() {
           </p>
 
           <div className="mt-6 flex flex-wrap gap-3">
-            <a
+            <Link
               href="/?nguon=Chon-xe-phu-hop#bao-gia"
               className="rounded bg-red-600 px-5 py-3 font-semibold text-white transition hover:bg-red-700"
             >
               Nhận báo giá
-            </a>
+            </Link>
 
             <a
               href={siteConfig.contact.zaloUrl}

@@ -1,12 +1,13 @@
 import { cars } from "@/data/cars";
 import { siteConfig } from "@/config/site";
 import MobileMenu from "@/components/MobileMenu";
+import Link from "next/link";
 
 export default function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-gray-800 bg-black text-white xl:border-gray-200 xl:bg-white xl:text-black">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 md:px-6 md:py-5">
-        <a
+        <Link
           href="/"
           aria-label="Về trang chủ"
           className="inline-flex shrink-0 items-center xl:-ml-4"
@@ -24,30 +25,30 @@ export default function SiteHeader() {
             alt="Mitsubishi Motors"
             className="hidden h-12 w-auto xl:block"
           />
-        </a>
+        </Link>
 
         {/* Menu desktop */}
 <nav className="hidden items-center gap-7 font-semibold xl:flex">
-  <a
+  <Link
     href="/gioi-thieu"
     className="whitespace-nowrap transition hover:text-red-600"
   >
     Giới thiệu
-  </a>
+  </Link>
 
   <div className="group relative">
-            <a
+            <Link
               href="/#san-pham"
               className="flex items-center gap-1 transition hover:text-red-600"
             >
               Sản phẩm
               <span className="text-xs">▼</span>
-            </a>
+            </Link>
 
             <div className="invisible absolute left-1/2 top-full z-50 w-[720px] -translate-x-1/2 pt-3 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100">
               <div className="grid grid-cols-3 gap-2 rounded-2xl border border-gray-200 bg-white p-4 shadow-xl">
                 {cars.map((car) => (
-                  <a
+                  <Link
                     key={car.slug}
                     href={`/xe/${car.slug}`}
                     className="group/car rounded-xl p-3 text-center transition hover:bg-gray-50"
@@ -62,18 +63,18 @@ export default function SiteHeader() {
                     <p className="mt-2 text-sm font-semibold text-gray-800 transition group-hover/car:text-red-600">
                       {car.name}
                     </p>
-                  </a>
+                  </Link>
                 ))}
               </div>
             </div>
           </div>
 
-          <a
+          <Link
             href="/#khuyen-mai"
             className="transition hover:text-red-600"
           >
             Khuyến mãi
-          </a>
+          </Link>
                     <div className="group relative">
             <button
               type="button"
@@ -85,41 +86,41 @@ export default function SiteHeader() {
 
             <div className="invisible absolute left-1/2 top-full z-50 w-56 -translate-x-1/2 pt-3 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100">
               <div className="rounded-xl border border-gray-200 bg-white p-2 shadow-xl">
-                <a
+                <Link
                   href="/du-toan/gia-lan-banh"
                   className="block rounded-lg px-4 py-3 text-sm font-semibold text-gray-800 transition hover:bg-gray-50 hover:text-red-600"
                 >
                   Tính giá lăn bánh
-                </a>
-                <a
+                </Link>
+                <Link
   href="/du-toan/tra-gop"
   className="block rounded-lg px-4 py-3 text-sm font-semibold text-gray-800 transition hover:bg-gray-50 hover:text-red-600"
 >
   Dự tính trả góp
-</a>
+</Link>
               </div>
             </div>
           </div>
-          <a
+          <Link
   href="/tin-tuc"
   className="transition hover:text-red-600"
 >
   Tin tức & Tư vấn
-</a>
+</Link>
 
-<a
+<Link
   href="/xe-cu"
   className="whitespace-nowrap transition hover:text-red-600"
 >
   Xe đã qua sử dụng
-</a>
+</Link>
 
-<a
+<Link
   href="/lien-he"
   className="transition hover:text-red-600"
 >
   Liên hệ
-</a>
+</Link>
         </nav>
 
         {/* Liên hệ desktop */}

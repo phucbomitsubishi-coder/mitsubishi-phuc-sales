@@ -1,42 +1,54 @@
 "use client";
 
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { cars } from "@/data/cars";
+import Link from "next/link";
 
-export default function QuoteForm() {
+type QuoteFormProps = {
+  initialCar?: string;
+  initialVariant?: string;
+  leadSource?: string;
+};
+
+// Đọc ?car=&variant=&form=&nguon= trên URL để điền sẵn form.
+// key thay đổi theo URL nên form được tạo lại khi bấm link sang cùng trang với tham số mới.
+export function QuoteFormFromUrl() {
+  const params = useSearchParams();
+  const carFromUrl = params.get("car");
+  const variantFromUrl = params.get("variant");
+  const formFromUrl = params.get("form");
+  const sourceFromUrl = params.get("nguon");
+
+  const matchedCar = carFromUrl
+    ? cars.find((car) => car.id === carFromUrl || car.name === carFromUrl)
+    : undefined;
+
+  const leadSource =
+    formFromUrl === "tra-gop"
+      ? "Công cụ tính trả góp"
+      : sourceFromUrl || undefined;
+
+  return (
+    <QuoteForm
+      key={params.toString()}
+      initialCar={matchedCar?.name}
+      initialVariant={matchedCar ? variantFromUrl ?? undefined : undefined}
+      leadSource={leadSource}
+    />
+  );
+}
+
+export default function QuoteForm({
+  initialCar = "",
+  initialVariant = "",
+  leadSource = "Website Mitsubishi",
+}: QuoteFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [message, setMessage] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
-  const [selectedCar, setSelectedCar] = useState("");
-  const [selectedVariant, setSelectedVariant] = useState("");
-  const [leadSource, setLeadSource] = useState("Website Mitsubishi");
-
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const carFromUrl = params.get("car");
-    const variantFromUrl = params.get("variant");
-    const formFromUrl = params.get("form");
-    const sourceFromUrl = params.get("nguon");
-    if (formFromUrl === "tra-gop") {
-      setLeadSource("Công cụ tính trả góp");
-    } else if (sourceFromUrl) {
-      setLeadSource(sourceFromUrl);
-    }
-
-    if (carFromUrl) {
-      const matchedCar = cars.find(
-        (car) => car.id === carFromUrl || car.name === carFromUrl
-      );
-
-      if (matchedCar) {
-        setSelectedCar(matchedCar.name);
-
-        if (variantFromUrl) {
-          setSelectedVariant(variantFromUrl);
-        }
-      }
-    }
-  }, []);
+  const [selectedCar, setSelectedCar] = useState(initialCar);
+  const [selectedVariant, setSelectedVariant] = useState(initialVariant);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -270,12 +282,12 @@ export default function QuoteForm() {
               <p className="mt-3 text-gray-700">
                 Cảm ơn bạn đã để lại thông tin. Lưu Hoàng Phúc sẽ liên hệ tư vấn giá xe và ưu đãi trong thời gian sớm nhất.
               </p>
-              <a
+              <Link
                 href="/"
                 className="mx-auto mt-6 hidden w-fit rounded-xl bg-red-600 px-8 py-3 font-semibold text-white transition hover:bg-red-700 md:block"
               >
                 ← Quay về trang chủ
-              </a>
+              </Link>
             </div>
           )}
         </div>

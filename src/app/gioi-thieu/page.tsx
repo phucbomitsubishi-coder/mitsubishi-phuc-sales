@@ -3,6 +3,7 @@ import MoveoEcosystem from "@/components/MoveoEcosystem";
 import MoveoTimeline from "@/components/MoveoTimeline";
 import MoveoLocation from "@/components/MoveoLocation";
 import { siteConfig } from "@/config/site";
+import Link from "next/link";
 
 export const metadata = {
   title: "Giới thiệu Mitsubishi Motors – Moveo New City",
@@ -38,12 +39,12 @@ export default function GioiThieuPage() {
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">
-            <a
+            <Link
               href="/dang-ky-lai-thu?nguon=Gioi-thieu"
               className="rounded-lg bg-red-600 px-6 py-3 font-bold text-white transition hover:bg-red-700"
             >
               Đăng ký lái thử
-            </a>
+            </Link>
 
             <a
               href={siteConfig.contact.zaloUrl}
@@ -185,12 +186,12 @@ export default function GioiThieuPage() {
           </div>
 
           <div className="flex flex-wrap gap-3">
-            <a
+            <Link
               href="/dang-ky-lai-thu?nguon=Gioi-thieu"
               className="rounded-lg bg-white px-6 py-3 font-bold text-red-600 transition hover:bg-gray-100"
             >
               Đăng ký lái thử
-            </a>
+            </Link>
 
             <a
               href={siteConfig.contact.zaloUrl}

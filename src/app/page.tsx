@@ -1,9 +1,11 @@
 import { cars } from "@/data/cars";
 import { getMaxPromotionValue } from "@/data/promotions";
 import { siteConfig } from "@/config/site";
-import QuoteForm from "@/components/QuoteForm";
+import { Suspense } from "react";
+import QuoteForm, { QuoteFormFromUrl } from "@/components/QuoteForm";
 import SiteHeader from "@/components/SiteHeader";
 import HeroSlider from "@/components/HeroSlider";
+import Link from "next/link";
 
 export const metadata = {
   alternates: {
@@ -66,12 +68,12 @@ export default function Home() {
                 </p>
               </div>
               <div className="mt-6 flex gap-3">
-  <a
+  <Link
     href={`/xe/${car.slug}`}
     className="rounded bg-red-600 px-4 py-2 font-semibold text-white transition hover:bg-red-700"
   >
     Xem chi tiết
-  </a>
+  </Link>
 
   <a
     href={siteConfig.contact.zaloUrl}
@@ -147,19 +149,19 @@ export default function Home() {
 )}
 
           <div className="mt-6 flex flex-wrap gap-3">
-            <a
+            <Link
               href={`/xe/${car.slug}`}
               className="rounded bg-red-600 px-4 py-3 font-semibold text-white transition hover:bg-red-700"
             >
               Xem chi tiết
-            </a>
+            </Link>
 
-            <a
+            <Link
   href={`/?car=${encodeURIComponent(car.name)}&nguon=Trang-chu-san-pham#bao-gia`}
   className="rounded border border-red-600 bg-white px-4 py-3 font-semibold text-red-600 transition hover:bg-red-50"
 >
   Nhận ưu đãi
-</a>
+</Link>
           </div>
         </div>
       ))}
@@ -200,12 +202,12 @@ export default function Home() {
           Gợi ý lựa chọn dòng xe phù hợp cho gia đình, công việc và nhu cầu
           di chuyển hằng ngày.
         </p>
-        <a
+        <Link
   href="/tu-van/chon-xe-mitsubishi-phu-hop"
   className="mt-5 inline-block font-semibold text-red-600 transition hover:text-red-700"
 >
   Đọc bài tư vấn →
-</a>
+</Link>
       </article>
 
       <article className="rounded-xl border border-gray-200 bg-gray-50 p-6">
@@ -222,12 +224,12 @@ export default function Home() {
     chuẩn bị ngân sách.
   </p>
 
-  <a
+  <Link
     href="/tu-van/chi-phi-lan-banh-mitsubishi"
     className="mt-5 inline-block font-semibold text-red-600 transition hover:text-red-700"
   >
     Đọc bài tư vấn →
-  </a>
+  </Link>
 </article>
 
       <article className="rounded-xl border border-gray-200 bg-gray-50 p-6">
@@ -244,28 +246,30 @@ export default function Home() {
     phiên bản phù hợp.
   </p>
 
-  <a
+  <Link
     href="/tu-van/chon-phien-ban-xe-mitsubishi"
     className="mt-5 inline-block font-semibold text-red-600 transition hover:text-red-700"
   >
     Đọc bài tư vấn →
-  </a>
+  </Link>
 </article>
         </div>
 
     <div className="mt-10 flex justify-center">
-      <a
+      <Link
         href="/tin-tuc"
         className="inline-flex items-center rounded-lg bg-red-600 px-6 py-3 font-semibold text-white transition hover:bg-red-700"
       >
         Xem tất cả Tin tức & Tư vấn →
-      </a>
+      </Link>
     </div>
   </div>
 </section>
 
 {/* NHẬN BÁO GIÁ */}
-<QuoteForm />
+<Suspense fallback={<QuoteForm />}>
+  <QuoteFormFromUrl />
+</Suspense>
 
 {/* LIÊN HỆ */}
 <section id="lien-he" className="bg-neutral-950 text-white">

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
 type MobileMenuProps = {
   cars: {
@@ -32,70 +33,71 @@ export default function MobileMenu({ cars }: MobileMenuProps) {
 
           <div className="grid grid-cols-2 gap-2">
             {cars.map((car) => (
-              <a
+              <Link
                 key={car.slug}
                 href={`/xe/${car.slug}`}
+                onClick={() => setIsOpen(false)}
                 className="rounded-lg border border-gray-800 px-3 py-3 text-sm font-semibold transition hover:border-red-600 hover:text-red-500"
               >
                 {car.name}
-              </a>
+              </Link>
             ))}
           </div>
 
           <div className="mt-5 border-t border-gray-800 pt-4">
-              <a
+              <Link
     href="/gioi-thieu"
     onClick={() => setIsOpen(false)}
     className="block py-3 font-semibold"
   >
     Giới thiệu
-  </a>
-  <a
+  </Link>
+  <Link
     href="/#khuyen-mai"
     onClick={() => setIsOpen(false)}
     className="block py-3 font-semibold"
   >
     Khuyến mãi
-  </a>
+  </Link>
 
-    <a
+    <Link
     href="/du-toan/gia-lan-banh"
     onClick={() => setIsOpen(false)}
     className="block py-3 font-semibold"
   >
     Tính giá lăn bánh
-  </a>
-  <a
+  </Link>
+  <Link
   href="/du-toan/tra-gop"
   onClick={() => setIsOpen(false)}
   className="block py-3 font-semibold"
 >
   Dự tính trả góp
-</a>
+</Link>
 
-  <a
+  <Link
   href="/tin-tuc"
   onClick={() => setIsOpen(false)}
   className="block py-3 font-semibold"
 >
   Tin tức & Tư vấn
-</a>
+</Link>
 
-<a
+<Link
   href="/xe-cu"
   onClick={() => setIsOpen(false)}
   className="block py-3 font-semibold"
 >
   Xe đã qua sử dụng
-</a>
+</Link>
 
-<a
+<Link
   href="/lien-he"
   onClick={() => setIsOpen(false)}
   className="block py-3 font-semibold"
 >
   Liên hệ
-</a>
+</Link>
 </div>
 </div>
 )}

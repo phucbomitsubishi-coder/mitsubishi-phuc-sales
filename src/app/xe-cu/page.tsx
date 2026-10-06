@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import SiteHeader from "@/components/SiteHeader";
 import { usedCars } from "@/data/usedCars";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Xe Mitsubishi đã qua sử dụng | Lưu Hoàng Phúc",
@@ -119,12 +120,12 @@ export default function UsedCarsPage() {
         {car.price.toLocaleString("vi-VN")} đ
       </p>
 
-      <a
+      <Link
         href={`/xe-cu/${car.slug}`}
         className="mt-5 block rounded-xl bg-gray-900 px-5 py-3 text-center font-semibold text-white transition hover:bg-red-600"
       >
         Xem chi tiết
-      </a>
+      </Link>
     </div>
   </article>
 ))}
@@ -201,12 +202,12 @@ export default function UsedCarsPage() {
                           </p>
                         </div>
 
-                        <a
+                        <Link
                           href={`/xe-cu/${car.slug}`}
                           className="mt-5 block rounded-xl border border-gray-300 px-5 py-3 text-center font-semibold text-gray-700 transition hover:border-gray-900 hover:text-gray-900"
                         >
                           Xem xe đã bán
-                        </a>
+                        </Link>
                       </div>
                     </article>
                   ))}
