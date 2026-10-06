@@ -63,6 +63,12 @@ const localBusinessSchema = {
     addressCountry: "VN",
   },
   sameAs: [siteConfig.social.facebook, siteConfig.social.tiktok],
+  openingHoursSpecification: {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: siteConfig.hours.days,
+    opens: siteConfig.hours.opens,
+    closes: siteConfig.hours.closes,
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

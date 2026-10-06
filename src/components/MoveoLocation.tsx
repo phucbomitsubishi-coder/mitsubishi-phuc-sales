@@ -17,8 +17,18 @@ export default function MoveoLocation() {
             </h2>
 
             <p className="mt-5 leading-8 text-gray-600">
-  Lô C1C, Đường Hùng Vương, Phường Bình Dương, Thành phố Hồ Chí Minh
-</p>
+              {siteConfig.dealer.address}
+            </p>
+
+            <div className="mt-4 text-gray-700">
+              <p>
+                <span className="font-semibold">Giờ làm việc:</span>{" "}
+                {siteConfig.hours.display}
+              </p>
+              <p className="mt-1 text-sm text-gray-600">
+                {siteConfig.hours.afterHours}
+              </p>
+            </div>
 
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
               <a

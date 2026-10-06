@@ -159,6 +159,11 @@ export default function SiteFooter() {
         {sales.email}
       </a>
 
+      <p>
+        Giờ làm việc: {siteConfig.hours.display}
+        <span className="block text-gray-400">{siteConfig.hours.afterHours}</span>
+      </p>
+
       <a
         href={social.facebook}
         target="_blank"

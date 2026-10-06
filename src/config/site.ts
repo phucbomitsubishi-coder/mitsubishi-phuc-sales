@@ -5,6 +5,17 @@ export const siteConfig = {
     phone: "0858678929",
     phoneDisplay: "0858 678 929",
     email: "phucbo.mitsubishi@gmail.com",
+    yearsOfExperience: 3,
+    carsDelivered: "Gần 200",
+  },
+
+  hours: {
+    display: "8:00 – 17:00, Thứ 2 – Thứ 7",
+    afterHours: "Ngoài giờ hỗ trợ 24/7 qua điện thoại & Zalo",
+    // Dùng cho dữ liệu cấu trúc (schema.org openingHoursSpecification)
+    days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+    opens: "08:00",
+    closes: "17:00",
   },
 
   dealer: {

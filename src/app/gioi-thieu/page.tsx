@@ -37,7 +37,7 @@ const reasons = [
   },
   {
     title: "Chăm sóc sau bán",
-    text: "Sau khi nhận xe vẫn chủ động hỏi thăm, nhắc lịch và hỗ trợ tư vấn bảo dưỡng.",
+    text: "Sau khi nhận xe vẫn chủ động hỏi thăm, nhắc lịch bảo dưỡng. Ngoài giờ làm việc vẫn hỗ trợ 24/7 qua điện thoại và Zalo.",
     icon: "M4 12a8 8 0 0 1 16 0v5a2 2 0 0 1-2 2h-1v-6h3M4 12v5a2 2 0 0 0 2 2h1v-6H4",
   },
 ];
@@ -148,6 +148,34 @@ export default function GioiThieuPage() {
               </span>
               , đại lý chính hãng được Mitsubishi Motors Việt Nam ủy quyền.
             </p>
+
+            {/* SỐ LIỆU NỔI BẬT */}
+            <dl className="mt-8 grid max-w-xl grid-cols-3 divide-x divide-neutral-800 rounded-2xl border border-neutral-800 bg-neutral-900/60">
+              {[
+                { value: `${sales.yearsOfExperience}`, suffix: "năm", label: "kinh nghiệm tư vấn" },
+                { value: sales.carsDelivered.replace(/^Gần\s*/, ""), prefix: "Gần", label: "xe đã bàn giao" },
+                { value: "24/7", label: "hỗ trợ ngoài giờ" },
+              ].map((stat) => (
+                <div key={stat.label} className="flex flex-col-reverse px-3 py-4 text-center sm:px-5">
+                  <dt className="mt-1 text-xs leading-4 text-neutral-400 sm:text-sm">
+                    {stat.label}
+                  </dt>
+                  <dd className="text-2xl font-extrabold tabular-nums sm:text-3xl">
+                    {stat.prefix && (
+                      <span className="mr-1 align-middle text-sm font-semibold text-neutral-400">
+                        {stat.prefix}
+                      </span>
+                    )}
+                    {stat.value}
+                    {stat.suffix && (
+                      <span className="ml-1 align-middle text-sm font-semibold text-neutral-400">
+                        {stat.suffix}
+                      </span>
+                    )}
+                  </dd>
+                </div>
+              ))}
+            </dl>
 
             <a
               href={googleReviewsUrl}
