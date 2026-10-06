@@ -13,7 +13,7 @@ export default function SiteHeader() {
         >
           {/* Logo mobile */}
           <img
-            src="/images/logo/logo-mobile-new.png"
+            src="/images/logo/logo-mobile-new.webp"
             alt="Mitsubishi Motors - Vững Tiến"
             className="h-20 w-auto object-contain xl:hidden"
           />
