@@ -45,6 +45,7 @@ export default function UsedCarGallery({
             <img
               src={image}
               alt={`${carName} - ảnh ${index + 1}`}
+              loading="lazy"
               className="aspect-[4/3] w-full object-cover"
             />
           </button>
