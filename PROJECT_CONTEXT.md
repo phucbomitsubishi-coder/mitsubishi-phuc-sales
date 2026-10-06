@@ -17,10 +17,12 @@ Mục tiêu chính: thu khách hàng tiềm năng (lead) qua báo giá, đăng k
 - ⚠️ Next.js 16 có thay đổi phá vỡ tương thích (breaking change). Đọc `node_modules/next/dist/docs/` trước khi dùng API mới (xem `AGENTS.md`).
   Ví dụ: `params` trong page là `Promise`, cần `await params`; layout dùng kiểu global `LayoutProps<"/">`.
 - `cheerio`: chỉ dùng trong script `add-news.mjs` để lấy bài viết từ web.
-- Font: `Roboto` và `Be_Vietnam_Pro` (`next/font/google`, có subset tiếng Việt).
+- Font: chỉ dùng `Roboto` (`next/font/google`, có subset tiếng Việt).
 - Không có database và không có backend riêng. **Toàn bộ dữ liệu nằm trong các file TS** ở `src/data/`.
 - Form gửi dữ liệu tới **Google Apps Script** bên ngoài:
   - `QuoteForm.tsx` → `process.env.NEXT_PUBLIC_QUOTE_API_URL` (đặt trong `.env.local`, file này bị gitignore).
+    Trang chủ render `<Suspense fallback={<QuoteForm />}><QuoteFormFromUrl /></Suspense>`. `QuoteFormFromUrl` đọc
+    `?car=&variant=&form=&nguon=` bằng `useSearchParams` và tạo lại form khi URL đổi (`key`). Link `/?car=...#bao-gia` vì vậy dùng được `<Link>`.
   - `dang-ky-lai-thu/page.tsx` → hằng số `SCRIPT_URL` được hardcode trong file.
   - Request gửi `Content-Type: text/plain` (để tránh CORS preflight) và nhận về JSON `{ success, message }`.
 - Không có test. Lệnh kiểm tra: `npm run lint`, `npm run build`.
@@ -117,9 +119,14 @@ Alias import: `@/` → `src/`.
   (CSS trong `globals.css` thêm padding cho footer).
 - Ảnh: phần lớn dùng `<img>` thường (trang chủ, header, gallery, xe cũ) kèm `loading` hoặc `fetchPriority`;
   `next/image` chỉ dùng ở tin tức, HeroSlider, VariantSelector và NewsPromotionCover. `public/` nặng khoảng 52 MB.
+- Link nội bộ luôn dùng `<Link>` từ `next/link`, không dùng `<a>` (lint báo lỗi). Link trong `MobileMenu` phải có `onClick={() => setIsOpen(false)}`.
+- Link tới trang xe phải dùng **slug** (`/xe/mitsubishi-xforce`), không dùng id. `next.config.ts` có redirect 308 từ `/xe/<id>` cũ.
+- Các trang `/xe/[slug]`, `/xe-cu/[slug]`, `/tin-tuc/[slug]` đều có `generateStaticParams` (tạo sẵn HTML khi build).
 - SEO: mỗi trang động có `generateMetadata`; `layout.tsx` chứa JSON-LD `AutoDealer`; sitemap được sinh tự động.
   Khi thêm trang tĩnh mới, **nhớ thêm vào `src/app/sitemap.ts`**.
-- Thông tin liên hệ nên lấy từ `siteConfig`. Tuy nhiên `layout.tsx` vẫn hardcode SĐT, email và địa chỉ trong metadata và JSON-LD.
+- Thông tin liên hệ lấy từ `siteConfig` (kể cả metadata và JSON-LD trong `layout.tsx`; riêng địa chỉ tách theo từng phần trong JSON-LD vẫn ghi cứng).
+- Không có dark mode. Website luôn dùng nền trắng.
+- Ảnh xe dùng cho thẻ `<img>` (ví dụ `public/images/cars/<id>.png`) nên rộng khoảng 1200px và dưới 300 KB. Có thể nén bằng `sharp` (có sẵn trong node_modules).
 - Code chưa được format đồng nhất (thụt lề lẫn lộn). Khi sửa code, giữ nguyên phong cách của vùng xung quanh.
 
 ## 9. Điểm cần chú ý hoặc rủi ro đã biết
@@ -127,5 +134,4 @@ Alias import: `@/` → `src/`.
 - Danh sách `categories` trong `add-news.mjs` phải khớp chính xác với union `NewsCategory` trong `news.ts`.
   Khi thêm hoặc đổi danh mục, sửa cả hai nơi, nếu không build sẽ lỗi.
 - `siteConfig.social.facebook` vẫn là `https://www.facebook.com/` (chưa có link thật).
-- Theme có `prefers-color-scheme: dark` mặc định từ create-next-app. Cần kiểm tra lại nếu thấy màu bị lệch.
 - `README.md` vẫn là nội dung mặc định của create-next-app.
