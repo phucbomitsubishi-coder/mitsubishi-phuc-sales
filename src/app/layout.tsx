@@ -62,6 +62,7 @@ const localBusinessSchema = {
     addressRegion: "Thành phố Hồ Chí Minh",
     addressCountry: "VN",
   },
+  sameAs: [siteConfig.social.facebook, siteConfig.social.tiktok],
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

@@ -173,6 +173,15 @@ export default function SiteFooter() {
       </a>
 
       <a
+        href={social.facebook}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="hover:text-white"
+      >
+        Facebook
+      </a>
+
+      <a
         href={social.tiktok}
         target="_blank"
         rel="noopener noreferrer"
