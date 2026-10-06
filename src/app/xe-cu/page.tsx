@@ -72,7 +72,7 @@ export default function UsedCarsPage() {
               </div>
             ) : (
               <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                {availableCars.map((car) => (
+                {availableCars.map((car, index) => (
   <article
     key={car.id}
     className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
@@ -82,6 +82,9 @@ export default function UsedCarsPage() {
         src={car.image}
         alt={`${car.name} ${car.modelYear}`}
         fill
+        // 3 xe đầu nằm ngay đầu trang: tải ngay thay vì lazy để ảnh hiện nhanh hơn (LCP)
+        loading={index < 3 ? "eager" : "lazy"}
+        fetchPriority={index === 0 ? "high" : "auto"}
         sizes="(min-width: 1024px) 400px, (min-width: 768px) 50vw, 100vw"
         className="object-cover"
       />
