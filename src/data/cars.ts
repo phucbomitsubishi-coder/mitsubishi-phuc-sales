@@ -52,6 +52,9 @@ export type Car = {
   category: "SUV" | "MPV" | "Sedan" | "Pickup";
   status: "available" | "coming-soon";
   featured: boolean;
+  // true = ẩn khỏi toàn bộ website (menu, trang chủ, form, công cụ tính, sitemap).
+  // Xóa dòng này (hoặc đặt false) khi xe chính thức mở bán.
+  hidden?: boolean;
 
   shortDescription: string;
   image: string;
@@ -80,7 +83,7 @@ export type Car = {
   };
 };
 
-export const cars: Car[] = [
+const allCars: Car[] = [
   {
     id: "xforce",
     name: "Mitsubishi Xforce",
@@ -1918,10 +1921,302 @@ transmission: "Tự động 4 cấp",
   ],
 },
   },
+
+  // ===== CHƯA MỞ BÁN (đang ẩn) =====
+  // Thông số lấy theo bản Đông Nam Á (Thái Lan / Philippines) trong các bài tin tức.
+  // Trước khi bỏ `hidden`: cập nhật giá Việt Nam (price đang = 0), phiên bản, màu, ảnh xe (PNG nền trong).
+  {
+    id: "outlander",
+    name: "Mitsubishi Outlander",
+    slug: "mitsubishi-outlander",
+    category: "SUV",
+    status: "coming-soon",
+    featured: false,
+    hidden: true,
+
+    shortDescription:
+      "SUV cỡ C plug-in hybrid 7 chỗ (5+2), mạnh 302 mã lực, chạy thuần điện khoảng 100 km.",
+
+    image: "/images/news/anh-thuc-te-mitsubishi-outlander-phev-2026-tai-dna-suv-co-c-manh-302-ma-luc-chay-100-km-khong-ton-xang.jpg",
+
+    promotion: {
+      title: "Đăng ký nhận thông tin Mitsubishi Outlander",
+      description:
+        "Liên hệ Lưu Hoàng Phúc để nhận thông tin sớm nhất về giá bán, phiên bản và thời gian mở bán Mitsubishi Outlander tại Việt Nam.",
+    },
+
+    variants: [
+      {
+        name: "PHEV",
+        price: 0,
+        specifications: {
+          engine: "Xăng MIVEC 2.4L + 2 mô-tơ điện (Plug-in Hybrid)",
+          drivetrain: "4 bánh toàn thời gian S-AWC",
+          power: "Tổng công suất 302 mã lực",
+          torque: "450 Nm",
+          seats: 7,
+          fuel: "Xăng + Điện (PHEV)",
+          dimensions: "4.710 × 1.862 × 1.740 mm",
+          wheelbase: "2.706 mm",
+          groundClearance: "210 mm",
+        },
+        equipment: {
+          exterior: [
+            "Ngôn ngữ thiết kế Dynamic Shield",
+            "Đèn LED định vị ban ngày đặt cao",
+            "Đèn chiếu sáng chính LED",
+          ],
+          interior: [
+            "3 hàng ghế cấu hình 5+2",
+            "Hàng ghế thứ ba gập phẳng",
+            "Cửa sổ trời toàn cảnh",
+          ],
+          convenience: [
+            "Màn hình cảm ứng trung tâm 12,3 inch",
+            "Apple CarPlay và Android Auto không dây",
+            "Bảng đồng hồ kỹ thuật số",
+            "Màn hình hiển thị trên kính lái (HUD)",
+            "Sạc không dây",
+            "Âm thanh Yamaha",
+            "Điều hòa tự động 3 vùng độc lập",
+            "Pin 22,7 kWh, chạy thuần điện khoảng 100 km",
+          ],
+          safety: ["Hệ thống túi khí", "Camera 360 độ"],
+          drivingSupport: [
+            "Giảm thiểu va chạm phía trước",
+            "Cảnh báo điểm mù",
+            "Hỗ trợ chuyển làn",
+            "Cảnh báo phương tiện cắt ngang phía sau",
+            "Cảnh báo chệch làn",
+            "Theo dõi sự chú ý của người lái",
+          ],
+        },
+      },
+    ],
+
+    colors: [],
+
+    specifications: {
+      seats: 7,
+      engine: "2.4L PHEV",
+      transmission: "S-AWC",
+      fuel: "Xăng + Điện",
+    },
+
+    highlights: {
+      exterior: ["Thiết kế Dynamic Shield mới", "Kích thước lớn hơn thế hệ trước"],
+      interior: ["3 hàng ghế 5+2", "Màn hình 12,3 inch, HUD, cửa sổ trời toàn cảnh"],
+      safety: ["Mitsubishi Safety Sensing", "Camera 360 độ"],
+      performance: [
+        "Tổng công suất 302 mã lực, 450 Nm",
+        "Chạy thuần điện khoảng 100 km",
+        "Dẫn động 4 bánh S-AWC",
+      ],
+    },
+  },
+
+  {
+    id: "pajero",
+    name: "Mitsubishi Pajero",
+    slug: "mitsubishi-pajero",
+    category: "SUV",
+    status: "coming-soon",
+    featured: false,
+    hidden: true,
+
+    shortDescription:
+      "SUV 7 chỗ khung gầm rời đầu bảng của Mitsubishi, động cơ diesel 2.4L 204 mã lực, hộp số tự động 8 cấp.",
+
+    image: "/images/news/mitsubishi-pajero-2026-se-ra-mat-dong-nam-a-vao-thang-10-co-3-phien-ban-may-diesel-204-ma-luc.jpg",
+
+    promotion: {
+      title: "Đăng ký nhận thông tin Mitsubishi Pajero",
+      description:
+        "Liên hệ Lưu Hoàng Phúc để nhận thông tin sớm nhất về giá bán, phiên bản và thời gian mở bán Mitsubishi Pajero tại Việt Nam.",
+    },
+
+    variants: [
+      {
+        name: "GLS 2WD",
+        price: 0,
+        specifications: {
+          engine: "4N16 Diesel 2.4L, tăng áp VGT Wide-Range",
+          transmission: "Tự động 8 cấp, lẫy chuyển số",
+          drivetrain: "Cầu sau (2WD)",
+          power: "204 mã lực / 3.500 vòng/phút",
+          torque: "480 Nm / 1.750 - 2.500 vòng/phút",
+          seats: 7,
+          fuel: "Dầu",
+          dimensions: "4.920 × 1.925 × 1.900 - 1.910 mm",
+          wheelbase: "2.870 mm",
+          groundClearance: "230 mm",
+        },
+        equipment: {
+          interior: [
+            "7 chỗ, 3 hàng ghế",
+            "Hàng ghế 2 trượt 150 mm, gập 60:40",
+            "Hàng ghế 3 gập 50:50",
+          ],
+          convenience: [
+            "Màn hình giải trí 12,3 inch",
+            "Bảng đồng hồ kỹ thuật số 12,3 inch",
+            "Apple CarPlay và Android Auto không dây",
+            "Sạc không dây, cổng USB Type-C",
+            "Âm thanh 6 loa",
+          ],
+          safety: ["7 túi khí", "Camera 360 độ"],
+          drivingSupport: [
+            "Kiểm soát hành trình thích ứng",
+            "Cảnh báo điểm mù và hỗ trợ chuyển làn",
+            "Hỗ trợ giữ làn, cảnh báo lệch làn",
+            "Giảm thiểu va chạm phía trước",
+            "Cảnh báo phương tiện cắt ngang phía trước và phía sau",
+          ],
+        },
+      },
+      {
+        name: "GSR 2WD",
+        price: 0,
+        specifications: {
+          engine: "4N16 Diesel 2.4L, tăng áp VGT Wide-Range",
+          transmission: "Tự động 8 cấp, lẫy chuyển số",
+          drivetrain: "Cầu sau (2WD)",
+          power: "204 mã lực / 3.500 vòng/phút",
+          torque: "480 Nm / 1.750 - 2.500 vòng/phút",
+          seats: 7,
+          fuel: "Dầu",
+          dimensions: "4.920 × 1.925 × 1.900 - 1.910 mm",
+          wheelbase: "2.870 mm",
+          groundClearance: "230 mm",
+          wheels: "Mâm 20 inch hai tông màu",
+        },
+        equipment: {
+          exterior: [
+            "Mâm 20 inch hai tông màu",
+            "Đèn LED thích ứng",
+            "Đèn Dynamic Flow Light trước và sau",
+          ],
+          interior: [
+            "7 chỗ, 3 hàng ghế",
+            "Ghế và vô lăng nhớ vị trí",
+            "Tựa lưng ghế chỉnh điện",
+            "Hộp làm mát trong bệ tỳ tay",
+          ],
+          convenience: [
+            "Màn hình giải trí 12,3 inch",
+            "Apple CarPlay và Android Auto không dây",
+            "Điều hòa 2 vùng độc lập",
+            "Lọc không khí Nanoe-X",
+            "Âm thanh Yamaha Dynamic Sound Ultimate 12 loa",
+          ],
+          safety: ["7 túi khí", "Camera 360 độ"],
+          drivingSupport: [
+            "Kiểm soát hành trình thích ứng",
+            "Cảnh báo điểm mù và hỗ trợ chuyển làn",
+            "Hỗ trợ giữ làn, cảnh báo lệch làn",
+            "Giảm thiểu va chạm phía trước",
+          ],
+        },
+      },
+      {
+        name: "Super Exceed 4WD",
+        price: 0,
+        specifications: {
+          engine: "4N16 Diesel 2.4L, tăng áp VGT Wide-Range",
+          transmission: "Tự động 8 cấp, lẫy chuyển số",
+          drivetrain: "4WD S-AWC (2H, 4H, 4HLC, 4LLC)",
+          power: "204 mã lực / 3.500 vòng/phút",
+          torque: "480 Nm / 1.750 - 2.500 vòng/phút",
+          seats: 7,
+          fuel: "Dầu",
+          dimensions: "4.920 × 1.925 × 1.900 - 1.910 mm",
+          wheelbase: "2.870 mm",
+          groundClearance: "230 mm",
+        },
+        equipment: {
+          exterior: [
+            "Bộ mâm thiết kế riêng",
+            "Lưới tản nhiệt dạng tổ ong",
+            "Chi tiết bảo vệ gầm",
+          ],
+          interior: [
+            "Nội thất đen phối nâu",
+            "Ghế da Semi-Aniline thông gió",
+            "Cửa sổ trời toàn cảnh",
+            "Gương chiếu hậu kỹ thuật số",
+          ],
+          convenience: [
+            "Màn hình giải trí 12,3 inch",
+            "Kết nối Mitsubishi CONNECT",
+            "Âm thanh Yamaha Dynamic Sound Ultimate 12 loa",
+          ],
+          safety: ["7 túi khí", "Camera 360 độ"],
+          drivingSupport: [
+            "Hệ thống hỗ trợ lái MI-PILOT",
+            "Dẫn động S-AWC",
+            "7 chế độ lái: Eco, Normal, Gravel, Snow, Mud, Sand, Rock",
+          ],
+        },
+      },
+    ],
+
+    colors: [],
+
+    specifications: {
+      seats: 7,
+      engine: "2.4L Diesel",
+      transmission: "AT 8 cấp",
+      fuel: "Dầu",
+    },
+
+    highlights: {
+      exterior: ["SUV khung gầm rời cỡ lớn", "Khoảng sáng gầm 230 mm"],
+      interior: ["7 chỗ, 3 hàng ghế linh hoạt", "Màn hình 12,3 inch"],
+      safety: ["7 túi khí", "Camera 360 độ", "Gói hỗ trợ lái ADAS"],
+      performance: [
+        "Diesel 2.4L 204 mã lực, 480 Nm",
+        "Hộp số tự động 8 cấp",
+        "S-AWC trên bản Super Exceed",
+      ],
+    },
+  },
 ];
+
+// Thứ tự hiển thị xe trên toàn website (trang chủ, menu, footer, form báo giá, công cụ tính).
+const displayOrder = [
+  "destinator",
+  "triton",
+  "xforce",
+  "xpander-cross",
+  "xpander",
+  "attrage",
+  "outlander",
+  "pajero",
+];
+
+const orderOf = (car: Car) => {
+  const index = displayOrder.indexOf(car.id);
+  return index === -1 ? displayOrder.length : index;
+};
+
+// Chỉ các xe đang mở bán (không có `hidden`), theo thứ tự displayOrder.
+export const cars: Car[] = allCars
+  .filter((car) => !car.hidden)
+  .sort((a, b) => orderOf(a) - orderOf(b));
+
+// Chặn lỡ tay hiển thị xe khi chưa có giá: build sẽ báo lỗi.
+for (const car of cars) {
+  if (car.variants.length === 0 || car.variants.some((variant) => !(variant.price > 0))) {
+    throw new Error(
+      `${car.name} đang hiển thị nhưng chưa có giá bán. Cập nhật price cho các phiên bản hoặc đặt lại hidden: true.`
+    );
+  }
+}
 
 export const featuredCars = cars.filter((car) => car.featured);
 
 export function getCarBySlug(slug: string) {
-  return cars.find((car) => car.slug === slug);
+  // Khi chạy `npm run dev` vẫn xem trước được trang xe đang ẩn (ví dụ /xe/mitsubishi-outlander).
+  const source = process.env.NODE_ENV === "development" ? allCars : cars;
+  return source.find((car) => car.slug === slug);
 }

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
+import { cars } from "@/data/cars";
 
 export default function SiteFooter() {
   const { sales, dealer, contact, social } = siteConfig;
@@ -37,29 +38,15 @@ export default function SiteFooter() {
     </h3>
 
     <div className="mt-4 flex flex-col gap-3 text-sm text-gray-300">
-      <Link href="/xe/mitsubishi-destinator" className="hover:text-white">
-        Destinator
-      </Link>
-
-      <Link href="/xe/mitsubishi-xforce" className="hover:text-white">
-        Xforce
-      </Link>
-
-      <Link href="/xe/mitsubishi-xpander" className="hover:text-white">
-        Xpander
-      </Link>
-
-      <Link href="/xe/mitsubishi-xpander-cross" className="hover:text-white">
-        Xpander Cross
-      </Link>
-
-      <Link href="/xe/mitsubishi-triton" className="hover:text-white">
-        Triton
-      </Link>
-
-      <Link href="/xe/mitsubishi-attrage" className="hover:text-white">
-        Attrage
-      </Link>
+      {cars.map((car) => (
+        <Link
+          key={car.slug}
+          href={`/xe/${car.slug}`}
+          className="hover:text-white"
+        >
+          {car.name.replace(/^Mitsubishi /, "")}
+        </Link>
+      ))}
     </div>
   </div>
 
