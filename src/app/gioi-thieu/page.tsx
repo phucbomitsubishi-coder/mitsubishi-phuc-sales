@@ -49,7 +49,7 @@ const steps = [
   },
   {
     title: "Lái thử",
-    text: "Sắp xếp lịch lái thử phù hợp để bạn trải nghiệm thực tế trước khi quyết định.",
+    text: "Lái thử tại showroom hoặc tại nhà theo lịch hẹn, để bạn trải nghiệm thực tế trước khi quyết định.",
   },
   {
     title: "Thủ tục & tài chính",

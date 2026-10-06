@@ -129,11 +129,11 @@ const faqs = [
     : []),
   {
     question: `Mua ${shortName} trả góp cần trả trước bao nhiêu?`,
-    answer: `Bạn có thể dự tính phương án vay với mức trả trước từ 15% giá trị xe bằng công cụ dự tính trả góp. Lãi suất, thời hạn vay và hồ sơ cụ thể tùy ngân hàng. Phúc sẽ hỗ trợ so sánh phương án và chuẩn bị hồ sơ.`,
+    answer: `Bạn có thể dự tính phương án vay với mức trả trước từ 20% giá trị xe bằng công cụ dự tính trả góp. Lãi suất, thời hạn vay và hồ sơ cụ thể tùy ngân hàng. Phúc sẽ hỗ trợ so sánh phương án và chuẩn bị hồ sơ.`,
   },
   {
     question: `Có thể lái thử ${shortName} không?`,
-    answer: `Có. Bạn đăng ký lịch lái thử tại showroom ${dealer.brand} – ${dealer.name.replace("Mitsubishi ", "")}, giờ làm việc ${hours.display}. ${hours.afterHours}.`,
+    answer: `Có. Bạn có thể lái thử tại showroom ${dealer.brand} – ${dealer.name.replace("Mitsubishi ", "")} (${hours.display}) hoặc đăng ký lái thử tại nhà, Phúc sẽ mang xe đến tận nơi theo lịch hẹn.`,
   },
   {
     question: `${shortName} được bảo hành bao lâu?`,

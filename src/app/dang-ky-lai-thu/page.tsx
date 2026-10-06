@@ -123,8 +123,9 @@ function DangKyLaiThuForm() {
           </h1>
 
           <p className="mt-3 max-w-2xl text-gray-300">
-            Trải nghiệm thực tế mẫu xe Mitsubishi bạn quan tâm. Vui lòng để lại
-            thông tin, chúng tôi sẽ liên hệ xác nhận lịch lái thử.
+            Trải nghiệm thực tế mẫu xe Mitsubishi bạn quan tâm, tại showroom hoặc
+            tại nhà. Vui lòng để lại thông tin, chúng tôi sẽ liên hệ xác nhận lịch
+            lái thử.
           </p>
         </div>
       </section>
@@ -236,7 +237,7 @@ function DangKyLaiThuForm() {
                   id="note"
                   name="note"
                   rows={4}
-                  placeholder="Thời gian thuận tiện để lái thử hoặc yêu cầu khác..."
+                  placeholder="Thời gian thuận tiện để lái thử. Muốn lái thử tại nhà, vui lòng ghi địa chỉ..."
                   className="w-full resize-none rounded-lg border border-gray-300 px-4 py-3 outline-none transition focus:border-red-600 focus:ring-2 focus:ring-red-100"
                 />
               </div>

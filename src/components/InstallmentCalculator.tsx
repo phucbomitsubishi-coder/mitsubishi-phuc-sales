@@ -5,7 +5,7 @@ import { cars } from "@/data/cars";
 import Link from "next/link";
 
 export default function InstallmentCalculator() {
-      const [downPaymentPercent, setDownPaymentPercent] = useState(15);
+      const [downPaymentPercent, setDownPaymentPercent] = useState(20);
       const [loanYears, setLoanYears] = useState(8);
       const [interestRate, setInterestRate] = useState(8);
   const [selectedCarId, setSelectedCarId] = useState(cars[0]?.id ?? "");
@@ -135,7 +135,6 @@ const month12Payment =
           }
           className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-gray-900 outline-none focus:border-red-600"
         >
-          <option value={15}>15%</option>
           <option value={20}>20%</option>
           <option value={30}>30%</option>
           <option value={40}>40%</option>
