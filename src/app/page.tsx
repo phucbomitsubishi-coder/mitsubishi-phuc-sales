@@ -6,6 +6,7 @@ import QuoteForm, { QuoteFormFromUrl } from "@/components/QuoteForm";
 import SiteHeader from "@/components/SiteHeader";
 import HeroSlider from "@/components/HeroSlider";
 import Link from "next/link";
+import Image from "next/image";
 
 export const metadata = {
   alternates: {
@@ -45,12 +46,15 @@ export default function Home() {
               className="rounded-xl border border-gray-200 p-6 shadow-sm"
             >
 <div className="mb-3 h-40 overflow-hidden">
-  <img
-    src={car.image}
-    alt={car.name}
-    loading="lazy"
-    className="h-52 w-full -translate-y-6 object-contain"
-  />
+  <div className="relative h-52 w-full -translate-y-6">
+    <Image
+      src={car.image}
+      alt={car.name}
+      fill
+      sizes="(min-width: 1024px) 400px, (min-width: 768px) 50vw, 100vw"
+      className="object-contain"
+    />
+  </div>
 </div>
 <h3 className="text-2xl font-bold">{car.name}</h3>
 
@@ -111,12 +115,13 @@ export default function Home() {
           key={car.id}
           className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm"
         >
-          <div className="mb-5 flex h-40 items-center justify-center overflow-hidden rounded-lg bg-gray-50">
-  <img
+          <div className="relative mb-5 flex h-40 items-center justify-center overflow-hidden rounded-lg bg-gray-50">
+  <Image
     src={car.image}
     alt={`Ưu đãi ${car.name}`}
-    loading="lazy"
-    className="h-full w-full object-contain p-3 transition duration-300 hover:scale-105"
+    fill
+    sizes="(min-width: 1024px) 400px, (min-width: 768px) 50vw, 100vw"
+    className="object-contain p-3 transition duration-300 hover:scale-105"
   />
 </div>
           <p className="text-sm font-semibold uppercase text-red-600">

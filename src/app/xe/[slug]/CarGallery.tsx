@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 
 type GalleryType = "exterior" | "interior";
 
@@ -122,16 +123,21 @@ export default function CarGallery({
   return (
     <div className="w-full">
       {/* ẢNH CHÍNH */}
-      <div className="flex h-[340px] items-center justify-center overflow-hidden rounded-lg bg-gray-50">
-        <img
+      <div className="relative flex h-[340px] items-center justify-center overflow-hidden rounded-lg bg-gray-50">
+        {selectedImage && (
+        <Image
           src={selectedImage}
           alt={
   galleryType === "exterior"
     ? `Ngoại thất ${carName}`
     : `Nội thất ${carName}`
 }
-          className="h-full w-full object-contain"
+          fill
+          loading="eager"
+          sizes="(min-width: 1280px) 600px, (min-width: 1024px) 50vw, 100vw"
+          className="object-contain"
         />
+        )}
       </div>
 
       {/* TAB NGOẠI THẤT / NỘI THẤT */}
@@ -168,17 +174,18 @@ export default function CarGallery({
             key={image}
             type="button"
             onClick={() => setSelectedIndex(index)}
-            className={`overflow-hidden rounded border-2 transition ${
+            className={`relative h-16 overflow-hidden rounded border-2 transition sm:h-20 ${
               selectedIndex === index
                 ? "border-red-600"
                 : "border-transparent hover:border-gray-300"
             }`}
           >
-            <img
+            <Image
               src={image}
               alt=""
-              loading="lazy"
-              className="h-16 w-full object-cover sm:h-20"
+              fill
+              sizes="150px"
+              className="object-cover"
             />
           </button>
         ))}

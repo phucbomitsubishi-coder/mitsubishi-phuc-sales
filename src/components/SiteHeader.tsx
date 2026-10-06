@@ -2,6 +2,7 @@ import { cars } from "@/data/cars";
 import { siteConfig } from "@/config/site";
 import MobileMenu from "@/components/MobileMenu";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function SiteHeader() {
   return (
@@ -13,16 +14,23 @@ export default function SiteHeader() {
           className="inline-flex shrink-0 items-center xl:-ml-4"
         >
           {/* Logo mobile */}
-          <img
+          <Image
             src="/images/logo/logo-mobile-new.webp"
             alt="Mitsubishi Motors - Vững Tiến"
+            width={900}
+            height={300}
+            sizes="240px"
+            loading="eager"
             className="h-20 w-auto object-contain xl:hidden"
           />
 
           {/* Logo desktop */}
-          <img
+          <Image
             src="/images/logo/logo-black.svg"
             alt="Mitsubishi Motors"
+            width={934}
+            height={272}
+            loading="eager"
             className="hidden h-12 w-auto xl:block"
           />
         </Link>
@@ -53,12 +61,15 @@ export default function SiteHeader() {
                     href={`/xe/${car.slug}`}
                     className="group/car rounded-xl p-3 text-center transition hover:bg-gray-50"
                   >
-                    <img
-                      src={car.image}
-                      alt={car.name}
-                      loading="lazy"
-                      className="mx-auto h-24 w-full object-contain transition duration-200 group-hover/car:scale-105"
-                    />
+                    <div className="relative h-24 w-full">
+                      <Image
+                        src={car.image}
+                        alt={car.name}
+                        fill
+                        sizes="220px"
+                        className="object-contain transition duration-200 group-hover/car:scale-105"
+                      />
+                    </div>
 
                     <p className="mt-2 text-sm font-semibold text-gray-800 transition group-hover/car:text-red-600">
                       {car.name}

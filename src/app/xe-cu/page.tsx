@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import SiteHeader from "@/components/SiteHeader";
 import { usedCars } from "@/data/usedCars";
 import Link from "next/link";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Xe Mitsubishi đã qua sử dụng | Lưu Hoàng Phúc",
@@ -76,12 +77,13 @@ export default function UsedCarsPage() {
     key={car.id}
     className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
   >
-    <div className="aspect-[4/3] overflow-hidden bg-gray-100">
-      <img
+    <div className="relative aspect-[4/3] overflow-hidden bg-gray-100">
+      <Image
         src={car.image}
         alt={`${car.name} ${car.modelYear}`}
-        loading="lazy"
-        className="h-full w-full object-cover"
+        fill
+        sizes="(min-width: 1024px) 400px, (min-width: 768px) 50vw, 100vw"
+        className="object-cover"
       />
     </div>
 
@@ -155,11 +157,12 @@ export default function UsedCarsPage() {
                       className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm"
                     >
                       <div className="relative aspect-[4/3] overflow-hidden bg-gray-100">
-                        <img
+                        <Image
                           src={car.image}
                           alt={`${car.name} ${car.modelYear}`}
-                          loading="lazy"
-                          className="h-full w-full object-cover"
+                          fill
+                          sizes="(min-width: 1024px) 400px, (min-width: 768px) 50vw, 100vw"
+                          className="object-cover"
                         />
 
                         <div className="absolute left-4 top-4 rounded-lg bg-gray-900 px-4 py-2 text-sm font-bold text-white shadow">

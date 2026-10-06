@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 
 type Props = {
   images: string[];
@@ -21,11 +22,14 @@ export default function UsedCarGallery({
 
   return (
     <div>
-      <div className="overflow-hidden rounded-2xl bg-white shadow-sm">
-        <img
+      <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-white shadow-sm">
+        <Image
           src={selectedImage}
           alt={carName}
-          className="aspect-[4/3] w-full object-cover"
+          fill
+          loading="eager"
+          sizes="(min-width: 1280px) 600px, (min-width: 1024px) 50vw, 100vw"
+          className="object-cover"
         />
       </div>
 
@@ -35,18 +39,19 @@ export default function UsedCarGallery({
             key={image}
             type="button"
             onClick={() => setSelectedImage(image)}
-            className={`overflow-hidden rounded-xl border-2 bg-white transition ${
+            className={`relative aspect-[4/3] overflow-hidden rounded-xl border-2 bg-white transition ${
               selectedImage === image
                 ? "border-red-600"
                 : "border-transparent hover:border-gray-300"
             }`}
             aria-label={`Xem ảnh ${index + 1} của ${carName}`}
           >
-            <img
+            <Image
               src={image}
               alt={`${carName} - ảnh ${index + 1}`}
-              loading="lazy"
-              className="aspect-[4/3] w-full object-cover"
+              fill
+              sizes="150px"
+              className="object-cover"
             />
           </button>
         ))}
