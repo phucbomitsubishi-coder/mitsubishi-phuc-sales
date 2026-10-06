@@ -1,16 +1,15 @@
 import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 import { siteConfig } from "@/config/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Câu hỏi thường gặp | Mitsubishi Lưu Hoàng Phúc",
   description:
     "Giải đáp các câu hỏi thường gặp khi mua và sử dụng xe Mitsubishi: báo giá, khuyến mãi, trả góp, bảo hành, bảo dưỡng và xe đã qua sử dụng.",
-  alternates: {
-    canonical: "/ho-tro/cau-hoi-thuong-gap",
-  },
-};
+  path: "/ho-tro/cau-hoi-thuong-gap",
+});
 
 const faqGroups = [
   {

@@ -1,17 +1,16 @@
 import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/metadata";
 import SiteHeader from "@/components/SiteHeader";
 import { usedCars } from "@/data/usedCars";
 import Link from "next/link";
 import Image from "next/image";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Xe Mitsubishi đã qua sử dụng | Lưu Hoàng Phúc",
   description:
     "Thông tin xe Mitsubishi đã qua sử dụng, xe cũ đang có sẵn và tư vấn lựa chọn xe phù hợp.",
-  alternates: {
-    canonical: "/xe-cu",
-  },
-};
+  path: "/xe-cu",
+});
 
 export default function UsedCarsPage() {
   const availableCars = usedCars.filter(

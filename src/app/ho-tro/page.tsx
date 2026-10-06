@@ -1,15 +1,14 @@
 import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Hỗ trợ khách hàng Mitsubishi",
   description:
     "Thông tin bảo hành, bảo dưỡng định kỳ, phụ tùng chính hãng, hướng dẫn sử dụng và giải đáp các câu hỏi thường gặp dành cho khách hàng Mitsubishi.",
-      alternates: {
-    canonical: "/ho-tro",
-  },
-};
+  path: "/ho-tro",
+});
 
 const supportItems = [
   {

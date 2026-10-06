@@ -1,16 +1,15 @@
 import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 import { siteConfig } from "@/config/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Chính sách bảo hành Mitsubishi | Lưu Hoàng Phúc",
   description:
     "Thông tin tham khảo về chính sách bảo hành xe Mitsubishi, thời hạn bảo hành và hỗ trợ khách hàng tại Mitsubishi Moveo New City.",
-  alternates: {
-    canonical: "/ho-tro/chinh-sach-bao-hanh",
-  },
-};
+  path: "/ho-tro/chinh-sach-bao-hanh",
+});
 
 export default function WarrantyPage() {
   const { sales, dealer, contact } = siteConfig;

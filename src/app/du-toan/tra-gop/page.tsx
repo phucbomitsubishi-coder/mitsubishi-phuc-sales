@@ -1,15 +1,14 @@
 import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/metadata";
 import SiteHeader from "@/components/SiteHeader";
 import InstallmentCalculator from "@/components/InstallmentCalculator";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Dự tính trả góp xe Mitsubishi | Lưu Hoàng Phúc",
   description:
     "Công cụ dự tính khoản vay và số tiền trả góp hàng tháng khi mua xe Mitsubishi theo mẫu xe, phiên bản, số tiền trả trước và thời hạn vay.",
-  alternates: {
-    canonical: "/du-toan/tra-gop",
-  },
-};
+  path: "/du-toan/tra-gop",
+});
 
 export default function TraGopPage() {
   return (

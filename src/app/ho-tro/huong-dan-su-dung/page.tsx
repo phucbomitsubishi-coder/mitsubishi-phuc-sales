@@ -1,16 +1,15 @@
 import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 import { siteConfig } from "@/config/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Hướng dẫn sử dụng xe Mitsubishi | Lưu Hoàng Phúc",
   description:
     "Trung tâm hướng dẫn sử dụng xe Mitsubishi, liên kết tài liệu và video hướng dẫn chính thức từ Mitsubishi Motors Việt Nam.",
-  alternates: {
-    canonical: "/ho-tro/huong-dan-su-dung",
-  },
-};
+  path: "/ho-tro/huong-dan-su-dung",
+});
 
 const models = [
   {

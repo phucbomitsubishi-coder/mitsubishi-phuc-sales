@@ -1,16 +1,15 @@
 import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 import { siteConfig } from "@/config/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Bảo dưỡng định kỳ Mitsubishi | Lưu Hoàng Phúc",
   description:
     "Thông tin tham khảo về chu kỳ bảo dưỡng định kỳ xe Mitsubishi và hỗ trợ khách hàng tại Mitsubishi Moveo New City.",
-  alternates: {
-    canonical: "/ho-tro/bao-duong-dinh-ky",
-  },
-};
+  path: "/ho-tro/bao-duong-dinh-ky",
+});
 
 export default function MaintenancePage() {
   const { sales, dealer, contact } = siteConfig;

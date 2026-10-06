@@ -1,18 +1,17 @@
 import SiteHeader from "@/components/SiteHeader";
+import { createPageMetadata } from "@/lib/metadata";
 import MoveoEcosystem from "@/components/MoveoEcosystem";
 import MoveoTimeline from "@/components/MoveoTimeline";
 import MoveoLocation from "@/components/MoveoLocation";
 import { siteConfig } from "@/config/site";
 import Link from "next/link";
 
-export const metadata = {
+export const metadata = createPageMetadata({
   title: "Giới thiệu Mitsubishi Motors – Moveo New City",
   description:
     "Giới thiệu Mitsubishi Motors – Moveo New City, nhà phân phối Mitsubishi Motors chính thức, hỗ trợ tư vấn mua xe, lái thử, dịch vụ và phụ tùng.",
-  alternates: {
-    canonical: "/gioi-thieu",
-  },
-};
+  path: "/gioi-thieu",
+});
 
 export default function GioiThieuPage() {
   return (

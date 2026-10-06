@@ -1,15 +1,14 @@
 import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Tư vấn mua xe Mitsubishi",
   description:
     "Thông tin tư vấn giúp khách hàng chọn mẫu xe Mitsubishi phù hợp, lựa chọn phiên bản, tham khảo chi phí lăn bánh và nhận báo giá.",
-      alternates: {
-    canonical: "/tu-van",
-  },
-};
+  path: "/tu-van",
+});
 
 const advisoryItems = [
   {

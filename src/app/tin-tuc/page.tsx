@@ -1,18 +1,17 @@
 import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/metadata";
 import Image from "next/image";
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 import { newsArticles } from "@/data/news";
 import NewsPromotionCover from "@/components/NewsPromotionCover";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Tin tức & Tư vấn Mitsubishi | Lưu Hoàng Phúc",
   description:
     "Tin tức Mitsubishi, tư vấn mua xe, kinh nghiệm sử dụng, khuyến mãi và thông tin thị trường ô tô.",
-  alternates: {
-    canonical: "/tin-tuc",
-  },
-};
+  path: "/tin-tuc",
+});
 
 function formatDate(date: string) {
   return new Intl.DateTimeFormat("vi-VN", {
@@ -77,7 +76,7 @@ export default function NewsPage() {
                     src={featuredArticle.image}
                     alt={featuredArticle.title}
                     fill
-                    priority
+                    preload
                     className="object-cover"
                     sizes="(max-width: 1024px) 100vw, 50vw"
                   />

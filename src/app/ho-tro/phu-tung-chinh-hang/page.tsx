@@ -1,16 +1,15 @@
 import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 import { siteConfig } from "@/config/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Phụ tùng chính hãng Mitsubishi | Lưu Hoàng Phúc",
   description:
     "Thông tin tham khảo về phụ tùng chính hãng Mitsubishi và hỗ trợ khách hàng tại Mitsubishi Moveo New City.",
-  alternates: {
-    canonical: "/ho-tro/phu-tung-chinh-hang",
-  },
-};
+  path: "/ho-tro/phu-tung-chinh-hang",
+});
 
 export default function GenuinePartsPage() {
   const { sales, dealer, contact } = siteConfig;

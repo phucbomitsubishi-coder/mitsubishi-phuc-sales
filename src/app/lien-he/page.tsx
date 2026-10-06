@@ -1,15 +1,14 @@
 import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Liên hệ tư vấn Mitsubishi",
   description:
     "Liên hệ tư vấn xe Mitsubishi, báo giá, ưu đãi, trả góp và đăng ký lái thử tại Mitsubishi Moveo New City.",
-      alternates: {
-    canonical: "/lien-he",
-  },
-};
+  path: "/lien-he",
+});
 
 export default function ContactPage() {
   return (

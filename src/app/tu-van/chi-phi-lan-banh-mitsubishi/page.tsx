@@ -1,16 +1,15 @@
 import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/metadata";
 import SiteHeader from "@/components/SiteHeader";
 import { siteConfig } from "@/config/site";
 import Link from "next/link";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Giá lăn bánh Mitsubishi gồm những khoản nào? | Lưu Hoàng Phúc",
   description:
     "Tìm hiểu các khoản chi phí dự kiến khi tính giá lăn bánh xe Mitsubishi và cách tham khảo chi phí theo mẫu xe, phiên bản và khu vực đăng ký.",
-  alternates: {
-    canonical: "/tu-van/chi-phi-lan-banh-mitsubishi",
-  },
-};
+  path: "/tu-van/chi-phi-lan-banh-mitsubishi",
+});
 
 export default function MitsubishiOnRoadCostGuidePage() {
   return (

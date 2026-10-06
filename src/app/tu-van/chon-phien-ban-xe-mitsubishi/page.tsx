@@ -1,16 +1,15 @@
 import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/metadata";
 import SiteHeader from "@/components/SiteHeader";
 import { siteConfig } from "@/config/site";
 import Link from "next/link";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Nên chọn phiên bản xe Mitsubishi như thế nào? | Lưu Hoàng Phúc",
   description:
     "Tư vấn cách lựa chọn phiên bản xe Mitsubishi phù hợp với nhu cầu sử dụng, trang bị và ngân sách dự kiến.",
-  alternates: {
-    canonical: "/tu-van/chon-phien-ban-xe-mitsubishi",
-  },
-};
+  path: "/tu-van/chon-phien-ban-xe-mitsubishi",
+});
 
 export default function MitsubishiVariantGuidePage() {
   return (

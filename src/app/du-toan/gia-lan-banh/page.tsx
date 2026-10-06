@@ -1,15 +1,14 @@
 import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/metadata";
 import SiteHeader from "@/components/SiteHeader";
 import OnRoadPricePage from "@/components/OnRoadPricePage";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Tính giá lăn bánh Mitsubishi | Lưu Hoàng Phúc",
   description:
     "Dự tính chi phí lăn bánh xe Mitsubishi theo mẫu xe, phiên bản và khu vực đăng ký.",
-  alternates: {
-    canonical: "/du-toan/gia-lan-banh",
-  },
-};
+  path: "/du-toan/gia-lan-banh",
+});
 
 export default function GiaLanBanhPage() {
   return (
