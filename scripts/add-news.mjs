@@ -24,7 +24,7 @@ const categories = [
   "Khuyến mãi",
   "Tư vấn mua xe",
   "Kinh nghiệm sử dụng",
-  "Thị trường",
+  "Thị trường ô tô",
 ];
 
 const MAX_CONTENT_IMAGES = 10;
