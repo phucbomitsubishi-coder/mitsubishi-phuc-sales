@@ -117,6 +117,12 @@ Alias import: `@/` → `src/`.
   - Có phí đăng kiểm, phí dịch vụ đăng ký và trừ khuyến mãi từ `promotions.ts`.
   - Triton được nhận diện bằng `carName === "Mitsubishi Triton"`, nên đổi tên xe sẽ làm sai logic này.
 - **Trả góp** (`InstallmentCalculator.tsx`): chọn trả trước 15–70%, nhập lãi suất năm đầu.
+- **Phần Khuyến mãi trang chủ** (`#khuyen-mai`, nền tối): `src/components/PromotionTabs.tsx` (client), dạng tab theo dòng xe.
+  Dữ liệu (`promotionItems`) được dựng sẵn trong `src/app/page.tsx` từ `cars` + `currentPromotion`.
+  **Không thêm hàm vào `promotions.ts`**, vì `add-news.mjs` ghi đè toàn bộ file này mỗi tháng.
+  Link "Xem toàn bộ chương trình" tự tìm bài trong `news.ts` có `title === currentPromotion.title`.
+  Số tiền ưu đãi được tách khỏi label bằng regex `(~ 78 triệu VNĐ)`. Nếu MMV đổi định dạng label thì vẫn hiển thị label gốc.
+  Panel bên trái dùng `lg:sticky`, nên thẻ cha phải dùng `overflow-clip` (không dùng `overflow-hidden`, vì sẽ làm hỏng sticky).
 - Trang chủ, trang xe và trang giá lăn bánh đọc `currentPromotion`. Khi sang tháng mới, cần cập nhật `promotions.ts`
   (thường làm qua `npm run add-news` với bài khuyến mãi của MMV).
 
