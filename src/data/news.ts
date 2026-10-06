@@ -29,20 +29,24 @@ export type NewsArticle = {
     name: string;
     url: string;
   };
+
+  // true: bài đã được viết lại bằng lời của mình (chỉ tham khảo `source`),
+  // nên được Google lập chỉ mục. Xem isRepublishedArticle trong src/lib/news.ts.
+  originalContent?: boolean;
 };
 
 export const newsArticles: NewsArticle[] = [
   {
     id: "news-1790904201775",
 
-    title: "Mitsubishi Attrage mới lộ thông số tiêu thụ nhiên liệu tại Việt Nam, đại lý mạnh tay ưu đãi xả hàng tồn",
+    title: "Mitsubishi Attrage sắp có bản nâng cấp tại Việt Nam? Mức tiêu thụ nhiên liệu và ưu đãi tháng 10/2026",
 
     slug: "mitsubishi-attrage-moi-lo-thong-so-tieu-thu-nhien-lieu-tai-viet-nam-dai-ly-manh-tay-uu-dai-xa-hang-ton",
 
     category: "Tin Mitsubishi",
 
     excerpt:
-      "Thông tin mới từ Cục Đăng kiểm Việt Nam đang làm dấy lên đồn đoán Mitsubishi Attrage sắp có bản nâng cấp mới tại thị trường trong nước.",
+      "Hai phiên bản Attrage GLX và GLS-P vừa xuất hiện trong dữ liệu nhãn năng lượng của Cục Đăng kiểm Việt Nam. Tóm tắt những gì đã biết về bản nâng cấp, so sánh với bản đang bán và ưu đãi hiện có.",
 
     publishedAt: "2026-10-02",
 
@@ -52,45 +56,51 @@ export const newsArticles: NewsArticle[] = [
 
     content: [
       {
-        heading: "Mitsubishi Attrage mới lộ thông số tiêu thụ nhiên liệu tại Việt Nam, đại lý mạnh tay ưu đãi xả hàng tồn",
+        heading: "Attrage GLX và GLS-P xuất hiện trong hồ sơ đăng kiểm",
 
         paragraphs: [
-          "Thông tin mới từ Cục Đăng kiểm Việt Nam đang làm dấy lên đồn đoán Mitsubishi Attrage sắp có bản nâng cấp mới tại thị trường trong nước.",
-          "Cục Đăng kiểm Việt Nam mới công bố dữ liệu nhãn năng lượng dành cho hai phiên bản Mitsubishi Attrage mang tên GLX và GLS-P. Hồ sơ này do Công ty TNHH Ô tô Mitsubishi Việt Nam cung cấp.",
-          "Theo dữ liệu được công bố, Mitsubishi Attrage GLX ghi nhận mức tiêu thụ nhiên liệu trung bình ở mức 5,32 lít/100km, trong khi bản GLS-P có chỉ số tương ứng là 5,34 lít/100km. Mức tiêu thụ này gần như tương đồng với con số 5,3 lít/100km trên dải sản phẩm hiện hành. Cả hai phiên bản mới tiếp tục được trang bị khối động cơ xăng 1.2L 3 xi-lanh (mã 3A92), sản sinh công suất tối đa 77 mã lực cùng mô-men xoắn cực đại 100 Nm.",
-          "Mặc dù Mitsubishi Việt Nam chưa đưa ra thông báo chính thức về thời điểm ra mắt phiên bản mới, động thái cập nhật hồ sơ đăng kiểm kết hợp cùng hoạt động kích cầu tại các đại lý cho thấy ngày mở bán Attrage mới không còn xa.",
-          "Hiện tại, giá niêm yết của Attrage đang dao động từ 380 triệu đồng cho bản số sàn đến 490 triệu đồng cho bản AT Premium. Tuy nhiên, nhiều đại lý đang áp dụng mức ưu đãi sâu cho các lô xe sản xuất năm 2025 (VIN 2025), đưa giá bán thực tế xuống mốc khoảng 300 triệu đồng. Khoảng giá này đưa mẫu sedan hạng B của Mitsubishi tiệm cận trực tiếp với nhóm xe đô thị cỡ A như Kia Morning, Toyota Wigo hay Hyundai Grand i10.",
-          "Trước đó, vào đầu tháng 7 năm nay, phiên bản nâng cấp của Mitsubishi Attrage đã chính thức ra mắt thị trường Thái Lan. Bước sang đời mới, thiết kế tổng thể của xe nhận được một số cải tiến thị giác dù khung gầm cơ sở đã trải qua chặng đường phát triển gần 15 năm.",
-          "Điểm thay đổi dễ nhận thấy nhất nằm ở phần đầu xe. Attrage 2026 sở hữu thiết kế Dynamic Shield được tinh chỉnh với nhiều chi tiết sơn đen hơn trước, kết hợp lưới tản nhiệt hình lục giác mới. Cụm đèn pha cũng được thiết kế lại để đồng bộ với diện mạo phía trước, trong khi bộ mâm hợp kim sở hữu kiểu dáng mới.",
-          "Tại Thái Lan, Mitsubishi Attrage được phân phối với hai phiên bản gồm Active và Smart.",
-          "Phiên bản Active được trang bị đèn pha halogen dạng chóa phản xạ, đèn hậu LED, gương chiếu hậu chỉnh điện, các chi tiết ốp nội thất màu đen bóng kết hợp họa tiết vân carbon, cụm đồng hồ analog tích hợp màn hình hiển thị đa thông tin và điều hòa chỉnh tay.",
-          "Xe còn được trang bị vô-lăng đa chức năng, màn hình cảm ứng 7 inch hỗ trợ Apple CarPlay và Android Auto, ghế bọc vải, chìa khóa thông minh cùng bộ mâm thép kích thước 14 inch.",
-          "Trong khi đó, phiên bản Smart được bổ sung nhiều tiện nghi hơn với cụm đèn pha LED tự động tích hợp đèn định vị ban ngày, đèn báo rẽ trên gương chiếu hậu, vô-lăng và cần số bọc da, điều hòa tự động, hệ thống kiểm soát hành trình, gương chiếu hậu chống chói tự động, ghế bọc da tổng hợp, khởi động bằng nút bấm, camera lùi và bộ mâm hợp kim hai tông màu kích thước 15 inch.",
-          "Trang bị an toàn tiêu chuẩn trên cả hai phiên bản của Mitsubishi Attrage 2026 gồm hai túi khí, hệ thống chống bó cứng phanh ABS, phân bổ lực phanh điện tử EBD, cân bằng điện tử, kiểm soát lực kéo và hỗ trợ khởi hành ngang dốc.",
-          "Ngoài các tính năng cơ bản, Attrage còn được bổ sung một số hệ thống hỗ trợ người lái. Phiên bản Active được trang bị camera ADAS với chức năng cảnh báo va chạm phía trước và cảnh báo chệch làn đường.",
-          "Trong khi đó, phiên bản Smart được trang bị hệ thống giảm thiểu va chạm phía trước hoạt động ở dải tốc độ thấp, đồng thời bổ sung cảm biến radar hỗ trợ giảm thiểu tình huống đạp nhầm chân ga trong phạm vi khoảng 4 m phía trước xe.",
+          "Dữ liệu nhãn năng lượng do Cục Đăng kiểm Việt Nam công bố gần đây có thêm hai phiên bản Mitsubishi Attrage mang tên GLX và GLS-P, do Công ty TNHH Ô tô Mitsubishi Việt Nam đăng ký. Đây là tên phiên bản mới, khác với hai bản MT và CVT Premium đang bán, nên nhiều khả năng Attrage nâng cấp sắp được giới thiệu tại Việt Nam.",
+          "Theo nhãn năng lượng, Attrage GLX tiêu thụ trung bình 5,32 lít/100 km, bản GLS-P là 5,34 lít/100 km (chu trình tổ hợp). Con số này gần như không đổi so với mức khoảng 5,3 lít/100 km của Attrage hiện tại, vì xe vẫn dùng động cơ xăng 1.2L 3 xi-lanh MIVEC (mã 3A92), công suất 77 mã lực, mô-men xoắn 100 Nm.",
+          "Mitsubishi Motors Việt Nam hiện chưa công bố thời gian ra mắt, giá bán hay trang bị của hai phiên bản này. Bài viết sẽ được cập nhật khi có thông tin chính thức.",
         ],
         images: [
           {
-            src: "/images/news/mitsubishi-attrage-moi-lo-thong-so-tieu-thu-nhien-lieu-tai-viet-nam-dai-ly-manh-tay-uu-dai-xa-hang-ton/image-01.jpg",
-            alt: "Mitsubishi Attrage mới lộ thông số tiêu thụ nhiên liệu tại Việt Nam, đại lý mạnh tay ưu đãi xả hàng tồn",
-          },
-          {
             src: "/images/news/mitsubishi-attrage-moi-lo-thong-so-tieu-thu-nhien-lieu-tai-viet-nam-dai-ly-manh-tay-uu-dai-xa-hang-ton/image-02.jpg",
-            alt: "Mitsubishi Attrage mới lộ thông số tiêu thụ nhiên liệu tại Việt Nam, đại lý mạnh tay ưu đãi xả hàng tồn",
+            alt: "Nhãn năng lượng Mitsubishi Attrage do Cục Đăng kiểm Việt Nam công bố, mức tiêu thụ 5,34 lít/100 km",
           },
+        ],
+      },
+      {
+        heading: "Bản nâng cấp đã ra mắt tại Thái Lan có gì mới",
+
+        paragraphs: [
+          "Attrage nâng cấp đã được giới thiệu tại Thái Lan từ tháng 7/2026, nên có thể dùng làm tham khảo cho phiên bản về Việt Nam. Thay đổi tập trung ở đầu xe: mặt trước Dynamic Shield có nhiều chi tiết sơn đen hơn, lưới tản nhiệt hình lục giác mới, cụm đèn pha thiết kế lại và mâm hợp kim kiểu mới. Khung gầm vẫn giữ nguyên.",
+          "Tại Thái Lan, xe có hai bản Active và Smart. Bản Active dùng đèn pha halogen, đèn hậu LED, màn hình cảm ứng 7 inch có Apple CarPlay và Android Auto, chìa khóa thông minh và mâm thép 14 inch. Bản Smart có thêm đèn pha LED tự động, điều hòa tự động, kiểm soát hành trình, gương chiếu hậu chống chói tự động, ghế da tổng hợp, khởi động bằng nút bấm, camera lùi và mâm hợp kim 15 inch.",
+          "Điểm đáng chú ý nhất là an toàn. Ngoài 2 túi khí, ABS, EBD, cân bằng điện tử, kiểm soát lực kéo và hỗ trợ khởi hành ngang dốc, bản Active có camera cảnh báo va chạm phía trước và cảnh báo chệch làn. Bản Smart có thêm phanh giảm thiểu va chạm ở tốc độ thấp và cảm biến hạn chế tình huống đạp nhầm chân ga trong khoảng 4 m phía trước. Với một mẫu sedan giá dễ tiếp cận, đây là những trang bị rất hữu ích cho người mới lái.",
+          "Trang bị bản Việt Nam có thể khác Thái Lan. Tên phiên bản trong hồ sơ đăng kiểm (GLX, GLS-P) cũng khác, nên cần chờ thông tin chính thức từ Mitsubishi Motors Việt Nam.",
+        ],
+        images: [
           {
             src: "/images/news/mitsubishi-attrage-moi-lo-thong-so-tieu-thu-nhien-lieu-tai-viet-nam-dai-ly-manh-tay-uu-dai-xa-hang-ton/image-03.jpg",
-            alt: "Mitsubishi Attrage mới lộ thông số tiêu thụ nhiên liệu tại Việt Nam, đại lý mạnh tay ưu đãi xả hàng tồn",
+            alt: "Đầu xe Mitsubishi Attrage nâng cấp với lưới tản nhiệt và đèn pha mới",
           },
           {
             src: "/images/news/mitsubishi-attrage-moi-lo-thong-so-tieu-thu-nhien-lieu-tai-viet-nam-dai-ly-manh-tay-uu-dai-xa-hang-ton/image-04.jpg",
-            alt: "Mitsubishi Attrage mới lộ thông số tiêu thụ nhiên liệu tại Việt Nam, đại lý mạnh tay ưu đãi xả hàng tồn",
+            alt: "Khoang lái Mitsubishi Attrage nâng cấp bản Thái Lan",
           },
           {
             src: "/images/news/mitsubishi-attrage-moi-lo-thong-so-tieu-thu-nhien-lieu-tai-viet-nam-dai-ly-manh-tay-uu-dai-xa-hang-ton/image-05.jpg",
-            alt: "Mitsubishi Attrage mới lộ thông số tiêu thụ nhiên liệu tại Việt Nam, đại lý mạnh tay ưu đãi xả hàng tồn",
+            alt: "Đuôi xe Mitsubishi Attrage nâng cấp tại Thái Lan",
           },
+        ],
+      },
+      {
+        heading: "Nên mua Attrage bây giờ hay chờ bản mới?",
+
+        paragraphs: [
+          "Attrage đang bán tại Việt Nam có 2 phiên bản: MT giá niêm yết 380 triệu đồng và CVT Premium giá 490 triệu đồng. Trong tháng 10/2026, Mitsubishi Motors Việt Nam hỗ trợ bản MT tương đương 100% lệ phí trước bạ (38 triệu đồng), phiếu nhiên liệu khoảng 8 triệu đồng và camera lùi. Bản CVT Premium được hỗ trợ tương đương 50% lệ phí trước bạ (24,5 triệu đồng), phiếu nhiên liệu khoảng 11 triệu đồng và ăng-ten vây cá.",
+          "Nếu cần xe ngay để đi lại hằng ngày hoặc chạy dịch vụ, mua bản hiện tại trong lúc ưu đãi đang cao là lựa chọn tiết kiệm, vì động cơ và mức tiêu hao nhiên liệu của bản mới gần như không đổi. Nếu ưu tiên thiết kế mới và các tính năng an toàn chủ động thì có thể chờ thêm, nhưng giá bản mới chưa được công bố và giai đoạn đầu mở bán thường ít ưu đãi.",
+          "Bạn có thể xem giá lăn bánh Attrage theo tỉnh, thành nơi đăng ký trong mục Dự tính giá lăn bánh, hoặc liên hệ Lưu Hoàng Phúc để nhận báo giá kèm ưu đãi mới nhất.",
         ],
       },
     ],
@@ -99,6 +109,8 @@ export const newsArticles: NewsArticle[] = [
       name: "xehay.vn",
       url: "https://xehay.vn/mitsubishi-attrage-moi-lo-thong-so-tieu-thu-nhien-lieu-tai-viet-nam-dai-ly-manh-tay-uu-dai-xa-hang-ton.html",
     },
+
+    originalContent: true,
   },
 
   {
@@ -157,14 +169,14 @@ export const newsArticles: NewsArticle[] = [
   {
     id: "news-1790842128387",
 
-    title: "Mitsubishi Pajero 2026 sẽ ra mắt Đông Nam Á vào tháng 10: Có 3 phiên bản, máy diesel 204 mã lực",
+    title: "Mitsubishi Pajero 2026 ra mắt Đông Nam Á: 3 phiên bản, máy dầu 2.4L 204 mã lực",
 
     slug: "mitsubishi-pajero-2026-se-ra-mat-dong-nam-a-vao-thang-10-co-3-phien-ban-may-diesel-204-ma-luc",
 
     category: "Tin Mitsubishi",
 
     excerpt:
-      "Sau thời gian dài vắng bóng, Mitsubishi Pajero thế hệ mới sẽ tái xuất với vị trí là mẫu SUV đầu bảng của Mitsubishi tại Đông Nam Á, nằm trên Pajero Sport trong danh mục sản phẩm.",
+      "Pajero trở lại với vai trò SUV 7 chỗ cao cấp nhất của Mitsubishi tại Đông Nam Á, dùng chung nền tảng với Triton. Tổng hợp thông số, trang bị từng phiên bản và khả năng về Việt Nam.",
 
     publishedAt: "2026-10-01",
 
@@ -174,57 +186,70 @@ export const newsArticles: NewsArticle[] = [
 
     content: [
       {
-        heading: "Mitsubishi Pajero 2026 sẽ ra mắt Đông Nam Á vào tháng 10: Có 3 phiên bản, máy diesel 204 mã lực",
+        heading: "Pajero trở lại, đứng trên Pajero Sport",
 
         paragraphs: [
-          "Sau thời gian dài vắng bóng, Mitsubishi Pajero thế hệ mới sẽ tái xuất với vị trí là mẫu SUV đầu bảng của Mitsubishi tại Đông Nam Á, nằm trên Pajero Sport trong danh mục sản phẩm.",
-          "Theo kế hoạch, xe sẽ chính thức ra mắt vào ngày 19/10 với ba phiên bản gồm GLS 2WD, GSR 2WD và Super Exceed 4WD. Xe có giá dự kiến nằm trong khoảng 1,6 - 1,9 triệu baht (khoảng 1,23 - 1,47 tỷ VNĐ).",
-          "Mitsubishi Pajero thế hệ mới tiếp tục được phát triển trên hệ thống khung gầm rời (body-on-frame), dựa trên nền tảng Triton nhưng được gia cố và tinh chỉnh lại nhằm đáp ứng yêu cầu của một mẫu SUV cỡ lớn.",
-          "Chiều dài tổng thể của xe đạt 4.920 mm, chiều rộng 1.925 mm, chiều cao dao động từ 1.900 đến 1.910 mm cùng chiều dài cơ sở 2.870 mm. Xe sở hữu khoảng sáng gầm 230 mm, kèm các góc tiếp cận, góc vượt đỉnh dốc và góc thoát lần lượt là 30,4 độ, 22,6 độ và 25,8 độ.",
-          "Không gian nội thất của Pajero được thiết kế theo cấu hình ba hàng ghế với tổng cộng 7 chỗ ngồi. Đáng chú ý, phiên bản GLS tiêu chuẩn đã có bảng đồng hồ kỹ thuật số và màn hình giải trí trung tâm cùng kích thước 12,3 inch.",
-          "Hệ thống giải trí hỗ trợ Apple CarPlay và Android Auto không dây. Các trang bị tiện dụng khác gồm sạc điện thoại không dây, cổng USB Type-C và dàn âm thanh 6 loa.",
-          "Hàng ghế thứ hai có khả năng trượt 150 mm, đồng thời có thể gập theo tỷ lệ 60:40. Hàng ghế cuối chia theo tỷ lệ 50:50, cho phép mở rộng khoang hành lý khi không sử dụng đủ 7 vị trí ngồi.",
-          "Về an toàn, Pajero GLS sở hữu một loạt công nghệ hỗ trợ người lái ngay từ phiên bản đầu tiên. Danh sách này gồm kiểm soát hành trình thích ứng, cảnh báo điểm mù, hỗ trợ chuyển làn, hỗ trợ giữ làn và cảnh báo lệch làn.",
-          "Hệ thống cũng có khả năng cảnh báo và giảm thiểu nguy cơ va chạm phía trước, nhận diện phương tiện cắt ngang ở phía trước và phía sau. Camera quan sát 360 độ cùng 7 túi khí được trang bị tiêu chuẩn.",
-          "Nếu GLS tập trung vào những trang bị thiết yếu, GSR được Mitsubishi bổ sung thêm một số tiện nghi và tính năng cao cấp hơn. Phiên bản này sử dụng mâm 20 inch phối hai tông màu, đèn LED thích ứng và hệ thống đèn Dynamic Flow Light ở cả phía trước và phía sau.",
-          "Khoang cabin GSR có điều hòa hai vùng độc lập, hệ thống lọc không khí Nanoe-X, ghế và vô-lăng tích hợp nhớ vị trí. Tựa lưng ghế chỉnh điện và một hộp làm mát được bố trí bên trong bệ tỳ tay trung tâm.",
-          "Hệ thống âm thanh trên GSR cũng được nâng cấp lên Yamaha Dynamic Sound Ultimate với 12 loa.",
-          "Đối với bản Super Exceed 4WD cao cấp nhất, xe sẽ được nhận diện bằng bộ mâm riêng, lưới tản nhiệt dạng tổ ong và các chi tiết bảo vệ phần gầm. Nội thất sử dụng tông màu đen kết hợp nâu.",
-          "Bản này có thêm cửa sổ trời toàn cảnh, ghế da Semi-Aniline tích hợp thông gió, gương chiếu hậu kỹ thuật số, kết nối Mitsubishi CONNECT và hệ thống hỗ trợ lái MI-PILOT.",
-          "Điểm khác biệt lớn nhất của Super Exceed nằm ở hệ thống S-AWC. Người lái có thể lựa chọn các cấu hình 2H, 4H, 4HLC và 4LLC tùy điều kiện vận hành.",
-          "Hệ thống này đi kèm 7 chế độ lái gồm Eco, Normal, Gravel, Snow, Mud, Sand và Rock. Các thiết lập được Mitsubishi thiết kế để hỗ trợ xe khi di chuyển trên đường thông thường cũng như các bề mặt có độ bám thấp hoặc địa hình phức tạp.",
-          "Cả 3 phiên bản của Pajero mới đều mang trong mình khối động cơ diesel 4 cylinder 2.4L mã hiệu 4N16, tích hợp bộ tăng áp VGT Wide-Range. Cấu hình này sản sinh công suất cực đại 204 mã lực tại 3.500 vòng/phút và mô-men xoắn tối đa 480 Nm tại dải vòng tua 1.750 - 2.500 vòng/phút. Sức mạnh động cơ truyền tới bánh xe thông qua hộp số tự động 8 cấp có chế độ thể thao cùng lẫy chuyển số tích hợp sau vô-lăng. Biến thể GLS và GSR sử dụng hệ dẫn động cầu sau, trong khi bản Super Exceed sở hữu hệ dẫn động 4 bánh S-AWC.",
-          "Dù phát triển trên nền tảng máy dầu 2.4L tương tự dòng bán tải Triton, động cơ của Pajero đã được tái thiết kế nhiều linh kiện bên trong, cải tiến bộ tăng áp và tinh chỉnh lại các thông số. Nhờ đó, lực kéo của xe tăng thêm 10 Nm so với Triton, đồng thời hộp số cũng được nâng cấp từ 6 cấp lên 8 cấp. Đáng chú ý, phiên bản phân phối tại Thái Lan không cần sử dụng dung dịch AdBlue mà vẫn đáp ứng đầy đủ các tiêu chí về khí thải tại thị trường này.",
+          "Mitsubishi Pajero thế hệ mới dự kiến ra mắt tại Thái Lan ngày 19/10/2026 với 3 phiên bản: GLS 2WD, GSR 2WD và Super Exceed 4WD. Giá dự kiến tại Thái Lan từ 1,6 đến 1,9 triệu baht, quy đổi khoảng 1,23 đến 1,47 tỷ đồng. Đây là giá tại Thái Lan, chưa phải giá bán tại Việt Nam.",
+          "Xe dùng khung gầm rời (body-on-frame) phát triển từ nền tảng Triton thế hệ mới, được gia cố cho một mẫu SUV cỡ lớn. Kích thước dài 4.920 mm, rộng 1.925 mm, cao 1.900–1.910 mm, chiều dài cơ sở 2.870 mm, khoảng sáng gầm 230 mm. Góc tiếp cận, góc vượt đỉnh dốc và góc thoát lần lượt là 30,4, 22,6 và 25,8 độ, phù hợp với nhu cầu đi đường xấu.",
         ],
         images: [
           {
             src: "/images/news/mitsubishi-pajero-2026-se-ra-mat-dong-nam-a-vao-thang-10-co-3-phien-ban-may-diesel-204-ma-luc/image-01.jpg",
-            alt: "Mitsubishi Pajero 2026 sẽ ra mắt Đông Nam Á vào tháng 10: Có 3 phiên bản, máy diesel 204 mã lực",
+            alt: "Mitsubishi Pajero 2026 màu trắng chạy trên đường",
           },
           {
             src: "/images/news/mitsubishi-pajero-2026-se-ra-mat-dong-nam-a-vao-thang-10-co-3-phien-ban-may-diesel-204-ma-luc/image-02.jpg",
-            alt: "Mitsubishi Pajero 2026 sẽ ra mắt Đông Nam Á vào tháng 10: Có 3 phiên bản, máy diesel 204 mã lực",
-          },
-          {
-            src: "/images/news/mitsubishi-pajero-2026-se-ra-mat-dong-nam-a-vao-thang-10-co-3-phien-ban-may-diesel-204-ma-luc/image-03.jpg",
-            alt: "Mitsubishi Pajero 2026 sẽ ra mắt Đông Nam Á vào tháng 10: Có 3 phiên bản, máy diesel 204 mã lực",
-          },
-          {
-            src: "/images/news/mitsubishi-pajero-2026-se-ra-mat-dong-nam-a-vao-thang-10-co-3-phien-ban-may-diesel-204-ma-luc/image-04.jpg",
-            alt: "Mitsubishi Pajero 2026 sẽ ra mắt Đông Nam Á vào tháng 10: Có 3 phiên bản, máy diesel 204 mã lực",
-          },
-          {
-            src: "/images/news/mitsubishi-pajero-2026-se-ra-mat-dong-nam-a-vao-thang-10-co-3-phien-ban-may-diesel-204-ma-luc/image-05.jpg",
-            alt: "Mitsubishi Pajero 2026 sẽ ra mắt Đông Nam Á vào tháng 10: Có 3 phiên bản, máy diesel 204 mã lực",
-          },
-          {
-            src: "/images/news/mitsubishi-pajero-2026-se-ra-mat-dong-nam-a-vao-thang-10-co-3-phien-ban-may-diesel-204-ma-luc/image-06.jpg",
-            alt: "Mitsubishi Pajero 2026 sẽ ra mắt Đông Nam Á vào tháng 10: Có 3 phiên bản, máy diesel 204 mã lực",
+            alt: "Thân xe Mitsubishi Pajero 2026 nhìn ngang",
           },
           {
             src: "/images/news/mitsubishi-pajero-2026-se-ra-mat-dong-nam-a-vao-thang-10-co-3-phien-ban-may-diesel-204-ma-luc/image-07.jpg",
-            alt: "Mitsubishi Pajero 2026 sẽ ra mắt Đông Nam Á vào tháng 10: Có 3 phiên bản, máy diesel 204 mã lực",
+            alt: "Đuôi xe Mitsubishi Pajero 2026 màu nâu",
           },
+        ],
+      },
+      {
+        heading: "Động cơ chung gốc với Triton nhưng mạnh hơn",
+
+        paragraphs: [
+          "Cả 3 phiên bản dùng động cơ dầu 2.4L 4 xi-lanh (mã 4N16) với tăng áp biến thiên VGT, công suất 204 mã lực tại 3.500 vòng/phút, mô-men xoắn 480 Nm tại 1.750–2.500 vòng/phút, đi kèm hộp số tự động 8 cấp có lẫy chuyển số. GLS và GSR dẫn động cầu sau, Super Exceed dẫn động 4 bánh S-AWC.",
+          "So với Triton đang bán tại Việt Nam (204 PS, 470 Nm, hộp số tự động 6 cấp), động cơ của Pajero được chỉnh lại bộ tăng áp và nhiều chi tiết bên trong, mô-men xoắn cao hơn 10 Nm, hộp số tăng lên 8 cấp. Bản Thái Lan đạt tiêu chuẩn khí thải mà không cần dung dịch AdBlue.",
+          "Hệ S-AWC trên bản Super Exceed có các chế độ 2H, 4H, 4HLc và 4LLc, cùng 7 chế độ lái: Eco, Normal, Gravel, Snow, Mud, Sand và Rock, dùng cho cả đường thường lẫn bề mặt trơn trượt hoặc địa hình khó.",
+        ],
+      },
+      {
+        heading: "Trang bị từng phiên bản",
+
+        paragraphs: [
+          "Xe có 3 hàng ghế, 7 chỗ. Hàng ghế thứ hai trượt được 150 mm và gập 60:40, hàng thứ ba gập 50:50 để mở rộng khoang hành lý.",
+          "GLS: dù là bản tiêu chuẩn nhưng đã có đồng hồ kỹ thuật số và màn hình giải trí cùng kích thước 12,3 inch, Apple CarPlay và Android Auto không dây, sạc không dây, cổng USB-C, 6 loa, 7 túi khí, camera 360 độ. Gói hỗ trợ lái gồm kiểm soát hành trình thích ứng, cảnh báo điểm mù, hỗ trợ chuyển làn, hỗ trợ giữ làn, cảnh báo lệch làn, giảm thiểu va chạm phía trước và cảnh báo phương tiện cắt ngang phía trước, phía sau.",
+          "GSR: thêm mâm 20 inch hai tông màu, đèn LED thích ứng, đèn Dynamic Flow Light trước và sau, điều hòa 2 vùng, lọc không khí Nanoe-X, ghế và vô-lăng nhớ vị trí, hộp làm mát ở bệ tỳ tay và hệ thống âm thanh Yamaha Dynamic Sound Ultimate 12 loa.",
+          "Super Exceed: mâm và lưới tản nhiệt riêng, ốp bảo vệ gầm, nội thất đen phối nâu, cửa sổ trời toàn cảnh, ghế da Semi-Aniline có thông gió, gương chiếu hậu kỹ thuật số, kết nối Mitsubishi CONNECT và hệ thống hỗ trợ lái MI-PILOT.",
+        ],
+        images: [
+          {
+            src: "/images/news/mitsubishi-pajero-2026-se-ra-mat-dong-nam-a-vao-thang-10-co-3-phien-ban-may-diesel-204-ma-luc/image-03.jpg",
+            alt: "Khoang lái Mitsubishi Pajero 2026 với màn hình 12,3 inch và cửa sổ trời toàn cảnh",
+          },
+          {
+            src: "/images/news/mitsubishi-pajero-2026-se-ra-mat-dong-nam-a-vao-thang-10-co-3-phien-ban-may-diesel-204-ma-luc/image-04.jpg",
+            alt: "Hàng ghế trước bọc da đen phối nâu trên Mitsubishi Pajero 2026",
+          },
+          {
+            src: "/images/news/mitsubishi-pajero-2026-se-ra-mat-dong-nam-a-vao-thang-10-co-3-phien-ban-may-diesel-204-ma-luc/image-05.jpg",
+            alt: "Hàng ghế thứ hai Mitsubishi Pajero 2026",
+          },
+          {
+            src: "/images/news/mitsubishi-pajero-2026-se-ra-mat-dong-nam-a-vao-thang-10-co-3-phien-ban-may-diesel-204-ma-luc/image-06.jpg",
+            alt: "Khoang hành lý Mitsubishi Pajero 2026 khi dựng đủ 3 hàng ghế",
+          },
+        ],
+      },
+      {
+        heading: "Khi nào Pajero về Việt Nam?",
+
+        paragraphs: [
+          "Mitsubishi Motors Việt Nam chưa công bố kế hoạch bán Pajero thế hệ mới. Nếu về Việt Nam, Pajero sẽ đứng trên Destinator (giá niêm yết 780–855 triệu đồng) trong dải SUV 7 chỗ của Mitsubishi, dành cho khách cần xe khung gầm rời, máy dầu và khả năng đi địa hình thật sự.",
+          "Nếu bạn quan tâm, hãy để lại số điện thoại ở thẻ Pajero \"Sắp ra mắt\" trên trang chủ. Lưu Hoàng Phúc sẽ báo ngay khi có giá và lịch mở bán chính thức.",
         ],
       },
     ],
@@ -233,19 +258,21 @@ export const newsArticles: NewsArticle[] = [
       name: "xehay.vn",
       url: "https://xehay.vn/mitsubishi-pajero-2026-se-ra-mat-dong-nam-a-vao-thang-10-co-3-phien-ban-may-diesel-204-ma-luc.html",
     },
+
+    originalContent: true,
   },
 
   {
     id: "news-1790838921934",
 
-    title: "Ảnh thực tế Mitsubishi Outlander PHEV 2026 tại ĐNÁ: SUV cỡ C mạnh 302 mã lực, chạy 100 km không tốn xăng",
+    title: "Mitsubishi Outlander PHEV 2026 tại Đông Nam Á: 302 mã lực, chạy thuần điện khoảng 100 km",
 
     slug: "anh-thuc-te-mitsubishi-outlander-phev-2026-tai-dna-suv-co-c-manh-302-ma-luc-chay-100-km-khong-ton-xang",
 
     category: "Tin Mitsubishi",
 
     excerpt:
-      "Thương hiệu xe Nhật Bản vừa chính thức trình làng mẫu SUV Mitsubishi Outlander PHEV phiên bản mới tại thị trường Đông Nam Á.",
+      "Outlander PHEV phiên bản mới đã được bán tại Philippines. Tổng hợp kích thước, trang bị, cách hoạt động của hệ hybrid sạc điện và những điều cần biết nếu xe về Việt Nam.",
 
     publishedAt: "2026-10-01",
 
@@ -255,18 +282,36 @@ export const newsArticles: NewsArticle[] = [
 
     content: [
       {
-        heading: "Ảnh thực tế Mitsubishi Outlander PHEV 2026 tại ĐNÁ: SUV cỡ C mạnh 302 mã lực, chạy 100 km không tốn xăng",
+        heading: "Kích thước và thiết kế",
+
         paragraphs: [
-          "Ở thế hệ mới, Mitsubishi Outlander PHEV sở hữu kích thước tổng thể với chiều dài 4.710 mm, rộng 1.862 mm, cao 1.740 mm và chiều dài cơ sở đạt 2.706 mm, đi cùng khoảng sáng gầm xe khoảng 210 mm. Các thông số này đều gia tăng đáng kể so với thế hệ trước đó. Xe tiếp tục duy trì kết cấu 3 hàng ghế dạng 5+2, trong đó hàng ghế thứ ba có khả năng gập phẳng để mở rộng không gian chứa đồ.",
-          "Ngoại thất của xe ghi nhận sự thay đổi toàn diện theo ngôn ngữ thiết kế Dynamic Shield hiện đại, mang nhiều nét tương đồng với mẫu MPV Xpander. Phần đầu xe nổi bật với dải đèn LED định vị ban ngày đặt cao, cụm đèn chiếu sáng chính LED được di chuyển xuống vị trí thấp hơn.",
-          "Bên trong khoang cabin, mẫu SUV cỡ C này được tích hợp nhiều trang bị hiện đại như: màn hình cảm ứng trung tâm 12,3 inch kết nối Apple CarPlay/Android Auto không dây, bảng đồng hồ kỹ thuật số, màn hình hiển thị thông tin trên kính lái (HUD), đế sạc không dây, hệ thống âm thanh Yamaha, điều hòa tự động 3 vùng độc lập và cửa sổ trời toàn cảnh.",
-          "Điểm đáng chú ý của Outlander PHEV 2026 là hệ thống plug-in hybrid gồm động cơ xăng MIVEC 2.4L, hai mô-tơ điện và bộ pin dung lượng 22,7 kWh.",
-          "Cấu hình này tạo ra tổng công suất 302 mã lực cùng mô-men xoắn cực đại 450 Nm. Theo Mitsubishi, xe có thể di chuyển khoảng 100 km chỉ bằng năng lượng điện, trong khi phạm vi vận hành kết hợp giữa động cơ xăng và mô-tơ điện đạt gần 1.000 km.",
-          "Hệ truyền động được kết hợp với hệ thống Super All-Wheel Control (S-AWC), công nghệ dẫn động 4 bánh đặc trưng của Mitsubishi. Hệ thống có khả năng điều phối lực kéo giữa các bánh xe, đồng thời phối hợp với Active Yaw Control và những công nghệ kiểm soát ổn định khác để duy trì độ bám đường trong các điều kiện vận hành khác nhau.",
-          "Về an toàn, Outlander PHEV được trang bị gói Mitsubishi Safety Sensing với nhiều chức năng hỗ trợ người lái.",
-          "Hệ thống bao gồm công nghệ giảm thiểu va chạm phía trước, cảnh báo điểm mù, hỗ trợ chuyển làn, cảnh báo phương tiện cắt ngang phía sau và cảnh báo chệch làn. Xe cũng có tính năng theo dõi sự chú ý của người lái nhằm phát hiện dấu hiệu mất tập trung trong quá trình vận hành.",
-          "Ngoài ra, Mitsubishi trang bị hệ thống túi khí cho hành khách và camera quan sát 360 độ, hỗ trợ người lái khi di chuyển hoặc đỗ xe trong không gian hẹp.",
-          "Tại Philippines, Mitsubishi Outlander PHEV 2026 có giá niêm yết 2,848 triệu peso (1,2 tỷ VNĐ).",
+          "Outlander PHEV 2026 dài 4.710 mm, rộng 1.862 mm, cao 1.740 mm, chiều dài cơ sở 2.706 mm, khoảng sáng gầm khoảng 210 mm. Xe có 3 hàng ghế dạng 5+2. Hàng thứ ba gập phẳng khi cần chở đồ và phù hợp hơn cho trẻ em hoặc các chuyến đi ngắn.",
+          "Đầu xe theo ngôn ngữ Dynamic Shield mới: dải đèn LED ban ngày đặt cao, đèn pha chính đặt thấp, cách bố trí quen thuộc trên Xpander và Xforce đang bán tại Việt Nam.",
+        ],
+      },
+      {
+        heading: "Hệ truyền động PHEV hoạt động thế nào",
+
+        paragraphs: [
+          "Xe dùng động cơ xăng 2.4L MIVEC, hai mô-tơ điện và pin 22,7 kWh, tổng công suất 302 mã lực, mô-men xoắn 450 Nm. Theo Mitsubishi, xe chạy được khoảng 100 km chỉ bằng điện và gần 1.000 km khi kết hợp xăng và điện.",
+          "Với người đi làm hằng ngày, khoảng 100 km chạy điện đủ cho phần lớn nhu cầu nếu sạc pin tại nhà mỗi tối. Khi đi xa, động cơ xăng hoạt động nên không phải lo hết pin như xe điện thuần. Quãng đường thực tế sẽ thấp hơn con số công bố, tùy tốc độ, tải trọng và việc sử dụng điều hòa.",
+          "Hệ dẫn động 4 bánh S-AWC phân bổ lực kéo giữa các bánh, kết hợp kiểm soát mô-men quay vòng chủ động (Active Yaw Control) để giữ xe ổn định khi vào cua hoặc trên đường trơn.",
+        ],
+      },
+      {
+        heading: "Tiện nghi và an toàn",
+
+        paragraphs: [
+          "Màn hình trung tâm 12,3 inch có Apple CarPlay và Android Auto không dây, đồng hồ kỹ thuật số, hiển thị thông tin trên kính lái (HUD), sạc không dây, âm thanh Yamaha, điều hòa tự động 3 vùng và cửa sổ trời toàn cảnh.",
+          "Gói Mitsubishi Safety Sensing gồm giảm thiểu va chạm phía trước, cảnh báo điểm mù, hỗ trợ chuyển làn, cảnh báo phương tiện cắt ngang phía sau, cảnh báo chệch làn và cảnh báo người lái mất tập trung, cùng camera 360 độ hỗ trợ đỗ xe ở chỗ hẹp.",
+        ],
+      },
+      {
+        heading: "Giá bán và khả năng về Việt Nam",
+
+        paragraphs: [
+          "Tại Philippines, Outlander PHEV 2026 có giá niêm yết 2,848 triệu peso, khoảng 1,2 tỷ đồng. Mitsubishi Motors Việt Nam chưa công bố giá và thời gian mở bán. Giá tại Việt Nam còn phụ thuộc thuế và chính sách cho xe hybrid sạc điện, nên chưa thể suy ra từ giá Philippines.",
+          "Bạn có thể đăng ký nhận thông tin ở thẻ Outlander \"Sắp ra mắt\" trên trang chủ để được Lưu Hoàng Phúc báo ngay khi có giá chính thức.",
         ],
       },
     ],
@@ -275,19 +320,21 @@ export const newsArticles: NewsArticle[] = [
       name: "XeHay",
       url: "https://xehay.vn/anh-thuc-te-mitsubishi-outlander-phev-2026-tai-dna-suv-co-c-manh-302-ma-luc-chay-100-km-khong-ton-xang.html",
     },
+
+    originalContent: true,
   },
 
   {
     id: "news-1790836010186",
 
-    title: "Mitsubishi Outlander thế hệ mới có thể ra mắt vào năm 2028",
+    title: "Mitsubishi Outlander thế hệ mới có thể ra mắt năm 2028: thiết kế từ Elevance Concept, PHEV 4 mô-tơ",
 
     slug: "mitsubishi-outlander-the-he-moi-co-the-ra-mat-vao-nam-2028",
 
     category: "Tin Mitsubishi",
 
     excerpt:
-      "Mitsubishi Outlander thế hệ thứ tư được giới thiệu từ năm 2021 và vẫn duy trì doanh số khá tốt. Tuy nhiên, thế hệ hoàn toàn mới có thể xuất hiện trong khoảng hai năm tới, với thiết kế được làm mới mạnh mẽ cùng hệ truyền động hybrid cắm sạc (PHEV) cải tiến. Những thay đổi này được kỳ vọng sẽ giúp...",
+      "Theo báo chí Nhật Bản, Outlander thế hệ thứ năm có thể ra mắt khoảng năm 2028, lấy cảm hứng từ Elevance Concept và dùng hệ PHEV mới. Đây là thông tin chưa được Mitsubishi xác nhận.",
 
     publishedAt: "2026-10-01",
 
@@ -297,18 +344,35 @@ export const newsArticles: NewsArticle[] = [
 
     content: [
       {
-        heading: "Mitsubishi Outlander thế hệ mới có thể ra mắt vào năm 2028",
+        heading: "Vì sao Mitsubishi cần Outlander mới",
+
         paragraphs: [
-          "Mitsubishi Outlander thế hệ thứ tư được giới thiệu từ năm 2021 và vẫn duy trì doanh số khá tốt. Tuy nhiên, thế hệ hoàn toàn mới có thể xuất hiện trong khoảng hai năm tới, với thiết kế được làm mới mạnh mẽ cùng hệ truyền động hybrid cắm sạc (PHEV) cải tiến. Những thay đổi này được kỳ vọng sẽ giúp Outlander tăng sức hút và cạnh tranh tốt hơn trong phân khúc.",
-          "Outlander hiện vẫn là một trong những mẫu xe quan trọng của Mitsubishi, đặc biệt tại thị trường Mỹ. Trong năm ngoái, hãng bán được 35.895 chiếc Outlander, giảm so với mức 45.253 xe của năm trước đó nhưng vẫn đủ để mẫu SUV này giữ vị trí xe bán chạy nhất của Mitsubishi tại thị trường này.",
-          "Theo một báo cáo từ Nhật Bản, Outlander thế hệ thứ năm có thể lấy cảm hứng thiết kế từ Elevance Concept, mẫu xe ý tưởng Mitsubishi giới thiệu vào năm ngoái. Dù có kích thước và kiểu dáng tổng thể tương đồng với Outlander hiện tại, Elevance Concept sở hữu diện mạo hoàn toàn mới, có thể trở thành nền tảng thiết kế cho thế hệ tiếp theo.",
-          "Một số chi tiết từ Elevance Concept được cho là có khả năng xuất hiện trên phiên bản thương mại, trong đó đáng chú ý là cụm đèn pha và đèn LED ban ngày được thiết kế mới, tạo hiệu ứng kéo dài xuống khu vực mặt trước. Xe cũng có thể được trang bị lưới tản nhiệt đồng màu thân xe.",
-          "Elevance Concept từng gây chú ý với phần cửa sổ bên có kích thước lớn. Tuy nhiên, chi tiết này nhiều khả năng sẽ không được giữ lại trên Outlander thương mại.",
-          "Ở phía sau, nếu tiếp tục phát triển theo phong cách của mẫu concept, Outlander thế hệ mới có thể sở hữu dải đèn LED kéo dài toàn chiều rộng đuôi xe, kết hợp cụm đèn hậu mới kéo dài lên trụ D và hai bên thân xe.",
-          "Đáng chú ý hơn thiết kế ngoại thất sẽ là hệ truyền động trên Outlander 2028. Phiên bản PHEV hiện tại sử dụng động cơ xăng 4 xi-lanh hút khí tự nhiên 2.4L, kết hợp hai mô-tơ điện và bộ pin lithium-ion dung lượng 22,7 kWh.",
-          "Hệ thống này cho công suất tổng cộng 297 mã lực và mô-men xoắn 450 Nm, đồng thời cho phép xe di chuyển hoàn toàn bằng điện tối đa khoảng 106 km theo thông số được đề cập.",
-          "Với thế hệ thứ năm, Mitsubishi được cho là có thể bổ sung thêm hai mô-tơ điện, nâng tổng số lên bốn mô-tơ. Không chỉ gia tăng công suất, cấu hình này còn có thể đóng vai trò quan trọng trong hệ thống Super All-Wheel Control (S-AWC) thế hệ mới.",
-          "Công nghệ này từng được Mitsubishi giới thiệu trên Elevance Concept, với khả năng phân bổ lực kéo chính xác tới từng bánh xe, qua đó hỗ trợ cải thiện khả năng kiểm soát và vận hành của Outlander thế hệ mới",
+          "Outlander thế hệ thứ tư ra mắt năm 2021 và vẫn là mẫu xe quan trọng của Mitsubishi, đặc biệt tại Mỹ. Theo số liệu được báo chí dẫn lại, năm 2025 hãng bán được 35.895 chiếc Outlander tại Mỹ, giảm so với 45.253 chiếc của năm trước đó, nhưng vẫn là mẫu bán chạy nhất của Mitsubishi tại thị trường này.",
+          "Đến năm 2028, Outlander hiện tại đã bán được khoảng 7 năm. Một thế hệ mới là bước cần thiết để mẫu xe này tiếp tục cạnh tranh với các SUV cỡ C liên tục được làm mới.",
+        ],
+      },
+      {
+        heading: "Thiết kế có thể lấy từ Elevance Concept",
+
+        paragraphs: [
+          "Theo một báo cáo từ Nhật Bản, Outlander thế hệ thứ năm có thể dựa trên Elevance Concept, mẫu xe ý tưởng Mitsubishi giới thiệu năm 2025. Kích thước tổng thể tương tự Outlander hiện tại nhưng diện mạo hoàn toàn mới.",
+          "Những chi tiết có thể được giữ lại gồm cụm đèn pha và đèn LED ban ngày kéo dài xuống mặt trước, lưới tản nhiệt cùng màu thân xe, và ở phía sau là dải đèn LED chạy hết chiều rộng đuôi xe, nối với đèn hậu kéo lên trụ D. Phần cửa sổ bên cỡ lớn của bản concept nhiều khả năng sẽ không xuất hiện trên xe thương mại.",
+        ],
+      },
+      {
+        heading: "Hệ PHEV 4 mô-tơ và S-AWC thế hệ mới",
+
+        paragraphs: [
+          "Outlander PHEV hiện tại dùng động cơ xăng 2.4L hút khí tự nhiên, hai mô-tơ điện và pin lithium-ion 22,7 kWh. Thế hệ mới được cho là sẽ dùng bốn mô-tơ điện thay vì hai, vừa tăng công suất, vừa giúp hệ S-AWC thế hệ mới phân bổ lực kéo chính xác tới từng bánh xe, cải thiện độ bám và khả năng vào cua.",
+          "Lưu ý: công suất và quãng đường chạy điện của Outlander PHEV hiện tại được công bố khác nhau giữa các thị trường (khoảng 297–302 mã lực, chạy điện khoảng 100–106 km) do khác phiên bản và tiêu chuẩn đo. Các con số này chỉ nên dùng để tham khảo.",
+        ],
+      },
+      {
+        heading: "Ý nghĩa với khách hàng Việt Nam",
+
+        paragraphs: [
+          "Đây mới là thông tin dự đoán, Mitsubishi chưa xác nhận. Tại Việt Nam, Outlander PHEV thế hệ hiện tại cũng chưa được bán chính thức.",
+          "Nếu bạn cần một chiếc xe 7 chỗ trong 1–2 năm tới, nên cân nhắc các mẫu đang bán như Destinator hoặc Xpander Cross thay vì chờ thế hệ mới. Liên hệ Lưu Hoàng Phúc để được tư vấn mẫu xe phù hợp và lái thử.",
         ],
       },
     ],
@@ -317,6 +381,8 @@ export const newsArticles: NewsArticle[] = [
       name: "Autodaily - Cộng đồng xe Việt Nam",
       url: "https://forum.autodaily.vn/threads/mitsubishi-outlander-the-he-moi-co-the-ra-mat-vao-nam-2028.57647/",
     },
+
+    originalContent: true,
   },
 
   {

@@ -176,7 +176,8 @@ Alias import: `@/` → `src/`.
 - Sitemap: chỉ tin tức có `lastModified` (lấy theo `publishedAt`). Không đặt `new Date()` cho trang tĩnh.
 - **Chính sách Google (rà soát 10/2026):**
   - Bài tin có `source` không thuộc `mitsubishi-motors.com.vn` (bài chép từ xehay, autodaily...) tự động bị `noindex`
-    và bỏ khỏi sitemap (`isRepublishedArticle` trong `src/lib/news.ts`). Muốn bài được lập chỉ mục thì phải viết lại bằng lời mình rồi xóa `source`.
+    và bỏ khỏi sitemap (`isRepublishedArticle` trong `src/lib/news.ts`). Muốn bài được lập chỉ mục thì phải viết lại bằng lời mình
+    rồi thêm `originalContent: true` (giữ `source` làm link tham khảo). 4 bài Attrage, Pajero, Outlander PHEV, Outlander 2028 đã được viết lại (10/2026).
   - JSON-LD toàn site (`layout.tsx`) là `@graph`: `WebSite` + `Person #person` (SĐT, email của Phúc) + `AutoDealer #autodealer`
     (chỉ tên, địa chỉ, giờ mở cửa). **Không gắn SĐT, email hay logo cá nhân vào AutoDealer**, vì như vậy là khai báo website cá nhân thành website đại lý.
     Bài tin dùng `author/publisher` = `#person`.

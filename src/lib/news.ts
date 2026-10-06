@@ -6,10 +6,10 @@ const officialSourceHosts = ["mitsubishi-motors.com.vn"];
 
 // Bài lấy nguyên văn từ báo hoặc diễn đàn khác (xehay.vn, autodaily.vn...).
 // Google xếp loại này vào "nội dung sao chép" (scraped content), nên các bài này được
-// đặt noindex và bỏ khỏi sitemap. Khi đã viết lại bằng lời của mình, xóa `source`
-// hoặc đổi sang nguồn chính thức để bài được lập chỉ mục trở lại.
+// đặt noindex và bỏ khỏi sitemap. Khi đã viết lại bằng lời của mình, đặt
+// `originalContent: true` (giữ `source` làm nguồn tham khảo) để bài được lập chỉ mục.
 export function isRepublishedArticle(article: NewsArticle) {
-  if (!article.source) return false;
+  if (!article.source || article.originalContent) return false;
 
   try {
     const host = new URL(article.source.url).hostname.replace(/^www\./, "");
