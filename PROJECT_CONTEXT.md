@@ -112,9 +112,14 @@ Alias import: `@/` → `src/`.
 ## 6. Logic nghiệp vụ quan trọng
 
 - **Giá lăn bánh** (`OnRoadPriceCalculator.tsx`):
-  - Lệ phí trước bạ: xe thường 10% (Hà Nội 12%); **Triton** (bán tải) 6% (Hà Nội 7%).
-  - Biển số: TP lớn 14 triệu (Triton 350 nghìn); tỉnh 140 nghìn (Triton 100 nghìn).
-  - Có phí đăng kiểm, phí dịch vụ đăng ký và trừ khuyến mãi từ `promotions.ts`.
+  - Nơi đăng ký: chọn 1 trong **34 tỉnh, thành** (dữ liệu ở `src/data/registrationFees.ts`, mặc định TP.HCM).
+  - Lệ phí trước bạ = `taxRate` của tỉnh (10%, 11% hoặc 12%). **Triton** (bán tải chở hàng) tính 60% mức đó.
+    Khi tỉnh nào đổi mức thu, chỉ cần sửa `taxRate` trong `registrationFees.ts`.
+  - Biển số (Thông tư 155/2025/TT-BTC): Hà Nội và TP.HCM 14 triệu, tỉnh khác 140 nghìn (Triton 350k / 100k).
+  - Các khoản phí gồm: trước bạ, đăng ký & biển số, đăng kiểm, đường bộ 12 tháng, bảo hiểm TNDS bắt buộc.
+    **Không có phí dịch vụ đăng ký** (đã bỏ theo yêu cầu của chủ website).
+  - Giao diện: tổng trước, 5 khoản phí thu gọn trong `<details>`. Trừ khuyến mãi từ `promotions.ts`.
+    Nút "Nhận báo giá" điền sẵn `?car=&variant=`.
   - Triton được nhận diện bằng `carName === "Mitsubishi Triton"`, nên đổi tên xe sẽ làm sai logic này.
 - **Trả góp** (`InstallmentCalculator.tsx`): chọn trả trước 15–70%, nhập lãi suất năm đầu.
 - **Phần Khuyến mãi trang chủ** (`#khuyen-mai`, nền tối): `src/components/PromotionTabs.tsx` (client), dạng tab theo dòng xe.
