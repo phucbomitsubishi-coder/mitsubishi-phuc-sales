@@ -55,7 +55,7 @@ export default function HeroSlider() {
           src={slide.image}
           alt={slide.name}
           fill
-          priority
+          preload
           sizes="100vw"
           className="object-cover"
           style={{ objectPosition: slide.position }}

@@ -167,7 +167,7 @@ const breadcrumbSchema = {
         src={article.image}
         alt={article.title}
         fill
-        priority
+        preload
         sizes="(max-width: 1024px) 100vw, 1024px"
         className="object-cover"
       />
