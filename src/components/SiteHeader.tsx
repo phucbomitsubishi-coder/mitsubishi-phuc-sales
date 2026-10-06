@@ -55,6 +55,7 @@ export default function SiteHeader() {
                     <img
                       src={car.image}
                       alt={car.name}
+                      loading="lazy"
                       className="mx-auto h-24 w-full object-contain transition duration-200 group-hover/car:scale-105"
                     />
 
