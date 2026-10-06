@@ -158,6 +158,12 @@ Alias import: `@/` → `src/`.
 - `next.config.ts` có header bảo mật (`X-Frame-Options`, `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`) và redirect `/xe/<id>`.
 - Sitemap: chỉ tin tức có `lastModified` (lấy theo `publishedAt`). Không đặt `new Date()` cho trang tĩnh.
 - Không có dark mode. Website luôn dùng nền trắng.
+- **Độ tương phản chữ nhỏ** (WCAG 4,5:1, đã đạt 0 lỗi trên toàn site):
+  - Trên nền trắng/xám nhạt/hồng nhạt (`bg-gray-50/100`, `bg-red-50`): chữ xám dùng `text-gray-600` trở lên, chữ đỏ dùng `text-red-700`.
+    `text-gray-500` và `text-red-600` chỉ dùng trên nền trắng hoặc cho chữ lớn.
+  - Trên nền đen: chữ xám dùng `text-gray-400` (không dùng `gray-500`).
+  - Trên nền đỏ `bg-red-600`: dùng `text-white` (không dùng `text-red-100`).
+  - Kiểm tra: dùng axe-core qua Edge headless (CDP), rule `color-contrast`, quét mọi URL trong sitemap.
 - Ảnh gốc trong `public/` nên rộng khoảng 1200–1600px và dưới 300 KB (`next/image` vẫn tự tạo bản nhỏ hơn). Có thể nén bằng `sharp` (có sẵn trong node_modules).
 - Kiểm tra giao diện bằng Edge headless (PowerShell): `msedge --headless --disable-gpu --user-data-dir=<thư mục mới> --window-size=1366,1000 --virtual-time-budget=15000 --screenshot=<file.png> <url>`.
   Mỗi lần chụp cần profile riêng hoặc phải tắt tiến trình Edge headless cũ trước (nếu không sẽ lỗi exit code 21).
