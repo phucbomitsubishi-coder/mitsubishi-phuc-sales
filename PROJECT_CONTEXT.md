@@ -122,6 +122,12 @@ Alias import: `@/` → `src/`.
     Nút "Nhận báo giá" điền sẵn `?car=&variant=`.
   - Triton được nhận diện bằng `carName === "Mitsubishi Triton"`, nên đổi tên xe sẽ làm sai logic này.
 - **Trả góp** (`InstallmentCalculator.tsx`): chọn trả trước 15–70%, nhập lãi suất năm đầu.
+- **Trang Giới thiệu** (`src/app/gioi-thieu/page.tsx`) tập trung vào người tư vấn. Thứ tự các phần: hero có ảnh chân dung,
+  số liệu (năm kinh nghiệm, số xe, 24/7) và điểm Google 5,0 (635) → 4 lý do (lấy từ nhận xét thật của khách) →
+  quy trình 4 bước → 9 ảnh bàn giao xe (`public/images/about/ban-giao-01..09.jpg`) → 3 nhận xét → đại lý → bản đồ → CTA.
+  Có JSON-LD `Person`. Ảnh gốc khách gửi nằm ở `C:\Mitsubishi-Website\anh-gioi-thieu` (ngoài repo).
+  Số năm kinh nghiệm, số xe đã bàn giao và giờ làm việc lấy từ `siteConfig.sales` và `siteConfig.hours`
+  (giờ làm việc cũng hiện ở footer và nằm trong JSON-LD AutoDealer). Lưới ảnh có ảnh đầu chiếm 2×2, nên cần đúng 9 ảnh để không trống ô.
 - **Phần Khuyến mãi trang chủ** (`#khuyen-mai`, nền tối): `src/components/PromotionTabs.tsx` (client), dạng tab theo dòng xe.
   Dữ liệu (`promotionItems`) được dựng sẵn trong `src/app/page.tsx` từ `cars` + `currentPromotion`.
   **Không thêm hàm vào `promotions.ts`**, vì `add-news.mjs` ghi đè toàn bộ file này mỗi tháng.
