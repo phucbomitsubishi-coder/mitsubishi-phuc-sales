@@ -100,19 +100,24 @@ const carGalleries: Record<
 type Props = {
   carName: string;
   galleries?: Record<GalleryType, string[]>;
+  // Ảnh dùng tạm khi xe chưa có bộ ảnh trong carGalleries
+  fallbackImage?: string;
 };
 
 export default function CarGallery({
   carName,
   galleries: customGalleries,
+  fallbackImage,
 }: Props) {
   const [galleryType, setGalleryType] =
     useState<GalleryType>("exterior");
 
   const [selectedIndex, setSelectedIndex] = useState(0);
 
+  const gallery = customGalleries ?? carGalleries[carName];
   const images =
-  (customGalleries ?? carGalleries[carName])?.[galleryType] ?? [];
+    gallery?.[galleryType] ??
+    (galleryType === "exterior" && fallbackImage ? [fallbackImage] : []);
   const selectedImage = images[selectedIndex];
 
   function changeGallery(type: GalleryType) {

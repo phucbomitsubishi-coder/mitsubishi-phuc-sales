@@ -144,7 +144,7 @@ const breadcrumbSchema = {
         <BackToPrevious />
 
         <div className="grid gap-5 md:gap-10 lg:grid-cols-2 lg:items-center">
-         <CarGallery carName={car.name} />
+         <CarGallery carName={car.name} fallbackImage={car.image} />
 
           <div>
             <p className="mb-2 font-semibold uppercase tracking-wider text-red-600">
@@ -205,7 +205,7 @@ const breadcrumbSchema = {
     <p>✓ Khoảng sáng gầm 214 mm, mâm hợp kim 18 inch</p>
     <p>✓ Hệ thống an toàn Diamond Sense trên bản Ultimate</p>
   </>
-  ) : (
+  ) : car.id === "xforce" ? (
     <>
       <p>✓ Dynamic Shield thế hệ mới</p>
       <p>✓ Khoảng sáng gầm lên đến 222 mm</p>
@@ -213,7 +213,19 @@ const breadcrumbSchema = {
       <p>✓ Màn hình lên đến 12,3 inch</p>
       <p>✓ Hệ thống an toàn Diamond Sense</p>
     </>
-
+  ) : (
+    // Xe mới chưa có nội dung riêng: lấy từ highlights trong dữ liệu xe
+    <>
+      {[
+        ...car.highlights.performance,
+        ...car.highlights.interior,
+        ...car.highlights.safety,
+      ]
+        .slice(0, 5)
+        .map((item) => (
+          <p key={item}>✓ {item}</p>
+        ))}
+    </>
   )}
 </div>
   <div className="mt-6 flex flex-wrap gap-4">
