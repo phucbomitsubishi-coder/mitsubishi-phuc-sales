@@ -9,6 +9,7 @@ export const metadata: Metadata = createPageMetadata({
   description:
     "Tư vấn lựa chọn xe Mitsubishi phù hợp với nhu cầu gia đình, đi phố, đi xa, công việc và ngân sách.",
   path: "/tu-van/chon-xe-mitsubishi-phu-hop",
+  hasOgImageFile: true,
 });
 
 export default function MitsubishiBuyingGuidePage() {

@@ -21,6 +21,7 @@ export const metadata: Metadata = createPageMetadata({
   description:
     "So sánh Mitsubishi Triton và Ford Ranger về giá niêm yết, giá lăn bánh, động cơ, hộp số, hệ dẫn động, trang bị và bảo hành. Gợi ý chọn xe bán tải theo nhu cầu.",
   path: "/tu-van/so-sanh-triton-va-ford-ranger",
+  hasOgImageFile: true,
 });
 
 // Số liệu Ford Ranger nằm ở src/data/competitors.ts

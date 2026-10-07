@@ -9,6 +9,7 @@ export const metadata: Metadata = createPageMetadata({
   description:
     "Tìm hiểu các khoản chi phí dự kiến khi tính giá lăn bánh xe Mitsubishi và cách tham khảo chi phí theo mẫu xe, phiên bản và khu vực đăng ký.",
   path: "/tu-van/chi-phi-lan-banh-mitsubishi",
+  hasOgImageFile: true,
 });
 
 export default function MitsubishiOnRoadCostGuidePage() {

@@ -21,6 +21,7 @@ export const metadata: Metadata = createPageMetadata({
   description:
     "So sánh Mitsubishi Attrage và Toyota Vios về giá niêm yết, giá lăn bánh, kích thước, khoảng sáng gầm, động cơ, mức tiêu thụ nhiên liệu và trang bị an toàn. Gợi ý chọn sedan hạng B theo nhu cầu.",
   path: "/tu-van/so-sanh-attrage-va-toyota-vios",
+  hasOgImageFile: true,
 });
 
 // Số liệu Toyota Vios nằm ở src/data/competitors.ts

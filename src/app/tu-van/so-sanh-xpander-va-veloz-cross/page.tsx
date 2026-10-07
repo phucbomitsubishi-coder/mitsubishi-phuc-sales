@@ -22,6 +22,7 @@ export const metadata: Metadata = createPageMetadata({
   description:
     "So sánh Mitsubishi Xpander và Toyota Veloz Cross về giá niêm yết, giá lăn bánh, kích thước, khoảng sáng gầm, hộp số và trang bị an toàn. Gợi ý chọn xe 7 chỗ theo nhu cầu.",
   path: "/tu-van/so-sanh-xpander-va-veloz-cross",
+  hasOgImageFile: true,
 });
 
 // Số liệu Toyota Veloz Cross nằm ở src/data/competitors.ts

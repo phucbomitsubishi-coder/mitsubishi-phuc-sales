@@ -9,6 +9,7 @@ export const metadata: Metadata = createPageMetadata({
   description:
     "Tư vấn cách lựa chọn phiên bản xe Mitsubishi phù hợp với nhu cầu sử dụng, trang bị và ngân sách dự kiến.",
   path: "/tu-van/chon-phien-ban-xe-mitsubishi",
+  hasOgImageFile: true,
 });
 
 export default function MitsubishiVariantGuidePage() {

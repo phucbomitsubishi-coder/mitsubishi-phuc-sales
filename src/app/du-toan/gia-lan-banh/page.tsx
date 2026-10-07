@@ -8,6 +8,7 @@ export const metadata: Metadata = createPageMetadata({
   description:
     "Dự tính chi phí lăn bánh xe Mitsubishi theo mẫu xe, phiên bản và khu vực đăng ký.",
   path: "/du-toan/gia-lan-banh",
+  hasOgImageFile: true,
 });
 
 export default function GiaLanBanhPage() {

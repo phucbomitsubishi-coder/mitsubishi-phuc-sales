@@ -10,6 +10,7 @@ export const metadata = createPageMetadata({
   description:
     "Lưu Hoàng Phúc – tư vấn kinh doanh Mitsubishi tại Moveo New City. Tư vấn tận tâm, thủ tục nhanh gọn, minh bạch, hỗ trợ trả góp và chăm sóc sau bán hàng.",
   path: "/gioi-thieu",
+  hasOgImageFile: true,
 });
 
 const { sales, dealer, contact, social } = siteConfig;

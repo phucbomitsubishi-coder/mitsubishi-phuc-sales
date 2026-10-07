@@ -182,6 +182,10 @@ Alias import: `@/` → `src/`.
   - Dùng `export const metadata: Metadata = createPageMetadata({ title, description, path })` từ `@/lib/metadata`.
     Nếu chỉ khai báo `title/description`, trang sẽ kế thừa Open Graph của trang chủ, và khi chia sẻ qua Zalo/Facebook sẽ hiện sai tiêu đề và URL.
     Hàm này tự thêm "| Lưu Hoàng Phúc" vào tiêu đề nếu thiếu.
+  - Ảnh chia sẻ riêng (1200×630): tạo `opengraph-image.tsx` trong thư mục trang, gọi `renderOgImage({ kicker, title, subtitle, images, versus })`
+    từ `@/lib/ogImage` (font Roboto ở `src/assets/fonts`), **và** thêm `hasOgImageFile: true` vào `createPageMetadata`.
+    Nếu thiếu `hasOgImageFile`, ảnh mặc định `og-default.jpg` sẽ được dùng thay cho ảnh riêng. Đã có ảnh riêng cho: bảng giá (tự đổi theo tháng),
+    các trang `/tu-van/*`, `/du-toan/*`, `/xe-cu`, `/gioi-thieu`.
   - **Nhớ thêm trang vào `src/app/sitemap.ts`**.
 - Next 16: thuộc tính `priority` của `<Image>` đã bị deprecate. Ảnh lớn ở đầu trang (LCP) dùng `preload`, các ảnh khác ở đầu trang dùng `loading="eager"`.
 - Thông tin liên hệ **luôn lấy từ `siteConfig`**, không ghi cứng số điện thoại, Zalo hay email trong trang

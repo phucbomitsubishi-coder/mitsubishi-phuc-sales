@@ -9,6 +9,7 @@ export const metadata: Metadata = createPageMetadata({
   description:
     "Thông tin tư vấn giúp khách hàng chọn mẫu xe Mitsubishi phù hợp, lựa chọn phiên bản, tham khảo chi phí lăn bánh và nhận báo giá.",
   path: "/tu-van",
+  hasOgImageFile: true,
 });
 
 // Danh sách bài tư vấn dùng chung: src/data/advisory.ts

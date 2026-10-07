@@ -11,6 +11,7 @@ export const metadata: Metadata = createPageMetadata({
   description:
     "Thông tin xe Mitsubishi đã qua sử dụng, xe cũ đang có sẵn và tư vấn lựa chọn xe phù hợp.",
   path: "/xe-cu",
+  hasOgImageFile: true,
 });
 
 export default function UsedCarsPage() {

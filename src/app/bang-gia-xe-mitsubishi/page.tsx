@@ -17,6 +17,7 @@ export const metadata: Metadata = createPageMetadata({
   title: `Bảng giá xe Mitsubishi tháng ${promotionMonthLabel}: giá lăn bánh và ưu đãi`,
   description: `Bảng giá xe Mitsubishi tháng ${promotionMonthLabel} đầy đủ các phiên bản Destinator, Triton, Xforce, Xpander Cross, Xpander, Attrage: giá niêm yết, ưu đãi trong tháng và giá lăn bánh tại TP.HCM, Bình Dương.`,
   path: "/bang-gia-xe-mitsubishi",
+  hasOgImageFile: true,
 });
 
 const province =

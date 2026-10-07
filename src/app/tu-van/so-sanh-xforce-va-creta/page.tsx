@@ -20,6 +20,7 @@ export const metadata: Metadata = createPageMetadata({
   description:
     "So sánh Mitsubishi Xforce và Hyundai Creta về giá niêm yết, giá lăn bánh, kích thước, khoảng sáng gầm, động cơ và trang bị. Gợi ý nên chọn xe nào theo nhu cầu.",
   path: "/tu-van/so-sanh-xforce-va-creta",
+  hasOgImageFile: true,
 });
 
 // Số liệu Hyundai Creta nằm ở src/data/competitors.ts

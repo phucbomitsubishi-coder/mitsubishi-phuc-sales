@@ -8,6 +8,7 @@ export const metadata: Metadata = createPageMetadata({
   description:
     "Công cụ dự tính khoản vay và số tiền trả góp hàng tháng khi mua xe Mitsubishi theo mẫu xe, phiên bản, số tiền trả trước và thời hạn vay.",
   path: "/du-toan/tra-gop",
+  hasOgImageFile: true,
 });
 
 export default function TraGopPage() {
