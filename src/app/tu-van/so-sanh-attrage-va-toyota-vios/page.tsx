@@ -54,7 +54,7 @@ export default function AttrageVsViosPage() {
     },
     {
       label: "Tiêu thụ nhiên liệu (tổ hợp)",
-      car: "Khoảng 5,3 lít/100 km",
+      car: "5,30 lít/100 km (MT), 5,59 lít/100 km (CVT Premium)",
       competitor: vios.specs.fuelConsumption,
     },
     { label: "Túi khí", car: "2 túi khí", competitor: vios.specs.airbags },
@@ -132,12 +132,12 @@ export default function AttrageVsViosPage() {
               left={{
                 title: `Mitsubishi Attrage ${attrageTop.name}`,
                 items: [
-                  "Đèn Bi-LED, đèn định vị ban ngày LED, gương gập điện",
+                  "Đèn Bi-LED, đèn sương mù LED, gương gập điện",
                   "Ghế và vô-lăng bọc da",
-                  "Màn hình cảm ứng, Apple CarPlay và Android Auto",
+                  "Màn hình cảm ứng 7 inch, Apple CarPlay và Android Auto",
                   "Điều hòa tự động, chìa khóa thông minh, khởi động nút bấm",
                   "Kiểm soát hành trình (Cruise Control)",
-                  "2 túi khí, camera lùi, cảm biến đỗ xe",
+                  "2 túi khí, camera lùi",
                   "Cân bằng điện tử, kiểm soát lực kéo, hỗ trợ khởi hành ngang dốc",
                 ],
               }}

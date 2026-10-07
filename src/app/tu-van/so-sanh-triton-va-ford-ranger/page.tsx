@@ -163,7 +163,7 @@ export default function TritonVsRangerPage() {
                   "Máy dầu 2.4L, 184 PS, 430 Nm, hộp số tự động 6 cấp",
                   "Màn hình giải trí 8 inch, đồng hồ kỹ thuật số 7 inch",
                   "Kiểm soát hành trình (Cruise Control)",
-                  "Camera lùi, túi khí phía trước",
+                  "3 túi khí, camera lùi",
                   "Cân bằng điện tử, kiểm soát lực kéo, hỗ trợ khởi hành ngang dốc",
                   "Mâm hợp kim 16 inch",
                 ],
@@ -184,7 +184,8 @@ export default function TritonVsRangerPage() {
               {formatMillion(rangerBase.price - tritonBase.price)} đồng và có động cơ mạnh
               hơn. Ở bản cao, Triton {tritonTop.name} có camera 360 độ, 7 túi khí, gói an
               toàn Mitsubishi Motors Safety Sensing (cảnh báo va chạm phía trước, cảnh báo
-              điểm mù, hỗ trợ chuyển làn) và kiểm soát vào cua chủ động AYC
+              điểm mù, cảnh báo lệch làn, kiểm soát hành trình thích ứng) và kiểm soát
+              vào cua chủ động AYC
               {rangerWildtrak
                 ? `, với giá thấp hơn Ranger ${rangerWildtrak.name} ${formatMillion(
                     rangerWildtrak.price - tritonTop.price

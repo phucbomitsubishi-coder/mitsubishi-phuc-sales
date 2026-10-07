@@ -103,7 +103,8 @@ export default function XforceVsCretaPage() {
                 <span className="font-semibold text-gray-900">Động cơ:</span> Creta nhỉnh
                 hơn về công suất và mô-men xoắn, có lợi khi chở đủ tải hoặc vượt xe trên
                 cao tốc. Xforce bù lại bằng hệ thống kiểm soát vào cua chủ động AYC và 4
-                chế độ lái (bản Ultimate), giúp xe ổn định khi vào cua và đi đường trơn.
+                chế độ lái (bản Luxury, Ultimate), giúp xe ổn định khi vào cua và đi đường
+                trơn.
               </p>
             </div>
           </section>
@@ -116,9 +117,9 @@ export default function XforceVsCretaPage() {
                 items: [
                   "Màn hình giải trí 12,3 inch, đồng hồ kỹ thuật số 8 inch",
                   "Âm thanh Dynamic Sound Yamaha Premium 8 loa",
-                  "Điều hòa tự động 2 vùng, ghế lái chỉnh điện, cốp điện rảnh tay",
+                  "Điều hòa tự động 2 vùng, ghế lái chỉnh điện, cốp điện rảnh tay, sạc không dây",
                   "6 túi khí, camera 360 độ",
-                  "Gói Diamond Sense: kiểm soát hành trình thích ứng, cảnh báo và giảm thiểu va chạm phía trước, cảnh báo điểm mù, hỗ trợ chuyển làn, cảnh báo phương tiện cắt ngang khi lùi, đèn pha tự động",
+                  "Gói Diamond Sense: kiểm soát hành trình thích ứng, cảnh báo và giảm thiểu va chạm phía trước, cảnh báo điểm mù, cảnh báo phương tiện cắt ngang khi lùi, cảnh báo phương tiện phía trước khởi hành, đèn pha tự động",
                 ],
               }}
               right={{
@@ -134,7 +135,7 @@ export default function XforceVsCretaPage() {
             />
             <p className="mt-4 leading-7 text-gray-700">
               Ở bản cao nhất, hai xe có danh sách trang bị an toàn chủ động tương
-              đương. Creta có thêm ghế thông gió và sạc không dây, Xforce có màn hình
+              đương. Creta có thêm ghế thông gió và khởi động từ xa, Xforce có màn hình
               giải trí lớn hơn và cốp điện. Ở bản tiêu chuẩn, nên xem kỹ từng xe vì trang
               bị giữa các phiên bản chênh lệch khá nhiều.
             </p>
@@ -157,7 +158,7 @@ export default function XforceVsCretaPage() {
                 title: "Chọn Creta nếu bạn",
                 items: [
                   "Ưu tiên động cơ mạnh hơn một chút",
-                  "Cần ghế thông gió, sạc không dây",
+                  "Cần ghế thông gió, khởi động từ xa",
                   "Thích phong cách thể thao của bản N Line",
                 ],
               }}

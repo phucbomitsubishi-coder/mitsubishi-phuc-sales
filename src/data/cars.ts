@@ -145,7 +145,8 @@ equipment: {
   ],
   safety: [
     "4 túi khí",
-    "Cảm biến lùi",
+    "Camera lùi",
+    "Cảm biến sau xe",
   ],
   drivingSupport: [
     "Hệ thống kiểm soát vào cua chủ động AYC",
@@ -234,17 +235,22 @@ equipment: {
     "Màn hình giải trí 12,3 inch",
     "Màn hình thông tin kỹ thuật số 8 inch",
     "Vô lăng bọc da",
+    "Ghế bọc da",
+    "Ghế lái chỉnh điện",
   ],
   convenience: [
     "Phanh tay điện tử và Auto Hold",
-    "Điều hòa tự động",
+    "Điều hòa tự động hai vùng độc lập",
+    "Kiểm soát hành trình (Cruise Control)",
     "Cổng sạc USB-A và USB-C",
     "Chìa khóa thông minh và khởi động nút bấm",
   ],
   safety: [
     "6 túi khí",
     "Camera lùi",
-    "Cảm biến hỗ trợ đỗ xe",
+    "Cảm biến sau xe",
+    "Cảnh báo điểm mù",
+    "Cảnh báo phương tiện cắt ngang khi lùi",
   ],
   drivingSupport: [
     "Hệ thống kiểm soát vào cua chủ động AYC",
@@ -295,6 +301,18 @@ safetyTechnologies: [
     description:
       "Hỗ trợ kiểm soát lực phanh giữa các bánh xe để tăng độ ổn định và khả năng kiểm soát khi vào cua.",
   },
+  {
+    code: "BSW",
+    name: "Cảnh báo điểm mù",
+    description:
+      "Hỗ trợ cảnh báo khi phát hiện phương tiện nằm trong vùng điểm mù bên hông xe.",
+  },
+  {
+    code: "RCTA",
+    name: "Cảnh báo phương tiện cắt ngang khi lùi",
+    description:
+      "Hỗ trợ phát hiện và cảnh báo phương tiện đang di chuyển cắt ngang phía sau khi lùi xe.",
+  },
 ],
 
     colors: ["Trắng", "Đen", "Đỏ", "Xám"],
@@ -342,11 +360,12 @@ equipment: {
     "Điều hòa tự động hai vùng độc lập",
     "Cổng sạc USB-A và USB-C",
     "Chìa khóa thông minh và khởi động nút bấm",
+    "Sạc điện thoại không dây",
   ],
   safety: [
     "6 túi khí",
     "Camera toàn cảnh 360 độ",
-    "Cảm biến hỗ trợ đỗ xe",
+    "Cảm biến sau xe",
   ],
   drivingSupport: [
     "Hệ thống kiểm soát vào cua chủ động AYC",
@@ -406,13 +425,6 @@ safetyTechnologies: [
     group: "Diamond Sense",
   },
   {
-    code: "LCA",
-    name: "Hỗ trợ chuyển làn",
-    description:
-      "Hỗ trợ cảnh báo phương tiện đang tiếp cận khi người lái có ý định chuyển làn.",
-    group: "Diamond Sense",
-  },
-  {
     code: "RCTA",
     name: "Cảnh báo phương tiện cắt ngang khi lùi",
     description:
@@ -453,7 +465,7 @@ safetyTechnologies: [
   },
 ],
 
-colors: ["Trắng", "Đen", "Đỏ", "Vàng", "Xám"],
+colors: ["Trắng", "Đen", "Đỏ", "Xám"],
 
 specifications: {
   seats: 5,
@@ -545,13 +557,12 @@ specifications: {
     convenience: [
       "Điều hòa chỉnh cơ",
       "Cửa gió điều hòa cho hàng ghế sau",
-      "Hệ thống giải trí hỗ trợ kết nối cơ bản",
+      "Màn hình cảm ứng 7 inch, Apple CarPlay và Android Auto",
       "Nhiều ngăn chứa đồ trong khoang cabin",
     ],
 
     safety: [
       "2 túi khí phía trước",
-      "Camera lùi",
     ],
   },
   safetyTechnologies: [
@@ -578,12 +589,6 @@ specifications: {
     name: "Cân bằng điện tử",
     description:
       "Hỗ trợ duy trì độ ổn định của xe khi hệ thống phát hiện nguy cơ mất cân bằng hoặc trượt bánh.",
-  },
-  {
-    code: "TCL",
-    name: "Kiểm soát lực kéo",
-    description:
-      "Hỗ trợ hạn chế bánh xe quay trượt khi tăng tốc trên bề mặt có độ bám thấp.",
   },
   {
     code: "HSA",
@@ -617,7 +622,7 @@ equipment: {
   exterior: [
     "Đèn chiếu sáng Halogen",
     "Đèn hậu LED",
-    "Gương chiếu hậu chỉnh điện",
+    "Gương chiếu hậu chỉnh điện, gập điện",
     "Mâm hợp kim 16 inch",
   ],
 
@@ -631,7 +636,8 @@ equipment: {
   convenience: [
     "Điều hòa chỉnh cơ",
     "Cửa gió điều hòa cho hàng ghế sau",
-    "Hệ thống giải trí hỗ trợ kết nối cơ bản",
+    "Màn hình cảm ứng 7 inch, Apple CarPlay và Android Auto",
+    "Chìa khóa thông minh và khởi động nút bấm",
     "Nhiều ngăn chứa đồ trong khoang cabin",
   ],
 
@@ -664,12 +670,6 @@ safetyTechnologies: [
     name: "Cân bằng điện tử",
     description:
       "Hỗ trợ duy trì độ ổn định của xe khi hệ thống phát hiện nguy cơ mất cân bằng hoặc trượt bánh.",
-  },
-  {
-    code: "TCL",
-    name: "Kiểm soát lực kéo",
-    description:
-      "Hỗ trợ hạn chế bánh xe quay trượt khi tăng tốc trên bề mặt có độ bám thấp.",
   },
   {
     code: "HSA",
@@ -699,12 +699,14 @@ safetyTechnologies: [
     fuelTank: "45 L",
     wheels: "205/55R17 - Mâm hợp kim 17 inch",
   },
-  colors: ["Trắng", "Đen", "Xám", "Đỏ"],
+  colors: ["Trắng", "Đen", "Bạc", "Đỏ"],
 
 equipment: {
   exterior: [
     "Đèn chiếu sáng LED",
     "Đèn định vị ban ngày LED",
+    "Đèn sương mù LED",
+    "Gạt mưa tự động",
     "Đèn hậu LED",
     "Gương chiếu hậu chỉnh điện, gập điện",
     "Mâm hợp kim 17 inch",
@@ -719,7 +721,9 @@ equipment: {
   ],
 
   convenience: [
-    "Màn hình giải trí cảm ứng",
+    "Màn hình cảm ứng 10 inch, Apple CarPlay và Android Auto",
+    "Đồng hồ kỹ thuật số 8 inch",
+    "Kiểm soát hành trình (Cruise Control)",
     "Điều hòa tự động",
     "Cửa gió điều hòa cho hàng ghế sau",
     "Phanh tay điện tử và Auto Hold",
@@ -728,9 +732,8 @@ equipment: {
   ],
 
   safety: [
-    "2 túi khí phía trước",
+    "6 túi khí",
     "Camera lùi",
-    "Cảm biến hỗ trợ đỗ xe",
   ],
 },
 safetyTechnologies: [
@@ -759,21 +762,21 @@ safetyTechnologies: [
       "Hỗ trợ duy trì độ ổn định của xe khi hệ thống phát hiện nguy cơ mất cân bằng hoặc trượt bánh.",
   },
   {
-    code: "TCL",
-    name: "Kiểm soát lực kéo",
-    description:
-      "Hỗ trợ hạn chế bánh xe quay trượt khi tăng tốc trên bề mặt có độ bám thấp.",
-  },
-  {
     code: "HSA",
     name: "Hỗ trợ khởi hành ngang dốc",
     description:
       "Hỗ trợ giữ phanh trong thời gian ngắn khi khởi hành trên dốc, hạn chế xe bị trôi về phía sau.",
   },
+  {
+    code: "AYC",
+    name: "Kiểm soát vào cua chủ động",
+    description:
+      "Hỗ trợ kiểm soát lực phanh giữa các bánh xe để tăng độ ổn định và khả năng kiểm soát khi vào cua.",
+  },
 ],
 },
 ],
-    colors: ["Trắng", "Đen", "Bạc", "Xám"],
+    colors: ["Trắng", "Đen", "Bạc", "Xám", "Nâu", "Đỏ"],
 
     specifications: {
       seats: 7,
@@ -861,12 +864,14 @@ turningRadius: "4,8 m",
   ],
   convenience: [
     "Điều hòa chỉnh cơ",
-    "Hệ thống âm thanh 2 loa",
-    "Kết nối USB",
+    "Màn hình cảm ứng 7 inch",
+    "Hệ thống âm thanh 4 loa",
+    "Nút điều khiển âm thanh và đàm thoại rảnh tay trên vô lăng",
     "Khoang hành lý rộng rãi",
   ],
   safety: [
     "2 túi khí phía trước",
+    "Camera lùi",
   ],
 },
 safetyTechnologies: [
@@ -908,8 +913,9 @@ turningRadius: "4,8 m",
   equipment: {
   exterior: [
     "Đèn chiếu sáng Bi-LED",
-    "Đèn định vị ban ngày LED",
-    "Đèn hậu",
+    "Đèn sương mù LED",
+    "Cảm biến bật/tắt đèn chiếu sáng và gạt mưa tự động",
+    "Đèn hậu LED",
     "Gương chiếu hậu chỉnh điện, gập điện",
     "Mâm hợp kim 15 inch",
   ],
@@ -920,7 +926,7 @@ turningRadius: "4,8 m",
     "Hàng ghế sau có tựa đầu",
   ],
   convenience: [
-    "Màn hình giải trí cảm ứng",
+    "Màn hình cảm ứng 7 inch",
     "Điều hòa tự động",
     "Kết nối Apple CarPlay và Android Auto",
     "Chìa khóa thông minh và khởi động nút bấm",
@@ -930,7 +936,6 @@ turningRadius: "4,8 m",
   safety: [
     "2 túi khí phía trước",
     "Camera lùi",
-    "Cảm biến hỗ trợ đỗ xe",
   ],
 },
 safetyTechnologies: [
@@ -968,7 +973,7 @@ safetyTechnologies: [
   colors: ["Trắng", "Xám", "Đỏ"],
 },
 ],
-    colors: ["Trắng", "Đỏ", "Xám", "Bạc"],
+    colors: ["Trắng", "Đỏ", "Xám"],
 
     specifications: {
       seats: 5,
@@ -1030,8 +1035,8 @@ turningRadius: "6,2 m",
 },
 equipment: {
   exterior: [
-    "Đèn chiếu sáng phía trước",
-    "Đèn hậu",
+    "Đèn chiếu sáng Halogen",
+    "Đèn sương mù Halogen",
     "Gương chiếu hậu chỉnh điện",
     "Mâm hợp kim 16 inch",
     "Bậc lên xuống hai bên",
@@ -1043,14 +1048,14 @@ equipment: {
     "Cụm đồng hồ kỹ thuật số 7 inch",
   ],
   convenience: [
-    "Màn hình giải trí 8 inch",
-    "Kết nối điện thoại thông minh",
-    "Điều hòa",
+    "Màn hình cảm ứng 8 inch",
+    "Hệ thống âm thanh 4 loa",
+    "Điều hòa chỉnh cơ",
     "Cruise Control",
     "Cổng kết nối USB",
   ],
   safety: [
-    "Túi khí phía trước",
+    "3 túi khí",
     "Camera lùi",
   ],
 },
@@ -1148,6 +1153,8 @@ equipment: {
   safety: [
     "7 túi khí",
     "Camera lùi",
+    "Cảm biến trước và sau xe",
+    "Cảm biến áp suất lốp (TPMS)",
   ],
 },
 safetyTechnologies: [
@@ -1231,8 +1238,8 @@ equipment: {
   ],
   interior: [
     "Nội thất 5 chỗ",
-    "Ghế bọc da",
-    "Ghế lái chỉnh điện 8 hướng",
+    "Ghế bọc nỉ",
+    "Ghế lái chỉnh cơ",
     "Vô lăng đa chức năng",
     "Cụm đồng hồ kỹ thuật số 7 inch",
   ],
@@ -1247,11 +1254,13 @@ equipment: {
   safety: [
     "7 túi khí",
     "Camera lùi",
+    "Cảm biến trước và sau xe",
   ],
   drivingSupport: [
     "Hệ dẫn động Super Select 4WD-II",
     "7 chế độ lái",
     "Khóa vi sai cầu sau",
+    "Kiểm soát vào cua chủ động AYC",
   ],
 },
 safetyTechnologies: [
@@ -1296,6 +1305,12 @@ safetyTechnologies: [
     name: "Hỗ trợ xuống dốc",
     description:
       "Hỗ trợ kiểm soát tốc độ xe khi xuống dốc, giúp người lái tập trung hơn vào việc điều khiển hướng di chuyển.",
+  },
+  {
+    code: "AYC",
+    name: "Kiểm soát vào cua chủ động",
+    description:
+      "Hỗ trợ kiểm soát lực phanh giữa các bánh xe để tăng độ ổn định khi vào cua.",
   },
 ],
     features: [
@@ -1350,14 +1365,18 @@ equipment: {
   convenience: [
     "Màn hình giải trí 9 inch",
     "Apple CarPlay và Android Auto",
-    "Điều hòa tự động",
-    "Cruise Control",
+    "Kiểm soát hành trình thích ứng (ACC)",
+    "Sạc điện thoại không dây",
+    "Gương chiếu hậu trong chống chói tự động",
+    "Điều hòa tự động hai vùng độc lập",
     "Chìa khóa thông minh và khởi động nút bấm",
     "Cổng kết nối USB",
   ],
   safety: [
     "7 túi khí",
     "Camera toàn cảnh 360 độ",
+    "Cảm biến trước và sau xe",
+    "Cảm biến áp suất lốp (TPMS)",
   ],
   drivingSupport: [
     "Hệ dẫn động Super Select 4WD-II",
@@ -1430,10 +1449,17 @@ safetyTechnologies: [
     group: "MMSS",
   },
   {
-    code: "LCA",
-    name: "Hỗ trợ chuyển làn",
+    code: "LDW",
+    name: "Cảnh báo lệch làn đường",
     description:
-      "Hỗ trợ cảnh báo phương tiện tiếp cận khi người lái có ý định chuyển làn.",
+      "Hỗ trợ cảnh báo khi xe có dấu hiệu đi lệch khỏi làn đường mà người lái không bật xi-nhan.",
+    group: "MMSS",
+  },
+  {
+    code: "AHB",
+    name: "Đèn pha tự động",
+    description:
+      "Tự động chuyển giữa đèn pha và đèn cốt khi phát hiện phương tiện phía trước hoặc ngược chiều.",
     group: "MMSS",
   },
   {
@@ -1519,7 +1545,9 @@ safetyTechnologies: [
     wheels: "225/55R18 - Mâm hợp kim 18 inch",
     curbWeight: "1.495 kg",
 turningRadius: "5,4 m",
-fuelConsumptionCombined: "Khoảng 6,8 L/100 km",
+fuelConsumptionCombined: "7,30 L/100 km",
+fuelConsumptionUrban: "9,20 L/100 km",
+fuelConsumptionExtraUrban: "6,20 L/100 km",
   },
   equipment: {
   exterior: [
@@ -1532,23 +1560,28 @@ fuelConsumptionCombined: "Khoảng 6,8 L/100 km",
   ],
   interior: [
     "Nội thất 7 chỗ",
-    "Ghế bọc da",
+    "Ghế da giảm hấp thụ nhiệt",
+    "Ghế lái chỉnh điện 6 hướng",
     "Vô lăng bọc da đa chức năng",
     "Hàng ghế thứ hai gập linh hoạt",
     "Hàng ghế thứ ba gập linh hoạt",
   ],
   convenience: [
-    "Màn hình giải trí cảm ứng",
-    "Kết nối Apple CarPlay và Android Auto",
-    "Điều hòa tự động",
+    "Màn hình cảm ứng 12,3 inch, Apple CarPlay và Android Auto",
+    "Đồng hồ kỹ thuật số 8 inch",
+    "Điều hòa tự động hai vùng độc lập",
     "Cửa gió điều hòa cho hàng ghế sau",
     "Chìa khóa thông minh và khởi động nút bấm",
     "Phanh tay điện tử và Auto Hold",
+    "Kiểm soát hành trình (Cruise Control)",
+    "Hệ thống âm thanh 6 loa",
   ],
   safety: [
-    "Túi khí",
+    "6 túi khí",
     "Camera lùi",
-    "Cảm biến hỗ trợ đỗ xe",
+    "Cảnh báo điểm mù",
+    "Cảnh báo phương tiện cắt ngang khi lùi",
+    "Cảm biến trước và sau xe",
   ],
 },
 safetyTechnologies: [
@@ -1594,6 +1627,18 @@ safetyTechnologies: [
     description:
       "Hỗ trợ kiểm soát lực phanh giữa các bánh xe để tăng độ ổn định và khả năng kiểm soát khi vào cua.",
   },
+  {
+    code: "BSW",
+    name: "Cảnh báo điểm mù",
+    description:
+      "Hỗ trợ cảnh báo khi phát hiện phương tiện nằm trong vùng điểm mù bên hông xe.",
+  },
+  {
+    code: "RCTA",
+    name: "Cảnh báo phương tiện cắt ngang khi lùi",
+    description:
+      "Hỗ trợ cảnh báo phương tiện đang di chuyển cắt ngang phía sau khi xe lùi.",
+  },
 ],
   colors: ["Trắng", "Xám", "Đen", "Đỏ"],
 },
@@ -1616,7 +1661,9 @@ safetyTechnologies: [
     wheels: "225/55R18 - Mâm hợp kim 18 inch",
     curbWeight: "1.495 kg",
 turningRadius: "5,4 m",
-fuelConsumptionCombined: "Khoảng 6,8 L/100 km",
+fuelConsumptionCombined: "7,30 L/100 km",
+fuelConsumptionUrban: "9,20 L/100 km",
+fuelConsumptionExtraUrban: "6,20 L/100 km",
   },
   equipment: {
   exterior: [
@@ -1630,25 +1677,29 @@ fuelConsumptionCombined: "Khoảng 6,8 L/100 km",
   ],
   interior: [
     "Nội thất 7 chỗ",
-    "Ghế bọc da",
-    "Ghế lái chỉnh điện",
+    "Ghế da giảm hấp thụ nhiệt",
+    "Ghế lái và ghế hành khách trước chỉnh điện",
+    "Đèn viền nội thất 64 màu",
     "Vô lăng bọc da đa chức năng",
     "Hàng ghế thứ hai gập linh hoạt",
     "Hàng ghế thứ ba gập linh hoạt",
   ],
   convenience: [
-    "Màn hình giải trí cảm ứng",
-    "Kết nối Apple CarPlay và Android Auto",
-    "Điều hòa tự động",
+    "Màn hình cảm ứng 12,3 inch, Apple CarPlay và Android Auto",
+    "Đồng hồ kỹ thuật số 8 inch",
+    "Điều hòa tự động hai vùng độc lập",
     "Cửa gió điều hòa cho hàng ghế sau",
     "Chìa khóa thông minh và khởi động nút bấm",
     "Phanh tay điện tử và Auto Hold",
-    "Hệ thống âm thanh cao cấp",
+    "Hệ thống âm thanh Yamaha cao cấp 8 loa",
+    "Lọc không khí nanoe X",
+    "Kết nối xe thông minh Mitsubishi Connect",
   ],
   safety: [
-    "Túi khí",
+    "6 túi khí",
     "Camera toàn cảnh 360 độ",
-    "Cảm biến hỗ trợ đỗ xe",
+    "Cảm biến áp suất lốp (TPMS)",
+    "Cảm biến trước và sau xe",
   ],
 },
 safetyTechnologies: [
@@ -1709,10 +1760,10 @@ safetyTechnologies: [
     group: "Diamond Sense",
   },
   {
-    code: "LCA",
-    name: "Hỗ trợ chuyển làn",
+    code: "LDW",
+    name: "Cảnh báo lệch làn đường",
     description:
-      "Hỗ trợ cảnh báo phương tiện tiếp cận khi người lái có ý định chuyển làn.",
+      "Hỗ trợ cảnh báo khi xe có dấu hiệu đi lệch khỏi làn đường mà người lái không bật xi-nhan.",
     group: "Diamond Sense",
   },
   {
@@ -1727,6 +1778,20 @@ safetyTechnologies: [
     name: "Kiểm soát hành trình thích ứng",
     description:
       "Hỗ trợ duy trì tốc độ và khoảng cách phù hợp với phương tiện phía trước.",
+    group: "Diamond Sense",
+  },
+  {
+    code: "AHB",
+    name: "Đèn pha tự động",
+    description:
+      "Tự động chuyển giữa đèn pha và đèn cốt khi phát hiện phương tiện phía trước hoặc ngược chiều.",
+    group: "Diamond Sense",
+  },
+  {
+    code: "LCDN",
+    name: "Cảnh báo phương tiện phía trước khởi hành",
+    description:
+      "Nhắc người lái khi phương tiện phía trước đã di chuyển mà xe vẫn đứng yên.",
     group: "Diamond Sense",
   },
 ],
@@ -1805,15 +1870,18 @@ image: "/images/cars/xpander-cross.png",
   groundClearance: "225 mm",
   fuelTank: "45 L",
   wheels: "205/55R17 - Mâm hợp kim 17 inch",
-curbWeight: "1.275 kg",
+curbWeight: "1.285 kg",
 turningRadius: "5,2 m",
-fuelConsumptionCombined: "7,10 L/100 km",
-fuelConsumptionUrban: "8,60 L/100 km",
+fuelConsumptionCombined: "7,23 L/100 km",
+fuelConsumptionUrban: "9,39 L/100 km",
+fuelConsumptionExtraUrban: "5,99 L/100 km",
 },
 equipment: {
   exterior: [
     "Đèn chiếu sáng LED",
     "Đèn định vị ban ngày LED",
+    "Đèn sương mù LED",
+    "Cảm biến bật/tắt đèn chiếu sáng và gạt mưa tự động",
     "Đèn hậu LED",
     "Gương chiếu hậu chỉnh điện, gập điện",
     "Mâm hợp kim 17 inch",
@@ -1821,23 +1889,25 @@ equipment: {
   ],
   interior: [
     "Nội thất 7 chỗ",
-    "Ghế bọc da",
+    "Ghế da giảm hấp thụ nhiệt, nội thất hai tông Đen và Đỏ tía",
     "Vô lăng bọc da",
+    "Đồng hồ kỹ thuật số 8 inch",
     "Hàng ghế thứ hai gập 60:40",
     "Hàng ghế thứ ba gập 50:50",
   ],
   convenience: [
-    "Màn hình giải trí cảm ứng",
-    "Điều hòa tự động",
+    "Màn hình cảm ứng 10 inch, Apple CarPlay và Android Auto",
+    "Hệ thống âm thanh 6 loa",
+    "Điều hòa chỉnh kỹ thuật số",
+    "Kiểm soát hành trình (Cruise Control)",
     "Cửa gió điều hòa cho hàng ghế sau",
     "Phanh tay điện tử và Auto Hold",
     "Chìa khóa thông minh và khởi động nút bấm",
     "Nhiều ngăn chứa đồ trong khoang cabin",
   ],
   safety: [
-    "2 túi khí phía trước",
+    "6 túi khí",
     "Camera lùi",
-    "Cảm biến hỗ trợ đỗ xe",
   ],
   drivingSupport: [
     "Hệ thống kiểm soát vào cua chủ động AYC",

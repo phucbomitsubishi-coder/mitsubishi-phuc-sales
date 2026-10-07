@@ -45,7 +45,7 @@ export default function XpanderVsVelozPage() {
     { label: "Mô-men xoắn", car: spec?.torque, competitor: veloz.specs.torque },
     { label: "Hộp số", car: "Số sàn 5 cấp (MT), tự động 4 cấp (AT)", competitor: veloz.specs.transmission },
     { label: "Mâm xe", car: "16 inch, 17 inch (AT Premium)", competitor: veloz.specs.wheels },
-    { label: "Túi khí", car: "2 túi khí", competitor: veloz.specs.airbags },
+    { label: "Túi khí", car: "2 túi khí (MT, AT), 6 túi khí (AT Premium)", competitor: veloz.specs.airbags },
   ];
 
   return (
@@ -70,12 +70,12 @@ export default function XpanderVsVelozPage() {
             </li>
             <li>
               <span className="font-semibold text-gray-900">Veloz Cross</span> dùng hộp số
-              CVT, bản CVT Top có 6 túi khí, camera 360 độ và gói an toàn Toyota Safety
-              Sense.
+              CVT, bản CVT Top có camera 360 độ và gói an toàn Toyota Safety Sense.
             </li>
             <li>
-              Nếu ưu tiên chi phí và không gian, Xpander có lợi thế. Nếu ưu tiên trang bị
-              an toàn chủ động, Veloz Cross CVT Top nhỉnh hơn.
+              Bản cao nhất của hai xe đều có 6 túi khí. Nếu ưu tiên chi phí và không gian,
+              Xpander có lợi thế. Nếu cần các tính năng cảnh báo va chạm, lệch làn, Veloz
+              Cross CVT Top nhỉnh hơn.
             </li>
           </QuickSummary>
 
@@ -118,12 +118,13 @@ export default function XpanderVsVelozPage() {
               left={{
                 title: "Mitsubishi Xpander (bản AT Premium)",
                 items: [
-                  "Ghế và vô-lăng bọc da, màn hình giải trí cảm ứng",
-                  "Điều hòa tự động, cửa gió cho hàng ghế sau",
+                  "Màn hình 10 inch, Apple CarPlay và Android Auto, đồng hồ kỹ thuật số 8 inch",
+                  "Ghế và vô-lăng bọc da, điều hòa tự động, cửa gió cho hàng ghế sau",
                   "Phanh tay điện tử và Auto Hold, chìa khóa thông minh",
+                  "Kiểm soát hành trình (Cruise Control), gạt mưa tự động",
                   "Đèn LED, gương gập điện, mâm 17 inch",
-                  "2 túi khí, camera lùi, cảm biến đỗ xe",
-                  "Cân bằng điện tử, kiểm soát lực kéo, hỗ trợ khởi hành ngang dốc",
+                  "6 túi khí, camera lùi",
+                  "Cân bằng điện tử, kiểm soát vào cua chủ động AYC, hỗ trợ khởi hành ngang dốc",
                 ],
               }}
               right={{
@@ -139,10 +140,11 @@ export default function XpanderVsVelozPage() {
               }}
             />
             <p className="mt-4 leading-7 text-gray-700">
-              Về an toàn chủ động, Veloz Cross CVT Top có lợi thế rõ ràng với 6 túi khí
-              và gói Toyota Safety Sense. Đổi lại, bản này đắt hơn Xpander AT Premium và
-              chưa có ưu đãi tương đương. Khi so sánh bản tiêu chuẩn, nên hỏi kỹ số túi
-              khí và trang bị an toàn của từng phiên bản.
+              Ở bản cao nhất, cả hai xe đều có 6 túi khí. Veloz Cross CVT Top có thêm gói
+              Toyota Safety Sense (cảnh báo va chạm, lệch làn) và camera 360 độ. Xpander AT
+              Premium có kiểm soát hành trình và kiểm soát vào cua AYC, giá thấp hơn và
+              có ưu đãi trong tháng. Bản MT và AT của Xpander có 2 túi khí, nên khi so
+              sánh các bản thấp hơn, hãy hỏi kỹ trang bị của từng phiên bản.
             </p>
           </section>
 
@@ -157,12 +159,13 @@ export default function XpanderVsVelozPage() {
                   "Thường chở đủ 7 người, cần hàng ghế 3 và cốp rộng",
                   "Hay đi đường ngập, đường quê, cần gầm cao",
                   "Chạy dịch vụ, cần bản số sàn giá thấp",
+                  "Hay đi đường dài, cần kiểm soát hành trình (bản AT Premium)",
                 ],
               }}
               right={{
                 title: "Chọn Veloz Cross nếu bạn",
                 items: [
-                  "Ưu tiên 6 túi khí và các tính năng an toàn chủ động",
+                  "Cần cảnh báo va chạm, cảnh báo lệch làn (Toyota Safety Sense)",
                   "Thích hộp số CVT, chủ yếu đi trong phố",
                   "Cần camera 360 độ, sạc không dây",
                 ],
