@@ -75,6 +75,7 @@ export default function NewsPromotionCover() {
                   alt={`Mitsubishi ${car.name}`}
                   width={car.width}
                   height={car.height}
+                  sizes="(min-width: 1152px) 280px, (min-width: 640px) 25vw, 50vw"
                   loading="eager"
                   className="max-h-full w-full object-contain"
                 />

@@ -245,6 +245,8 @@ const selectedImage =
       alt={`${carName} ${selectedColor || "Trắng"}`}
       width={900}
       height={600}
+      // Khung cao 280–320px nên ảnh 3:2 hiển thị rộng tối đa ~480px
+      sizes="(min-width: 768px) 480px, 100vw"
       className="h-full w-full object-contain"
     />
   </div>

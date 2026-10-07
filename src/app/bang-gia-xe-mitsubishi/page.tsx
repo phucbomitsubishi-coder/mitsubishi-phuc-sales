@@ -175,7 +175,7 @@ export default function PriceListPage() {
                       src={car.image}
                       alt={car.name}
                       fill
-                      sizes="(min-width: 768px) 220px, 100vw"
+                      sizes="(min-width: 768px) 220px, 300px"
                       className="object-contain"
                     />
                   </div>
