@@ -1,275 +1,405 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import { createPageMetadata } from "@/lib/metadata";
 import SiteHeader from "@/components/SiteHeader";
 import PageSchema from "@/components/PageSchema";
 import { siteConfig } from "@/config/site";
 import Link from "next/link";
+import { cars } from "@/data/cars";
+import { getCarPriceRows } from "@/components/CarComparison";
+import { formatMillion, promotionMonthLabel } from "@/lib/promotionItems";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Nên chọn phiên bản xe Mitsubishi như thế nào? | Lưu Hoàng Phúc",
+  title: "Nên chọn phiên bản nào? Khác biệt giữa các phiên bản xe Mitsubishi | Lưu Hoàng Phúc",
   description:
-    "Tư vấn cách lựa chọn phiên bản xe Mitsubishi phù hợp với nhu cầu sử dụng, trang bị và ngân sách dự kiến.",
+    "Lên phiên bản cao hơn được thêm gì, chênh bao nhiêu tiền? So sánh từng phiên bản Xforce, Xpander, Destinator, Triton, Attrage và gợi ý bản nên mua theo nhu cầu.",
   path: "/tu-van/chon-phien-ban-xe-mitsubishi",
   hasOgImageFile: true,
 });
 
+// Trang bị từng phiên bản đã đối chiếu với mitsubishi-motors.com.vn (10/2026).
+// Giá lấy tự động từ cars.ts theo tên phiên bản; tên không khớp thì build báo lỗi.
+type VariantGuide = { name: string; summary: string; adds: string[] };
+type CarGuide = { carId: string; variants: VariantGuide[]; advice: ReactNode };
+
+const guides: CarGuide[] = [
+  {
+    carId: "destinator",
+    variants: [
+      {
+        name: "Premium",
+        summary: "Đã đủ dùng cho gia đình",
+        adds: [
+          "Động cơ 1.5L tăng áp 163 PS, 6 túi khí, kiểm soát vào cua AYC",
+          "Cảnh báo điểm mù, cảnh báo phương tiện cắt ngang khi lùi, Cruise Control",
+          "Màn hình 12,3 inch, đồng hồ kỹ thuật số 8 inch, điều hòa tự động 2 vùng",
+          "Ghế da, ghế lái chỉnh điện 6 hướng, camera lùi, cảm biến trước và sau",
+        ],
+      },
+      {
+        name: "Ultimate",
+        summary: "Thêm gói an toàn chủ động và tiện nghi cao cấp",
+        adds: [
+          "Diamond Sense: kiểm soát hành trình thích ứng, cảnh báo và giảm thiểu va chạm phía trước, cảnh báo lệch làn, đèn pha tự động",
+          "Camera 360 độ, cảm biến áp suất lốp",
+          "Âm thanh Yamaha 8 loa, ghế hành khách trước chỉnh điện, lọc không khí nanoe X",
+          "Cốp điện rảnh tay, ngoại thất 2 tông màu, kết nối Mitsubishi Connect",
+        ],
+      },
+    ],
+    advice: (
+      <>
+        Bản Premium đã có cảnh báo điểm mù và 6 túi khí, đủ cho phần lớn gia đình. Nên
+        lên Ultimate nếu hay đi cao tốc đường dài (kiểm soát hành trình thích ứng, cảnh báo
+        va chạm giúp đỡ mệt hơn) hoặc thường đỗ xe chỗ hẹp (camera 360 độ).
+      </>
+    ),
+  },
+  {
+    carId: "triton",
+    variants: [
+      {
+        name: "2WD AT GLX",
+        summary: "Bản cơ bản, một cầu",
+        adds: [
+          "Máy dầu 2.4L 184 PS, hộp số tự động 6 cấp",
+          "3 túi khí, camera lùi, Cruise Control",
+          "Màn hình 8 inch, 4 loa, điều hòa chỉnh cơ, ghế nỉ, mâm 16 inch",
+        ],
+      },
+      {
+        name: "2WD AT Premium",
+        summary: "Một cầu, tiện nghi đầy đủ",
+        adds: [
+          "7 túi khí, đèn LED, mâm 18 inch",
+          "Màn hình 9 inch, 6 loa, điều hòa tự động, chìa khóa thông minh",
+          "Ghế da, ghế lái chỉnh điện 8 hướng",
+          "Cảm biến trước và sau, cảm biến áp suất lốp",
+        ],
+      },
+      {
+        name: "4WD AT Premium",
+        summary: "Hai cầu, ưu tiên khả năng vượt địa hình",
+        adds: [
+          "Super Select 4WD-II, khóa vi sai cầu sau, 7 chế độ lái",
+          "Kiểm soát vào cua AYC, hỗ trợ xuống dốc HDC",
+          "Giữ 7 túi khí, đèn LED, màn hình 9 inch như bản 2WD Premium",
+          "Khác bản 2WD Premium: ghế nỉ, ghế lái chỉnh cơ, không có cảm biến áp suất lốp",
+        ],
+      },
+      {
+        name: "4WD AT Athlete",
+        summary: "Bản cao nhất, máy mạnh và đủ công nghệ an toàn",
+        adds: [
+          "Máy Bi-Turbo 204 PS, 470 Nm, trợ lực lái điện",
+          "Gói an toàn MMSS: kiểm soát hành trình thích ứng, cảnh báo va chạm phía trước, cảnh báo điểm mù, cảnh báo lệch làn",
+          "Camera 360 độ, sạc không dây, gương chống chói tự động",
+          "Ghế da phối da lộn, điều hòa tự động 2 vùng",
+        ],
+      },
+    ],
+    advice: (
+      <>
+        Điểm đáng chú ý: <strong>2WD AT Premium và 4WD AT Premium cùng giá</strong>. Chạy
+        chủ yếu đường nhựa, cần thoải mái thì chọn 2WD (ghế da, ghế lái chỉnh điện). Hay
+        đi đường đất, dốc, ngập thì chọn 4WD. Chở hàng thuần túy, cần giá thấp thì bản GLX
+        là đủ.
+      </>
+    ),
+  },
+  {
+    carId: "xforce",
+    variants: [
+      {
+        name: "GLX",
+        summary: "Bản tiêu chuẩn",
+        adds: [
+          "4 túi khí, kiểm soát vào cua AYC, phanh tay điện tử và Auto Hold",
+          "Đèn LED, camera lùi, cảm biến sau",
+          "Màn hình 8 inch, 6 loa, ghế nỉ, mâm 17 inch",
+        ],
+      },
+      {
+        name: "Luxury",
+        summary: "Thêm an toàn và tiện nghi rõ rệt",
+        adds: [
+          "6 túi khí, cảnh báo điểm mù, cảnh báo phương tiện cắt ngang khi lùi",
+          "Cruise Control, 4 chế độ lái, cảm biến áp suất lốp",
+          "Màn hình 12,3 inch (CarPlay không dây), đồng hồ kỹ thuật số 8 inch",
+          "Ghế da, ghế lái chỉnh điện, điều hòa tự động 2 vùng, lọc không khí nanoe X, mâm 18 inch",
+        ],
+      },
+      {
+        name: "Ultimate",
+        summary: "Bản cao cấp, thêm gói an toàn Diamond Sense",
+        adds: [
+          "Diamond Sense: kiểm soát hành trình thích ứng, cảnh báo và giảm thiểu va chạm phía trước, đèn pha tự động",
+          "Camera 360 độ, âm thanh Yamaha 8 loa",
+          "Sạc không dây, cốp điện rảnh tay",
+        ],
+      },
+    ],
+    advice: (
+      <>
+        <strong>Luxury là bản cân bằng</strong>: so với GLX có thêm 2 túi khí, cảnh báo
+        điểm mù, Cruise Control, ghế da và màn hình lớn. GLX hợp khi ngân sách sát. Ultimate
+        đáng tiền nếu bạn đi cao tốc thường xuyên.
+      </>
+    ),
+  },
+  {
+    carId: "xpander-cross",
+    variants: [
+      {
+        name: "Xpander Cross",
+        summary: "Một phiên bản duy nhất",
+        adds: [
+          "6 túi khí, kiểm soát vào cua AYC, Cruise Control, phanh tay điện tử và Auto Hold",
+          "Thân xe rộng 1.790 mm, ngoại thất kiểu SUV, giá nóc, mâm 17 inch",
+          "Màn hình 10 inch, đồng hồ kỹ thuật số 8 inch, ghế da, nội thất 2 tông màu",
+        ],
+      },
+    ],
+    advice: (
+      <>
+        Trang bị gần tương đương Xpander AT Premium; khác biệt chủ yếu ở kiểu dáng SUV và
+        thân xe rộng hơn. Nếu không quá đặt nặng kiểu dáng, Xpander AT Premium giúp tiết
+        kiệm hơn.
+      </>
+    ),
+  },
+  {
+    carId: "xpander",
+    variants: [
+      {
+        name: "MT",
+        summary: "Số sàn, giá thấp",
+        adds: [
+          "Động cơ 1.5L, số sàn 5 cấp, 2 túi khí, cân bằng điện tử",
+          "Màn hình 7 inch (CarPlay, Android Auto), đèn halogen",
+          "Không có camera lùi và chìa khóa thông minh",
+        ],
+      },
+      {
+        name: "AT",
+        summary: "Số tự động",
+        adds: [
+          "Hộp số tự động 4 cấp",
+          "Camera lùi, chìa khóa thông minh, gương gập điện",
+        ],
+      },
+      {
+        name: "AT Premium",
+        summary: "Bản đủ trang bị cho gia đình",
+        adds: [
+          "6 túi khí, kiểm soát vào cua AYC, Cruise Control",
+          "Phanh tay điện tử và Auto Hold, gạt mưa tự động",
+          "Đèn LED, màn hình 10 inch, đồng hồ kỹ thuật số 8 inch, 6 loa",
+          "Ghế da, điều hòa kỹ thuật số, mâm 17 inch",
+        ],
+      },
+    ],
+    advice: (
+      <>
+        Chạy dịch vụ, cần chi phí thấp: <strong>MT</strong>. Xe gia đình: nên cân nhắc lên{" "}
+        <strong>AT Premium</strong> vì là bản duy nhất của Xpander có 6 túi khí. Bản AT hợp
+        khi cần số tự động nhưng ngân sách không đủ cho AT Premium.
+      </>
+    ),
+  },
+  {
+    carId: "attrage",
+    variants: [
+      {
+        name: "MT",
+        summary: "Số sàn, giá thấp",
+        adds: [
+          "Động cơ 1.2L, số sàn 5 cấp, 2 túi khí, camera lùi",
+          "Màn hình cảm ứng 7 inch, ghế nỉ, đèn halogen",
+        ],
+      },
+      {
+        name: "CVT Premium",
+        summary: "Số tự động, nhiều tiện nghi",
+        adds: [
+          "Hộp số CVT, cân bằng điện tử và kiểm soát lực kéo, hỗ trợ khởi hành ngang dốc",
+          "Đèn Bi-LED, đèn sương mù LED, tự động bật đèn và gạt mưa",
+          "Cruise Control, chìa khóa thông minh, điều hòa tự động",
+          "Ghế da, CarPlay và Android Auto, gương gập điện",
+        ],
+      },
+    ],
+    advice: (
+      <>
+        Chạy dịch vụ, đi tỉnh nhiều: <strong>MT</strong> tiết kiệm. Chủ yếu đi phố, kẹt xe:{" "}
+        <strong>CVT Premium</strong>, đây cũng là bản duy nhất có cân bằng điện tử.
+      </>
+    ),
+  },
+];
+
 export default function MitsubishiVariantGuidePage() {
+  const sections = guides.flatMap((guide) => {
+    const car = cars.find((item) => item.id === guide.carId);
+    if (!car) return [];
+    const prices = getCarPriceRows(car);
+    const variants = guide.variants.map((variant, index) => {
+      const row = prices.find((item) => item.name === variant.name);
+      if (!row) {
+        throw new Error(`chon-phien-ban: không tìm thấy phiên bản "${variant.name}" của ${car.name} trong cars.ts`);
+      }
+      const previous = index > 0 ? prices.find((item) => item.name === guide.variants[index - 1].name) : undefined;
+      return { ...variant, row, diff: previous ? row.price - previous.price : undefined };
+    });
+    return [{ car, variants, advice: guide.advice }];
+  });
+
   return (
     <main className="min-h-screen bg-white text-black">
       <PageSchema
         metadata={metadata}
         path="/tu-van/chon-phien-ban-xe-mitsubishi"
         parents={[{ name: "Tư vấn", path: "/tu-van" }]}
+        name="Chọn phiên bản xe Mitsubishi"
         datePublished="2026-09-29"
+        dateModified="2026-10-07"
         hasOgImage
       />
       <SiteHeader />
 
       <article className="mx-auto max-w-4xl px-6 py-10 md:py-16">
         <Link
-          href="/#tin-tuc"
-          className="font-semibold text-red-600 transition hover:text-red-700"
+          href="/tu-van"
+          className="font-semibold text-red-700 transition hover:text-red-800"
         >
-          ← Tin tức & Tư vấn
+          ← Tư vấn chọn xe
         </Link>
 
-        <p className="mt-8 font-semibold uppercase tracking-wider text-red-600">
-          Phiên bản & ưu đãi
+        <p className="mt-8 font-semibold uppercase tracking-wider text-red-700">
+          Phiên bản & trang bị · Cập nhật {promotionMonthLabel}
         </p>
 
         <h1 className="mt-3 text-3xl font-bold leading-tight md:text-5xl">
-          Nên chọn phiên bản xe Mitsubishi như thế nào?
+          Nên chọn phiên bản nào? Khác biệt giữa các phiên bản xe Mitsubishi
         </h1>
 
-        <p className="mt-6 text-lg leading-8 text-gray-600">
-          Cùng một dòng xe Mitsubishi có thể có nhiều phiên bản với mức giá,
-          trang bị và khả năng vận hành khác nhau. Lựa chọn phiên bản phù hợp
-          không nhất thiết là chọn phiên bản cao nhất, mà nên dựa trên nhu cầu
-          sử dụng thực tế và ngân sách dự kiến.
+        <p className="mt-6 text-lg leading-8 text-gray-700">
+          Câu hỏi khách hay hỏi sau khi chọn được dòng xe là: lên bản cao hơn thì
+          được thêm gì, chênh bao nhiêu tiền, có đáng không? Dưới đây là từng phiên bản của
+          6 dòng xe Mitsubishi, xếp từ thấp đến cao. Mỗi bản chỉ liệt kê những gì{" "}
+          <strong>có thêm so với bản ngay trước nó</strong>.
         </p>
-        <section className="mt-12">
-  <h2 className="text-2xl font-bold md:text-3xl">
-    1. Chọn phiên bản theo nhu cầu sử dụng
-  </h2>
 
-  <p className="mt-4 leading-8 text-gray-700">
-    Khi một dòng xe có nhiều phiên bản, mức giá cao hơn thường đi kèm với
-    sự khác biệt về trang bị, tiện nghi hoặc khả năng vận hành. Tuy nhiên,
-    phiên bản phù hợp nhất không nhất thiết phải là phiên bản có giá cao nhất.
-  </p>
+        <nav className="mt-8 flex flex-wrap gap-2" aria-label="Chọn dòng xe">
+          {sections.map(({ car }) => (
+            <a
+              key={car.id}
+              href={`#${car.id}`}
+              className="rounded-full border border-gray-300 px-4 py-2 text-sm font-semibold text-gray-800 transition hover:border-red-600 hover:text-red-700"
+            >
+              {car.name.replace("Mitsubishi ", "")}
+            </a>
+          ))}
+        </nav>
 
-  <p className="mt-4 leading-8 text-gray-700">
-    Trước khi lựa chọn, bạn nên xác định xe chủ yếu được sử dụng để đi lại
-    hằng ngày, phục vụ gia đình, đi đường dài hay phục vụ công việc. Sau đó
-    mới cân đối ngân sách và những trang bị thực sự cần thiết.
-  </p>
+        {sections.map(({ car, variants, advice }) => (
+          <section key={car.id} id={car.id} className="mt-12 scroll-mt-24 border-t border-gray-200 pt-10">
+            <h2 className="text-2xl font-bold md:text-3xl">{car.name}</h2>
 
-  <p className="mt-4 leading-8 text-gray-700">
-    Cách lựa chọn này giúp hạn chế việc chi thêm cho những trang bị ít sử
-    dụng, đồng thời tránh chọn phiên bản quá cơ bản so với nhu cầu thực tế.
-  </p>
-</section>
-<section className="mt-12 border-t border-gray-200 pt-10">
-  <h2 className="text-2xl font-bold md:text-3xl">
-    2. So sánh phần chênh lệch giữa các phiên bản
-  </h2>
+            <div className="mt-6 grid gap-4">
+              {variants.map((variant) => (
+                <div key={variant.name} className="rounded-2xl border border-gray-200 p-5">
+                  <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                    <h3 className="text-lg font-bold">
+                      {variant.name === car.name.replace("Mitsubishi ", "") ? car.name : variant.name}
+                      <span className="ml-2 text-sm font-normal text-gray-600">{variant.summary}</span>
+                    </h3>
+                    <p className="text-right">
+                      <span className="font-bold tabular-nums">{formatMillion(variant.row.price)}</span>
+                      {variant.diff !== undefined && (
+                        <span className="ml-2 text-sm text-red-700">
+                          {variant.diff > 0 ? `+${formatMillion(variant.diff)}` : "cùng giá"}
+                        </span>
+                      )}
+                    </p>
+                  </div>
+                  <ul className="mt-3 list-disc space-y-1.5 pl-5 leading-7 text-gray-700">
+                    {variant.adds.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                  <p className="mt-3 text-sm text-gray-600">
+                    Lăn bánh TP.HCM khoảng {formatMillion(variant.row.onRoadPrice)}
+                    {(variant.row.promotionValue ?? 0) > 0
+                      ? ` · ưu đãi tháng ${promotionMonthLabel}: ${formatMillion(variant.row.promotionValue ?? 0)}`
+                      : ""}
+                  </p>
+                </div>
+              ))}
+            </div>
 
-  <p className="mt-4 leading-8 text-gray-700">
-    Khi phân vân giữa hai phiên bản, bạn không nên chỉ nhìn vào số tiền
-    chênh lệch. Điều quan trọng hơn là xác định số tiền đó đổi lại những
-    trang bị hoặc khả năng vận hành nào và chúng có thực sự cần thiết với
-    nhu cầu sử dụng hay không.
-  </p>
+            <p className="mt-5 rounded-xl bg-gray-50 p-4 leading-7 text-gray-700">
+              <span className="font-semibold text-gray-900">Nên chọn bản nào: </span>
+              {advice}
+            </p>
 
-  <p className="mt-4 leading-8 text-gray-700">
-    Có thể ưu tiên so sánh các nhóm chính như động cơ và hệ truyền động,
-    trang bị an toàn, tiện nghi, kích thước bánh xe và những tính năng hỗ
-    trợ sử dụng hằng ngày. Với xe phục vụ công việc, khả năng vận hành có
-    thể được ưu tiên hơn; với xe gia đình, sự tiện nghi và an toàn thường
-    cần được cân nhắc kỹ hơn.
-  </p>
+            <Link
+              href={`/xe/${car.slug}`}
+              className="mt-4 inline-block font-semibold text-red-700 transition hover:text-red-800"
+            >
+              Thông số đầy đủ và màu xe {car.name} →
+            </Link>
+          </section>
+        ))}
 
-  <p className="mt-4 leading-8 text-gray-700">
-    Sau khi xác định những trang bị thực sự cần, hãy đối chiếu phần chênh
-    lệch giá để quyết định nâng lên phiên bản cao hơn hay dành ngân sách
-    cho các chi phí khác khi mua xe.
-  </p>
-</section>
-<section className="mt-12 border-t border-gray-200 pt-10">
-  <h2 className="text-2xl font-bold md:text-3xl">
-    3. Gợi ý lựa chọn phiên bản theo từng dòng xe
-  </h2>
+        <section className="mt-12 border-t border-gray-200 pt-10">
+          <h2 className="text-2xl font-bold md:text-3xl">Mẹo chọn phiên bản</h2>
+          <ul className="mt-4 list-disc space-y-3 pl-5 leading-8 text-gray-700">
+            <li>
+              <span className="font-semibold text-gray-900">So sánh theo giá lăn bánh sau ưu đãi.</span>{" "}
+              Ưu đãi mỗi tháng khác nhau giữa các phiên bản, nên khoảng chênh thực tế có thể nhỏ
+              hơn chênh lệch giá niêm yết. Xem tại{" "}
+              <InlineLink href="/bang-gia-xe-mitsubishi">bảng giá xe Mitsubishi</InlineLink>.
+            </li>
+            <li>
+              <span className="font-semibold text-gray-900">Ưu tiên trang bị an toàn.</span>{" "}
+              Túi khí, cảnh báo điểm mù, cân bằng điện tử không lắp thêm được sau khi mua, còn
+              màn hình, camera hay phim cách nhiệt thì có thể bổ sung sau.
+            </li>
+            <li>
+              <span className="font-semibold text-gray-900">Chưa chọn được dòng xe?</span>{" "}
+              Xem <InlineLink href="/tu-van/chon-xe-mitsubishi-phu-hop">chọn xe Mitsubishi theo nhu cầu</InlineLink>{" "}
+              hoặc <InlineLink href="/tu-van/chi-phi-lan-banh-mitsubishi">cách tính giá lăn bánh</InlineLink>.
+            </li>
+          </ul>
+        </section>
 
-  <h3 className="mt-7 text-xl font-bold">
-    Mitsubishi Xforce
-  </h3>
-
-  <p className="mt-3 leading-8 text-gray-700">
-    Xforce hiện có các phiên bản GLX, Luxury và Ultimate trên website.
-    Khi lựa chọn, khách hàng có thể bắt đầu từ mức ngân sách dự kiến,
-    sau đó so sánh những trang bị bổ sung giữa từng phiên bản để xác định
-    đâu là lựa chọn phù hợp với nhu cầu sử dụng hằng ngày.
-  </p>
-
-  <Link
-    href="/xe/mitsubishi-xforce"
-    className="mt-3 inline-block font-semibold text-red-600 transition hover:text-red-700"
-  >
-    Xem các phiên bản Mitsubishi Xforce →
-  </Link>
-
-  <h3 className="mt-8 text-xl font-bold">
-    Mitsubishi Xpander
-  </h3>
-
-  <p className="mt-3 leading-8 text-gray-700">
-    Xpander có các phiên bản MT, AT và AT Premium. Người mua có thể cân
-    nhắc giữa nhu cầu sử dụng hộp số sàn hoặc số tự động, sau đó tiếp tục
-    so sánh trang bị giữa AT và AT Premium để lựa chọn theo ngân sách và
-    nhu cầu sử dụng của gia đình.
-  </p>
-
-  <Link
-    href="/xe/mitsubishi-xpander"
-    className="mt-3 inline-block font-semibold text-red-600 transition hover:text-red-700"
-  >
-    Xem các phiên bản Mitsubishi Xpander →
-  </Link>
-  <h3 className="mt-8 text-xl font-bold">
-  Mitsubishi Triton
-</h3>
-
-<p className="mt-3 leading-8 text-gray-700">
-  Triton có nhiều lựa chọn từ 2WD AT GLX, 2WD AT Premium đến 4WD AT
-  Premium và 4WD AT Athlete. Nếu nhu cầu chủ yếu là di chuyển hằng ngày
-  và phục vụ công việc, khách hàng có thể bắt đầu từ nhóm 2WD. Khi thường
-  xuyên cần khả năng vận hành trên nhiều điều kiện đường sá khác nhau,
-  nhóm phiên bản 4WD là lựa chọn cần được cân nhắc thêm.
-</p>
-
-<p className="mt-3 leading-8 text-gray-700">
-  Riêng phiên bản Athlete sử dụng động cơ Bi-Turbo với công suất và mô-men
-  xoắn cao hơn các phiên bản còn lại, vì vậy nên so sánh thêm nhu cầu vận
-  hành thực tế trước khi quyết định.
-</p>
-
-<Link
-  href="/xe/mitsubishi-triton"
-  className="mt-3 inline-block font-semibold text-red-600 transition hover:text-red-700"
->
-  Xem các phiên bản Mitsubishi Triton →
-</Link>
-
-<h3 className="mt-8 text-xl font-bold">
-  Mitsubishi Attrage
-</h3>
-
-<p className="mt-3 leading-8 text-gray-700">
-  Attrage hiện có phiên bản MT và CVT Premium trên website. Điểm cần xác
-  định trước tiên là nhu cầu sử dụng hộp số sàn hay hộp số tự động. Từ đó,
-  khách hàng có thể tiếp tục cân đối mức giá và trang bị để lựa chọn phiên
-  bản phù hợp với nhu cầu đi lại hằng ngày.
-</p>
-
-<Link
-  href="/xe/mitsubishi-attrage"
-  className="mt-3 inline-block font-semibold text-red-600 transition hover:text-red-700"
->
-  Xem các phiên bản Mitsubishi Attrage →
-</Link>
-<h3 className="mt-8 text-xl font-bold">
-  Mitsubishi Destinator
-</h3>
-
-<p className="mt-3 leading-8 text-gray-700">
-  Destinator hiện có hai phiên bản Premium và Ultimate trên website.
-  Cả hai đều hướng đến nhu cầu sử dụng SUV 7 chỗ, vì vậy khi lựa chọn,
-  khách hàng nên tập trung so sánh phần chênh lệch về trang bị giữa hai
-  phiên bản và cân đối với ngân sách dự kiến.
-</p>
-
-<p className="mt-3 leading-8 text-gray-700">
-  Nếu những trang bị bổ sung của phiên bản Ultimate phù hợp với nhu cầu
-  sử dụng thường xuyên, khách hàng có thể cân nhắc nâng cấp. Ngược lại,
-  phiên bản Premium giúp giữ ngân sách mua xe ở mức thấp hơn trong khi
-  vẫn đáp ứng nhu cầu sử dụng cơ bản của dòng xe.
-</p>
-
-<Link
-  href="/xe/mitsubishi-destinator"
-  className="mt-3 inline-block font-semibold text-red-600 transition hover:text-red-700"
->
-  Xem các phiên bản Mitsubishi Destinator →
-</Link>
-
-<h3 className="mt-8 text-xl font-bold">
-  Mitsubishi Xpander Cross
-</h3>
-
-<p className="mt-3 leading-8 text-gray-700">
-  Xpander Cross hiện được giới thiệu với một phiên bản trên website.
-  Vì không phải lựa chọn giữa nhiều cấp phiên bản, khách hàng có thể tập
-  trung so sánh Xpander Cross với các phiên bản Xpander về mức giá, thiết
-  kế, trang bị và nhu cầu sử dụng thực tế.
-</p>
-
-<Link
-  href="/xe/mitsubishi-xpander-cross"
-  className="mt-3 inline-block font-semibold text-red-600 transition hover:text-red-700"
->
-  Xem Mitsubishi Xpander Cross →
-</Link>
-</section>
-<section className="mt-12 border-t border-gray-200 pt-10">
-  <h2 className="text-2xl font-bold md:text-3xl">
-    4. Đừng quên cân đối tổng ngân sách lăn bánh
-  </h2>
-
-  <p className="mt-4 leading-8 text-gray-700">
-    Khi lựa chọn phiên bản, ngân sách không nên chỉ dừng ở giá xe. Bạn
-    cũng nên dự tính thêm các khoản chi phí để xe có thể hoàn tất thủ tục
-    đăng ký và đưa vào sử dụng.
-  </p>
-
-  <p className="mt-4 leading-8 text-gray-700">
-    Trong một số trường hợp, lựa chọn phiên bản phù hợp hơn với ngân sách
-    có thể giúp bạn chủ động phần chi phí lăn bánh và các nhu cầu sử dụng
-    khác sau khi nhận xe.
-  </p>
-
-  <Link
-    href="/tu-van/chi-phi-lan-banh-mitsubishi"
-    className="mt-5 inline-block font-semibold text-red-600 transition hover:text-red-700"
-  >
-    Tìm hiểu các khoản chi phí lăn bánh Mitsubishi →
-  </Link>
-</section>
-
+        <p className="mt-10 text-sm leading-6 text-gray-600">
+          Trang bị theo công bố của Mitsubishi Motors Việt Nam, đối chiếu tháng 10/2026. Giá
+          lăn bánh tạm tính cho TP. Hồ Chí Minh (gồm Bình Dương cũ), chưa trừ ưu đãi.
+        </p>
 
         <div className="mt-10 rounded-2xl bg-gray-100 p-6 md:p-8">
-          <h2 className="text-2xl font-bold">
-            Bạn đang phân vân giữa các phiên bản?
-          </h2>
+          <h2 className="text-2xl font-bold">Đang phân vân giữa hai phiên bản?</h2>
 
-          <p className="mt-3 leading-7 text-gray-600">
-            Chọn mẫu xe đang quan tâm để xem giá, thông số và các phiên bản
-            hiện có, hoặc liên hệ Lưu Hoàng Phúc để được tư vấn theo nhu cầu
-            sử dụng thực tế.
+          <p className="mt-3 leading-7 text-gray-700">
+            Gửi cho Phúc hai phiên bản bạn đang cân nhắc, Phúc sẽ gửi bảng so sánh lăn bánh
+            sau ưu đãi và đề xuất bản phù hợp nhu cầu.
           </p>
 
           <div className="mt-6 flex flex-wrap gap-3">
             <Link
-              href="/#san-pham"
+              href="/?nguon=Chon-phien-ban#bao-gia"
               className="rounded bg-red-600 px-5 py-3 font-semibold text-white transition hover:bg-red-700"
             >
-              Xem các mẫu xe
+              Nhận báo giá
             </Link>
 
             <a
               href={siteConfig.contact.zaloUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded border border-blue-600 bg-white px-5 py-3 font-semibold text-blue-600 transition hover:bg-blue-50"
+              className="rounded border border-blue-600 bg-white px-5 py-3 font-semibold text-blue-700 transition hover:bg-blue-50"
             >
               Tư vấn Zalo
             </a>
@@ -277,5 +407,13 @@ export default function MitsubishiVariantGuidePage() {
         </div>
       </article>
     </main>
+  );
+}
+
+function InlineLink({ href, children }: { href: string; children: ReactNode }) {
+  return (
+    <Link href={href} className="font-semibold text-red-700 underline hover:text-red-800">
+      {children}
+    </Link>
   );
 }

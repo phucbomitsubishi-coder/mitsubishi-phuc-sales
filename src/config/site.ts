@@ -4,6 +4,9 @@ export const siteConfig = {
     title: "Tư vấn Kinh doanh Mitsubishi",
     phone: "0858678929",
     phoneDisplay: "0858 678 929",
+    // Số phụ của anh Phúc, hiện ở trang Liên hệ
+    phone2: "0967354821",
+    phone2Display: "0967 354 821",
     email: "phucbo.mitsubishi@gmail.com",
     yearsOfExperience: 3,
     carsDelivered: "Gần 200",

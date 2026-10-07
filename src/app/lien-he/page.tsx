@@ -101,10 +101,10 @@ export default function ContactPage() {
                   </a>
 
                   <a
-                    href="tel:0967354821"
+                    href={`tel:${siteConfig.sales.phone2}`}
                     className="block text-2xl font-bold text-neutral-950 transition hover:text-red-600"
                   >
-                    0967 354 821
+                    {siteConfig.sales.phone2Display}
                   </a>
                 </div>
 
@@ -211,10 +211,10 @@ export default function ContactPage() {
                   </a>
 
                   <a
-                    href="tel:0967354821"
+                    href={`tel:${siteConfig.sales.phone2}`}
                     className="font-bold text-white transition hover:text-red-500"
                   >
-                    0967 354 821
+                    {siteConfig.sales.phone2Display}
                   </a>
                 </div>
               </div>

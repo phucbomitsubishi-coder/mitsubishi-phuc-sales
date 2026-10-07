@@ -39,14 +39,19 @@ export function calculateOnRoadPrice({
     : plateType === "yellow"
       ? 2160000
       : 1560000;
+  // Bảo hiểm TNDS bắt buộc 1 năm theo Phụ lục I Nghị định 67/2023/NĐ-CP, đã gồm VAT 10%.
+  // Không kinh doanh: dưới 6 chỗ và bán tải 437.000, 6–11 chỗ 794.000 (chưa VAT).
+  // Kinh doanh: dưới 6 chỗ 756.000, 7 chỗ 1.080.000, bán tải 933.000 (chưa VAT).
   const insuranceFee =
     plateType === "yellow"
-      ? seats === 7
-        ? 1203000
-        : 842000
-      : seats === 7
-        ? 944000
-        : 531000;
+      ? isTriton
+        ? 1026300
+        : seats === 7
+          ? 1188000
+          : 831600
+      : seats === 7 && !isTriton
+        ? 873400
+        : 480700;
 
   const fees = [
     {

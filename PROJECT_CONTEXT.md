@@ -118,6 +118,8 @@ Alias import: `@/` → `src/`.
     Khi tỉnh nào đổi mức thu, chỉ cần sửa `taxRate` trong `registrationFees.ts`.
   - Biển số (Thông tư 155/2025/TT-BTC): Hà Nội và TP.HCM 14 triệu, tỉnh khác 140 nghìn (Triton 350k / 100k).
   - Các khoản phí gồm: trước bạ, đăng ký & biển số, đăng kiểm, đường bộ 12 tháng, bảo hiểm TNDS bắt buộc.
+    Bảo hiểm TNDS lấy theo Phụ lục I Nghị định 67/2023/NĐ-CP, **đã gồm VAT**: xe không kinh doanh dưới 6 chỗ và bán tải 480.700đ, 6–11 chỗ 873.400đ;
+    xe kinh doanh dưới 6 chỗ 831.600đ, 7 chỗ 1.188.000đ, bán tải 1.026.300đ (anh Phúc xác nhận lấy theo nghị định, 10/2026).
     **Không có phí dịch vụ đăng ký** (đã bỏ theo yêu cầu của chủ website).
   - Giao diện: tổng trước, 5 khoản phí thu gọn trong `<details>`. Trừ khuyến mãi từ `promotions.ts`.
     Nút "Nhận báo giá" điền sẵn `?car=&variant=`.
