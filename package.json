@@ -9,7 +9,8 @@
     "lint": "eslint",
     "add-used-car": "node scripts/add-used-car.mjs",
     "sold-used-car": "node scripts/sold-used-car.mjs",
-    "add-news": "node scripts/add-news.mjs"
+    "add-news": "node scripts/add-news.mjs",
+    "price-image": "node scripts/make-price-image.mjs"
   },
   "dependencies": {
     "cheerio": "^1.2.0",

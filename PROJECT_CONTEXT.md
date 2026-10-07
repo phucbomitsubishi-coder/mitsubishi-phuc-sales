@@ -37,6 +37,7 @@ npm run lint
 npm run add-used-car   # CLI thêm xe cũ vào src/data/usedCars.ts
 npm run sold-used-car  # CLI chuyển xe cũ sang trạng thái "sold"
 npm run add-news       # CLI lấy bài viết từ URL → src/data/news.ts (+ promotions.ts)
+npm run price-image    # Tạo ảnh bảng giá tháng 1080×1350 để đăng Facebook → ../anh-facebook/ (chụp bằng Edge)
 ```
 
 ## 4. Cấu trúc thư mục
