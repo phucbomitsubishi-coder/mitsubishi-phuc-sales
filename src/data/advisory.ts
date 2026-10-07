@@ -48,4 +48,20 @@ export const advisoryArticles: AdvisoryArticle[] = [
     href: "/tu-van/so-sanh-xpander-va-veloz-cross",
     carIds: ["xpander", "xpander-cross"],
   },
+  {
+    number: "06",
+    title: "So sánh Triton và Ford Ranger",
+    description:
+      "So sánh giá, động cơ, hộp số, hệ dẫn động 4WD, trang bị và bảo hành của hai mẫu bán tải phổ biến tại Việt Nam.",
+    href: "/tu-van/so-sanh-triton-va-ford-ranger",
+    carIds: ["triton"],
+  },
+  {
+    number: "07",
+    title: "So sánh Attrage và Toyota Vios",
+    description:
+      "So sánh giá, kích thước, khoảng sáng gầm, động cơ, mức tiêu thụ nhiên liệu và trang bị an toàn của hai mẫu sedan hạng B.",
+    href: "/tu-van/so-sanh-attrage-va-toyota-vios",
+    carIds: ["attrage"],
+  },
 ];

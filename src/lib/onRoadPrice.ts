@@ -6,6 +6,8 @@ type OnRoadInput = {
   carName: string;
   price: number;
   seats?: number;
+  // Bán tải chở hàng của hãng khác (Ford Ranger...) trong các bài so sánh
+  isPickup?: boolean;
   province: Province;
   plateType?: PlateType;
 };
@@ -16,11 +18,12 @@ export function calculateOnRoadPrice({
   carName,
   price,
   seats,
+  isPickup = false,
   province,
   plateType = "white",
 }: OnRoadInput) {
   // Triton được nhận diện theo tên xe: đổi tên xe sẽ làm sai công thức
-  const isTriton = carName === "Mitsubishi Triton";
+  const isTriton = isPickup || carName === "Mitsubishi Triton";
 
   // Bán tải chở hàng (Triton) chịu 60% mức trước bạ của ô tô con tại địa phương
   const registrationTaxRate = isTriton

@@ -126,7 +126,11 @@ Alias import: `@/` → `src/`.
 - **Bài tư vấn** (`/tu-van/...`): danh sách nằm ở `src/data/advisory.ts`, dùng chung cho trang `/tu-van`, khối "Tư vấn chọn xe"
   trên `/tin-tuc` và trang xe (bài có `carIds` chứa id xe hiện ở mục "So sánh và tư vấn" của trang xe đó).
   Thêm bài mới: tạo trang, thêm vào `advisory.ts` và `sitemap.ts`. `/tu-van` có link ở footer và menu mobile.
-  Bài so sánh Xforce và Creta: giá Creta ghi cứng ở `cretaVariants` (cập nhật khi Hyundai đổi giá).
+- **Bài so sánh với xe đối thủ** (`/tu-van/so-sanh-...`: Xforce–Creta, Xpander–Veloz Cross, Triton–Ranger, Attrage–Vios):
+  giá, thông số và nguồn của xe đối thủ nằm ở `src/data/competitors.ts` (có `updated` = tháng của giá; khi hãng đổi giá chỉ sửa ở đó).
+  Giao diện dùng chung trong `src/components/CarComparison.tsx` (bảng giá + lăn bánh, bảng thông số, 2 cột danh sách, CTA, nguồn);
+  phần nhận xét viết riêng trong từng trang. Xe bán tải đối thủ có `isPickup: true` để tính trước bạ 60% như Triton.
+  Mỗi xe đối thủ cần ≥ 2 nguồn; số liệu các nguồn ghi khác nhau thì bỏ. Tránh từ "nhất" khi không có số liệu chứng minh (Luật Quảng cáo).
 - **Bảng giá xe** (`/bang-gia-xe-mitsubishi`, trang SEO chính cho từ khóa "giá xe Mitsubishi"): URL cố định, tiêu đề và nội dung
   tự đổi theo tháng của `currentPromotion`. Giá niêm yết lấy từ `cars.ts`, ưu đãi khớp theo `variantName === variant.name`,
   lăn bánh tính cho TP.HCM. Có link ở menu "Dự toán chi phí", menu mobile và footer. Mỗi tháng chỉ cần cập nhật `promotions.ts`.

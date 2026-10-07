@@ -104,6 +104,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.8,
     },
+    {
+      url: `${baseUrl}/tu-van/so-sanh-triton-va-ford-ranger`,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/tu-van/so-sanh-attrage-va-toyota-vios`,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
 
     {
       url: `${baseUrl}/bang-gia-xe-mitsubishi`,
