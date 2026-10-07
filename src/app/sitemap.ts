@@ -142,11 +142,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.6,
     },
     {
-      url: `${baseUrl}/ho-tro/phu-tung-chinh-hang`,
-      changeFrequency: "monthly",
-      priority: 0.6,
-    },
-    {
       url: `${baseUrl}/ho-tro/huong-dan-su-dung`,
       changeFrequency: "monthly",
       priority: 0.6,

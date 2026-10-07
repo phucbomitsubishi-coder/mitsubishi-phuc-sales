@@ -4,12 +4,17 @@ import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 import { siteConfig } from "@/config/site";
 
-export const metadata: Metadata = createPageMetadata({
-  title: "Phụ tùng chính hãng Mitsubishi | Lưu Hoàng Phúc",
-  description:
-    "Thông tin tham khảo về phụ tùng chính hãng Mitsubishi và hỗ trợ khách hàng tại Mitsubishi Moveo New City.",
-  path: "/ho-tro/phu-tung-chinh-hang",
-});
+// Nội dung còn mỏng nên không cho Google lập chỉ mục (vẫn mở được bình thường, đã bỏ khỏi sitemap).
+// Khi viết lại có thông tin thật (giá phụ tùng, thời gian đặt hàng...) thì bỏ robots và thêm lại vào sitemap.ts.
+export const metadata: Metadata = {
+  ...createPageMetadata({
+    title: "Phụ tùng chính hãng Mitsubishi | Lưu Hoàng Phúc",
+    description:
+      "Thông tin tham khảo về phụ tùng chính hãng Mitsubishi và hỗ trợ khách hàng tại Mitsubishi Moveo New City.",
+    path: "/ho-tro/phu-tung-chinh-hang",
+  }),
+  robots: { index: false, follow: true },
+};
 
 export default function GenuinePartsPage() {
   const { sales, dealer, contact } = siteConfig;
