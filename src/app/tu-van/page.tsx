@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { createPageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
+import PageSchema from "@/components/PageSchema";
 import { advisoryArticles } from "@/data/advisory";
 
 export const metadata: Metadata = createPageMetadata({
@@ -18,6 +19,13 @@ const advisoryItems = advisoryArticles;
 export default function AdvisoryPage() {
   return (
     <>
+      <PageSchema
+        metadata={metadata}
+        path="/tu-van"
+        type="CollectionPage"
+        name="Tư vấn"
+        hasOgImage
+      />
       <SiteHeader />
 
       <main>

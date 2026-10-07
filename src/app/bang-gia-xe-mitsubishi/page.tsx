@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import SiteHeader from "@/components/SiteHeader";
+import PageSchema from "@/components/PageSchema";
 import { createPageMetadata } from "@/lib/metadata";
 import { cars, upcomingCars } from "@/data/cars";
 import { currentPromotion } from "@/data/promotions";
@@ -77,6 +78,14 @@ export default function PriceListPage() {
 
   return (
     <>
+      <PageSchema
+        metadata={metadata}
+        path="/bang-gia-xe-mitsubishi"
+        type="WebPage"
+        name="Bảng giá xe Mitsubishi"
+        dateModified={`${currentPromotion.year}-${String(currentPromotion.month).padStart(2, "0")}-01`}
+        hasOgImage
+      />
       <SiteHeader />
 
       <main className="bg-white text-gray-900">

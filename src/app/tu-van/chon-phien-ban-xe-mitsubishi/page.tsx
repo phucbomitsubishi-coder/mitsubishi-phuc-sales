@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { createPageMetadata } from "@/lib/metadata";
 import SiteHeader from "@/components/SiteHeader";
+import PageSchema from "@/components/PageSchema";
 import { siteConfig } from "@/config/site";
 import Link from "next/link";
 
@@ -15,6 +16,13 @@ export const metadata: Metadata = createPageMetadata({
 export default function MitsubishiVariantGuidePage() {
   return (
     <main className="min-h-screen bg-white text-black">
+      <PageSchema
+        metadata={metadata}
+        path="/tu-van/chon-phien-ban-xe-mitsubishi"
+        parents={[{ name: "Tư vấn", path: "/tu-van" }]}
+        datePublished="2026-09-29"
+        hasOgImage
+      />
       <SiteHeader />
 
       <article className="mx-auto max-w-4xl px-6 py-10 md:py-16">

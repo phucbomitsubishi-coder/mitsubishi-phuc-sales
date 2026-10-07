@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { createPageMetadata } from "@/lib/metadata";
 import SiteHeader from "@/components/SiteHeader";
+import PageSchema from "@/components/PageSchema";
 import InstallmentCalculator from "@/components/InstallmentCalculator";
 
 export const metadata: Metadata = createPageMetadata({
@@ -14,6 +15,13 @@ export const metadata: Metadata = createPageMetadata({
 export default function TraGopPage() {
   return (
     <>
+      <PageSchema
+        metadata={metadata}
+        path="/du-toan/tra-gop"
+        type="WebPage"
+        name="Tính trả góp"
+        hasOgImage
+      />
       <SiteHeader />
 
       <main className="bg-gray-50">

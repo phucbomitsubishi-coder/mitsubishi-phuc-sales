@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { createPageMetadata } from "@/lib/metadata";
 import SiteHeader from "@/components/SiteHeader";
+import PageSchema from "@/components/PageSchema";
 import OnRoadPricePage from "@/components/OnRoadPricePage";
 
 export const metadata: Metadata = createPageMetadata({
@@ -14,6 +15,13 @@ export const metadata: Metadata = createPageMetadata({
 export default function GiaLanBanhPage() {
   return (
     <>
+      <PageSchema
+        metadata={metadata}
+        path="/du-toan/gia-lan-banh"
+        type="WebPage"
+        name="Tính giá lăn bánh"
+        hasOgImage
+      />
       <SiteHeader />
 
       <main className="bg-gray-50">

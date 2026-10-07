@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
+import PageSchema from "@/components/PageSchema";
 import { createPageMetadata } from "@/lib/metadata";
 import { getCarBySlug } from "@/data/cars";
 import { competitors } from "@/data/competitors";
@@ -51,6 +52,14 @@ export default function XpanderVsVelozPage() {
 
   return (
     <>
+      <PageSchema
+        metadata={metadata}
+        path="/tu-van/so-sanh-xpander-va-veloz-cross"
+        parents={[{ name: "Tư vấn", path: "/tu-van" }]}
+        datePublished="2026-10-06"
+        dateModified="2026-10-07"
+        hasOgImage
+      />
       <SiteHeader />
 
       <main className="bg-white text-gray-900">

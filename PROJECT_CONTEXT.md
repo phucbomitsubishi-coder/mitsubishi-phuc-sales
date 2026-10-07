@@ -186,6 +186,9 @@ Alias import: `@/` → `src/`.
     từ `@/lib/ogImage` (font Roboto ở `src/assets/fonts`), **và** thêm `hasOgImageFile: true` vào `createPageMetadata`.
     Nếu thiếu `hasOgImageFile`, ảnh mặc định `og-default.jpg` sẽ được dùng thay cho ảnh riêng. Đã có ảnh riêng cho: bảng giá (tự đổi theo tháng),
     các trang `/tu-van/*`, `/du-toan/*`, `/xe-cu`, `/gioi-thieu`.
+  - Schema: đặt `<PageSchema metadata={metadata} path="..." parents={[...]} datePublished="YYYY-MM-DD" hasOgImage />` ngay trước `<SiteHeader />`
+    (`src/components/PageSchema.tsx`, xuất Article/WebPage có tác giả `#person` + BreadcrumbList). Đã có ở bảng giá, `/tu-van/*`, `/du-toan/*`.
+    Khi sửa nội dung bài tư vấn hoặc so sánh, nhớ cập nhật `dateModified`.
   - **Nhớ thêm trang vào `src/app/sitemap.ts`**.
 - Next 16: thuộc tính `priority` của `<Image>` đã bị deprecate. Ảnh lớn ở đầu trang (LCP) dùng `preload`, các ảnh khác ở đầu trang dùng `loading="eager"`.
 - Thông tin liên hệ **luôn lấy từ `siteConfig`**, không ghi cứng số điện thoại, Zalo hay email trong trang
