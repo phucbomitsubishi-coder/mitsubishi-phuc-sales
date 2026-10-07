@@ -137,7 +137,7 @@ Alias import: `@/` → `src/`.
   lăn bánh tính cho TP.HCM. Có link ở menu "Dự toán chi phí", menu mobile và footer. Mỗi tháng chỉ cần cập nhật `promotions.ts`.
 - **Trả góp** (`InstallmentCalculator.tsx`): chọn trả trước 15–70%, nhập lãi suất năm đầu.
 - **Trang Giới thiệu** (`src/app/gioi-thieu/page.tsx`) tập trung vào người tư vấn. Thứ tự các phần: hero có ảnh chân dung,
-  số liệu (năm kinh nghiệm, số xe, 24/7) và điểm Google 5,0 (635) → 4 lý do (lấy từ nhận xét thật của khách) →
+  số liệu (năm kinh nghiệm, số xe, 24/7) và điểm Google 5,0 (635) **của showroom** (luôn ghi rõ tên showroom, không phải đánh giá cá nhân) → 4 lý do (lấy từ nhận xét thật của khách) →
   quy trình 4 bước → 9 ảnh bàn giao xe (`public/images/about/ban-giao-01..09.jpg`) → 3 nhận xét → đại lý → bản đồ → CTA.
   Có JSON-LD `Person`. Ảnh gốc khách gửi nằm ở `C:\Mitsubishi-Website\anh-gioi-thieu` (ngoài repo).
   Số năm kinh nghiệm, số xe đã bàn giao và giờ làm việc lấy từ `siteConfig.sales` và `siteConfig.hours`

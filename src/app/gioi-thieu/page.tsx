@@ -15,7 +15,8 @@ export const metadata = createPageMetadata({
 
 const { sales, dealer, contact, social } = siteConfig;
 
-// Số liệu Google Maps của showroom (ảnh chụp màn hình khách gửi, 10/2026)
+// Số liệu Google Maps của showroom đại lý, không phải của riêng người tư vấn (ảnh chụp màn hình khách gửi, 10/2026).
+// Luôn ghi rõ tên showroom cạnh con số để khách không hiểu nhầm là đánh giá cá nhân.
 const googleRating = { score: "5,0", count: 635 };
 const googleReviewsUrl =
   "https://www.google.com/maps/search/?api=1&query=Mitsubishi+Motors+Moveo+New+City";
@@ -190,7 +191,7 @@ export default function GioiThieuPage() {
                 <span className="font-bold text-white">{googleRating.score}</span>
                 <span className="text-neutral-400">
                   {" "}
-                  · {googleRating.count} đánh giá showroom trên Google
+                  · {googleRating.count} đánh giá Google của showroom {dealer.name}
                 </span>
               </span>
             </a>
@@ -371,7 +372,7 @@ export default function GioiThieuPage() {
               <span>
                 <Stars className="block text-lg" />
                 <span className="text-sm text-neutral-400">
-                  {googleRating.count} đánh giá trên Google Maps →
+                  Showroom {dealer.name} · {googleRating.count} đánh giá trên Google Maps →
                 </span>
               </span>
             </a>
