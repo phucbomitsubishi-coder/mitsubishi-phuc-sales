@@ -137,7 +137,7 @@ Alias import: `@/` → `src/`.
 - **Bảng giá xe** (`/bang-gia-xe-mitsubishi`, trang SEO chính cho từ khóa "giá xe Mitsubishi"): URL cố định, tiêu đề và nội dung
   tự đổi theo tháng của `currentPromotion`. Giá niêm yết lấy từ `cars.ts`, ưu đãi khớp theo `variantName === variant.name`,
   lăn bánh tính cho TP.HCM. Có link ở menu "Dự toán chi phí", menu mobile và footer. Mỗi tháng chỉ cần cập nhật `promotions.ts`.
-- **Trả góp** (`InstallmentCalculator.tsx`): chọn trả trước 15–70%, nhập lãi suất năm đầu.
+- **Trả góp** (`InstallmentCalculator.tsx`): chọn trả trước 20–70%, thời hạn 1–8 năm, nhập lãi suất năm đầu.
 - **Trang Giới thiệu** (`src/app/gioi-thieu/page.tsx`) tập trung vào người tư vấn. Thứ tự các phần: hero có ảnh chân dung,
   số liệu (năm kinh nghiệm, số xe, 24/7) và điểm Google 5,0 (635) **của showroom** (luôn ghi rõ tên showroom, không phải đánh giá cá nhân) → 4 lý do (lấy từ nhận xét thật của khách) →
   quy trình 4 bước → 9 ảnh bàn giao xe (`public/images/about/ban-giao-01..09.jpg`) → 3 nhận xét → đại lý → bản đồ → CTA.
