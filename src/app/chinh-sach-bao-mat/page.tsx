@@ -11,7 +11,7 @@ export const metadata: Metadata = createPageMetadata({
 });
 
 // Cập nhật ngày này mỗi khi sửa nội dung chính sách
-const lastUpdated = "06/10/2026";
+const lastUpdated = "07/10/2026";
 
 export default function PrivacyPolicyPage() {
   const { sales, dealer, contact } = siteConfig;
@@ -21,7 +21,7 @@ export default function PrivacyPolicyPage() {
       heading: "1. Thông tin được thu thập",
       paragraphs: [
         "Website chỉ thu thập thông tin khi bạn chủ động gửi biểu mẫu Nhận báo giá hoặc Đăng ký lái thử, gồm: họ và tên, số điện thoại, mẫu xe và phiên bản quan tâm, ghi chú bạn tự nhập (ví dụ thời gian hoặc địa chỉ lái thử tại nhà).",
-        "Website không yêu cầu tài khoản, không thu thập số CMND/CCCD, thông tin ngân hàng hay thẻ thanh toán, và không dùng cookie quảng cáo hay công cụ theo dõi hành vi.",
+        "Website không yêu cầu tài khoản, không thu thập số CMND/CCCD, thông tin ngân hàng hay thẻ thanh toán, và không dùng cookie quảng cáo.",
       ],
     },
     {
@@ -47,7 +47,14 @@ export default function PrivacyPolicyPage() {
       ],
     },
     {
-      heading: "5. Liên kết bên ngoài",
+      heading: "5. Thống kê lượt truy cập",
+      paragraphs: [
+        "Website dùng Vercel Web Analytics để thống kê số lượt xem trang. Công cụ này không dùng cookie và không lưu thông tin nhận dạng cá nhân như họ tên, số điện thoại hay địa chỉ IP đầy đủ.",
+        "Số liệu chỉ được xem ở dạng tổng hợp (trang nào được xem nhiều, khách đến từ Google, Facebook hay Zalo, dùng điện thoại hay máy tính) để cải thiện nội dung website.",
+      ],
+    },
+    {
+      heading: "6. Liên kết bên ngoài",
       paragraphs: [
         "Website có liên kết tới Zalo, Facebook, TikTok, Google Maps và website của Mitsubishi Motors Việt Nam. Các trang này áp dụng chính sách bảo mật riêng của từng nơi.",
       ],
@@ -99,7 +106,7 @@ export default function PrivacyPolicyPage() {
             ))}
 
             <div className="rounded-2xl border border-gray-200 bg-gray-50 p-6">
-              <h2 className="text-xl font-bold">6. Liên hệ về dữ liệu cá nhân</h2>
+              <h2 className="text-xl font-bold">7. Liên hệ về dữ liệu cá nhân</h2>
 
               <div className="mt-4 space-y-2 leading-7 text-gray-700">
                 <p>
