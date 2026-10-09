@@ -133,9 +133,15 @@ const faqGroups: { title: string; items: FaqItem[] }[] = [
         link: { href: "/dang-ky-lai-thu?nguon=FAQ", label: "Đăng ký lái thử" },
       },
       {
+        question: "Ở tỉnh khác có mua xe được không?",
+        answer:
+          "Được. Phúc bán xe cho khách trên cả nước: báo giá theo tỉnh của bạn, đặt cọc online và ký hợp đồng trước, hỗ trợ đăng ký xe. Xe nhận tại showroom hoặc giao tận nhà theo yêu cầu.",
+        link: { href: "/mua-xe-mitsubishi-toan-quoc", label: "Xem quy trình mua xe từ tỉnh khác" },
+      },
+      {
         question: "Đặt cọc bao lâu thì nhận được xe?",
         answer:
-          "Tùy phiên bản và màu xe có sẵn tại đại lý hay phải chờ hãng phân bổ. Khi báo giá, Phúc sẽ kiểm tra tình trạng xe và báo thời gian giao dự kiến trước khi bạn đặt cọc.",
+          "Thường khoảng 7–10 ngày với khách TP.HCM và 10–15 ngày với khách ở tỉnh khác, tùy tiến độ thanh toán và việc xe có sẵn phiên bản, màu bạn chọn hay phải chờ hãng phân bổ. Khi báo giá, Phúc sẽ kiểm tra tình trạng xe và báo thời gian giao dự kiến trước khi bạn đặt cọc.",
       },
     ],
   },
@@ -167,7 +173,7 @@ export default function FAQPage() {
         parents={[{ name: "Hỗ trợ", path: "/ho-tro" }]}
         name="Câu hỏi thường gặp"
         type="WebPage"
-        dateModified="2026-10-07"
+        dateModified="2026-10-09"
       />
       <SiteHeader />
 

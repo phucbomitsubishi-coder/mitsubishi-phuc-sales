@@ -83,6 +83,10 @@ export default function SiteFooter() {
         Tư vấn mua xe
       </Link>
 
+      <Link href="/mua-xe-mitsubishi-toan-quoc" className="hover:text-white">
+        Mua xe từ tỉnh khác
+      </Link>
+
       <Link href="/xe-cu" className="hover:text-white">
         Xe đã qua sử dụng
       </Link>
