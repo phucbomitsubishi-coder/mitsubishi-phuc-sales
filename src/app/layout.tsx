@@ -68,7 +68,7 @@ const siteSchema = {
       url: "https://www.mitsubishiauto.vn/gioi-thieu",
       telephone: `+84${sales.phone.slice(1)}`,
       email: sales.email,
-      sameAs: [siteConfig.social.facebook, siteConfig.social.tiktok],
+      sameAs: [siteConfig.social.fanpage, siteConfig.social.facebook, siteConfig.social.tiktok],
       worksFor: { "@id": "https://www.mitsubishiauto.vn/#autodealer" },
     },
     {

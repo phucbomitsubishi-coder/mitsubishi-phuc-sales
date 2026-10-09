@@ -32,6 +32,9 @@ export const siteConfig = {
   social: {
     zalo: "https://zalo.me/0858678929",
     facebook: "https://www.facebook.com/phuc.bo.413077",
+    // Fanpage "Phúc Mitsubishi Auto" (dùng chạy quảng cáo)
+    fanpage: "https://www.facebook.com/mitsubishimotorbinhduong",
+    fanpageName: "Phúc Mitsubishi Auto",
     tiktok:
       "https://www.tiktok.com/@phucbobinhduong",
   },

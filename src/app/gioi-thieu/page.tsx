@@ -106,7 +106,7 @@ const personSchema = {
   image: "https://www.mitsubishiauto.vn/images/about/luu-hoang-phuc.jpg",
   url: "https://www.mitsubishiauto.vn/gioi-thieu",
   worksFor: { "@id": "https://www.mitsubishiauto.vn/#autodealer" },
-  sameAs: [social.facebook, social.tiktok],
+  sameAs: [social.fanpage, social.facebook, social.tiktok],
 };
 
 function Stars({ className = "" }: { className?: string }) {
@@ -315,12 +315,12 @@ export default function GioiThieuPage() {
               Xem video trên TikTok →
             </a>
             <a
-              href={social.facebook}
+              href={social.fanpage}
               target="_blank"
               rel="noopener noreferrer"
               className="rounded-full border border-neutral-300 px-5 py-2.5 text-sm font-semibold transition hover:border-neutral-950"
             >
-              Facebook →
+              Fanpage {social.fanpageName} →
             </a>
           </div>
         </div>

@@ -177,12 +177,21 @@ export default function SiteFooter() {
       </p>
 
       <a
+        href={social.fanpage}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="hover:text-white"
+      >
+        Fanpage {social.fanpageName}
+      </a>
+
+      <a
         href={social.facebook}
         target="_blank"
         rel="noopener noreferrer"
         className="hover:text-white"
       >
-        Facebook
+        Facebook cá nhân
       </a>
 
       <a
