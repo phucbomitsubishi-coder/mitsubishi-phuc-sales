@@ -11,7 +11,7 @@ export const metadata: Metadata = createPageMetadata({
 });
 
 // Cập nhật ngày này mỗi khi sửa nội dung chính sách
-const lastUpdated = "07/10/2026";
+const lastUpdated = "09/10/2026";
 
 export default function PrivacyPolicyPage() {
   const { sales, dealer, contact } = siteConfig;
@@ -21,7 +21,7 @@ export default function PrivacyPolicyPage() {
       heading: "1. Thông tin được thu thập",
       paragraphs: [
         "Website chỉ thu thập thông tin khi bạn chủ động gửi biểu mẫu Nhận báo giá hoặc Đăng ký lái thử, gồm: họ và tên, số điện thoại, mẫu xe và phiên bản quan tâm, ghi chú bạn tự nhập (ví dụ thời gian hoặc địa chỉ lái thử tại nhà).",
-        "Website không yêu cầu tài khoản, không thu thập số CMND/CCCD, thông tin ngân hàng hay thẻ thanh toán, và không dùng cookie quảng cáo.",
+        "Website không yêu cầu tài khoản, không thu thập số CMND/CCCD, thông tin ngân hàng hay thẻ thanh toán. Cookie quảng cáo của Meta (Facebook) được mô tả ở mục 5.",
       ],
     },
     {
@@ -47,10 +47,12 @@ export default function PrivacyPolicyPage() {
       ],
     },
     {
-      heading: "5. Thống kê lượt truy cập",
+      heading: "5. Thống kê lượt truy cập và quảng cáo",
       paragraphs: [
         "Website dùng Vercel Web Analytics để thống kê số lượt xem trang. Công cụ này không dùng cookie và không lưu thông tin nhận dạng cá nhân như họ tên, số điện thoại hay địa chỉ IP đầy đủ.",
         "Số liệu chỉ được xem ở dạng tổng hợp (trang nào được xem nhiều, khách đến từ Google, Facebook hay Zalo, dùng điện thoại hay máy tính) để cải thiện nội dung website.",
+        "Website dùng Meta Pixel của Meta (Facebook) để đo hiệu quả quảng cáo trên Facebook và Instagram: ghi nhận trang bạn đã xem, lượt bấm gọi điện hoặc Zalo, và việc gửi biểu mẫu thành công. Meta Pixel dùng cookie và có thể nhận địa chỉ IP, thông tin trình duyệt; họ tên và số điện thoại bạn nhập vào biểu mẫu không được gửi cho Meta.",
+        "Meta dùng dữ liệu này theo Chính sách quyền riêng tư của Meta, ví dụ để hiển thị quảng cáo Mitsubishi cho người đã xem website. Bạn có thể tắt quảng cáo dựa trên hoạt động bên ngoài Meta trong phần Cài đặt quảng cáo của tài khoản Facebook, hoặc chặn cookie bên thứ ba trong trình duyệt.",
       ],
     },
     {

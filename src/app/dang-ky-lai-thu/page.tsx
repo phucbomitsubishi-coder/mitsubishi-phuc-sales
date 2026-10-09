@@ -5,6 +5,7 @@ import { cars } from "@/data/cars";
 import { useSearchParams } from "next/navigation";
 import SiteHeader from "@/components/SiteHeader";
 import Link from "next/link";
+import { trackPixel } from "@/lib/metaPixel";
 
 const SCRIPT_URL =
   "https://script.google.com/macros/s/AKfycbzw49PlAEA9ajztoKPK5oAs1vb3HOzLXO1sikV0cjROOaLwn3eb2WLNtVBAM--ll-6t/exec";
@@ -93,6 +94,7 @@ function DangKyLaiThuForm() {
         throw new Error(result.message || "Không thể gửi đăng ký.");
       }
 
+      trackPixel("Lead", { content_name: "Lai thu" });
       setSuccessMessage(
         "Đăng ký lái thử thành công! Chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất."
       );

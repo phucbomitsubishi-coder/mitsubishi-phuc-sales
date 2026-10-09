@@ -39,6 +39,11 @@ export const siteConfig = {
       "https://www.tiktok.com/@phucbobinhduong",
   },
 
+  tracking: {
+    // Meta Pixel (tập dữ liệu "mitsubishiauto.vn" trong Trình quản lý sự kiện của Fanpage)
+    metaPixelId: "2239821823251751",
+  },
+
   contact: {
     phoneUrl: "tel:0858678929",
     zaloUrl: "https://zalo.me/0858678929",

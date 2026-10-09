@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { cars, upcomingCars } from "@/data/cars";
 import ScrollTopLink from "@/components/ScrollTopLink";
 import Link from "next/link";
+import { trackPixel } from "@/lib/metaPixel";
 
 type QuoteFormProps = {
   initialCar?: string;
@@ -122,6 +123,7 @@ export default function QuoteForm({
         "Đã gửi yêu cầu báo giá. Lưu Hoàng Phúc sẽ liên hệ tư vấn sớm."
       );
       setIsSuccess(true);
+      trackPixel("Lead", { content_name: "Bao gia", content_category: car });
 
       form.reset();
       setSelectedCar("");

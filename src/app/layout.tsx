@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import MetaPixel from "@/components/MetaPixel";
 import "./globals.css";
 import SiteFooter from "@/components/SiteFooter";
 import { siteConfig } from "@/config/site";
@@ -110,6 +111,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   <main className="flex-1">{children}</main>
   <SiteFooter />
   <Analytics />
+  <MetaPixel />
 </body>
     </html>
   );

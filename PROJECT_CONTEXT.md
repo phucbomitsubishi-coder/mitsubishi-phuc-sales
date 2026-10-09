@@ -211,6 +211,9 @@ Alias import: `@/` → `src/`.
   - Footer ghi rõ đây là website cá nhân, không phải website chính thức, và © thuộc về Lưu Hoàng Phúc (không ghi tên đại lý).
   - `/chinh-sach-bao-mat` (theo Nghị định 13/2023) có link ở footer và dưới 2 form. Nếu thêm form hoặc thêm công cụ theo dõi
     (Google Analytics, Facebook Pixel) thì phải cập nhật nội dung trang này và `lastUpdated`.
+  - **Meta Pixel** (`src/components/MetaPixel.tsx`, ID trong `siteConfig.tracking.metaPixelId`, chỉ chạy ở production): PageView (kể cả khi chuyển trang),
+    Contact khi bấm link `tel:`/`zalo.me` (bắt bằng click toàn trang, nên link gọi/Zalo mới tự được đếm), Lead khi QuoteForm hoặc form lái thử gửi thành công (`trackPixel` trong `src/lib/metaPixel.ts`).
+    Không gửi họ tên/SĐT cho Meta. Kiểm tra bằng Edge headless phải đặt user agent thường (UA "HeadlessEdg" bị Meta bỏ qua, không gửi /tr).
   - Không dùng schema `aggregateRating`/`Review` cho chính mình (Google cấm đánh giá tự đăng). Điểm 5,0 (635) chỉ hiển thị dạng chữ.
 - Không có dark mode. Website luôn dùng nền trắng.
 - **Độ tương phản chữ nhỏ** (WCAG 4,5:1, đã đạt 0 lỗi trên toàn site):
