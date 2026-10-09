@@ -39,6 +39,7 @@ npm run sold-used-car  # CLI chuyển xe cũ sang trạng thái "sold"
 npm run add-news       # CLI lấy bài viết từ URL → src/data/news.ts (+ promotions.ts)
 npm run price-image    # Tạo ảnh bảng giá tháng 1080×1350 để đăng Facebook → ../anh-facebook/ (chụp bằng Edge)
 npm run promo-images   # Ảnh khuyến mãi từng dòng xe 1080×1350 + file caption/bình luận → ../anh-facebook/khuyen-mai-MM-YYYY/
+npm run ad-images      # Ảnh QUẢNG CÁO Fanpage theo chương trình ĐẠI LÝ (đọc PROMOS/CARS/BHVC từ ../bao-gia-xe/index.html) → ../anh-facebook/quang-cao-MM-YYYY/
 ```
 
 ## 4. Cấu trúc thư mục

@@ -11,7 +11,8 @@
     "sold-used-car": "node scripts/sold-used-car.mjs",
     "add-news": "node scripts/add-news.mjs",
     "price-image": "node scripts/make-price-image.mjs",
-    "promo-images": "node scripts/make-promo-images.mjs"
+    "promo-images": "node scripts/make-promo-images.mjs",
+    "ad-images": "node scripts/make-ad-images.mjs"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",

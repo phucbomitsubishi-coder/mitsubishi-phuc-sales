@@ -23,6 +23,8 @@ export const metadata: Metadata = {
   },
   verification: {
     google: "lQesEnQkjgxVoGmnCBwKvD8J8v8y5wlsF178d9ddSZI",
+    // Xác minh tên miền trong Meta Business (Domains), dùng cho quảng cáo Fanpage
+    other: { "facebook-domain-verification": "bktqtfx8bz1ex7i8mya5viaxysdwgg" },
   },
   openGraph: {
   type: "website",
