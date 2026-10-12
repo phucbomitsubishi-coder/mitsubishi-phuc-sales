@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { provinces, defaultProvinceId } from "@/data/registrationFees";
 import { calculateOnRoadPrice } from "@/lib/onRoadPrice";
@@ -34,8 +34,18 @@ export default function QuickQuote({ cars, zaloUrl, phoneUrl }: Props) {
   const [variantName, setVariantName] = useState(cars[0]?.variants[0]?.name ?? "");
   const [provinceId, setProvinceId] = useState(defaultProvinceId);
   const [copied, setCopied] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  // Chỉ hiện nút sau khi cuộn qua phần đầu trang (tránh đè nút "Đăng ký lái thử" trên banner trang chủ)
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 500);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [pathname]);
 
   if (hiddenPaths.includes(pathname) || cars.length === 0) return null;
+  if (!scrolled && !open) return null;
 
   const car = cars.find((item) => item.id === carId) ?? cars[0];
   const variant = car.variants.find((item) => item.name === variantName) ?? car.variants[0];
