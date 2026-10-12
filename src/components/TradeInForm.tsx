@@ -3,7 +3,7 @@
 import { FormEvent, useState } from "react";
 import Link from "next/link";
 import { cars } from "@/data/cars";
-import { TEST_DRIVE_SCRIPT_URL } from "@/lib/leadScripts";
+import { LEAD_SOURCE, TEST_DRIVE_SCRIPT_URL } from "@/lib/leadScripts";
 import { trackPixel } from "@/lib/metaPixel";
 
 const inputClass =
@@ -49,7 +49,7 @@ export default function TradeInForm() {
     }
 
     const note = [
-      "THU CŨ ĐỔI MỚI",
+      "Nguồn: Thu cũ đổi mới (KHÔNG phải lái thử)",
       `Xe đang đi: ${oldCar}`,
       get("year") && `Năm sản xuất: ${get("year")}`,
       get("mileage") && `Số km: ${get("mileage")}`,
@@ -69,8 +69,8 @@ export default function TradeInForm() {
           phone,
           car: newCar || "Chưa chọn xe mới",
           note,
-          source: "Thu cũ đổi mới",
-          type: "trade-in",
+          source: LEAD_SOURCE,
+          type: "test-drive",
           website: "",
         }),
       });

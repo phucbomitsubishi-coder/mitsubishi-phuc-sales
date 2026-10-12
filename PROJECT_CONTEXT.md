@@ -144,7 +144,7 @@ Alias import: `@/` → `src/`.
   phí vận chuyển (miễn phí 10 km, ngoài đó tham khảo 30.000đ/km; các hằng số ở đầu file) và bảng lăn bánh 34 tỉnh (tự tính từ `registrationFees.ts`).
   **Không tạo hàng loạt trang "Mitsubishi <tỉnh>"** (doorway page); chỉ làm trang riêng cho tỉnh nào Search Console cho thấy có nhu cầu thật.
 - **Thu cũ đổi mới** (`/thu-cu-doi-moi`, form `TradeInForm.tsx`): gửi qua script lái thử (`TEST_DRIVE_SCRIPT_URL` trong `src/lib/leadScripts.ts`),
-  `type: "trade-in"`, thông tin xe cũ gom vào `note`, `car` = xe Mitsubishi muốn đổi. Pixel Lead "Thu cu doi moi". Có link ở footer, menu mobile, trang /xe-cu.
+  gửi `source: "Website"`, `type: "test-drive"` (script chỉ nhận source Website/Hero và type test-drive, xem `src/lib/leadScripts.ts`), nguồn thật và thông tin xe cũ gom vào `note`, `car` = xe Mitsubishi muốn đổi. Pixel Lead "Thu cu doi moi". Có link ở footer, menu mobile, trang /xe-cu.
 - **Nút "Báo giá nhanh"** (`QuickQuote.tsx`, gắn trong layout): nổi góc phải mọi trang (ẩn ở /du-toan/gia-lan-banh và các trang có form).
   Chọn xe → phiên bản → tỉnh → lăn bánh đã trừ ưu đãi tháng; nút Zalo chép sẵn tin nhắn (Zalo không cho điền sẵn qua link).
   Dữ liệu xe dựng gọn trong layout.tsx (`quickQuoteCars`) để không đưa cả cars.ts vào bundle client.

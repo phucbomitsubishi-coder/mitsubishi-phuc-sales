@@ -6,7 +6,7 @@ import { useSearchParams } from "next/navigation";
 import SiteHeader from "@/components/SiteHeader";
 import Link from "next/link";
 import { trackPixel } from "@/lib/metaPixel";
-import { TEST_DRIVE_SCRIPT_URL as SCRIPT_URL } from "@/lib/leadScripts";
+import { LEAD_SOURCE, TEST_DRIVE_SCRIPT_URL as SCRIPT_URL } from "@/lib/leadScripts";
 
 const carNames: Record<string, string> = {
   triton: "Mitsubishi Triton",
@@ -67,8 +67,9 @@ function DangKyLaiThuForm() {
       customerName: name,
       phone: normalizedPhone,
       car: carNames[carId] || carId,
-      note,
-      source: leadSource,
+      // Apps Script chỉ nhận source "Website"/"Hero" và type "test-drive"; nguồn thật ghi vào note
+      note: [`Nguồn: ${leadSource}`, note].filter(Boolean).join(" | "),
+      source: LEAD_SOURCE,
       type: "test-drive",
       website,
     };
