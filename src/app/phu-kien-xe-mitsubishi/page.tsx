@@ -6,7 +6,8 @@ import PageSchema from "@/components/PageSchema";
 import { createPageMetadata } from "@/lib/metadata";
 import { siteConfig } from "@/config/site";
 import { cars } from "@/data/cars";
-import { accessoryGroups, accessoriesMonth, type AccessoryGroup } from "@/data/accessories";
+import { accessoryGroups, accessoriesMonth, type AccessoryGroup, type AccessoryItem } from "@/data/accessories";
+import { categorizeGroup } from "@/lib/accessoryCategories";
 
 export const metadata: Metadata = createPageMetadata({
   title: `Bảng giá phụ kiện xe Mitsubishi ${accessoriesMonth}: Xpander, Xforce, Destinator, Triton`,
@@ -37,20 +38,21 @@ const carGroups = cars
   .filter((item): item is { car: (typeof cars)[number]; group: AccessoryGroup } => Boolean(item.group));
 const generalGroups = accessoryGroups.filter((group) => !group.carId);
 
-function AccessoryTable({ group }: { group: AccessoryGroup }) {
+function AccessoryTable({ items }: { items: AccessoryItem[] }) {
+  const hasPrice = items.some((item) => item.price !== null);
   return (
-    <div className="mt-4 overflow-x-auto rounded-xl border border-gray-200 bg-white">
+    <div className="mt-2 overflow-x-auto rounded-xl border border-gray-200 bg-white">
       <table className="w-full text-left text-sm">
         <thead className="bg-gray-50 text-gray-700">
           <tr>
-            <th scope="col" className="px-4 py-3 font-semibold">Phụ kiện</th>
-            <th scope="col" className="px-4 py-3 text-right font-semibold">Giá (gồm VAT)</th>
+            <th scope="col" className="px-3 py-3 font-semibold sm:px-4">Phụ kiện</th>
+            <th scope="col" className="whitespace-nowrap px-3 py-3 text-right font-semibold sm:px-4">{hasPrice ? "Giá (gồm VAT)" : "Giá"}</th>
           </tr>
         </thead>
         <tbody className="divide-y divide-gray-100">
-          {group.items.map((item) => (
+          {items.map((item) => (
             <tr key={`${item.name}-${item.seats}`}>
-              <th scope="row" className="px-4 py-2.5 font-normal text-gray-800">
+              <th scope="row" className="px-3 py-2.5 font-normal text-gray-800 sm:px-4">
                 {item.name.replace(/ – MMV$/, "")}
                 {/ – MMV$/.test(item.name) && (
                   <span className="mt-1 block w-fit whitespace-nowrap rounded bg-red-50 px-1.5 py-0.5 text-xs font-semibold text-red-700">
@@ -61,7 +63,7 @@ function AccessoryTable({ group }: { group: AccessoryGroup }) {
                   <span className="ml-2 text-xs text-gray-600">{seatLabel(item.seats)}</span>
                 )}
               </th>
-              <td className="whitespace-nowrap px-4 py-2.5 text-right font-semibold tabular-nums">
+              <td className="whitespace-nowrap px-3 py-2.5 text-right font-semibold tabular-nums sm:px-4">
                 {item.price !== null ? (
                   <>
                     {vnd(item.price)}
@@ -75,6 +77,32 @@ function AccessoryTable({ group }: { group: AccessoryGroup }) {
           ))}
         </tbody>
       </table>
+    </div>
+  );
+}
+
+// Mỗi nhóm chia thành các loại nhỏ, bấm từng loại mới xổ bảng giá (nhóm chính hãng MMV mở sẵn)
+function CategoryList({ group }: { group: AccessoryGroup }) {
+  return (
+    <div className="mt-3 space-y-2">
+      {categorizeGroup(group).map((category) => (
+        <details
+          key={category.name}
+          open={category.name.includes("MMV")}
+          className="group/cat rounded-lg border border-gray-200 bg-gray-50"
+        >
+          <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-3 py-2.5 text-sm font-semibold hover:bg-gray-100">
+            <span>{category.name}</span>
+            <span className="shrink-0 font-normal text-gray-600">
+              {category.items.length} mục
+              <span className="ml-2 inline-block transition group-open/cat:rotate-180">▾</span>
+            </span>
+          </summary>
+          <div className="px-1 pb-1 sm:px-2 sm:pb-2">
+            <AccessoryTable items={category.items} />
+          </div>
+        </details>
+      ))}
     </div>
   );
 }
@@ -134,7 +162,7 @@ export default function AccessoriesPage() {
                     </div>
                     <span aria-hidden="true" className="inline-block text-gray-600 transition group-open:rotate-180">▾</span>
                   </summary>
-                  <div className="px-2 pb-3">
+                  <div className="px-1.5 pb-3 sm:px-2">
                     <div className="flex flex-wrap items-center gap-x-4 gap-y-2 px-2 pt-1 text-sm">
                       <a
                         href={zaloUrl}
@@ -148,7 +176,7 @@ export default function AccessoriesPage() {
                         Xem giá xe {car.name.replace("Mitsubishi ", "")}
                       </Link>
                     </div>
-                    <AccessoryTable group={group} />
+                    <CategoryList group={group} />
                   </div>
                 </details>
               ))}
@@ -168,8 +196,8 @@ export default function AccessoriesPage() {
                       <span className="ml-2 inline-block transition group-open:rotate-180">▾</span>
                     </span>
                   </summary>
-                  <div className="px-2 pb-3">
-                    <AccessoryTable group={group} />
+                  <div className="px-1.5 pb-3 sm:px-2">
+                    <CategoryList group={group} />
                   </div>
                 </details>
               ))}
