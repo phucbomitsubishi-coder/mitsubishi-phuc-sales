@@ -12,7 +12,8 @@
     "add-news": "node scripts/add-news.mjs",
     "price-image": "node scripts/make-price-image.mjs",
     "promo-images": "node scripts/make-promo-images.mjs",
-    "ad-images": "node scripts/make-ad-images.mjs"
+    "ad-images": "node scripts/make-ad-images.mjs",
+    "sync-accessories": "node scripts/sync-accessories.mjs"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",

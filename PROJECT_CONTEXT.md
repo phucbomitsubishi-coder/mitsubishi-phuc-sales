@@ -39,6 +39,7 @@ npm run sold-used-car  # CLI chuyển xe cũ sang trạng thái "sold"
 npm run add-news       # CLI lấy bài viết từ URL → src/data/news.ts (+ promotions.ts)
 npm run price-image    # Tạo ảnh bảng giá tháng 1080×1350 để đăng Facebook → ../anh-facebook/ (chụp bằng Edge)
 npm run promo-images   # Ảnh khuyến mãi từng dòng xe 1080×1350 + file caption/bình luận → ../anh-facebook/khuyen-mai-MM-YYYY/
+npm run sync-accessories # Đồng bộ bảng phụ kiện (CHỈ giá niêm yết) từ ../bao-gia-xe/phu-kien.js → src/data/accessories.ts (tự sinh, không sửa tay)
 npm run ad-images      # Ảnh QUẢNG CÁO Fanpage theo chương trình ĐẠI LÝ (đọc PROMOS/CARS/BHVC từ ../bao-gia-xe/index.html) → ../anh-facebook/quang-cao-MM-YYYY/
 ```
 
@@ -131,7 +132,7 @@ Alias import: `@/` → `src/`.
 - **Bài tư vấn** (`/tu-van/...`): danh sách nằm ở `src/data/advisory.ts`, dùng chung cho trang `/tu-van`, khối "Tư vấn chọn xe"
   trên `/tin-tuc` và trang xe (bài có `carIds` chứa id xe hiện ở mục "So sánh và tư vấn" của trang xe đó).
   Thêm bài mới: tạo trang, thêm vào `advisory.ts` và `sitemap.ts`. `/tu-van` có link ở footer và menu mobile.
-- **Bài so sánh với xe đối thủ** (`/tu-van/so-sanh-...`: Xforce–Creta, Xpander–Veloz Cross, Triton–Ranger, Attrage–Vios):
+- **Bài so sánh với xe đối thủ** (`/tu-van/so-sanh-...`: Xforce–Creta, Xpander–Veloz Cross, Triton–Ranger, Attrage–Vios, Destinator–Innova Cross, Xpander Cross–XL7):
   giá, thông số và nguồn của xe đối thủ nằm ở `src/data/competitors.ts` (có `updated` = tháng của giá; khi hãng đổi giá chỉ sửa ở đó).
   Giao diện dùng chung trong `src/components/CarComparison.tsx` (bảng giá + lăn bánh, bảng thông số, 2 cột danh sách, CTA, nguồn);
   phần nhận xét viết riêng trong từng trang. Xe bán tải đối thủ có `isPickup: true` để tính trước bạ 60% như Triton.
@@ -142,6 +143,13 @@ Alias import: `@/` → `src/`.
 - **Mua xe từ tỉnh khác** (`/mua-xe-mitsubishi-toan-quoc`): anh Phúc bán xe toàn quốc. Trang gồm quy trình 5 bước, thời gian giao (TP.HCM 7–10 ngày, tỉnh 10–15 ngày),
   phí vận chuyển (miễn phí 10 km, ngoài đó tham khảo 30.000đ/km; các hằng số ở đầu file) và bảng lăn bánh 34 tỉnh (tự tính từ `registrationFees.ts`).
   **Không tạo hàng loạt trang "Mitsubishi <tỉnh>"** (doorway page); chỉ làm trang riêng cho tỉnh nào Search Console cho thấy có nhu cầu thật.
+- **Thu cũ đổi mới** (`/thu-cu-doi-moi`, form `TradeInForm.tsx`): gửi qua script lái thử (`TEST_DRIVE_SCRIPT_URL` trong `src/lib/leadScripts.ts`),
+  `type: "trade-in"`, thông tin xe cũ gom vào `note`, `car` = xe Mitsubishi muốn đổi. Pixel Lead "Thu cu doi moi". Có link ở footer, menu mobile, trang /xe-cu.
+- **Nút "Báo giá nhanh"** (`QuickQuote.tsx`, gắn trong layout): nổi góc phải mọi trang (ẩn ở /du-toan/gia-lan-banh và các trang có form).
+  Chọn xe → phiên bản → tỉnh → lăn bánh đã trừ ưu đãi tháng; nút Zalo chép sẵn tin nhắn (Zalo không cho điền sẵn qua link).
+  Dữ liệu xe dựng gọn trong layout.tsx (`quickQuoteCars`) để không đưa cả cars.ts vào bundle client.
+- **Phụ kiện** (`/phu-kien-xe-mitsubishi`): đọc `src/data/accessories.ts` (`npm run sync-accessories`). Tên có đuôi " – MMV" hiện nhãn "Chính hãng MMV".
+  Trang `/ho-tro/phu-tung-chinh-hang` vẫn noindex.
 - **Trả góp** (`InstallmentCalculator.tsx`): chọn trả trước 20–70%, thời hạn 1–8 năm, nhập lãi suất năm đầu.
 - **Trang Giới thiệu** (`src/app/gioi-thieu/page.tsx`) tập trung vào người tư vấn. Thứ tự các phần: hero có ảnh chân dung,
   số liệu (năm kinh nghiệm, số xe, 24/7) và điểm Google 5,0 (635) **của showroom** (luôn ghi rõ tên showroom, không phải đánh giá cá nhân) → 4 lý do (lấy từ nhận xét thật của khách) →

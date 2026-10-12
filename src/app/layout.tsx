@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import MetaPixel from "@/components/MetaPixel";
+import QuickQuote, { type QuickQuoteCar } from "@/components/QuickQuote";
+import { cars } from "@/data/cars";
+import { currentPromotion } from "@/data/promotions";
 import "./globals.css";
 import SiteFooter from "@/components/SiteFooter";
 import { siteConfig } from "@/config/site";
@@ -96,6 +99,24 @@ const siteSchema = {
   ],
 };
 
+// Dữ liệu gọn cho nút "Báo giá nhanh" (không đưa cả cars.ts vào bundle client)
+const quickQuoteCars: QuickQuoteCar[] = cars.map((car) => {
+  const promotion = currentPromotion.cars.find((item) => item.carId === car.id);
+  return {
+    id: car.id,
+    name: car.name,
+    seats: car.variants[0]?.specifications?.seats,
+    variants: car.variants.map((variant) => ({
+      name: variant.name,
+      price: variant.price,
+      promotion:
+        promotion?.variants
+          .find((item) => item.variantName === variant.name)
+          ?.benefits.reduce((sum, benefit) => sum + (benefit.value ?? 0), 0) ?? 0,
+    })),
+  };
+});
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
@@ -114,6 +135,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   <SiteFooter />
   <Analytics />
   <MetaPixel />
+  <QuickQuote cars={quickQuoteCars} zaloUrl={siteConfig.contact.zaloUrl} phoneUrl={siteConfig.contact.phoneUrl} />
 </body>
     </html>
   );

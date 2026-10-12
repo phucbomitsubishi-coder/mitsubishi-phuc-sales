@@ -42,6 +42,14 @@ export default function UsedCarsPage() {
               Thông tin từng xe sẽ được cập nhật theo tình trạng thực tế.
             </p>
 
+            <p className="mt-3 max-w-3xl leading-7 text-gray-700">
+              Đang có xe muốn bán để lên đời?{" "}
+              <Link href="/thu-cu-doi-moi" className="font-semibold text-red-700 underline hover:text-red-800">
+                Định giá xe cũ, thu cũ đổi mới
+              </Link>
+              .
+            </p>
+
             {availableCars.length === 0 ? (
               <div className="mt-10 rounded-2xl border border-gray-200 bg-white p-8 text-center shadow-sm md:p-12">
                 <h2 className="text-xl font-bold text-gray-900">

@@ -11,7 +11,7 @@ export const metadata: Metadata = createPageMetadata({
 });
 
 // Cập nhật ngày này mỗi khi sửa nội dung chính sách
-const lastUpdated = "09/10/2026";
+const lastUpdated = "12/10/2026";
 
 export default function PrivacyPolicyPage() {
   const { sales, dealer, contact } = siteConfig;
@@ -20,7 +20,7 @@ export default function PrivacyPolicyPage() {
     {
       heading: "1. Thông tin được thu thập",
       paragraphs: [
-        "Website chỉ thu thập thông tin khi bạn chủ động gửi biểu mẫu Nhận báo giá hoặc Đăng ký lái thử, gồm: họ và tên, số điện thoại, mẫu xe và phiên bản quan tâm, ghi chú bạn tự nhập (ví dụ thời gian hoặc địa chỉ lái thử tại nhà).",
+        "Website chỉ thu thập thông tin khi bạn chủ động gửi biểu mẫu Nhận báo giá, Đăng ký lái thử hoặc Thu cũ đổi mới, gồm: họ và tên, số điện thoại, mẫu xe và phiên bản quan tâm, thông tin xe đang sử dụng (dòng xe, năm sản xuất, số km, khu vực) và ghi chú bạn tự nhập (ví dụ thời gian hoặc địa chỉ lái thử tại nhà).",
         "Website không yêu cầu tài khoản, không thu thập số CMND/CCCD, thông tin ngân hàng hay thẻ thanh toán. Cookie quảng cáo của Meta (Facebook) được mô tả ở mục 5.",
       ],
     },

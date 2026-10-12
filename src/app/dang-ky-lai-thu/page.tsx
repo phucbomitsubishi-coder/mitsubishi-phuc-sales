@@ -6,9 +6,7 @@ import { useSearchParams } from "next/navigation";
 import SiteHeader from "@/components/SiteHeader";
 import Link from "next/link";
 import { trackPixel } from "@/lib/metaPixel";
-
-const SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbzw49PlAEA9ajztoKPK5oAs1vb3HOzLXO1sikV0cjROOaLwn3eb2WLNtVBAM--ll-6t/exec";
+import { TEST_DRIVE_SCRIPT_URL as SCRIPT_URL } from "@/lib/leadScripts";
 
 const carNames: Record<string, string> = {
   triton: "Mitsubishi Triton",

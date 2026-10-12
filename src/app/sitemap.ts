@@ -119,6 +119,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.8,
     },
+    {
+      url: `${baseUrl}/tu-van/so-sanh-xpander-cross-va-suzuki-xl7`,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
 
     {
       url: `${baseUrl}/bang-gia-xe-mitsubishi`,
@@ -139,6 +144,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${baseUrl}/mua-xe-mitsubishi-toan-quoc`,
       changeFrequency: "monthly",
       priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/thu-cu-doi-moi`,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/phu-kien-xe-mitsubishi`,
+      changeFrequency: "monthly",
+      priority: 0.7,
     },
 
     {

@@ -72,4 +72,12 @@ export const advisoryArticles: AdvisoryArticle[] = [
     href: "/tu-van/so-sanh-destinator-va-innova-cross",
     carIds: ["destinator"],
   },
+  {
+    number: "09",
+    title: "So sánh Xpander Cross và Suzuki XL7",
+    description:
+      "So sánh giá, giá lăn bánh, kích thước, khoảng sáng gầm, động cơ, mức tiêu thụ nhiên liệu và trang bị của hai mẫu 7 chỗ phong cách SUV.",
+    href: "/tu-van/so-sanh-xpander-cross-va-suzuki-xl7",
+    carIds: ["xpander-cross"],
+  },
 ];

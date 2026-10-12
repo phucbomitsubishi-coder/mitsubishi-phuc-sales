@@ -220,4 +220,40 @@ export const competitors = {
       },
     ],
   },
+
+  // Kích thước, gầm, khoang hành lý, tiêu hao, giá: trang chính thức suzuki.com.vn (10/2026).
+  // Công suất, mô-men, hộp số, mâm: VnExpress và 24h (Suzuki không công bố). Số túi khí và
+  // chiều dài cơ sở chưa có hai nguồn khớp nhau nên chưa đưa vào.
+  suzukiXL7: {
+    name: "Suzuki XL7 Hybrid",
+    seats: 7,
+    updated: "10/2026",
+    variants: [{ name: "Hybrid 1.5 AT", price: 599_900_000 }],
+    specs: {
+      type: "MPV phong cách SUV, 7 chỗ",
+      dimensions: "4.450 × 1.775 × 1.710 mm",
+      groundClearance: "200 mm",
+      engine: "Xăng 1.5L K15B, hybrid nhẹ (máy phát khởi động ISG)",
+      power: "103 mã lực / 6.000 vòng/phút",
+      torque: "138 Nm / 4.400 vòng/phút",
+      transmission: "Tự động 4 cấp",
+      drivetrain: "Cầu trước",
+      wheels: "16 inch",
+      fuelConsumption: "5,9 lít/100 km (kết hợp)",
+    },
+    sources: [
+      {
+        name: "Suzuki Việt Nam – XL7 Hybrid: giá và thông số kỹ thuật",
+        url: "https://suzuki.com.vn/cars/xl7-hybrid",
+      },
+      {
+        name: "VnExpress – Suzuki XL7: giá lăn bánh, thông số kỹ thuật",
+        url: "https://vnexpress.net/oto-xe-may/v-car/dong-xe/suzuki-xl7-hybrid-144",
+      },
+      {
+        name: "24h – Giá xe Suzuki XL7 Hybrid lăn bánh tháng 10/2026",
+        url: "https://www.24h.com.vn/o-to/gia-xe-suzuki-xl7-hybrid-lan-banh-thang-10-2026-uu-dai-100-phi-truoc-ba-c747a1800936.html",
+      },
+    ],
+  },
 } satisfies Record<string, CompetitorCar>;

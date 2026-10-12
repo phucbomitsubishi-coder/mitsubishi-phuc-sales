@@ -87,6 +87,14 @@ export default function SiteFooter() {
         Mua xe từ tỉnh khác
       </Link>
 
+      <Link href="/thu-cu-doi-moi" className="hover:text-white">
+        Thu cũ đổi mới
+      </Link>
+
+      <Link href="/phu-kien-xe-mitsubishi" className="hover:text-white">
+        Phụ kiện xe
+      </Link>
+
       <Link href="/xe-cu" className="hover:text-white">
         Xe đã qua sử dụng
       </Link>
