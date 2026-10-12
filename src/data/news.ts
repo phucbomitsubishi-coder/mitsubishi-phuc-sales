@@ -441,55 +441,7 @@ export const newsArticles: NewsArticle[] = [
       name: "Mitsubishi Motors Việt Nam",
       url: "https://www.mitsubishi-motors.com.vn/tin-tuc/chuong-trinh-khuyen-mai-mua-xe-thang-092026-n154227.html",
     },
-  },
-
-  {
-    id: "news-001",
-
-    title: "Kinh nghiệm chọn xe Mitsubishi phù hợp với nhu cầu sử dụng",
-
-    slug: "kinh-nghiem-chon-xe-mitsubishi-phu-hop",
-
-    category: "Tư vấn mua xe",
-
-    excerpt:
-      "Một số tiêu chí quan trọng giúp khách hàng xác định mẫu xe Mitsubishi phù hợp với nhu cầu gia đình, công việc và ngân sách.",
-
-    publishedAt: "2026-09-30",
-
-    image: "/images/hero/hero-main.jpg",
-
-    featured: false,
-
-    content: [
-      {
-        heading: "Xác định nhu cầu sử dụng",
-        paragraphs: [
-          "Trước khi lựa chọn xe, người mua nên xác định rõ nhu cầu sử dụng chính như đi lại hằng ngày, phục vụ gia đình, đi đường dài hay kết hợp công việc.",
-          "Số lượng người thường xuyên sử dụng xe, điều kiện đường sá và nhu cầu chở hành lý cũng là những yếu tố cần cân nhắc.",
-        ],
-      },
-      {
-        heading: "Xác định ngân sách",
-        paragraphs: [
-          "Ngoài giá mua xe, khách hàng nên tính thêm chi phí lăn bánh và các khoản chi phí sử dụng sau khi nhận xe.",
-          "Nếu có nhu cầu vay ngân hàng, việc xác định trước số tiền trả trước và khả năng thanh toán hằng tháng sẽ giúp lựa chọn phương án phù hợp hơn.",
-        ],
-      },
-      {
-        heading: "So sánh mẫu xe và phiên bản",
-        paragraphs: [
-          "Các mẫu xe và phiên bản khác nhau có thể khác biệt về trang bị, tính năng và mức giá. Người mua nên ưu tiên những trang bị thực sự phù hợp với nhu cầu sử dụng thay vì chỉ dựa vào giá bán.",
-        ],
-      },
-      {
-        heading: "Nên xem xe và lái thử trước khi quyết định",
-        paragraphs: [
-          "Việc xem xe thực tế và trải nghiệm lái thử giúp khách hàng đánh giá rõ hơn về không gian, vị trí lái, khả năng quan sát và cảm giác vận hành trước khi đưa ra quyết định.",
-        ],
-      },
-    ],
-  },
+  }
 ];
 
 export function getNewsArticleBySlug(slug: string) {

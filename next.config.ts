@@ -21,6 +21,12 @@ const nextConfig: NextConfig = {
   async redirects() {
     // Link cũ trong footer dùng id xe (/xe/xforce) thay vì slug (/xe/mitsubishi-xforce)
     return [
+      // Bài tin cũ trùng chủ đề và quá sơ sài, gộp vào bài tư vấn đầy đủ (10/2026)
+      {
+        source: "/tin-tuc/kinh-nghiem-chon-xe-mitsubishi-phu-hop",
+        destination: "/tu-van/chon-xe-mitsubishi-phu-hop",
+        permanent: true,
+      },
       {
         source:
           "/xe/:id(xforce|xpander|xpander-cross|attrage|triton|destinator)",

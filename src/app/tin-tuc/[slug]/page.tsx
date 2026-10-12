@@ -9,6 +9,8 @@ import {
 } from "@/data/news";
 import { siteConfig } from "@/config/site";
 import { isRepublishedArticle } from "@/lib/news";
+import { currentPromotion } from "@/data/promotions";
+import { promotionMonthLabel } from "@/lib/promotionItems";
 
 type NewsDetailPageProps = {
   params: Promise<{
@@ -84,6 +86,9 @@ export default async function NewsDetailPage({
   }
 
   const { sales, contact } = siteConfig;
+  // Bài khuyến mãi của tháng trước: ghi rõ đã kết thúc để khách không nhầm với ưu đãi hiện tại
+  const isExpiredPromotion =
+    article.category === "Khuyến mãi" && article.title !== currentPromotion.title;
   const articleSchema = {
   "@context": "https://schema.org",
   "@type": "Article",
@@ -186,6 +191,18 @@ const breadcrumbSchema = {
 
         {/* Article content */}
         <article className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
+          {isExpiredPromotion && (
+            <div className="mb-10 rounded-2xl border border-amber-200 bg-amber-50 p-5 leading-7 text-gray-800">
+              <p className="font-bold text-gray-900">Chương trình này đã kết thúc.</p>
+              <p className="mt-1">
+                Nội dung dưới đây chỉ để tham khảo. Ưu đãi đang áp dụng tháng {promotionMonthLabel} xem tại{" "}
+                <Link href="/bang-gia-xe-mitsubishi" className="font-semibold text-red-700 underline hover:text-red-800">
+                  bảng giá xe Mitsubishi
+                </Link>
+                .
+              </p>
+            </div>
+          )}
           <div className="space-y-10">
             {article.content.map((section, index) => (
               <section key={`${section.heading}-${index}`}>

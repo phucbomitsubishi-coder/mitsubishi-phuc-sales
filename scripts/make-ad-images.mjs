@@ -65,6 +65,9 @@ const ads = [
   { id: "xpander", model: "XPANDER", type: "MPV 7 chỗ",
     photo: "images/cars/xpander/gallery/exterior/exterior-01.jpg", pos: "35% 60%",
     bullets: ["7 chỗ cho cả nhà", "Lái thử tận nhà", "Giao xe toàn quốc"] },
+  { id: "xpander-cross", model: "XPANDER CROSS", type: "Crossover 7 chỗ",
+    photo: "images/cars/xpander-cross/gallery/exterior/exterior-01.jpg", pos: "40% 60%",
+    bullets: ["7 chỗ gầm cao", "Lái thử tận nhà", "Giao xe toàn quốc"] },
   { id: "triton", model: "TRITON", type: "Bán tải",
     photo: "images/cars/triton/gallery/exterior/exterior-01.jpg", pos: "40% 0%", size: "auto 145%",
     bullets: ["Bán tải mạnh mẽ", "Bảo hành 5 năm", "Giao xe toàn quốc"] },
@@ -89,6 +92,8 @@ function headline(ad, d) {
 
 function html(ad, d, h, w, H) {
   const tall = H > 1500;
+  const square = H === w; // 1:1 cho Instagram và các vị trí vuông: bỏ dòng chip, ghi chú, gạch đầu dòng cho vừa khung
+  const v = (t, f, q) => (tall ? t : square ? q : f);
   const hookSize = h.hook[1].length > 16 ? 76 : h.hook[1].length > 10 ? 104 : 128;
   const numeric = /^[0-9,]+$/.test(h.badge[1]);
   return `<!doctype html><html lang="vi"><head><meta charset="utf-8">
@@ -97,11 +102,12 @@ function html(ad, d, h, w, H) {
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { width: ${w}px; height: ${H}px; overflow: hidden; }
 body { font-family: Roboto, Arial, sans-serif; color: #fff; background: #0a0a0a; position: relative; }
-.photo { position: absolute; left: 0; right: 0; top: ${tall ? 520 : 330}px; height: ${tall ? 900 : 640}px;
+.photo { position: absolute; left: 0; right: 0; top: ${v(520, 330, 250)}px; height: ${v(900, 640, 520)}px;
   background: url('${pub(ad.photo)}') ${ad.pos} / ${ad.size ?? "cover"} no-repeat; }
 .photo::after { content: ""; position: absolute; inset: 0;
   background: linear-gradient(180deg, #0a0a0a 0%, rgba(10,10,10,0) 22%, rgba(10,10,10,0) 70%, #0a0a0a 100%); }
-.top { position: absolute; left: 56px; right: 56px; top: ${tall ? 120 : 52}px; }
+.top { position: absolute; left: 56px; right: 56px; top: ${v(120, 52, 36)}px; }
+${square ? ".chip, .note, .extras, .bullets { display: none !important; } .legal { font-size: 14px !important; margin-top: 8px !important; } .badge { width: 220px !important; height: 220px !important; }" : ""}
 .chip { display: inline-flex; align-items: center; gap: 10px; font-size: 24px; font-weight: 700; letter-spacing: 1px;
   background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.25); padding: 8px 18px 8px 10px; border-radius: 999px; }
 .chip i { width: 14px; height: 14px; border-radius: 50%; background: #ef4444; box-shadow: 0 0 0 5px rgba(239,68,68,.25); }
@@ -109,14 +115,14 @@ body { font-family: Roboto, Arial, sans-serif; color: #fff; background: #0a0a0a;
 .model b { color: #fff; }
 .hook1 { margin-top: 6px; font-size: 64px; font-weight: 900; line-height: 1; }
 .hook2 { font-size: ${hookSize}px; font-weight: 900; font-style: italic; line-height: 1.02; letter-spacing: -2px; color: #fde047; text-shadow: 0 8px 30px rgba(0,0,0,.6); }
-.badge { position: absolute; right: 48px; top: ${tall ? 900 : 640}px; width: 250px; height: 250px; border-radius: 50%;
+.badge { position: absolute; right: 48px; top: ${v(900, 640, 470)}px; width: 250px; height: 250px; border-radius: 50%;
   background: radial-gradient(circle at 30% 30%, #f87171, #b91c1c 70%); transform: rotate(-8deg);
   display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
   box-shadow: 0 20px 50px rgba(220,38,38,.55), 0 0 0 8px rgba(255,255,255,.15); }
 .badge small { font-size: ${/^[0-9]/.test(h.badge[0]) ? 46 : 22}px; line-height: 1; font-weight: 900; letter-spacing: 2px; color: #fde047; }
 .badge b { font-size: ${numeric ? (h.badge[1].length > 3 ? 64 : 92) : 40}px; margin: 4px 0; font-weight: 900; font-style: italic; line-height: 1; }
 .badge span { font-size: 24px; font-weight: 900; letter-spacing: 3px; }
-.bottom { position: absolute; left: 48px; right: 48px; bottom: ${tall ? 150 : 40}px; }
+.bottom { position: absolute; left: 48px; right: 48px; bottom: ${v(150, 40, 20)}px; }
 .price { font-size: 30px; color: #e5e7eb; }
 .price b { font-size: 44px; color: #fff; }
 .note { margin-top: 6px; font-size: 24px; color: #d1d5db; }
@@ -168,7 +174,7 @@ const only = process.argv[2];
 for (const ad of ads.filter((a) => !only || a.id === only)) {
   const d = carData(ad.id);
   const h = headline(ad, d);
-  for (const [w, H, suffix] of [[1080, 1350, "feed"], [1080, 1920, "story"]]) {
+  for (const [w, H, suffix] of [[1080, 1350, "feed"], [1080, 1920, "story"], [1080, 1080, "vuong"]]) {
     const file = path.join(work, `${ad.id}-${suffix}.html`);
     fs.writeFileSync(file, html(ad, d, h, w, H));
     const out = path.join(outDir, `${ad.id}-${suffix}.png`);
