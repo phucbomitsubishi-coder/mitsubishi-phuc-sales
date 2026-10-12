@@ -77,6 +77,27 @@ export default function SiteHeader() {
                     </p>
                   </Link>
                 ))}
+
+                <div className="col-span-3 mt-1 flex flex-wrap justify-center gap-2 border-t border-gray-100 pt-3">
+                  <Link
+                    href="/phu-kien-xe-mitsubishi"
+                    className="rounded-full bg-gray-50 px-4 py-2 text-sm font-semibold text-gray-800 transition hover:bg-red-50 hover:text-red-700"
+                  >
+                    Bảng giá phụ kiện xe
+                  </Link>
+                  <Link
+                    href="/tu-van"
+                    className="rounded-full bg-gray-50 px-4 py-2 text-sm font-semibold text-gray-800 transition hover:bg-red-50 hover:text-red-700"
+                  >
+                    So sánh với xe đối thủ
+                  </Link>
+                  <Link
+                    href="/dang-ky-lai-thu"
+                    className="rounded-full bg-gray-50 px-4 py-2 text-sm font-semibold text-gray-800 transition hover:bg-red-50 hover:text-red-700"
+                  >
+                    Đăng ký lái thử
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
@@ -126,12 +147,32 @@ export default function SiteHeader() {
   Tin tức & Tư vấn
 </Link>
 
-<Link
-  href="/xe-cu"
-  className="whitespace-nowrap transition hover:text-red-600"
->
-  Xe đã qua sử dụng
-</Link>
+<div className="group relative">
+  <Link
+    href="/xe-cu"
+    className="flex items-center gap-1 whitespace-nowrap transition hover:text-red-600"
+  >
+    Xe cũ
+    <span className="text-xs">▼</span>
+  </Link>
+
+  <div className="invisible absolute left-1/2 top-full z-50 w-56 -translate-x-1/2 pt-3 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100">
+    <div className="rounded-xl border border-gray-200 bg-white p-2 shadow-xl">
+      <Link
+        href="/xe-cu"
+        className="block rounded-lg px-4 py-3 text-sm font-semibold text-gray-800 transition hover:bg-gray-50 hover:text-red-600"
+      >
+        Xe đã qua sử dụng
+      </Link>
+      <Link
+        href="/thu-cu-doi-moi"
+        className="block rounded-lg px-4 py-3 text-sm font-semibold text-gray-800 transition hover:bg-gray-50 hover:text-red-600"
+      >
+        Thu cũ đổi mới
+      </Link>
+    </div>
+  </div>
+</div>
 
 <Link
   href="/lien-he"

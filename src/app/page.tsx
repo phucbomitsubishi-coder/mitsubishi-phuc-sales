@@ -31,6 +31,16 @@ const promotionArticle = newsArticles.find(
   (article) => article.title === currentPromotion.title
 );
 
+// Khối "Dịch vụ & công cụ": lối vào nhanh các trang tiện ích
+const serviceLinks = [
+  { href: "/du-toan/gia-lan-banh", title: "Tính giá lăn bánh", description: "Đủ 34 tỉnh, đã trừ ưu đãi tháng" },
+  { href: "/du-toan/tra-gop", title: "Dự tính trả góp", description: "Trả trước, số tiền góp hằng tháng" },
+  { href: "/thu-cu-doi-moi", title: "Thu cũ đổi mới", description: "Định giá xe đang đi, đổi sang Mitsubishi" },
+  { href: "/phu-kien-xe-mitsubishi", title: "Phụ kiện xe", description: "Bảng giá phụ kiện từng dòng xe" },
+  { href: "/dang-ky-lai-thu", title: "Đăng ký lái thử", description: "Tại showroom hoặc mang xe đến nhà" },
+  { href: "/mua-xe-mitsubishi-toan-quoc", title: "Mua xe từ tỉnh khác", description: "Cọc online, giao xe toàn quốc" },
+];
+
 export default function Home() {
   return (
     <main className="min-h-screen bg-white text-black">
@@ -220,6 +230,31 @@ export default function Home() {
       * Chương trình của {currentPromotion.source}. Giá trị ưu đãi mang tính
       tham khảo và có thể thay đổi theo từng thời điểm.
     </p>
+  </div>
+</section>
+
+{/* DỊCH VỤ & CÔNG CỤ */}
+<section className="border-b border-gray-200 bg-gray-50">
+  <div className="mx-auto max-w-7xl px-6 py-14">
+    <p className="font-semibold uppercase tracking-wider text-red-700">
+      Dịch vụ & công cụ
+    </p>
+    <h2 className="mt-2 text-3xl font-bold">Hỗ trợ mua xe trọn gói</h2>
+
+    <div className="mt-8 grid grid-cols-2 gap-3 md:gap-4 lg:grid-cols-3">
+      {serviceLinks.map((item) => (
+        <Link
+          key={item.href}
+          href={item.href}
+          className="group rounded-xl border border-gray-200 bg-white p-4 transition hover:border-red-600 hover:shadow-md md:p-6"
+        >
+          <h3 className="font-bold text-gray-900 transition group-hover:text-red-700 md:text-lg">
+            {item.title} <span aria-hidden="true" className="hidden md:inline">→</span>
+          </h3>
+          <p className="mt-1.5 text-sm leading-6 text-gray-600">{item.description}</p>
+        </Link>
+      ))}
+    </div>
   </div>
 </section>
 

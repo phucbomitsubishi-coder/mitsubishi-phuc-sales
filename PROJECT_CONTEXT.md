@@ -148,6 +148,8 @@ Alias import: `@/` → `src/`.
 - **Nút "Báo giá nhanh"** (`QuickQuote.tsx`, gắn trong layout): nổi góc phải mọi trang (ẩn ở /du-toan/gia-lan-banh và các trang có form).
   Chọn xe → phiên bản → tỉnh → lăn bánh đã trừ ưu đãi tháng; nút Zalo chép sẵn tin nhắn (Zalo không cho điền sẵn qua link).
   Dữ liệu xe dựng gọn trong layout.tsx (`quickQuoteCars`) để không đưa cả cars.ts vào bundle client.
+- **Lối vào các trang tiện ích:** menu desktop (`SiteHeader.tsx`) có dropdown "Xe cũ" (Xe đã qua sử dụng, Thu cũ đổi mới) và hàng nút cuối dropdown "Sản phẩm" (Phụ kiện, So sánh với xe đối thủ → /tu-van, Đăng ký lái thử).
+  Trang chủ có khối "Dịch vụ & công cụ" (mảng `serviceLinks` trong `src/app/page.tsx`, sau phần Khuyến mãi). Thêm trang tiện ích mới thì thêm vào cả hai chỗ và `MobileMenu`.
 - **Phụ kiện** (`/phu-kien-xe-mitsubishi`): đọc `src/data/accessories.ts` (`npm run sync-accessories`). Tên có đuôi " – MMV" hiện nhãn "Chính hãng MMV".
   Trang `/ho-tro/phu-tung-chinh-hang` vẫn noindex.
 - **Trả góp** (`InstallmentCalculator.tsx`): chọn trả trước 20–70%, thời hạn 1–8 năm, nhập lãi suất năm đầu.
