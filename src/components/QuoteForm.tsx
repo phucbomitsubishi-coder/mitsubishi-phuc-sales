@@ -6,6 +6,7 @@ import { cars, upcomingCars } from "@/data/cars";
 import ScrollTopLink from "@/components/ScrollTopLink";
 import Link from "next/link";
 import { trackPixel } from "@/lib/metaPixel";
+import { toQuoteSource } from "@/lib/leadScripts";
 
 type QuoteFormProps = {
   initialCar?: string;
@@ -104,7 +105,7 @@ export default function QuoteForm({
           phone: normalizedPhone,
           car,
           variant,
-          source: leadSource,
+          source: toQuoteSource(leadSource),
           website,
         }),
       });

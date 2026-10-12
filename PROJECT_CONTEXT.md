@@ -24,6 +24,8 @@ Mục tiêu chính: thu khách hàng tiềm năng (lead) qua báo giá, đăng k
     Trang chủ render `<Suspense fallback={<QuoteForm />}><QuoteFormFromUrl /></Suspense>`. `QuoteFormFromUrl` đọc
     `?car=&variant=&form=&nguon=` bằng `useSearchParams` và tạo lại form khi URL đổi (`key`). Link `/?car=...#bao-gia` vì vậy dùng được `<Link>`.
   - `dang-ky-lai-thu/page.tsx` → hằng số `SCRIPT_URL` được hardcode trong file.
+  - ⚠️ **Cả 2 Apps Script chỉ nhận danh sách nguồn (`source`) cố định**, nguồn lạ bị từ chối và khách không gửi được (lỗi phát hiện 12/10/2026).
+    QuoteForm đổi nguồn qua `toQuoteSource()` trong `src/lib/leadScripts.ts`; thêm `?nguon=` mới thì nhớ thêm vào Apps Script trước rồi mới thêm vào danh sách đó.
   - Request gửi `Content-Type: text/plain` (để tránh CORS preflight) và nhận về JSON `{ success, message }`.
 - Không có test. Lệnh kiểm tra: `npm run lint`, `npm run build`.
 - Remote: `github.com/phucbomitsubishi-coder/mitsubishi-phuc-sales`, nhánh `main`. Có lẽ deploy trên Vercel.
