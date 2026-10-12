@@ -89,16 +89,16 @@ function CategoryList({ group }: { group: AccessoryGroup }) {
         <details
           key={category.name}
           open={category.name.includes("MMV")}
-          className="group/cat rounded-lg border border-gray-200 bg-gray-50"
+          className="group/cat overflow-hidden rounded-lg border border-gray-200 border-l-4 border-l-red-600 bg-white"
         >
-          <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-3 py-2.5 text-sm font-semibold hover:bg-gray-100">
+          <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-3 py-3 font-bold text-gray-900 transition hover:bg-red-50 group-open/cat:bg-red-50 group-open/cat:text-red-700">
             <span>{category.name}</span>
-            <span className="shrink-0 font-normal text-gray-600">
-              {category.items.length} mục
+            <span className="shrink-0 text-sm font-semibold text-gray-700">
+              <span className="rounded-full bg-gray-100 px-2 py-0.5">{category.items.length} mục</span>
               <span className="ml-2 inline-block transition group-open/cat:rotate-180">▾</span>
             </span>
           </summary>
-          <div className="px-1 pb-1 sm:px-2 sm:pb-2">
+          <div className="pb-1 sm:px-2 sm:pb-2">
             <AccessoryTable items={category.items} />
           </div>
         </details>
@@ -145,13 +145,13 @@ export default function AccessoriesPage() {
             <p className="mt-1 text-sm text-gray-600">Bấm vào dòng xe để xem bảng giá phụ kiện.</p>
             <div className="mt-4 space-y-3">
               {carGroups.map(({ car, group }) => (
-                <details key={car.id} id={car.id} className="group scroll-mt-24 rounded-xl border border-gray-200 bg-white">
-                  <summary className="flex cursor-pointer list-none items-center gap-4 px-4 py-3 hover:bg-gray-50">
+                <details key={car.id} id={car.id} className="group scroll-mt-24 rounded-xl border-2 border-gray-200 bg-white shadow-sm transition open:border-red-600">
+                  <summary className="flex cursor-pointer list-none items-center gap-4 rounded-xl px-4 py-3 hover:bg-gray-50">
                     <div className="relative h-12 w-20 shrink-0">
                       <Image src={car.image} alt={car.name} fill sizes="80px" className="object-contain" />
                     </div>
                     <div className="min-w-0 flex-1">
-                      <p className="font-semibold">
+                      <p className="text-lg font-bold text-gray-900 group-open:text-red-700">
                         {car.name}
                         {car.id === "xpander" ? " / Xpander Cross" : ""}
                       </p>
@@ -188,10 +188,10 @@ export default function AccessoriesPage() {
             <p className="mt-1 text-sm text-gray-600">Bấm vào từng nhóm để xem danh sách, nhắn Zalo để nhận giá.</p>
             <div className="mt-4 space-y-3">
               {generalGroups.map((group) => (
-                <details key={group.name} className="group rounded-xl border border-gray-200 bg-white">
-                  <summary className="flex cursor-pointer list-none items-center justify-between px-4 py-3 font-semibold hover:bg-gray-50">
+                <details key={group.name} className="group rounded-xl border-2 border-gray-200 bg-white shadow-sm transition open:border-red-600">
+                  <summary className="flex cursor-pointer list-none items-center justify-between rounded-xl px-4 py-4 text-lg font-bold text-gray-900 hover:bg-gray-50 group-open:text-red-700">
                     {group.name}
-                    <span className="text-sm font-normal text-gray-600">
+                    <span className="shrink-0 text-sm font-semibold text-gray-700">
                       {group.items.length} mục
                       <span className="ml-2 inline-block transition group-open:rotate-180">▾</span>
                     </span>
