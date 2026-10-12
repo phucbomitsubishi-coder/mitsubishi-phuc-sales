@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import SiteHeader from "@/components/SiteHeader";
 import PageSchema from "@/components/PageSchema";
 import { createPageMetadata } from "@/lib/metadata";
@@ -88,45 +89,45 @@ export default function AccessoriesPage() {
               che mưa, phim cách nhiệt, phủ gầm, camera, đồ trang trí. Mua kèm xe mới thường có
               chương trình tặng hoặc giảm giá phụ kiện, hãy hỏi Phúc khi nhận báo giá.
             </p>
-
-            <nav aria-label="Chọn dòng xe" className="mt-6 flex flex-wrap gap-2">
-              {carGroups.map(({ car }) => (
-                <a
-                  key={car.id}
-                  href={`#${car.id}`}
-                  className="rounded-full border border-white/30 px-4 py-2 text-sm font-semibold transition hover:bg-white hover:text-gray-900"
-                >
-                  {car.name.replace("Mitsubishi ", "")}
-                </a>
-              ))}
-              <a
-                href="#dung-chung"
-                className="rounded-full border border-white/30 px-4 py-2 text-sm font-semibold transition hover:bg-white hover:text-gray-900"
-              >
-                Phụ kiện dùng chung
-              </a>
-            </nav>
           </div>
         </section>
 
         <div className="mx-auto max-w-4xl px-6 py-12">
-          {carGroups.map(({ car, group }) => (
-            <section key={car.id} id={car.id} className="scroll-mt-24 pb-10">
-              <h2 className="text-2xl font-bold">
-                Phụ kiện {car.name}
-                {car.id === "xpander" ? " (dùng chung Xpander Cross)" : ""}
-              </h2>
-              <p className="mt-1 text-sm text-gray-600">
-                {group.items.length} phụ kiện ·{" "}
-                <Link href={`/xe/${car.slug}`} className="font-semibold text-red-700 underline hover:text-red-800">
-                  Xem giá xe {car.name.replace("Mitsubishi ", "")}
-                </Link>
-              </p>
-              <AccessoryTable group={group} />
-            </section>
-          ))}
+          <section>
+            <h2 className="text-2xl font-bold">Phụ kiện theo dòng xe</h2>
+            <p className="mt-1 text-sm text-gray-600">Bấm vào dòng xe để xem bảng giá phụ kiện.</p>
+            <div className="mt-4 space-y-3">
+              {carGroups.map(({ car, group }) => (
+                <details key={car.id} id={car.id} className="group scroll-mt-24 rounded-xl border border-gray-200 bg-white">
+                  <summary className="flex cursor-pointer list-none items-center gap-4 px-4 py-3 hover:bg-gray-50">
+                    <div className="relative h-12 w-20 shrink-0">
+                      <Image src={car.image} alt={car.name} fill sizes="80px" className="object-contain" />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <p className="font-semibold">
+                        {car.name}
+                        {car.id === "xpander" ? " / Xpander Cross" : ""}
+                      </p>
+                      <p className="text-sm text-gray-600">
+                        {group.items.length} phụ kiện · từ {vnd(Math.min(...group.items.map((item) => item.price)))}
+                      </p>
+                    </div>
+                    <span aria-hidden="true" className="inline-block text-gray-600 transition group-open:rotate-180">▾</span>
+                  </summary>
+                  <div className="px-2 pb-3">
+                    <p className="px-2 pt-1 text-sm">
+                      <Link href={`/xe/${car.slug}`} className="font-semibold text-red-700 underline hover:text-red-800">
+                        Xem giá xe {car.name.replace("Mitsubishi ", "")}
+                      </Link>
+                    </p>
+                    <AccessoryTable group={group} />
+                  </div>
+                </details>
+              ))}
+            </div>
+          </section>
 
-          <section id="dung-chung" className="scroll-mt-24 border-t border-gray-200 pt-10">
+          <section id="dung-chung" className="mt-10 scroll-mt-24">
             <h2 className="text-2xl font-bold">Phụ kiện dùng chung cho các dòng xe</h2>
             <p className="mt-1 text-sm text-gray-600">Bấm vào từng nhóm để xem giá.</p>
             <div className="mt-4 space-y-3">
