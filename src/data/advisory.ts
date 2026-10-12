@@ -64,4 +64,12 @@ export const advisoryArticles: AdvisoryArticle[] = [
     href: "/tu-van/so-sanh-attrage-va-toyota-vios",
     carIds: ["attrage"],
   },
+  {
+    number: "08",
+    title: "So sánh Destinator và Toyota Innova Cross",
+    description:
+      "So sánh giá, giá lăn bánh, kích thước, khoảng sáng gầm, động cơ turbo và hybrid, trang bị an toàn của hai mẫu xe gầm cao 7–8 chỗ.",
+    href: "/tu-van/so-sanh-destinator-va-innova-cross",
+    carIds: ["destinator"],
+  },
 ];

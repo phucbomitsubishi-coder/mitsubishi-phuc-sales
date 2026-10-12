@@ -49,7 +49,7 @@ export function calculateOnRoadPrice({
         : seats === 7
           ? 1188000
           : 831600
-      : seats === 7 && !isTriton
+      : (seats ?? 0) >= 6 && !isTriton
         ? 873400
         : 480700;
 

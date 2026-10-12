@@ -179,4 +179,45 @@ export const competitors = {
       },
     ],
   },
+
+  // Giá và thông số lấy từ trang chính thức toyota.com.vn (API thông số từng phiên bản, 10/2026),
+  // đối chiếu giá 2.0G với VietnamNet và giá các bản với Bonbanh.
+  toyotaInnovaCross: {
+    name: "Toyota Innova Cross",
+    seats: 8,
+    updated: "10/2026",
+    variants: [
+      { name: "2.0G", price: 730_000_000 },
+      { name: "2.0V", price: 825_000_000 },
+      { name: "2.0 HEV (hybrid)", price: 960_000_000 },
+    ],
+    specs: {
+      type: "MPV gầm cao, 8 chỗ (2.0G, 2.0V), 7 chỗ (HEV)",
+      dimensions: "4.755 × 1.845 × 1.785–1.790 mm (HEV rộng 1.850 mm)",
+      wheelbase: "2.850 mm",
+      groundClearance: "170 mm (HEV 167 mm)",
+      engine: "Xăng 2.0L (2.0G, 2.0V); xăng 2.0L kết hợp mô-tơ điện (HEV)",
+      power: "172 mã lực (2.0G, 2.0V); máy xăng 150 mã lực + mô-tơ điện 83 kW (HEV)",
+      torque: "205 Nm (2.0G, 2.0V); máy xăng 188 Nm + mô-tơ điện 206 Nm (HEV)",
+      transmission: "Vô cấp CVT (2.0G, 2.0V), e-CVT (HEV)",
+      drivetrain: "Cầu trước",
+      wheels: "16 inch (2.0G), 17 inch (2.0V), 18 inch (HEV)",
+      fuelConsumption: "7,1–7,2 lít/100 km (2.0G, 2.0V); 4,7 lít/100 km (HEV), kết hợp",
+      airbags: "6 túi khí",
+    },
+    sources: [
+      {
+        name: "Toyota Việt Nam – Innova Cross: giá và thông số kỹ thuật từng phiên bản",
+        url: "https://www.toyota.com.vn/innova-cross",
+      },
+      {
+        name: "VietnamNet – Giá trên 700 triệu: mua Toyota Innova Cross 2.0G hay Mitsubishi Destinator?",
+        url: "https://vietnamnet.vn/gia-tren-700-trieu-mua-toyota-innova-cross-hay-mitsubishi-destinator-2468435.html",
+      },
+      {
+        name: "Bonbanh – Giá xe Toyota Innova Cross",
+        url: "https://bonbanh.com/gia-xe-oto-toyota-innova",
+      },
+    ],
+  },
 } satisfies Record<string, CompetitorCar>;
