@@ -1,5 +1,6 @@
 // Đồng bộ bảng phụ kiện từ app báo giá (../bao-gia-xe/phu-kien.js) sang src/data/accessories.ts.
 // Chỉ lấy tên, số chỗ áp dụng và GIÁ NIÊM YẾT. Cột "giá tặng" là số nội bộ, không bao giờ đưa lên website.
+// Chỉ phụ kiện chính hãng (tên có đuôi " – MMV") mới có giá; món khác ghi price: null → website hiện "Liên hệ" (anh Phúc chọn 12/10/2026).
 // Chạy: npm run sync-accessories   (mỗi tháng sau khi cập nhật phu-kien.js trong app)
 import fs from "node:fs";
 import path from "node:path";
@@ -18,18 +19,19 @@ const groups = PHU_KIEN.map((group) => ({
   ...(group.xe ? { carId: group.xe } : {}),
   items: group.ds
     .filter((row) => Array.isArray(row) && typeof row[3] === "number" && row[3] > 0)
-    .map(([name, seats, , price]) => ({ name, seats, price })),
+    .map(([name, seats, , price]) => ({ name, seats, price: / – MMV$/.test(name) ? price : null })),
 }));
 
 const total = groups.reduce((sum, group) => sum + group.items.length, 0);
 const output = `// TỰ SINH bởi scripts/sync-accessories.mjs từ app báo giá. Không sửa tay, chạy lại script khi đổi giá.
-// Chỉ gồm giá niêm yết (không có giá nội bộ).
+// Chỉ gồm giá niêm yết của phụ kiện chính hãng MMV; món khác price: null (hiện "Liên hệ"). Không có giá nội bộ.
 
 export type AccessoryItem = {
   name: string;
   // 5 / 7: chỉ áp dụng xe 5 chỗ / 7 chỗ; 0: mọi xe
   seats: number;
-  price: number;
+  // Giá niêm yết, chỉ có ở phụ kiện chính hãng MMV; null = liên hệ
+  price: number | null;
 };
 
 export type AccessoryGroup = {

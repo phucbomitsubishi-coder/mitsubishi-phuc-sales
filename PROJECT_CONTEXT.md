@@ -41,7 +41,7 @@ npm run sold-used-car  # CLI chuyển xe cũ sang trạng thái "sold"
 npm run add-news       # CLI lấy bài viết từ URL → src/data/news.ts (+ promotions.ts)
 npm run price-image    # Tạo ảnh bảng giá tháng 1080×1350 để đăng Facebook → ../anh-facebook/ (chụp bằng Edge)
 npm run promo-images   # Ảnh khuyến mãi từng dòng xe 1080×1350 + file caption/bình luận → ../anh-facebook/khuyen-mai-MM-YYYY/
-npm run sync-accessories # Đồng bộ bảng phụ kiện (CHỈ giá niêm yết) từ ../bao-gia-xe/phu-kien.js → src/data/accessories.ts (tự sinh, không sửa tay)
+npm run sync-accessories # Đồng bộ bảng phụ kiện (CHỈ giá niêm yết của món " – MMV") từ ../bao-gia-xe/phu-kien.js → src/data/accessories.ts (tự sinh, không sửa tay)
 npm run ad-images      # Ảnh QUẢNG CÁO Fanpage theo chương trình ĐẠI LÝ (đọc PROMOS/CARS/BHVC từ ../bao-gia-xe/index.html) → ../anh-facebook/quang-cao-MM-YYYY/
 ```
 
@@ -152,7 +152,7 @@ Alias import: `@/` → `src/`.
   Dữ liệu xe dựng gọn trong layout.tsx (`quickQuoteCars`) để không đưa cả cars.ts vào bundle client.
 - **Lối vào các trang tiện ích:** menu desktop (`SiteHeader.tsx`) có dropdown "Xe cũ" (Xe đã qua sử dụng, Thu cũ đổi mới) và hàng nút cuối dropdown "Sản phẩm" (Phụ kiện, So sánh với xe đối thủ → /tu-van, Đăng ký lái thử).
   Trang chủ có khối "Dịch vụ & công cụ" (mảng `serviceLinks` trong `src/app/page.tsx`, sau phần Khuyến mãi). Thêm trang tiện ích mới thì thêm vào cả hai chỗ và `MobileMenu`.
-- **Phụ kiện** (`/phu-kien-xe-mitsubishi`): đọc `src/data/accessories.ts` (`npm run sync-accessories`). Tên có đuôi " – MMV" hiện nhãn "Chính hãng MMV".
+- **Phụ kiện** (`/phu-kien-xe-mitsubishi`): đọc `src/data/accessories.ts` (`npm run sync-accessories`). Tên có đuôi " – MMV" hiện nhãn "Chính hãng MMV" và là món **duy nhất có giá**; món khác `price: null`, hiện "Liên hệ" (anh Phúc chọn 12/10/2026, script sync bỏ giá ngay từ đầu). Bảng theo dòng xe dạng `<details>` thu gọn, có nút Zalo.
   Trang `/ho-tro/phu-tung-chinh-hang` vẫn noindex.
 - **Trả góp** (`InstallmentCalculator.tsx`): chọn trả trước 20–70%, thời hạn 1–8 năm, nhập lãi suất năm đầu.
 - **Trang Giới thiệu** (`src/app/gioi-thieu/page.tsx`) tập trung vào người tư vấn. Thứ tự các phần: hero có ảnh chân dung,

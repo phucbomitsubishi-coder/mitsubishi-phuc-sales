@@ -11,12 +11,19 @@ import { accessoryGroups, accessoriesMonth, type AccessoryGroup } from "@/data/a
 export const metadata: Metadata = createPageMetadata({
   title: `Bảng giá phụ kiện xe Mitsubishi ${accessoriesMonth}: Xpander, Xforce, Destinator, Triton`,
   description:
-    "Giá niêm yết phụ kiện cho Xpander, Xpander Cross, Xforce, Destinator, Triton, Attrage: lót sàn, vè che mưa, phim cách nhiệt, phủ gầm, camera hành trình và phụ kiện chính hãng MMV.",
+    "Phụ kiện cho Xpander, Xpander Cross, Xforce, Destinator, Triton, Attrage: lót sàn, vè che mưa, phim cách nhiệt, phủ gầm, camera hành trình. Giá niêm yết phụ kiện chính hãng MMV, các món khác liên hệ để nhận giá theo gói.",
   path: "/phu-kien-xe-mitsubishi",
 });
 
 // Dữ liệu ở src/data/accessories.ts, sinh bởi `npm run sync-accessories` từ app báo giá (chỉ giá niêm yết).
 const vnd = (value: number) => `${value.toLocaleString("vi-VN")} đ`;
+const zaloUrl = siteConfig.contact.zaloUrl;
+
+// Giá thấp nhất trong các món có giá (chỉ phụ kiện chính hãng MMV có giá)
+function minPrice(group: AccessoryGroup) {
+  const prices = group.items.map((item) => item.price).filter((price): price is number => price !== null);
+  return prices.length > 0 ? Math.min(...prices) : null;
+}
 const seatLabel = (seats: number) => (seats === 5 ? "Xe 5 chỗ" : seats === 7 ? "Xe 7 chỗ" : "");
 
 const carGroups = cars
@@ -34,7 +41,7 @@ function AccessoryTable({ group }: { group: AccessoryGroup }) {
         <thead className="bg-gray-50 text-gray-700">
           <tr>
             <th scope="col" className="px-4 py-3 font-semibold">Phụ kiện</th>
-            <th scope="col" className="px-4 py-3 text-right font-semibold">Giá niêm yết</th>
+            <th scope="col" className="px-4 py-3 text-right font-semibold">Giá</th>
           </tr>
         </thead>
         <tbody className="divide-y divide-gray-100">
@@ -51,7 +58,9 @@ function AccessoryTable({ group }: { group: AccessoryGroup }) {
                   <span className="ml-2 text-xs text-gray-600">{seatLabel(item.seats)}</span>
                 )}
               </th>
-              <td className="whitespace-nowrap px-4 py-2.5 text-right font-semibold tabular-nums">{vnd(item.price)}</td>
+              <td className="whitespace-nowrap px-4 py-2.5 text-right font-semibold tabular-nums">
+                {item.price !== null ? vnd(item.price) : <span className="font-normal text-gray-600">Liên hệ</span>}
+              </td>
             </tr>
           ))}
         </tbody>
@@ -85,9 +94,9 @@ export default function AccessoriesPage() {
               Bảng giá phụ kiện xe Mitsubishi
             </h1>
             <p className="mt-4 max-w-2xl leading-8 text-gray-300">
-              Giá niêm yết {total} phụ kiện theo từng dòng xe và các nhóm dùng chung: lót sàn, vè
-              che mưa, phim cách nhiệt, phủ gầm, camera, đồ trang trí. Mua kèm xe mới thường có
-              chương trình tặng hoặc giảm giá phụ kiện, hãy hỏi Phúc khi nhận báo giá.
+              {total} phụ kiện theo từng dòng xe và các nhóm dùng chung: lót sàn, vè che mưa, phim
+              cách nhiệt, phủ gầm, camera, đồ trang trí. Phụ kiện chính hãng MMV có giá niêm yết;
+              các món khác giá thay đổi theo gói và khi mua kèm xe, nhắn Phúc để nhận giá tốt.
             </p>
           </div>
         </section>
@@ -109,17 +118,26 @@ export default function AccessoriesPage() {
                         {car.id === "xpander" ? " / Xpander Cross" : ""}
                       </p>
                       <p className="text-sm text-gray-600">
-                        {group.items.length} phụ kiện · từ {vnd(Math.min(...group.items.map((item) => item.price)))}
+                        {group.items.length} phụ kiện
+                        {minPrice(group) !== null && ` · chính hãng MMV từ ${vnd(minPrice(group)!)}`}
                       </p>
                     </div>
                     <span aria-hidden="true" className="inline-block text-gray-600 transition group-open:rotate-180">▾</span>
                   </summary>
                   <div className="px-2 pb-3">
-                    <p className="px-2 pt-1 text-sm">
+                    <div className="flex flex-wrap items-center gap-x-4 gap-y-2 px-2 pt-1 text-sm">
+                      <a
+                        href={zaloUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="rounded bg-blue-600 px-3 py-1.5 font-semibold text-white transition hover:bg-blue-700"
+                      >
+                        Hỏi giá phụ kiện qua Zalo
+                      </a>
                       <Link href={`/xe/${car.slug}`} className="font-semibold text-red-700 underline hover:text-red-800">
                         Xem giá xe {car.name.replace("Mitsubishi ", "")}
                       </Link>
-                    </p>
+                    </div>
                     <AccessoryTable group={group} />
                   </div>
                 </details>
@@ -129,7 +147,7 @@ export default function AccessoriesPage() {
 
           <section id="dung-chung" className="mt-10 scroll-mt-24">
             <h2 className="text-2xl font-bold">Phụ kiện dùng chung cho các dòng xe</h2>
-            <p className="mt-1 text-sm text-gray-600">Bấm vào từng nhóm để xem giá.</p>
+            <p className="mt-1 text-sm text-gray-600">Bấm vào từng nhóm để xem danh sách, nhắn Zalo để nhận giá.</p>
             <div className="mt-4 space-y-3">
               {generalGroups.map((group) => (
                 <details key={group.name} className="group rounded-xl border border-gray-200 bg-white">
@@ -149,9 +167,10 @@ export default function AccessoriesPage() {
           </section>
 
           <p className="mt-10 text-sm leading-6 text-gray-600">
-            Giá niêm yết tham khảo tháng {accessoriesMonth}, có thể thay đổi theo thời điểm và tình
-            trạng hàng. Phụ kiện ghi “Chính hãng MMV” là phụ kiện của Mitsubishi Motors Việt Nam.
-            Liên hệ để biết phụ kiện được tặng kèm theo chương trình mua xe hiện hành.
+            Giá niêm yết phụ kiện chính hãng MMV tham khảo tháng {accessoriesMonth}, có thể thay đổi
+            theo thời điểm và tình trạng hàng. Phụ kiện ghi “Chính hãng MMV” là phụ kiện của
+            Mitsubishi Motors Việt Nam. Các món ghi “Liên hệ” có giá theo gói và chương trình mua
+            xe hiện hành.
           </p>
 
           <div className="mt-8 rounded-2xl bg-gray-100 p-6 md:p-8">
@@ -162,7 +181,7 @@ export default function AccessoriesPage() {
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <a
-                href={siteConfig.contact.zaloUrl}
+                href={zaloUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="rounded bg-blue-600 px-5 py-3 font-semibold text-white transition hover:bg-blue-700"
