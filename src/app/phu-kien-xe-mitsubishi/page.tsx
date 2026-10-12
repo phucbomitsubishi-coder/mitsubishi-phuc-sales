@@ -18,6 +18,9 @@ export const metadata: Metadata = createPageMetadata({
 // Dữ liệu ở src/data/accessories.ts, sinh bởi `npm run sync-accessories` từ app báo giá (chỉ giá niêm yết).
 const vnd = (value: number) => `${value.toLocaleString("vi-VN")} đ`;
 const zaloUrl = siteConfig.contact.zaloUrl;
+// Giá trong app báo giá đã gồm VAT 8%; trang MMV công bố giá chưa VAT (= giá ÷ 1,08)
+const VAT_RATE = 0.08;
+const withoutVat = (price: number) => Math.round(price / (1 + VAT_RATE) / 1000) * 1000;
 
 // Giá thấp nhất trong các món có giá (chỉ phụ kiện chính hãng MMV có giá)
 function minPrice(group: AccessoryGroup) {
@@ -41,7 +44,7 @@ function AccessoryTable({ group }: { group: AccessoryGroup }) {
         <thead className="bg-gray-50 text-gray-700">
           <tr>
             <th scope="col" className="px-4 py-3 font-semibold">Phụ kiện</th>
-            <th scope="col" className="px-4 py-3 text-right font-semibold">Giá</th>
+            <th scope="col" className="px-4 py-3 text-right font-semibold">Giá (gồm VAT)</th>
           </tr>
         </thead>
         <tbody className="divide-y divide-gray-100">
@@ -50,7 +53,7 @@ function AccessoryTable({ group }: { group: AccessoryGroup }) {
               <th scope="row" className="px-4 py-2.5 font-normal text-gray-800">
                 {item.name.replace(/ – MMV$/, "")}
                 {/ – MMV$/.test(item.name) && (
-                  <span className="ml-2 rounded bg-red-50 px-1.5 py-0.5 text-xs font-semibold text-red-700">
+                  <span className="mt-1 block w-fit whitespace-nowrap rounded bg-red-50 px-1.5 py-0.5 text-xs font-semibold text-red-700">
                     Chính hãng MMV
                   </span>
                 )}
@@ -59,7 +62,14 @@ function AccessoryTable({ group }: { group: AccessoryGroup }) {
                 )}
               </th>
               <td className="whitespace-nowrap px-4 py-2.5 text-right font-semibold tabular-nums">
-                {item.price !== null ? vnd(item.price) : <span className="font-normal text-gray-600">Liên hệ</span>}
+                {item.price !== null ? (
+                  <>
+                    {vnd(item.price)}
+                    <span className="block text-xs font-normal text-gray-600">MMV chưa VAT: {vnd(withoutVat(item.price))}</span>
+                  </>
+                ) : (
+                  <span className="font-normal text-gray-600">Liên hệ</span>
+                )}
               </td>
             </tr>
           ))}
@@ -167,8 +177,9 @@ export default function AccessoriesPage() {
           </section>
 
           <p className="mt-10 text-sm leading-6 text-gray-600">
-            Giá niêm yết phụ kiện chính hãng MMV tham khảo tháng {accessoriesMonth}, có thể thay đổi
-            theo thời điểm và tình trạng hàng. Phụ kiện ghi “Chính hãng MMV” là phụ kiện của
+            Giá phụ kiện chính hãng MMV tham khảo tháng {accessoriesMonth}, đã gồm VAT 8% (trang của
+            Mitsubishi Motors Việt Nam công bố giá bán lẻ chưa gồm VAT), có thể thay đổi theo thời
+            điểm và tình trạng hàng. Phụ kiện ghi “Chính hãng MMV” là phụ kiện của
             Mitsubishi Motors Việt Nam. Các món ghi “Liên hệ” có giá theo gói và chương trình mua
             xe hiện hành.
           </p>
