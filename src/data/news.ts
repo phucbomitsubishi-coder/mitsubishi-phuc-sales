@@ -37,6 +37,79 @@ export type NewsArticle = {
 
 export const newsArticles: NewsArticle[] = [
   {
+    id: "news-1791787200000",
+
+    title: "Mitsubishi Destinator vượt mốc 10.000 xe sau hơn 10 tháng tại Việt Nam",
+
+    slug: "mitsubishi-destinator-vuot-moc-10000-xe-tai-viet-nam",
+
+    category: "Thị trường ô tô",
+
+    excerpt:
+      "Theo công bố của Mitsubishi, Destinator đã vượt 10.000 xe bán ra sau hơn 10 tháng, nhanh hơn Xpander ở giai đoạn đầu. Tổng hợp doanh số qua từng mốc và cách đọc số liệu VAMA.",
+
+    publishedAt: "2026-10-12",
+
+    image: "/images/cars/destinator/gallery/exterior/exterior-01.jpg",
+
+    featured: false,
+
+    content: [
+      {
+        heading: "Hơn 10.000 xe sau hơn 10 tháng mở bán",
+        paragraphs: [
+          "Mitsubishi Motors Việt Nam công bố mẫu SUV 7 chỗ Destinator đã vượt mốc 10.000 xe bàn giao sau hơn 10 tháng có mặt tại Việt Nam. Thông tin được nhiều báo đăng tải đầu tháng 10/2026, trong đó có VOV, Tiền Phong và Autopro.",
+          "Để so sánh, Xpander, mẫu xe chủ lực của Mitsubishi, từng mất khoảng một năm sau khi ra mắt mới đạt hơn 10.000 xe. Như vậy Destinator chạm mốc này sớm hơn khoảng hai tháng.",
+        ],
+      },
+      {
+        heading: "Doanh số qua từng mốc",
+        paragraphs: [
+          "Tuần đầu sau khi công bố: theo VOV, xe nhận hơn 2.000 đơn đặt hàng, khoảng 75% khách chọn bản cao nhất Ultimate.",
+          "Tháng 12/2025, tháng đầu mở bán: 2.377 xe được bàn giao, mức doanh số tháng đầu kỷ lục của Mitsubishi tại Việt Nam theo công bố của hãng.",
+          "Sau khoảng nửa năm: theo Bnews dẫn thông tin từ Mitsubishi, Destinator đạt mốc 7.000 xe.",
+          "Tháng 3/2026: theo số liệu VAMA được Tuổi Trẻ dẫn lại, Destinator bán 1.663 xe, lần đầu dẫn đầu nhóm SUV/crossover cỡ C động cơ xăng, vượt Mazda CX-5. Cùng tháng, Xpander bán 1.763 xe và Xforce 1.050 xe.",
+          "9 tháng đầu năm 2026: theo thống kê của Hiệp hội các nhà sản xuất ô tô Việt Nam (VAMA), Destinator đạt 7.449 xe và nhiều lần nằm trong top 10 xe xăng, dầu bán chạy theo tháng.",
+        ],
+        images: [
+          {
+            src: "/images/cars/destinator/gallery/exterior/exterior-03.jpg",
+            alt: "Mitsubishi Destinator",
+          },
+        ],
+      },
+      {
+        heading: "Vì sao số liệu VAMA và số của hãng khác nhau?",
+        paragraphs: [
+          "Cộng doanh số tháng 12/2025 (2.377 xe) với 9 tháng đầu năm 2026 theo VAMA (7.449 xe) được khoảng 9.826 xe, thấp hơn một chút so với con số hơn 10.000 xe mà hãng công bố.",
+          "Chênh lệch này chủ yếu do thời điểm tính: số VAMA tính đến hết tháng 9, còn con số của hãng tính cho hơn 10 tháng kể từ khi ra mắt, tức đã sang tháng 10. Vì vậy hai con số không mâu thuẫn nhau.",
+        ],
+      },
+      {
+        heading: "Một trong ba mẫu xe chủ lực của Mitsubishi",
+        paragraphs: [
+          "Destinator hiện cùng Xpander và Xforce tạo thành nhóm ba mẫu xe bán chạy của Mitsubishi tại Việt Nam. Theo Tiền Phong dẫn số liệu VAMA, trong 9 tháng đầu năm 2026, ba mẫu này bán tổng cộng 27.401 xe, chiếm khoảng 85% lượng xe Mitsubishi bàn giao.",
+        ],
+      },
+      {
+        heading: "Destinator có gì?",
+        paragraphs: [
+          "Destinator là SUV 7 chỗ 3 hàng ghế, dùng động cơ xăng 1.5L turbo MIVEC công suất 163 PS, mô-men xoắn 250 Nm từ 2.000 vòng/phút, hộp số CVT, khoảng sáng gầm 214 mm và mâm 18 inch. Xe có hai phiên bản Premium và Ultimate, giá niêm yết 780 triệu và 855 triệu đồng, bảo hành 5 năm hoặc 150.000 km.",
+          "Bản Ultimate có thêm âm thanh Yamaha 8 loa, camera 360 độ, kiểm soát hành trình thích ứng, cảnh báo và giảm thiểu va chạm phía trước, cảnh báo lệch làn. Cả hai bản đều có 6 túi khí, cảnh báo điểm mù và cảnh báo phương tiện cắt ngang khi lùi.",
+          "Đang cân nhắc Destinator? Bạn có thể xem bài so sánh Destinator và Toyota Innova Cross tại mục Tư vấn, xem giá lăn bánh và ưu đãi tháng này tại bảng giá xe Mitsubishi, hoặc liên hệ Phúc để đăng ký lái thử tận nhà khu vực Bình Dương.",
+        ],
+      },
+    ],
+
+    source: {
+      name: "Tiền Phong (tham khảo thêm VOV, Autopro, Tuổi Trẻ, Bnews)",
+      url: "https://tienphong.vn/mau-suv-7-cho-pha-ky-luc-cua-mitsubishi-xpander-post1884471.tpo",
+    },
+
+    originalContent: true,
+  },
+
+  {
     id: "news-1790904201775",
 
     title: "Mitsubishi Attrage sắp có bản nâng cấp tại Việt Nam? Mức tiêu thụ nhiên liệu và ưu đãi tháng 10/2026",
