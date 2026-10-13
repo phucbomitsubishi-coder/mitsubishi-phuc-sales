@@ -80,4 +80,12 @@ export const advisoryArticles: AdvisoryArticle[] = [
     href: "/tu-van/so-sanh-xpander-cross-va-suzuki-xl7",
     carIds: ["xpander-cross"],
   },
+  {
+    number: "10",
+    title: "So sánh Xforce và Toyota Yaris Cross",
+    description:
+      "So sánh giá, giá lăn bánh, kích thước, khoảng sáng gầm, động cơ xăng và hybrid, mức tiêu thụ nhiên liệu, trang bị an toàn của hai mẫu SUV cỡ B bán chạy.",
+    href: "/tu-van/so-sanh-xforce-va-yaris-cross",
+    carIds: ["xforce"],
+  },
 ];

@@ -256,4 +256,38 @@ export const competitors = {
       },
     ],
   },
+
+  toyotaYarisCross: {
+    name: "Toyota Yaris Cross",
+    seats: 5,
+    updated: "10/2026",
+    variants: [
+      { name: "1.5 xăng", price: 650_000_000 },
+      { name: "1.5 HEV (hybrid)", price: 728_000_000 },
+    ],
+    specs: {
+      type: "SUV cỡ B, 5 chỗ",
+      dimensions: "4.310 × 1.770 × 1.655 mm",
+      wheelbase: "2.620 mm",
+      groundClearance: "210 mm",
+      engine: "Xăng 1.5L 2NR-VE; bản HEV: 1.5L + mô-tơ điện (hybrid)",
+      power: "105 mã lực / 6.000 vòng/phút; HEV: máy xăng 90 mã lực + mô-tơ 79 mã lực",
+      torque: "138 Nm / 4.200 vòng/phút; HEV: máy xăng 121 Nm + mô-tơ 141 Nm",
+      transmission: "Vô cấp (CVT), cầu trước",
+      drivetrain: "Cầu trước",
+      wheels: "18 inch",
+      fuelConsumption: "5,95 lít/100 km; HEV 3,8 lít/100 km (kết hợp)",
+      airbags: "6",
+    },
+    sources: [
+      {
+        name: "Toyota Việt Nam – Yaris Cross: giá và thông số kỹ thuật từng phiên bản",
+        url: "https://www.toyota.com.vn/yaris-cross",
+      },
+      {
+        name: "Bonbanh – Giá xe Toyota Yaris Cross",
+        url: "https://bonbanh.com/gia-xe-oto-toyota-yaris-cross",
+      },
+    ],
+  },
 } satisfies Record<string, CompetitorCar>;
