@@ -91,13 +91,13 @@ export default function Home() {
                       src={car.image}
                       alt={car.name}
                       fill
-                      sizes="(min-width: 1024px) 400px, (min-width: 768px) 50vw, 100vw"
+                      sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, calc(100vw - 96px)"
                       className="object-contain transition duration-300 group-hover:scale-105"
                     />
                   </div>
                 </div>
 
-                <h3 className="text-2xl font-bold">{car.name}</h3>
+                <h2 className="text-2xl font-bold">{car.name}</h2>
                 <p className="mt-1 text-sm text-gray-600">
                   {[
                     categoryLabel[car.category] ?? car.category,
@@ -153,12 +153,12 @@ export default function Home() {
                   src={car.image}
                   alt={`${car.name} sắp ra mắt tại Việt Nam`}
                   fill
-                  sizes="(min-width: 1024px) 400px, (min-width: 768px) 50vw, 100vw"
+                  sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, calc(100vw - 96px)"
                   className="object-cover"
                 />
               </div>
 
-              <h3 className="text-2xl font-bold">{car.name}</h3>
+              <h2 className="text-2xl font-bold">{car.name}</h2>
               <p className="mt-2 flex-1 text-sm leading-6 text-gray-600">
                 {car.shortDescription}
               </p>

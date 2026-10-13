@@ -508,7 +508,7 @@ const breadcrumbSchema = {
                     <div className="relative aspect-[16/9] bg-gray-100">
                       <Image
                         src={article.image}
-                        alt={article.title}
+                        alt=""
                         fill
                         sizes="(min-width: 1024px) 400px, (min-width: 640px) 50vw, 100vw"
                         className="object-cover transition duration-300 group-hover:scale-105"

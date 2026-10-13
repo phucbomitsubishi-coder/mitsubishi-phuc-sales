@@ -37,6 +37,84 @@ export type NewsArticle = {
 
 export const newsArticles: NewsArticle[] = [
   {
+    id: "news-1791873600000",
+
+    title: "Doanh số Mitsubishi 9 tháng 2026: 31.932 xe, Xpander, Xforce và Destinator cùng vào top 10 xe xăng bán chạy",
+
+    slug: "doanh-so-mitsubishi-9-thang-2026-xpander-xforce-destinator-top-10",
+
+    category: "Thị trường ô tô",
+
+    excerpt:
+      "Mitsubishi bán 31.932 xe trong 9 tháng đầu năm 2026. Xpander, Xforce và Destinator cùng nằm trong top 10 xe động cơ đốt trong bán chạy, riêng tháng 9 Xforce bán gần gấp đôi tháng trước.",
+
+    publishedAt: "2026-10-13",
+
+    image: "/images/cars/xforce/gallery/exterior/exterior-01.jpg",
+
+    featured: false,
+
+    content: [
+      {
+        heading: "31.932 xe sau 9 tháng",
+        paragraphs: [
+          "Theo số liệu được AutoPro và Autonet tổng hợp ngày 13/10/2026, Mitsubishi bán 31.932 xe tại Việt Nam trong 9 tháng đầu năm 2026. AutoPro cho biết con số này tăng 28% so với cùng kỳ năm 2025 (25.009 xe). Riêng tháng 9, theo Autonet, hãng bán 3.890 xe.",
+          "Phần lớn doanh số đến từ ba mẫu xe: Xpander, Xforce và Destinator. Ba mẫu này cộng lại được 27.401 xe, chiếm khoảng 86% lượng xe Mitsubishi bán ra trong 9 tháng.",
+        ],
+      },
+      {
+        heading: "Ba mẫu xe trong top 10 xe xăng, dầu bán chạy 9 tháng",
+        paragraphs: [
+          "Xpander: 10.496 xe (gồm bản nhập khẩu và lắp ráp), trung bình hơn 1.100 xe mỗi tháng, đứng thứ 3 trong nhóm xe động cơ đốt trong, chỉ sau Toyota Yaris Cross (12.646 xe) và Mazda CX-5 (11.893 xe).",
+          "Xforce: 9.456 xe, đứng thứ 5, xếp sau Ford Ranger (9.835 xe).",
+          "Destinator: 7.449 xe, đứng thứ 9. Đây là mẫu SUV 7 chỗ mới mở bán từ cuối năm 2025 và đã vượt mốc 10.000 xe bàn giao theo công bố của hãng.",
+          "Thứ hạng theo bảng tổng hợp lũy kế 9 tháng của AutoPro từ số liệu Hiệp hội các nhà sản xuất ô tô Việt Nam (VAMA). Bảng này chỉ tính xe xăng, dầu và hybrid của các hãng thành viên VAMA, không gồm xe điện.",
+        ],
+        images: [
+          {
+            src: "/images/cars/xpander/gallery/exterior/exterior-01.jpg",
+            alt: "Mitsubishi Xpander",
+          },
+        ],
+      },
+      {
+        heading: "Tháng 9: Xforce tăng gần gấp đôi",
+        paragraphs: [
+          "Xforce bán 1.323 xe trong tháng 9/2026, gần gấp đôi tháng 8 (664 xe), đứng thứ 4 trong top 10 xe xăng, dầu bán chạy của tháng.",
+          "Xpander bán 954 xe, tăng 43% so với tháng 8 (668 xe), đứng thứ 10 của tháng.",
+        ],
+        images: [
+          {
+            src: "/images/cars/xforce/gallery/exterior/exterior-03.jpg",
+            alt: "Mitsubishi Xforce",
+          },
+        ],
+      },
+      {
+        heading: "Đối thủ của các mẫu Mitsubishi cũng nằm trong top 10",
+        paragraphs: [
+          "Nhiều mẫu xe khách hàng hay đặt lên bàn cân với Mitsubishi cũng có mặt trong bảng 9 tháng: Ford Ranger (9.835 xe), Toyota Innova Cross (8.959 xe) và Toyota Veloz Cross. Nếu bạn đang phân vân giữa các mẫu này, có thể tham khảo các bài so sánh Triton và Ranger, Destinator và Innova Cross, Xpander và Veloz Cross, Xforce và Hyundai Creta tại mục Tư vấn.",
+          "Doanh số cao cho thấy mẫu xe được nhiều gia đình lựa chọn, nhưng xe phù hợp nhất vẫn tùy nhu cầu chở người, quãng đường đi lại và ngân sách của bạn. Lái thử trực tiếp là cách chắc chắn nhất để chọn đúng xe.",
+        ],
+      },
+      {
+        heading: "Giá xe và ưu đãi tháng 10",
+        paragraphs: [
+          "Giá niêm yết tháng 10/2026: Xpander từ 568 triệu đồng, Xforce từ 605 triệu đồng, Destinator từ 780 triệu đồng. Cả ba mẫu đều có chương trình ưu đãi của Mitsubishi Motors Việt Nam trong tháng.",
+          "Bạn có thể xem giá lăn bánh và ưu đãi từng phiên bản tại bảng giá xe Mitsubishi trên website, hoặc liên hệ Phúc để nhận báo giá và đăng ký lái thử tận nhà khu vực Bình Dương.",
+        ],
+      },
+    ],
+
+    source: {
+      name: "AutoPro (tham khảo thêm Autonet, số liệu VAMA)",
+      url: "https://autopro.com.vn/mitsubishi-gop-3-10-mau-xe-xang-dau-ban-chay-nhat-3-quy-dau-2026-xpander-ban-hon-1100-xe-thang-destinator-giup-keo-doanh-so-tang-gan-30-17726101306511066.chn",
+    },
+
+    originalContent: true,
+  },
+
+  {
     id: "news-1791787200000",
 
     title: "Mitsubishi Destinator vượt mốc 10.000 xe sau hơn 10 tháng tại Việt Nam",

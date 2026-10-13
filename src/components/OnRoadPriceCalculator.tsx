@@ -117,7 +117,7 @@ export default function OnRoadPriceCalculator({
         Chi phí dự kiến
       </p>
 
-      <h3 className="mt-1 text-2xl font-bold">Dự tính giá lăn bánh</h3>
+      <h2 className="mt-1 text-2xl font-bold">Dự tính giá lăn bánh</h2>
       <p className="mt-1 text-sm text-gray-600">{displayName}</p>
 
       <div className="mt-4 space-y-3">
