@@ -24,8 +24,9 @@ Mục tiêu chính: thu khách hàng tiềm năng (lead) qua báo giá, đăng k
     Trang chủ render `<Suspense fallback={<QuoteForm />}><QuoteFormFromUrl /></Suspense>`. `QuoteFormFromUrl` đọc
     `?car=&variant=&form=&nguon=` bằng `useSearchParams` và tạo lại form khi URL đổi (`key`). Link `/?car=...#bao-gia` vì vậy dùng được `<Link>`.
   - `dang-ky-lai-thu/page.tsx` → hằng số `SCRIPT_URL` được hardcode trong file.
-  - ⚠️ **Cả 2 Apps Script chỉ nhận danh sách nguồn (`source`) cố định**, nguồn lạ bị từ chối và khách không gửi được (lỗi phát hiện 12/10/2026).
-    QuoteForm đổi nguồn qua `toQuoteSource()` trong `src/lib/leadScripts.ts`; thêm `?nguon=` mới thì nhớ thêm vào Apps Script trước rồi mới thêm vào danh sách đó.
+  - **Form báo giá, lái thử và thu cũ đổi mới dùng CHUNG một Apps Script** (cùng URL; `type` "" → sheet "Trang tính1", "test-drive"/"trade-in" → sheet "DangKyLaiThu").
+    Từ 13/10/2026 script nhận mọi `source` dài 1–60 ký tự gồm chữ có dấu, số, khoảng trắng, `_`, `-` (trước đó là danh sách cố định nên nhiều nút bị từ chối).
+    Web kiểm tra cùng quy tắc bằng `toLeadSource()` trong `src/lib/leadScripts.ts`, nên `?nguon=` mới dùng được ngay. Thử script nên gửi bằng Node `fetch` (curl trong Git Bash làm hỏng chữ có dấu).
   - Request gửi `Content-Type: text/plain` (để tránh CORS preflight) và nhận về JSON `{ success, message }`.
 - Không có test. Lệnh kiểm tra: `npm run lint`, `npm run build`.
 - Remote: `github.com/phucbomitsubishi-coder/mitsubishi-phuc-sales`, nhánh `main`. Có lẽ deploy trên Vercel.
@@ -146,7 +147,7 @@ Alias import: `@/` → `src/`.
   phí vận chuyển (miễn phí 10 km, ngoài đó tham khảo 30.000đ/km; các hằng số ở đầu file) và bảng lăn bánh 34 tỉnh (tự tính từ `registrationFees.ts`).
   **Không tạo hàng loạt trang "Mitsubishi <tỉnh>"** (doorway page); chỉ làm trang riêng cho tỉnh nào Search Console cho thấy có nhu cầu thật.
 - **Thu cũ đổi mới** (`/thu-cu-doi-moi`, form `TradeInForm.tsx`): gửi qua script lái thử (`TEST_DRIVE_SCRIPT_URL` trong `src/lib/leadScripts.ts`),
-  gửi `source: "Website"`, `type: "test-drive"` (script chỉ nhận source Website/Hero và type test-drive, xem `src/lib/leadScripts.ts`), nguồn thật và thông tin xe cũ gom vào `note`, `car` = xe Mitsubishi muốn đổi. Pixel Lead "Thu cu doi moi". Có link ở footer, menu mobile, trang /xe-cu.
+  gửi `source: "Thu cũ đổi mới"`, `type: "trade-in"` (email báo về ghi "Thu cũ đổi mới"), thông tin xe cũ gom vào `note`, `car` = xe Mitsubishi muốn đổi. Pixel Lead "Thu cu doi moi". Có link ở footer, menu mobile, trang /xe-cu.
 - **Nút "Báo giá nhanh"** (`QuickQuote.tsx`, gắn trong layout): nổi góc phải mọi trang (ẩn ở /du-toan/gia-lan-banh và các trang có form).
   Chọn xe → phiên bản → tỉnh → lăn bánh đã trừ ưu đãi tháng; nút Zalo chép sẵn tin nhắn (Zalo không cho điền sẵn qua link).
   Dữ liệu xe dựng gọn trong layout.tsx (`quickQuoteCars`) để không đưa cả cars.ts vào bundle client.
