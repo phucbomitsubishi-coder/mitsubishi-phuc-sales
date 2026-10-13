@@ -43,6 +43,7 @@ npm run add-news       # CLI lấy bài viết từ URL → src/data/news.ts (+ 
 npm run price-image    # Tạo ảnh bảng giá tháng 1080×1350 để đăng Facebook → ../anh-facebook/ (chụp bằng Edge)
 npm run promo-images   # Ảnh khuyến mãi từng dòng xe 1080×1350 + file caption/bình luận → ../anh-facebook/khuyen-mai-MM-YYYY/
 npm run sync-accessories # Đồng bộ bảng phụ kiện (CHỈ giá niêm yết của món " – MMV") từ ../bao-gia-xe/phu-kien.js → src/data/accessories.ts (tự sinh, không sửa tay)
+npm run compare-images # Ảnh 1080×1350 + caption cho các bài so sánh → ../anh-facebook/so-sanh/ (thêm bài mới: sửa mảng comparisons trong script; ảnh chỉ đặt câu hỏi trung lập, không số liệu hơn thua; ảnh xe đối thủ CHỈ lấy từ Wikimedia Commons CC BY/BY-SA, lưu ../anh-facebook/so-sanh/doi-thu/<khóa>.jpg + credits.json, ảnh tự in dòng ghi tác giả; ảnh anh Phúc tự chụp để ở ../anh-facebook/so-sanh/anh-tu-chup/<tên mẫu xe>.jpg được ưu tiên, không cần ghi tác giả)
 npm run indexnow       # Báo Bing/IndexNow mọi URL trong sitemap (chạy SAU khi deploy xong; khóa ở public/<key>.txt). Cốc Cốc không còn webmaster tool, tự thu thập theo robots.txt
 npm run ad-images      # Ảnh QUẢNG CÁO Fanpage theo chương trình ĐẠI LÝ (đọc PROMOS/CARS/BHVC từ ../bao-gia-xe/index.html) → ../anh-facebook/quang-cao-MM-YYYY/
 ```

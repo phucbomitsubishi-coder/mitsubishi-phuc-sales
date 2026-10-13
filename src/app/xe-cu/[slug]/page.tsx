@@ -105,6 +105,20 @@ export default async function UsedCarDetailPage({ params }: Props) {
           ? "https://schema.org/InStock"
           : "https://schema.org/OutOfStock",
       url: `https://www.mitsubishiauto.vn/xe-cu/${car.slug}`,
+      // Anh Phúc xác nhận (13/10/2026): không nhận trả xe; nhận xe tại showroom, giao xa thỏa thuận riêng
+      hasMerchantReturnPolicy: {
+        "@type": "MerchantReturnPolicy",
+        applicableCountry: "VN",
+        returnPolicyCategory: "https://schema.org/MerchantReturnNotPermitted",
+      },
+      shippingDetails: {
+        "@type": "OfferShippingDetails",
+        shippingDestination: {
+          "@type": "DefinedRegion",
+          addressCountry: "VN",
+        },
+        doesNotShip: true,
+      },
     },
   };
   return (
