@@ -57,7 +57,7 @@ export default function XpanderVsVelozPage() {
         path="/tu-van/so-sanh-xpander-va-veloz-cross"
         parents={[{ name: "Tư vấn", path: "/tu-van" }]}
         datePublished="2026-10-06"
-        dateModified="2026-10-07"
+        dateModified="2026-10-14"
         hasOgImage
       />
       <SiteHeader />
@@ -129,11 +129,11 @@ export default function XpanderVsVelozPage() {
                 title: "Mitsubishi Xpander (bản AT Premium)",
                 items: [
                   "Màn hình 10 inch, Apple CarPlay và Android Auto, đồng hồ kỹ thuật số 8 inch",
-                  "Ghế và vô-lăng bọc da, điều hòa tự động, cửa gió cho hàng ghế sau",
+                  "Ghế và vô-lăng bọc da, điều hòa chỉnh kỹ thuật số, cửa gió cho hàng ghế sau",
                   "Phanh tay điện tử và Auto Hold, chìa khóa thông minh",
                   "Kiểm soát hành trình (Cruise Control), gạt mưa tự động",
                   "Đèn LED, gương gập điện, mâm 17 inch",
-                  "6 túi khí, camera lùi",
+                  "6 túi khí, camera lùi, cảm biến lùi",
                   "Cân bằng điện tử, kiểm soát vào cua chủ động AYC, hỗ trợ khởi hành ngang dốc",
                 ],
               }}

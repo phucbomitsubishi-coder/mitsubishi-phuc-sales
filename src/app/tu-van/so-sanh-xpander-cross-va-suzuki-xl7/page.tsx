@@ -57,7 +57,7 @@ export default function XpanderCrossVsXL7Page() {
         path="/tu-van/so-sanh-xpander-cross-va-suzuki-xl7"
         parents={[{ name: "Tư vấn", path: "/tu-van" }]}
         datePublished="2026-10-12"
-        dateModified="2026-10-12"
+        dateModified="2026-10-14"
         hasOgImage
       />
       <SiteHeader />
@@ -134,7 +134,7 @@ export default function XpanderCrossVsXL7Page() {
                   "Kiểm soát hành trình (Cruise Control), gạt mưa và đèn tự động",
                   "Ghế da, cửa gió điều hòa cho hàng ghế sau",
                   "Đèn LED, đèn sương mù LED, mâm 17 inch",
-                  "6 túi khí, camera lùi",
+                  "6 túi khí, camera lùi, cảm biến lùi",
                   "Cân bằng điện tử, kiểm soát lực kéo, kiểm soát vào cua chủ động AYC",
                 ],
               }}

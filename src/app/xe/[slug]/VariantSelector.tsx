@@ -6,6 +6,7 @@ import type { CarVariant } from "@/data/cars";
 import type { VariantPromotion } from "@/data/promotions";
 import OnRoadPriceCalculator from "@/components/OnRoadPriceCalculator";
 import Link from "next/link";
+import SpecSheet from "./SpecSheet";
 
 type Props = {
   carName: string;
@@ -125,10 +126,18 @@ export default function VariantSelector({
 }: Props) {
   const [selectedIndex, setSelectedIndex] = useState(0);
 const [selectedColor, setSelectedColor] = useState("");
-const [isSpecsOpen, setIsSpecsOpen] = useState(false);
 const [isSafetyInfoOpen, setIsSafetyInfoOpen] = useState(false);
 const [isBasicSafetyOpen, setIsBasicSafetyOpen] = useState(false);
   const selectedVariant = variants[selectedIndex];
+
+  // Dùng chung cho thẻ phiên bản và tiêu đề cột trong bảng thông số
+  const selectVariant = (index: number) => {
+    setSelectedIndex(index);
+    const nextVariant = variants[index];
+    if (selectedColor && !nextVariant.colors?.includes(selectedColor)) {
+      setSelectedColor(nextVariant.colors?.[0] ?? "");
+    }
+  };
 
   if (!selectedVariant) {
     return null;
@@ -187,18 +196,7 @@ const selectedImage =
             <button
               key={variant.name}
               type="button"
-              onClick={() => {
-  setSelectedIndex(index);
-
-  const nextVariant = variants[index];
-
-  if (
-    selectedColor &&
-    !nextVariant.colors?.includes(selectedColor)
-  ) {
-    setSelectedColor(nextVariant.colors?.[0] ?? "");
-  }
-}}
+              onClick={() => selectVariant(index)}
               className={`rounded-xl border p-4 text-left transition ${
                 selectedIndex === index
                   ? "border-red-600 bg-red-50 shadow-md"
@@ -300,201 +298,11 @@ const selectedImage =
     </div>
   )}
 
-<button
-  type="button"
-  onClick={() => setIsSpecsOpen(!isSpecsOpen)}
-  className="mt-5 flex w-full items-center justify-between border-y border-gray-300 py-4 text-left"
->
-  <span className="text-lg font-bold uppercase">
-    Thông số kỹ thuật
-  </span>
-
-  <span
-    className={`text-xl transition-transform duration-300 ${
-      isSpecsOpen ? "rotate-180" : ""
-    }`}
-  >
-    ▼
-  </span>
-</button>
-{isSpecsOpen && (
-  <>
-           {/* ĐỘNG CƠ & VẬN HÀNH */}
-<div className="col-span-full">
-  <div className="border-b border-gray-300 pb-3">
-    <p className="text-lg font-bold uppercase text-gray-900">
-      Động cơ & Vận hành
-    </p>
-  </div>
-
-  <div className="mt-5 grid gap-x-6 gap-y-3 sm:grid-cols-2 lg:grid-cols-3">
-    {selectedVariant.specifications?.engine && (
-      <div>
-        <p className="mb-2 text-sm text-gray-700">
-          Động cơ
-        </p>
-        <div className="flex min-h-[44px] items-center justify-center bg-gray-100 px-4 py-3 text-center font-semibold">
-          {selectedVariant.specifications.engine}
-        </div>
-      </div>
-    )}
-
-    {selectedVariant.specifications?.displacement && (
-      <div>
-        <p className="mb-2 text-sm text-gray-700">
-          Dung tích động cơ
-        </p>
-        <div className="flex min-h-[44px] items-center justify-center bg-gray-100 px-4 py-3 text-center font-semibold">
-          {selectedVariant.specifications.displacement}
-        </div>
-      </div>
-    )}
-
-    {selectedVariant.specifications?.power && (
-      <div>
-        <p className="mb-2 text-sm text-gray-700">
-          Công suất
-        </p>
-        <div className="flex min-h-[44px] items-center justify-center bg-gray-100 px-4 py-3 text-center font-semibold">
-          {selectedVariant.specifications.power}
-        </div>
-      </div>
-    )}
-
-    {selectedVariant.specifications?.torque && (
-      <div>
-        <p className="mb-2 text-sm text-gray-700">
-          Mô-men xoắn
-        </p>
-        <div className="flex min-h-[44px] items-center justify-center bg-gray-100 px-4 py-3 text-center font-semibold">
-          {selectedVariant.specifications.torque}
-        </div>
-      </div>
-    )}
-
-    {selectedVariant.specifications?.fuel && (
-      <div>
-        <p className="mb-2 text-sm text-gray-700">
-          Nhiên liệu
-        </p>
-        <div className="flex min-h-[44px] items-center justify-center bg-gray-100 px-4 py-3 text-center font-semibold">
-          {selectedVariant.specifications.fuel}
-        </div>
-      </div>
-    )}
-  </div>
-</div>
-              {/* TRUYỀN ĐỘNG & KHẢ NĂNG CHỞ */}
-<div className="col-span-full mt-5">
-  <div className="border-b border-gray-300 pb-3">
-    <p className="text-lg font-bold uppercase text-gray-900">
-      Truyền động & Khả năng chở
-    </p>
-  </div>
-
-  <div className="mt-5 grid gap-x-6 gap-y-5 sm:grid-cols-2 lg:grid-cols-3">
-    {selectedVariant.specifications?.transmission && (
-      <div>
-        <p className="mb-2 text-sm text-gray-700">
-          Hộp số
-        </p>
-        <div className="flex min-h-[44px] items-center justify-center bg-gray-100 px-4 py-3 text-center font-semibold">
-          {selectedVariant.specifications.transmission}
-        </div>
-      </div>
-    )}
-
-    {selectedVariant.specifications?.drivetrain && (
-      <div>
-        <p className="mb-2 text-sm text-gray-700">
-          Dẫn động
-        </p>
-        <div className="flex min-h-[44px] items-center justify-center bg-gray-100 px-4 py-3 text-center font-semibold">
-          {selectedVariant.specifications.drivetrain}
-        </div>
-      </div>
-    )}
-
-    {selectedVariant.specifications?.seats && (
-      <div>
-        <p className="mb-2 text-sm text-gray-700">
-          Số chỗ
-        </p>
-        <div className="flex min-h-[44px] items-center justify-center bg-gray-100 px-4 py-3 text-center font-semibold">
-          {selectedVariant.specifications.seats} chỗ
-        </div>
-      </div>
-    )}
-  </div>
-</div>
-
-{/* KÍCH THƯỚC & KHUNG XE */}
-<div className="col-span-full mt-5">
-  <div className="border-b border-gray-300 pb-3">
-    <p className="text-lg font-bold uppercase text-gray-900">
-      Kích thước & Khung xe
-    </p>
-  </div>
-
-  <div className="mt-5 grid gap-x-6 gap-y-5 sm:grid-cols-2 lg:grid-cols-3">
-    {selectedVariant.specifications?.dimensions && (
-      <div>
-        <p className="mb-2 text-sm text-gray-700">
-          Kích thước D × R × C
-        </p>
-        <div className="flex min-h-[44px] items-center justify-center bg-gray-100 px-4 py-3 text-center font-semibold">
-          {selectedVariant.specifications.dimensions}
-        </div>
-      </div>
-    )}
-
-    {selectedVariant.specifications?.wheelbase && (
-      <div>
-        <p className="mb-2 text-sm text-gray-700">
-          Chiều dài cơ sở
-        </p>
-        <div className="flex min-h-[44px] items-center justify-center bg-gray-100 px-4 py-3 text-center font-semibold">
-          {selectedVariant.specifications.wheelbase}
-        </div>
-      </div>
-    )}
-
-    {selectedVariant.specifications?.groundClearance && (
-      <div>
-        <p className="mb-2 text-sm text-gray-700">
-          Khoảng sáng gầm
-        </p>
-        <div className="flex min-h-[44px] items-center justify-center bg-gray-100 px-4 py-3 text-center font-semibold">
-          {selectedVariant.specifications.groundClearance}
-        </div>
-      </div>
-    )}
-
-    {selectedVariant.specifications?.fuelTank && (
-      <div>
-        <p className="mb-2 text-sm text-gray-700">
-          Dung tích bình nhiên liệu
-        </p>
-        <div className="flex min-h-[44px] items-center justify-center bg-gray-100 px-4 py-3 text-center font-semibold">
-          {selectedVariant.specifications.fuelTank}
-        </div>
-      </div>
-    )}
-
-    {selectedVariant.specifications?.wheels && (
-      <div>
-        <p className="mb-2 text-sm text-gray-700">
-          Mâm / Lốp
-        </p>
-        <div className="flex min-h-[44px] items-center justify-center bg-gray-100 px-4 py-3 text-center font-semibold">
-          {selectedVariant.specifications.wheels}
-        </div>
-      </div>
-    )}
-  </div>
-</div>
-            </>
-            )}
+<SpecSheet
+  variants={variants}
+  selectedIndex={selectedIndex}
+  onSelect={selectVariant}
+/>
 
             <div className="mt-8 grid items-start gap-8 lg:grid-cols-[1fr_480px]">
   <div>

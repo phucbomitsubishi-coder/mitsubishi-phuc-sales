@@ -14,7 +14,7 @@ export default function NotFound() {
     <>
       <SiteHeader />
 
-      <section className="bg-white">
+      <main className="bg-white">
         <div className="mx-auto max-w-3xl px-6 py-20 text-center md:py-28">
           <p className="text-sm font-bold uppercase tracking-wider text-red-600">
             Lỗi 404
@@ -77,7 +77,7 @@ export default function NotFound() {
             </div>
           </div>
         </div>
-      </section>
+      </main>
     </>
   );
 }

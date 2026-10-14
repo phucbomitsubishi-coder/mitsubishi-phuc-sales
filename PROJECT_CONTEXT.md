@@ -157,6 +157,9 @@ Alias import: `@/` → `src/`.
   Trang chủ có khối "Dịch vụ & công cụ" (mảng `serviceLinks` trong `src/app/page.tsx`, sau phần Khuyến mãi). Thêm trang tiện ích mới thì thêm vào cả hai chỗ và `MobileMenu`.
 - **Phụ kiện** (`/phu-kien-xe-mitsubishi`): đọc `src/data/accessories.ts` (`npm run sync-accessories`). Tên có đuôi " – MMV" hiện nhãn "Chính hãng MMV" và là món **duy nhất có giá**; món khác `price: null`, hiện "Liên hệ" (anh Phúc chọn 12/10/2026, script sync bỏ giá ngay từ đầu). Bảng theo dòng xe dạng `<details>` thu gọn, có nút Zalo. Trong mỗi nhóm, phụ kiện chia thành loại nhỏ (camera hành trình, màn hình, lót sàn...) bằng quy tắc theo tên trong `src/lib/accessoryCategories.ts`; app thêm loại phụ kiện mới không khớp quy tắc thì rơi vào "Phụ kiện khác", nên thêm quy tắc. Giá hiện đã gồm VAT 8%, kèm dòng "MMV chưa VAT" (giá ÷ 1,08, khớp trang MMV).
   Trang `/ho-tro/phu-tung-chinh-hang` vẫn noindex.
+- **Thông số kỹ thuật trang xe** (`src/app/xe/[slug]/SpecSheet.tsx`): 6 ô thông số nổi bật của phiên bản đang chọn + bảng đầy đủ trong `<details>` (vẫn có trong HTML cho SEO), so sánh mọi phiên bản theo cột,
+  thông số giống nhau gộp 1 ô, tùy chọn "Chỉ xem điểm khác nhau", bấm tên cột để đổi phiên bản. Nhóm và thứ tự dòng theo bảng MMV (mảng `groups`); dòng nào không xe nào có dữ liệu thì tự ẩn.
+  Dữ liệu ở `specifications` của từng phiên bản trong `cars.ts` (đã đối chiếu trang MMV 14/10/2026, gồm khoảng cách bánh, treo, phanh, trợ lực lái, khóa vi sai, tiêu hao nhiên liệu). Trên điện thoại bảng vuốt ngang, cột tên thông số và chữ ô gộp dính mép trái (`sticky`).
 - **Trả góp** (`InstallmentCalculator.tsx`): chọn trả trước 20–70%, thời hạn 1–8 năm, nhập lãi suất năm đầu.
 - **Trang Giới thiệu** (`src/app/gioi-thieu/page.tsx`) tập trung vào người tư vấn. Thứ tự các phần: hero có ảnh chân dung,
   số liệu (năm kinh nghiệm, số xe, 24/7) và điểm Google 5,0 (635) **của showroom** (luôn ghi rõ tên showroom, không phải đánh giá cá nhân) → 4 lý do (lấy từ nhận xét thật của khách) →
@@ -231,6 +234,7 @@ Alias import: `@/` → `src/`.
     Contact khi bấm link `tel:`/`zalo.me` (bắt bằng click toàn trang, nên link gọi/Zalo mới tự được đếm), Lead khi QuoteForm hoặc form lái thử gửi thành công (`trackPixel` trong `src/lib/metaPixel.ts`).
     Không gửi họ tên/SĐT cho Meta. Kiểm tra bằng Edge headless phải đặt user agent thường (UA "HeadlessEdg" bị Meta bỏ qua, không gửi /tr).
   - Không dùng schema `aggregateRating`/`Review` cho chính mình (Google cấm đánh giá tự đăng). Điểm 5,0 (635) chỉ hiển thị dạng chữ.
+- **Mỗi trang tự bọc nội dung trong `<main>`** (layout chỉ dùng `<div className="flex-1">`). Trang mới phải có đúng 1 `<main>`, không lồng nhau (axe: landmark-no-duplicate-main).
 - Không có dark mode. Website luôn dùng nền trắng.
 - **Độ tương phản chữ nhỏ** (WCAG 4,5:1, đã đạt 0 lỗi trên toàn site):
   - Trên nền trắng/xám nhạt/hồng nhạt (`bg-gray-50/100`, `bg-red-50`): chữ xám dùng `text-gray-600` trở lên, chữ đỏ dùng `text-red-700`.

@@ -21,7 +21,6 @@ const { siteConfig } = await import(pathToFileURL(path.join(root, "src/config/si
 
 const siteUrl = siteConfig.url ?? "https://www.mitsubishiauto.vn";
 const phone = siteConfig.sales?.phoneDisplay ?? "";
-const fileUrl = (publicPath) => pathToFileURL(path.join(root, "public", publicPath)).href;
 const escapeHtml = (text) =>
   String(text).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
 
@@ -50,16 +49,6 @@ const rivalDir = path.resolve(root, "..", "anh-facebook", "so-sanh", "doi-thu");
 const creditsFile = path.join(rivalDir, "credits.json");
 const credits = fs.existsSync(creditsFile) ? JSON.parse(fs.readFileSync(creditsFile, "utf8")) : {};
 
-// Vị trí cắt ảnh xe đối thủ trong khung bên phải (ảnh ngang, giữ chiều cao)
-const rivalPositions = {
-  toyotaYarisCross: "40% center",
-  toyotaInnovaCross: "45% center",
-  hyundaiCreta: "60% center",
-  fordRanger: "55% center",
-  toyotaVelozCross: "45% center",
-  suzukiXL7: "60% center",
-  toyotaVios: "30% center",
-};
 
 // Ảnh anh Phúc tự chụp xe đối thủ: ../anh-facebook/so-sanh/anh-tu-chup/<tên xe>.jpg|.jpeg|.png
 // Tên file chỉ cần chứa tên mẫu xe, không phân biệt hoa thường, ví dụ "Yaris Cross.jpg", "ranger 2.png".
@@ -79,7 +68,6 @@ function findOwnPhoto(rivalName) {
 const topics = ["Giá lăn bánh", "Kích thước, gầm xe", "Động cơ, mức tiêu thụ", "Trang bị an toàn"];
 
 function renderHtml(item) {
-  const photo = photos[item.car.id];
   const leftSrc = item.leftSrc;
   const [rivalBrand, ...rivalRest] = item.rival.name.split(" ");
   const rivalModel = rivalRest.join(" ").replace(/\s*Hybrid$/, "");
