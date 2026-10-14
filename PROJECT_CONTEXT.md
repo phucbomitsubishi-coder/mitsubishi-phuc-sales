@@ -160,6 +160,7 @@ Alias import: `@/` → `src/`.
 - **Thông số kỹ thuật trang xe** (`src/app/xe/[slug]/SpecSheet.tsx`): 6 ô thông số nổi bật của phiên bản đang chọn + bảng đầy đủ trong `<details>` (vẫn có trong HTML cho SEO), so sánh mọi phiên bản theo cột,
   thông số giống nhau gộp 1 ô, tùy chọn "Chỉ xem điểm khác nhau", bấm tên cột để đổi phiên bản. Nhóm và thứ tự dòng theo bảng MMV (mảng `groups`); dòng nào không xe nào có dữ liệu thì tự ẩn.
   Dữ liệu ở `specifications` của từng phiên bản trong `cars.ts` (đã đối chiếu trang MMV 14/10/2026, gồm khoảng cách bánh, treo, phanh, trợ lực lái, khóa vi sai, tiêu hao nhiên liệu). Trên điện thoại bảng vuốt ngang, cột tên thông số và chữ ô gộp dính mép trái (`sticky`).
+- **Trang bị phiên bản** (`src/app/xe/[slug]/EquipmentList.tsx`): mỗi nhóm `equipment` (ngoại thất, nội thất, tiện nghi, an toàn, vận hành và hỗ trợ lái), "Hệ thống an toàn" và "Diamond Sense" (`safetyTechnologies`, kèm giải thích) là một `<details>` thu gọn có số đếm.
 - **Trả góp** (`InstallmentCalculator.tsx`): chọn trả trước 20–70%, thời hạn 1–8 năm, nhập lãi suất năm đầu.
 - **Trang Giới thiệu** (`src/app/gioi-thieu/page.tsx`) tập trung vào người tư vấn. Thứ tự các phần: hero có ảnh chân dung,
   số liệu (năm kinh nghiệm, số xe, 24/7) và điểm Google 5,0 (635) **của showroom** (luôn ghi rõ tên showroom, không phải đánh giá cá nhân) → 4 lý do (lấy từ nhận xét thật của khách) →

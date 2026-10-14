@@ -7,6 +7,7 @@ import type { VariantPromotion } from "@/data/promotions";
 import OnRoadPriceCalculator from "@/components/OnRoadPriceCalculator";
 import Link from "next/link";
 import SpecSheet from "./SpecSheet";
+import EquipmentList from "./EquipmentList";
 
 type Props = {
   carName: string;
@@ -126,8 +127,6 @@ export default function VariantSelector({
 }: Props) {
   const [selectedIndex, setSelectedIndex] = useState(0);
 const [selectedColor, setSelectedColor] = useState("");
-const [isSafetyInfoOpen, setIsSafetyInfoOpen] = useState(false);
-const [isBasicSafetyOpen, setIsBasicSafetyOpen] = useState(false);
   const selectedVariant = variants[selectedIndex];
 
   // Dùng chung cho thẻ phiên bản và tiêu đề cột trong bảng thông số
@@ -306,217 +305,14 @@ const selectedImage =
 
             <div className="mt-8 grid items-start gap-8 lg:grid-cols-[1fr_480px]">
   <div>
-    {selectedVariant.equipment && (
-  <div>
-    <p className="text-sm font-semibold uppercase tracking-wide text-red-600">
-      Trang bị phiên bản
-    </p>
-
-    <h4 className="mt-2 text-2xl font-bold">
-  {selectedVariant.name === carName.replace("Mitsubishi ", "")
-    ? carName
-    : `${carName} ${selectedVariant.name}`}
-</h4>
-
-    <div className="mt-5 grid gap-5 sm:grid-cols-2">
-      {selectedVariant.equipment.exterior &&
-        selectedVariant.equipment.exterior.length > 0 && (
-          <div>
-            <p className="font-bold text-gray-900">
-              Ngoại thất
-            </p>
-
-            <div className="mt-2 space-y-2">
-              {selectedVariant.equipment.exterior.map((item) => (
-                <p key={item} className="text-sm leading-6 text-gray-600">
-                  ✓ {item}
-                </p>
-              ))}
-            </div>
-          </div>
-        )}
-
-      {selectedVariant.equipment.interior &&
-        selectedVariant.equipment.interior.length > 0 && (
-          <div>
-            <p className="font-bold text-gray-900">
-              Nội thất
-            </p>
-
-            <div className="mt-2 space-y-2">
-              {selectedVariant.equipment.interior.map((item) => (
-                <p key={item} className="text-sm leading-6 text-gray-600">
-                  ✓ {item}
-                </p>
-              ))}
-            </div>
-          </div>
-        )}
-
-      {selectedVariant.equipment.convenience &&
-        selectedVariant.equipment.convenience.length > 0 && (
-          <div>
-            <p className="font-bold text-gray-900">
-              Tiện nghi
-            </p>
-
-            <div className="mt-2 space-y-2">
-              {selectedVariant.equipment.convenience.map((item) => (
-                <p key={item} className="text-sm leading-6 text-gray-600">
-                  ✓ {item}
-                </p>
-              ))}
-            </div>
-          </div>
-        )}
-
-      {selectedVariant.equipment.safety &&
-        selectedVariant.equipment.safety.length > 0 && (
-          <div>
-            <p className="font-bold text-gray-900">
-              An toàn
-            </p>
-
-            <div className="mt-2 space-y-2">
-              {selectedVariant.equipment.safety.map((item) => (
-                <p key={item} className="text-sm leading-6 text-gray-600">
-                  ✓ {item}
-                </p>
-              ))}
-            </div>
-          </div>
-        )}
-    </div>
-  </div>
-)}
-
-{selectedVariant.safetyTechnologies &&
-  selectedVariant.safetyTechnologies.length > 0 && (
-    <div className="mt-6">
-      <p className="text-sm font-semibold uppercase tracking-wide text-red-600">
-        An toàn & hỗ trợ lái
-      </p>
-
-      <div className="mt-3 grid gap-x-4 gap-y-2 lg:grid-cols-2">
-        {selectedVariant.safetyTechnologies
-  .filter((technology) => technology.group !== "Diamond Sense")
-  .map((technology) => (
-          <div
-            key={technology.code}
-            className="flex items-start gap-2 text-sm"
-          >
-            <span className="min-w-12 font-bold text-gray-900">
-              {technology.code}
-            </span>
-
-           <span className="leading-5 text-gray-600">
-  {technology.name}
-</span>
-          </div>
-                ))}
-      </div>
-
-      <button
-        type="button"
-        onClick={() => setIsBasicSafetyOpen(!isBasicSafetyOpen)}
-        className="mt-4 text-sm font-semibold text-red-600 hover:text-red-700"
-      >
-        {isBasicSafetyOpen
-          ? "Thu gọn hệ thống an toàn ↑"
-          : "Giải thích các hệ thống an toàn ↓"}
-      </button>
-
-      {isBasicSafetyOpen && (
-  <div className="mt-4 space-y-3 rounded-xl border border-gray-200 bg-white p-4">
-    {selectedVariant.safetyTechnologies
-      .filter(
-        (technology) => technology.group !== "Diamond Sense"
-      )
-      .map((technology) => (
-        <div key={technology.code}>
-          <p className="text-sm font-bold text-gray-900">
-            <span className="mr-2 text-red-600">
-              {technology.code}
-            </span>
-            {technology.name}
-          </p>
-
-          <p className="mt-1 text-sm leading-6 text-gray-600">
-            {technology.description}
-          </p>
-        </div>
-      ))}
-  </div>
-)}
-
-    </div>
-  )}
-
-  {selectedVariant.safetyTechnologies?.some(
-  (technology) => technology.group === "Diamond Sense"
-) && (
-  <div className="mt-6">
-    <p className="text-sm font-semibold uppercase tracking-wide text-red-600">
-      Diamond Sense
-    </p>
-
-    <p className="mt-1 text-sm text-gray-500">
-      Hệ thống an toàn chủ động thông minh
-    </p>
-
-    <div className="mt-3 grid gap-x-5 gap-y-2 sm:grid-cols-2">
-      {selectedVariant.safetyTechnologies
-        .filter(
-          (technology) => technology.group === "Diamond Sense"
-        )
-        .map((technology) => (
-          <div
-            key={technology.code}
-            className="flex items-start gap-2 text-sm"
-          >
-            <span className="min-w-12 font-bold text-red-600">
-              {technology.code}
-            </span>
-
-            <span className="leading-5 text-gray-600">
-              {technology.name}
-            </span>
-          </div>
-        ))}
-    </div>
-    <button
-  type="button"
-  onClick={() => setIsSafetyInfoOpen(!isSafetyInfoOpen)}
-  className="mt-4 text-sm font-semibold text-red-600 hover:text-red-700"
->
-  {isSafetyInfoOpen
-    ? "Thu gọn Diamond Sense ↑"
-: "Tìm hiểu Diamond Sense ↓"}
-</button>
-{isSafetyInfoOpen && (
-  <div className="mt-4 space-y-3 rounded-xl border border-gray-200 bg-white p-4">
-    {selectedVariant.safetyTechnologies
-      ?.filter(
-        (technology) => technology.group === "Diamond Sense"
-      )
-      .map((technology) => (
-        <div key={technology.code}>
-          <p className="text-sm font-bold text-gray-900">
-            <span className="mr-2 text-red-600">
-              {technology.code}
-            </span>
-            {technology.name}
-          </p>
-
-          <p className="mt-1 text-sm leading-6 text-gray-600">
-            {technology.description}
-          </p>
-        </div>
-      ))}
-  </div>
-)}
-  </div>
-)}
+    <EquipmentList
+      title={
+        selectedVariant.name === carName.replace("Mitsubishi ", "")
+          ? carName
+          : `${carName} ${selectedVariant.name}`
+      }
+      variant={selectedVariant}
+    />
 
     <Link
       href={`/?car=${encodeURIComponent(
