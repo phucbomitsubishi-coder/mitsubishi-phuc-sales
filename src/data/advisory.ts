@@ -88,4 +88,28 @@ export const advisoryArticles: AdvisoryArticle[] = [
     href: "/tu-van/so-sanh-xforce-va-yaris-cross",
     carIds: ["xforce"],
   },
+  {
+    number: "11",
+    title: "So sánh Triton và Toyota Hilux",
+    description:
+      "So sánh giá, giá lăn bánh, khoảng sáng gầm, động cơ dầu 2.4L và 2.8L, hộp số, hệ dẫn động 4WD và trang bị an toàn của hai mẫu bán tải Nhật.",
+    href: "/tu-van/so-sanh-triton-va-toyota-hilux",
+    carIds: ["triton"],
+  },
+  {
+    number: "12",
+    title: "So sánh Xpander và Toyota Avanza Premio",
+    description:
+      "So sánh giá, giá lăn bánh, kích thước, khoảng sáng gầm, hộp số và trang bị an toàn từng phiên bản của hai mẫu MPV 7 chỗ giá dưới 700 triệu.",
+    href: "/tu-van/so-sanh-xpander-va-toyota-avanza-premio",
+    carIds: ["xpander"],
+  },
+  {
+    number: "13",
+    title: "So sánh Attrage và Hyundai Accent",
+    description:
+      "So sánh giá, giá lăn bánh, kích thước, động cơ, hộp số và trang bị từng phiên bản của hai mẫu sedan hạng B cho người mua xe lần đầu.",
+    href: "/tu-van/so-sanh-attrage-va-hyundai-accent",
+    carIds: ["attrage"],
+  },
 ];

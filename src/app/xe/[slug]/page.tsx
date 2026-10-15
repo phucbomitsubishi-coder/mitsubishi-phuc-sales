@@ -7,7 +7,7 @@ import type { Metadata } from "next";
 import BackToPrevious from "@/components/BackToPrevious";
 import MobileContactBar from "@/components/MobileContactBar";
 import CarGallery from "./CarGallery";
-import { currentPromotion } from "@/data/promotions";
+import { currentPromotion, getMaxPromotionValue } from "@/data/promotions";
 import Link from "next/link";
 import Image from "next/image";
 import PromotionTabs from "@/components/PromotionTabs";
@@ -33,6 +33,16 @@ export function generateStaticParams() {
   }));
 }
 
+// Cụm từ khách hay tìm cho từng xe (Search Console: "mitsubishi 5 chỗ gầm cao"...)
+const carSeoTags: Record<string, string> = {
+  xforce: "SUV 5 chỗ gầm cao 222 mm",
+  xpander: "MPV 7 chỗ gia đình",
+  "xpander-cross": "MPV 7 chỗ phong cách SUV, gầm cao 225 mm",
+  destinator: "SUV 7 chỗ động cơ turbo",
+  triton: "bán tải 5 chỗ máy dầu",
+  attrage: "sedan 5 chỗ tiết kiệm xăng",
+};
+
 export async function generateMetadata({
   params,
 }: CarDetailPageProps): Promise<Metadata> {
@@ -45,17 +55,30 @@ export async function generateMetadata({
     };
   }
 
+  // Tiêu đề, mô tả tự đổi theo tháng của currentPromotion (khách hay tìm "giá xe ... tháng", "lăn bánh")
+  const title = `Giá xe ${car.name} tháng ${promotionMonthLabel}: lăn bánh, ưu đãi | Lưu Hoàng Phúc`;
+  const prices = car.variants.map((variant) => variant.price).filter((price) => price > 0);
+  const maxPromotion = getMaxPromotionValue(car.id);
+  const description = [
+    `${car.name} ${carSeoTags[car.id] ?? car.category}`,
+    prices.length > 0 && `: giá niêm yết từ ${formatMillion(Math.min(...prices))} đồng`,
+    maxPromotion > 0 && `, ưu đãi tháng ${promotionMonthLabel} đến ${formatMillion(maxPromotion)} đồng`,
+    ". Xem giá lăn bánh, thông số và trang bị từng phiên bản. Tư vấn: Lưu Hoàng Phúc, Mitsubishi Moveo New City.",
+  ]
+    .filter(Boolean)
+    .join("");
+
   return {
-    title: `${car.name} | Giá xe & ưu đãi | Lưu Hoàng Phúc`,
-    description: `${car.name} tại Bình Dương. Xem giá xe, phiên bản, thông số kỹ thuật và ưu đãi mới. Liên hệ Lưu Hoàng Phúc để nhận báo giá và tư vấn.`,
+    title,
+    description,
     alternates: {
       canonical: `/xe/${slug}`,
     },
     openGraph: {
       type: "website",
       url: `/xe/${slug}`,
-      title: `${car.name} | Giá xe & ưu đãi | Lưu Hoàng Phúc`,
-      description: `${car.name} tại Bình Dương. Xem giá xe, phiên bản, thông số kỹ thuật và ưu đãi mới. Liên hệ Lưu Hoàng Phúc để nhận báo giá và tư vấn.`,
+      title,
+      description,
       images: [
         {
           url: car.image,
@@ -65,8 +88,8 @@ export async function generateMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      title: `${car.name} | Giá xe & ưu đãi | Lưu Hoàng Phúc`,
-      description: `${car.name} tại Bình Dương. Xem giá xe, phiên bản, thông số kỹ thuật và ưu đãi mới. Liên hệ Lưu Hoàng Phúc để nhận báo giá và tư vấn.`,
+      title,
+      description,
       images: [car.image],
     },
   };
@@ -312,7 +335,7 @@ const breadcrumbSchema = {
   ) : car.id === "xforce" ? (
     <>
       <p>✓ Dynamic Shield thế hệ mới</p>
-      <p>✓ Khoảng sáng gầm lên đến 222 mm</p>
+      <p>✓ SUV 5 chỗ gầm cao, khoảng sáng gầm lên đến 222 mm</p>
       <p>✓ 4 chế độ lái</p>
       <p>✓ Màn hình lên đến 12,3 inch</p>
       <p>✓ Hệ thống an toàn Diamond Sense</p>

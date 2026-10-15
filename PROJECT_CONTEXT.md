@@ -137,7 +137,7 @@ Alias import: `@/` → `src/`.
 - **Bài tư vấn** (`/tu-van/...`): danh sách nằm ở `src/data/advisory.ts`, dùng chung cho trang `/tu-van`, khối "Tư vấn chọn xe"
   trên `/tin-tuc` và trang xe (bài có `carIds` chứa id xe hiện ở mục "So sánh và tư vấn" của trang xe đó).
   Thêm bài mới: tạo trang, thêm vào `advisory.ts` và `sitemap.ts`. `/tu-van` có link ở footer và menu mobile.
-- **Bài so sánh với xe đối thủ** (`/tu-van/so-sanh-...`: Xforce–Creta, Xpander–Veloz Cross, Triton–Ranger, Attrage–Vios, Destinator–Innova Cross, Xpander Cross–XL7, Xforce–Yaris Cross):
+- **Bài so sánh với xe đối thủ** (`/tu-van/so-sanh-...`: Xforce–Creta, Xpander–Veloz Cross, Triton–Ranger, Attrage–Vios, Destinator–Innova Cross, Xpander Cross–XL7, Xforce–Yaris Cross, Triton–Hilux, Xpander–Avanza Premio, Attrage–Accent):
   giá, thông số và nguồn của xe đối thủ nằm ở `src/data/competitors.ts` (có `updated` = tháng của giá; khi hãng đổi giá chỉ sửa ở đó).
   Giao diện dùng chung trong `src/components/CarComparison.tsx` (bảng giá + lăn bánh, bảng thông số, 2 cột danh sách, CTA, nguồn);
   phần nhận xét viết riêng trong từng trang. Xe bán tải đối thủ có `isPickup: true` để tính trước bạ 60% như Triton.
@@ -161,6 +161,7 @@ Alias import: `@/` → `src/`.
   thông số giống nhau gộp 1 ô, tùy chọn "Chỉ xem điểm khác nhau", bấm tên cột để đổi phiên bản. Nhóm và thứ tự dòng theo bảng MMV (mảng `groups`); dòng nào không xe nào có dữ liệu thì tự ẩn.
   Dữ liệu ở `specifications` của từng phiên bản trong `cars.ts` (đã đối chiếu trang MMV 14/10/2026, gồm khoảng cách bánh, treo, phanh, trợ lực lái, khóa vi sai, tiêu hao nhiên liệu). Trên điện thoại bảng vuốt ngang, cột tên thông số và chữ ô gộp dính mép trái (`sticky`).
 - **Trang bị phiên bản** (`src/app/xe/[slug]/EquipmentList.tsx`): mỗi nhóm `equipment` (ngoại thất, nội thất, tiện nghi, an toàn, vận hành và hỗ trợ lái), "Hệ thống an toàn" và "Diamond Sense" (`safetyTechnologies`, kèm giải thích) là một `<details>` thu gọn có số đếm.
+- **Tiêu đề trang xe** (`generateMetadata` trong `src/app/xe/[slug]/page.tsx`): "Giá xe <tên xe> tháng MM/YYYY: lăn bánh, ưu đãi", mô tả có cụm từ khách hay tìm (`carSeoTags`, ví dụ Xforce "SUV 5 chỗ gầm cao 222 mm"), giá thấp nhất và ưu đãi cao nhất, tự đổi theo `currentPromotion` (15/10/2026, theo số liệu Search Console).
 - **Trả góp** (`InstallmentCalculator.tsx`): chọn trả trước 20–70%, thời hạn 1–8 năm, nhập lãi suất năm đầu.
 - **Trang Giới thiệu** (`src/app/gioi-thieu/page.tsx`) tập trung vào người tư vấn. Thứ tự các phần: hero có ảnh chân dung,
   số liệu (năm kinh nghiệm, số xe, 24/7) và điểm Google 5,0 (635) **của showroom** (luôn ghi rõ tên showroom, không phải đánh giá cá nhân) → 4 lý do (lấy từ nhận xét thật của khách) →

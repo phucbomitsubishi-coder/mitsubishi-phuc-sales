@@ -444,6 +444,48 @@ export default function Home() {
       </div>
     </div>
 
+    {/* SHOWROOM: nơi anh Phúc làm việc (cho từ khóa "mitsubishi bình dương", "moveo new city") */}
+    <div className="mt-8 grid gap-6 rounded-xl border border-gray-700 bg-neutral-900 p-6 md:grid-cols-[1fr_auto] md:items-center">
+      <div>
+        <h3 className="text-xl font-bold">
+          Showroom {siteConfig.dealer.name}
+        </h3>
+        <p className="mt-3 leading-7 text-gray-300">
+          Phúc làm việc tại showroom {siteConfig.dealer.name}, khu vực {siteConfig.dealer.salesArea}.
+          Anh chị có thể đến xem xe, lái thử và làm thủ tục mua xe trực tiếp tại showroom, hoặc
+          nhận báo giá, tư vấn trả góp qua điện thoại và Zalo.{" "}
+          <Link href="/mua-xe-mitsubishi-toan-quoc" className="font-semibold text-white underline hover:text-red-400">
+            Khách ở tỉnh khác
+          </Link>{" "}
+          vẫn được hỗ trợ đăng ký và giao xe tận nơi.
+        </p>
+        <dl className="mt-4 grid gap-2 text-sm text-gray-300 sm:grid-cols-[auto_1fr] sm:gap-x-4">
+          <dt className="font-semibold text-white">Địa chỉ</dt>
+          <dd>{siteConfig.dealer.address}</dd>
+          <dt className="font-semibold text-white">Giờ làm việc</dt>
+          <dd>
+            {siteConfig.hours.display}. {siteConfig.hours.afterHours}
+          </dd>
+        </dl>
+      </div>
+      <div className="flex flex-col gap-3 sm:flex-row md:flex-col">
+        <a
+          href="https://www.google.com/maps/dir/?api=1&destination=Mitsubishi+Motors+Moveo+New+City+Binh+Duong"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="rounded bg-white px-5 py-3 text-center font-semibold text-neutral-950 transition hover:bg-gray-200"
+        >
+          Chỉ đường đến showroom
+        </a>
+        <Link
+          href="/gioi-thieu"
+          className="rounded border border-gray-600 px-5 py-3 text-center font-semibold transition hover:border-white"
+        >
+          Về Lưu Hoàng Phúc
+        </Link>
+      </div>
+    </div>
+
     <div className="mt-10 border-t border-gray-800 pt-6 text-sm text-gray-400">
       Mitsubishi Motors Bình Dương • Tư vấn Kinh doanh: Lưu Hoàng Phúc
     </div>

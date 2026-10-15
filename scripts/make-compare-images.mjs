@@ -33,6 +33,9 @@ const comparisons = [
   { slug: "so-sanh-xpander-cross-va-suzuki-xl7", carId: "xpander-cross", rival: "suzukiXL7", hook: "Xe 7 chỗ dáng SUV: gầm cao rộng rãi hay hybrid tiết kiệm xăng?" },
   { slug: "so-sanh-triton-va-ford-ranger", carId: "triton", rival: "fordRanger", hook: "Bán tải đi làm, đi chơi: chọn xe nào cho đúng nhu cầu?" },
   { slug: "so-sanh-attrage-va-toyota-vios", carId: "attrage", rival: "toyotaVios", hook: "Sedan hạng B cho gia đình và chạy dịch vụ: tiết kiệm hay rộng rãi?" },
+  { slug: "so-sanh-triton-va-toyota-hilux", carId: "triton", rival: "toyotaHilux", hook: "Hai mẫu bán tải Nhật: số tự động, hai cầu hay máy dầu 2.8L?", topics: ["Giá lăn bánh", "Kích thước, gầm xe", "Động cơ, hai cầu", "Trang bị an toàn"] },
+  { slug: "so-sanh-xpander-va-toyota-avanza-premio", carId: "xpander", rival: "toyotaAvanzaPremio", hook: "MPV 7 chỗ dưới 700 triệu: rộng rãi hay nhiều túi khí ở bản giữa?", topics: ["Giá lăn bánh", "Kích thước, gầm xe", "Động cơ, hộp số", "Trang bị an toàn"] },
+  { slug: "so-sanh-attrage-va-hyundai-accent", carId: "attrage", rival: "hyundaiAccent", hook: "Sedan cho người mua xe lần đầu: giá dễ chịu hay rộng và máy mạnh?", topics: ["Giá lăn bánh", "Kích thước, gầm xe", "Động cơ, hộp số", "Trang bị từng phiên bản"] },
 ];
 
 // Ảnh xe Mitsubishi thật (gallery). crop (tỉ lệ 0–1): cắt sát vào xe, bỏ chữ quảng cáo/khoảng trống có sẵn trong ảnh gốc
@@ -153,7 +156,7 @@ function renderHtml(item) {
   </section>
   <section class="topics">
     <p>Bài so sánh chi tiết:</p>
-    <div class="chips">${topics.map((topic) => `<span class="chip">${topic}</span>`).join("")}</div>
+    <div class="chips">${(item.topics ?? topics).map((topic) => `<span class="chip">${topic}</span>`).join("")}</div>
     <div class="read">Đọc tại <b>mitsubishiauto.vn</b> · mục Tư vấn</div>
   </section>
   <footer>

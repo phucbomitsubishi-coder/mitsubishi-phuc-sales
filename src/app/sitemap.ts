@@ -129,6 +129,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.8,
     },
+    {
+      url: `${baseUrl}/tu-van/so-sanh-triton-va-toyota-hilux`,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/tu-van/so-sanh-xpander-va-toyota-avanza-premio`,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/tu-van/so-sanh-attrage-va-hyundai-accent`,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
 
     {
       url: `${baseUrl}/bang-gia-xe-mitsubishi`,

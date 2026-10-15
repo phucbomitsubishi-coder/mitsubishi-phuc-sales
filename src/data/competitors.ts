@@ -290,4 +290,131 @@ export const competitors = {
       },
     ],
   },
+
+  // Giá, thông số: API thông số từng phiên bản trên toyota.com.vn (15/10/2026), đối chiếu giá với
+  // VnExpress và thông số với Bonbanh. Toyota không công bố mức tiêu hao nhiên liệu Hilux mới nên chưa đưa vào.
+  toyotaHilux: {
+    name: "Toyota Hilux",
+    seats: 5,
+    isPickup: true,
+    updated: "10/2026",
+    priceNote: "màu trắng ngọc trai cộng thêm 8 triệu đồng",
+    variants: [
+      { name: "Standard 2.8 4x2 MT", price: 632_000_000 },
+      { name: "Pro 2.8 4x2 AT", price: 706_000_000 },
+      { name: "Trailhunter 2.8 4x4 AT", price: 903_000_000 },
+    ],
+    specs: {
+      type: "Bán tải cỡ trung, 5 chỗ",
+      dimensions: "5.320 × 1.885 × 1.815 mm (Standard rộng 1.855 mm)",
+      wheelbase: "3.085 mm",
+      groundClearance: "312 mm",
+      engine: "Dầu 2.8L Turbo (1GD-FTV)",
+      power: "201 mã lực",
+      torque: "420 Nm (số sàn), 500 Nm (số tự động)",
+      transmission: "Số sàn 6 cấp (Standard), tự động 6 cấp (Pro, Trailhunter)",
+      drivetrain: "Cầu sau (Standard, Pro), hai cầu bán thời gian (Trailhunter)",
+      wheels: "17 inch (Standard, Pro), 18 inch (Trailhunter)",
+      airbags: "3 túi khí (Standard, Pro), 7 túi khí (Trailhunter)",
+    },
+    sources: [
+      {
+        name: "Toyota Việt Nam – Hilux: giá và thông số kỹ thuật từng phiên bản",
+        url: "https://www.toyota.com.vn/hilux",
+      },
+      {
+        name: "VnExpress – Toyota Hilux: giá lăn bánh, thông số kỹ thuật",
+        url: "https://vnexpress.net/oto-xe-may/v-car/dong-xe/toyota-hilux-159",
+      },
+      {
+        name: "Bonbanh – Thông số kỹ thuật Toyota Hilux Pro 2.8L 4x2 AT 2026",
+        url: "https://bonbanh.com/chi-tiet-thong-so-ky-thuat-xe-toyota-hilux-pro-2.8l-4x2-at-2026-18478",
+      },
+    ],
+  },
+
+  // Giá, thông số: toyota.com.vn (15/10/2026), giá đối chiếu VnExpress, thông số đối chiếu Bonbanh.
+  // Mức tiêu hao nhiên liệu Toyota và Bonbanh ghi khác nhau nên chưa đưa vào.
+  toyotaAvanzaPremio: {
+    name: "Toyota Avanza Premio",
+    seats: 7,
+    updated: "10/2026",
+    variants: [
+      { name: "MT", price: 558_000_000 },
+      { name: "CVT", price: 598_000_000 },
+    ],
+    specs: {
+      type: "MPV 7 chỗ",
+      dimensions: "4.395 × 1.730 × 1.700 mm",
+      wheelbase: "2.750 mm",
+      groundClearance: "205 mm",
+      engine: "Xăng 1.5L (2NR-VE)",
+      power: "105 mã lực / 6.000 vòng/phút",
+      torque: "138 Nm / 4.200 vòng/phút",
+      transmission: "Số sàn (MT), vô cấp CVT (CVT)",
+      drivetrain: "Cầu trước",
+      wheels: "16 inch",
+      airbags: "2 túi khí (MT), 6 túi khí (CVT)",
+    },
+    sources: [
+      {
+        name: "Toyota Việt Nam – Avanza Premio: giá và thông số kỹ thuật từng phiên bản",
+        url: "https://www.toyota.com.vn/avanza-premio",
+      },
+      {
+        name: "VnExpress – Toyota Avanza Premio: giá lăn bánh, thông số kỹ thuật",
+        url: "https://vnexpress.net/oto-xe-may/v-car/dong-xe/toyota-avanza-151",
+      },
+      {
+        name: "Bonbanh – Thông số kỹ thuật Toyota Avanza Premio 1.5 AT 2026",
+        url: "https://bonbanh.com/chi-tiet-thong-so-ky-thuat-xe-toyota-avanza-premio-1.5-at-2026-18617",
+      },
+    ],
+  },
+
+  // Giá: VnExpress (10/2026), đối chiếu Bonbanh và Báo Lâm Đồng (bản Cao cấp 569 triệu, 09/2026).
+  // Thông số: trang Hyundai Thành Công, đối chiếu Bonbanh. Cỡ lốp hai nguồn ghi khác nhau (185/55R15
+  // và 185/65R15), mức tiêu hao chỉ có một nguồn, nên chưa đưa vào.
+  hyundaiAccent: {
+    name: "Hyundai Accent",
+    seats: 5,
+    updated: "10/2026",
+    variants: [
+      { name: "1.5 MT", price: 439_000_000 },
+      { name: "1.5 AT", price: 489_000_000 },
+      { name: "1.5 AT Đặc biệt", price: 529_000_000 },
+      { name: "1.5 AT Cao cấp", price: 569_000_000 },
+    ],
+    specs: {
+      type: "Sedan hạng B, 5 chỗ",
+      dimensions: "4.535 × 1.765 × 1.485 mm",
+      wheelbase: "2.670 mm",
+      groundClearance: "165 mm",
+      engine: "Xăng 1.5L Smartstream",
+      power: "115 PS / 6.300 vòng/phút",
+      torque: "144 Nm / 4.500 vòng/phút",
+      transmission: "Số sàn 6 cấp (MT), vô cấp CVT (các bản AT)",
+      drivetrain: "Cầu trước",
+      wheels: "15 inch, 16 inch (Cao cấp)",
+      airbags: "2 túi khí (MT, AT), 4 (Đặc biệt), 6 (Cao cấp)",
+    },
+    sources: [
+      {
+        name: "VnExpress – Hyundai Accent: giá lăn bánh, thông số kỹ thuật",
+        url: "https://vnexpress.net/oto-xe-may/v-car/dong-xe/hyundai-accent-47",
+      },
+      {
+        name: "Hyundai Thành Công – All New Accent",
+        url: "https://hyundai.thanhcong.vn/all-new-accent",
+      },
+      {
+        name: "Bonbanh – Thông số kỹ thuật Hyundai Accent Cao cấp 1.5 AT 2026",
+        url: "https://bonbanh.com/chi-tiet-thong-so-ky-thuat-xe-hyundai-accent-cao-cap-1.5-at-2026-18420",
+      },
+      {
+        name: "Báo Lâm Đồng – Đánh giá Hyundai Accent 2026 bản 1.5 AT Cao cấp",
+        url: "https://baolamdong.vn/danh-gia-xe-hyundai-accent-2026-ban-15-at-cao-cap-dot-pha-thiet-ke-va-goi-an-toan-smartsense-466178.html",
+      },
+    ],
+  },
 } satisfies Record<string, CompetitorCar>;
