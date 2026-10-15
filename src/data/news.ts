@@ -37,6 +37,85 @@ export type NewsArticle = {
 
 export const newsArticles: NewsArticle[] = [
   {
+    id: "news-1792046400000",
+
+    title: "Xe Mitsubishi cũ chính hãng MMV UCAR: kiểm tra 160 điểm, bảo hành CPO 12 tháng hoặc 20.000 km",
+
+    slug: "xe-mitsubishi-cu-chinh-hang-mmv-ucar-bao-hanh-cpo",
+
+    category: "Tư vấn mua xe",
+
+    excerpt:
+      "MMV UCAR là chương trình xe Mitsubishi qua sử dụng chính hãng. Xe đạt chuẩn được kiểm tra 160 điểm, cấp chứng nhận CPO và bảo hành động cơ, hộp số 12 tháng hoặc 20.000 km. Điều kiện xe, quyền lợi và những trường hợp không được bảo hành.",
+
+    publishedAt: "2026-10-15",
+
+    image: "/images/used-cars/xpander-cross-2025-002/01.jpg",
+
+    featured: false,
+
+    content: [
+      {
+        heading: "MMV UCAR là gì?",
+        paragraphs: [
+          "MMV UCAR là chương trình xe Mitsubishi qua sử dụng chính hãng do Mitsubishi Motors Việt Nam (MMV) triển khai từ đầu năm 2022, thực hiện qua các nhà phân phối ủy quyền. Chương trình gồm thu mua xe cũ, bán xe cũ đã kiểm định và thu cũ đổi mới.",
+          "Mitsubishi Moveo New City, nơi Phúc đang làm tư vấn, là nhà phân phối có tham gia chương trình. Vì vậy bạn có thể bán, mua hoặc đổi xe Mitsubishi cũ ngay tại showroom.",
+        ],
+      },
+      {
+        heading: "Điều kiện để xe được cấp chứng nhận CPO",
+        paragraphs: [
+          "CPO (Certified Pre-Owned) là chứng nhận xe qua sử dụng đạt chuẩn của hãng. Theo công bố của MMV ngày 14/10/2026, xe phải đáp ứng đủ các điều kiện sau:",
+          "Tuổi xe và quãng đường: không quá 5 năm tính từ ngày bắt đầu bảo hành xe mới, hoặc không quá 140.000 km, tùy điều kiện nào đến trước.",
+          "Tình trạng xe: không có dấu hiệu tai nạn nghiêm trọng, không bị thủy kích (ngập nước), không can thiệp đồng hồ công-tơ-mét, không lắp phụ kiện không chính hãng hoặc lắp sai kỹ thuật.",
+          "Lịch sử bảo dưỡng: đầy đủ trên hệ thống của MMV.",
+          "Kiểm tra kỹ thuật: đạt bài kiểm tra 160 điểm do kỹ thuật viên được MMV đào tạo thực hiện.",
+        ],
+      },
+      {
+        heading: "Bảo hành CPO: 12 tháng hoặc 20.000 km",
+        paragraphs: [
+          "Hạng mục bảo hành: các bộ phận cơ khí bên trong động cơ và ECU động cơ; các bộ phận cơ khí bên trong hộp số và hộp điều khiển hộp số (AT-ECU, CVT-ECU). Ly hợp và biến mô không nằm trong phạm vi bảo hành. Lỗi phải do nhà sản xuất và được nhà phân phối ủy quyền xác nhận.",
+          "Thời hạn: 12 tháng hoặc 20.000 km, tùy điều kiện nào đến trước. Nếu xe vẫn còn bảo hành xe mới (hoặc gói bảo hành mở rộng) khi bạn mua, bảo hành CPO bắt đầu ngay sau khi bảo hành đó hết. Nếu đã hết, bảo hành CPO tính từ ngày nhận xe.",
+          "Tổng thời gian bảo hành (gồm bảo hành xe mới và CPO) tối đa 6 năm hoặc 160.000 km, tùy điều kiện nào đến trước.",
+          "Bảo hành được áp dụng tại tất cả nhà phân phối ủy quyền của Mitsubishi trên toàn quốc. Hiệu lực được ghi nhận trên ứng dụng Mitsubishi Connect+ và sổ bảo hành do nhà phân phối cấp.",
+        ],
+      },
+      {
+        heading: "Trường hợp không được bảo hành",
+        paragraphs: [
+          "Xe đã được chuyển nhượng cho người khác sau khi mua; đồng hồ công-tơ-mét bị can thiệp hoặc không xác định được số km.",
+          "Hư hỏng do tự sửa chữa, thay đổi thiết kế, bảo dưỡng không đúng quy định, dùng phụ tùng, dầu nhớt chưa được MMV phê duyệt hoặc sửa chữa ngoài hệ thống nhà phân phối ủy quyền.",
+          "Vận hành sai cách, chở quá tải; hư hỏng do tai nạn, ngập nước, hỏa hoạn, thiên tai, hóa chất và các yếu tố bên ngoài khác.",
+          "Hao mòn tự nhiên như phai màu sơn, trầy xước, lão hóa vật liệu; tiếng ồn, độ rung không ảnh hưởng đến vận hành.",
+        ],
+      },
+      {
+        heading: "Quyền lợi khi bán hoặc đổi xe cũ",
+        paragraphs: [
+          "Người bán xe: được kiểm tra và định giá miễn phí tại nhà phân phối, có thể yêu cầu thu mua tại địa điểm thuận tiện, nhận báo giá trọn gói.",
+          "Người đổi sang xe Mitsubishi mới: được tư vấn ưu đãi thu cũ đổi mới và lãi suất vay theo từng thời điểm.",
+          "Người mua xe cũ: xe có nguồn gốc và lịch sử bảo dưỡng rõ ràng, được hỗ trợ vay mua xe qua ngân hàng đối tác tùy chương trình.",
+        ],
+      },
+      {
+        heading: "Mua, bán xe Mitsubishi cũ tại Bình Dương",
+        paragraphs: [
+          "Các xe Mitsubishi đã qua sử dụng Phúc đang có được đăng tại mục Xe cũ trên website, kèm năm sản xuất, số km và hình ảnh thực tế. Khi quan tâm xe nào, bạn hỏi Phúc để biết xe đó có chứng nhận CPO hay không, còn bảo hành xe mới bao lâu và lịch sử bảo dưỡng.",
+          "Nếu muốn bán hoặc đổi xe cũ lấy xe Mitsubishi mới, bạn điền thông tin xe tại trang Thu cũ đổi mới, Phúc sẽ liên hệ hẹn lịch kiểm tra và báo giá.",
+        ],
+      },
+    ],
+
+    source: {
+      name: "Mitsubishi Motors Việt Nam (Chương trình MMV UCAR, Chính sách bảo hành xe CPO)",
+      url: "https://www.mitsubishi-motors.com.vn/tin-tuc/chinh-sach-bao-hanh-xe-cpo-n154558.html",
+    },
+
+    originalContent: true,
+  },
+
+  {
     id: "news-1791873600000",
 
     title: "Doanh số Mitsubishi 9 tháng 2026: 31.932 xe, Xpander, Xforce và Destinator cùng vào top 10 xe xăng bán chạy",
