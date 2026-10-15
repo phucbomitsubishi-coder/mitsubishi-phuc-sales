@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { siteConfig } from "@/config/site";
 import { createPageMetadata } from "@/lib/metadata";
 import SiteHeader from "@/components/SiteHeader";
+import UsedCarGifts from "@/components/UsedCarGifts";
 import { usedCars } from "@/data/usedCars";
 import Link from "next/link";
 import Image from "next/image";
@@ -49,6 +50,8 @@ export default function UsedCarsPage() {
               </Link>
               .
             </p>
+
+            {availableCars.length > 0 && <UsedCarGifts className="mt-8 max-w-4xl" />}
 
             {availableCars.length === 0 ? (
               <div className="mt-10 rounded-2xl border border-gray-200 bg-white p-8 text-center shadow-sm md:p-12">

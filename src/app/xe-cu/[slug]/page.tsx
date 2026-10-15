@@ -5,6 +5,7 @@ import SiteHeader from "@/components/SiteHeader";
 import BackToPrevious from "@/components/BackToPrevious";
 import MobileContactBar from "@/components/MobileContactBar";
 import UsedCarGallery from "@/components/UsedCarGallery";
+import UsedCarGifts from "@/components/UsedCarGifts";
 import { usedCars } from "@/data/usedCars";
 
 type Props = {
@@ -156,8 +157,8 @@ export default async function UsedCarDetailPage({ params }: Props) {
 
               <div className="mt-8 grid grid-cols-2 gap-4">
                 <Info label="Năm sản xuất" value={String(car.modelYear)} />
-                <Info label="Đăng ký lần đầu" value={car.firstRegistration} />
-                <Info label="Số đời chủ" value={car.owners} />
+                {car.firstRegistration && <Info label="Đăng ký lần đầu" value={car.firstRegistration} />}
+                {car.owners && <Info label="Số đời chủ" value={car.owners} />}
                 <Info
                   label="Số km đã đi"
                   value={`${car.mileage.toLocaleString("vi-VN")} km`}
@@ -177,6 +178,7 @@ export default async function UsedCarDetailPage({ params }: Props) {
     {car.description}
   </p>
 
+  {car.serviceHistory && (
   <div className="mt-6 border-t border-gray-200 pt-5">
     <p className="font-semibold text-gray-900">
       Lịch sử bảo dưỡng
@@ -186,7 +188,9 @@ export default async function UsedCarDetailPage({ params }: Props) {
       {car.serviceHistory}
     </p>
   </div>
+  )}
 
+  {car.equipment.length > 0 && (
   <div className="mt-5 border-t border-gray-200 pt-5">
     <p className="font-semibold text-gray-900">
       Trang bị theo xe
@@ -203,7 +207,10 @@ export default async function UsedCarDetailPage({ params }: Props) {
       ))}
     </div>
   </div>
+  )}
 </div>
+
+              {car.status === "available" && <UsedCarGifts className="mt-6" />}
 
               <div className="mt-6 rounded-2xl border border-green-200 bg-green-50 p-6">
   <h2 className="text-xl font-bold text-gray-900">

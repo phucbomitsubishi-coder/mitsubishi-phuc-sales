@@ -12,6 +12,8 @@ const labelClass = "mb-2 block text-sm font-semibold text-gray-700";
 
 const currentYear = new Date().getFullYear();
 const years = Array.from({ length: 16 }, (_, index) => String(currentYear - index));
+// Mức tình trạng giống form định giá của Ucar Moveo
+const conditions = ["Rất sạch", "Sạch", "Trung bình", "Dưới trung bình"];
 
 // Form "Thu cũ đổi mới": khách nhập xe đang đi để nhận báo giá thu sơ bộ và báo giá xe mới.
 // Gửi qua script lái thử (lưu được ghi chú); thông tin xe cũ gom vào `note`.
@@ -53,6 +55,11 @@ export default function TradeInForm() {
       `Xe đang đi: ${oldCar}`,
       get("year") && `Năm sản xuất: ${get("year")}`,
       get("mileage") && `Số km: ${get("mileage")}`,
+      get("transmission") && `Hộp số: ${get("transmission")}`,
+      get("color") && `Màu: ${get("color")}`,
+      get("exterior") && `Ngoại thất: ${get("exterior")}`,
+      get("interior") && `Nội thất: ${get("interior")}`,
+      get("accident") && `Va chạm/ngập nước: ${get("accident")}`,
       get("area") && `Khu vực: ${get("area")}`,
       get("note") && `Ghi chú: ${get("note")}`,
     ]
@@ -140,6 +147,51 @@ export default function TradeInForm() {
       </div>
 
       <div>
+        <label htmlFor="trade-transmission" className={labelClass}>Hộp số</label>
+        <select id="trade-transmission" name="transmission" defaultValue="" className={inputClass}>
+          <option value="">Chọn</option>
+          <option value="Số tự động">Số tự động</option>
+          <option value="Số sàn">Số sàn</option>
+        </select>
+      </div>
+
+      <div>
+        <label htmlFor="trade-color" className={labelClass}>Màu xe</label>
+        <input id="trade-color" name="color" type="text" placeholder="Ví dụ: Trắng" className={inputClass} />
+      </div>
+
+      <div>
+        <label htmlFor="trade-exterior" className={labelClass}>Tình trạng ngoại thất</label>
+        <select id="trade-exterior" name="exterior" defaultValue="" className={inputClass}>
+          <option value="">Chọn</option>
+          {conditions.map((item) => (
+            <option key={item} value={item}>{item}</option>
+          ))}
+        </select>
+      </div>
+
+      <div>
+        <label htmlFor="trade-interior" className={labelClass}>Tình trạng nội thất</label>
+        <select id="trade-interior" name="interior" defaultValue="" className={inputClass}>
+          <option value="">Chọn</option>
+          {conditions.map((item) => (
+            <option key={item} value={item}>{item}</option>
+          ))}
+        </select>
+      </div>
+
+      <div className="sm:col-span-2">
+        <label htmlFor="trade-accident" className={labelClass}>Xe từng bị va chạm hoặc ngập nước?</label>
+        <select id="trade-accident" name="accident" defaultValue="" className={inputClass}>
+          <option value="">Chọn</option>
+          <option value="Chưa từng">Chưa từng</option>
+          <option value="Va chạm nhẹ, đã sửa">Va chạm nhẹ, đã sửa</option>
+          <option value="Từng tai nạn hoặc ngập nước">Từng tai nạn hoặc ngập nước</option>
+          <option value="Không rõ">Không rõ</option>
+        </select>
+      </div>
+
+      <div>
         <label htmlFor="trade-area" className={labelClass}>Khu vực xem xe</label>
         <input id="trade-area" name="area" type="text" placeholder="Ví dụ: Thủ Dầu Một, Dĩ An…" className={inputClass} />
       </div>
@@ -156,7 +208,7 @@ export default function TradeInForm() {
 
       <div className="sm:col-span-2">
         <label htmlFor="trade-note" className={labelClass}>Ghi chú</label>
-        <textarea id="trade-note" name="note" rows={3} placeholder="Tình trạng xe, màu xe, thời gian muốn đổi xe…" className={`${inputClass} resize-none`} />
+        <textarea id="trade-note" name="note" rows={3} placeholder="Lịch sử bảo dưỡng, đồ chơi đã lắp, thời gian muốn đổi xe…" className={`${inputClass} resize-none`} />
       </div>
 
       {errorMessage && (

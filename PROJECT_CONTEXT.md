@@ -111,6 +111,8 @@ Alias import: `@/` → `src/`.
     5. `npm run build` → push.
 - **UsedCar**: `id`, `slug`, `modelYear`, `mileage` (km), `price` (đồng), `status` (`available` hoặc `sold`),
   `image`, `images[]`, `equipment[]`, `commitments[]`, ...
+  Xe cũ lấy từ kho Ucar Moveo (https://ucarmoveo.com/inventory/, Moveo New City tham gia MMV UCAR). 15/10/2026 thêm 12 xe (005–016): chỉ lấy năm, phiên bản, odo, màu, giá, phần mô tả và cam kết;
+  **không** lấy danh sách "Trang bị" mẫu của Ucar (hay sai, ví dụ ghi ghế Nappa cho Xpander). Ảnh bỏ banner PNG, tối đa 10 ảnh, nén 1280px. Thông tin không xác định để chuỗi rỗng (`firstRegistration`, `owners`, `serviceHistory`) hoặc `equipment: []`, trang chi tiết tự ẩn mục đó (anh Phúc chọn bỏ qua phần không xác định).
 - **NewsArticle**: `slug`, `category` (union `NewsCategory`), `publishedAt` (`YYYY-MM-DD`), `image`,
   `content[]` gồm các khối `{ heading?, paragraphs[], images? }`, `source?`.
 - **PromotionProgram** (`currentPromotion`): `month`, `year`, `cars[]` gồm `carId` → `variants[]` → `benefits[]`
