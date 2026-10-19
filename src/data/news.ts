@@ -37,6 +37,70 @@ export type NewsArticle = {
 
 export const newsArticles: NewsArticle[] = [
   {
+    id: "news-1792392000000",
+
+    title: "Mitsubishi Outlander thế hệ mới xuất hiện tại Việt Nam, hãng xác nhận mở bán trong năm 2026 với bản hybrid nhẹ",
+
+    slug: "mitsubishi-outlander-the-he-moi-xuat-hien-tai-viet-nam-mo-ban-2026",
+
+    category: "Tin Mitsubishi",
+
+    excerpt:
+      "Một chiếc Outlander thế hệ mới được bắt gặp trên xe vận chuyển tại Việt Nam. Mitsubishi Motors Việt Nam đã xác nhận đưa mẫu xe này về nước trong năm 2026 với hệ truyền động hybrid nhẹ. Những gì đã chính thức và những gì còn chờ công bố.",
+
+    publishedAt: "2026-10-19",
+
+    image: "/images/news/anh-thuc-te-mitsubishi-outlander-phev-2026-tai-dna-suv-co-c-manh-302-ma-luc-chay-100-km-khong-ton-xang-official.jpg",
+
+    featured: false,
+
+    content: [
+      {
+        heading: "Outlander mới xuất hiện trên đường vận chuyển",
+        paragraphs: [
+          "Ngày 19/10/2026, Tuổi Trẻ và CafeF (dẫn lại Đời sống & Pháp luật) đăng hình ảnh một chiếc Mitsubishi Outlander thế hệ mới màu đen nằm trên xe chở ô tô, được người chia sẻ cho biết chụp trên cao tốc Bắc – Nam đoạn qua Nghệ An.",
+          "Đây là thế hệ Outlander đang bán ở nhiều nước, khác với Outlander từng được phân phối chính hãng tại Việt Nam (bản nâng cấp năm 2020 của thế hệ trước). Mitsubishi chưa công bố lý do chiếc xe có mặt, nên chưa thể biết đây là xe chạy thử hay xe chuẩn bị cho lễ ra mắt.",
+        ],
+      },
+      {
+        heading: "Điều đã chính thức: về Việt Nam trong năm 2026, bản hybrid nhẹ",
+        paragraphs: [
+          "Theo Tuổi Trẻ (03/09/2026), ông Tomoki Yanagawa, Tổng Giám đốc Mitsubishi Motors Việt Nam, xác nhận tại sự kiện ra mắt Pajero thế hệ mới ở Nhật Bản rằng Outlander thế hệ mới sẽ được đưa về Việt Nam trong năm 2026. Bản phân phối trong nước dùng hệ truyền động hybrid nhẹ (mild hybrid). Dân trí cũng đưa tin Outlander mới có thể về Việt Nam vào cuối năm.",
+          "Đến nay, hãng chưa công bố ngày ra mắt, giá bán, số phiên bản và danh sách trang bị cho thị trường Việt Nam.",
+        ],
+      },
+      {
+        heading: "Thông số tham khảo từ bản nước ngoài",
+        paragraphs: [
+          "Các số liệu dưới đây là của Outlander bán tại nước ngoài, được Tuổi Trẻ và CafeF dẫn lại. Bản Việt Nam có thể khác khi hãng công bố chính thức.",
+          "Kích thước: dài 4.710 mm, rộng 1.862 mm, cao 1.740 mm, chiều dài cơ sở 2.706 mm, khoảng sáng gầm khoảng 210 mm. Xe có cấu hình 7 chỗ (5+2).",
+          "Động cơ bản hybrid nhẹ tại Bắc Mỹ: xăng 1.5L tăng áp 4 xi-lanh kết hợp hệ điện 48V, công suất 174 mã lực, mô-men xoắn 279 Nm, hộp số CVT, dẫn động 4 bánh S-AWC. Chưa rõ bản Việt Nam có dùng dẫn động 4 bánh hay không.",
+        ],
+      },
+      {
+        heading: "Outlander mới và Destinator: khác nhau thế nào?",
+        paragraphs: [
+          "Destinator đang bán là SUV 7 chỗ dài 4.680 mm, chiều dài cơ sở 2.815 mm, khoảng sáng gầm 214 mm, máy 1.5L turbo 163 PS, 250 Nm, giá niêm yết 780 và 855 triệu đồng. Theo số liệu bản nước ngoài, Outlander mới dài hơn 30 mm, rộng hơn, nhưng chiều dài cơ sở ngắn hơn Destinator; Outlander có thêm hệ hybrid nhẹ và dẫn động 4 bánh ở thị trường Bắc Mỹ.",
+          "Hãng chưa công bố giá Outlander tại Việt Nam. Nếu bạn cần xe 7 chỗ trong vài tháng tới, Destinator là lựa chọn có giá và ưu đãi rõ ràng ngay bây giờ. Nếu muốn chờ Outlander, Phúc sẽ báo bạn ngay khi có giá và lịch nhận đặt cọc chính thức.",
+        ],
+      },
+      {
+        heading: "Nhận thông tin sớm",
+        paragraphs: [
+          "Bài viết sẽ được cập nhật khi Mitsubishi Motors Việt Nam công bố giá và phiên bản. Bạn có thể để lại số điện thoại ở form báo giá hoặc nhắn Zalo cho Phúc, ghi \"Outlander\", để được báo ngay khi xe mở bán tại Mitsubishi Moveo New City.",
+        ],
+      },
+    ],
+
+    source: {
+      name: "Tuổi Trẻ (tham khảo thêm CafeF, Dân trí)",
+      url: "https://tuoitre.vn/mitsubishi-outlander-2026-xuat-hien-o-viet-nam-du-kien-som-ra-mat-dau-honda-cr-v-mazda-cx-5-100261019084038131.htm",
+    },
+
+    originalContent: true,
+  },
+
+  {
     id: "news-1792046400000",
 
     title: "Xe Mitsubishi cũ chính hãng MMV UCAR: kiểm tra 160 điểm, bảo hành CPO 12 tháng hoặc 20.000 km",
@@ -609,8 +673,9 @@ export const newsArticles: NewsArticle[] = [
         heading: "Ý nghĩa với khách hàng Việt Nam",
 
         paragraphs: [
-          "Đây mới là thông tin dự đoán, Mitsubishi chưa xác nhận. Tại Việt Nam, Outlander PHEV thế hệ hiện tại cũng chưa được bán chính thức.",
-          "Nếu bạn cần một chiếc xe 7 chỗ trong 1–2 năm tới, nên cân nhắc các mẫu đang bán như Destinator hoặc Xpander Cross thay vì chờ thế hệ mới. Liên hệ Lưu Hoàng Phúc để được tư vấn mẫu xe phù hợp và lái thử.",
+          "Thông tin về thế hệ thứ năm (khoảng năm 2028) mới là dự đoán của báo chí Nhật Bản, Mitsubishi chưa xác nhận.",
+          "Cập nhật 19/10/2026: thế hệ Outlander đang bán ở nhiều nước (không phải thế hệ 2028 nói trong bài này) đã được Mitsubishi Motors Việt Nam xác nhận đưa về nước trong năm 2026 với bản hybrid nhẹ, và vừa xuất hiện trên xe vận chuyển tại Việt Nam. Xem chi tiết ở bài \"Mitsubishi Outlander thế hệ mới xuất hiện tại Việt Nam\" trong mục Tin tức.",
+          "Nếu bạn cần xe 7 chỗ ngay, Destinator và Xpander Cross đang có giá và ưu đãi rõ ràng. Liên hệ Lưu Hoàng Phúc để được tư vấn mẫu xe phù hợp và lái thử.",
         ],
       },
     ],
