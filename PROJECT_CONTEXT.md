@@ -165,11 +165,11 @@ Alias import: `@/` → `src/`.
   Dữ liệu ở `specifications` của từng phiên bản trong `cars.ts` (đã đối chiếu trang MMV 14/10/2026, gồm khoảng cách bánh, treo, phanh, trợ lực lái, khóa vi sai, tiêu hao nhiên liệu). Trên điện thoại bảng vuốt ngang, cột tên thông số và chữ ô gộp dính mép trái (`sticky`).
 - **Trang bị phiên bản** (`src/app/xe/[slug]/EquipmentList.tsx`): mỗi nhóm `equipment` (ngoại thất, nội thất, tiện nghi, an toàn, vận hành và hỗ trợ lái), "Hệ thống an toàn" và "Diamond Sense" (`safetyTechnologies`, kèm giải thích) là một `<details>` thu gọn có số đếm.
 - **Tiêu đề trang xe** (`generateMetadata` trong `src/app/xe/[slug]/page.tsx`): "Giá xe <tên xe> tháng MM/YYYY: lăn bánh, ưu đãi", mô tả có cụm từ khách hay tìm (`carSeoTags`, ví dụ Xforce "SUV 5 chỗ gầm cao 222 mm"), giá thấp nhất và ưu đãi cao nhất, tự đổi theo `currentPromotion` (15/10/2026, theo số liệu Search Console).
-- **Landing page quảng cáo** (`/uu-dai/<xe>`, hiện có `/uu-dai/destinator`, 10/2026): cho người bấm quảng cáo Facebook/Google. `robots: noindex, nofollow`, KHÔNG có trong sitemap, KHÔNG link từ web chính.
+- **Landing page quảng cáo** (`/uu-dai/<xe>`: destinator, xforce, xpander, triton; 10/2026; khuôn chung `src/components/AdLandingPage.tsx`): cho người bấm quảng cáo Facebook/Google. `robots: noindex, nofollow`, KHÔNG có trong sitemap, KHÔNG link từ web chính.
   Không có menu; footer chung và nút Báo giá nhanh bị ẩn bằng `HideOnLanding` (layout) cho mọi đường dẫn `/uu-dai/`; trang tự có footer ngắn (người bán, địa chỉ, chính sách bảo mật: Google Ads yêu cầu).
   Ưu đãi ghi theo **chương trình đại lý** (anh Phúc chọn "cách B" 16/10/2026) từ `dealerPromotions.ts` (`npm run sync-dealer-promos` mỗi tháng), vẫn kèm câu "không phải tiền mặt"; hết tháng mà chưa đồng bộ thì phần ưu đãi tự ẩn khi build.
   **Không bao giờ** đưa quyền linh động/LNG (.bi-mat) vào repo (repo công khai). Form `LandingLeadForm` gửi vào sheet báo giá, nguồn = `?nguon=` của URL quảng cáo (mặc định "Landing Destinator"), Pixel Lead.
-  Thêm xe mới: chép thư mục `src/app/uu-dai/destinator`, đổi `CAR_SLUG`, `DEFAULT_SOURCE`, `highlights`, ảnh.
+  Thêm xe mới: chép `src/app/uu-dai/xforce/page.tsx`, đổi metadata (giữ `robots` noindex), `carSlug`, `defaultSource`, `kicker`, ảnh, `highlights` (chỉ số liệu đã đối chiếu MMV).
 - **Trả góp** (`InstallmentCalculator.tsx`): chọn trả trước 20–70%, thời hạn 1–8 năm, nhập lãi suất năm đầu.
 - **Trang Giới thiệu** (`src/app/gioi-thieu/page.tsx`) tập trung vào người tư vấn. Thứ tự các phần: hero có ảnh chân dung,
   số liệu (năm kinh nghiệm, số xe, 24/7) và điểm Google 5,0 (635) **của showroom** (luôn ghi rõ tên showroom, không phải đánh giá cá nhân) → 4 lý do (lấy từ nhận xét thật của khách) →
