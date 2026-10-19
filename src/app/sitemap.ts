@@ -144,6 +144,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.8,
     },
+    {
+      url: `${baseUrl}/tu-van/so-sanh-xforce-va-kia-seltos`,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/tu-van/so-sanh-xpander-va-kia-carens`,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/tu-van/so-sanh-destinator-va-hyundai-santa-fe`,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
 
     {
       url: `${baseUrl}/bang-gia-xe-mitsubishi`,

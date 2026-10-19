@@ -112,4 +112,28 @@ export const advisoryArticles: AdvisoryArticle[] = [
     href: "/tu-van/so-sanh-attrage-va-hyundai-accent",
     carIds: ["attrage"],
   },
+  {
+    number: "14",
+    title: "So sánh Xforce và Kia Seltos",
+    description:
+      "So sánh giá, giá lăn bánh, kích thước, khoảng sáng gầm, động cơ 1.5L và 1.5 Turbo, trang bị an toàn từng phiên bản của hai mẫu SUV cỡ B 5 chỗ.",
+    href: "/tu-van/so-sanh-xforce-va-kia-seltos",
+    carIds: ["xforce"],
+  },
+  {
+    number: "15",
+    title: "So sánh Xpander và Kia Carens",
+    description:
+      "So sánh giá, giá lăn bánh, kích thước, khoảng sáng gầm, hộp số và trang bị an toàn từng phiên bản của hai mẫu xe 7 chỗ gia đình dưới 700 triệu.",
+    href: "/tu-van/so-sanh-xpander-va-kia-carens",
+    carIds: ["xpander"],
+  },
+  {
+    number: "16",
+    title: "So sánh Destinator và Hyundai Santa Fe",
+    description:
+      "So sánh giá, giá lăn bánh, kích thước, khoảng sáng gầm, động cơ 1.5 turbo và 2.5L, trang bị an toàn của hai mẫu SUV 7 chỗ khác phân khúc.",
+    href: "/tu-van/so-sanh-destinator-va-hyundai-santa-fe",
+    carIds: ["destinator"],
+  },
 ];

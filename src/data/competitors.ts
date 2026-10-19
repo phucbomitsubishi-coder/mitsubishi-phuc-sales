@@ -417,4 +417,131 @@ export const competitors = {
       },
     ],
   },
+
+  // Giá theo Kia Việt Nam (giá khởi điểm 549 triệu) + đại lý Kia Hùng Vương (bảng 10/2026) + 24h (11/10/2026), cả 3 khớp nhau.
+  // VnExpress v-car còn ghi bảng giá cũ trước đợt giảm giá (579–699 triệu) nên không dùng giá của VnExpress.
+  // Túi khí bản Luxury các nguồn ghi khác nhau (2 hoặc 6) nên chỉ ghi chung "2 hoặc 6 tùy phiên bản".
+  kiaSeltos: {
+    name: "Kia Seltos",
+    seats: 5,
+    updated: "10/2026",
+    variants: [
+      { name: "1.5L AT", price: 549_000_000 },
+      { name: "1.5L Deluxe", price: 569_000_000 },
+      { name: "1.5L Luxury", price: 609_000_000 },
+      { name: "1.5 Turbo Deluxe", price: 619_000_000 },
+      { name: "1.5 Turbo Luxury", price: 665_000_000 },
+      { name: "1.5L Premium", price: 689_000_000 },
+    ],
+    specs: {
+      type: "SUV cỡ B, 5 chỗ",
+      dimensions: "4.365 × 1.800 × 1.645 mm",
+      wheelbase: "2.610 mm",
+      groundClearance: "190 mm",
+      engine: "Xăng 1.5L Smartstream; 1.5 Turbo (bản Turbo)",
+      power: "113 mã lực (1.5L); 158 mã lực (1.5 Turbo)",
+      torque: "144 Nm (1.5L); 253 Nm (1.5 Turbo)",
+      transmission: "Vô cấp CVT (1.5L), ly hợp kép 7 cấp (1.5 Turbo)",
+      drivetrain: "Cầu trước",
+      wheels: "17 inch",
+      airbags: "2 hoặc 6 túi khí tùy phiên bản",
+    },
+    sources: [
+      { name: "Kia Việt Nam – Bảng giá xe", url: "https://www.kiavietnam.com.vn/bang-gia-xe" },
+      { name: "Kia Hùng Vương – Giá xe Kia Seltos tháng 10/2026", url: "https://kia-hungvuong.com/xe/kia-seltos/" },
+      {
+        name: "24h – Giá xe Kia Seltos lăn bánh tháng 10/2026",
+        url: "https://www.24h.com.vn/o-to/gia-xe-kia-seltos-lan-banh-kem-uu-dai-thang-10-2026-c747a1800412.html",
+      },
+      {
+        name: "Bonbanh – Thông số kỹ thuật Kia Seltos 1.5 AT 2026",
+        url: "https://bonbanh.com/chi-tiet-thong-so-ky-thuat-xe-kia-seltos-1.5-at-2026-18577",
+      },
+      { name: "VnExpress – Kia Seltos: thông số động cơ 1.5 Turbo", url: "https://vnexpress.net/oto-xe-may/v-car/dong-xe/kia-seltos-68" },
+    ],
+  },
+
+  // Giá theo Kia Việt Nam (giá khởi điểm 559 triệu) + Bonbanh (bảng giá 10/2026), khớp nhau.
+  // Một số trang (VnExpress, một đại lý) còn ghi giá cũ cao hơn nên không dùng.
+  // Mức tiêu hao nhiên liệu các nguồn ghi khác nhau (6,8 và 6,9 L/100 km) nên bỏ.
+  kiaCarens: {
+    name: "Kia Carens",
+    seats: 7,
+    updated: "10/2026",
+    variants: [
+      { name: "1.5G MT Deluxe", price: 559_000_000 },
+      { name: "1.5G IVT", price: 569_000_000 },
+      { name: "1.5G Luxury", price: 609_000_000 },
+    ],
+    specs: {
+      type: "MPV 7 chỗ",
+      dimensions: "4.540 × 1.800 × 1.750 mm",
+      wheelbase: "2.780 mm",
+      groundClearance: "190 mm",
+      engine: "Xăng 1.5L Smartstream",
+      power: "113 mã lực / 6.300 vòng/phút",
+      torque: "144 Nm / 4.500 vòng/phút",
+      transmission: "Số sàn (Deluxe), vô cấp IVT (IVT, Luxury)",
+      drivetrain: "Cầu trước",
+      wheels: "17 inch",
+      airbags: "2 túi khí",
+    },
+    sources: [
+      { name: "Kia Việt Nam – Bảng giá xe", url: "https://www.kiavietnam.com.vn/bang-gia-xe" },
+      { name: "Bonbanh – Giá xe Kia Carens tháng 10/2026", url: "https://bonbanh.com/gia-xe-oto-kia-carens" },
+      {
+        name: "VnExpress – Kia Carens 1.5G IVT: thông số kỹ thuật",
+        url: "https://vnexpress.net/oto-xe-may/v-car/phien-ban-xe/kia-carens-2022-1-5g-ivt-567",
+      },
+      {
+        name: "Bonbanh – Thông số kỹ thuật Kia Carens 1.5G IVT 2026",
+        url: "https://bonbanh.com/chi-tiet-thong-so-ky-thuat-xe-kia-carens-1.5g-ivt-2026-18575",
+      },
+    ],
+  },
+
+  // Giá theo Bonbanh (10/2026) + VnExpress v-car + Báo Quốc tế (9/2026), khớp nhau.
+  // Chiều cao các nguồn ghi khác nhau (1.720 và 1.770 mm) nên chỉ ghi dài × rộng.
+  hyundaiSantaFe: {
+    name: "Hyundai Santa Fe",
+    seats: 7,
+    updated: "10/2026",
+    variants: [
+      { name: "Exclusive 2.5", price: 1_069_000_000 },
+      { name: "Prestige 2.5", price: 1_265_000_000 },
+      { name: "Calligraphy 2.5", price: 1_315_000_000 },
+      { name: "Calligraphy 2.5 Turbo", price: 1_365_000_000 },
+      { name: "Hybrid 1.6 Turbo", price: 1_369_000_000 },
+    ],
+    specs: {
+      type: "SUV cỡ D, 6 hoặc 7 chỗ",
+      dimensions: "Dài 4.830 mm, rộng 1.900 mm",
+      wheelbase: "2.815 mm",
+      groundClearance: "177 mm",
+      engine: "Xăng 2.5L Smartstream (Exclusive, Prestige, Calligraphy)",
+      power: "194 mã lực (2.5L)",
+      torque: "246 Nm (2.5L)",
+      transmission: "Tự động 8 cấp (2.5L)",
+      drivetrain: "Cầu trước (Exclusive), 4 bánh HTRAC (các bản khác)",
+      wheels: "18 inch (Exclusive) đến 21 inch",
+      fuelConsumption: "8,31 L/100 km (Exclusive, hỗn hợp)",
+      airbags: "6 túi khí",
+    },
+    sources: [
+      { name: "Bonbanh – Giá xe Hyundai Santa Fe tháng 10/2026", url: "https://bonbanh.com/gia-xe-oto-hyundai-santafe" },
+      { name: "VnExpress – Hyundai Santa Fe: giá lăn bánh, thông số kỹ thuật", url: "https://vnexpress.net/oto-xe-may/v-car/dong-xe/hyundai-santa-fe-51" },
+      {
+        name: "VnExpress – Hyundai Santa Fe Exclusive: thông số kỹ thuật",
+        url: "https://vnexpress.net/oto-xe-may/v-car/phien-ban-xe/hyundai-santa-fe-2024-exclusive-946",
+      },
+      {
+        name: "Bonbanh – Thông số kỹ thuật Hyundai Santa Fe Exclusive 2.5L 2026",
+        url: "https://bonbanh.com/chi-tiet-thong-so-ky-thuat-xe-hyundai-santafe-exclusive-2.5l-2026-18425",
+      },
+      {
+        name: "Báo Quốc tế – Bảng giá lăn bánh Hyundai Santa Fe tháng 9/2026",
+        url: "https://baoquocte.vn/cap-nhat-bang-gia-lan-banh-xe-hyundai-santa-fe-thang-9-2026-moi-nhat-448745.html",
+      },
+    ],
+  },
 } satisfies Record<string, CompetitorCar>;
