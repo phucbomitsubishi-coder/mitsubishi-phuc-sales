@@ -7,14 +7,15 @@ import { toLeadSource } from "@/lib/leadScripts";
 
 type LandingLeadFormProps = {
   carName: string;
-  variants: string[];
+  // Phiên bản cho khách chọn; car khác carName khi trang gộp nhiều dòng xe (vd Xpander + Xpander Cross)
+  options: { car: string; variant: string }[];
   // Nguồn mặc định khi URL quảng cáo không có ?nguon=
   defaultSource: string;
 };
 
 // Form ngắn cho landing page quảng cáo: tên + SĐT + phiên bản, gửi vào sheet báo giá như QuoteForm.
 // Nguồn lấy từ ?nguon= (đặt khác nhau cho từng quảng cáo Facebook/Google để biết khách từ đâu).
-export default function LandingLeadForm({ carName, variants, defaultSource }: LandingLeadFormProps) {
+export default function LandingLeadForm({ carName, options, defaultSource }: LandingLeadFormProps) {
   const params = useSearchParams();
   const leadSource = toLeadSource(params.get("nguon"), defaultSource);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -53,6 +54,10 @@ export default function LandingLeadForm({ carName, variants, defaultSource }: La
       return;
     }
 
+    // Giá trị ô chọn là chỉ số trong options ("" = chưa chọn) để biết đúng dòng xe
+    const optionIndex = get("option");
+    const selected = optionIndex === "" ? undefined : options[Number(optionIndex)];
+
     try {
       setIsSubmitting(true);
       const response = await fetch(apiUrl, {
@@ -61,8 +66,8 @@ export default function LandingLeadForm({ carName, variants, defaultSource }: La
         body: JSON.stringify({
           customerName,
           phone,
-          car: carName,
-          variant: get("variant"),
+          car: selected?.car ?? carName,
+          variant: selected?.variant ?? "",
           source: leadSource,
           website: "",
         }),
@@ -72,7 +77,7 @@ export default function LandingLeadForm({ carName, variants, defaultSource }: La
       const result = await response.json();
       if (!result.success) throw new Error(result.message || "Không thể gửi yêu cầu.");
 
-      trackPixel("Lead", { content_name: leadSource, content_category: carName });
+      trackPixel("Lead", { content_name: leadSource, content_category: selected?.car ?? carName });
       setIsSuccess(true);
       form.reset();
     } catch (error) {
@@ -128,18 +133,20 @@ export default function LandingLeadForm({ carName, variants, defaultSource }: La
         />
       </div>
 
-      {variants.length > 1 && (
+      {options.length > 1 && (
         <div>
           <label htmlFor="landing-variant" className="mb-1.5 block text-sm font-semibold text-gray-700">Phiên bản quan tâm</label>
           <select
             id="landing-variant"
-            name="variant"
+            name="option"
             defaultValue=""
             className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 outline-none transition focus:border-red-600 focus:ring-2 focus:ring-red-100"
           >
             <option value="">Chưa chọn</option>
-            {variants.map((variant) => (
-              <option key={variant} value={variant}>{variant}</option>
+            {options.map((option, index) => (
+              <option key={option.car + option.variant} value={index}>
+                {option.car === carName ? option.variant : option.car.replace(/^Mitsubishi /, "")}
+              </option>
             ))}
           </select>
         </div>

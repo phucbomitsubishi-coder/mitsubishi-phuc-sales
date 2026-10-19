@@ -18,6 +18,10 @@ import MobileContactBar from "@/components/MobileContactBar";
 
 export type AdLandingPageProps = {
   carSlug: string;
+  // Gộp thêm dòng xe cùng nhóm khách (vd Xpander Cross vào trang Xpander): thêm phiên bản vào bảng, ưu đãi và form
+  extraCarSlugs?: string[];
+  // Tiêu đề lớn, mặc định là tên xe chính
+  heading?: string;
   defaultSource: string;
   kicker: string;
   heroImage: string;
@@ -30,7 +34,7 @@ const million = (value: number) =>
 
 const deliveryPhotos = ["ban-giao-01.jpg", "ban-giao-02.jpg", "ban-giao-03.jpg"];
 
-export default function AdLandingPage({ carSlug, defaultSource, kicker, heroImage, highlights, whyTitle }: AdLandingPageProps) {
+export default function AdLandingPage({ carSlug, extraCarSlugs = [], heading, defaultSource, kicker, heroImage, highlights, whyTitle }: AdLandingPageProps) {
   const car = getCarBySlug(carSlug);
   if (!car) notFound();
 
@@ -39,18 +43,20 @@ export default function AdLandingPage({ carSlug, defaultSource, kicker, heroImag
   const isPromoActive =
     now.getFullYear() === dealerPromotion.year && now.getMonth() + 1 === dealerPromotion.month;
   const promoMonthLabel = `${String(dealerPromotion.month).padStart(2, "0")}/${dealerPromotion.year}`;
-  const dealerVariants = isPromoActive ? dealerPromotion.cars[car.id] ?? [] : [];
-
   const province = provinces.find((item) => item.id === defaultProvinceId) ?? provinces[0];
-  const rows = car.variants.map((variant) => {
-    const benefits = dealerVariants.find((item) => item.variant === variant.name)?.benefits ?? [];
-    const { onRoadPrice } = calculateOnRoadPrice({
-      carName: car.name,
-      price: variant.price,
-      seats: variant.specifications?.seats,
-      province,
+  const landingCars = [car, ...extraCarSlugs.map((slug) => getCarBySlug(slug)).filter((item) => item !== undefined)];
+  const rows = landingCars.flatMap((item) => {
+    const dealerVariants = isPromoActive ? dealerPromotion.cars[item.id] ?? [] : [];
+    return item.variants.map((variant) => {
+      const benefits = dealerVariants.find((promo) => promo.variant === variant.name)?.benefits ?? [];
+      const { onRoadPrice } = calculateOnRoadPrice({
+        carName: item.name,
+        price: variant.price,
+        seats: variant.specifications?.seats,
+        province,
+      });
+      return { carName: item.name, name: variant.name, price: variant.price, onRoadPrice, benefits };
     });
-    return { name: variant.name, price: variant.price, onRoadPrice, benefits };
   });
   const maxBenefit = Math.max(0, ...rows.map((row) => row.benefits.reduce((sum, b) => sum + b.value, 0)));
 
@@ -77,7 +83,7 @@ export default function AdLandingPage({ carSlug, defaultSource, kicker, heroImag
         <div className="mx-auto grid max-w-6xl gap-8 px-4 py-8 md:grid-cols-[1.2fr_1fr] md:py-12">
           <div>
             <p className="text-sm font-semibold uppercase tracking-widest text-red-500">{kicker}</p>
-            <h1 className="mt-2 text-3xl font-bold md:text-5xl">{car.name}</h1>
+            <h1 className="mt-2 text-3xl font-bold md:text-5xl">{heading ?? car.name}</h1>
             <p className="mt-3 text-lg text-gray-300">
               Giá niêm yết từ {million(Math.min(...rows.map((row) => row.price)))} đồng
             </p>
@@ -121,7 +127,7 @@ export default function AdLandingPage({ carSlug, defaultSource, kicker, heroImag
               <Suspense fallback={null}>
                 <LandingLeadForm
                   carName={car.name}
-                  variants={rows.map((row) => row.name)}
+                  options={rows.map((row) => ({ car: row.carName, variant: row.name }))}
                   defaultSource={defaultSource}
                 />
               </Suspense>
