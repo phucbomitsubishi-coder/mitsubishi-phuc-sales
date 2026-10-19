@@ -27,6 +27,21 @@ const nextConfig: NextConfig = {
         destination: "/tu-van/chon-xe-mitsubishi-phu-hop",
         permanent: true,
       },
+      // Link của web cũ trên tên miền (?s=45/san-pham/mitsubishi-attrage, ?x=31/san-pham/attrage-cvt)
+      // vẫn còn trong Search Console: đưa về đúng trang xe thay vì trang chủ (16/10/2026)
+      ...["s", "x"].map((key) => ({
+        source: "/",
+        has: [
+          {
+            type: "query" as const,
+            key,
+            value:
+              ".*san-pham/(?:mitsubishi-)?(?<model>xpander-cross|xforce|xpander|attrage|triton|destinator).*",
+          },
+        ],
+        destination: "/xe/mitsubishi-:model",
+        permanent: true,
+      })),
       {
         source:
           "/xe/:id(xforce|xpander|xpander-cross|attrage|triton|destinator)",

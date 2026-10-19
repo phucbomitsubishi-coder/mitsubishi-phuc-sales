@@ -7,6 +7,7 @@ import { cars } from "@/data/cars";
 import { currentPromotion } from "@/data/promotions";
 import "./globals.css";
 import SiteFooter from "@/components/SiteFooter";
+import HideOnLanding from "@/components/HideOnLanding";
 import { siteConfig } from "@/config/site";
 
 const roboto = Roboto({
@@ -132,10 +133,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   }}
 />
   <div className="flex-1">{children}</div>
-  <SiteFooter />
+  <HideOnLanding><SiteFooter /></HideOnLanding>
   <Analytics />
   <MetaPixel />
-  <QuickQuote cars={quickQuoteCars} zaloUrl={siteConfig.contact.zaloUrl} phoneUrl={siteConfig.contact.phoneUrl} />
+  <HideOnLanding><QuickQuote cars={quickQuoteCars} zaloUrl={siteConfig.contact.zaloUrl} phoneUrl={siteConfig.contact.phoneUrl} /></HideOnLanding>
 </body>
     </html>
   );

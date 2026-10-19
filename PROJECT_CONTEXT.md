@@ -45,6 +45,7 @@ npm run promo-images   # Ảnh khuyến mãi từng dòng xe 1080×1350 + file c
 npm run sync-accessories # Đồng bộ bảng phụ kiện (CHỈ giá niêm yết của món " – MMV") từ ../bao-gia-xe/phu-kien.js → src/data/accessories.ts (tự sinh, không sửa tay)
 npm run compare-images # Ảnh 1080×1350 + caption cho các bài so sánh → ../anh-facebook/so-sanh/ (thêm bài mới: sửa mảng comparisons trong script; ảnh chỉ đặt câu hỏi trung lập, không số liệu hơn thua; ảnh xe đối thủ CHỈ lấy từ Wikimedia Commons CC BY/BY-SA, lưu ../anh-facebook/so-sanh/doi-thu/<khóa>.jpg + credits.json, ảnh tự in dòng ghi tác giả; ảnh anh Phúc tự chụp để ở ../anh-facebook/so-sanh/anh-tu-chup/<tên mẫu xe>.jpg được ưu tiên, không cần ghi tác giả)
 npm run indexnow       # Báo Bing/IndexNow mọi URL trong sitemap (chạy SAU khi deploy xong; khóa ở public/<key>.txt). Cốc Cốc không còn webmaster tool, tự thu thập theo robots.txt
+npm run sync-dealer-promos # Đồng bộ CHƯƠNG TRÌNH ĐẠI LÝ (PROMO_MONTH, PROMOS) từ ../bao-gia-xe/index.html → src/data/dealerPromotions.ts (tự sinh; KHÔNG đọc .bi-mat). Chỉ landing page /uu-dai/* dùng
 npm run ad-images      # Ảnh QUẢNG CÁO Fanpage theo chương trình ĐẠI LÝ (đọc PROMOS/CARS/BHVC từ ../bao-gia-xe/index.html) → ../anh-facebook/quang-cao-MM-YYYY/
 ```
 
@@ -164,6 +165,11 @@ Alias import: `@/` → `src/`.
   Dữ liệu ở `specifications` của từng phiên bản trong `cars.ts` (đã đối chiếu trang MMV 14/10/2026, gồm khoảng cách bánh, treo, phanh, trợ lực lái, khóa vi sai, tiêu hao nhiên liệu). Trên điện thoại bảng vuốt ngang, cột tên thông số và chữ ô gộp dính mép trái (`sticky`).
 - **Trang bị phiên bản** (`src/app/xe/[slug]/EquipmentList.tsx`): mỗi nhóm `equipment` (ngoại thất, nội thất, tiện nghi, an toàn, vận hành và hỗ trợ lái), "Hệ thống an toàn" và "Diamond Sense" (`safetyTechnologies`, kèm giải thích) là một `<details>` thu gọn có số đếm.
 - **Tiêu đề trang xe** (`generateMetadata` trong `src/app/xe/[slug]/page.tsx`): "Giá xe <tên xe> tháng MM/YYYY: lăn bánh, ưu đãi", mô tả có cụm từ khách hay tìm (`carSeoTags`, ví dụ Xforce "SUV 5 chỗ gầm cao 222 mm"), giá thấp nhất và ưu đãi cao nhất, tự đổi theo `currentPromotion` (15/10/2026, theo số liệu Search Console).
+- **Landing page quảng cáo** (`/uu-dai/<xe>`, hiện có `/uu-dai/destinator`, 10/2026): cho người bấm quảng cáo Facebook/Google. `robots: noindex, nofollow`, KHÔNG có trong sitemap, KHÔNG link từ web chính.
+  Không có menu; footer chung và nút Báo giá nhanh bị ẩn bằng `HideOnLanding` (layout) cho mọi đường dẫn `/uu-dai/`; trang tự có footer ngắn (người bán, địa chỉ, chính sách bảo mật: Google Ads yêu cầu).
+  Ưu đãi ghi theo **chương trình đại lý** (anh Phúc chọn "cách B" 16/10/2026) từ `dealerPromotions.ts` (`npm run sync-dealer-promos` mỗi tháng), vẫn kèm câu "không phải tiền mặt"; hết tháng mà chưa đồng bộ thì phần ưu đãi tự ẩn khi build.
+  **Không bao giờ** đưa quyền linh động/LNG (.bi-mat) vào repo (repo công khai). Form `LandingLeadForm` gửi vào sheet báo giá, nguồn = `?nguon=` của URL quảng cáo (mặc định "Landing Destinator"), Pixel Lead.
+  Thêm xe mới: chép thư mục `src/app/uu-dai/destinator`, đổi `CAR_SLUG`, `DEFAULT_SOURCE`, `highlights`, ảnh.
 - **Trả góp** (`InstallmentCalculator.tsx`): chọn trả trước 20–70%, thời hạn 1–8 năm, nhập lãi suất năm đầu.
 - **Trang Giới thiệu** (`src/app/gioi-thieu/page.tsx`) tập trung vào người tư vấn. Thứ tự các phần: hero có ảnh chân dung,
   số liệu (năm kinh nghiệm, số xe, 24/7) và điểm Google 5,0 (635) **của showroom** (luôn ghi rõ tên showroom, không phải đánh giá cá nhân) → 4 lý do (lấy từ nhận xét thật của khách) →
