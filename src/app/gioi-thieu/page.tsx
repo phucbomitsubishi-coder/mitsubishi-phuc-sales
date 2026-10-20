@@ -2,6 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 import MoveoLocation from "@/components/MoveoLocation";
+import CarLineup from "@/components/CarLineup";
+import { carCards, lineupNeeds } from "@/lib/carCards";
 import { siteConfig } from "@/config/site";
 import { createPageMetadata } from "@/lib/metadata";
 
@@ -17,7 +19,7 @@ const { sales, dealer, contact, social } = siteConfig;
 
 // Số liệu Google Maps của showroom đại lý, không phải của riêng người tư vấn (ảnh chụp màn hình khách gửi, 10/2026).
 // Luôn ghi rõ tên showroom cạnh con số để khách không hiểu nhầm là đánh giá cá nhân.
-const googleRating = { score: "5,0", count: 635 };
+const googleRating = siteConfig.dealer.googleRating;
 const googleReviewsUrl =
   "https://www.google.com/maps/search/?api=1&query=Mitsubishi+Motors+Moveo+New+City";
 
@@ -136,11 +138,11 @@ export default function GioiThieuPage() {
 
         <div className="relative mx-auto grid max-w-7xl items-end gap-10 px-6 pt-12 lg:grid-cols-[7fr_5fr] lg:pt-16">
           <div className="pb-12 lg:pb-20">
-            <p className="text-sm font-bold uppercase tracking-[0.25em] text-red-400">
+            <p className="text-xs font-bold uppercase tracking-[0.25em] text-red-400">
               {sales.title}
             </p>
 
-            <h1 className="mt-3 text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+            <h1 className="mt-3 text-4xl font-black tracking-tight sm:text-5xl lg:text-7xl">
               {sales.name}
             </h1>
 
@@ -199,7 +201,7 @@ export default function GioiThieuPage() {
             <div className="mt-8 flex flex-wrap gap-3">
               <a
                 href={contact.phoneUrl}
-                className="rounded-xl bg-red-600 px-6 py-3 font-bold text-white shadow-lg shadow-red-600/30 transition hover:bg-red-700"
+                className="bg-red-600 px-6 py-3.5 text-sm font-bold uppercase tracking-[0.15em] text-white transition hover:bg-red-700"
               >
                 Gọi {sales.phoneDisplay}
               </a>
@@ -207,13 +209,13 @@ export default function GioiThieuPage() {
                 href={contact.zaloUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-xl border border-white/80 px-6 py-3 font-bold text-white transition hover:bg-white hover:text-neutral-950"
+                className="border border-white px-6 py-3.5 text-sm font-bold uppercase tracking-[0.15em] text-white transition hover:bg-white hover:text-neutral-950"
               >
                 Nhắn Zalo
               </a>
               <Link
                 href="/dang-ky-lai-thu?nguon=Gioi-thieu"
-                className="rounded-xl px-4 py-3 font-bold text-neutral-300 underline-offset-4 transition hover:text-white hover:underline"
+                className="px-2 py-3.5 text-sm font-bold uppercase tracking-[0.15em] text-neutral-300 underline-offset-4 transition hover:text-white hover:underline"
               >
                 Đăng ký lái thử →
               </Link>
@@ -235,10 +237,10 @@ export default function GioiThieuPage() {
 
       {/* VÌ SAO CHỌN PHÚC */}
       <section className="mx-auto max-w-7xl px-6 py-16 md:py-20">
-        <p className="text-sm font-bold uppercase tracking-[0.25em] text-red-700">
+        <p className="text-xs font-bold uppercase tracking-[0.25em] text-red-700">
           Vì sao khách hàng chọn Phúc
         </p>
-        <h2 className="mt-3 max-w-2xl text-3xl font-extrabold tracking-tight md:text-4xl">
+        <h2 className="mt-3 max-w-3xl text-3xl font-black tracking-tight md:text-5xl">
           Mua xe nhẹ nhàng, rõ ràng và được chăm sóc lâu dài
         </h2>
 
@@ -272,10 +274,10 @@ export default function GioiThieuPage() {
       {/* QUY TRÌNH */}
       <section className="bg-neutral-50">
         <div className="mx-auto max-w-7xl px-6 py-16 md:py-20">
-          <p className="text-sm font-bold uppercase tracking-[0.25em] text-red-700">
+          <p className="text-xs font-bold uppercase tracking-[0.25em] text-red-700">
             Quy trình mua xe
           </p>
-          <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
+          <h2 className="mt-3 text-3xl font-black tracking-tight md:text-5xl">
             4 bước để sở hữu xe Mitsubishi
           </h2>
 
@@ -297,10 +299,10 @@ export default function GioiThieuPage() {
       <section className="mx-auto max-w-7xl px-6 py-16 md:py-20">
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div>
-            <p className="text-sm font-bold uppercase tracking-[0.25em] text-red-700">
+            <p className="text-xs font-bold uppercase tracking-[0.25em] text-red-700">
               Khoảnh khắc bàn giao xe
             </p>
-            <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
+            <h2 className="mt-3 text-3xl font-black tracking-tight md:text-5xl">
               Niềm vui của khách hàng là động lực của Phúc
             </h2>
           </div>
@@ -310,7 +312,7 @@ export default function GioiThieuPage() {
               href={social.tiktok}
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-full border border-neutral-300 px-5 py-2.5 text-sm font-semibold transition hover:border-neutral-950"
+              className="border border-neutral-300 px-4 py-2.5 text-xs font-bold uppercase tracking-[0.12em] transition hover:border-neutral-950"
             >
               Xem video trên TikTok →
             </a>
@@ -318,7 +320,7 @@ export default function GioiThieuPage() {
               href={social.fanpage}
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-full border border-neutral-300 px-5 py-2.5 text-sm font-semibold transition hover:border-neutral-950"
+              className="border border-neutral-300 px-4 py-2.5 text-xs font-bold uppercase tracking-[0.12em] transition hover:border-neutral-950"
             >
               Fanpage {social.fanpageName} →
             </a>
@@ -354,10 +356,10 @@ export default function GioiThieuPage() {
         <div className="mx-auto max-w-7xl px-6 py-16 md:py-20">
           <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <div>
-              <p className="text-sm font-bold uppercase tracking-[0.25em] text-red-500">
+              <p className="text-xs font-bold uppercase tracking-[0.25em] text-red-500">
                 Khách hàng nói gì
               </p>
-              <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
+              <h2 className="mt-3 text-3xl font-black tracking-tight md:text-5xl">
                 Được khách hàng tin tưởng
               </h2>
             </div>
@@ -398,74 +400,47 @@ export default function GioiThieuPage() {
         </div>
       </section>
 
-      {/* ĐẠI LÝ MOVEO NEW CITY */}
-      <section className="mx-auto max-w-7xl px-6 pt-16 md:pt-20">
-        <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
-          <div>
-            <p className="text-sm font-bold uppercase tracking-[0.25em] text-red-700">
-              Về đại lý
-            </p>
-            <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
-              {dealer.brand} – {dealer.name.replace("Mitsubishi ", "")}
-            </h2>
-            <p className="mt-5 leading-8 text-neutral-600">
-              Đại lý chính hãng được Mitsubishi Motors Việt Nam ủy quyền, cung
-              cấp xe mới, dịch vụ bảo dưỡng – sửa chữa, phụ tùng chính
-              hãng và xe đã qua sử dụng. Thuộc hệ thống Moveo, phục vụ khách
-              hàng Mitsubishi khu vực {dealer.salesArea}.
-            </p>
-          </div>
-
-          <ol className="grid grid-cols-3 gap-3">
-            {milestones.map((item) => (
-              <li
-                key={item.year}
-                className="rounded-2xl border border-neutral-200 p-5 text-center"
-              >
-                <p className="text-2xl font-extrabold text-red-700 sm:text-3xl">
-                  {item.year}
-                </p>
-                <p className="mt-1 text-sm font-semibold text-neutral-700">
-                  {item.text}
-                </p>
-              </li>
-            ))}
-          </ol>
+      {/* CÁC DÒNG XE PHÚC TƯ VẤN (dùng chung khối với trang chủ) */}
+      <section className="bg-white">
+        <div className="mx-auto max-w-7xl px-6 py-12 md:py-20">
+          <p className="text-xs font-bold uppercase tracking-[0.25em] text-red-700">Các dòng xe Phúc đang tư vấn</p>
+          <h2 className="mt-3 text-3xl font-black tracking-tight md:text-5xl">Anh chị quan tâm xe nào?</h2>
+          <CarLineup cars={carCards} needs={lineupNeeds} />
         </div>
       </section>
 
-      {/* ĐỊA ĐIỂM & BẢN ĐỒ */}
-      <MoveoLocation />
+      {/* VỀ ĐẠI LÝ, ĐỊA ĐIỂM & BẢN ĐỒ */}
+      <MoveoLocation milestones={milestones} />
 
-      {/* CTA CUỐI TRANG */}
-      <section className="bg-red-600 text-white">
-        <div className="mx-auto flex max-w-7xl flex-col gap-6 px-6 py-12 md:flex-row md:items-center md:justify-between">
-          <div>
-            <p className="text-sm font-bold uppercase tracking-wider text-white">
-              Kết nối trực tiếp
-            </p>
-            <h2 className="mt-2 text-3xl font-bold">
-              Bạn đang quan tâm xe Mitsubishi?
-            </h2>
-            <p className="mt-2 max-w-2xl text-white">
-              Nhắn cho Phúc mẫu xe bạn thích để nhận báo giá, ưu đãi mới nhất và
-              lịch lái thử phù hợp.
-            </p>
-          </div>
-          <div className="flex flex-wrap gap-3">
+      {/* DẢI CHỐT CUỐI TRANG (đồng bộ cuối trang xe) */}
+      <section className="relative overflow-clip bg-neutral-950 text-white">
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_120%,rgba(220,38,38,0.4),transparent_60%)]" />
+        <div className="relative mx-auto max-w-5xl px-6 py-14 text-center md:py-20">
+          <p className="text-xs font-bold uppercase tracking-[0.25em] text-red-400">Kết nối trực tiếp</p>
+          <h2 className="mt-3 text-3xl font-black uppercase tracking-tight md:text-5xl">Bạn đang quan tâm xe Mitsubishi?</h2>
+          <p className="mx-auto mt-4 max-w-2xl leading-7 text-white/75">
+            Nhắn cho Phúc mẫu xe bạn thích để nhận báo giá lăn bánh, ưu đãi mới nhất và lịch lái thử phù hợp.
+          </p>
+          <div className="mx-auto mt-8 grid max-w-3xl gap-3 sm:grid-cols-3">
             <Link
               href="/dang-ky-lai-thu?nguon=Gioi-thieu"
-              className="rounded-lg bg-white px-6 py-3 font-bold text-red-700 transition hover:bg-gray-100"
+              className="bg-white px-6 py-4 text-sm font-bold uppercase tracking-[0.2em] text-neutral-950 transition hover:bg-gray-200"
             >
               Đăng ký lái thử
+            </Link>
+            <Link
+              href="/?nguon=Gioi-thieu#bao-gia"
+              className="bg-red-600 px-6 py-4 text-sm font-bold uppercase tracking-[0.2em] text-white transition hover:bg-red-700"
+            >
+              Nhận báo giá
             </Link>
             <a
               href={contact.zaloUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-lg border border-white px-6 py-3 font-bold text-white transition hover:bg-white hover:text-red-700"
+              className="border border-white/40 px-6 py-4 text-sm font-bold uppercase tracking-[0.2em] transition hover:border-white hover:bg-white/10"
             >
-              Liên hệ Zalo
+              Nhắn Zalo
             </a>
           </div>
         </div>

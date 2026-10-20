@@ -33,11 +33,14 @@ export async function generateMetadata({
     };
   }
 
+  // Mô tả trên Google: giá, số km, phiên bản và cam kết để khách thấy ngay
+  const variant = car.name.toLowerCase().includes(car.variant.toLowerCase()) ? "" : ` ${car.variant}`;
+  const inspected = car.commitments.some((item) => item.includes("160"));
+  const description = `${car.name}${variant} ${car.modelYear} đã qua sử dụng, đi ${car.mileage.toLocaleString("vi-VN")} km, giá ${car.price.toLocaleString("vi-VN")} đồng.${inspected ? " Xe đã kiểm định chính hãng 160 chi tiết." : ""} Xem xe và lái thử tại ${siteConfig.dealer.name}.`;
+
   return {
     title: `${car.name} ${car.modelYear} đã qua sử dụng, ${car.mileage.toLocaleString("vi-VN")} km | Lưu Hoàng Phúc`,
-    description: `${car.name} ${car.modelYear}, ${car.mileage.toLocaleString(
-      "vi-VN"
-    )} km, giá ${car.price.toLocaleString("vi-VN")} đồng.`,
+    description,
     alternates: {
       canonical: `/xe-cu/${slug}`,
     },
@@ -45,9 +48,7 @@ export async function generateMetadata({
       type: "website",
       url: `/xe-cu/${slug}`,
       title: `${car.name} ${car.modelYear} đã qua sử dụng, ${car.mileage.toLocaleString("vi-VN")} km | Lưu Hoàng Phúc`,
-      description: `${car.name} ${car.modelYear}, ${car.mileage.toLocaleString(
-        "vi-VN"
-      )} km, giá ${car.price.toLocaleString("vi-VN")} đồng.`,
+      description,
       images: [
         {
           url: car.image,
@@ -58,9 +59,7 @@ export async function generateMetadata({
     twitter: {
       card: "summary_large_image",
       title: `${car.name} ${car.modelYear} đã qua sử dụng, ${car.mileage.toLocaleString("vi-VN")} km | Lưu Hoàng Phúc`,
-      description: `${car.name} ${car.modelYear}, ${car.mileage.toLocaleString(
-        "vi-VN"
-      )} km, giá ${car.price.toLocaleString("vi-VN")} đồng.`,
+      description,
       images: [car.image],
     },
   };

@@ -1,16 +1,17 @@
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
 import { cars } from "@/data/cars";
+import FooterSection from "@/components/FooterSection";
 
 export default function SiteFooter() {
   const { sales, dealer, contact, social } = siteConfig;
 
   return (
     <footer className="mt-auto bg-black text-white">
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-5">
+      <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 md:py-12 lg:px-8">
+        <div className="grid md:grid-cols-2 md:gap-10 lg:grid-cols-5">
   {/* Showroom */}
-  <div className="lg:col-span-1">
+  <div className="border-b border-gray-800 pb-5 md:border-0 md:pb-0 lg:col-span-1">
     <h2 className="text-lg font-bold">
       {dealer.name}
     </h2>
@@ -32,12 +33,7 @@ export default function SiteFooter() {
   </div>
 
   {/* Sản phẩm */}
-  <div>
-    <h3 className="font-bold uppercase tracking-wide">
-      Sản phẩm
-    </h3>
-
-    <div className="mt-4 flex flex-col gap-3 text-sm text-gray-300">
+  <FooterSection title="Sản phẩm">
       {cars.map((car) => (
         <Link
           key={car.slug}
@@ -47,16 +43,10 @@ export default function SiteFooter() {
           {car.name.replace(/^Mitsubishi /, "")}
         </Link>
       ))}
-    </div>
-  </div>
+  </FooterSection>
 
   {/* Mua xe */}
-  <div>
-    <h3 className="font-bold uppercase tracking-wide">
-      Mua xe
-    </h3>
-
-    <div className="mt-4 flex flex-col gap-3 text-sm text-gray-300">
+  <FooterSection title="Mua xe">
       <Link href="/bang-gia-xe-mitsubishi" className="hover:text-white">
         Bảng giá xe
       </Link>
@@ -102,16 +92,10 @@ export default function SiteFooter() {
       <Link href="/lien-he" className="hover:text-white">
         Yêu cầu báo giá
       </Link>
-    </div>
-  </div>
+  </FooterSection>
 
   {/* Hỗ trợ khách hàng */}
-  <div>
-    <h3 className="font-bold uppercase tracking-wide">
-      Hỗ trợ khách hàng
-    </h3>
-
-    <div className="mt-4 flex flex-col gap-3 text-sm text-gray-300">
+  <FooterSection title="Hỗ trợ khách hàng">
       <Link
         href="/ho-tro/chinh-sach-bao-hanh"
         className="hover:text-white"
@@ -146,11 +130,10 @@ export default function SiteFooter() {
 >
   Câu hỏi thường gặp
 </Link>
-    </div>
-  </div>
+  </FooterSection>
 
   {/* Liên hệ */}
-  <div>
+  <div className="pt-6 md:pt-0">
     <h3 className="font-bold uppercase tracking-wide">
       Liên hệ
     </h3>
@@ -184,6 +167,7 @@ export default function SiteFooter() {
         <span className="block text-gray-400">{siteConfig.hours.afterHours}</span>
       </p>
 
+      <div className="flex flex-wrap gap-x-4 gap-y-2">
       <a
         href={social.fanpage}
         target="_blank"
@@ -210,6 +194,7 @@ export default function SiteFooter() {
       >
         TikTok
       </a>
+      </div>
     </div>
   </div>
 </div>

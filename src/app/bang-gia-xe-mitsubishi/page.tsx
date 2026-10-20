@@ -9,6 +9,7 @@ import { currentPromotion } from "@/data/promotions";
 import { provinces, defaultProvinceId } from "@/data/registrationFees";
 import { calculateOnRoadPrice } from "@/lib/onRoadPrice";
 import { formatMillion, promotionMonthLabel } from "@/lib/promotionItems";
+import { featuredImages } from "@/lib/carCards";
 import { siteConfig } from "@/config/site";
 
 // Toàn bộ số liệu lấy từ cars.ts, promotions.ts và registrationFees.ts.
@@ -130,7 +131,7 @@ export default function PriceListPage() {
             {formatMillion(cheapest.minPrice)} đồng.
           </p>
 
-          <div className="mt-5 overflow-x-auto rounded-xl border border-gray-200">
+          <div tabIndex={0} role="region" aria-label="Bảng tóm tắt giá các dòng xe" className="mt-5 overflow-x-auto rounded-xl border border-gray-200">
             <table className="w-full min-w-[560px] text-left text-sm">
               <thead className="bg-gray-50 text-gray-700">
                 <tr>
@@ -181,7 +182,7 @@ export default function PriceListPage() {
                 <div className="grid gap-6 md:grid-cols-[220px_1fr] md:items-center">
                   <div className="relative h-32 md:h-36">
                     <Image
-                      src={car.image}
+                      src={featuredImages[car.id] ?? car.image}
                       alt={car.name}
                       fill
                       sizes="(min-width: 768px) 220px, 300px"
@@ -198,7 +199,7 @@ export default function PriceListPage() {
                   </div>
                 </div>
 
-                <div className="mt-6 overflow-x-auto rounded-xl border border-gray-200">
+                <div tabIndex={0} role="region" aria-label={`Bảng giá ${car.name}`} className="mt-6 overflow-x-auto rounded-xl border border-gray-200">
                   <table className="w-full min-w-[640px] text-left text-sm">
                     <thead className="bg-gray-50 text-gray-700">
                       <tr>

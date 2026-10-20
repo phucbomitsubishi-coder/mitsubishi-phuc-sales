@@ -6,6 +6,7 @@ import SiteHeader from "@/components/SiteHeader";
 import { newsArticles } from "@/data/news";
 import { advisoryArticles } from "@/data/advisory";
 import NewsPromotionCover from "@/components/NewsPromotionCover";
+import NewsList from "./NewsList";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Tin tức & Tư vấn Mitsubishi | Lưu Hoàng Phúc",
@@ -129,79 +130,51 @@ export default function NewsPage() {
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {advisoryArticles.map((item) => (
+            {advisoryArticles.map((item, index) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="group rounded-xl border border-gray-200 p-5 transition hover:border-red-600 hover:shadow-md"
+                className={`group rounded-xl border border-gray-200 p-4 transition hover:border-red-600 hover:shadow-md sm:p-5 ${index >= 6 ? "hidden sm:block" : ""}`}
               >
                 <span className="text-sm font-bold text-red-700">{item.number}</span>
                 <p className="mt-2 font-bold leading-6 group-hover:text-red-700">
                   {item.title}
                 </p>
-                <p className="mt-2 text-sm leading-6 text-gray-600">
+                <p className="mt-2 hidden text-sm leading-6 text-gray-600 sm:block">
                   {item.description}
                 </p>
               </Link>
             ))}
           </div>
+          {advisoryArticles.length > 6 && (
+            <Link
+              href="/tu-van"
+              className="mt-4 block rounded-xl border border-gray-300 py-3 text-center font-semibold text-gray-800 transition hover:border-red-600 hover:text-red-700 sm:hidden"
+            >
+              Xem tất cả {advisoryArticles.length} bài tư vấn, so sánh →
+            </Link>
+          )}
         </section>
 
         {/* Other articles */}
         {otherArticles.length > 0 && (
           <section className="bg-gray-50">
-            <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+            <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
               <h2 className="text-2xl font-bold">
                 Bài viết mới
               </h2>
 
-              <div className="mt-7 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                {otherArticles.map((article) => (
-                  <article
-                    key={article.id}
-                    className="overflow-hidden rounded-2xl border border-gray-200 bg-white"
-                  >
-                    <div className="relative aspect-[16/9]">
-                      <Image
-                        src={article.image}
-                        alt={article.title}
-                        fill
-                        className="object-cover"
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      />
-                    </div>
-
-                    <div className="p-6">
-                      <div className="flex flex-wrap items-center gap-2 text-sm">
-                        <span className="font-semibold text-red-600">
-                          {article.category}
-                        </span>
-
-                        <span className="text-gray-300">•</span>
-
-                        <span className="text-gray-500">
-                          {formatDate(article.publishedAt)}
-                        </span>
-                      </div>
-
-                      <h3 className="mt-3 text-xl font-bold">
-                        {article.title}
-                      </h3>
-
-                      <p className="mt-3 line-clamp-3 leading-7 text-gray-600">
-                        {article.excerpt}
-                      </p>
-
-                      <Link
-                        href={`/tin-tuc/${article.slug}`}
-                        className="mt-5 inline-flex font-semibold text-red-600 hover:text-red-700"
-                      >
-                        Đọc tiếp →
-                      </Link>
-                    </div>
-                  </article>
-                ))}
-              </div>
+              <NewsList
+                articles={otherArticles.map((article) => ({
+                  id: article.id,
+                  slug: article.slug,
+                  title: article.title,
+                  excerpt: article.excerpt,
+                  image: article.image,
+                  category: article.category,
+                  date: formatDate(article.publishedAt),
+                }))}
+              />
             </div>
           </section>
         )}

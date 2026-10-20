@@ -8,6 +8,8 @@ import { siteConfig } from "@/config/site";
 import { cars } from "@/data/cars";
 import { accessoryGroups, accessoriesMonth, type AccessoryGroup, type AccessoryItem } from "@/data/accessories";
 import { categorizeGroup } from "@/lib/accessoryCategories";
+import { featuredImages } from "@/lib/carCards";
+import OpenDetailsFromHash from "@/components/OpenDetailsFromHash";
 
 export const metadata: Metadata = createPageMetadata({
   title: `Bảng giá phụ kiện xe Mitsubishi ${accessoriesMonth}: Xpander, Xforce, Destinator, Triton`,
@@ -121,6 +123,7 @@ export default function AccessoriesPage() {
         dateModified="2026-10-12"
       />
       <SiteHeader />
+      <OpenDetailsFromHash />
 
       <main className="bg-gray-50 text-gray-900">
         <section className="bg-neutral-950 text-white">
@@ -148,7 +151,7 @@ export default function AccessoriesPage() {
                 <details key={car.id} id={car.id} className="group scroll-mt-24 rounded-xl border-2 border-gray-200 bg-white shadow-sm transition open:border-red-600">
                   <summary className="flex cursor-pointer list-none items-center gap-4 rounded-xl px-4 py-3 hover:bg-gray-50">
                     <div className="relative h-12 w-20 shrink-0">
-                      <Image src={car.image} alt={car.name} fill sizes="80px" className="object-contain" />
+                      <Image src={featuredImages[car.id] ?? car.image} alt={car.name} fill sizes="80px" className="object-contain" />
                     </div>
                     <div className="min-w-0 flex-1">
                       <p className="text-lg font-bold text-gray-900 group-open:text-red-700">

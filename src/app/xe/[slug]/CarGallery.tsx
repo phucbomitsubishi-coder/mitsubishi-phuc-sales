@@ -1,101 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Image from "next/image";
+import { carGalleries } from "@/data/carGalleries";
 
 type GalleryType = "exterior" | "interior";
-
-const carGalleries: Record<
-  string,
-  Record<GalleryType, string[]>
-> = {
-  "Mitsubishi Xforce": {
-    exterior: [
-      "/images/cars/xforce/gallery/exterior/exterior-01.jpg",
-      "/images/cars/xforce/gallery/exterior/exterior-02.jpg",
-      "/images/cars/xforce/gallery/exterior/exterior-03.jpg",
-      "/images/cars/xforce/gallery/exterior/exterior-04.jpg",
-    ],
-    interior: [
-      "/images/cars/xforce/gallery/interior/interior-01.jpg",
-      "/images/cars/xforce/gallery/interior/interior-02.jpg",
-      "/images/cars/xforce/gallery/interior/interior-03.jpg",
-      "/images/cars/xforce/gallery/interior/interior-04.jpg",
-    ],
-    },
-
-  "Mitsubishi Xpander": {
-    exterior: [
-      "/images/cars/xpander/gallery/exterior/exterior-01.jpg",
-      "/images/cars/xpander/gallery/exterior/exterior-02.jpg",
-      "/images/cars/xpander/gallery/exterior/exterior-03.jpg",
-      "/images/cars/xpander/gallery/exterior/exterior-04.jpg",
-    ],
-    interior: [
-      "/images/cars/xpander/gallery/interior/interior-01.jpg",
-      "/images/cars/xpander/gallery/interior/interior-02.jpg",
-      "/images/cars/xpander/gallery/interior/interior-03.jpg",
-      "/images/cars/xpander/gallery/interior/interior-04.jpg",
-    ],
-  },
-    "Mitsubishi Xpander Cross": {
-    exterior: [
-      "/images/cars/xpander-cross/gallery/exterior/exterior-01.jpg",
-      "/images/cars/xpander-cross/gallery/exterior/exterior-02.jpg",
-      "/images/cars/xpander-cross/gallery/exterior/exterior-03.jpg",
-      "/images/cars/xpander-cross/gallery/exterior/exterior-04.jpg",
-    ],
-    interior: [
-      "/images/cars/xpander-cross/gallery/interior/interior-01.jpg",
-      "/images/cars/xpander-cross/gallery/interior/interior-02.jpg",
-      "/images/cars/xpander-cross/gallery/interior/interior-03.jpg",
-      "/images/cars/xpander-cross/gallery/interior/interior-04.jpg",
-    ],
-  },
-    "Mitsubishi Attrage": {
-    exterior: [
-      "/images/cars/attrage/gallery/exterior/exterior-01.jpg",
-      "/images/cars/attrage/gallery/exterior/exterior-02.jpg",
-      "/images/cars/attrage/gallery/exterior/exterior-03.jpg",
-      "/images/cars/attrage/gallery/exterior/exterior-04.jpg",
-    ],
-    interior: [
-      "/images/cars/attrage/gallery/interior/interior-01.jpg",
-      "/images/cars/attrage/gallery/interior/interior-02.jpg",
-      "/images/cars/attrage/gallery/interior/interior-03.jpg",
-      "/images/cars/attrage/gallery/interior/interior-04.jpg",
-    ],
-  },
-    "Mitsubishi Triton": {
-    exterior: [
-      "/images/cars/triton/gallery/exterior/exterior-01.jpg",
-      "/images/cars/triton/gallery/exterior/exterior-02.jpg",
-      "/images/cars/triton/gallery/exterior/exterior-03.jpg",
-      "/images/cars/triton/gallery/exterior/exterior-04.jpg",
-    ],
-    interior: [
-      "/images/cars/triton/gallery/interior/interior-01.jpg",
-      "/images/cars/triton/gallery/interior/interior-02.jpg",
-      "/images/cars/triton/gallery/interior/interior-03.jpg",
-      "/images/cars/triton/gallery/interior/interior-04.jpg",
-    ],
-  },
-  "Mitsubishi Destinator": {
-  exterior: [
-    "/images/cars/destinator/gallery/exterior/exterior-01.jpg",
-    "/images/cars/destinator/gallery/exterior/exterior-02.jpg",
-    "/images/cars/destinator/gallery/exterior/exterior-03.jpg",
-    "/images/cars/destinator/gallery/exterior/exterior-04.jpg",
-  ],
-  interior: [
-    "/images/cars/destinator/gallery/interior/interior-01.jpg",
-    "/images/cars/destinator/gallery/interior/interior-02.jpg",
-    "/images/cars/destinator/gallery/interior/interior-03.jpg",
-    "/images/cars/destinator/gallery/interior/interior-04.jpg",
-  ],
-},
-};
-
 
 type Props = {
   carName: string;
@@ -104,97 +13,82 @@ type Props = {
   fallbackImage?: string;
 };
 
-export default function CarGallery({
-  carName,
-  galleries: customGalleries,
-  fallbackImage,
-}: Props) {
-  const [galleryType, setGalleryType] =
-    useState<GalleryType>("exterior");
-
-  const [selectedIndex, setSelectedIndex] = useState(0);
+// Thư viện ảnh kiểu Toyota: tab Ngoại thất / Nội thất, hàng ảnh lớn vuốt ngang (máy tính có nút mũi tên).
+export default function CarGallery({ carName, galleries: customGalleries, fallbackImage }: Props) {
+  const [galleryType, setGalleryType] = useState<GalleryType>("exterior");
+  const trackRef = useRef<HTMLDivElement>(null);
 
   const gallery = customGalleries ?? carGalleries[carName];
-  const images =
-    gallery?.[galleryType] ??
-    (galleryType === "exterior" && fallbackImage ? [fallbackImage] : []);
-  const selectedImage = images[selectedIndex];
+  const images = gallery?.[galleryType] ?? (galleryType === "exterior" && fallbackImage ? [fallbackImage] : []);
+  const label = galleryType === "exterior" ? "Ngoại thất" : "Nội thất";
 
   function changeGallery(type: GalleryType) {
     setGalleryType(type);
-    setSelectedIndex(0);
+    trackRef.current?.scrollTo({ left: 0 });
+  }
+
+  function scrollBy(direction: 1 | -1) {
+    const track = trackRef.current;
+    if (track) track.scrollBy({ left: direction * track.clientWidth * 0.8, behavior: "smooth" });
   }
 
   return (
     <div className="w-full">
-      {/* ẢNH CHÍNH */}
-      <div className="relative flex h-[340px] items-center justify-center overflow-hidden rounded-lg bg-gray-50">
-        {selectedImage && (
-        <Image
-          src={selectedImage}
-          alt={
-  galleryType === "exterior"
-    ? `Ngoại thất ${carName}`
-    : `Nội thất ${carName}`
-}
-          fill
-          loading="eager"
-          sizes="(min-width: 1280px) 600px, (min-width: 1024px) 50vw, 100vw"
-          className="object-contain"
-        />
+      <div className="flex items-center justify-between gap-4">
+        <div className="flex gap-6" role="tablist" aria-label="Loại ảnh">
+          {(["exterior", "interior"] as GalleryType[]).map((type) => (
+            <button
+              key={type}
+              type="button"
+              role="tab"
+              aria-selected={galleryType === type}
+              onClick={() => changeGallery(type)}
+              className={`border-b-2 pb-1 text-sm font-bold uppercase tracking-[0.15em] transition ${
+                galleryType === type ? "border-red-600 text-gray-950" : "border-transparent text-gray-600 hover:text-gray-950"
+              }`}
+            >
+              {type === "exterior" ? "Ngoại thất" : "Nội thất"}
+            </button>
+          ))}
+        </div>
+        {images.length > 1 && (
+          <div className="hidden gap-2 md:flex">
+            {([-1, 1] as const).map((direction) => (
+              <button
+                key={direction}
+                type="button"
+                onClick={() => scrollBy(direction)}
+                aria-label={direction < 0 ? "Ảnh trước" : "Ảnh sau"}
+                className="flex h-11 w-11 items-center justify-center rounded-full border border-gray-300 bg-white text-lg transition hover:border-gray-900"
+              >
+                {direction < 0 ? "←" : "→"}
+              </button>
+            ))}
+          </div>
         )}
       </div>
 
-      {/* TAB NGOẠI THẤT / NỘI THẤT */}
-      <div className="mt-3 flex justify-center gap-2">
-        <button
-          type="button"
-          onClick={() => changeGallery("exterior")}
-          className={`rounded px-4 py-2 text-sm font-semibold transition ${
-            galleryType === "exterior"
-              ? "bg-red-600 text-white"
-              : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-          }`}
-        >
-          Ngoại thất
-        </button>
-
-        <button
-          type="button"
-          onClick={() => changeGallery("interior")}
-          className={`rounded px-4 py-2 text-sm font-semibold transition ${
-            galleryType === "interior"
-              ? "bg-red-600 text-white"
-              : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-          }`}
-        >
-          Nội thất
-        </button>
-      </div>
-
-      {/* ẢNH THU NHỎ */}
-      <div className="mt-3 grid grid-cols-4 gap-2">
+      <div
+        ref={trackRef}
+        // Vuốt bằng bàn phím (mũi tên trái/phải) khi khung ảnh được chọn
+        tabIndex={0}
+        role="region"
+        aria-label={`Ảnh ${label.toLowerCase()} ${carName}`}
+        className="-mx-6 mt-5 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-6 pb-2 [scrollbar-width:none] md:mx-0 md:px-0 [&::-webkit-scrollbar]:hidden"
+      >
         {images.map((image, index) => (
-          <button
+          <div
             key={image}
-            type="button"
-            onClick={() => setSelectedIndex(index)}
-            aria-label={`Xem ảnh ${galleryType === "exterior" ? "ngoại thất" : "nội thất"} ${index + 1} của ${carName}`}
-            aria-pressed={selectedIndex === index}
-            className={`relative h-16 overflow-hidden rounded border-2 transition sm:h-20 ${
-              selectedIndex === index
-                ? "border-red-600"
-                : "border-transparent hover:border-gray-300"
-            }`}
+            className="relative aspect-[16/10] w-[85%] shrink-0 snap-start overflow-hidden rounded-2xl bg-neutral-900 md:w-[62%]"
           >
             <Image
               src={image}
-              alt=""
+              alt={`${label} ${carName} – ảnh ${index + 1}`}
               fill
-              sizes="150px"
+              sizes="(min-width: 1024px) 800px, 85vw"
               className="object-cover"
             />
-          </button>
+          </div>
         ))}
       </div>
     </div>

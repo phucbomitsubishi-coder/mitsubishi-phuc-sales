@@ -2158,7 +2158,7 @@ transmission: "Tự động 4 cấp",
     hidden: true,
 
     shortDescription:
-      "SUV cỡ C plug-in hybrid 7 chỗ (5+2), mạnh 302 mã lực, chạy thuần điện khoảng 100 km.",
+      "SUV cỡ C 7 chỗ (5+2) thế hệ mới. Mitsubishi Việt Nam xác nhận mở bán trong năm 2026 với bản hybrid nhẹ.",
 
     image: "/images/news/anh-thuc-te-mitsubishi-outlander-phev-2026-tai-dna-suv-co-c-manh-302-ma-luc-chay-100-km-khong-ton-xang-official.jpg",
 

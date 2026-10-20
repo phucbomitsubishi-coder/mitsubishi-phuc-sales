@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import PurchaseTimeline, { withTimeline } from "@/components/PurchaseTimeline";
 import { useSearchParams } from "next/navigation";
 import { cars, upcomingCars } from "@/data/cars";
 import ScrollTopLink from "@/components/ScrollTopLink";
@@ -65,6 +66,7 @@ export default function QuoteForm({
     const phone = String(formData.get("phone") || "").trim();
     const car = String(formData.get("car") || "").trim();
     const variant = String(formData.get("variant") || "").trim();
+    const timeline = String(formData.get("timeline") || "").trim();
 
     const website = String(formData.get("website") || "").trim();
 
@@ -104,7 +106,7 @@ export default function QuoteForm({
           customerName,
           phone: normalizedPhone,
           car,
-          variant,
+          variant: withTimeline(variant, timeline),
           source: toLeadSource(leadSource, "Website Mitsubishi"),
           website,
         }),
@@ -141,15 +143,15 @@ export default function QuoteForm({
   }
 
   return (
-    <section id="bao-gia" className="bg-white">
-      <div className="mx-auto max-w-7xl px-6 py-16">
+    <section id="bao-gia" className="scroll-mt-20 bg-gradient-to-b from-white to-gray-100">
+      <div className="mx-auto max-w-7xl px-6 py-12 md:py-20">
         <div className="mx-auto max-w-3xl">
           <div className="text-center">
-            <p className="font-semibold uppercase tracking-wider text-red-600">
+            <p className="text-xs font-bold uppercase tracking-[0.25em] text-red-700">
               Nhận báo giá
             </p>
 
-            <h2 className="mt-2 text-3xl font-bold">
+            <h2 className="mt-2 text-3xl font-black tracking-tight md:text-5xl">
               Nhận báo giá Mitsubishi
             </h2>
 
@@ -157,12 +159,20 @@ export default function QuoteForm({
               Để lại thông tin và mẫu xe quan tâm. Lưu Hoàng Phúc sẽ liên hệ
               tư vấn giá xe, chương trình ưu đãi và phương án trả góp phù hợp.
             </p>
+            <ul className="mt-5 flex flex-wrap justify-center gap-2 text-sm font-semibold">
+              {["Giá lăn bánh chi tiết", "Ưu đãi tháng mới nhất", "Phương án trả góp"].map((item) => (
+                <li key={item} className="rounded-full bg-white px-3 py-1.5 text-gray-800 ring-1 ring-gray-200">
+                  <span className="mr-1 text-red-600" aria-hidden="true">✓</span>
+                  {item}
+                </li>
+              ))}
+            </ul>
           </div>
 
           {!isSuccess ? (
             <form
               onSubmit={handleSubmit}
-              className="mt-10 rounded-2xl border border-gray-200 bg-gray-50 p-6 shadow-sm sm:p-8"
+              className="mt-8 rounded-3xl bg-white p-6 shadow-xl shadow-gray-200/70 ring-1 ring-gray-200 sm:p-8"
             >
               <div
                 className="absolute -left-[9999px] top-auto h-px w-px overflow-hidden"
@@ -270,12 +280,14 @@ export default function QuoteForm({
                     />
                   </div>
                 )}
+
+                <PurchaseTimeline />
               </div>
 
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="mt-8 w-full rounded-lg bg-red-600 px-6 py-4 font-bold text-white transition hover:bg-red-700 disabled:cursor-not-allowed disabled:bg-gray-400"
+                className="mt-8 w-full bg-red-600 px-6 py-4 text-sm font-bold uppercase tracking-[0.2em] text-white transition hover:bg-red-700 disabled:cursor-not-allowed disabled:bg-gray-400"
               >
                 {isSubmitting ? "Đang gửi..." : "Nhận báo giá ngay"}
               </button>

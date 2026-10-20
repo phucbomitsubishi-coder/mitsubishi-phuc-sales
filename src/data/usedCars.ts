@@ -122,7 +122,7 @@ equipment: [
   "modelYear": 2024,
   "firstRegistration": "07/072024",
   "owners": "1 chủ từ mới",
-  "variant": "ultimate",
+  "variant": "Ultimate",
   "mileage": 61161,
   "price": 575000000,
   "color": "đen",

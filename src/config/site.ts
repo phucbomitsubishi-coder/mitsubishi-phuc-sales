@@ -27,6 +27,8 @@ export const siteConfig = {
     address:
       "Lô C1C, Đường Hùng Vương, Phường Bình Dương, Thành phố Hồ Chí Minh",
     salesArea: "Bình Dương cũ (TP. Hồ Chí Minh mới)",
+    // Điểm Google Maps của SHOWROOM (không phải đánh giá cá nhân), chỉ hiển thị dạng chữ, không đưa vào schema
+    googleRating: { score: "5,0", count: 635 },
   },
 
   social: {

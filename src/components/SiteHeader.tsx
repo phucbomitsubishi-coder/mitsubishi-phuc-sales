@@ -4,11 +4,13 @@ import MobileMenu from "@/components/MobileMenu";
 import Link from "next/link";
 import Image from "next/image";
 import ScrollTopLink from "@/components/ScrollTopLink";
+import HeaderAutoHide from "@/components/HeaderAutoHide";
+import { featuredImages } from "@/lib/carCards";
 
 export default function SiteHeader() {
   return (
-    <header className="sticky top-0 z-50 border-b border-gray-800 bg-black text-white xl:border-gray-200 xl:bg-white xl:text-black">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 md:px-6 md:py-5">
+    <header id="site-header" className="site-header sticky top-0 z-50 border-b border-gray-800 bg-black text-white xl:border-gray-200 xl:bg-white xl:text-black">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2 md:px-6 xl:py-5">
         <ScrollTopLink
           href="/"
           aria-label="Về trang chủ"
@@ -22,7 +24,7 @@ export default function SiteHeader() {
             height={300}
             sizes="240px"
             loading="eager"
-            className="h-20 w-auto object-contain xl:hidden"
+            className="h-12 w-auto object-contain md:h-14 xl:hidden"
           />
 
           {/* Logo desktop */}
@@ -64,7 +66,7 @@ export default function SiteHeader() {
                   >
                     <div className="relative h-24 w-full">
                       <Image
-                        src={car.image}
+                        src={featuredImages[car.id] ?? car.image}
                         alt={car.name}
                         fill
                         sizes="220px"
@@ -204,6 +206,7 @@ export default function SiteHeader() {
         {/* Menu mobile */}
         <MobileMenu cars={cars} />
       </div>
+      <HeaderAutoHide />
     </header>
   );
 }

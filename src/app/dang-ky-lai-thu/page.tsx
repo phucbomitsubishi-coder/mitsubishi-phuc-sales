@@ -3,6 +3,7 @@
 import { FormEvent, Suspense, useState } from "react";
 import { cars } from "@/data/cars";
 import { useSearchParams } from "next/navigation";
+import PurchaseTimeline, { withTimeline } from "@/components/PurchaseTimeline";
 import SiteHeader from "@/components/SiteHeader";
 import Link from "next/link";
 import { trackPixel } from "@/lib/metaPixel";
@@ -46,7 +47,10 @@ function DangKyLaiThuForm() {
     const name = String(formData.get("name") || "").trim();
     const phone = String(formData.get("phone") || "").trim();
     const carId = String(formData.get("car") || "").trim();
-    const note = String(formData.get("note") || "").trim();
+    const note = withTimeline(
+      String(formData.get("note") || "").trim(),
+      String(formData.get("timeline") || "").trim()
+    );
 
     if (!name || !phone || !carId) {
       setErrorMessage("Vui lòng nhập đầy đủ thông tin bắt buộc.");
@@ -204,6 +208,8 @@ function DangKyLaiThuForm() {
                   ))}
                 </select>
               </div>
+
+              <PurchaseTimeline className="sm:col-span-2" />
 
               {/* GHI CHÚ */}
               <div className="sm:col-span-2">

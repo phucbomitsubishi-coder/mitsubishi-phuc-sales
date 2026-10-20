@@ -44,8 +44,9 @@ export async function generateMetadata({
     };
   }
 
+  // Tiêu đề hiện trên Google: dùng seoTitle ngắn (~60 ký tự) nếu có, vì tiêu đề bài thường dài và bị Google cắt
   return {
-    title: `${article.title} | Mitsubishi Lưu Hoàng Phúc`,
+    title: `${article.seoTitle ?? article.title} | Lưu Hoàng Phúc`,
     description: article.excerpt,
     alternates: {
       canonical: `/tin-tuc/${slug}`,

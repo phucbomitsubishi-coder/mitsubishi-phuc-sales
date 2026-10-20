@@ -10,10 +10,19 @@ import CarGallery from "./CarGallery";
 import { currentPromotion, getMaxPromotionValue } from "@/data/promotions";
 import Link from "next/link";
 import Image from "next/image";
-import PromotionTabs from "@/components/PromotionTabs";
 import { usedCars } from "@/data/usedCars";
 import { newsArticles } from "@/data/news";
 import { advisoryArticles } from "@/data/advisory";
+import { brochures } from "@/data/brochures";
+import { getCarFacts } from "@/lib/carFacts";
+import CarSectionNav from "./CarSectionNav";
+import CarFeatures from "./CarFeatures";
+import ShowroomHero from "./ShowroomHero";
+import ShowroomFeatures from "./ShowroomFeatures";
+import { showrooms } from "@/data/showroom";
+import QuoteDialog from "@/components/QuoteDialog";
+import HandoverStrip from "@/components/HandoverStrip";
+import { featuredImages } from "@/lib/carCards";
 import {
   benefitSummary,
   buildPromotionItem,
@@ -142,6 +151,37 @@ const otherCars = cars.filter((item) => item.id !== car.id).slice(0, 3);
 // Thời hạn bảo hành theo trang /ho-tro/chinh-sach-bao-hanh
 const isLongWarranty = car.id === "triton" || car.id === "destinator";
 const { hours, dealer } = siteConfig;
+const facts = getCarFacts(car);
+const brochure = brochures[car.id];
+
+// Câu hỏi về chính chiếc xe (khách hay tìm trên Google, giống mục hỏi đáp của Ford),
+// trả lời bằng thông số từng phiên bản trong cars.ts (đã đối chiếu MMV)
+const specFaqs = [
+  facts.seats && {
+    question: `${shortName} có mấy chỗ ngồi?`,
+    answer: `${car.name} là ${car.category === "Pickup" ? "xe bán tải" : car.category} ${facts.seats} chỗ ngồi${facts.groundClearance ? `, khoảng sáng gầm ${facts.groundClearance}` : ""}.`,
+  },
+  facts.engine && {
+    question: `${shortName} chạy xăng hay dầu, động cơ gì?`,
+    answer: `${car.name} dùng động cơ ${facts.fuel === "Dầu" ? "dầu (diesel)" : (facts.fuel ?? "").toLowerCase()}. ${facts.engine}.`,
+  },
+  facts.transmission && {
+    question: `${shortName} có số tự động không?`,
+    answer: `Hộp số và dẫn động của ${car.name}: ${facts.transmission}.`,
+  },
+  facts.fuelConsumption && {
+    question: `${shortName} tiêu hao bao nhiêu lít xăng/100 km?`,
+    answer: `Mức tiêu hao nhiên liệu kết hợp theo công bố của Mitsubishi Motors Việt Nam: ${facts.fuelConsumption}. Mức thực tế thay đổi theo cách lái, tải trọng và điều kiện đường.`,
+  },
+  facts.dimensions && {
+    question: `Kích thước ${shortName} bao nhiêu?`,
+    answer: `Kích thước tổng thể (dài × rộng × cao) của ${car.name}: ${facts.dimensions}.`,
+  },
+  facts.airbags && {
+    question: `${shortName} có bao nhiêu túi khí?`,
+    answer: `Số túi khí theo phiên bản: ${facts.airbags}. Xem đầy đủ hệ thống an toàn trong mục Trang bị ở trên.`,
+  },
+].filter((item): item is { question: string; answer: string } => !!item);
 
 const faqs = [
   {
@@ -168,7 +208,22 @@ const faqs = [
     question: `${shortName} được bảo hành bao lâu?`,
     answer: `${car.name} được bảo hành ${isLongWarranty ? "60 tháng hoặc 150.000 km" : "36 tháng hoặc 100.000 km"}, tùy điều kiện nào đến trước, theo chính sách của Mitsubishi Motors Việt Nam.`,
   },
+  ...specFaqs,
 ];
+
+// Mục lục bám đầu trang
+// Thứ tự giống trang sản phẩm MMV: phiên bản & giá trước, rồi tới các khối tính năng
+const sectionNav = [
+  { id: "phien-ban", label: "Giá & phiên bản" },
+  { id: "lan-banh", label: "Lăn bánh" },
+  { id: "trang-bi", label: "Trang thiết bị" },
+  { id: "tinh-nang", label: "Tính năng" },
+  { id: "hinh-anh", label: "Hình ảnh" },
+  { id: "hoi-dap", label: "Hỏi đáp" },
+];
+
+// Bộ hình ảnh kiểu trang MMV (src/data/showroom.ts); xe chưa có thì dùng banner mặc định
+const showroom = showrooms[car.id];
 
 const faqSchema = {
   "@context": "https://schema.org",
@@ -249,184 +304,174 @@ const breadcrumbSchema = {
   />
   <SiteHeader />
 
-  <section className="mx-auto max-w-7xl px-6 pt-4 pb-2 md:pt-6 md:pb-3">
-        <BackToPrevious />
-
-        <div className="grid gap-5 md:gap-10 lg:grid-cols-2 lg:items-center">
-         <CarGallery carName={car.name} fallbackImage={car.image} />
-
-          <div>
-            <p className="mb-2 font-semibold uppercase tracking-wider text-red-600">
-              {car.category}
-            </p>
-
-            <h1 className="text-4xl font-bold">
-              {car.name}
-            </h1>
-
-            <p className="mt-5 text-lg leading-8 text-gray-600">
-              {car.shortDescription}
-            </p>
-
-            <div className="mt-5 flex flex-wrap items-end gap-x-5 gap-y-3">
-              <div>
-                <p className="text-sm text-gray-600">Giá từ</p>
-                <p className="text-3xl font-extrabold tabular-nums text-red-700">
-                  {minPrice.toLocaleString("vi-VN")} đ
-                </p>
-              </div>
-
-              {promotionItem.maxValue > 0 && (
-                <a
-                  href="#uu-dai"
-                  className="mb-1 rounded-full bg-red-50 px-3 py-1.5 text-sm font-bold text-red-700 ring-1 ring-red-200 transition hover:bg-red-100"
-                >
-                  Ưu đãi tháng {promotionMonthLabel} đến {formatMillion(promotionItem.maxValue)} ↓
-                </a>
-              )}
-            </div>
-
-            <div className="mt-6">
-  <p className="text-sm font-bold uppercase tracking-wide text-red-600">
-    Điểm nổi bật
-  </p>
-
- <div className="mt-3 grid gap-2 text-gray-700">
-  {car.id === "xpander" ? (
+  {showroom ? (
     <>
-      <p>✓ MPV 7 chỗ rộng rãi, linh hoạt</p>
-      <p>✓ Khoảng sáng gầm 225 mm</p>
-      <p>✓ Động cơ 1.5L MIVEC</p>
-      <p>✓ Mâm hợp kim lên đến 17 inch</p>
-      <p>✓ Phanh tay điện tử & Auto Hold</p>
-    </>
-  ) : car.id === "xpander-cross" ? (
-    <>
-      <p>✓ MPV 7 chỗ phong cách SUV mạnh mẽ</p>
-      <p>✓ Khoảng sáng gầm 225 mm</p>
-      <p>✓ Động cơ 1.5L MIVEC</p>
-      <p>✓ Mâm hợp kim 17 inch</p>
-      <p>✓ Hệ thống kiểm soát vào cua chủ động AYC</p>
-    </>
-  ) : car.id === "attrage" ? (
-    <>
-      <p>✓ Sedan 5 chỗ nhỏ gọn, linh hoạt</p>
-      <p>✓ Động cơ 1.2L MIVEC</p>
-      <p>✓ Khoảng sáng gầm 170 mm</p>
-      <p>✓ Mâm hợp kim 15 inch</p>
-      <p>✓ Phiên bản CVT Premium trang bị tiện nghi nổi bật</p>
-    </>
-    ) : car.id === "triton" ? (
-  <>
-    <p>✓ Động cơ Diesel 2.4L MIVEC mạnh mẽ</p>
-    <p>✓ Công suất lên đến 204 PS, mô-men xoắn 470 Nm</p>
-    <p>✓ Hệ dẫn động Super Select 4WD-II</p>
-    <p>✓ 7 chế độ lái hỗ trợ đa địa hình</p>
-    <p>✓ Mitsubishi Motors Safety Sensing (MMSS) trên bản Athlete</p>
-  </>
-  ) : car.id === "destinator" ? (
-  <>
-    <p>✓ SUV 7 chỗ rộng rãi dành cho gia đình</p>
-    <p>✓ Động cơ Turbo 1.5L MIVEC, công suất 163 PS</p>
-    <p>✓ Mô-men xoắn cực đại 250 Nm</p>
-    <p>✓ Khoảng sáng gầm 214 mm, mâm hợp kim 18 inch</p>
-    <p>✓ Hệ thống an toàn Diamond Sense trên bản Ultimate</p>
-  </>
-  ) : car.id === "xforce" ? (
-    <>
-      <p>✓ Dynamic Shield thế hệ mới</p>
-      <p>✓ SUV 5 chỗ gầm cao, khoảng sáng gầm lên đến 222 mm</p>
-      <p>✓ 4 chế độ lái</p>
-      <p>✓ Màn hình lên đến 12,3 inch</p>
-      <p>✓ Hệ thống an toàn Diamond Sense</p>
+      <ShowroomHero
+        showroom={showroom}
+        carName={car.name}
+        carId={car.id}
+        priceLabel={`${minPrice.toLocaleString("vi-VN")} đ`}
+        promotionLabel={promotionItem.maxValue > 0 ? `Ưu đãi tháng ${promotionMonthLabel} đến ${formatMillion(promotionItem.maxValue)}` : undefined}
+        brochureUrl={brochure?.url}
+        stats={facts.stats}
+      />
     </>
   ) : (
-    // Xe mới chưa có nội dung riêng: lấy từ highlights trong dữ liệu xe
-    <>
-      {[
-        ...car.highlights.performance,
-        ...car.highlights.interior,
-        ...car.highlights.safety,
-      ]
-        .slice(0, 5)
-        .map((item) => (
-          <p key={item}>✓ {item}</p>
+  /* BANNER XE mặc định (xe chưa có bộ ảnh showroom): nền tối, tên xe lớn, ảnh xe tách nền, 4 số liệu nhanh */
+  <section className="relative overflow-clip bg-neutral-950 text-white">
+    <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 h-3/4 bg-[radial-gradient(ellipse_at_65%_80%,rgba(220,38,38,0.35),transparent_60%)]" />
+    <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 h-1/2 bg-[radial-gradient(ellipse_at_50%_0%,rgba(255,255,255,0.08),transparent_70%)]" />
+
+    <div className="relative mx-auto max-w-7xl px-5 pb-8 pt-4 md:px-6 md:pb-12 md:pt-6">
+      <BackToPrevious className="text-sm text-white/70 hover:text-white" />
+
+      <div className="mt-2 grid items-center gap-2 md:grid-cols-[1fr_1.3fr] md:gap-8">
+        <div className="hero-fade order-2 md:order-1">
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-red-400">
+            {carSeoTags[car.id] ?? car.category}
+          </p>
+          <h1 className="mt-2 font-black leading-none tracking-tight">
+            <span className="block text-lg font-bold tracking-[0.3em] text-white/60 md:text-xl">MITSUBISHI</span>
+            <span className="mt-1 block text-5xl md:text-7xl">{shortName}</span>
+          </h1>
+          <p className="mt-4 max-w-md leading-7 text-white/70">{car.shortDescription}</p>
+
+          <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2">
+            <p>
+              <span className="block text-xs text-white/60">Giá niêm yết từ</span>
+              <span className="text-3xl font-extrabold tabular-nums">{minPrice.toLocaleString("vi-VN")} đ</span>
+            </p>
+            {promotionItem.maxValue > 0 && (
+              <a
+                href="#lan-banh"
+                className="rounded-lg bg-red-600 px-3 py-1.5 text-sm font-bold shadow-lg shadow-red-900/40 transition hover:bg-red-700"
+              >
+                Ưu đãi tháng {promotionMonthLabel} đến {formatMillion(promotionItem.maxValue)} ↓
+              </a>
+            )}
+          </div>
+
+          <div className="mt-6 grid grid-cols-2 gap-3 sm:flex sm:flex-wrap">
+            <Link
+              href={`/?car=${encodeURIComponent(car.name)}&nguon=Chi-tiet-xe#bao-gia`}
+              className="rounded-full bg-red-600 px-5 py-3 text-center font-bold text-white transition hover:bg-red-700 sm:px-7"
+            >
+              Nhận báo giá
+            </Link>
+            <Link
+              href={`/dang-ky-lai-thu?xe=${car.id}&nguon=Chi-tiet-xe`}
+              className="rounded-full bg-white px-5 py-3 text-center font-bold text-neutral-950 transition hover:bg-gray-200 sm:px-7"
+            >
+              Lái thử
+            </Link>
+            <a
+              href={siteConfig.contact.zaloUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-full border border-white/30 px-5 py-3 text-center font-bold transition hover:border-white hover:bg-white/10 sm:px-7"
+            >
+              Tư vấn Zalo
+            </a>
+            {brochure && (
+              <a
+                href={brochure.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-full border border-white/30 px-5 py-3 text-center font-bold transition hover:border-white hover:bg-white/10 sm:px-7"
+              >
+                Brochure <span className="text-xs font-normal text-white/60">PDF</span>
+              </a>
+            )}
+          </div>
+        </div>
+
+        <div className="relative order-1 h-[220px] sm:h-[320px] md:order-2 md:h-[440px]">
+          <p
+            aria-hidden="true"
+            className="hero-mark pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2 select-none whitespace-nowrap text-center text-[24vw] font-black uppercase leading-none tracking-tighter text-transparent [-webkit-text-stroke:1.5px_rgba(255,255,255,0.22)] md:text-[11rem]"
+          >
+            {shortName}
+          </p>
+          <div className="absolute inset-0 scale-[1.25] md:scale-[1.15]">
+            <Image
+              src={car.image}
+              alt={car.name}
+              fill
+              preload
+              sizes="(min-width: 768px) 720px, 100vw"
+              className="object-contain drop-shadow-[0_30px_30px_rgba(0,0,0,0.6)]"
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* 4 số liệu nhanh (giống hàng số liệu của Ford) */}
+      <dl className="mt-8 grid grid-cols-2 gap-y-5 border-t border-white/10 pt-6 md:grid-cols-4">
+        {facts.stats.map((stat, index) => (
+          <div key={stat.label} className={`flex flex-col-reverse px-1 ${index % 2 ? "border-l border-white/10 pl-4 md:pl-6" : ""} ${index === 2 ? "md:border-l md:border-white/10 md:pl-6" : ""}`}>
+            <dt className="mt-1 text-xs uppercase tracking-wider text-white/60">{stat.label}</dt>
+            <dd className="text-xl font-extrabold tabular-nums md:text-3xl">{stat.value}</dd>
+          </div>
         ))}
-    </>
+      </dl>
+    </div>
+  </section>
   )}
-</div>
-  <div className="mt-6 flex flex-wrap gap-4">
-    <Link
-      href={`/?car=${encodeURIComponent(car.name)}&nguon=Chi-tiet-xe#bao-gia`}
-      className="rounded bg-red-600 px-6 py-3 font-semibold text-white hover:bg-red-700"
-    >
-      Nhận báo giá
-    </Link>
 
-    <Link
-      href={`/dang-ky-lai-thu?xe=${car.id}&nguon=Chi-tiet-xe`}
-      className="rounded border border-red-600 px-6 py-3 font-semibold text-red-700 hover:bg-red-50"
-    >
-      Đăng ký lái thử
-    </Link>
+      <CarSectionNav
+        items={sectionNav}
+        carName={car.name}
+        quoteHref={`/?car=${encodeURIComponent(car.name)}&nguon=Thanh-muc-luc#bao-gia`}
+      />
 
-    <a
-      href={siteConfig.contact.zaloUrl}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="rounded border border-gray-300 px-6 py-3 font-semibold hover:bg-gray-100"
-    >
-      Tư vấn Zalo
-    </a>
-  </div>
-</div>
+      {/* PHIÊN BẢN & GIÁ XE, THÔNG SỐ, TRANG BỊ, LĂN BÁNH */}
+      <VariantSelector
+        carName={car.name}
+        variants={car.variants}
+        promotions={carPromotion?.variants}
+        sideImages={showroom?.sideImages}
+      />
+
+      {showroom ? <ShowroomFeatures car={car} showroom={showroom} /> : <CarFeatures car={car} />}
+
+      {/* THƯ VIỆN ẢNH */}
+      <section id="hinh-anh" className="scroll-mt-32 bg-gray-50">
+        <div className="mx-auto max-w-7xl px-6 py-12 md:py-20">
+          <p className="text-xs font-bold uppercase tracking-[0.25em] text-red-700">Thư viện ảnh</p>
+          <h2 className="mt-2 text-3xl font-black tracking-tight md:text-5xl">Hình ảnh {shortName}</h2>
+          <div className="mt-6">
+            <CarGallery carName={car.name} fallbackImage={car.image} />
           </div>
         </div>
       </section>
 
-      {/* PHIÊN BẢN & GIÁ XE */}
 
-      {/* THÔNG SỐ KỸ THUẬT */}
-<VariantSelector
-  carName={car.name}
-  variants={car.variants}
-  promotions={carPromotion?.variants}
-/>
-
-      {/* ƯU ĐÃI RIÊNG CỦA XE */}
-      {promotionItem.maxValue > 0 && (
-        <section
-          id="uu-dai"
-          className="relative mt-12 scroll-mt-28 overflow-clip bg-neutral-950 text-white"
-        >
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute -top-40 right-0 h-96 w-96 rounded-full bg-red-600/20 blur-3xl"
-          />
-          <div className="relative mx-auto max-w-7xl px-6 py-14 md:py-16">
-            <p className="text-sm font-bold uppercase tracking-[0.25em] text-red-500">
-              Khuyến mãi
-            </p>
-            <h2 className="mt-3 text-3xl font-extrabold tracking-tight">
-              Ưu đãi {shortName} tháng {promotionMonthLabel}
-            </h2>
-
-            <PromotionTabs items={[promotionItem]} />
-
-            <p className="mt-5 text-xs leading-5 text-neutral-400">
-              * Chương trình của {currentPromotion.source}. Giá trị ưu đãi mang
-              tính tham khảo và có thể thay đổi theo từng thời điểm.
+      {/* KHÁCH HÀNG NHẬN XE (tạo tin tưởng; ảnh đã được khách đồng ý, dùng chung với /gioi-thieu) */}
+      <section className="overflow-hidden bg-white py-12 md:py-20">
+        <div className="mx-auto flex max-w-7xl flex-wrap items-end justify-between gap-4 px-6">
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.25em] text-red-700">Khách hàng nhận xe</p>
+            <h2 className="mt-2 text-3xl font-black tracking-tight md:text-5xl">{siteConfig.sales.carsDelivered} chiếc xe đã lăn bánh cùng Phúc</h2>
+            <p className="mt-3 max-w-2xl text-gray-600">
+              Showroom {dealer.name} được đánh giá{" "}
+              <span className="font-bold text-gray-900">{dealer.googleRating.score}★ trên Google</span> ({dealer.googleRating.count} đánh giá).
             </p>
           </div>
-        </section>
-      )}
+          <Link href="/gioi-thieu" className="font-semibold text-red-700 hover:text-red-800">
+            Xem thêm về Phúc →
+          </Link>
+        </div>
+        <div className="mt-6">
+          <HandoverStrip />
+        </div>
+      </section>
 
       {/* CÂU HỎI THƯỜNG GẶP */}
-      <section className="mx-auto max-w-4xl px-6 py-14 md:py-16">
+      <section id="hoi-dap" className="mx-auto max-w-4xl scroll-mt-32 px-6 py-12 md:py-16">
         <p className="text-sm font-bold uppercase tracking-[0.25em] text-red-700">
           Câu hỏi thường gặp
         </p>
-        <h2 className="mt-3 text-3xl font-extrabold tracking-tight">
+        <h2 className="mt-3 text-3xl font-black tracking-tight md:text-5xl">
           Thắc mắc khi mua {shortName}
         </h2>
 
@@ -448,20 +493,67 @@ const breadcrumbSchema = {
         </div>
       </section>
 
-      {/* GỢI Ý LIÊN QUAN */}
+      {/* DẢI CHỐT CUỐI TRANG: nút lái thử / báo giá mở hộp thoại (QuoteDialog) */}
+      <section className="relative overflow-clip bg-neutral-950 text-white">
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_120%,rgba(220,38,38,0.4),transparent_60%)]" />
+        <div className="relative mx-auto max-w-5xl px-6 py-14 text-center md:py-20">
+          <p className="text-xs font-bold uppercase tracking-[0.25em] text-red-400">Bước tiếp theo</p>
+          <h2 className="mt-3 text-3xl font-black uppercase tracking-tight md:text-5xl">Sẵn sàng trải nghiệm {shortName}?</h2>
+          <p className="mx-auto mt-4 max-w-2xl leading-7 text-white/75">
+            Lái thử tại showroom {dealer.name} hoặc tại nhà. Phúc gửi báo giá lăn bánh, ưu đãi tháng và phương án trả góp qua Zalo.
+          </p>
+          <div className="mx-auto mt-8 grid max-w-3xl gap-3 sm:grid-cols-3">
+            <Link
+              href={`/dang-ky-lai-thu?xe=${car.id}&nguon=Cuoi-trang-xe`}
+              className="bg-white px-6 py-4 text-sm font-bold uppercase tracking-[0.2em] text-neutral-950 transition hover:bg-gray-200"
+            >
+              Đăng ký lái thử
+            </Link>
+            <Link
+              href={`/?car=${encodeURIComponent(car.name)}&nguon=Cuoi-trang-xe#bao-gia`}
+              className="bg-red-600 px-6 py-4 text-sm font-bold uppercase tracking-[0.2em] text-white transition hover:bg-red-700"
+            >
+              Nhận báo giá
+            </Link>
+            <a
+              href={siteConfig.contact.zaloUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="border border-white/40 px-6 py-4 text-sm font-bold uppercase tracking-[0.2em] transition hover:border-white hover:bg-white/10"
+            >
+              Nhắn Zalo
+            </a>
+          </div>
+          <p className="mt-6 text-sm text-white/70">
+            <Link href="/du-toan/tra-gop" className="underline-offset-4 hover:text-white hover:underline">Dự tính trả góp</Link>
+            <span aria-hidden="true"> · </span>
+            <Link href="/thu-cu-doi-moi" className="underline-offset-4 hover:text-white hover:underline">Thu cũ đổi mới</Link>
+            {brochure && (
+              <>
+                <span aria-hidden="true"> · </span>
+                <a href={brochure.url} target="_blank" rel="noopener noreferrer" className="underline-offset-4 hover:text-white hover:underline">
+                  Tải brochure (PDF {brochure.size})
+                </a>
+              </>
+            )}
+          </p>
+        </div>
+      </section>
+
+      {/* GỢI Ý LIÊN QUAN: điện thoại vuốt ngang (giống Toyota), máy tính dạng lưới */}
       <section className="bg-gray-50">
-        <div className="mx-auto max-w-7xl space-y-14 px-6 py-14 md:py-16">
+        <div className="mx-auto max-w-7xl space-y-10 px-6 py-10 md:space-y-14 md:py-16">
           {relatedAdvisory.length > 0 && (
             <div>
               <h2 className="text-2xl font-extrabold tracking-tight">
                 So sánh và tư vấn chọn {shortName}
               </h2>
-              <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              <div className="-mx-6 mt-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-2 [scrollbar-width:none] sm:mx-0 sm:mt-6 sm:grid sm:grid-cols-2 sm:gap-5 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-3 [&::-webkit-scrollbar]:hidden">
                 {relatedAdvisory.map((item) => (
                   <Link
                     key={item.href}
                     href={item.href}
-                    className="group rounded-2xl border border-gray-200 bg-white p-5 transition hover:border-red-600 hover:shadow-lg"
+                    className="group w-[80%] shrink-0 snap-start rounded-2xl border border-gray-200 bg-white p-5 transition hover:border-red-600 hover:shadow-lg sm:w-auto"
                   >
                     <p className="font-bold leading-6 group-hover:text-red-700">
                       {item.title}
@@ -483,23 +575,23 @@ const breadcrumbSchema = {
               <h2 className="text-2xl font-extrabold tracking-tight">
                 {shortName} đã qua sử dụng đang có sẵn
               </h2>
-              <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              <div className="-mx-6 mt-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-2 [scrollbar-width:none] sm:mx-0 sm:mt-6 sm:grid sm:grid-cols-2 sm:gap-5 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-3 [&::-webkit-scrollbar]:hidden">
                 {relatedUsedCars.map((usedCar) => (
                   <Link
                     key={usedCar.id}
                     href={`/xe-cu/${usedCar.slug}`}
-                    className="group overflow-clip rounded-2xl border border-gray-200 bg-white transition hover:shadow-lg"
+                    className="group w-[72%] shrink-0 snap-start overflow-clip rounded-2xl border border-gray-200 bg-white transition hover:shadow-lg sm:w-auto"
                   >
                     <div className="relative aspect-[4/3] bg-gray-100">
                       <Image
                         src={usedCar.image}
                         alt={`${usedCar.name} ${usedCar.modelYear}`}
                         fill
-                        sizes="(min-width: 1024px) 400px, (min-width: 640px) 50vw, 100vw"
+                        sizes="(min-width: 1024px) 400px, (min-width: 640px) 50vw, 72vw"
                         className="object-cover transition duration-300 group-hover:scale-105"
                       />
                     </div>
-                    <div className="p-5">
+                    <div className="p-4 sm:p-5">
                       <p className="font-bold">
                         {usedCar.name} {usedCar.modelYear}
                       </p>
@@ -521,12 +613,12 @@ const breadcrumbSchema = {
               <h2 className="text-2xl font-extrabold tracking-tight">
                 Tin tức về {shortName}
               </h2>
-              <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              <div className="-mx-6 mt-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-2 [scrollbar-width:none] sm:mx-0 sm:mt-6 sm:grid sm:grid-cols-2 sm:gap-5 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-3 [&::-webkit-scrollbar]:hidden">
                 {relatedNews.map((article) => (
                   <Link
                     key={article.id}
                     href={`/tin-tuc/${article.slug}`}
-                    className="group overflow-clip rounded-2xl border border-gray-200 bg-white transition hover:shadow-lg"
+                    className="group w-[80%] shrink-0 snap-start overflow-clip rounded-2xl border border-gray-200 bg-white transition hover:shadow-lg sm:w-auto"
                   >
                     <div className="relative aspect-[16/9] bg-gray-100">
                       <Image
@@ -550,16 +642,16 @@ const breadcrumbSchema = {
             <h2 className="text-2xl font-extrabold tracking-tight">
               Có thể bạn quan tâm
             </h2>
-            <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="-mx-6 mt-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-2 [scrollbar-width:none] sm:mx-0 sm:mt-6 sm:grid sm:grid-cols-2 sm:gap-5 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-3 [&::-webkit-scrollbar]:hidden">
               {otherCars.map((other) => (
                 <Link
                   key={other.id}
                   href={`/xe/${other.slug}`}
-                  className="group rounded-2xl border border-gray-200 bg-white p-5 transition hover:shadow-lg"
+                  className="group w-[72%] shrink-0 snap-start rounded-2xl border border-gray-200 bg-white p-5 transition hover:shadow-lg sm:w-auto"
                 >
                   <div className="relative h-36">
                     <Image
-                      src={other.image}
+                      src={featuredImages[other.id] ?? other.image}
                       alt={other.name}
                       fill
                       sizes="(min-width: 1024px) 360px, (min-width: 640px) 50vw, 100vw"
@@ -579,6 +671,9 @@ const breadcrumbSchema = {
           </div>
         </div>
       </section>
+
+      {/* Form báo giá ẩn, mở khi khách bấm nút Nhận báo giá / Báo giá trên trang */}
+      <QuoteDialog carName={car.name} carId={car.id} variantNames={car.variants.map((variant) => variant.name)} />
 
             {/* MOBILE CONTACT BAR */}
       <MobileContactBar

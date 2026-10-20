@@ -30,6 +30,9 @@ export type NewsArticle = {
     url: string;
   };
 
+  // Tiêu đề ngắn (~60 ký tự) cho Google; không có thì dùng `title`
+  seoTitle?: string;
+
   // true: bài đã được viết lại bằng lời của mình (chỉ tham khảo `source`),
   // nên được Google lập chỉ mục. Xem isRepublishedArticle trong src/lib/news.ts.
   originalContent?: boolean;
@@ -40,6 +43,8 @@ export const newsArticles: NewsArticle[] = [
     id: "news-1792392000000",
 
     title: "Mitsubishi Outlander thế hệ mới xuất hiện tại Việt Nam, hãng xác nhận mở bán trong năm 2026 với bản hybrid nhẹ",
+
+    seoTitle: "Outlander thế hệ mới về Việt Nam năm 2026, bản hybrid nhẹ",
 
     slug: "mitsubishi-outlander-the-he-moi-xuat-hien-tai-viet-nam-mo-ban-2026",
 
@@ -104,6 +109,8 @@ export const newsArticles: NewsArticle[] = [
     id: "news-1792046400000",
 
     title: "Xe Mitsubishi cũ chính hãng MMV UCAR: kiểm tra 160 điểm, bảo hành CPO 12 tháng hoặc 20.000 km",
+
+    seoTitle: "Xe Mitsubishi cũ chính hãng MMV UCAR, bảo hành CPO",
 
     slug: "xe-mitsubishi-cu-chinh-hang-mmv-ucar-bao-hanh-cpo",
 
@@ -184,6 +191,8 @@ export const newsArticles: NewsArticle[] = [
 
     title: "Doanh số Mitsubishi 9 tháng 2026: 31.932 xe, Xpander, Xforce và Destinator cùng vào top 10 xe xăng bán chạy",
 
+    seoTitle: "Doanh số Mitsubishi 9 tháng 2026: 31.932 xe",
+
     slug: "doanh-so-mitsubishi-9-thang-2026-xpander-xforce-destinator-top-10",
 
     category: "Thị trường ô tô",
@@ -262,6 +271,8 @@ export const newsArticles: NewsArticle[] = [
 
     title: "Mitsubishi Destinator vượt mốc 10.000 xe sau hơn 10 tháng tại Việt Nam",
 
+    seoTitle: "Destinator vượt mốc 10.000 xe tại Việt Nam",
+
     slug: "mitsubishi-destinator-vuot-moc-10000-xe-tai-viet-nam",
 
     category: "Thị trường ô tô",
@@ -335,6 +346,8 @@ export const newsArticles: NewsArticle[] = [
 
     title: "Mitsubishi Attrage sắp có bản nâng cấp tại Việt Nam? Mức tiêu thụ nhiên liệu và ưu đãi tháng 10/2026",
 
+    seoTitle: "Attrage nâng cấp sắp về Việt Nam? Tiêu hao và ưu đãi",
+
     slug: "mitsubishi-attrage-moi-lo-thong-so-tieu-thu-nhien-lieu-tai-viet-nam-dai-ly-manh-tay-uu-dai-xa-hang-ton",
 
     category: "Tin Mitsubishi",
@@ -398,6 +411,8 @@ export const newsArticles: NewsArticle[] = [
 
     title: "CHƯƠNG TRÌNH KHUYẾN MÃI MUA XE THÁNG 10/2026 - Mitsubishi Motors Việt Nam",
 
+    seoTitle: "Khuyến mãi mua xe Mitsubishi tháng 10/2026",
+
     slug: "chuong-trinh-khuyen-mai-mua-xe-thang-10-2026-mitsubishi-motors-viet-nam",
 
     category: "Khuyến mãi",
@@ -450,6 +465,8 @@ export const newsArticles: NewsArticle[] = [
     id: "news-1790842128387",
 
     title: "Mitsubishi Pajero 2026 ra mắt Đông Nam Á: 3 phiên bản, máy dầu 2.4L 204 mã lực",
+
+    seoTitle: "Pajero 2026 ra mắt Đông Nam Á: 3 bản, máy dầu 2.4L",
 
     slug: "mitsubishi-pajero-2026-se-ra-mat-dong-nam-a-vao-thang-10-co-3-phien-ban-may-diesel-204-ma-luc",
 
@@ -552,6 +569,8 @@ export const newsArticles: NewsArticle[] = [
 
     title: "Mitsubishi Outlander PHEV 2026 tại Đông Nam Á: 302 mã lực, chạy thuần điện khoảng 100 km",
 
+    seoTitle: "Outlander PHEV 2026 tại Đông Nam Á: 302 mã lực",
+
     slug: "anh-thuc-te-mitsubishi-outlander-phev-2026-tai-dna-suv-co-c-manh-302-ma-luc-chay-100-km-khong-ton-xang",
 
     category: "Tin Mitsubishi",
@@ -613,6 +632,8 @@ export const newsArticles: NewsArticle[] = [
     id: "news-1790836010186",
 
     title: "Mitsubishi Outlander thế hệ mới có thể ra mắt năm 2028: thiết kế từ Elevance Concept, PHEV 4 mô-tơ",
+
+    seoTitle: "Outlander thế hệ thứ năm có thể ra mắt năm 2028",
 
     slug: "mitsubishi-outlander-the-he-moi-co-the-ra-mat-vao-nam-2028",
 
@@ -692,6 +713,8 @@ export const newsArticles: NewsArticle[] = [
     id: "news-1790758742014",
 
     title: "Khuyến mãi Mitsubishi tháng 09/2026: Ưu đãi phí trước bạ và nhiều quà tặng",
+
+    seoTitle: "Khuyến mãi Mitsubishi tháng 09/2026",
 
     slug: "khuyen-mai-mitsubishi-thang-09-2026-uu-dai-phi-truoc-ba-va-nhieu-qua-tang",
 
