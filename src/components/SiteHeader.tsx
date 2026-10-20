@@ -9,8 +9,8 @@ import { featuredImages } from "@/lib/carCards";
 
 export default function SiteHeader() {
   return (
-    <header id="site-header" className="site-header sticky top-0 z-50 border-b border-gray-800 bg-black text-white xl:border-gray-200 xl:bg-white xl:text-black">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2 md:px-6 xl:py-5">
+    <header id="site-header" className="site-header sticky top-0 z-50 border-b border-white/10 bg-black text-white">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2 md:px-6 xl:py-3">
         <ScrollTopLink
           href="/"
           aria-label="Về trang chủ"
@@ -24,18 +24,9 @@ export default function SiteHeader() {
             height={300}
             sizes="240px"
             loading="eager"
-            className="h-12 w-auto object-contain md:h-14 xl:hidden"
+            className="h-12 w-auto object-contain md:h-14"
           />
 
-          {/* Logo desktop */}
-          <Image
-            src="/images/logo/logo-black.svg"
-            alt="Mitsubishi Motors"
-            width={934}
-            height={272}
-            loading="eager"
-            className="hidden h-12 w-auto xl:block"
-          />
         </ScrollTopLink>
 
         {/* Menu desktop */}
@@ -190,14 +181,14 @@ export default function SiteHeader() {
             href={siteConfig.contact.zaloUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded border border-blue-600 px-4 py-3 font-semibold text-blue-600 transition hover:bg-blue-50"
+            className="border border-white/50 px-5 py-2.5 text-sm font-bold uppercase tracking-[0.15em] text-white transition hover:border-white hover:bg-white/10"
           >
             Zalo
           </a>
 
           <a
             href={siteConfig.contact.phoneUrl}
-            className="whitespace-nowrap rounded bg-red-600 px-5 py-3 font-semibold text-white transition hover:bg-red-700"
+            className="whitespace-nowrap bg-red-600 px-5 py-2.5 text-sm font-bold uppercase tracking-[0.15em] text-white transition hover:bg-red-700"
           >
             Gọi ngay
           </a>

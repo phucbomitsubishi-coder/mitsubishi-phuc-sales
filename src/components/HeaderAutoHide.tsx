@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 
-// Điện thoại/tablet (< 1280px): ẩn thanh trên cùng khi khách cuộn xuống, hiện lại khi cuộn lên
+// Mọi màn hình (máy tính từ 20/10/2026): ẩn thanh trên cùng khi khách cuộn xuống, hiện lại khi cuộn lên
 // (giống web Mitsubishi Việt Nam), để nội dung không bị che. Không ẩn khi menu đang mở.
 // Đặt biến CSS --header-offset (chiều cao header đang hiện, hoặc 0) cho các thanh bám đầu trang khác.
 export default function HeaderAutoHide() {
@@ -23,9 +23,8 @@ export default function HeaderAutoHide() {
     const update = () => {
       ticking = false;
       const y = window.scrollY;
-      const desktop = window.innerWidth >= 1280;
       const menuOpen = !!header.querySelector('[aria-expanded="true"]');
-      if (desktop || menuOpen || y < 120) {
+      if (menuOpen || y < 120) {
         if (hidden) apply(false);
         lastY = y;
         return;

@@ -5,7 +5,6 @@ import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 import { newsArticles } from "@/data/news";
 import { advisoryArticles } from "@/data/advisory";
-import NewsPromotionCover from "@/components/NewsPromotionCover";
 import NewsList from "./NewsList";
 
 export const metadata: Metadata = createPageMetadata({
@@ -23,146 +22,111 @@ function formatDate(date: string) {
   }).format(new Date(`${date}T00:00:00`));
 }
 
-export default function NewsPage() {
-  const featuredArticle = newsArticles.find(
-    (article) => article.featured
-  );
+// Số bài tư vấn hiện sẵn (bài mới nhất trước); các bài còn lại vẫn có trong HTML nhưng ẩn, xem đủ ở /tu-van
+const ADVISORY_SHOWN = 6;
 
-  const otherArticles = newsArticles.filter(
-    (article) => article.slug !== featuredArticle?.slug
-  );
+export default function NewsPage() {
+  const featuredArticle = newsArticles.find((article) => article.featured);
+
+  const otherArticles = newsArticles.filter((article) => article.slug !== featuredArticle?.slug);
+
+  // Bài so sánh/tư vấn mới nhất trước (bài mới được thêm vào cuối advisory.ts)
+  const advisoryNewestFirst = [...advisoryArticles].reverse();
 
   return (
     <>
       <SiteHeader />
 
       <main className="bg-white text-gray-900">
-        {/* Hero */}
-        <section className="bg-neutral-950 text-white">
-          <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
-            <p className="text-sm font-semibold uppercase tracking-widest text-red-500">
-              Mitsubishi Lưu Hoàng Phúc
-            </p>
+        {/* BANNER: bài nổi bật, ảnh tràn ngang (đồng bộ banner trang chủ, trang xe) */}
+        <section className="relative isolate overflow-hidden bg-neutral-950 text-white">
+          {featuredArticle && (
+            <>
+              <Image
+                src={featuredArticle.image}
+                alt=""
+                fill
+                preload
+                sizes="100vw"
+                className="-z-20 object-cover opacity-60"
+              />
+              <div aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-t from-black via-black/60 to-black/30" />
+            </>
+          )}
+          <div className="mx-auto max-w-7xl px-5 pb-12 pt-10 md:px-6 md:pb-16 md:pt-14">
+            <p className="text-xs font-bold uppercase tracking-[0.25em] text-red-400">Mitsubishi · Lưu Hoàng Phúc</p>
+            <h1 className="mt-2 text-lg font-semibold text-white/90 md:text-xl">Tin tức & Tư vấn</h1>
 
-            <h1 className="mt-3 text-3xl font-bold sm:text-4xl">
-              Tin tức & Tư vấn
-            </h1>
-
-            <p className="mt-4 max-w-3xl leading-7 text-gray-300">
-              Cập nhật thông tin Mitsubishi, tư vấn lựa chọn xe,
-              kinh nghiệm sử dụng và những nội dung hữu ích dành cho
-              khách hàng.
-            </p>
+            {featuredArticle && (
+              <div className="mt-16 max-w-3xl md:mt-28">
+                <p className="flex flex-wrap items-center gap-3 text-xs font-bold uppercase tracking-[0.15em]">
+                  <span className="bg-red-600 px-2.5 py-1">{featuredArticle.category}</span>
+                  <span className="text-white/80">{formatDate(featuredArticle.publishedAt)}</span>
+                </p>
+                <h2 className="mt-4 text-3xl font-black leading-tight tracking-tight md:text-5xl">
+                  {featuredArticle.seoTitle ?? featuredArticle.title}
+                </h2>
+                <p className="mt-4 line-clamp-3 max-w-2xl leading-7 text-white/80">{featuredArticle.excerpt}</p>
+                <Link
+                  href={`/tin-tuc/${featuredArticle.slug}`}
+                  className="mt-7 inline-block bg-white px-8 py-3.5 text-sm font-bold uppercase tracking-[0.2em] text-neutral-950 transition hover:bg-gray-200"
+                >
+                  Đọc bài viết
+                </Link>
+              </div>
+            )}
           </div>
         </section>
 
-                {/* Promotion Cover */}
-        <section className="mx-auto max-w-7xl px-4 pt-10 sm:px-6 lg:px-8">
-          <NewsPromotionCover />
-        </section>
-
-        {/* Featured */}
-        {featuredArticle && (
-          <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-            <div className="mb-6 flex items-center gap-3">
-              <span className="h-6 w-1 rounded-full bg-red-600" />
-              <h2 className="text-2xl font-bold">
-                Bài viết nổi bật
-              </h2>
+        {/* SO SÁNH & TƯ VẤN CHỌN XE (src/data/advisory.ts), thẻ có ảnh chia sẻ của từng bài */}
+        <section className="mx-auto max-w-7xl px-5 py-12 md:px-6 md:py-20">
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[0.25em] text-red-700">So sánh & tư vấn</p>
+              <h2 className="mt-2 text-3xl font-black tracking-tight md:text-5xl">Tư vấn chọn xe</h2>
             </div>
-
-            <article className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
-              <div className="grid lg:grid-cols-2">
-                <div className="relative min-h-[260px] sm:min-h-[340px]">
-                  <Image
-                    src={featuredArticle.image}
-                    alt={featuredArticle.title}
-                    fill
-                    preload
-                    className="object-cover"
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                  />
-                </div>
-
-                <div className="flex flex-col justify-center p-6 sm:p-9">
-                  <div className="flex flex-wrap items-center gap-3 text-sm">
-                    <span className="rounded-full bg-red-50 px-3 py-1 font-semibold text-red-700">
-                      {featuredArticle.category}
-                    </span>
-
-                    <span className="text-gray-500">
-                      {formatDate(featuredArticle.publishedAt)}
-                    </span>
-                  </div>
-
-                  <h2 className="mt-5 text-2xl font-bold leading-tight sm:text-3xl">
-                    {featuredArticle.title}
-                  </h2>
-
-                  <p className="mt-4 leading-7 text-gray-600">
-                    {featuredArticle.excerpt}
-                  </p>
-
-                  <div className="mt-7">
-                    <Link
-                      href={`/tin-tuc/${featuredArticle.slug}`}
-                      className="inline-flex rounded-lg bg-red-600 px-5 py-3 font-semibold text-white transition hover:bg-red-700"
-                    >
-                      Đọc bài viết
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </article>
-          </section>
-        )}
-
-        {/* Tư vấn chọn xe (src/data/advisory.ts) */}
-        <section className="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">
-          <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
-            <div className="flex items-center gap-3">
-              <span className="h-6 w-1 rounded-full bg-red-600" />
-              <h2 className="text-2xl font-bold">Tư vấn chọn xe</h2>
-            </div>
-            <Link href="/tu-van" className="font-semibold text-red-700 hover:underline">
-              Xem tất cả →
+            <Link
+              href="/tu-van"
+              className="border-b-2 border-gray-900 pb-0.5 text-sm font-black uppercase tracking-[0.2em] transition hover:border-red-600 hover:text-red-700"
+            >
+              Xem tất cả {advisoryArticles.length} bài
             </Link>
           </div>
 
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {advisoryArticles.map((item, index) => (
+          <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {advisoryNewestFirst.map((item, index) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className={`group rounded-xl border border-gray-200 p-4 transition hover:border-red-600 hover:shadow-md sm:p-5 ${index >= 6 ? "hidden sm:block" : ""}`}
+                className={`group overflow-hidden rounded-2xl bg-white ring-1 ring-gray-200 transition duration-300 hover:-translate-y-1 hover:shadow-xl ${
+                  index >= ADVISORY_SHOWN ? "hidden" : ""
+                }`}
               >
-                <span className="text-sm font-bold text-red-700">{item.number}</span>
-                <p className="mt-2 font-bold leading-6 group-hover:text-red-700">
-                  {item.title}
-                </p>
-                <p className="mt-2 hidden text-sm leading-6 text-gray-600 sm:block">
-                  {item.description}
-                </p>
+                <div className="relative aspect-[1200/630] overflow-hidden bg-gray-100">
+                  <Image
+                    src={`${item.href}/opengraph-image`}
+                    alt=""
+                    fill
+                    unoptimized
+                    sizes="(min-width: 1024px) 400px, (min-width: 640px) 50vw, 100vw"
+                    className="object-cover transition duration-500 group-hover:scale-105"
+                  />
+                </div>
+                <div className="p-5">
+                  <h3 className="font-bold leading-snug group-hover:text-red-700 md:text-lg">{item.title}</h3>
+                  <p className="mt-2 line-clamp-2 text-sm leading-6 text-gray-600">{item.description}</p>
+                </div>
               </Link>
             ))}
           </div>
-          {advisoryArticles.length > 6 && (
-            <Link
-              href="/tu-van"
-              className="mt-4 block rounded-xl border border-gray-300 py-3 text-center font-semibold text-gray-800 transition hover:border-red-600 hover:text-red-700 sm:hidden"
-            >
-              Xem tất cả {advisoryArticles.length} bài tư vấn, so sánh →
-            </Link>
-          )}
         </section>
 
-        {/* Other articles */}
+        {/* BÀI VIẾT MỚI */}
         {otherArticles.length > 0 && (
           <section className="bg-gray-50">
-            <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
-              <h2 className="text-2xl font-bold">
-                Bài viết mới
-              </h2>
+            <div className="mx-auto max-w-7xl px-5 py-12 md:px-6 md:py-20">
+              <p className="text-xs font-bold uppercase tracking-[0.25em] text-red-700">Tin tức</p>
+              <h2 className="mt-2 text-3xl font-black tracking-tight md:text-5xl">Bài viết mới</h2>
 
               <NewsList
                 articles={otherArticles.map((article) => ({
