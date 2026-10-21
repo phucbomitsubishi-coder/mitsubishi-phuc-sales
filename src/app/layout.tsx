@@ -3,6 +3,9 @@ import { Roboto } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import MetaPixel from "@/components/MetaPixel";
 import QuickQuote, { type QuickQuoteCar } from "@/components/QuickQuote";
+import QuoteDialog, { type DialogCar } from "@/components/QuoteDialog";
+import MobileActionBar from "@/components/MobileActionBar";
+import OnRoadDialog, { type OnRoadCar } from "@/components/OnRoadDialog";
 import { cars } from "@/data/cars";
 import { currentPromotion } from "@/data/promotions";
 import "./globals.css";
@@ -118,6 +121,30 @@ const quickQuoteCars: QuickQuoteCar[] = cars.map((car) => {
   };
 });
 
+// Hộp thoại báo giá / lái thử và thanh đáy điện thoại dùng chung toàn site (21/10/2026)
+const dialogCars: DialogCar[] = cars.map((car) => ({
+  id: car.id,
+  slug: car.slug,
+  name: car.name,
+  variantNames: car.variants.map((variant) => variant.name),
+}));
+
+// Công cụ tính lăn bánh mở tại chỗ (OnRoadDialog): giá, số chỗ, ưu đãi tháng từng phiên bản
+const onRoadCars: OnRoadCar[] = cars.map((car) => {
+  const promotion = currentPromotion.cars.find((item) => item.carId === car.id);
+  return {
+    id: car.id,
+    slug: car.slug,
+    name: car.name,
+    variants: car.variants.map((variant) => ({
+      name: variant.name,
+      price: variant.price,
+      seats: variant.specifications?.seats,
+      promotion: promotion?.variants.find((item) => item.variantName === variant.name),
+    })),
+  };
+});
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
@@ -137,6 +164,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   <Analytics />
   <MetaPixel />
   <HideOnLanding><QuickQuote cars={quickQuoteCars} zaloUrl={siteConfig.contact.zaloUrl} phoneUrl={siteConfig.contact.phoneUrl} /></HideOnLanding>
+  <HideOnLanding><QuoteDialog cars={dialogCars} /></HideOnLanding>
+  <HideOnLanding><MobileActionBar cars={dialogCars} /></HideOnLanding>
+  <HideOnLanding><OnRoadDialog cars={onRoadCars} /></HideOnLanding>
 </body>
     </html>
   );

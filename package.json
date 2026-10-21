@@ -15,6 +15,7 @@
     "ad-images": "node scripts/make-ad-images.mjs",
     "sync-accessories": "node scripts/sync-accessories.mjs",
     "indexnow": "node scripts/indexnow.mjs",
+    "check-site": "node scripts/check-site.mjs",
     "compare-images": "node scripts/make-compare-images.mjs",
     "sync-dealer-promos": "node scripts/sync-dealer-promos.mjs"
   },

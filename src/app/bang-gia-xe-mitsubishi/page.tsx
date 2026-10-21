@@ -97,16 +97,16 @@ export default function PriceListPage() {
       <main className="bg-white text-gray-900">
         {/* HERO */}
         <section className="bg-neutral-950 text-white">
-          <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-14">
-            <p className="text-sm font-semibold uppercase tracking-widest text-red-500">
+          <div className="mx-auto max-w-4xl px-6 py-16 text-center md:py-24">
+            <p className="text-xs font-bold uppercase tracking-[0.3em] text-red-500">
               Cập nhật tháng {promotionMonthLabel}
             </p>
 
-            <h1 className="mt-3 text-3xl font-bold sm:text-4xl">
+            <h1 className="mt-4 text-3xl font-black uppercase leading-tight tracking-tight md:text-5xl">
               Bảng giá xe Mitsubishi tháng {promotionMonthLabel}
             </h1>
 
-            <p className="mt-4 max-w-3xl leading-7 text-gray-300">
+            <p className="mx-auto mt-5 max-w-2xl leading-7 text-gray-300">
               Giá niêm yết, ưu đãi trong tháng và giá lăn bánh dự kiến của{" "}
               {priceList.length} dòng xe Mitsubishi đang bán tại Việt Nam. Giá lăn
               bánh tính cho xe đăng ký tại TP. Hồ Chí Minh (gồm cả khu vực Bình
@@ -123,7 +123,7 @@ export default function PriceListPage() {
           <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-6">
             {priceList.map(({ car, shortName, minPrice, maxPromotion }) => (
               <li key={car.id}>
-                <a href={`#${car.id}`} className="group block h-full border border-gray-200 p-3 transition hover:border-gray-950">
+                <a href={`#${car.id}`} className="group block h-full p-3 text-center transition hover:bg-gray-50">
                   <span className="relative block h-16 sm:h-20">
                     <Image src={featuredImages[car.id] ?? car.image} alt="" fill sizes="200px" className="object-contain" />
                   </span>
@@ -145,14 +145,23 @@ export default function PriceListPage() {
         <div className="border-t border-gray-200 bg-white">
           <div className="mx-auto max-w-7xl divide-y divide-gray-200 px-4 sm:px-6 lg:px-8">
             {priceList.map(({ car, shortName, minPrice, maxPromotion, commonYear, variants }) => (
-              <section key={car.id} id={car.id} className="scroll-mt-28 py-8 md:py-12">
-                <div className="grid items-center gap-4 md:grid-cols-[1fr_240px] md:gap-8">
+              <section key={car.id} id={car.id} className="scroll-mt-28 py-12 md:py-16">
+                <div className="relative mx-auto h-36 max-w-xl sm:h-44 md:h-56">
+                  <Image
+                    src={featuredImages[car.id] ?? car.image}
+                    alt={car.name}
+                    fill
+                    sizes="(min-width: 768px) 576px, 90vw"
+                    className="object-contain"
+                  />
+                </div>
+                <div className="mt-4 text-center">
                   <div>
                     <h2>
                       <span className="block text-xs font-bold uppercase tracking-[0.25em] text-red-700">Giá xe Mitsubishi</span>{" "}
                       <span className="mt-1 block text-3xl font-black uppercase tracking-tight md:text-4xl">{shortName}</span>
                     </h2>
-                    <p className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-sm text-gray-700">
+                    <p className="mt-3 flex flex-wrap justify-center gap-x-4 gap-y-1 text-sm text-gray-700">
                       <span>{variants.length} phiên bản</span>
                       {commonYear && <span>Sản xuất {commonYear}</span>}
                       <span>
@@ -161,21 +170,12 @@ export default function PriceListPage() {
                       {maxPromotion > 0 && <strong className="text-red-700">Ưu đãi đến {formatMillion(maxPromotion)}</strong>}
                     </p>
                   </div>
-                  <div className="relative order-first h-24 md:order-none md:h-28">
-                    <Image
-                      src={featuredImages[car.id] ?? car.image}
-                      alt={car.name}
-                      fill
-                      sizes="240px"
-                      className="object-contain object-left md:object-right"
-                    />
-                  </div>
                 </div>
 
                 {/* Máy tính, tablet: bảng */}
-                <div tabIndex={0} role="region" aria-label={`Bảng giá ${car.name}`} className="mt-6 hidden overflow-x-auto border border-gray-200 md:block">
+                <div tabIndex={0} role="region" aria-label={`Bảng giá ${car.name}`} className="mx-auto mt-8 hidden max-w-5xl overflow-x-auto border border-gray-200 md:block">
                   <table className="w-full text-left text-sm">
-                    <thead className="bg-gray-950 text-xs uppercase tracking-wider text-white">
+                    <thead className="bg-gray-100 text-xs uppercase tracking-wider text-gray-700">
                       <tr>
                         <th scope="col" className="px-4 py-3 font-bold">Phiên bản</th>
                         {!commonYear && <th scope="col" className="px-4 py-3 font-bold">Năm SX</th>}
@@ -186,7 +186,7 @@ export default function PriceListPage() {
                     </thead>
                     <tbody className="divide-y divide-gray-200">
                       {variants.map((variant) => (
-                        <tr key={variant.name} className="align-top">
+                        <tr key={variant.name} className="align-top even:bg-gray-50">
                           <th scope="row" className="px-4 py-4 font-bold">{variant.name}</th>
                           {!commonYear && <td className="px-4 py-4 tabular-nums text-gray-700">{variant.modelYear}</td>}
                           <td className="whitespace-nowrap px-4 py-4 text-right font-semibold tabular-nums">{vnd(variant.price)}</td>
@@ -223,7 +223,7 @@ export default function PriceListPage() {
                 </div>
 
                 {/* Điện thoại: mỗi phiên bản một khối */}
-                <ul className="mt-6 divide-y divide-gray-200 border-y border-gray-200 md:hidden">
+                <ul className="mx-auto mt-6 max-w-xl divide-y divide-gray-200 border-y border-gray-200 md:hidden">
                   {variants.map((variant) => (
                     <li key={variant.name} className="py-4">
                       <div className="flex items-baseline justify-between gap-3">
@@ -257,7 +257,7 @@ export default function PriceListPage() {
                   ))}
                 </ul>
 
-                <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3">
+                <div className="mt-7 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
                   <Link
                     href={`/?car=${encodeURIComponent(car.name)}&nguon=Bang-gia#bao-gia`}
                     className="bg-red-600 px-5 py-3 text-xs font-black uppercase tracking-[0.18em] text-white transition hover:bg-red-700"
@@ -275,19 +275,19 @@ export default function PriceListPage() {
             ))}
 
             {upcomingCars.length > 0 && (
-              <section className="my-10 rounded-2xl border border-dashed border-gray-300 bg-white p-5 sm:p-8">
-                <h2 className="text-2xl font-bold">Mẫu xe sắp ra mắt</h2>
-                <p className="mt-2 leading-7 text-gray-600">
+              <section className="py-12 text-center md:py-16">
+                <h2 className="text-2xl font-black uppercase tracking-tight md:text-3xl">Mẫu xe sắp ra mắt</h2>
+                <p className="mx-auto mt-3 max-w-2xl leading-7 text-gray-600">
                   {upcomingCars.map((car) => car.name).join(" và ")} chưa được
                   Mitsubishi Motors Việt Nam công bố giá bán. Để lại số điện thoại để
                   được báo ngay khi có giá chính thức.
                 </p>
-                <div className="mt-4 flex flex-wrap gap-3">
+                <div className="mt-5 flex flex-wrap justify-center gap-3">
                   {upcomingCars.map((car) => (
                     <Link
                       key={car.id}
                       href={`/?car=${encodeURIComponent(car.name)}&nguon=Sap-ra-mat#bao-gia`}
-                      className="rounded-lg bg-neutral-950 px-5 py-2.5 font-semibold text-white transition hover:bg-neutral-800"
+                      className="border-2 border-gray-950 px-5 py-3 text-xs font-black uppercase tracking-[0.18em] transition hover:bg-gray-950 hover:text-white"
                     >
                       Đăng ký nhận giá {car.name.replace(/^Mitsubishi /, "")}
                     </Link>

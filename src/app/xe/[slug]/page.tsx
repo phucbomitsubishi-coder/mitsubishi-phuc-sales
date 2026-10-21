@@ -5,7 +5,6 @@ import VariantSelector from "./VariantSelector";
 import { siteConfig } from "@/config/site";
 import type { Metadata } from "next";
 import BackToPrevious from "@/components/BackToPrevious";
-import MobileContactBar from "@/components/MobileContactBar";
 import CarGallery from "./CarGallery";
 import { currentPromotion, getMaxPromotionValue } from "@/data/promotions";
 import Link from "next/link";
@@ -19,8 +18,8 @@ import CarSectionNav from "./CarSectionNav";
 import CarFeatures from "./CarFeatures";
 import ShowroomHero from "./ShowroomHero";
 import ShowroomFeatures from "./ShowroomFeatures";
+import Tabs from "@/components/Tabs";
 import { showrooms } from "@/data/showroom";
-import QuoteDialog from "@/components/QuoteDialog";
 import HandoverStrip from "@/components/HandoverStrip";
 import { featuredImages } from "@/lib/carCards";
 import {
@@ -493,7 +492,7 @@ const breadcrumbSchema = {
         </div>
       </section>
 
-      {/* DẢI CHỐT CUỐI TRANG: nút lái thử / báo giá mở hộp thoại (QuoteDialog) */}
+      {/* DẢI CHỐT CUỐI TRANG: nút lái thử / báo giá mở hộp thoại dùng chung (QuoteDialog trong layout) */}
       <section className="relative overflow-clip bg-neutral-950 text-white">
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_120%,rgba(220,38,38,0.4),transparent_60%)]" />
         <div className="relative mx-auto max-w-5xl px-6 py-14 text-center md:py-20">
@@ -540,15 +539,17 @@ const breadcrumbSchema = {
         </div>
       </section>
 
-      {/* GỢI Ý LIÊN QUAN: điện thoại vuốt ngang (giống Toyota), máy tính dạng lưới */}
+      {/* GỢI Ý LIÊN QUAN (gộp 21/10/2026): 1 khối tab So sánh / Xe cũ / Tin tức / Dòng xe khác;
+          điện thoại vuốt ngang, máy tính dạng lưới; tab ẩn vẫn trong HTML */}
       <section className="bg-gray-50">
-        <div className="mx-auto max-w-7xl space-y-10 px-6 py-10 md:space-y-14 md:py-16">
-          {relatedAdvisory.length > 0 && (
-            <div>
-              <h2 className="text-2xl font-extrabold tracking-tight">
-                So sánh và tư vấn chọn {shortName}
-              </h2>
-              <div className="-mx-6 mt-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-2 [scrollbar-width:none] sm:mx-0 sm:mt-6 sm:grid sm:grid-cols-2 sm:gap-5 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-3 [&::-webkit-scrollbar]:hidden">
+        <div className="mx-auto max-w-7xl px-6 py-10 md:py-16">
+          <h2 className="text-2xl font-black tracking-tight md:text-3xl">Xem thêm về {shortName}</h2>
+          <div className="mt-6">
+          <Tabs
+            label={`Xem thêm về ${shortName}`}
+            tabs={[
+          ...(relatedAdvisory.length > 0 ? [{ id: "so-sanh", label: "So sánh & tư vấn", content: (
+              <div className="-mx-6 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-2 [scrollbar-width:none] sm:mx-0 sm:mt-6 sm:grid sm:grid-cols-2 sm:gap-5 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-3 [&::-webkit-scrollbar]:hidden">
                 {relatedAdvisory.map((item) => (
                   <Link
                     key={item.href}
@@ -567,15 +568,9 @@ const breadcrumbSchema = {
                   </Link>
                 ))}
               </div>
-            </div>
-          )}
-
-          {relatedUsedCars.length > 0 && (
-            <div>
-              <h2 className="text-2xl font-extrabold tracking-tight">
-                {shortName} đã qua sử dụng đang có sẵn
-              </h2>
-              <div className="-mx-6 mt-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-2 [scrollbar-width:none] sm:mx-0 sm:mt-6 sm:grid sm:grid-cols-2 sm:gap-5 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-3 [&::-webkit-scrollbar]:hidden">
+          ) }] : []),
+          ...(relatedUsedCars.length > 0 ? [{ id: "xe-cu", label: `${shortName} đã qua sử dụng`, content: (
+              <div className="-mx-6 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-2 [scrollbar-width:none] sm:mx-0 sm:mt-6 sm:grid sm:grid-cols-2 sm:gap-5 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-3 [&::-webkit-scrollbar]:hidden">
                 {relatedUsedCars.map((usedCar) => (
                   <Link
                     key={usedCar.id}
@@ -605,15 +600,9 @@ const breadcrumbSchema = {
                   </Link>
                 ))}
               </div>
-            </div>
-          )}
-
-          {relatedNews.length > 0 && (
-            <div>
-              <h2 className="text-2xl font-extrabold tracking-tight">
-                Tin tức về {shortName}
-              </h2>
-              <div className="-mx-6 mt-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-2 [scrollbar-width:none] sm:mx-0 sm:mt-6 sm:grid sm:grid-cols-2 sm:gap-5 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-3 [&::-webkit-scrollbar]:hidden">
+          ) }] : []),
+          ...(relatedNews.length > 0 ? [{ id: "tin-tuc", label: "Tin tức", content: (
+              <div className="-mx-6 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-2 [scrollbar-width:none] sm:mx-0 sm:mt-6 sm:grid sm:grid-cols-2 sm:gap-5 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-3 [&::-webkit-scrollbar]:hidden">
                 {relatedNews.map((article) => (
                   <Link
                     key={article.id}
@@ -635,14 +624,9 @@ const breadcrumbSchema = {
                   </Link>
                 ))}
               </div>
-            </div>
-          )}
-
-          <div>
-            <h2 className="text-2xl font-extrabold tracking-tight">
-              Có thể bạn quan tâm
-            </h2>
-            <div className="-mx-6 mt-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-2 [scrollbar-width:none] sm:mx-0 sm:mt-6 sm:grid sm:grid-cols-2 sm:gap-5 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-3 [&::-webkit-scrollbar]:hidden">
+          ) }] : []),
+          { id: "xe-khac", label: "Dòng xe khác", content: (
+            <div className="-mx-6 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-2 [scrollbar-width:none] sm:mx-0 sm:mt-6 sm:grid sm:grid-cols-2 sm:gap-5 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-3 [&::-webkit-scrollbar]:hidden">
               {otherCars.map((other) => (
                 <Link
                   key={other.id}
@@ -668,18 +652,12 @@ const breadcrumbSchema = {
                 </Link>
               ))}
             </div>
+          ) },
+            ]}
+          />
           </div>
         </div>
       </section>
-
-      {/* Form báo giá ẩn, mở khi khách bấm nút Nhận báo giá / Báo giá trên trang */}
-      <QuoteDialog carName={car.name} carId={car.id} variantNames={car.variants.map((variant) => variant.name)} />
-
-            {/* MOBILE CONTACT BAR */}
-      <MobileContactBar
-        zaloUrl={siteConfig.contact.zaloUrl}
-        phoneUrl={siteConfig.contact.phoneUrl}
-      />
     </main>
   );
 }

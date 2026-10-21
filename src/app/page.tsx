@@ -10,7 +10,7 @@ import SiteHeader from "@/components/SiteHeader";
 import HeroShowroom from "@/components/HeroShowroom";
 import { showrooms } from "@/data/showroom";
 import CarLineup from "@/components/CarLineup";
-import { carCards, lineupNeeds } from "@/lib/carCards";
+import { carCards } from "@/lib/carCards";
 import HandoverStrip from "@/components/HandoverStrip";
 import Link from "next/link";
 import Image from "next/image";
@@ -136,11 +136,11 @@ export default function Home() {
 
       {/* CHỌN XE THEO NHU CẦU */}
       <section id="san-pham" className="scroll-mt-28 bg-white">
-        <div className="reveal mx-auto max-w-7xl px-6 py-12 md:py-20">
-          <p className="text-xs font-bold uppercase tracking-[0.25em] text-red-700">Các dòng xe Mitsubishi</p>
-          <h2 className="mt-2 text-3xl font-black tracking-tight md:text-5xl">Xe nào hợp với bạn?</h2>
+        {/* Băng chuyền kiểu trang chủ MMV: không tiêu đề, không tab lọc (bỏ 21/10/2026 theo ý anh Phúc); h2 ẩn cho cấu trúc trang */}
+        <div className="reveal mx-auto max-w-7xl px-6 py-10 md:py-16">
+          <h2 className="sr-only">Các dòng xe Mitsubishi</h2>
 
-          <CarLineup cars={carCards} needs={lineupNeeds} />
+          <CarLineup cars={carCards} needs={[]} />
 
           {/* XE SẮP RA MẮT (đang ẩn trong cars.ts) */}
           {upcomingCars.length > 0 && (

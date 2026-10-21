@@ -24,7 +24,7 @@ const million = (value: number) =>
 // Không hiện nút nổi ở trang đã có công cụ tính giá riêng và các trang có form (tránh che ô nhập)
 const hiddenPaths = ["/du-toan/gia-lan-banh", "/thu-cu-doi-moi", "/dang-ky-lai-thu", "/lien-he"];
 
-// Nút "Báo giá nhanh" nổi trên mọi trang: chọn xe, phiên bản, nơi đăng ký → giá lăn bánh đã trừ ưu đãi,
+// Nút "Báo giá nhanh" nổi trên mọi trang (CHỈ máy tính từ 21/10/2026; điện thoại dùng thanh đáy MobileActionBar): chọn xe, phiên bản, nơi đăng ký → giá lăn bánh đã trừ ưu đãi,
 // rồi chép sẵn tin nhắn và mở Zalo (Zalo không cho điền sẵn tin nhắn qua link).
 // Dữ liệu xe được dựng gọn ở layout.tsx để không đưa cả cars.ts vào bundle client.
 export default function QuickQuote({ cars, zaloUrl, phoneUrl }: Props) {
@@ -80,7 +80,7 @@ export default function QuickQuote({ cars, zaloUrl, phoneUrl }: Props) {
         onClick={() => setOpen((value) => !value)}
         aria-expanded={open}
         aria-controls="quick-quote-panel"
-        className="fixed bottom-24 right-3 z-40 flex items-center gap-1.5 rounded-full bg-red-600 px-3.5 py-2.5 text-sm font-bold text-white shadow-xl transition hover:bg-red-700 md:bottom-6 md:right-6 md:gap-2 md:px-4 md:py-3 md:text-base"
+        className="fixed bottom-6 right-6 z-40 hidden items-center gap-2 rounded-full bg-red-600 px-4 py-3 text-base font-bold text-white shadow-xl transition hover:bg-red-700 md:flex"
       >
         <span aria-hidden="true">💬</span>
         {open ? "Đóng" : (<>Báo giá<span className="hidden md:inline"> nhanh</span></>)}

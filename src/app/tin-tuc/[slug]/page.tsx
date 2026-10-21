@@ -277,7 +277,7 @@ const tableContent = hasTable
   ← Vuốt sang ngang để xem đầy đủ →
 </p>
 
-    <div className="mb-8 mt-3 overflow-x-auto rounded-xl border border-gray-200">
+    <div tabIndex={0} role="region" aria-label={tableHeading ? `Bảng: ${tableHeading}` : `Bảng ${index + 1}.${paragraphIndex + 1}${section.heading ? ` – ${section.heading}` : ""}`} className="mb-8 mt-3 overflow-x-auto rounded-xl border border-gray-200">
       <table className="w-full min-w-[760px] border-collapse text-left">
         <tbody>
           {tableContent

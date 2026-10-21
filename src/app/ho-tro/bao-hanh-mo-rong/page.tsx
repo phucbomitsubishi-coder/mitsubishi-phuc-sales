@@ -3,7 +3,6 @@ import Link from "next/link";
 import Image from "next/image";
 import SiteHeader from "@/components/SiteHeader";
 import PageSchema from "@/components/PageSchema";
-import MobileContactBar from "@/components/MobileContactBar";
 import { createPageMetadata } from "@/lib/metadata";
 import { siteConfig } from "@/config/site";
 
@@ -276,7 +275,6 @@ export default function ExtendedWarrantyPage() {
             </div>
           </div>
         </section>
-        <MobileContactBar zaloUrl={contact.zaloUrl} phoneUrl={contact.phoneUrl} />
       </main>
     </>
   );

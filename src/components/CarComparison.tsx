@@ -94,7 +94,7 @@ function PriceTable({
   highlight?: boolean;
 }) {
   return (
-    <div className="overflow-x-auto rounded-xl border border-gray-200">
+    <div tabIndex={0} role="region" aria-label={caption} className="overflow-x-auto rounded-xl border border-gray-200">
       <table className="w-full min-w-[320px] text-left text-sm">
         <caption
           className={`${highlight ? "bg-red-50" : "bg-gray-100"} px-4 py-3 text-left font-bold text-gray-900`}
@@ -183,7 +183,7 @@ export function SpecTable({
   rows: SpecRow[];
 }) {
   return (
-    <div className="mt-6 overflow-x-auto rounded-xl border border-gray-200">
+    <div tabIndex={0} role="region" aria-label={`Bảng thông số so sánh với ${competitorName}`} className="mt-6 overflow-x-auto rounded-xl border border-gray-200">
       <table className="w-full min-w-[560px] text-left text-sm">
         <thead className="bg-gray-50 text-gray-700">
           <tr>

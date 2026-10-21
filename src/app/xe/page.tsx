@@ -3,7 +3,6 @@ import Link from "next/link";
 import Image from "next/image";
 import SiteHeader from "@/components/SiteHeader";
 import PageSchema from "@/components/PageSchema";
-import MobileContactBar from "@/components/MobileContactBar";
 import { createPageMetadata } from "@/lib/metadata";
 import { carCards } from "@/lib/carCards";
 import { upcomingCars } from "@/data/cars";
@@ -133,7 +132,6 @@ export default function CarListPage() {
           </div>
         </section>
 
-        <MobileContactBar zaloUrl={siteConfig.contact.zaloUrl} phoneUrl={siteConfig.contact.phoneUrl} />
       </main>
     </>
   );

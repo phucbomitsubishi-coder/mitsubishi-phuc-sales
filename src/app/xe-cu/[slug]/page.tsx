@@ -3,7 +3,6 @@ import { siteConfig } from "@/config/site";
 import { notFound } from "next/navigation";
 import SiteHeader from "@/components/SiteHeader";
 import BackToPrevious from "@/components/BackToPrevious";
-import MobileContactBar from "@/components/MobileContactBar";
 import UsedCarGallery from "@/components/UsedCarGallery";
 import UsedCarGifts from "@/components/UsedCarGifts";
 import { usedCars } from "@/data/usedCars";
@@ -254,10 +253,6 @@ export default async function UsedCarDetailPage({ params }: Props) {
             </div>
           </div>
         </section>
-        <MobileContactBar
-          zaloUrl={siteConfig.contact.zaloUrl}
-          phoneUrl={siteConfig.contact.phoneUrl}
-        />
       </main>
     </>
   );

@@ -109,6 +109,8 @@ export default function CarLineup({ cars, needs }: { cars: LineupCar[]; needs: {
 
   return (
     <>
+      {/* Tab lọc theo nhu cầu: chỉ hiện khi truyền needs (trang chủ bỏ từ 21/10/2026, kiểu băng chuyền MMV) */}
+      {needs.length > 0 && (
       <div className="-mx-6 mt-6 flex gap-6 overflow-x-auto border-b border-gray-200 px-6 [scrollbar-width:none] md:mx-0 md:gap-8 md:px-0 [&::-webkit-scrollbar]:hidden">
         {[{ id: "", label: "Tất cả" }, ...needs].map((item) => (
           <button
@@ -124,8 +126,9 @@ export default function CarLineup({ cars, needs }: { cars: LineupCar[]; needs: {
           </button>
         ))}
       </div>
+      )}
 
-      <div className="relative -mx-6 mt-8 md:mx-0">
+      <div className={`relative -mx-6 md:mx-0 ${needs.length > 0 ? "mt-8" : ""}`}>
         <div
           ref={trackRef}
           onScroll={onScroll}
