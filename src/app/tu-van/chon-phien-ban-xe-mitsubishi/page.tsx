@@ -279,7 +279,7 @@ export default function MitsubishiVariantGuidePage() {
           Phiên bản & trang bị · Cập nhật {promotionMonthLabel}
         </p>
 
-        <h1 className="mt-3 text-3xl font-bold leading-tight md:text-5xl">
+        <h1 className="mt-3 text-3xl font-black leading-tight md:text-5xl tracking-tight">
           Nên chọn phiên bản nào? Khác biệt giữa các phiên bản xe Mitsubishi
         </h1>
 
@@ -295,7 +295,7 @@ export default function MitsubishiVariantGuidePage() {
             <a
               key={car.id}
               href={`#${car.id}`}
-              className="rounded-full border border-gray-300 px-4 py-2 text-sm font-semibold text-gray-800 transition hover:border-red-600 hover:text-red-700"
+              className="border border-gray-300 px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-gray-800 transition hover:border-red-600 hover:text-red-700"
             >
               {car.name.replace("Mitsubishi ", "")}
             </a>
@@ -304,11 +304,11 @@ export default function MitsubishiVariantGuidePage() {
 
         {sections.map(({ car, variants, advice }) => (
           <section key={car.id} id={car.id} className="mt-12 scroll-mt-24 border-t border-gray-200 pt-10">
-            <h2 className="text-2xl font-bold md:text-3xl">{car.name}</h2>
+            <h2 className="text-2xl font-black md:text-3xl tracking-tight">{car.name}</h2>
 
             <div className="mt-6 grid gap-4">
               {variants.map((variant) => (
-                <div key={variant.name} className="rounded-2xl border border-gray-200 p-5">
+                <div key={variant.name} className="border border-gray-200 p-5">
                   <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                     <h3 className="text-lg font-bold">
                       {variant.name === car.name.replace("Mitsubishi ", "") ? car.name : variant.name}
@@ -338,7 +338,7 @@ export default function MitsubishiVariantGuidePage() {
               ))}
             </div>
 
-            <p className="mt-5 rounded-xl bg-gray-50 p-4 leading-7 text-gray-700">
+            <p className="mt-5 bg-gray-50 p-4 leading-7 text-gray-700">
               <span className="font-semibold text-gray-900">Nên chọn bản nào: </span>
               {advice}
             </p>
@@ -353,7 +353,7 @@ export default function MitsubishiVariantGuidePage() {
         ))}
 
         <section className="mt-12 border-t border-gray-200 pt-10">
-          <h2 className="text-2xl font-bold md:text-3xl">Mẹo chọn phiên bản</h2>
+          <h2 className="text-2xl font-black md:text-3xl tracking-tight">Mẹo chọn phiên bản</h2>
           <ul className="mt-4 list-disc space-y-3 pl-5 leading-8 text-gray-700">
             <li>
               <span className="font-semibold text-gray-900">So sánh theo giá lăn bánh sau ưu đãi.</span>{" "}
@@ -379,8 +379,8 @@ export default function MitsubishiVariantGuidePage() {
           lăn bánh tạm tính cho TP. Hồ Chí Minh (gồm Bình Dương cũ), chưa trừ ưu đãi.
         </p>
 
-        <div className="mt-10 rounded-2xl bg-gray-100 p-6 md:p-8">
-          <h2 className="text-2xl font-bold">Đang phân vân giữa hai phiên bản?</h2>
+        <div className="mt-10 bg-gray-100 p-6 md:p-8">
+          <h2 className="text-2xl font-black tracking-tight">Đang phân vân giữa hai phiên bản?</h2>
 
           <p className="mt-3 leading-7 text-gray-700">
             Gửi cho Phúc hai phiên bản bạn đang cân nhắc, Phúc sẽ gửi bảng so sánh lăn bánh
@@ -390,7 +390,7 @@ export default function MitsubishiVariantGuidePage() {
           <div className="mt-6 flex flex-wrap gap-3">
             <Link
               href="/?nguon=Chon-phien-ban#bao-gia"
-              className="rounded bg-red-600 px-5 py-3 font-semibold text-white transition hover:bg-red-700"
+              className="rounded bg-red-600 px-5 py-3 text-xs font-black uppercase tracking-[0.18em] text-white transition hover:bg-red-700"
             >
               Nhận báo giá
             </Link>
@@ -399,7 +399,7 @@ export default function MitsubishiVariantGuidePage() {
               href={siteConfig.contact.zaloUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded border border-blue-600 bg-white px-5 py-3 font-semibold text-blue-700 transition hover:bg-blue-50"
+              className="rounded border border-blue-600 bg-white px-5 py-3 text-xs font-black uppercase tracking-[0.18em] text-blue-700 transition hover:bg-blue-50"
             >
               Tư vấn Zalo
             </a>

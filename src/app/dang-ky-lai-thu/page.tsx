@@ -117,8 +117,8 @@ function DangKyLaiThuForm() {
     <>
       {/* FORM */}
       <section className="mx-auto max-w-4xl px-6 py-12">
-        <div className="rounded-2xl bg-white p-6 shadow-lg sm:p-10">
-          <h2 className="mb-8 text-2xl font-bold text-gray-900">
+        <div className="bg-white p-6 shadow-lg sm:p-10">
+          <h2 className="mb-8 text-2xl font-black text-gray-900 tracking-tight">
             Thông tin đăng ký
           </h2>
 
@@ -156,7 +156,7 @@ function DangKyLaiThuForm() {
                   autoComplete="name"
                   required
                   placeholder="Nguyễn Văn A"
-                  className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none transition focus:border-red-600 focus:ring-2 focus:ring-red-100"
+                  className="w-full border border-gray-300 px-4 py-3 outline-none transition focus:border-red-600 focus:ring-2 focus:ring-red-100"
                 />
               </div>
 
@@ -177,7 +177,7 @@ function DangKyLaiThuForm() {
                   autoComplete="tel"
                   required
                   placeholder="09xx xxx xxx"
-                  className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none transition focus:border-red-600 focus:ring-2 focus:ring-red-100"
+                  className="w-full border border-gray-300 px-4 py-3 outline-none transition focus:border-red-600 focus:ring-2 focus:ring-red-100"
                 />
               </div>
 
@@ -195,7 +195,7 @@ function DangKyLaiThuForm() {
                   name="car"
                   required
                   defaultValue={selectedCar}
-                  className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 outline-none transition focus:border-red-600 focus:ring-2 focus:ring-red-100"
+                  className="w-full border border-gray-300 bg-white px-4 py-3 outline-none transition focus:border-red-600 focus:ring-2 focus:ring-red-100"
                 >
                   <option value="" disabled>
                     Chọn mẫu xe
@@ -225,14 +225,14 @@ function DangKyLaiThuForm() {
                   name="note"
                   rows={4}
                   placeholder="Thời gian thuận tiện để lái thử. Muốn lái thử tại nhà, vui lòng ghi địa chỉ..."
-                  className="w-full resize-none rounded-lg border border-gray-300 px-4 py-3 outline-none transition focus:border-red-600 focus:ring-2 focus:ring-red-100"
+                  className="w-full resize-none border border-gray-300 px-4 py-3 outline-none transition focus:border-red-600 focus:ring-2 focus:ring-red-100"
                 />
               </div>
 
               {/* THÔNG BÁO */}
 
               {errorMessage && (
-                <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm font-medium text-red-700 sm:col-span-2">
+                <div className="border border-red-200 bg-red-50 p-4 text-sm font-medium text-red-700 sm:col-span-2">
                   {errorMessage}
                 </div>
               )}
@@ -242,13 +242,13 @@ function DangKyLaiThuForm() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full rounded-lg bg-red-600 px-6 py-4 font-bold text-white shadow-lg transition hover:bg-red-700 disabled:cursor-not-allowed disabled:bg-gray-400 sm:w-auto"
+                  className="w-full bg-red-600 px-6 py-4 text-xs font-black uppercase tracking-[0.18em] text-white shadow-lg transition hover:bg-red-700 disabled:cursor-not-allowed disabled:bg-gray-400 sm:w-auto"
                 >
                   {isSubmitting ? "Đang gửi..." : "Gửi đăng ký lái thử"}
                 </button>              </div>
             </form>
           ) : (
-            <div className="rounded-xl border border-green-200 bg-green-50 p-6 text-center">
+            <div className="border border-green-200 bg-green-50 p-6 text-center">
               <div className="text-2xl font-bold text-green-700">
                 ✓ Đăng ký lái thử thành công
               </div>
@@ -257,7 +257,7 @@ function DangKyLaiThuForm() {
               </p>
               <Link
                 href="/"
-                className="mx-auto mt-6 hidden w-fit rounded-xl bg-red-600 px-8 py-3 font-semibold text-white transition hover:bg-red-700 md:block"
+                className="mx-auto mt-6 hidden w-fit bg-red-600 px-8 py-3 text-xs font-black uppercase tracking-[0.18em] text-white transition hover:bg-red-700 md:block"
               >
                 ← Quay về trang chủ
               </Link>
@@ -287,11 +287,11 @@ export default function DangKyLaiThuPage() {
         {/* TIÊU ĐỀ: nằm ngoài Suspense để có sẵn trong HTML (Google đọc được H1 ngay) */}
         <section className="bg-black py-12 text-white">
           <div className="mx-auto max-w-7xl px-6">
-            <p className="mb-2 text-sm font-semibold uppercase tracking-widest text-red-500">
+            <p className="mb-2 text-xs font-bold uppercase tracking-[0.25em] text-red-500">
               Mitsubishi Motors
             </p>
 
-            <h1 className="text-3xl font-bold sm:text-4xl">
+            <h1 className="text-3xl font-black sm:text-4xl tracking-tight">
               Đăng ký lái thử
             </h1>
 

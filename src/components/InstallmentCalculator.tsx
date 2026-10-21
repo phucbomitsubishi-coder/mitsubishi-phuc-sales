@@ -104,7 +104,7 @@ const month12Payment =
         </div>
       </div>
 
-      <div className="rounded-2xl border border-red-100 bg-red-50 px-5 py-4">
+      <div className="border border-red-100 bg-red-50 px-5 py-4">
         <p className="text-sm font-medium text-gray-600">
           Giá xe dùng để dự tính
         </p>
@@ -202,7 +202,7 @@ onBlur={(event) => {
   </p>
 </div>
  <div className="grid gap-4 md:grid-cols-2">
-  <div className="rounded-xl bg-gray-100 p-5">
+  <div className="bg-gray-100 p-5">
     <p className="text-sm text-gray-600">
       Số tiền trả trước ({downPaymentPercent}%)
     </p>
@@ -212,7 +212,7 @@ onBlur={(event) => {
     </p>
   </div>
 
-  <div className="rounded-xl bg-gray-900 p-5 text-white">
+  <div className="bg-gray-900 p-5 text-white">
     <p className="text-sm text-gray-300">
       Khoản vay dự kiến
     </p>
@@ -222,11 +222,11 @@ onBlur={(event) => {
     </p>
   </div>
 </div>
-<div className="rounded-2xl border border-gray-200 bg-white p-5">
+<div className="border border-gray-200 bg-white p-5">
   <h3 className="text-lg font-bold text-gray-900">
     Dự tính thanh toán trong năm đầu
   </h3>
-  <div className="mt-4 rounded-xl border border-red-100 bg-red-50 p-4">
+  <div className="mt-4 border border-red-100 bg-red-50 p-4">
   <p className="text-sm font-medium text-gray-600">
     Khoảng thanh toán dự kiến trong năm đầu
   </p>
@@ -248,7 +248,7 @@ onBlur={(event) => {
 </div>
 
   <div className="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-    <div className="rounded-xl bg-gray-50 p-4">
+    <div className="bg-gray-50 p-4">
       <p className="text-sm text-gray-600">
         Gốc trả mỗi tháng (dự kiến)
       </p>
@@ -261,7 +261,7 @@ onBlur={(event) => {
       </p>
     </div>
 
-    <div className="rounded-xl bg-gray-50 p-4">
+    <div className="bg-gray-50 p-4">
       <p className="text-sm text-gray-600">
         Lãi tháng đầu
       </p>
@@ -274,7 +274,7 @@ onBlur={(event) => {
       </p>
     </div>
 
-    <div className="rounded-xl bg-red-600 p-4 text-white">
+    <div className="bg-red-600 p-4 text-white">
       <p className="text-sm text-white">
         Thanh toán tháng đầu
       </p>
@@ -286,7 +286,7 @@ onBlur={(event) => {
         đ
       </p>
     </div>
-    <div className="rounded-xl bg-gray-900 p-4 text-white">
+    <div className="bg-gray-900 p-4 text-white">
   <p className="text-sm text-gray-300">
     Thanh toán tháng 12
   </p>
@@ -312,7 +312,7 @@ onBlur={(event) => {
   href={`/?form=tra-gop&car=${encodeURIComponent(
     selectedCar.id
   )}&variant=${encodeURIComponent(selectedVariant.name)}#bao-gia`}
-  className="flex w-full items-center justify-center rounded-lg bg-red-600 px-6 py-4 text-base font-bold text-white transition hover:bg-red-700"
+  className="flex w-full items-center justify-center bg-red-600 px-6 py-4 text-xs font-black uppercase tracking-[0.18em] text-white transition hover:bg-red-700"
 >
   Nhận tư vấn trả góp
 </Link>

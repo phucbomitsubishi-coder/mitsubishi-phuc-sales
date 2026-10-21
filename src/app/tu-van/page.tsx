@@ -31,11 +31,11 @@ export default function AdvisoryPage() {
       <main>
         <section className="bg-neutral-950 text-white">
           <div className="mx-auto max-w-7xl px-6 py-16 md:py-20">
-            <p className="mb-3 text-sm font-bold uppercase tracking-wider text-red-500">
+            <p className="mb-3 text-xs font-bold uppercase tracking-[0.25em] text-red-500">
               Tư vấn mua xe Mitsubishi
             </p>
 
-            <h1 className="max-w-4xl text-3xl font-bold leading-tight md:text-5xl">
+            <h1 className="max-w-4xl text-3xl font-black leading-tight md:text-5xl tracking-tight">
               Chọn đúng mẫu xe, đúng phiên bản và chủ động chi phí
             </h1>
 
@@ -48,14 +48,14 @@ export default function AdvisoryPage() {
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
                 href="/?nguon=Tu-van#bao-gia"
-                className="rounded-lg bg-red-600 px-6 py-3 font-bold text-white transition hover:bg-red-700"
+                className="bg-red-600 px-6 py-3 text-xs font-black uppercase tracking-[0.18em] text-white transition hover:bg-red-700"
               >
                 Nhận báo giá
               </Link>
 
               <Link
                 href="/dang-ky-lai-thu?nguon=Tu-van"
-                className="rounded-lg border border-neutral-600 px-6 py-3 font-bold text-white transition hover:border-white"
+                className="border border-neutral-600 px-6 py-3 text-xs font-black uppercase tracking-[0.18em] text-white transition hover:border-white"
               >
                 Đăng ký lái thử
               </Link>
@@ -66,11 +66,11 @@ export default function AdvisoryPage() {
         <section className="bg-white">
           <div className="mx-auto max-w-7xl px-6 py-14 md:py-16">
             <div className="mb-8">
-              <p className="text-sm font-bold uppercase tracking-wider text-red-600">
+              <p className="text-xs font-bold uppercase tracking-[0.25em] text-red-600">
                 Hướng dẫn lựa chọn
               </p>
 
-              <h2 className="mt-2 text-2xl font-bold text-neutral-950 md:text-3xl">
+              <h2 className="mt-2 text-2xl font-black text-neutral-950 md:text-3xl tracking-tight">
                 Bắt đầu từ nhu cầu của bạn
               </h2>
 
@@ -85,7 +85,7 @@ export default function AdvisoryPage() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="group rounded-2xl border border-neutral-200 bg-white p-7 shadow-sm transition hover:-translate-y-1 hover:border-red-200 hover:shadow-lg"
+                  className="group border border-neutral-200 bg-white p-7 shadow-sm transition hover:-translate-y-1 hover:border-red-200 hover:shadow-lg"
                 >
                   <div className="mb-8 flex items-center justify-between">
                     <span className="text-sm font-bold text-red-600">
@@ -119,13 +119,13 @@ export default function AdvisoryPage() {
             <div className="grid gap-5 md:grid-cols-2">
               <Link
                 href="/du-toan/gia-lan-banh"
-                className="group rounded-2xl bg-white p-7 shadow-sm transition hover:shadow-md"
+                className="group bg-white p-7 shadow-sm transition hover:shadow-md"
               >
                 <p className="text-sm font-bold uppercase text-red-600">
                   Công cụ dự toán
                 </p>
 
-                <h2 className="mt-2 text-2xl font-bold text-neutral-950">
+                <h2 className="mt-2 text-2xl font-black text-neutral-950 tracking-tight">
                   Tính giá lăn bánh
                 </h2>
 
@@ -141,13 +141,13 @@ export default function AdvisoryPage() {
 
               <Link
                 href="/du-toan/tra-gop"
-                className="group rounded-2xl bg-white p-7 shadow-sm transition hover:shadow-md"
+                className="group bg-white p-7 shadow-sm transition hover:shadow-md"
               >
                 <p className="text-sm font-bold uppercase text-red-600">
                   Kế hoạch tài chính
                 </p>
 
-                <h2 className="mt-2 text-2xl font-bold text-neutral-950">
+                <h2 className="mt-2 text-2xl font-black text-neutral-950 tracking-tight">
                   Dự tính trả góp
                 </h2>
 
@@ -166,13 +166,13 @@ export default function AdvisoryPage() {
 
         <section className="bg-white">
           <div className="mx-auto max-w-7xl px-6 py-12">
-            <div className="rounded-2xl bg-neutral-950 px-7 py-9 text-white md:flex md:items-center md:justify-between md:px-10">
+            <div className="bg-neutral-950 px-7 py-9 text-white md:flex md:items-center md:justify-between md:px-10">
               <div>
-                <p className="text-sm font-bold uppercase tracking-wider text-red-500">
+                <p className="text-xs font-bold uppercase tracking-[0.25em] text-red-500">
                   Cần tư vấn trực tiếp?
                 </p>
 
-                <h2 className="mt-2 text-2xl font-bold">
+                <h2 className="mt-2 text-2xl font-black tracking-tight">
                   Nhận tư vấn xe Mitsubishi
                 </h2>
 
@@ -184,7 +184,7 @@ export default function AdvisoryPage() {
 
               <Link
                 href="/?nguon=Tu-van#bao-gia"
-                className="mt-6 inline-flex rounded-lg bg-red-600 px-6 py-3 font-bold text-white transition hover:bg-red-700 md:mt-0"
+                className="mt-6 inline-flex bg-red-600 px-6 py-3 text-xs font-black uppercase tracking-[0.18em] text-white transition hover:bg-red-700 md:mt-0"
               >
                 Nhận tư vấn ngay
               </Link>

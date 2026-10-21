@@ -117,7 +117,7 @@ export default function TritonVsHiluxPage() {
           <PriceComparison heading="1. Giá niêm yết và giá lăn bánh" car={triton} competitor={hilux} />
 
           <section className="mt-12">
-            <h2 className="text-2xl font-bold">2. Kích thước, động cơ và hệ dẫn động</h2>
+            <h2 className="text-2xl font-black tracking-tight">2. Kích thước, động cơ và hệ dẫn động</h2>
 
             <SpecTable carName={triton.name} competitorName={hilux.name} rows={specRows} />
 
@@ -145,7 +145,7 @@ export default function TritonVsHiluxPage() {
           </section>
 
           <section className="mt-12">
-            <h2 className="text-2xl font-bold">3. Trang bị và an toàn ở tầm giá giữa</h2>
+            <h2 className="text-2xl font-black tracking-tight">3. Trang bị và an toàn ở tầm giá giữa</h2>
             <TwoColumnLists
               left={{
                 title: `Mitsubishi Triton ${tritonPremium4wd?.name ?? "4WD AT Premium"}`,
@@ -179,7 +179,7 @@ export default function TritonVsHiluxPage() {
           </section>
 
           <section className="mt-12">
-            <h2 className="text-2xl font-bold">4. Nên mua xe nào?</h2>
+            <h2 className="text-2xl font-black tracking-tight">4. Nên mua xe nào?</h2>
             <TwoColumnLists
               emphasizeLeft
               left={{

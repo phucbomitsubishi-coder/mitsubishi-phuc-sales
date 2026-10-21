@@ -202,6 +202,31 @@ export default function CarLineup({ cars, needs }: { cars: LineupCar[]; needs: {
         </button>
       </div>
 
+      {/* Dải thông số nhanh của xe đang ở giữa (kiểu băng chuyền VinFast, 21/10/2026) */}
+      {cars[active] && (
+        <div className="mx-auto mt-6 flex max-w-3xl flex-col items-center gap-5 border-y border-gray-200 py-5 md:flex-row md:justify-between md:gap-8">
+          <dl className="grid w-full grid-cols-3 divide-x divide-gray-200 text-center md:w-auto">
+            {cars[active].specs.split(" · ").slice(0, 3).map((value, index) => (
+              <div key={index} className="flex flex-col-reverse px-3 md:px-6">
+                <dt className="mt-1 text-[11px] uppercase tracking-[0.15em] text-gray-600">{["Kiểu xe", "Số chỗ", "Động cơ"][index]}</dt>
+                <dd className="text-sm font-bold text-gray-950 md:text-base">{value}</dd>
+              </div>
+            ))}
+          </dl>
+          <div className="flex shrink-0 items-center gap-5">
+            <Link href={`/xe/${cars[active].slug}`} className="text-sm font-bold text-gray-950 underline-offset-4 hover:text-red-700 hover:underline">
+              Xem chi tiết →
+            </Link>
+            <Link
+              href={`/?car=${encodeURIComponent(cars[active].name)}&nguon=Bang-chuyen-trang-chu#bao-gia`}
+              className="bg-red-600 px-5 py-3 text-xs font-black uppercase tracking-[0.18em] text-white transition hover:bg-red-700"
+            >
+              Báo giá
+            </Link>
+          </div>
+        </div>
+      )}
+
       <div className="mt-8 text-center">
         <Link
           href="/bang-gia-xe-mitsubishi"

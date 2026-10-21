@@ -101,7 +101,7 @@ export default function AttrageVsAccentPage() {
           <PriceComparison heading="1. Giá niêm yết và giá lăn bánh" car={attrage} competitor={accent} />
 
           <section className="mt-12">
-            <h2 className="text-2xl font-bold">2. Kích thước, động cơ và hộp số</h2>
+            <h2 className="text-2xl font-black tracking-tight">2. Kích thước, động cơ và hộp số</h2>
 
             <SpecTable carName={attrage.name} competitorName={accent.name} rows={specRows} />
 
@@ -127,7 +127,7 @@ export default function AttrageVsAccentPage() {
           </section>
 
           <section className="mt-12">
-            <h2 className="text-2xl font-bold">3. Trang bị ở cùng tầm giá</h2>
+            <h2 className="text-2xl font-black tracking-tight">3. Trang bị ở cùng tầm giá</h2>
             <TwoColumnLists
               left={{
                 title: `Mitsubishi Attrage ${attrageTop.name}`,
@@ -161,7 +161,7 @@ export default function AttrageVsAccentPage() {
           </section>
 
           <section className="mt-12">
-            <h2 className="text-2xl font-bold">4. Nên mua xe nào?</h2>
+            <h2 className="text-2xl font-black tracking-tight">4. Nên mua xe nào?</h2>
             <TwoColumnLists
               emphasizeLeft
               left={{

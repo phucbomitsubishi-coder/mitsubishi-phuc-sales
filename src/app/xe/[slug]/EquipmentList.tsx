@@ -30,11 +30,11 @@ function Group({
   children: ReactNode;
 }) {
   return (
-    <details className="group rounded-xl border-2 border-gray-200 bg-white open:border-red-600">
+    <details className="group border-2 border-gray-200 bg-white open:border-red-600">
       <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-4 py-3.5 [&::-webkit-details-marker]:hidden">
         <span className="min-w-0">
           <span className="font-bold text-gray-900">{title}</span>
-          <span className="ml-2 rounded-full bg-gray-100 px-2 py-0.5 text-xs font-semibold text-gray-700">
+          <span className="ml-2 bg-gray-100 px-2 py-0.5 text-xs font-semibold text-gray-700">
             {count}
           </span>
           {note && <span className="mt-0.5 block text-sm text-gray-600">{note}</span>}
@@ -76,7 +76,7 @@ export default function EquipmentList({ title, variant }: Props) {
 
   return (
     <div>
-      <p className="text-sm font-semibold uppercase tracking-wide text-red-600">Trang bị phiên bản</p>
+      <p className="text-xs font-bold uppercase tracking-[0.25em] text-red-600">Trang bị phiên bản</p>
       <h4 className="mt-2 text-2xl font-bold">{title}</h4>
       <p className="mt-1 text-sm text-gray-600">Bấm vào từng nhóm để xem chi tiết.</p>
 

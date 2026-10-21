@@ -300,7 +300,7 @@ export default function PriceListPage() {
 
         {/* GHI CHÚ CÁCH TÍNH */}
         <section className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-bold">Cách tính giá lăn bánh trong bảng</h2>
+          <h2 className="text-2xl font-black tracking-tight">Cách tính giá lăn bánh trong bảng</h2>
           <div className="mt-4 space-y-3 leading-7 text-gray-700">
             <p>
               Giá lăn bánh = giá niêm yết + lệ phí trước bạ + lệ phí đăng ký và biển số
@@ -330,7 +330,7 @@ export default function PriceListPage() {
           </div>
 
           <div className="mt-8 bg-neutral-950 p-6 text-white sm:p-8">
-            <h2 className="text-xl font-bold sm:text-2xl">
+            <h2 className="text-xl font-black sm:text-2xl tracking-tight">
               Cần báo giá chính xác cho phiên bản bạn chọn?
             </h2>
             <p className="mt-3 leading-7 text-gray-300">

@@ -72,7 +72,7 @@ export default function CarFeatures({ car }: { car: Car }) {
                   sizes="(min-width: 768px) 600px, 100vw"
                   className="object-cover transition duration-700 hover:scale-105"
                 />
-                <span className="absolute left-4 top-4 rounded-full bg-black/60 px-3 py-1 text-xs font-bold text-white backdrop-blur">
+                <span className="absolute left-4 top-4 bg-black/60 px-3 py-1 text-xs font-bold text-white backdrop-blur">
                   {String(index + 1).padStart(2, "0")}
                 </span>
               </div>

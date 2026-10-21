@@ -79,7 +79,7 @@ export default function CarGallery({ carName, galleries: customGalleries, fallba
         {images.map((image, index) => (
           <div
             key={image}
-            className="relative aspect-[16/10] w-[85%] shrink-0 snap-start overflow-hidden rounded-2xl bg-neutral-900 md:w-[62%]"
+            className="relative aspect-[16/10] w-[85%] shrink-0 snap-start overflow-hidden bg-neutral-900 md:w-[62%]"
           >
             <Image
               src={image}

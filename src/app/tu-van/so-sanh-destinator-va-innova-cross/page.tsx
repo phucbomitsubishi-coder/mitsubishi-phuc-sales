@@ -99,7 +99,7 @@ export default function DestinatorVsInnovaCrossPage() {
           />
 
           <section className="mt-12">
-            <h2 className="text-2xl font-bold">2. Kích thước và vận hành</h2>
+            <h2 className="text-2xl font-black tracking-tight">2. Kích thước và vận hành</h2>
 
             <SpecTable carName={destinator.name} competitorName={innova.name} rows={specRows} />
 
@@ -135,7 +135,7 @@ export default function DestinatorVsInnovaCrossPage() {
           </section>
 
           <section className="mt-12">
-            <h2 className="text-2xl font-bold">3. Trang bị và an toàn</h2>
+            <h2 className="text-2xl font-black tracking-tight">3. Trang bị và an toàn</h2>
             <p className="mt-3 leading-7 text-gray-700">
               So sánh từng cặp phiên bản có giá gần nhau.
             </p>
@@ -215,7 +215,7 @@ export default function DestinatorVsInnovaCrossPage() {
           </section>
 
           <section className="mt-12">
-            <h2 className="text-2xl font-bold">4. Nên mua xe nào?</h2>
+            <h2 className="text-2xl font-black tracking-tight">4. Nên mua xe nào?</h2>
             <TwoColumnLists
               emphasizeLeft
               left={{

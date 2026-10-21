@@ -96,7 +96,7 @@ export default function XpanderVsVelozPage() {
           />
 
           <section className="mt-12">
-            <h2 className="text-2xl font-bold">2. Kích thước và vận hành</h2>
+            <h2 className="text-2xl font-black tracking-tight">2. Kích thước và vận hành</h2>
 
             <SpecTable carName={xpander.name} competitorName={veloz.name} rows={specRows} />
 
@@ -123,7 +123,7 @@ export default function XpanderVsVelozPage() {
           </section>
 
           <section className="mt-12">
-            <h2 className="text-2xl font-bold">3. Trang bị và an toàn</h2>
+            <h2 className="text-2xl font-black tracking-tight">3. Trang bị và an toàn</h2>
             <TwoColumnLists
               left={{
                 title: "Mitsubishi Xpander (bản AT Premium)",
@@ -159,7 +159,7 @@ export default function XpanderVsVelozPage() {
           </section>
 
           <section className="mt-12">
-            <h2 className="text-2xl font-bold">4. Nên mua xe nào?</h2>
+            <h2 className="text-2xl font-black tracking-tight">4. Nên mua xe nào?</h2>
             <TwoColumnLists
               emphasizeLeft
               left={{

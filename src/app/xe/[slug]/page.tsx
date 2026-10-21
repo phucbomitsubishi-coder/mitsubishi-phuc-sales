@@ -343,7 +343,7 @@ const breadcrumbSchema = {
             {promotionItem.maxValue > 0 && (
               <a
                 href="#lan-banh"
-                className="rounded-lg bg-red-600 px-3 py-1.5 text-sm font-bold shadow-lg shadow-red-900/40 transition hover:bg-red-700"
+                className="bg-red-600 px-3 py-1.5 text-sm font-bold shadow-lg shadow-red-900/40 transition hover:bg-red-700"
               >
                 Ưu đãi tháng {promotionMonthLabel} đến {formatMillion(promotionItem.maxValue)} ↓
               </a>
@@ -353,13 +353,13 @@ const breadcrumbSchema = {
           <div className="mt-6 grid grid-cols-2 gap-3 sm:flex sm:flex-wrap">
             <Link
               href={`/?car=${encodeURIComponent(car.name)}&nguon=Chi-tiet-xe#bao-gia`}
-              className="rounded-full bg-red-600 px-5 py-3 text-center font-bold text-white transition hover:bg-red-700 sm:px-7"
+              className="bg-red-600 px-5 py-3 text-center text-xs font-black uppercase tracking-[0.18em] text-white transition hover:bg-red-700 sm:px-7"
             >
               Nhận báo giá
             </Link>
             <Link
               href={`/dang-ky-lai-thu?xe=${car.id}&nguon=Chi-tiet-xe`}
-              className="rounded-full bg-white px-5 py-3 text-center font-bold text-neutral-950 transition hover:bg-gray-200 sm:px-7"
+              className="bg-white px-5 py-3 text-center text-xs font-black uppercase tracking-[0.18em] text-neutral-950 transition hover:bg-gray-200 sm:px-7"
             >
               Lái thử
             </Link>
@@ -367,7 +367,7 @@ const breadcrumbSchema = {
               href={siteConfig.contact.zaloUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-full border border-white/30 px-5 py-3 text-center font-bold transition hover:border-white hover:bg-white/10 sm:px-7"
+              className="border border-white/30 px-5 py-3 text-center text-xs font-black uppercase tracking-[0.18em] transition hover:border-white hover:bg-white/10 sm:px-7"
             >
               Tư vấn Zalo
             </a>
@@ -376,7 +376,7 @@ const breadcrumbSchema = {
                 href={brochure.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-full border border-white/30 px-5 py-3 text-center font-bold transition hover:border-white hover:bg-white/10 sm:px-7"
+                className="border border-white/30 px-5 py-3 text-center text-xs font-black uppercase tracking-[0.18em] transition hover:border-white hover:bg-white/10 sm:px-7"
               >
                 Brochure <span className="text-xs font-normal text-white/60">PDF</span>
               </a>
@@ -474,7 +474,7 @@ const breadcrumbSchema = {
           Thắc mắc khi mua {shortName}
         </h2>
 
-        <div className="mt-8 divide-y divide-gray-200 rounded-2xl border border-gray-200">
+        <div className="mt-8 divide-y divide-gray-200 border border-gray-200">
           {faqs.map((faq) => (
             <details key={faq.question} className="group px-5 py-4 sm:px-6">
               <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold [&::-webkit-details-marker]:hidden">
@@ -554,7 +554,7 @@ const breadcrumbSchema = {
                   <Link
                     key={item.href}
                     href={item.href}
-                    className="group w-[80%] shrink-0 snap-start rounded-2xl border border-gray-200 bg-white p-5 transition hover:border-red-600 hover:shadow-lg sm:w-auto"
+                    className="group w-[80%] shrink-0 snap-start border border-gray-200 bg-white p-5 transition hover:border-red-600 hover:shadow-lg sm:w-auto"
                   >
                     <p className="font-bold leading-6 group-hover:text-red-700">
                       {item.title}
@@ -575,7 +575,7 @@ const breadcrumbSchema = {
                   <Link
                     key={usedCar.id}
                     href={`/xe-cu/${usedCar.slug}`}
-                    className="group w-[72%] shrink-0 snap-start overflow-clip rounded-2xl border border-gray-200 bg-white transition hover:shadow-lg sm:w-auto"
+                    className="group w-[72%] shrink-0 snap-start overflow-clip border border-gray-200 bg-white transition hover:shadow-lg sm:w-auto"
                   >
                     <div className="relative aspect-[4/3] bg-gray-100">
                       <Image
@@ -607,7 +607,7 @@ const breadcrumbSchema = {
                   <Link
                     key={article.id}
                     href={`/tin-tuc/${article.slug}`}
-                    className="group w-[80%] shrink-0 snap-start overflow-clip rounded-2xl border border-gray-200 bg-white transition hover:shadow-lg sm:w-auto"
+                    className="group w-[80%] shrink-0 snap-start overflow-clip border border-gray-200 bg-white transition hover:shadow-lg sm:w-auto"
                   >
                     <div className="relative aspect-[16/9] bg-gray-100">
                       <Image
@@ -631,7 +631,7 @@ const breadcrumbSchema = {
                 <Link
                   key={other.id}
                   href={`/xe/${other.slug}`}
-                  className="group w-[72%] shrink-0 snap-start rounded-2xl border border-gray-200 bg-white p-5 transition hover:shadow-lg sm:w-auto"
+                  className="group w-[72%] shrink-0 snap-start border border-gray-200 bg-white p-5 transition hover:shadow-lg sm:w-auto"
                 >
                   <div className="relative h-36">
                     <Image

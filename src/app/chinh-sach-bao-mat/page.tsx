@@ -71,11 +71,11 @@ export default function PrivacyPolicyPage() {
         {/* Hero */}
         <section className="bg-neutral-950 text-white">
           <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
-            <p className="text-sm font-semibold uppercase tracking-widest text-red-500">
+            <p className="text-xs font-bold uppercase tracking-[0.25em] text-red-500">
               Chính sách
             </p>
 
-            <h1 className="mt-3 text-3xl font-bold sm:text-4xl">
+            <h1 className="mt-3 text-3xl font-black sm:text-4xl tracking-tight">
               Chính sách bảo mật thông tin
             </h1>
 
@@ -95,7 +95,7 @@ export default function PrivacyPolicyPage() {
           <div className="space-y-10">
             {sections.map((section) => (
               <div key={section.heading}>
-                <h2 className="text-xl font-bold sm:text-2xl">
+                <h2 className="text-xl font-black sm:text-2xl tracking-tight">
                   {section.heading}
                 </h2>
 
@@ -107,8 +107,8 @@ export default function PrivacyPolicyPage() {
               </div>
             ))}
 
-            <div className="rounded-2xl border border-gray-200 bg-gray-50 p-6">
-              <h2 className="text-xl font-bold">7. Liên hệ về dữ liệu cá nhân</h2>
+            <div className="border border-gray-200 bg-gray-50 p-6">
+              <h2 className="text-xl font-black tracking-tight">7. Liên hệ về dữ liệu cá nhân</h2>
 
               <div className="mt-4 space-y-2 leading-7 text-gray-700">
                 <p>

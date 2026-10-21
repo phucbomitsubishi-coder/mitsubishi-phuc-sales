@@ -31,7 +31,7 @@ export default function GiaLanBanhPage() {
               Dự toán chi phí
             </p>
 
-            <h1 className="text-3xl font-bold text-gray-900 md:text-4xl">
+            <h1 className="text-3xl font-black text-gray-900 md:text-4xl tracking-tight">
               Tính giá lăn bánh Mitsubishi
             </h1>
 

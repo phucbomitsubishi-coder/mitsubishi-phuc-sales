@@ -161,7 +161,7 @@ export default function QuoteForm({
             </p>
             <ul className="mt-5 flex flex-wrap justify-center gap-2 text-sm font-semibold">
               {["Giá lăn bánh chi tiết", "Ưu đãi tháng mới nhất", "Phương án trả góp"].map((item) => (
-                <li key={item} className="rounded-full bg-white px-3 py-1.5 text-gray-800 ring-1 ring-gray-200">
+                <li key={item} className="bg-white px-3 py-1.5 text-gray-800 ring-1 ring-gray-200">
                   <span className="mr-1 text-red-600" aria-hidden="true">✓</span>
                   {item}
                 </li>
@@ -203,7 +203,7 @@ export default function QuoteForm({
                     autoComplete="name"
                     required
                     placeholder="Nhập họ và tên"
-                    className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 outline-none transition focus:border-red-600"
+                    className="w-full border border-gray-300 bg-white px-4 py-3 outline-none transition focus:border-red-600"
                   />
                 </div>
 
@@ -220,7 +220,7 @@ export default function QuoteForm({
                     autoComplete="tel"
                     required
                     placeholder="Nhập số điện thoại"
-                    className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 outline-none transition focus:border-red-600"
+                    className="w-full border border-gray-300 bg-white px-4 py-3 outline-none transition focus:border-red-600"
                   />
                 </div>
 
@@ -276,7 +276,7 @@ export default function QuoteForm({
                       type="text"
                       value={selectedVariant}
                       readOnly
-                      className="w-full rounded-lg border border-gray-300 bg-gray-100 px-4 py-3 text-gray-700 outline-none"
+                      className="w-full border border-gray-300 bg-gray-100 px-4 py-3 text-gray-700 outline-none"
                     />
                   </div>
                 )}
@@ -308,7 +308,7 @@ export default function QuoteForm({
               </p>
             </form>
           ) : (
-            <div className="mt-10 rounded-2xl border border-green-200 bg-green-50 p-8 text-center shadow-sm">
+            <div className="mt-10 border border-green-200 bg-green-50 p-8 text-center shadow-sm">
               <div className="text-2xl font-bold text-green-700">
                 ✓ Yêu cầu báo giá đã được gửi
               </div>
@@ -317,7 +317,7 @@ export default function QuoteForm({
               </p>
               <ScrollTopLink
                 href="/"
-                className="mx-auto mt-6 hidden w-fit rounded-xl bg-red-600 px-8 py-3 font-semibold text-white transition hover:bg-red-700 md:block"
+                className="mx-auto mt-6 hidden w-fit bg-red-600 px-8 py-3 text-xs font-black uppercase tracking-[0.18em] text-white transition hover:bg-red-700 md:block"
               >
                 ← Quay về trang chủ
               </ScrollTopLink>

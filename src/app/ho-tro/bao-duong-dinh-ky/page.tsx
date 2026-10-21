@@ -22,11 +22,11 @@ export default function MaintenancePage() {
         {/* Hero */}
         <section className="bg-neutral-950 text-white">
           <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
-            <p className="text-sm font-semibold uppercase tracking-widest text-red-500">
+            <p className="text-xs font-bold uppercase tracking-[0.25em] text-red-500">
               Hỗ trợ khách hàng
             </p>
 
-            <h1 className="mt-3 text-3xl font-bold sm:text-4xl">
+            <h1 className="mt-3 text-3xl font-black sm:text-4xl tracking-tight">
               Bảo dưỡng định kỳ Mitsubishi
             </h1>
 
@@ -39,7 +39,7 @@ export default function MaintenancePage() {
 
         {/* Chu kỳ */}
         <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-bold">
+          <h2 className="text-2xl font-black tracking-tight">
             Chu kỳ bảo dưỡng tham khảo
           </h2>
 
@@ -50,7 +50,7 @@ export default function MaintenancePage() {
           </p>
 
           <div className="mt-7 grid gap-5 md:grid-cols-2">
-            <div className="rounded-2xl border border-gray-200 p-6 shadow-sm">
+            <div className="border border-gray-200 p-6 shadow-sm">
               <p className="text-sm font-semibold uppercase text-red-600">
                 Đa số mẫu xe Mitsubishi
               </p>
@@ -68,7 +68,7 @@ export default function MaintenancePage() {
               </p>
             </div>
 
-            <div className="rounded-2xl border border-gray-200 p-6 shadow-sm">
+            <div className="border border-gray-200 p-6 shadow-sm">
               <p className="text-sm font-semibold uppercase text-red-600">
                 All-New Triton động cơ 4N16
               </p>
@@ -87,7 +87,7 @@ export default function MaintenancePage() {
             </div>
           </div>
 
-          <div className="mt-8 rounded-xl bg-gray-50 p-5 text-sm leading-6 text-gray-600">
+          <div className="mt-8 bg-gray-50 p-5 text-sm leading-6 text-gray-600">
             Lịch bảo dưỡng cụ thể có thể khác nhau tùy mẫu xe, phiên bản,
             điều kiện vận hành và hướng dẫn sử dụng đi kèm xe. Khách hàng
             nên kiểm tra tài liệu hướng dẫn của xe và thực hiện bảo dưỡng
@@ -98,7 +98,7 @@ export default function MaintenancePage() {
         {/* Hạng mục */}
         <section className="bg-gray-50">
           <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-            <h2 className="text-2xl font-bold">
+            <h2 className="text-2xl font-black tracking-tight">
               Một số hạng mục cần kiểm tra định kỳ
             </h2>
 
@@ -116,7 +116,7 @@ export default function MaintenancePage() {
               ].map((item) => (
                 <div
                   key={item}
-                  className="rounded-xl border border-gray-200 bg-white p-5"
+                  className="border border-gray-200 bg-white p-5"
                 >
                   <p className="font-semibold">{item}</p>
                 </div>
@@ -132,12 +132,12 @@ export default function MaintenancePage() {
 
         {/* Lợi ích */}
         <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-bold">
+          <h2 className="text-2xl font-black tracking-tight">
             Vì sao nên bảo dưỡng đúng định kỳ?
           </h2>
 
           <div className="mt-6 grid gap-5 md:grid-cols-3">
-            <div className="rounded-xl border border-gray-200 p-6">
+            <div className="border border-gray-200 p-6">
               <h3 className="font-bold">
                 Duy trì vận hành ổn định
               </h3>
@@ -148,7 +148,7 @@ export default function MaintenancePage() {
               </p>
             </div>
 
-            <div className="rounded-xl border border-gray-200 p-6">
+            <div className="border border-gray-200 p-6">
               <h3 className="font-bold">
                 Hỗ trợ duy trì an toàn
               </h3>
@@ -159,7 +159,7 @@ export default function MaintenancePage() {
               </p>
             </div>
 
-            <div className="rounded-xl border border-gray-200 p-6">
+            <div className="border border-gray-200 p-6">
               <h3 className="font-bold">
                 Theo dõi lịch sử chăm sóc xe
               </h3>
@@ -175,8 +175,8 @@ export default function MaintenancePage() {
         {/* Nguồn chính thức */}
         <section className="bg-gray-50">
           <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-            <div className="rounded-2xl border border-gray-200 bg-white p-6 sm:p-8">
-              <h2 className="text-xl font-bold">
+            <div className="border border-gray-200 bg-white p-6 sm:p-8">
+              <h2 className="text-xl font-black tracking-tight">
                 Tra cứu thông tin bảo dưỡng chính thức
               </h2>
 
@@ -191,7 +191,7 @@ export default function MaintenancePage() {
                 href="https://www.mitsubishi-motors.com.vn/dich-vu/bao-duong-dinh-ky"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-5 inline-flex rounded-lg border border-gray-900 px-5 py-3 font-semibold transition hover:bg-gray-900 hover:text-white"
+                className="mt-5 inline-flex border border-gray-900 px-5 py-3 text-xs font-black uppercase tracking-[0.18em] transition hover:bg-gray-900 hover:text-white"
               >
                 Xem thông tin Mitsubishi Motors Việt Nam
               </a>
@@ -204,11 +204,11 @@ export default function MaintenancePage() {
           <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
             <div className="grid gap-8 lg:grid-cols-2 lg:items-center">
               <div>
-                <p className="text-sm font-semibold uppercase tracking-widest text-red-500">
+                <p className="text-xs font-bold uppercase tracking-[0.25em] text-red-500">
                   Hỗ trợ khách hàng
                 </p>
 
-                <h2 className="mt-2 text-2xl font-bold">
+                <h2 className="mt-2 text-2xl font-black tracking-tight">
                   Cần hỗ trợ thêm về bảo dưỡng?
                 </h2>
 
@@ -225,7 +225,7 @@ export default function MaintenancePage() {
               <div className="flex flex-wrap gap-3 lg:justify-end">
                 <a
                   href={contact.phoneUrl}
-                  className="rounded-lg bg-red-600 px-6 py-3 font-bold text-white hover:bg-red-700"
+                  className="bg-red-600 px-6 py-3 text-xs font-black uppercase tracking-[0.18em] text-white hover:bg-red-700"
                 >
                   Gọi {sales.phoneDisplay}
                 </a>
@@ -234,14 +234,14 @@ export default function MaintenancePage() {
                   href={contact.zaloUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="rounded-lg border border-blue-500 px-6 py-3 font-bold text-blue-400 hover:bg-blue-500 hover:text-white"
+                  className="border border-blue-500 px-6 py-3 text-xs font-black uppercase tracking-[0.18em] text-blue-400 hover:bg-blue-500 hover:text-white"
                 >
                   Mở Zalo
                 </a>
 
                 <Link
                   href="/"
-                  className="rounded-lg border border-gray-600 px-6 py-3 font-semibold hover:bg-white hover:text-black"
+                  className="border border-gray-600 px-6 py-3 text-xs font-black uppercase tracking-[0.18em] hover:bg-white hover:text-black"
                 >
                   Về trang chủ
                 </Link>

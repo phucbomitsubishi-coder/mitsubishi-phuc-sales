@@ -102,7 +102,7 @@ export default function Home() {
       {/* NGƯỜI TƯ VẤN: gương mặt thật + số liệu thật (điểm Google là của showroom) */}
       <section className="border-b border-gray-200 bg-white">
         <div className="mx-auto flex max-w-7xl items-center gap-4 px-6 py-5 md:gap-6 md:py-7">
-          <div className="relative h-20 w-16 shrink-0 overflow-hidden rounded-2xl bg-gray-100 md:h-28 md:w-24">
+          <div className="relative h-20 w-16 shrink-0 overflow-hidden bg-gray-100 md:h-28 md:w-24">
             <Image
               src="/images/about/luu-hoang-phuc.jpg"
               alt={`${sales.name} – ${sales.title}`}
@@ -148,8 +148,8 @@ export default function Home() {
               <h3 className="text-lg font-extrabold">Sắp ra mắt</h3>
               <div className="mt-4 grid gap-3 sm:grid-cols-2">
                 {upcomingCars.map((car) => (
-                  <article key={car.slug} className="flex gap-3 overflow-hidden rounded-2xl bg-neutral-950 p-3 text-white sm:p-4">
-                    <div className="relative h-24 w-32 shrink-0 overflow-hidden rounded-xl sm:h-28 sm:w-40">
+                  <article key={car.slug} className="flex gap-3 overflow-hidden bg-neutral-950 p-3 text-white sm:p-4">
+                    <div className="relative h-24 w-32 shrink-0 overflow-hidden sm:h-28 sm:w-40">
                       <Image
                         src={car.image}
                         alt={`${car.name} sắp ra mắt tại Việt Nam`}

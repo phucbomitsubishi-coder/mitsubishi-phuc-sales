@@ -99,7 +99,7 @@ export default function DestinatorVsSantaFePage() {
           <PriceComparison heading="1. Giá niêm yết và giá lăn bánh" car={destinator} competitor={santaFe} />
 
           <section className="mt-12">
-            <h2 className="text-2xl font-bold">2. Kích thước, động cơ và hộp số</h2>
+            <h2 className="text-2xl font-black tracking-tight">2. Kích thước, động cơ và hộp số</h2>
 
             <SpecTable carName={destinator.name} competitorName={santaFe.name} rows={specRows} />
 
@@ -124,7 +124,7 @@ export default function DestinatorVsSantaFePage() {
           </section>
 
           <section className="mt-12">
-            <h2 className="text-2xl font-bold">3. Trang bị: Destinator Ultimate và Santa Fe Exclusive</h2>
+            <h2 className="text-2xl font-black tracking-tight">3. Trang bị: Destinator Ultimate và Santa Fe Exclusive</h2>
             <TwoColumnLists
               left={{
                 title: `Mitsubishi Destinator ${destinatorTop.name} (${formatMillion(destinatorTop.price)} đồng)`,
@@ -157,7 +157,7 @@ export default function DestinatorVsSantaFePage() {
           </section>
 
           <section className="mt-12">
-            <h2 className="text-2xl font-bold">4. Nên mua xe nào?</h2>
+            <h2 className="text-2xl font-black tracking-tight">4. Nên mua xe nào?</h2>
             <TwoColumnLists
               emphasizeLeft
               left={{

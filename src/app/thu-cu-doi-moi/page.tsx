@@ -55,10 +55,10 @@ export default function TradeInPage() {
       <main className="bg-gray-50 text-gray-900">
         <section className="bg-neutral-950 text-white">
           <div className="mx-auto max-w-7xl px-6 py-12 md:py-16">
-            <p className="mb-2 text-sm font-semibold uppercase tracking-widest text-red-500">
+            <p className="mb-2 text-xs font-bold uppercase tracking-[0.25em] text-red-500">
               Thu cũ đổi mới
             </p>
-            <h1 className="max-w-3xl text-3xl font-bold leading-tight md:text-5xl">
+            <h1 className="max-w-3xl text-3xl font-black leading-tight md:text-5xl tracking-tight">
               Định giá xe cũ, lên đời xe Mitsubishi mới
             </h1>
             <p className="mt-4 max-w-2xl leading-8 text-gray-300">
@@ -69,14 +69,14 @@ export default function TradeInPage() {
         </section>
 
         <section className="mx-auto max-w-4xl px-6 py-12">
-          <div className="rounded-2xl bg-white p-6 shadow-lg sm:p-10">
-            <h2 className="mb-6 text-2xl font-bold">Thông tin xe của bạn</h2>
+          <div className="bg-white p-6 shadow-lg sm:p-10">
+            <h2 className="mb-6 text-2xl font-black tracking-tight">Thông tin xe của bạn</h2>
             <TradeInForm />
           </div>
         </section>
 
         <section className="mx-auto max-w-4xl px-6 pb-12">
-          <h2 className="text-2xl font-bold md:text-3xl">Quy trình thu cũ đổi mới</h2>
+          <h2 className="text-2xl font-black md:text-3xl tracking-tight">Quy trình thu cũ đổi mới</h2>
           <ol className="mt-6 space-y-5">
             {steps.map((step, index) => (
               <li key={step.title} className="flex gap-4">
@@ -91,14 +91,14 @@ export default function TradeInPage() {
             ))}
           </ol>
 
-          <h2 className="mt-12 text-2xl font-bold md:text-3xl">Giấy tờ cần chuẩn bị</h2>
+          <h2 className="mt-12 text-2xl font-black md:text-3xl tracking-tight">Giấy tờ cần chuẩn bị</h2>
           <ul className="mt-4 list-disc space-y-2 pl-5 leading-7 text-gray-700">
             {documents.map((item) => (
               <li key={item}>{item}</li>
             ))}
           </ul>
 
-          <h2 className="mt-12 text-2xl font-bold md:text-3xl">Lưu ý về giá thu</h2>
+          <h2 className="mt-12 text-2xl font-black md:text-3xl tracking-tight">Lưu ý về giá thu</h2>
           <div className="mt-4 space-y-3 leading-7 text-gray-700">
             <p>
               Giá thu phụ thuộc đời xe, số km, tình trạng thân vỏ, máy móc, lịch sử bảo dưỡng
@@ -118,8 +118,8 @@ export default function TradeInPage() {
             </p>
           </div>
 
-          <div className="mt-10 rounded-2xl bg-gray-100 p-6 md:p-8">
-            <h2 className="text-2xl font-bold">Gửi ảnh xe để báo giá nhanh hơn</h2>
+          <div className="mt-10 bg-gray-100 p-6 md:p-8">
+            <h2 className="text-2xl font-black tracking-tight">Gửi ảnh xe để báo giá nhanh hơn</h2>
             <p className="mt-3 leading-7 text-gray-700">
               Chụp 4 góc xe, nội thất, đồng hồ số km và gửi qua Zalo cho Phúc.
             </p>
@@ -128,13 +128,13 @@ export default function TradeInPage() {
                 href={siteConfig.contact.zaloUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded bg-blue-600 px-5 py-3 font-semibold text-white transition hover:bg-blue-700"
+                className="rounded bg-blue-600 px-5 py-3 text-xs font-black uppercase tracking-[0.18em] text-white transition hover:bg-blue-700"
               >
                 Gửi ảnh qua Zalo
               </a>
               <a
                 href={siteConfig.contact.phoneUrl}
-                className="rounded bg-red-600 px-5 py-3 font-semibold text-white transition hover:bg-red-700"
+                className="rounded bg-red-600 px-5 py-3 text-xs font-black uppercase tracking-[0.18em] text-white transition hover:bg-red-700"
               >
                 Gọi {siteConfig.sales.phoneDisplay}
               </a>

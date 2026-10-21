@@ -156,7 +156,7 @@ const breadcrumbSchema = {
         <section className="bg-neutral-950 text-white">
           <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
             <div className="flex flex-wrap items-center gap-3 text-sm">
-              <span className="rounded-full bg-red-600 px-3 py-1 font-semibold">
+              <span className="bg-red-600 px-3 py-1 font-semibold">
                 {article.category}
               </span>
 
@@ -166,7 +166,7 @@ const breadcrumbSchema = {
               </span>
             </div>
 
-            <h1 className="mt-5 text-3xl font-bold leading-tight sm:text-4xl">
+            <h1 className="mt-5 text-3xl font-black leading-tight sm:text-4xl tracking-tight">
               {article.title}
             </h1>
 
@@ -178,7 +178,7 @@ const breadcrumbSchema = {
         {/* Ảnh đại diện bài viết */}
 {article.image && (
   <section className="mx-auto max-w-5xl px-4 pt-10 sm:px-6 lg:px-8">
-    <div className="relative aspect-[16/9] overflow-hidden rounded-2xl bg-gray-100 shadow-sm">
+    <div className="relative aspect-[16/9] overflow-hidden bg-gray-100 shadow-sm">
       <Image
         src={article.image}
         alt={article.title}
@@ -195,7 +195,7 @@ const breadcrumbSchema = {
         {/* Article content */}
         <article className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
           {isExpiredPromotion && (
-            <div className="mb-10 rounded-2xl border border-amber-200 bg-amber-50 p-5 leading-7 text-gray-800">
+            <div className="mb-10 border border-amber-200 bg-amber-50 p-5 leading-7 text-gray-800">
               <p className="font-bold text-gray-900">Chương trình này đã kết thúc.</p>
               <p className="mt-1">
                 Nội dung dưới đây chỉ để tham khảo. Ưu đãi đang áp dụng tháng {promotionMonthLabel} xem tại{" "}
@@ -210,7 +210,7 @@ const breadcrumbSchema = {
             {article.content.map((section, index) => (
               <section key={`${section.heading}-${index}`}>
                 {section.heading && (
-                  <h2 className="text-2xl font-bold">
+                  <h2 className="text-2xl font-black tracking-tight">
                     {section.heading}
                   </h2>
                 )}
@@ -277,7 +277,7 @@ const tableContent = hasTable
   ← Vuốt sang ngang để xem đầy đủ →
 </p>
 
-    <div tabIndex={0} role="region" aria-label={tableHeading ? `Bảng: ${tableHeading}` : `Bảng ${index + 1}.${paragraphIndex + 1}${section.heading ? ` – ${section.heading}` : ""}`} className="mb-8 mt-3 overflow-x-auto rounded-xl border border-gray-200">
+    <div tabIndex={0} role="region" aria-label={tableHeading ? `Bảng: ${tableHeading}` : `Bảng ${index + 1}.${paragraphIndex + 1}${section.heading ? ` – ${section.heading}` : ""}`} className="mb-8 mt-3 overflow-x-auto border border-gray-200">
       <table className="w-full min-w-[760px] border-collapse text-left">
         <tbody>
           {tableContent
@@ -332,7 +332,7 @@ const tableContent = hasTable
 
         {image && (
           <figure className="my-8">
-            <div className="overflow-hidden rounded-2xl bg-gray-100 shadow-sm">
+            <div className="overflow-hidden bg-gray-100 shadow-sm">
               <Image
                 src={image.src}
                 alt={image.alt || article.title}
@@ -360,7 +360,7 @@ const tableContent = hasTable
 
           {/* Source */}
           {article.source && (
-            <div className="mt-12 rounded-xl border border-gray-200 bg-gray-50 p-5">
+            <div className="mt-12 border border-gray-200 bg-gray-50 p-5">
               <p className="text-sm text-gray-600">
                 Nguồn tham khảo:
               </p>
@@ -390,12 +390,12 @@ const tableContent = hasTable
         {/* CTA */}
         <section className="bg-gray-50">
           <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
-            <div className="rounded-2xl bg-neutral-950 p-7 text-white sm:p-9">
-              <p className="text-sm font-semibold uppercase tracking-widest text-red-500">
+            <div className="bg-neutral-950 p-7 text-white sm:p-9">
+              <p className="text-xs font-bold uppercase tracking-[0.25em] text-red-500">
                 Tư vấn Mitsubishi
               </p>
 
-              <h2 className="mt-3 text-2xl font-bold">
+              <h2 className="mt-3 text-2xl font-black tracking-tight">
                 Cần tư vấn chọn xe hoặc nhận báo giá?
               </h2>
 
@@ -408,7 +408,7 @@ const tableContent = hasTable
               <div className="mt-6 flex flex-wrap gap-3">
                 <a
                   href={contact.phoneUrl}
-                  className="rounded-lg bg-red-600 px-6 py-3 font-bold text-white hover:bg-red-700"
+                  className="bg-red-600 px-6 py-3 text-xs font-black uppercase tracking-[0.18em] text-white hover:bg-red-700"
                 >
                   Gọi {sales.phoneDisplay}
                 </a>
@@ -417,7 +417,7 @@ const tableContent = hasTable
                   href={contact.zaloUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="rounded-lg border border-blue-500 px-6 py-3 font-bold text-blue-400 hover:bg-blue-500 hover:text-white"
+                  className="border border-blue-500 px-6 py-3 text-xs font-black uppercase tracking-[0.18em] text-blue-400 hover:bg-blue-500 hover:text-white"
                 >
                   Mở Zalo
                 </a>

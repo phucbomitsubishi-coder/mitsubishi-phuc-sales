@@ -101,7 +101,7 @@ export default function XpanderVsCarensPage() {
           <PriceComparison heading="1. Giá niêm yết và giá lăn bánh" car={xpander} competitor={carens} />
 
           <section className="mt-12">
-            <h2 className="text-2xl font-bold">2. Kích thước, động cơ và hộp số</h2>
+            <h2 className="text-2xl font-black tracking-tight">2. Kích thước, động cơ và hộp số</h2>
 
             <SpecTable carName={xpander.name} competitorName={carens.name} rows={specRows} />
 
@@ -125,7 +125,7 @@ export default function XpanderVsCarensPage() {
           </section>
 
           <section className="mt-12">
-            <h2 className="text-2xl font-bold">3. Trang bị bản cao nhất</h2>
+            <h2 className="text-2xl font-black tracking-tight">3. Trang bị bản cao nhất</h2>
             <TwoColumnLists
               left={{
                 title: `Mitsubishi Xpander ${xpanderTop.name} (${formatMillion(xpanderTop.price)} đồng)`,
@@ -158,7 +158,7 @@ export default function XpanderVsCarensPage() {
           </section>
 
           <section className="mt-12">
-            <h2 className="text-2xl font-bold">4. Nên mua xe nào?</h2>
+            <h2 className="text-2xl font-black tracking-tight">4. Nên mua xe nào?</h2>
             <TwoColumnLists
               emphasizeLeft
               left={{

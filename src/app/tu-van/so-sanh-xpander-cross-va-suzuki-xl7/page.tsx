@@ -97,7 +97,7 @@ export default function XpanderCrossVsXL7Page() {
           />
 
           <section className="mt-12">
-            <h2 className="text-2xl font-bold">2. Kích thước và vận hành</h2>
+            <h2 className="text-2xl font-black tracking-tight">2. Kích thước và vận hành</h2>
 
             <SpecTable carName={cross.name} competitorName={xl7.name} rows={specRows} />
 
@@ -124,7 +124,7 @@ export default function XpanderCrossVsXL7Page() {
           </section>
 
           <section className="mt-12">
-            <h2 className="text-2xl font-bold">3. Trang bị</h2>
+            <h2 className="text-2xl font-black tracking-tight">3. Trang bị</h2>
             <TwoColumnLists
               left={{
                 title: "Mitsubishi Xpander Cross",
@@ -159,7 +159,7 @@ export default function XpanderCrossVsXL7Page() {
           </section>
 
           <section className="mt-12">
-            <h2 className="text-2xl font-bold">4. Nên mua xe nào?</h2>
+            <h2 className="text-2xl font-black tracking-tight">4. Nên mua xe nào?</h2>
             <TwoColumnLists
               emphasizeLeft
               left={{

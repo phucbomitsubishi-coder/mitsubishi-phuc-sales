@@ -248,9 +248,9 @@ export default function GioiThieuPage() {
           {reasons.map((reason) => (
             <div
               key={reason.title}
-              className="rounded-2xl border border-neutral-200 p-4 transition hover:border-red-200 hover:shadow-lg sm:p-6"
+              className="border border-neutral-200 p-4 transition hover:border-red-200 hover:shadow-lg sm:p-6"
             >
-              <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-red-50 text-red-700 sm:h-11 sm:w-11">
+              <span className="flex h-9 w-9 items-center justify-center bg-red-50 text-red-700 sm:h-11 sm:w-11">
                 <svg
                   aria-hidden="true"
                   viewBox="0 0 24 24"
@@ -283,7 +283,7 @@ export default function GioiThieuPage() {
 
           <ol className="mt-8 grid grid-cols-2 gap-3 sm:mt-10 sm:gap-5 lg:grid-cols-4">
             {steps.map((step, index) => (
-              <li key={step.title} className="relative rounded-2xl bg-white p-4 shadow-sm sm:p-6">
+              <li key={step.title} className="relative bg-white p-4 shadow-sm sm:p-6">
                 <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-red-600 text-xs font-extrabold tabular-nums text-white sm:h-10 sm:w-10 sm:text-sm">
                   {String(index + 1).padStart(2, "0")}
                 </span>
@@ -331,7 +331,7 @@ export default function GioiThieuPage() {
           {deliveryPhotos.map((photo, index) => (
             <div
               key={photo.src}
-              className={`relative overflow-clip rounded-xl bg-neutral-100 md:rounded-2xl ${
+              className={`relative overflow-clip bg-neutral-100 ${
                 index === 0 ? "col-span-2 row-span-2" : "aspect-[3/4]"
               }`}
             >
@@ -368,7 +368,7 @@ export default function GioiThieuPage() {
               href={googleReviewsUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-4 rounded-2xl border border-neutral-800 bg-neutral-900 px-5 py-4 transition hover:border-neutral-600"
+              className="flex items-center gap-4 border border-neutral-800 bg-neutral-900 px-5 py-4 transition hover:border-neutral-600"
             >
               <span className="text-4xl font-extrabold">{googleRating.score}</span>
               <span>
@@ -389,7 +389,7 @@ export default function GioiThieuPage() {
             {testimonials.map((item) => (
               <figure
                 key={item.name}
-                className="flex w-[85%] shrink-0 snap-start flex-col rounded-2xl border border-neutral-800 bg-neutral-900/60 p-6 sm:w-[55%] lg:w-auto lg:p-7"
+                className="flex w-[85%] shrink-0 snap-start flex-col border border-neutral-800 bg-neutral-900/60 p-6 sm:w-[55%] lg:w-auto lg:p-7"
               >
                 <Stars />
                 <blockquote className="mt-4 flex-1 leading-7 text-neutral-200">

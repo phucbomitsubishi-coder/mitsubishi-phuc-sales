@@ -124,7 +124,7 @@ export default function TritonVsRangerPage() {
           />
 
           <section className="mt-12">
-            <h2 className="text-2xl font-bold">2. Động cơ, hộp số và kích thước</h2>
+            <h2 className="text-2xl font-black tracking-tight">2. Động cơ, hộp số và kích thước</h2>
 
             <SpecTable carName={triton.name} competitorName={ranger.name} rows={specRows} />
 
@@ -160,7 +160,7 @@ export default function TritonVsRangerPage() {
           </section>
 
           <section className="mt-12">
-            <h2 className="text-2xl font-bold">3. Trang bị bản tiêu chuẩn</h2>
+            <h2 className="text-2xl font-black tracking-tight">3. Trang bị bản tiêu chuẩn</h2>
             <p className="mt-3 leading-7 text-gray-700">
               Phần lớn khách mua bán tải cho công việc chọn bản tiêu chuẩn, nên đây là hai
               phiên bản đáng so sánh nhất.
@@ -205,7 +205,7 @@ export default function TritonVsRangerPage() {
           </section>
 
           <section className="mt-12">
-            <h2 className="text-2xl font-bold">4. Nên mua xe nào?</h2>
+            <h2 className="text-2xl font-black tracking-tight">4. Nên mua xe nào?</h2>
             <TwoColumnLists
               emphasizeLeft
               left={{

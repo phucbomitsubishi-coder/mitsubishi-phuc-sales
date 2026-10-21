@@ -31,7 +31,7 @@ export default function TraGopPage() {
               Dự toán chi phí
             </p>
 
-            <h1 className="text-3xl font-bold text-gray-900 md:text-4xl">
+            <h1 className="text-3xl font-black text-gray-900 md:text-4xl tracking-tight">
               Dự tính trả góp xe Mitsubishi
             </h1>
 
@@ -40,8 +40,8 @@ export default function TraGopPage() {
               cần trả trước, khoản vay và chi phí trả góp hàng tháng.
             </p>
 
-            <div className="mt-8 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
-  <h2 className="text-xl font-bold text-gray-900">
+            <div className="mt-8 border border-gray-200 bg-white p-6 shadow-sm">
+  <h2 className="text-xl font-black text-gray-900 tracking-tight">
     Công cụ dự tính trả góp
   </h2>
 

@@ -20,11 +20,11 @@ export default function ContactPage() {
         {/* HERO */}
         <section className="bg-neutral-950 text-white">
           <div className="mx-auto max-w-7xl px-6 py-16 md:py-20">
-            <p className="mb-3 text-sm font-bold uppercase tracking-wider text-red-500">
+            <p className="mb-3 text-xs font-bold uppercase tracking-[0.25em] text-red-500">
               Liên hệ Mitsubishi
             </p>
 
-            <h1 className="max-w-4xl text-3xl font-bold leading-tight md:text-5xl">
+            <h1 className="max-w-4xl text-3xl font-black leading-tight md:text-5xl tracking-tight">
               Tư vấn mua xe Mitsubishi nhanh chóng và thuận tiện
             </h1>
 
@@ -36,14 +36,14 @@ export default function ContactPage() {
             <div className="mt-8 flex flex-wrap gap-3">
               <a
                 href={siteConfig.contact.phoneUrl}
-                className="rounded-lg bg-red-600 px-6 py-3 font-bold text-white transition hover:bg-red-700"
+                className="bg-red-600 px-6 py-3 text-xs font-black uppercase tracking-[0.18em] text-white transition hover:bg-red-700"
               >
                 Gọi ngay: {siteConfig.sales.phoneDisplay}
               </a>
 
               <Link
                 href="/?nguon=Lien-he#bao-gia"
-                className="rounded-lg border border-neutral-600 px-6 py-3 font-bold text-white transition hover:border-white"
+                className="border border-neutral-600 px-6 py-3 text-xs font-black uppercase tracking-[0.18em] text-white transition hover:border-white"
               >
                 Nhận báo giá
               </Link>
@@ -55,12 +55,12 @@ export default function ContactPage() {
         <section className="bg-white">
           <div className="mx-auto max-w-7xl px-6 py-14 md:py-16">
             <div className="mb-8">
-              <p className="text-sm font-bold uppercase tracking-wider text-red-600">
+              <p className="text-xs font-bold uppercase tracking-[0.25em] text-red-600">
                 Thông tin liên hệ
               </p>
 
-              <h2 className="mt-2 text-2xl font-bold text-neutral-950 md:text-3xl">
-                Mitsubishi Moveo New City
+              <h2 className="mt-2 text-2xl font-black text-neutral-950 md:text-3xl tracking-tight">
+                Liên hệ tư vấn mua xe
               </h2>
 
               <p className="mt-3 max-w-3xl leading-7 text-neutral-600">
@@ -71,7 +71,7 @@ export default function ContactPage() {
 
             <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
               {/* TƯ VẤN KINH DOANH */}
-              <div className="rounded-2xl border border-neutral-200 bg-white p-7 shadow-sm">
+              <div className="border border-neutral-200 bg-white p-7 shadow-sm">
                 <p className="text-sm font-bold uppercase text-red-600">
                   Tư vấn kinh doanh
                 </p>
@@ -87,7 +87,7 @@ export default function ContactPage() {
               </div>
 
               {/* HOTLINE */}
-              <div className="rounded-2xl border border-neutral-200 bg-white p-7 shadow-sm">
+              <div className="border border-neutral-200 bg-white p-7 shadow-sm">
                 <p className="text-sm font-bold uppercase text-red-600">
                   Hotline & Zalo
                 </p>
@@ -115,7 +115,7 @@ export default function ContactPage() {
               </div>
 
               {/* EMAIL */}
-              <div className="rounded-2xl border border-neutral-200 bg-white p-7 shadow-sm">
+              <div className="border border-neutral-200 bg-white p-7 shadow-sm">
                 <p className="text-sm font-bold uppercase text-red-600">
                   Email
                 </p>
@@ -139,13 +139,13 @@ export default function ContactPage() {
         <section className="bg-neutral-100">
           <div className="mx-auto grid max-w-7xl gap-8 px-6 py-14 md:grid-cols-2 md:py-16">
             {/* ĐỊA CHỈ */}
-            <div className="rounded-2xl bg-white p-7 shadow-sm md:p-9">
-              <p className="text-sm font-bold uppercase tracking-wider text-red-600">
+            <div className="bg-white p-7 shadow-sm md:p-9">
+              <p className="text-xs font-bold uppercase tracking-[0.25em] text-red-600">
                 Địa chỉ
               </p>
 
-              <h2 className="mt-2 text-2xl font-bold text-neutral-950">
-                Mitsubishi Moveo New City
+              <h2 className="mt-2 text-2xl font-black text-neutral-950 tracking-tight">
+                Showroom Mitsubishi Moveo New City
               </h2>
 
               <p className="mt-5 leading-8 text-neutral-600">
@@ -154,18 +154,18 @@ export default function ContactPage() {
                 Phường Bình Dương, Thành phố Hồ Chí Minh.
               </p>
 
-              <p className="mt-5 rounded-lg bg-neutral-100 p-4 text-sm leading-6 text-neutral-600">
+              <p className="mt-5 bg-neutral-100 p-4 text-sm leading-6 text-neutral-600">
                 Khu vực phục vụ: Bình Dương cũ (TP. Hồ Chí Minh mới).
               </p>
             </div>
 
             {/* CTA */}
-            <div className="rounded-2xl bg-neutral-950 p-7 text-white shadow-sm md:p-9">
-              <p className="text-sm font-bold uppercase tracking-wider text-red-500">
+            <div className="bg-neutral-950 p-7 text-white shadow-sm md:p-9">
+              <p className="text-xs font-bold uppercase tracking-[0.25em] text-red-500">
                 Bạn đang quan tâm xe Mitsubishi?
               </p>
 
-              <h2 className="mt-2 text-2xl font-bold">
+              <h2 className="mt-2 text-2xl font-black tracking-tight">
                 Chọn hình thức hỗ trợ phù hợp
               </h2>
 
@@ -177,21 +177,21 @@ export default function ContactPage() {
               <div className="mt-7 flex flex-wrap gap-3">
                 <Link
                   href="/?nguon=Lien-he#bao-gia"
-                  className="rounded-lg bg-red-600 px-5 py-3 font-bold text-white transition hover:bg-red-700"
+                  className="bg-red-600 px-5 py-3 text-xs font-black uppercase tracking-[0.18em] text-white transition hover:bg-red-700"
                 >
                   Nhận báo giá
                 </Link>
 
                 <Link
                   href="/dang-ky-lai-thu?nguon=Lien-he"
-                  className="rounded-lg border border-neutral-600 px-5 py-3 font-bold text-white transition hover:border-white"
+                  className="border border-neutral-600 px-5 py-3 text-xs font-black uppercase tracking-[0.18em] text-white transition hover:border-white"
                 >
                   Đăng ký lái thử
                 </Link>
 
                 <Link
                   href="/du-toan/gia-lan-banh"
-                  className="rounded-lg border border-neutral-600 px-5 py-3 font-bold text-white transition hover:border-white"
+                  className="border border-neutral-600 px-5 py-3 text-xs font-black uppercase tracking-[0.18em] text-white transition hover:border-white"
                 >
                   Dự toán chi phí
                 </Link>

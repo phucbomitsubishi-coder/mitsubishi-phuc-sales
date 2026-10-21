@@ -32,7 +32,7 @@ export default function ShowroomFeatures({ car, showroom }: { car: Car; showroom
             </div>
             <div className="relative -mt-10 mx-5 bg-neutral-950 p-7 text-white md:absolute md:right-10 md:top-0 md:mx-0 md:-mt-8 md:w-[420px] md:p-10">
               <p className="text-xs font-semibold uppercase tracking-[0.25em] text-white/70">{showroom.highlight.kicker}</p>
-              <h2 className="mt-6 text-3xl font-black uppercase leading-tight md:text-4xl">{showroom.highlight.title}</h2>
+              <h2 className="mt-6 text-3xl font-black uppercase leading-tight md:text-4xl tracking-tight">{showroom.highlight.title}</h2>
               {showroom.highlight.text && <p className="mt-4 leading-7 text-white/85">{showroom.highlight.text}</p>}
               <Link
                 href={quoteHref}
@@ -102,7 +102,7 @@ export default function ShowroomFeatures({ car, showroom }: { car: Car; showroom
             </div>
             <div className="relative -mt-10 mx-5 bg-neutral-950 p-7 text-white md:absolute md:bottom-10 md:left-10 md:mx-0 md:mt-0 md:w-[420px] md:p-10">
               <p className="text-xs font-semibold uppercase tracking-[0.25em] text-white/70">Phụ kiện chính hãng</p>
-              <h2 className="mt-5 text-3xl font-black uppercase leading-tight md:text-4xl">Phụ kiện cho {car.name.replace(/^Mitsubishi /, "")}</h2>
+              <h2 className="mt-5 text-3xl font-black uppercase leading-tight md:text-4xl tracking-tight">Phụ kiện cho {car.name.replace(/^Mitsubishi /, "")}</h2>
               <p className="mt-4 leading-7 text-white/85">Bảng phụ kiện theo dòng xe: camera hành trình, màn hình, lót sàn, trang trí. Phụ kiện chính hãng MMV có giá niêm yết.</p>
               <Link
                 href={`/phu-kien-xe-mitsubishi#${car.id}`}

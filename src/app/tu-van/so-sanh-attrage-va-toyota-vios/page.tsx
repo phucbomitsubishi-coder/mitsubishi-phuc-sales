@@ -108,7 +108,7 @@ export default function AttrageVsViosPage() {
           />
 
           <section className="mt-12">
-            <h2 className="text-2xl font-bold">2. Kích thước, động cơ và mức tiêu thụ nhiên liệu</h2>
+            <h2 className="text-2xl font-black tracking-tight">2. Kích thước, động cơ và mức tiêu thụ nhiên liệu</h2>
 
             <SpecTable carName={attrage.name} competitorName={vios.name} rows={specRows} />
 
@@ -136,7 +136,7 @@ export default function AttrageVsViosPage() {
           </section>
 
           <section className="mt-12">
-            <h2 className="text-2xl font-bold">3. Trang bị và an toàn</h2>
+            <h2 className="text-2xl font-black tracking-tight">3. Trang bị và an toàn</h2>
             <TwoColumnLists
               left={{
                 title: `Mitsubishi Attrage ${attrageTop.name}`,
@@ -171,7 +171,7 @@ export default function AttrageVsViosPage() {
           </section>
 
           <section className="mt-12">
-            <h2 className="text-2xl font-bold">4. Nên mua xe nào?</h2>
+            <h2 className="text-2xl font-black tracking-tight">4. Nên mua xe nào?</h2>
             <TwoColumnLists
               emphasizeLeft
               left={{

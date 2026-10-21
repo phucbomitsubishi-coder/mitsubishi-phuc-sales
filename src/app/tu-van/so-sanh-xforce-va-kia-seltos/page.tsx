@@ -102,7 +102,7 @@ export default function XforceVsSeltosPage() {
           <PriceComparison heading="1. Giá niêm yết và giá lăn bánh" car={xforce} competitor={seltos} />
 
           <section className="mt-12">
-            <h2 className="text-2xl font-bold">2. Kích thước, động cơ và hộp số</h2>
+            <h2 className="text-2xl font-black tracking-tight">2. Kích thước, động cơ và hộp số</h2>
 
             <SpecTable carName={xforce.name} competitorName={seltos.name} rows={specRows} />
 
@@ -128,7 +128,7 @@ export default function XforceVsSeltosPage() {
           </section>
 
           <section className="mt-12">
-            <h2 className="text-2xl font-bold">3. Trang bị ở tầm giá 609–665 triệu đồng</h2>
+            <h2 className="text-2xl font-black tracking-tight">3. Trang bị ở tầm giá 609–665 triệu đồng</h2>
             <TwoColumnLists
               left={{
                 title: `Mitsubishi Xforce ${xforceLuxury.name} (${formatMillion(xforceLuxury.price)} đồng)`,
@@ -161,7 +161,7 @@ export default function XforceVsSeltosPage() {
           </section>
 
           <section className="mt-12">
-            <h2 className="text-2xl font-bold">4. Nên mua xe nào?</h2>
+            <h2 className="text-2xl font-black tracking-tight">4. Nên mua xe nào?</h2>
             <TwoColumnLists
               emphasizeLeft
               left={{

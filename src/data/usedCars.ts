@@ -508,7 +508,7 @@ equipment: [
   "transmission": "Số tự động",
   "fuel": "Dầu",
   "location": "Bình Dương",
-  "status": "available",
+  "status": "sold",
   "image": "/images/used-cars/mitsubishi-triton-athlete-2024-012/01.jpg",
   "images": [
     "/images/used-cars/mitsubishi-triton-athlete-2024-012/01.jpg",

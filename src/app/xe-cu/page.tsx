@@ -35,7 +35,7 @@ export default function UsedCarsPage() {
               Xe đã qua sử dụng
             </p>
 
-            <h1 className="text-3xl font-bold text-gray-900 md:text-4xl">
+            <h1 className="text-3xl font-black text-gray-900 md:text-4xl tracking-tight">
               Xe Mitsubishi đã qua sử dụng
             </h1>
 
@@ -55,8 +55,8 @@ export default function UsedCarsPage() {
             {availableCars.length > 0 && <UsedCarGifts className="mt-8 max-w-4xl" />}
 
             {availableCars.length === 0 ? (
-              <div className="mt-10 rounded-2xl border border-gray-200 bg-white p-8 text-center shadow-sm md:p-12">
-                <h2 className="text-xl font-bold text-gray-900">
+              <div className="mt-10 border border-gray-200 bg-white p-8 text-center shadow-sm md:p-12">
+                <h2 className="text-xl font-black text-gray-900 tracking-tight">
                   Hiện chưa có xe được đăng bán
                 </h2>
 
@@ -68,7 +68,7 @@ export default function UsedCarsPage() {
                 <div className="mt-6 flex flex-wrap justify-center gap-3">
                   <a
                     href={siteConfig.contact.phoneUrl}
-                    className="rounded-xl bg-red-600 px-6 py-3 font-semibold text-white transition hover:bg-red-700"
+                    className="bg-red-600 px-6 py-3 text-xs font-black uppercase tracking-[0.18em] text-white transition hover:bg-red-700"
                   >
                     Gọi tư vấn
                   </a>
@@ -77,7 +77,7 @@ export default function UsedCarsPage() {
                     href={siteConfig.contact.zaloUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="rounded-xl border border-blue-600 px-6 py-3 font-semibold text-blue-600 transition hover:bg-blue-50"
+                    className="border border-blue-600 px-6 py-3 text-xs font-black uppercase tracking-[0.18em] text-blue-600 transition hover:bg-blue-50"
                   >
                     Liên hệ Zalo
                   </a>
@@ -105,7 +105,7 @@ export default function UsedCarsPage() {
                     Xe tham khảo
                   </p>
 
-                  <h2 className="text-2xl font-bold text-gray-900 md:text-3xl">
+                  <h2 className="text-2xl font-black text-gray-900 md:text-3xl tracking-tight">
                     Xe đã bán
                   </h2>
 
@@ -119,7 +119,7 @@ export default function UsedCarsPage() {
                   {soldCars.map((car) => (
                     <article
                       key={car.id}
-                      className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm"
+                      className="overflow-hidden border border-gray-200 bg-white shadow-sm"
                     >
                       <div className="relative aspect-[4/3] overflow-hidden bg-gray-100">
                         <Image
@@ -130,7 +130,7 @@ export default function UsedCarsPage() {
                           className="object-cover"
                         />
 
-                        <div className="absolute left-2 top-2 rounded-lg bg-gray-900 px-2.5 py-1 text-xs font-bold text-white shadow sm:left-4 sm:top-4 sm:px-4 sm:py-2 sm:text-sm">
+                        <div className="absolute left-2 top-2 bg-gray-900 px-2.5 py-1 text-xs font-bold text-white shadow sm:left-4 sm:top-4 sm:px-4 sm:py-2 sm:text-sm">
                           ĐÃ BÁN
                         </div>
                       </div>
@@ -172,7 +172,7 @@ export default function UsedCarsPage() {
 
                         <Link
                           href={`/xe-cu/${car.slug}`}
-                          className="mt-3 block rounded-xl border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700 transition hover:border-gray-900 hover:text-gray-900"
+                          className="mt-3 block border border-gray-300 px-3 py-2 text-center text-xs font-black uppercase tracking-[0.18em] text-gray-700 transition hover:border-gray-900 hover:text-gray-900"
                         >
                           Xem xe đã bán
                         </Link>

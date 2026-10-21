@@ -69,7 +69,7 @@ export default function SpecSheet({ variants, selectedIndex, onSelect }: Props) 
       {/* Thông số nổi bật của phiên bản đang chọn */}
       <dl className="mt-5 grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-6">
         {highlights.map((item) => (
-          <div key={item.label} className="rounded-xl border border-gray-200 bg-white p-4">
+          <div key={item.label} className="border border-gray-200 bg-white p-4">
             <dt className="text-xs font-semibold uppercase tracking-wide text-gray-600">{item.label}</dt>
             <dd className="mt-2 text-lg font-bold leading-tight text-gray-900 md:text-xl">{item.value}</dd>
             {item.note && <dd className="mt-1 text-xs text-gray-600">{item.note}</dd>}
@@ -77,7 +77,7 @@ export default function SpecSheet({ variants, selectedIndex, onSelect }: Props) 
         ))}
       </dl>
 
-      <details className="group mt-5 rounded-xl border-2 border-gray-200 bg-white open:border-red-600">
+      <details className="group mt-5 border-2 border-gray-200 bg-white open:border-red-600">
         <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-4 py-4 md:px-5 [&::-webkit-details-marker]:hidden">
           <span>
             <span className="block font-bold text-gray-900">
@@ -145,7 +145,7 @@ export default function SpecSheet({ variants, selectedIndex, onSelect }: Props) 
                       <th
                         colSpan={variants.length + 1}
                         scope="colgroup"
-                        className="border-l-4 border-red-600 bg-gray-100 px-3 py-2 text-left text-sm font-bold uppercase tracking-wide text-gray-900"
+                        className="border-l-4 border-red-600 bg-gray-100 px-3 py-2 text-left text-xs font-bold uppercase tracking-[0.25em] text-gray-900"
                       >
                         <span className="sticky left-3">{group.title}</span>
                       </th>

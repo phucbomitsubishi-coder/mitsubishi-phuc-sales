@@ -99,7 +99,7 @@ export default function TradeInForm() {
 
   if (isSuccess) {
     return (
-      <div className="rounded-xl border border-green-200 bg-green-50 p-6 text-center">
+      <div className="border border-green-200 bg-green-50 p-6 text-center">
         <p className="text-2xl font-bold text-green-700">✓ Đã gửi thông tin xe</p>
         <p className="mt-3 text-gray-700">
           Phúc sẽ liên hệ báo giá thu sơ bộ và báo giá xe mới trong thời gian sớm nhất.
@@ -212,7 +212,7 @@ export default function TradeInForm() {
       </div>
 
       {errorMessage && (
-        <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm font-medium text-red-700 sm:col-span-2">
+        <div className="border border-red-200 bg-red-50 p-4 text-sm font-medium text-red-700 sm:col-span-2">
           {errorMessage}
         </div>
       )}
@@ -221,7 +221,7 @@ export default function TradeInForm() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full rounded-lg bg-red-600 px-6 py-4 font-bold text-white shadow-lg transition hover:bg-red-700 disabled:cursor-not-allowed disabled:bg-gray-400 sm:w-auto"
+          className="w-full bg-red-600 px-6 py-4 text-xs font-black uppercase tracking-[0.18em] text-white shadow-lg transition hover:bg-red-700 disabled:cursor-not-allowed disabled:bg-gray-400 sm:w-auto"
         >
           {isSubmitting ? "Đang gửi..." : "Gửi thông tin xe"}
         </button>

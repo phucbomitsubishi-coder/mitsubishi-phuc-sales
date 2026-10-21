@@ -63,11 +63,11 @@ export default function SupportPage() {
       <main>
         <section className="bg-neutral-950 text-white">
           <div className="mx-auto max-w-7xl px-6 py-16 md:py-20">
-            <p className="mb-3 text-sm font-bold uppercase tracking-wider text-red-500">
+            <p className="mb-3 text-xs font-bold uppercase tracking-[0.25em] text-red-500">
               Hỗ trợ khách hàng
             </p>
 
-            <h1 className="max-w-3xl text-3xl font-bold leading-tight md:text-5xl">
+            <h1 className="max-w-3xl text-3xl font-black leading-tight md:text-5xl tracking-tight">
               Đồng hành cùng bạn trong suốt hành trình sử dụng xe Mitsubishi
             </h1>
 
@@ -82,11 +82,11 @@ export default function SupportPage() {
         <section className="bg-white">
           <div className="mx-auto max-w-7xl px-6 py-14 md:py-16">
             <div className="mb-8">
-              <p className="text-sm font-bold uppercase tracking-wider text-red-600">
+              <p className="text-xs font-bold uppercase tracking-[0.25em] text-red-600">
                 Trung tâm hỗ trợ
               </p>
 
-              <h2 className="mt-2 text-2xl font-bold text-neutral-950 md:text-3xl">
+              <h2 className="mt-2 text-2xl font-black text-neutral-950 md:text-3xl tracking-tight">
                 Bạn cần hỗ trợ nội dung nào?
               </h2>
             </div>
@@ -96,7 +96,7 @@ export default function SupportPage() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="group rounded-2xl border border-neutral-200 bg-white p-7 shadow-sm transition hover:-translate-y-1 hover:border-red-200 hover:shadow-lg"
+                  className="group border border-neutral-200 bg-white p-7 shadow-sm transition hover:-translate-y-1 hover:border-red-200 hover:shadow-lg"
                 >
                   <div className="mb-8 flex items-center justify-between">
                     <span className="text-sm font-bold text-red-600">
@@ -127,13 +127,13 @@ export default function SupportPage() {
 
         <section className="bg-neutral-100">
           <div className="mx-auto max-w-7xl px-6 py-12">
-            <div className="rounded-2xl bg-neutral-950 px-7 py-9 text-white md:flex md:items-center md:justify-between md:px-10">
+            <div className="bg-neutral-950 px-7 py-9 text-white md:flex md:items-center md:justify-between md:px-10">
               <div>
-                <p className="text-sm font-bold uppercase tracking-wider text-red-500">
+                <p className="text-xs font-bold uppercase tracking-[0.25em] text-red-500">
                   Cần hỗ trợ thêm?
                 </p>
 
-                <h2 className="mt-2 text-2xl font-bold">
+                <h2 className="mt-2 text-2xl font-black tracking-tight">
                   Liên hệ tư vấn Mitsubishi
                 </h2>
 
@@ -145,7 +145,7 @@ export default function SupportPage() {
 
               <Link
                 href="/?nguon=Ho-tro#bao-gia"
-                className="mt-6 inline-flex rounded-lg bg-red-600 px-6 py-3 font-bold text-white transition hover:bg-red-700 md:mt-0"
+                className="mt-6 inline-flex bg-red-600 px-6 py-3 text-xs font-black uppercase tracking-[0.18em] text-white transition hover:bg-red-700 md:mt-0"
               >
                 Gửi yêu cầu tư vấn
               </Link>

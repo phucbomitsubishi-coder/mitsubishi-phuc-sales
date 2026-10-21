@@ -59,21 +59,21 @@ export default function CarSectionNav({ items, carName, quoteHref }: { items: It
               href={`#${item.id}`}
               data-id={item.id}
               aria-current={active === item.id ? "true" : undefined}
-              className={`relative shrink-0 px-3 py-2 text-sm font-semibold transition ${
+              className={`relative shrink-0 px-3 py-2 text-xs font-black uppercase tracking-[0.18em] transition ${
                 active === item.id ? "text-gray-950" : "text-gray-600 hover:text-gray-950"
               }`}
             >
               {item.label}
               <span
                 aria-hidden="true"
-                className={`absolute inset-x-3 -bottom-2 h-0.5 rounded-full bg-red-600 transition ${active === item.id ? "opacity-100" : "opacity-0"}`}
+                className={`absolute inset-x-3 -bottom-2 h-0.5 bg-red-600 transition ${active === item.id ? "opacity-100" : "opacity-0"}`}
               />
             </a>
           ))}
         </div>
         <Link
           href={quoteHref}
-          className="shrink-0 rounded-full bg-red-600 px-4 py-2 text-sm font-bold text-white transition hover:bg-red-700"
+          className="shrink-0 bg-red-600 px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-white transition hover:bg-red-700"
         >
           Báo giá
         </Link>

@@ -126,7 +126,7 @@ export default function MitsubishiBuyingGuidePage() {
           Tư vấn chọn xe · Cập nhật {promotionMonthLabel}
         </p>
 
-        <h1 className="mt-3 text-3xl font-bold leading-tight md:text-5xl">
+        <h1 className="mt-3 text-3xl font-black leading-tight md:text-5xl tracking-tight">
           Nên mua xe Mitsubishi nào? Chọn xe theo nhu cầu và ngân sách
         </h1>
 
@@ -138,13 +138,13 @@ export default function MitsubishiBuyingGuidePage() {
         </p>
 
         <section className="mt-12">
-          <h2 className="text-2xl font-bold md:text-3xl">Chọn nhanh theo nhu cầu</h2>
+          <h2 className="text-2xl font-black md:text-3xl tracking-tight">Chọn nhanh theo nhu cầu</h2>
           <p className="mt-3 leading-7 text-gray-700">
             Giá lăn bánh tạm tính cho xe đăng ký tại TP. Hồ Chí Minh (gồm cả Bình
             Dương cũ), chưa trừ ưu đãi tháng {promotionMonthLabel}.
           </p>
 
-          <div className="mt-6 overflow-x-auto rounded-xl border border-gray-200">
+          <div className="mt-6 overflow-x-auto border border-gray-200">
             <table className="w-full text-left text-sm">
               <thead className="bg-gray-50 text-gray-700">
                 <tr>
@@ -178,7 +178,7 @@ export default function MitsubishiBuyingGuidePage() {
 
         {rows.map((row, index) => (
           <section key={row.slug} className="mt-12 border-t border-gray-200 pt-10">
-            <h2 className="text-2xl font-bold md:text-3xl">
+            <h2 className="text-2xl font-black md:text-3xl tracking-tight">
               {index + 1}. {row.heading}
             </h2>
 
@@ -188,7 +188,7 @@ export default function MitsubishiBuyingGuidePage() {
               ))}
             </ul>
 
-            <p className="mt-4 rounded-xl bg-gray-50 p-4 leading-7 text-gray-700">
+            <p className="mt-4 bg-gray-50 p-4 leading-7 text-gray-700">
               <span className="font-semibold text-gray-900">Nên chọn bản nào: </span>
               {row.tip}
             </p>
@@ -213,7 +213,7 @@ export default function MitsubishiBuyingGuidePage() {
         ))}
 
         <section className="mt-12 border-t border-gray-200 pt-10">
-          <h2 className="text-2xl font-bold md:text-3xl">Kinh nghiệm trước khi quyết định</h2>
+          <h2 className="text-2xl font-black md:text-3xl tracking-tight">Kinh nghiệm trước khi quyết định</h2>
           <ul className="mt-4 list-disc space-y-3 pl-5 leading-8 text-gray-700">
             <Tip title="Tính theo giá lăn bánh, không theo giá niêm yết.">
               Lăn bánh còn gồm lệ phí trước bạ, biển số, đăng kiểm, phí đường bộ và bảo
@@ -247,8 +247,8 @@ export default function MitsubishiBuyingGuidePage() {
           tháng 10/2026. Giá và trang bị có thể thay đổi, vui lòng liên hệ để được xác nhận.
         </p>
 
-        <div className="mt-10 rounded-2xl bg-gray-100 p-6 md:p-8">
-          <h2 className="text-2xl font-bold">
+        <div className="mt-10 bg-gray-100 p-6 md:p-8">
+          <h2 className="text-2xl font-black tracking-tight">
             Bạn đang phân vân giữa hai mẫu xe?
           </h2>
 
@@ -260,7 +260,7 @@ export default function MitsubishiBuyingGuidePage() {
           <div className="mt-6 flex flex-wrap gap-3">
             <Link
               href="/?nguon=Chon-xe-phu-hop#bao-gia"
-              className="rounded bg-red-600 px-5 py-3 font-semibold text-white transition hover:bg-red-700"
+              className="rounded bg-red-600 px-5 py-3 text-xs font-black uppercase tracking-[0.18em] text-white transition hover:bg-red-700"
             >
               Nhận báo giá
             </Link>
@@ -269,7 +269,7 @@ export default function MitsubishiBuyingGuidePage() {
               href={siteConfig.contact.zaloUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded border border-blue-600 bg-white px-5 py-3 font-semibold text-blue-700 transition hover:bg-blue-50"
+              className="rounded border border-blue-600 bg-white px-5 py-3 text-xs font-black uppercase tracking-[0.18em] text-blue-700 transition hover:bg-blue-50"
             >
               Tư vấn Zalo
             </a>

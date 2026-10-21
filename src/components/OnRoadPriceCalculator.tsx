@@ -112,12 +112,12 @@ export default function OnRoadPriceCalculator({
     .join(", ");
 
   return (
-    <div className="w-full rounded-xl border border-gray-200 bg-white p-4 shadow-sm sm:p-5">
-      <p className="text-sm font-semibold uppercase tracking-wide text-red-700">
+    <div className="w-full border border-gray-200 bg-white p-4 shadow-sm sm:p-5">
+      <p className="text-xs font-bold uppercase tracking-[0.25em] text-red-700">
         Chi phí dự kiến
       </p>
 
-      <h2 className="mt-1 text-2xl font-bold">Dự tính giá lăn bánh</h2>
+      <h2 className="mt-1 text-2xl font-black tracking-tight">Dự tính giá lăn bánh</h2>
       <p className="mt-1 text-sm text-gray-600">{displayName}</p>
 
       <div className="mt-4 space-y-3">
@@ -183,7 +183,7 @@ export default function OnRoadPriceCalculator({
           <span className="hidden group-open:inline">Thu gọn chi tiết</span>
         </summary>
 
-        <dl className="mt-2 space-y-1.5 rounded-lg bg-gray-50 p-3">
+        <dl className="mt-2 space-y-1.5 bg-gray-50 p-3">
           {fees.map((fee) => (
             <div key={fee.label} className="flex items-center justify-between gap-4">
               <dt className="text-gray-600">{fee.label}</dt>
@@ -228,7 +228,7 @@ export default function OnRoadPriceCalculator({
 
       <Link
         href={`/?car=${encodeURIComponent(carName)}&variant=${encodeURIComponent(variantName)}&nguon=Gia-lan-banh#bao-gia`}
-        className="mt-4 flex w-full items-center justify-center gap-2 rounded-lg bg-red-600 px-5 py-3 font-bold text-white transition hover:bg-red-700"
+        className="mt-4 flex w-full items-center justify-center gap-2 bg-red-600 px-5 py-3 text-xs font-black uppercase tracking-[0.18em] text-white transition hover:bg-red-700"
       >
         Nhận báo giá {displayName.replace(/^Mitsubishi /, "")}
         <span aria-hidden="true">→</span>

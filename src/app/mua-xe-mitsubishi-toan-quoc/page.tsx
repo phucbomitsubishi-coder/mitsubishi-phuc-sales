@@ -119,7 +119,7 @@ export default function NationwidePurchasePage() {
           Mua xe từ tỉnh khác · Cập nhật {promotionMonthLabel}
         </p>
 
-        <h1 className="mt-3 text-3xl font-bold leading-tight md:text-5xl">
+        <h1 className="mt-3 text-3xl font-black leading-tight md:text-5xl tracking-tight">
           Mua xe Mitsubishi khi ở tỉnh khác: đặt cọc online, nhận xe toàn quốc
         </h1>
 
@@ -141,7 +141,7 @@ export default function NationwidePurchasePage() {
         </div>
 
         <section className="mt-12">
-          <h2 className="text-2xl font-bold md:text-3xl">1. Quy trình mua xe từ xa</h2>
+          <h2 className="text-2xl font-black md:text-3xl tracking-tight">1. Quy trình mua xe từ xa</h2>
           <ol className="mt-6 space-y-5">
             {steps.map((step, index) => (
               <li key={step.title} className="flex gap-4">
@@ -158,9 +158,9 @@ export default function NationwidePurchasePage() {
         </section>
 
         <section className="mt-12 border-t border-gray-200 pt-10">
-          <h2 className="text-2xl font-bold md:text-3xl">2. Thời gian nhận xe và phí vận chuyển</h2>
+          <h2 className="text-2xl font-black md:text-3xl tracking-tight">2. Thời gian nhận xe và phí vận chuyển</h2>
 
-          <div className="mt-6 overflow-x-auto rounded-xl border border-gray-200">
+          <div className="mt-6 overflow-x-auto border border-gray-200">
             <table className="w-full text-left text-sm">
               <tbody className="divide-y divide-gray-200 align-top">
                 <tr>
@@ -194,7 +194,7 @@ export default function NationwidePurchasePage() {
         </section>
 
         <section className="mt-12 border-t border-gray-200 pt-10">
-          <h2 className="text-2xl font-bold md:text-3xl">
+          <h2 className="text-2xl font-black md:text-3xl tracking-tight">
             3. Giá lăn bánh tại 34 tỉnh, thành
           </h2>
           <p className="mt-3 leading-7 text-gray-700">
@@ -204,7 +204,7 @@ export default function NationwidePurchasePage() {
             Bấm vào tỉnh của bạn để xem.
           </p>
 
-          <div className="mt-6 divide-y divide-gray-200 rounded-xl border border-gray-200">
+          <div className="mt-6 divide-y divide-gray-200 border border-gray-200">
             {provinceRows.map(({ province, plateFee, cars: rows }) => (
               <details key={province.id} className="group">
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-4 py-3 hover:bg-gray-50">
@@ -251,7 +251,7 @@ export default function NationwidePurchasePage() {
         </section>
 
         <section className="mt-12 border-t border-gray-200 pt-10">
-          <h2 className="text-2xl font-bold md:text-3xl">4. Câu hỏi thường gặp</h2>
+          <h2 className="text-2xl font-black md:text-3xl tracking-tight">4. Câu hỏi thường gặp</h2>
           <div className="mt-6 space-y-6">
             {faqs.map((item) => (
               <div key={item.question}>
@@ -268,8 +268,8 @@ export default function NationwidePurchasePage() {
           trường hợp, được ghi rõ trong báo giá và hợp đồng.
         </p>
 
-        <div className="mt-10 rounded-2xl bg-gray-100 p-6 md:p-8">
-          <h2 className="text-2xl font-bold">Nhận báo giá lăn bánh cho tỉnh của bạn</h2>
+        <div className="mt-10 bg-gray-100 p-6 md:p-8">
+          <h2 className="text-2xl font-black tracking-tight">Nhận báo giá lăn bánh cho tỉnh của bạn</h2>
           <p className="mt-3 leading-7 text-gray-700">
             Gửi mẫu xe và nơi đăng ký, Phúc gửi bảng giá chi tiết đã trừ ưu đãi tháng{" "}
             {promotionMonthLabel}, kèm thời gian giao xe dự kiến.
@@ -279,19 +279,19 @@ export default function NationwidePurchasePage() {
               href={siteConfig.contact.zaloUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded bg-blue-600 px-5 py-3 font-semibold text-white transition hover:bg-blue-700"
+              className="rounded bg-blue-600 px-5 py-3 text-xs font-black uppercase tracking-[0.18em] text-white transition hover:bg-blue-700"
             >
               Nhắn Zalo
             </a>
             <a
               href={siteConfig.contact.phoneUrl}
-              className="rounded bg-red-600 px-5 py-3 font-semibold text-white transition hover:bg-red-700"
+              className="rounded bg-red-600 px-5 py-3 text-xs font-black uppercase tracking-[0.18em] text-white transition hover:bg-red-700"
             >
               Gọi {siteConfig.sales.phoneDisplay}
             </a>
             <Link
               href="/?nguon=Toan-quoc#bao-gia"
-              className="rounded border border-gray-300 bg-white px-5 py-3 font-semibold text-gray-900 transition hover:bg-gray-50"
+              className="rounded border border-gray-300 bg-white px-5 py-3 text-xs font-black uppercase tracking-[0.18em] text-gray-900 transition hover:bg-gray-50"
             >
               Gửi yêu cầu báo giá
             </Link>
@@ -304,7 +304,7 @@ export default function NationwidePurchasePage() {
 
 function Fact({ title, children }: { title: string; children: ReactNode }) {
   return (
-    <div className="rounded-2xl border border-red-100 bg-red-50 p-5">
+    <div className="border border-red-100 bg-red-50 p-5">
       <p className="font-bold text-gray-900">{title}</p>
       <p className="mt-1 leading-7 text-gray-700">{children}</p>
     </div>

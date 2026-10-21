@@ -43,7 +43,7 @@ const generalGroups = accessoryGroups.filter((group) => !group.carId);
 function AccessoryTable({ items }: { items: AccessoryItem[] }) {
   const hasPrice = items.some((item) => item.price !== null);
   return (
-    <div className="mt-2 overflow-x-auto rounded-xl border border-gray-200 bg-white">
+    <div className="mt-2 overflow-x-auto border border-gray-200 bg-white">
       <table className="w-full text-left text-sm">
         <thead className="bg-gray-50 text-gray-700">
           <tr>
@@ -91,12 +91,12 @@ function CategoryList({ group }: { group: AccessoryGroup }) {
         <details
           key={category.name}
           open={category.name.includes("MMV")}
-          className="group/cat overflow-hidden rounded-lg border border-gray-200 border-l-4 border-l-red-600 bg-white"
+          className="group/cat overflow-hidden border border-gray-200 border-l-4 border-l-red-600 bg-white"
         >
           <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-3 py-3 font-bold text-gray-900 transition hover:bg-red-50 group-open/cat:bg-red-50 group-open/cat:text-red-700">
             <span>{category.name}</span>
             <span className="shrink-0 text-sm font-semibold text-gray-700">
-              <span className="rounded-full bg-gray-100 px-2 py-0.5">{category.items.length} mục</span>
+              <span className="bg-gray-100 px-2 py-0.5">{category.items.length} mục</span>
               <span className="ml-2 inline-block transition group-open/cat:rotate-180">▾</span>
             </span>
           </summary>
@@ -128,10 +128,10 @@ export default function AccessoriesPage() {
       <main className="bg-gray-50 text-gray-900">
         <section className="bg-neutral-950 text-white">
           <div className="mx-auto max-w-7xl px-6 py-12 md:py-16">
-            <p className="mb-2 text-sm font-semibold uppercase tracking-widest text-red-500">
+            <p className="mb-2 text-xs font-bold uppercase tracking-[0.25em] text-red-500">
               Phụ kiện · Cập nhật {accessoriesMonth}
             </p>
-            <h1 className="max-w-3xl text-3xl font-bold leading-tight md:text-5xl">
+            <h1 className="max-w-3xl text-3xl font-black leading-tight md:text-5xl tracking-tight">
               Bảng giá phụ kiện xe Mitsubishi
             </h1>
             <p className="mt-4 max-w-2xl leading-8 text-gray-300">
@@ -144,12 +144,12 @@ export default function AccessoriesPage() {
 
         <div className="mx-auto max-w-4xl px-6 py-12">
           <section>
-            <h2 className="text-2xl font-bold">Phụ kiện theo dòng xe</h2>
+            <h2 className="text-2xl font-black tracking-tight">Phụ kiện theo dòng xe</h2>
             <p className="mt-1 text-sm text-gray-600">Bấm vào dòng xe để xem bảng giá phụ kiện.</p>
             <div className="mt-4 space-y-3">
               {carGroups.map(({ car, group }) => (
-                <details key={car.id} id={car.id} className="group scroll-mt-24 rounded-xl border-2 border-gray-200 bg-white shadow-sm transition open:border-red-600">
-                  <summary className="flex cursor-pointer list-none items-center gap-4 rounded-xl px-4 py-3 hover:bg-gray-50">
+                <details key={car.id} id={car.id} className="group scroll-mt-24 border-2 border-gray-200 bg-white shadow-sm transition open:border-red-600">
+                  <summary className="flex cursor-pointer list-none items-center gap-4 px-4 py-3 hover:bg-gray-50">
                     <div className="relative h-12 w-20 shrink-0">
                       <Image src={featuredImages[car.id] ?? car.image} alt={car.name} fill sizes="80px" className="object-contain" />
                     </div>
@@ -187,12 +187,12 @@ export default function AccessoriesPage() {
           </section>
 
           <section id="dung-chung" className="mt-10 scroll-mt-24">
-            <h2 className="text-2xl font-bold">Phụ kiện dùng chung cho các dòng xe</h2>
+            <h2 className="text-2xl font-black tracking-tight">Phụ kiện dùng chung cho các dòng xe</h2>
             <p className="mt-1 text-sm text-gray-600">Bấm vào từng nhóm để xem danh sách, nhắn Zalo để nhận giá.</p>
             <div className="mt-4 space-y-3">
               {generalGroups.map((group) => (
-                <details key={group.name} className="group rounded-xl border-2 border-gray-200 bg-white shadow-sm transition open:border-red-600">
-                  <summary className="flex cursor-pointer list-none items-center justify-between rounded-xl px-4 py-4 text-lg font-bold text-gray-900 hover:bg-gray-50 group-open:text-red-700">
+                <details key={group.name} className="group border-2 border-gray-200 bg-white shadow-sm transition open:border-red-600">
+                  <summary className="flex cursor-pointer list-none items-center justify-between px-4 py-4 text-lg font-bold text-gray-900 hover:bg-gray-50 group-open:text-red-700">
                     {group.name}
                     <span className="shrink-0 text-sm font-semibold text-gray-700">
                       {group.items.length} mục
@@ -215,8 +215,8 @@ export default function AccessoriesPage() {
             xe hiện hành.
           </p>
 
-          <div className="mt-8 rounded-2xl bg-gray-100 p-6 md:p-8">
-            <h2 className="text-2xl font-bold">Nhận báo giá xe kèm gói phụ kiện</h2>
+          <div className="mt-8 bg-gray-100 p-6 md:p-8">
+            <h2 className="text-2xl font-black tracking-tight">Nhận báo giá xe kèm gói phụ kiện</h2>
             <p className="mt-3 leading-7 text-gray-700">
               Gửi Phúc dòng xe và các phụ kiện bạn quan tâm, Phúc báo giá lăn bánh trọn gói đã gồm
               phụ kiện và ưu đãi tháng.
@@ -226,13 +226,13 @@ export default function AccessoriesPage() {
                 href={zaloUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded bg-blue-600 px-5 py-3 font-semibold text-white transition hover:bg-blue-700"
+                className="rounded bg-blue-600 px-5 py-3 text-xs font-black uppercase tracking-[0.18em] text-white transition hover:bg-blue-700"
               >
                 Nhắn Zalo
               </a>
               <Link
                 href="/?nguon=Phu-kien#bao-gia"
-                className="rounded bg-red-600 px-5 py-3 font-semibold text-white transition hover:bg-red-700"
+                className="rounded bg-red-600 px-5 py-3 text-xs font-black uppercase tracking-[0.18em] text-white transition hover:bg-red-700"
               >
                 Gửi yêu cầu báo giá
               </Link>

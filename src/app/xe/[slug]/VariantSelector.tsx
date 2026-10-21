@@ -339,13 +339,13 @@ const selectedImage =
             <div className="mt-7 flex flex-wrap gap-3">
               <Link
                 href={`/?car=${encodeURIComponent(carName)}&variant=${encodeURIComponent(selectedVariant.name)}&nguon=Chon-phien-ban#bao-gia`}
-                className="rounded-full bg-red-600 px-6 py-3 font-bold text-white transition hover:bg-red-700"
+                className="bg-red-600 px-6 py-3 text-xs font-black uppercase tracking-[0.18em] text-white transition hover:bg-red-700"
               >
                 Báo giá {selectedVariant.name}
               </Link>
               <a
                 href="#lan-banh"
-                className="rounded-full border-2 border-gray-900 px-6 py-3 font-bold text-gray-900 transition hover:bg-gray-900 hover:text-white"
+                className="border-2 border-gray-900 px-6 py-3 text-xs font-black uppercase tracking-[0.18em] text-gray-900 transition hover:bg-gray-900 hover:text-white"
               >
                 Tính lăn bánh
               </a>
@@ -440,8 +440,8 @@ const selectedImage =
                 promotion={selectedPromotion}
               />
             ) : (
-              <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm md:p-8">
-                <p className="text-sm font-bold uppercase tracking-wide text-red-700">Chi phí dự kiến</p>
+              <div className="border border-gray-200 bg-white p-6 shadow-sm md:p-8">
+                <p className="text-xs font-bold uppercase tracking-[0.25em] text-red-700">Chi phí dự kiến</p>
                 <p className="mt-1 text-2xl font-bold">Giá lăn bánh {selectedVariant.name}</p>
                 <p className="mt-1 text-sm text-gray-600">
                   Giá niêm yết {selectedVariant.price.toLocaleString("vi-VN")} đ, cộng thuế phí đăng ký theo tỉnh, trừ ưu đãi tháng.

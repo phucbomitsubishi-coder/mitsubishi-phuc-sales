@@ -99,7 +99,7 @@ export default function NewsPage() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`group w-[82%] shrink-0 snap-start overflow-hidden rounded-2xl bg-white ring-1 ring-gray-200 transition duration-300 hover:-translate-y-1 hover:shadow-xl sm:w-auto ${
+                className={`group w-[82%] shrink-0 snap-start overflow-hidden bg-white ring-1 ring-gray-200 transition duration-300 hover:-translate-y-1 hover:shadow-xl sm:w-auto ${
                   index >= ADVISORY_SHOWN ? "hidden" : ""
                 }`}
               >

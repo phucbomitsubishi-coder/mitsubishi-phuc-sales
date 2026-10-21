@@ -57,10 +57,10 @@ export default function NewsList({ articles }: { articles: NewsListItem[] }) {
           return (
             <article
               key={article.id}
-              className={`${visible ? "" : "hidden"} overflow-hidden rounded-2xl border border-gray-200 bg-white`}
+              className={`${visible ? "" : "hidden"} overflow-hidden border border-gray-200 bg-white`}
             >
               <Link href={`/tin-tuc/${article.slug}`} className="group flex gap-3 p-3 sm:block sm:p-0">
-                <div className="relative aspect-[4/3] w-28 shrink-0 overflow-hidden rounded-xl sm:aspect-[16/9] sm:w-full sm:rounded-none">
+                <div className="relative aspect-[4/3] w-28 shrink-0 overflow-hidden sm:aspect-[16/9] sm:w-full sm:rounded-none">
                   <Image
                     src={article.image}
                     alt=""

@@ -93,7 +93,7 @@ export default function XforceVsCretaPage() {
           />
 
           <section className="mt-12">
-            <h2 className="text-2xl font-bold">2. Kích thước và vận hành</h2>
+            <h2 className="text-2xl font-black tracking-tight">2. Kích thước và vận hành</h2>
 
             <SpecTable carName={xforce.name} competitorName={creta.name} rows={specRows} />
 
@@ -120,7 +120,7 @@ export default function XforceVsCretaPage() {
           </section>
 
           <section className="mt-12">
-            <h2 className="text-2xl font-bold">3. Trang bị và an toàn</h2>
+            <h2 className="text-2xl font-black tracking-tight">3. Trang bị và an toàn</h2>
             <TwoColumnLists
               left={{
                 title: "Mitsubishi Xforce (bản Ultimate)",
@@ -152,7 +152,7 @@ export default function XforceVsCretaPage() {
           </section>
 
           <section className="mt-12">
-            <h2 className="text-2xl font-bold">4. Nên chọn xe nào?</h2>
+            <h2 className="text-2xl font-black tracking-tight">4. Nên chọn xe nào?</h2>
             <TwoColumnLists
               emphasizeLeft
               left={{

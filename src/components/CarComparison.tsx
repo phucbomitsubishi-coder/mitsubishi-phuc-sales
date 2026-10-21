@@ -61,11 +61,11 @@ export function ComparisonHero({ title, children }: { title: string; children: R
   return (
     <section className="bg-neutral-950 text-white">
       <div className="mx-auto max-w-7xl px-6 py-14 md:py-16">
-        <p className="mb-3 text-sm font-bold uppercase tracking-wider text-red-500">
+        <p className="mb-3 text-xs font-bold uppercase tracking-[0.25em] text-red-500">
           Tư vấn chọn xe · Cập nhật {promotionMonthLabel}
         </p>
 
-        <h1 className="max-w-4xl text-3xl font-bold leading-tight md:text-5xl">{title}</h1>
+        <h1 className="max-w-4xl text-3xl font-black leading-tight md:text-5xl tracking-tight">{title}</h1>
 
         <p className="mt-5 max-w-3xl text-base leading-8 text-neutral-300 md:text-lg">
           {children}
@@ -77,8 +77,8 @@ export function ComparisonHero({ title, children }: { title: string; children: R
 
 export function QuickSummary({ children }: { children: ReactNode }) {
   return (
-    <section className="rounded-2xl border border-gray-200 bg-gray-50 p-6">
-      <h2 className="text-xl font-bold">Tóm tắt nhanh</h2>
+    <section className="border border-gray-200 bg-gray-50 p-6">
+      <h2 className="text-xl font-black tracking-tight">Tóm tắt nhanh</h2>
       <ul className="mt-4 space-y-2 leading-7 text-gray-700">{children}</ul>
     </section>
   );
@@ -94,7 +94,7 @@ function PriceTable({
   highlight?: boolean;
 }) {
   return (
-    <div tabIndex={0} role="region" aria-label={caption} className="overflow-x-auto rounded-xl border border-gray-200">
+    <div tabIndex={0} role="region" aria-label={caption} className="overflow-x-auto border border-gray-200">
       <table className="w-full min-w-[320px] text-left text-sm">
         <caption
           className={`${highlight ? "bg-red-50" : "bg-gray-100"} px-4 py-3 text-left font-bold text-gray-900`}
@@ -143,7 +143,7 @@ export function PriceComparison({
 
   return (
     <section className="mt-12">
-      <h2 className="text-2xl font-bold">{heading}</h2>
+      <h2 className="text-2xl font-black tracking-tight">{heading}</h2>
       <p className="mt-3 leading-7 text-gray-700">
         Giá lăn bánh tạm tính cho xe đăng ký tại TP. Hồ Chí Minh (gồm cả Bình Dương cũ),
         dùng cùng một cách tính cho cả hai xe
@@ -183,7 +183,7 @@ export function SpecTable({
   rows: SpecRow[];
 }) {
   return (
-    <div tabIndex={0} role="region" aria-label={`Bảng thông số so sánh với ${competitorName}`} className="mt-6 overflow-x-auto rounded-xl border border-gray-200">
+    <div tabIndex={0} role="region" aria-label={`Bảng thông số so sánh với ${competitorName}`} className="mt-6 overflow-x-auto border border-gray-200">
       <table className="w-full min-w-[560px] text-left text-sm">
         <thead className="bg-gray-50 text-gray-700">
           <tr>
@@ -231,7 +231,7 @@ export function TwoColumnLists({
         return (
           <div
             key={column.title}
-            className={`rounded-xl p-5 ${
+            className={`p-5 ${
               isEmphasized
                 ? "border-2 border-red-600"
                 : emphasizeLeft
@@ -261,13 +261,13 @@ export function ComparisonCta({ car, source }: { car: Car; source: string }) {
     <div className="mt-6 flex flex-wrap gap-3">
       <Link
         href={`/dang-ky-lai-thu?xe=${car.id}&nguon=${source}`}
-        className="rounded-lg bg-red-600 px-6 py-3 font-bold text-white transition hover:bg-red-700"
+        className="bg-red-600 px-6 py-3 text-xs font-black uppercase tracking-[0.18em] text-white transition hover:bg-red-700"
       >
         Đăng ký lái thử {shortName}
       </Link>
       <Link
         href={`/?car=${encodeURIComponent(car.name)}&nguon=${source}#bao-gia`}
-        className="rounded-lg border border-gray-300 px-6 py-3 font-bold text-gray-900 transition hover:border-red-600 hover:text-red-700"
+        className="border border-gray-300 px-6 py-3 text-xs font-black uppercase tracking-[0.18em] text-gray-900 transition hover:border-red-600 hover:text-red-700"
       >
         Nhận báo giá {shortName}
       </Link>
@@ -277,12 +277,12 @@ export function ComparisonCta({ car, source }: { car: Car; source: string }) {
 
 export function CarLinkCard({ car }: { car: Car }) {
   return (
-    <section className="mt-12 grid items-center gap-6 rounded-2xl bg-gray-50 p-6 md:grid-cols-[240px_1fr]">
+    <section className="mt-12 grid items-center gap-6 bg-gray-50 p-6 md:grid-cols-[240px_1fr]">
       <div className="relative h-36">
         <Image src={car.image} alt={car.name} fill sizes="240px" className="object-contain" />
       </div>
       <div>
-        <h2 className="text-xl font-bold">Xem chi tiết {car.name}</h2>
+        <h2 className="text-xl font-black tracking-tight">Xem chi tiết {car.name}</h2>
         <p className="mt-2 leading-7 text-gray-700">
           Thông số đầy đủ, màu xe, hình ảnh và công cụ tính giá lăn bánh theo 34 tỉnh,
           thành.
@@ -301,7 +301,7 @@ export function CarLinkCard({ car }: { car: Car }) {
 export function ComparisonSources({ car, competitor }: { car: Car; competitor: CompetitorCar }) {
   return (
     <section className="mt-12 border-t border-gray-200 pt-6">
-      <h2 className="text-base font-bold">Nguồn số liệu {competitor.name}</h2>
+      <h2 className="text-base font-black tracking-tight">Nguồn số liệu {competitor.name}</h2>
       <ul className="mt-2 space-y-1 text-sm text-gray-600">
         {competitor.sources.map((source) => (
           <li key={source.url}>

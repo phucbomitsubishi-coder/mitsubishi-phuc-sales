@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { siteConfig } from "@/config/site";
 import { notFound } from "next/navigation";
 import SiteHeader from "@/components/SiteHeader";
@@ -145,11 +146,20 @@ export default async function UsedCarDetailPage({ params }: Props) {
                 Xe đã qua sử dụng
               </p>
 
-              <h1 className="mt-2 text-3xl font-bold text-gray-900 md:text-4xl">
+              <h1 className="mt-2 text-3xl font-black text-gray-900 md:text-4xl tracking-tight">
                 {car.name} {car.modelYear}
               </h1>
 
-              <p className="mt-4 text-3xl font-bold text-red-600">
+              {car.status === "sold" && (
+                <p className="mt-4 border-l-4 border-gray-950 bg-gray-100 px-4 py-3 text-sm leading-6 text-gray-800">
+                  <strong className="uppercase tracking-wide">Xe đã bán.</strong>{" "}
+                  <Link href="/xe-cu" className="font-bold text-red-700 underline underline-offset-2 hover:text-red-800">
+                    Xem các xe đang có sẵn →
+                  </Link>
+                </p>
+              )}
+
+              <p className={`mt-4 text-3xl font-bold ${car.status === "sold" ? "text-gray-500 line-through" : "text-red-600"}`}>
                 {car.price.toLocaleString("vi-VN")} đ
               </p>
 
@@ -167,8 +177,8 @@ export default async function UsedCarDetailPage({ params }: Props) {
                 <Info label="Nhiên liệu" value={car.fuel} />
               </div>
 
-              <div className="mt-8 rounded-2xl border border-gray-200 bg-white p-6">
-  <h2 className="text-xl font-bold text-gray-900">
+              <div className="mt-8 border border-gray-200 bg-white p-6">
+  <h2 className="text-xl font-black text-gray-900 tracking-tight">
     Thông tin xe
   </h2>
 
@@ -198,7 +208,7 @@ export default async function UsedCarDetailPage({ params }: Props) {
       {car.equipment.map((item) => (
         <span
           key={item}
-          className="rounded-full bg-gray-100 px-3 py-2 text-sm font-medium text-gray-700"
+          className="bg-gray-100 px-3 py-2 text-sm font-medium text-gray-700"
         >
           {item}
         </span>
@@ -210,8 +220,8 @@ export default async function UsedCarDetailPage({ params }: Props) {
 
               {car.status === "available" && <UsedCarGifts className="mt-6" />}
 
-              <div className="mt-6 rounded-2xl border border-green-200 bg-green-50 p-6">
-  <h2 className="text-xl font-bold text-gray-900">
+              <div className="mt-6 border border-green-200 bg-green-50 p-6">
+  <h2 className="text-xl font-black text-gray-900 tracking-tight">
     Cam kết xe
   </h2>
 
@@ -236,7 +246,7 @@ export default async function UsedCarDetailPage({ params }: Props) {
               <div className="mt-6 flex flex-wrap gap-3">
                 <a
                   href={siteConfig.contact.phoneUrl}
-                  className="rounded-xl bg-red-600 px-6 py-3 font-semibold text-white transition hover:bg-red-700"
+                  className="bg-red-600 px-6 py-3 text-xs font-black uppercase tracking-[0.18em] text-white transition hover:bg-red-700"
                 >
                   Gọi tư vấn xe này
                 </a>
@@ -245,7 +255,7 @@ export default async function UsedCarDetailPage({ params }: Props) {
                   href={siteConfig.contact.zaloUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="rounded-xl border border-blue-600 px-6 py-3 font-semibold text-blue-600 transition hover:bg-blue-50"
+                  className="border border-blue-600 px-6 py-3 text-xs font-black uppercase tracking-[0.18em] text-blue-600 transition hover:bg-blue-50"
                 >
                   Hỏi xe qua Zalo
                 </a>
@@ -266,7 +276,7 @@ function Info({
   value: string;
 }) {
   return (
-    <div className="rounded-xl bg-white p-4 shadow-sm">
+    <div className="bg-white p-4 shadow-sm">
       <p className="text-sm text-gray-500">{label}</p>
       <p className="mt-1 font-bold text-gray-900">{value}</p>
     </div>

@@ -90,7 +90,7 @@ export default function UsedCarList({ cars }: { cars: UsedCarCard[] }) {
             <Link
               key={car.id}
               href={`/xe-cu/${car.slug}`}
-              className="group overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg"
+              className="group overflow-hidden border border-gray-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg"
             >
               <div className="relative aspect-[4/3] overflow-hidden bg-gray-100">
                 <Image
@@ -106,7 +106,7 @@ export default function UsedCarList({ cars }: { cars: UsedCarCard[] }) {
               </div>
 
               <div className="p-3 sm:p-4">
-                <h2 className="text-sm font-bold leading-snug text-gray-900 group-hover:text-red-700 sm:text-base">
+                <h2 className="text-sm font-black leading-snug text-gray-900 group-hover:text-red-700 sm:text-base tracking-tight">
                   {car.name.replace(/^Mitsubishi /, "")} {car.modelYear}
                   {showVariant && <span className="block font-semibold text-gray-600">{car.variant}</span>}
                 </h2>

@@ -39,7 +39,7 @@ const selectedPromotion = currentPromotion.cars
 
   return (
     <div className="space-y-6">
-      <div className="grid gap-5 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm md:grid-cols-2">
+      <div className="grid gap-5 border border-gray-200 bg-white p-6 shadow-sm md:grid-cols-2">
         <div>
           <label
             htmlFor="car"
@@ -85,7 +85,7 @@ const selectedPromotion = currentPromotion.cars
         </div>
       </div>
 
-      <div className="rounded-2xl border border-red-100 bg-red-50 px-5 py-4">
+      <div className="border border-red-100 bg-red-50 px-5 py-4">
         <p className="text-sm font-medium text-gray-600">
           Giá xe đang dùng để dự tính
         </p>

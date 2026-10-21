@@ -62,7 +62,7 @@ export default function CarListPage() {
                 Giá từ <span className="tabular-nums">{car.priceFull}</span>
               </p>
               <p className="mx-auto mt-4 max-w-xl leading-7 text-gray-700">{car.description}</p>
-              <ul className="mt-6 flex justify-center gap-8 text-sm font-bold uppercase tracking-wide">
+              <ul className="mt-6 flex justify-center gap-8 text-xs font-bold uppercase tracking-[0.25em]">
                 <li className="flex items-center gap-2">
                   <svg aria-hidden="true" viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8">
                     <path d={fuelIcon} />

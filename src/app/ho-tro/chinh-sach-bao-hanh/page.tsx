@@ -52,7 +52,7 @@ export default function WarrantyPage() {
 
         {/* Warranty periods */}
         <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-black md:text-3xl">
+          <h2 className="text-2xl font-black md:text-3xl tracking-tight">
             Thời hạn bảo hành xe mới
           </h2>
 
@@ -141,7 +141,7 @@ export default function WarrantyPage() {
         <section className="bg-gray-50">
           <div className="mx-auto grid max-w-7xl gap-8 px-4 py-12 sm:px-6 lg:grid-cols-2 lg:px-8">
             <div>
-              <h2 className="text-2xl font-black md:text-3xl">
+              <h2 className="text-2xl font-black md:text-3xl tracking-tight">
                 Phạm vi bảo hành
               </h2>
 
@@ -156,7 +156,7 @@ export default function WarrantyPage() {
             </div>
 
             <div>
-              <h2 className="text-2xl font-black md:text-3xl">
+              <h2 className="text-2xl font-black md:text-3xl tracking-tight">
                 Một số trường hợp không thuộc bảo hành
               </h2>
 
@@ -174,7 +174,7 @@ export default function WarrantyPage() {
         {/* Official source */}
         <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
           <div className="border border-gray-200 p-6 sm:p-8">
-            <h2 className="text-xl font-bold">
+            <h2 className="text-xl font-black tracking-tight">
               Xem chính sách chính thức
             </h2>
 
@@ -200,11 +200,11 @@ export default function WarrantyPage() {
           <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
             <div className="grid gap-8 lg:grid-cols-2 lg:items-center">
               <div>
-                <p className="text-sm font-semibold uppercase tracking-widest text-red-500">
+                <p className="text-xs font-bold uppercase tracking-[0.25em] text-red-500">
                   Hỗ trợ khách hàng
                 </p>
 
-                <h2 className="mt-2 text-2xl font-bold">
+                <h2 className="mt-2 text-2xl font-black tracking-tight">
                   Cần tư vấn thêm về bảo hành?
                 </h2>
 

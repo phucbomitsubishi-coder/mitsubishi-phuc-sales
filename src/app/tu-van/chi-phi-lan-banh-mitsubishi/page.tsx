@@ -94,7 +94,7 @@ export default function MitsubishiOnRoadCostGuidePage() {
           Chi phí mua xe · Cập nhật {promotionMonthLabel}
         </p>
 
-        <h1 className="mt-3 text-3xl font-bold leading-tight md:text-5xl">
+        <h1 className="mt-3 text-3xl font-black leading-tight md:text-5xl tracking-tight">
           Giá lăn bánh xe Mitsubishi gồm những khoản nào?
         </h1>
 
@@ -105,7 +105,7 @@ export default function MitsubishiOnRoadCostGuidePage() {
           {formatMillion(minFees)} đến {formatMillion(maxFees)} đồng, tùy giá xe.
         </p>
 
-        <div className="mt-8 rounded-2xl border border-red-100 bg-red-50 p-6">
+        <div className="mt-8 border border-red-100 bg-red-50 p-6">
           <p className="font-bold text-gray-900">Ví dụ nhanh</p>
           <p className="mt-2 leading-7 text-gray-800">
             {example.car.name} {example.variant.name} giá niêm yết{" "}
@@ -119,9 +119,9 @@ export default function MitsubishiOnRoadCostGuidePage() {
         </div>
 
         <section className="mt-12">
-          <h2 className="text-2xl font-bold md:text-3xl">1. Năm khoản phí khi lăn bánh</h2>
+          <h2 className="text-2xl font-black md:text-3xl tracking-tight">1. Năm khoản phí khi lăn bánh</h2>
 
-          <div className="mt-6 overflow-x-auto rounded-xl border border-gray-200">
+          <div className="mt-6 overflow-x-auto border border-gray-200">
             <table className="w-full text-left text-sm">
               <thead className="bg-gray-50 text-gray-700">
                 <tr>
@@ -184,7 +184,7 @@ export default function MitsubishiOnRoadCostGuidePage() {
         </section>
 
         <section className="mt-12 border-t border-gray-200 pt-10">
-          <h2 className="text-2xl font-bold md:text-3xl">
+          <h2 className="text-2xl font-black md:text-3xl tracking-tight">
             2. Giá lăn bánh 6 dòng xe Mitsubishi
           </h2>
           <p className="mt-3 leading-7 text-gray-700">
@@ -193,7 +193,7 @@ export default function MitsubishiOnRoadCostGuidePage() {
             <InlineLink href="/bang-gia-xe-mitsubishi">bảng giá xe Mitsubishi</InlineLink>.
           </p>
 
-          <div className="mt-6 overflow-x-auto rounded-xl border border-gray-200">
+          <div className="mt-6 overflow-x-auto border border-gray-200">
             <table className="w-full text-left text-sm">
               <thead className="bg-gray-50 text-gray-700">
                 <tr>
@@ -230,12 +230,12 @@ export default function MitsubishiOnRoadCostGuidePage() {
         </section>
 
         <section className="mt-12 border-t border-gray-200 pt-10">
-          <h2 className="text-2xl font-bold md:text-3xl">
+          <h2 className="text-2xl font-black md:text-3xl tracking-tight">
             3. Ví dụ tính từng khoản: {example.car.name} {example.variant.name}
           </h2>
           <p className="mt-3 leading-7 text-gray-700">Đăng ký tại TP. Hồ Chí Minh, biển trắng.</p>
 
-          <div className="mt-6 overflow-x-auto rounded-xl border border-gray-200">
+          <div className="mt-6 overflow-x-auto border border-gray-200">
             <table className="w-full text-left text-sm">
               <tbody className="divide-y divide-gray-200">
                 <tr>
@@ -258,7 +258,7 @@ export default function MitsubishiOnRoadCostGuidePage() {
         </section>
 
         <section className="mt-12 border-t border-gray-200 pt-10">
-          <h2 className="text-2xl font-bold md:text-3xl">4. Những điều nên biết thêm</h2>
+          <h2 className="text-2xl font-black md:text-3xl tracking-tight">4. Những điều nên biết thêm</h2>
           <ul className="mt-4 list-disc space-y-3 pl-5 leading-8 text-gray-700">
             <Tip title="Ưu đãi tháng có thể giảm đáng kể tiền lăn bánh.">
               {taxSupportText
@@ -288,8 +288,8 @@ export default function MitsubishiOnRoadCostGuidePage() {
           có thể thay đổi theo địa phương, thời điểm đăng ký và hồ sơ thực tế.
         </p>
 
-        <div className="mt-10 rounded-2xl bg-gray-100 p-6 md:p-8">
-          <h2 className="text-2xl font-bold">Tính giá lăn bánh cho đúng xe và nơi bạn đăng ký</h2>
+        <div className="mt-10 bg-gray-100 p-6 md:p-8">
+          <h2 className="text-2xl font-black tracking-tight">Tính giá lăn bánh cho đúng xe và nơi bạn đăng ký</h2>
 
           <p className="mt-3 leading-7 text-gray-700">
             Chọn mẫu xe, phiên bản và 1 trong 34 tỉnh, thành để xem từng khoản phí, đã trừ
@@ -299,7 +299,7 @@ export default function MitsubishiOnRoadCostGuidePage() {
           <div className="mt-6 flex flex-wrap gap-3">
             <Link
               href="/du-toan/gia-lan-banh"
-              className="rounded bg-red-600 px-5 py-3 font-semibold text-white transition hover:bg-red-700"
+              className="rounded bg-red-600 px-5 py-3 text-xs font-black uppercase tracking-[0.18em] text-white transition hover:bg-red-700"
             >
               Tính giá lăn bánh
             </Link>
@@ -308,7 +308,7 @@ export default function MitsubishiOnRoadCostGuidePage() {
               href={siteConfig.contact.zaloUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded border border-blue-600 bg-white px-5 py-3 font-semibold text-blue-700 transition hover:bg-blue-50"
+              className="rounded border border-blue-600 bg-white px-5 py-3 text-xs font-black uppercase tracking-[0.18em] text-blue-700 transition hover:bg-blue-50"
             >
               Tư vấn Zalo
             </a>

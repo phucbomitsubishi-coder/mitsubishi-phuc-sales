@@ -22,7 +22,7 @@ export default function UsedCarGallery({
 
   return (
     <div>
-      <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-white shadow-sm">
+      <div className="relative aspect-[4/3] overflow-hidden bg-white shadow-sm">
         <Image
           src={selectedImage}
           alt={carName}

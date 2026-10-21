@@ -181,11 +181,11 @@ export default function FAQPage() {
         {/* Hero */}
         <section className="bg-neutral-950 text-white">
           <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
-            <p className="text-sm font-semibold uppercase tracking-widest text-red-500">
+            <p className="text-xs font-bold uppercase tracking-[0.25em] text-red-500">
               Hỗ trợ khách hàng
             </p>
 
-            <h1 className="mt-3 text-3xl font-bold sm:text-4xl">
+            <h1 className="mt-3 text-3xl font-black sm:text-4xl tracking-tight">
               Câu hỏi thường gặp
             </h1>
 
@@ -201,7 +201,7 @@ export default function FAQPage() {
           <div className="space-y-12">
             {faqGroups.map((group) => (
               <div key={group.title}>
-                <h2 className="text-2xl font-bold">
+                <h2 className="text-2xl font-black tracking-tight">
                   {group.title}
                 </h2>
 
@@ -209,7 +209,7 @@ export default function FAQPage() {
                   {group.items.map((item) => (
                     <details
                       key={item.question}
-                      className="group rounded-xl border border-gray-200 bg-white"
+                      className="group border border-gray-200 bg-white"
                     >
                       <summary className="flex cursor-pointer list-none items-center justify-between gap-4 p-5 font-semibold">
                         <span>{item.question}</span>
@@ -243,28 +243,28 @@ export default function FAQPage() {
         {/* Quick links */}
         <section className="bg-gray-50">
           <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
-            <h2 className="text-2xl font-bold">
+            <h2 className="text-2xl font-black tracking-tight">
               Thông tin hỗ trợ
             </h2>
 
             <div className="mt-6 grid gap-4 sm:grid-cols-3">
               <Link
                 href="/ho-tro/chinh-sach-bao-hanh"
-                className="rounded-xl border border-gray-200 bg-white p-5 font-semibold transition hover:border-red-500"
+                className="border border-gray-200 bg-white p-5 font-semibold transition hover:border-red-500"
               >
                 Chính sách bảo hành →
               </Link>
 
               <Link
                 href="/ho-tro/bao-duong-dinh-ky"
-                className="rounded-xl border border-gray-200 bg-white p-5 font-semibold transition hover:border-red-500"
+                className="border border-gray-200 bg-white p-5 font-semibold transition hover:border-red-500"
               >
                 Bảo dưỡng định kỳ →
               </Link>
 
               <Link
                 href="/ho-tro/phu-tung-chinh-hang"
-                className="rounded-xl border border-gray-200 bg-white p-5 font-semibold transition hover:border-red-500"
+                className="border border-gray-200 bg-white p-5 font-semibold transition hover:border-red-500"
               >
                 Phụ tùng chính hãng →
               </Link>
@@ -277,11 +277,11 @@ export default function FAQPage() {
           <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
             <div className="grid gap-8 lg:grid-cols-2 lg:items-center">
               <div>
-                <p className="text-sm font-semibold uppercase tracking-widest text-red-500">
+                <p className="text-xs font-bold uppercase tracking-[0.25em] text-red-500">
                   Chưa tìm thấy câu trả lời?
                 </p>
 
-                <h2 className="mt-2 text-2xl font-bold">
+                <h2 className="mt-2 text-2xl font-black tracking-tight">
                   Liên hệ trực tiếp để được hỗ trợ
                 </h2>
 
@@ -297,7 +297,7 @@ export default function FAQPage() {
               <div className="flex flex-wrap gap-3 lg:justify-end">
                 <a
                   href={contact.phoneUrl}
-                  className="rounded-lg bg-red-600 px-6 py-3 font-bold text-white hover:bg-red-700"
+                  className="bg-red-600 px-6 py-3 text-xs font-black uppercase tracking-[0.18em] text-white hover:bg-red-700"
                 >
                   Gọi {sales.phoneDisplay}
                 </a>
@@ -306,14 +306,14 @@ export default function FAQPage() {
                   href={contact.zaloUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="rounded-lg border border-blue-500 px-6 py-3 font-bold text-blue-400 hover:bg-blue-500 hover:text-white"
+                  className="border border-blue-500 px-6 py-3 text-xs font-black uppercase tracking-[0.18em] text-blue-400 hover:bg-blue-500 hover:text-white"
                 >
                   Mở Zalo
                 </a>
 
                 <Link
                   href="/"
-                  className="rounded-lg border border-gray-600 px-6 py-3 font-semibold hover:bg-white hover:text-black"
+                  className="border border-gray-600 px-6 py-3 text-xs font-black uppercase tracking-[0.18em] hover:bg-white hover:text-black"
                 >
                   Về trang chủ
                 </Link>
