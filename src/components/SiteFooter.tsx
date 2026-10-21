@@ -94,13 +94,17 @@ export default function SiteFooter() {
       </Link>
   </FooterSection>
 
-  {/* Hỗ trợ khách hàng */}
-  <FooterSection title="Hỗ trợ khách hàng">
+  {/* Dịch vụ (cùng tên mục menu) */}
+  <FooterSection title="Dịch vụ">
       <Link
         href="/ho-tro/chinh-sach-bao-hanh"
         className="hover:text-white"
       >
         Chính sách bảo hành
+      </Link>
+
+      <Link href="/ho-tro/bao-hanh-mo-rong" className="hover:text-white">
+        Bảo hành mở rộng
       </Link>
 
       <Link

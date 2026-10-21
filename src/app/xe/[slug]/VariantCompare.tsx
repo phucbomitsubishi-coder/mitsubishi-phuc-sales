@@ -82,7 +82,7 @@ const INITIAL_GROUPS = 3;
 // khi cuộn, các nhóm thông số/trang bị bấm để mở, nút Xem thêm / Thu gọn.
 // Điện thoại: so sánh 2 phiên bản một lúc (chọn bằng ô chọn nếu xe có hơn 2 phiên bản).
 export default function VariantCompare({ carName, variants, imageFor }: Props) {
-  const [colors, setColors] = useState<string[]>(() => featuredColors(variants));
+  const [colors, setColors] = useState<string[]>(() => featuredColors(variants, carName));
   const [open, setOpen] = useState<string[]>([]);
   const [showAll, setShowAll] = useState(false);
   const [pair, setPair] = useState<[number, number]>([0, Math.min(1, variants.length - 1)]);

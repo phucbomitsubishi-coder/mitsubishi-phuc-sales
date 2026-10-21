@@ -19,32 +19,39 @@ const supportItems = [
     number: "01",
   },
   {
+    title: "Bảo hành mở rộng",
+    description:
+      "Thêm 1 hoặc 2 năm bảo hành sau thời hạn tiêu chuẩn: gói Cơ bản, Cao cấp, giá từng dòng xe và điều kiện mua.",
+    href: "/ho-tro/bao-hanh-mo-rong",
+    number: "02",
+  },
+  {
     title: "Bảo dưỡng định kỳ",
     description:
       "Tham khảo các mốc bảo dưỡng giúp xe vận hành ổn định, bền bỉ và an toàn.",
     href: "/ho-tro/bao-duong-dinh-ky",
-    number: "02",
+    number: "03",
   },
   {
     title: "Phụ tùng chính hãng",
     description:
       "Thông tin về phụ tùng Mitsubishi chính hãng và lợi ích khi sử dụng đúng tiêu chuẩn.",
     href: "/ho-tro/phu-tung-chinh-hang",
-    number: "03",
+    number: "04",
   },
   {
     title: "Hướng dẫn sử dụng",
     description:
       "Các thông tin hữu ích giúp khách hàng sử dụng và chăm sóc xe Mitsubishi thuận tiện hơn.",
     href: "/ho-tro/huong-dan-su-dung",
-    number: "04",
+    number: "05",
   },
   {
     title: "Câu hỏi thường gặp",
     description:
       "Giải đáp nhanh những vấn đề khách hàng thường quan tâm trong quá trình mua và sử dụng xe.",
     href: "/ho-tro/cau-hoi-thuong-gap",
-    number: "05",
+    number: "06",
   },
 ];
 

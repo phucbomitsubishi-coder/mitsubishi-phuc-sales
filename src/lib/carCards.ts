@@ -9,9 +9,9 @@ import { buildPromotionItem, formatMillion } from "@/lib/promotionItems";
 const cardColors: Record<string, [string, string]> = {
   destinator: ["Ultimate", "Xanh Đen"],
   triton: ["4WD AT Athlete", "Cam"],
-  xforce: ["Ultimate", "Đỏ Đen"],
+  xforce: ["Luxury", "Trắng"],
   "xpander-cross": ["Xpander Cross", "Nâu"],
-  xpander: ["AT Premium", "Đỏ"],
+  xpander: ["AT Premium", "Trắng"],
   attrage: ["CVT Premium", "Xám"],
 };
 
@@ -48,6 +48,12 @@ export const carCards = cars.map((car) => {
     shortName: car.name.replace(/^Mitsubishi /, ""),
     image: car.image,
     sideImage,
+    // Ảnh nền hiện khi rê chuột (băng chuyền trang chủ) và ảnh thẻ trang /xe, lấy từ trang MMV (showroom.ts)
+    hoverBg: showrooms[car.id]?.hoverBg,
+    listImage: showrooms[car.id]?.listImage,
+    fuel: car.specifications.fuel,
+    seats: car.specifications.seats,
+    description: car.shortDescription,
     tagline: taglines[car.id] ?? categoryLabel[car.category] ?? car.category,
     priceLabel: formatMillion(minPrice),
     priceFull: `${minPrice.toLocaleString("vi-VN")} VNĐ`,

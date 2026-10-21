@@ -161,6 +161,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
 
     {
+      url: `${baseUrl}/xe`,
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
       url: `${baseUrl}/bang-gia-xe-mitsubishi`,
       changeFrequency: "monthly",
       priority: 0.9,
@@ -193,6 +198,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     {
       url: `${baseUrl}/ho-tro/chinh-sach-bao-hanh`,
+      changeFrequency: "monthly",
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/ho-tro/bao-hanh-mo-rong`,
       changeFrequency: "monthly",
       priority: 0.6,
     },

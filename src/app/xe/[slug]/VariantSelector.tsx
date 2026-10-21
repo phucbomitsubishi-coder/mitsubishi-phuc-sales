@@ -147,7 +147,7 @@ const [selectedColor, setSelectedColor] = useState("");
   const [showCalculator, setShowCalculator] = useState(false);
   const selectedVariant = variants[selectedIndex];
   // Màu mặc định từng phiên bản (màu nổi bật, hạn chế trắng)
-  const featured = featuredColors(variants);
+  const featured = featuredColors(variants, carName);
 
   // Dùng chung cho thẻ phiên bản và tiêu đề cột trong bảng thông số
   const selectVariant = (index: number) => {

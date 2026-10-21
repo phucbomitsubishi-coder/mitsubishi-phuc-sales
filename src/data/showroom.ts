@@ -22,6 +22,10 @@ export type Showroom = {
   specs: { icon: string; label: string }[];
   // Ảnh xe nhìn ngang theo phiên bản → màu (tên màu khớp colors trong cars.ts); màu đầu tiên là ảnh mặc định
   sideImages?: Record<string, Record<string, string>>;
+  // Ảnh nền dọc hiện khi rê chuột vào xe ở băng chuyền trang chủ (ảnh nền thanh chọn xe trang chủ MMV)
+  hoverBg?: string;
+  // Ảnh xe có cảnh nền cho thẻ trang /xe (trang "Tất cả dòng xe" của MMV)
+  listImage?: string;
   highlight?: ShowroomFeature;
   // Khối "Phụ kiện chính hãng" (ảnh MMV), dẫn sang bảng phụ kiện của xe
   accessoriesImage?: string;
@@ -37,6 +41,8 @@ const at = "/images/cars/attrage/showroom";
 
 export const showrooms: Record<string, Showroom> = {
   destinator: {
+    hoverBg: `${dst}/hover-bg.jpg`,
+    listImage: `${dst}/list.png`,
     slogan: "Khởi sự vạn điểm đến",
     logo: { src: `${dst}/logo.png`, width: 1200, height: 124 },
     video: `${dst}/hero.mp4`,
@@ -101,6 +107,8 @@ export const showrooms: Record<string, Showroom> = {
     ],
   },
   xforce: {
+    hoverBg: `${xf}/hover-bg.jpg`,
+    listImage: `${xf}/list.png`,
     slogan: "Vươn tầm vượt chuẩn",
     logo: { src: `${xf}/logo.png`, width: 1200, height: 187 },
     poster: `${xf}/hero-poster.jpg`,
@@ -137,6 +145,8 @@ export const showrooms: Record<string, Showroom> = {
     ],
   },
   xpander: {
+    hoverBg: `${xp}/hover-bg.jpg`,
+    listImage: `${xp}/list.png`,
     slogan: "Vượt mong đợi – Vững hành trình",
     logo: { src: `${xp}/logo.png`, width: 1200, height: 201 },
     video: `${xp}/hero.mp4`,
@@ -175,6 +185,8 @@ export const showrooms: Record<string, Showroom> = {
     ],
   },
   "xpander-cross": {
+    hoverBg: `${xc}/hover-bg.jpg`,
+    listImage: `${xc}/list.png`,
     slogan: "Vượt mong đợi – Vững hành trình",
     logo: { src: `${xc}/logo.png`, width: 1200, height: 347 },
     video: `${xc}/hero.mp4`,
@@ -205,6 +217,8 @@ export const showrooms: Record<string, Showroom> = {
     ],
   },
   triton: {
+    hoverBg: `${tr}/hover-bg.jpg`,
+    listImage: `${tr}/list.png`,
     slogan: "Chiếm lĩnh mọi lãnh địa",
     logo: { src: `${tr}/logo.png`, width: 1200, height: 115 },
     video: `${tr}/hero.mp4`,
@@ -249,6 +263,8 @@ export const showrooms: Record<string, Showroom> = {
     ],
   },
   attrage: {
+    hoverBg: `${at}/hover-bg.jpg`,
+    listImage: `${at}/list.png`,
     slogan: "Khởi đầu vững chắc",
     logo: { src: `${at}/logo.png`, width: 1200, height: 189 },
     poster: `${at}/hero-poster.jpg`,

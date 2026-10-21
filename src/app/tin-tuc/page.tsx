@@ -93,12 +93,13 @@ export default function NewsPage() {
             </Link>
           </div>
 
-          <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {/* Điện thoại: vuốt ngang (21/10/2026); từ sm: lưới như cũ */}
+          <div className="-mx-5 mt-8 flex snap-x snap-mandatory scroll-px-5 gap-4 overflow-x-auto px-5 pb-2 [scrollbar-width:none] sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-5 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-3 [&::-webkit-scrollbar]:hidden">
             {advisoryNewestFirst.map((item, index) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className={`group overflow-hidden rounded-2xl bg-white ring-1 ring-gray-200 transition duration-300 hover:-translate-y-1 hover:shadow-xl ${
+                className={`group w-[82%] shrink-0 snap-start overflow-hidden rounded-2xl bg-white ring-1 ring-gray-200 transition duration-300 hover:-translate-y-1 hover:shadow-xl sm:w-auto ${
                   index >= ADVISORY_SHOWN ? "hidden" : ""
                 }`}
               >
@@ -108,7 +109,7 @@ export default function NewsPage() {
                     alt=""
                     fill
                     unoptimized
-                    sizes="(min-width: 1024px) 400px, (min-width: 640px) 50vw, 100vw"
+                    sizes="(min-width: 1024px) 400px, (min-width: 640px) 50vw, 82vw"
                     className="object-cover transition duration-500 group-hover:scale-105"
                   />
                 </div>

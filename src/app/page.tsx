@@ -1,10 +1,8 @@
-import { cars, upcomingCars } from "@/data/cars";
+import { upcomingCars } from "@/data/cars";
 import { currentPromotion } from "@/data/promotions";
 import { newsArticles } from "@/data/news";
 import { advisoryArticles } from "@/data/advisory";
 import { isRepublishedArticle } from "@/lib/news";
-import PromotionTabs from "@/components/PromotionTabs";
-import { buildPromotionItem } from "@/lib/promotionItems";
 import { siteConfig } from "@/config/site";
 import { Suspense } from "react";
 import QuoteForm, { QuoteFormFromUrl } from "@/components/QuoteForm";
@@ -25,24 +23,41 @@ export const metadata = {
 
 
 
-// Ưu đãi từng dòng xe (xem src/lib/promotionItems.ts)
-const promotionItems = cars.map(buildPromotionItem);
-
 // Bài tin tức của chương trình khuyến mãi hiện tại (add-news tạo bài cùng tiêu đề)
 const promotionArticle = newsArticles.find(
   (article) => article.title === currentPromotion.title
 );
 
-// Khối "Bài viết mới": 3 bài so sánh mới nhất + 3 tin mới nhất được Google lập chỉ mục,
+// Khối "Bài viết mới" (gọn lại 21/10/2026): tin mới nhất được Google lập chỉ mục + 2 bài so sánh mới nhất,
 // để trang chủ luôn có link tới bài mới (Google thấy trang được cập nhật, bài mới được phát hiện nhanh)
-const latestComparisons = advisoryArticles
-  .filter((article) => article.href.startsWith("/tu-van/so-sanh-"))
-  .slice(-3)
-  .reverse();
 const latestNews = newsArticles
   .filter((article) => !isRepublishedArticle(article))
-  .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
-  .slice(0, 3);
+  .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))[0];
+const latestComparisons = advisoryArticles
+  .filter((article) => article.href.startsWith("/tu-van/so-sanh-"))
+  .slice(-2)
+  .reverse();
+const latestPosts = [
+  ...(latestNews
+    ? [{
+        href: `/tin-tuc/${latestNews.slug}`,
+        image: latestNews.image,
+        og: false,
+        label: `Tin tức · ${latestNews.publishedAt.split("-").reverse().join("/")}`,
+        title: latestNews.seoTitle ?? latestNews.title,
+      }]
+    : []),
+  ...latestComparisons.map((article) => ({
+    href: article.href,
+    image: `${article.href}/opengraph-image`,
+    og: true,
+    label: "So sánh xe",
+    title: article.title,
+  })),
+];
+
+// Khối Khuyến mãi gọn kiểu MMV: mỗi xe một dòng "ưu đãi đến ..." (chi tiết từng phiên bản ở bảng giá và trang xe)
+const promoCars = carCards.filter((card) => card.promotionLabel);
 
 // Bài tin của xe sắp ra mắt (thẻ "Sắp ra mắt" dẫn sang bài để khách đọc thêm)
 const upcomingNews: Record<string, string> = {
@@ -70,16 +85,6 @@ const heroCars = carCards.flatMap((card) => {
 });
 const monthLabel = `${String(currentPromotion.month).padStart(2, "0")}/${currentPromotion.year}`;
 const { sales, dealer } = siteConfig;
-
-// Khối "Dịch vụ & công cụ": lối vào nhanh các trang tiện ích
-const serviceLinks = [
-  { href: "/du-toan/gia-lan-banh", title: "Tính giá lăn bánh", description: "Đủ 34 tỉnh, đã trừ ưu đãi tháng", icon: "M5 3h14v18H5zM8 7h8M8 11h2m3 0h3m-8 4h2m3 0h3" },
-  { href: "/du-toan/tra-gop", title: "Dự tính trả góp", description: "Trả trước, số tiền góp hằng tháng", icon: "M3 6h18v12H3zM3 10h18M7 15h4" },
-  { href: "/thu-cu-doi-moi", title: "Thu cũ đổi mới", description: "Định giá xe đang đi, đổi sang Mitsubishi", icon: "M4 9h13l-3-3m6 9H7l3 3" },
-  { href: "/phu-kien-xe-mitsubishi", title: "Phụ kiện xe", description: "Bảng giá phụ kiện từng dòng xe", icon: "M14 6a4 4 0 0 1-5 5l-5 5 3 3 5-5a4 4 0 0 1 5-5l-2-2 2-2a4 4 0 0 0-3-1z" },
-  { href: "/dang-ky-lai-thu", title: "Đăng ký lái thử", description: "Tại showroom hoặc mang xe đến nhà", icon: "M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 6a4 4 0 1 1 0 8 4 4 0 0 1 0-8Zm-9.5 4h5.5m8 0h5.5M12 16v5.5" },
-  { href: "/mua-xe-mitsubishi-toan-quoc", title: "Mua xe từ tỉnh khác", description: "Cọc online, giao xe toàn quốc", icon: "M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11Zm0-8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" },
-];
 
 export default function Home() {
   return (
@@ -175,8 +180,45 @@ export default function Home() {
         </div>
       </section>
 
+      {/* LÁI THỬ: banner kiểu "Trải nghiệm các mẫu xe" trang chủ MMV */}
+      <section className="bg-white md:px-6">
+        <div className="relative mx-auto max-w-7xl overflow-hidden bg-neutral-950 text-white">
+          <div className="relative aspect-[2/1] md:absolute md:inset-0 md:aspect-auto">
+            <Image
+              src="/images/cars/test-drive.jpg"
+              alt="Mitsubishi Destinator chạy trên đường"
+              fill
+              sizes="(min-width: 1280px) 1232px, 100vw"
+              className="object-cover md:object-right"
+            />
+            <div aria-hidden="true" className="absolute inset-0 hidden bg-gradient-to-r from-black/85 via-black/55 to-transparent md:block" />
+          </div>
+          <div className="relative px-6 py-10 md:max-w-xl md:px-14 md:py-24">
+            <p className="text-xs font-bold uppercase tracking-[0.25em] text-red-500">Lái thử</p>
+            <h2 className="mt-3 text-3xl font-black tracking-tight md:text-5xl">Trải nghiệm trước khi quyết định</h2>
+            <p className="mt-4 leading-7 text-gray-300">
+              Lái thử các dòng xe Mitsubishi tại showroom {dealer.name} hoặc hẹn lịch lái thử tại nhà. Phúc đi cùng, giải thích từng tính năng trên đường thật.
+            </p>
+            <div className="mt-7 flex flex-wrap gap-3">
+              <Link
+                href="/dang-ky-lai-thu?nguon=Trang-chu-lai-thu"
+                className="bg-red-600 px-6 py-3.5 text-xs font-black uppercase tracking-[0.2em] text-white transition hover:bg-red-700"
+              >
+                Đăng ký lái thử
+              </Link>
+              <Link
+                href="/du-toan/gia-lan-banh"
+                className="border border-white/60 px-6 py-3.5 text-xs font-black uppercase tracking-[0.2em] transition hover:bg-white hover:text-gray-950"
+              >
+                Tính giá lăn bánh
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* KHÁCH HÀNG NHẬN XE */}
-      <section className="overflow-hidden bg-white pb-12 md:pb-20">
+      <section className="overflow-hidden bg-white pb-12 pt-12 md:pb-20 md:pt-20">
         <div className="reveal mx-auto max-w-7xl px-6">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
@@ -196,270 +238,138 @@ export default function Home() {
         </div>
       </section>
 
-      {/* KHUYẾN MÃI */}
-<section
-  id="khuyen-mai"
-  className="relative scroll-mt-28 overflow-clip bg-neutral-950 text-white md:scroll-mt-24"
->
-  {/* Ánh đỏ nền trang trí */}
-  <div
-    aria-hidden="true"
-    className="pointer-events-none absolute -top-40 right-0 h-96 w-96 rounded-full bg-red-600/20 blur-3xl"
-  />
-  <div
-    aria-hidden="true"
-    className="pointer-events-none absolute -bottom-40 -left-20 h-80 w-80 rounded-full bg-red-900/20 blur-3xl"
-  />
-
-  <div className="relative mx-auto max-w-7xl px-6 py-16 md:py-20">
-    <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-      <div>
-        <p className="text-sm font-bold uppercase tracking-[0.25em] text-red-500">
-          Khuyến mãi
-        </p>
-
-        <h2 className="mt-3 text-3xl font-black tracking-tight md:text-5xl">
-          Ưu đãi Mitsubishi tháng{" "}
-          {String(currentPromotion.month).padStart(2, "0")}/{currentPromotion.year}
-        </h2>
-
-        <p className="mt-4 max-w-2xl leading-7 text-neutral-400">
-          Chọn dòng xe để xem chi tiết ưu đãi từng phiên bản. Liên hệ trực tiếp
-          để nhận báo giá và chính sách hiện hành.
-        </p>
-      </div>
-
-      {promotionArticle && (
-        <Link
-          href={`/tin-tuc/${promotionArticle.slug}`}
-          className="inline-flex w-fit shrink-0 items-center gap-2 rounded-full border border-neutral-700 px-5 py-2.5 text-sm font-semibold text-white transition hover:border-white"
-        >
-          Xem toàn bộ chương trình
-          <span aria-hidden="true">→</span>
-        </Link>
-      )}
-    </div>
-
-    <PromotionTabs items={promotionItems} />
-
-    <p className="mt-5 text-xs leading-5 text-neutral-400">
-      * Chương trình của {currentPromotion.source}. Giá trị ưu đãi mang tính
-      tham khảo và có thể thay đổi theo từng thời điểm.
-    </p>
-  </div>
-</section>
-
-{/* NHẬN BÁO GIÁ: ngay sau Khuyến mãi, lúc khách đang có ý định mua */}
-<Suspense fallback={<QuoteForm />}>
-  <QuoteFormFromUrl />
-</Suspense>
-
-{/* DỊCH VỤ & CÔNG CỤ */}
-<section className="border-b border-gray-200 bg-gray-50">
-  <div className="reveal mx-auto max-w-7xl px-6 py-12 md:py-20">
-    <p className="text-xs font-bold uppercase tracking-[0.25em] text-red-700">
-      Dịch vụ & công cụ
-    </p>
-    <h2 className="mt-2 text-3xl font-black tracking-tight md:text-5xl">Hỗ trợ mua xe trọn gói</h2>
-
-    <div className="mt-8 grid grid-cols-2 gap-3 md:gap-4 lg:grid-cols-3">
-      {serviceLinks.map((item) => (
-        <Link
-          key={item.href}
-          href={item.href}
-          className="group rounded-2xl bg-white p-4 ring-1 ring-gray-200 transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:ring-gray-300 md:p-6"
-        >
-          <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-red-50 text-red-600 transition group-hover:bg-red-600 group-hover:text-white md:h-12 md:w-12">
-            <svg aria-hidden="true" viewBox="0 0 24 24" className="h-5 w-5 md:h-6 md:w-6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-              <path d={item.icon} />
-            </svg>
-          </span>
-          <h3 className="mt-3 font-bold text-gray-900 transition group-hover:text-red-700 md:text-lg">
-            {item.title} <span aria-hidden="true" className="hidden md:inline">→</span>
-          </h3>
-          <p className="mt-1.5 text-sm leading-6 text-gray-600">{item.description}</p>
-        </Link>
-      ))}
-    </div>
-  </div>
-</section>
-
-{/* TIN TỨC & TƯ VẤN */}
-<section
-  id="tin-tuc"
-  className="scroll-mt-28 bg-white md:scroll-mt-24"
->
-  <div className="reveal mx-auto max-w-7xl px-6 py-12 md:py-20">
-    <p className="text-xs font-bold uppercase tracking-[0.25em] text-red-700">
-      Tin tức & Tư vấn
-    </p>
-
-    <h2 className="mt-2 text-3xl font-black tracking-tight md:text-5xl">
-      Bài viết mới
-    </h2>
-
-    <div className="mt-8 grid gap-8 md:grid-cols-2">
-      <div>
-        <h3 className="text-lg font-bold">So sánh với xe đối thủ</h3>
-        <ul className="mt-4 space-y-3">
-          {latestComparisons.map((article) => (
-            <li key={article.href}>
+      {/* KHUYẾN MÃI: khối ảnh trái, chữ phải kiểu trang chủ MMV (21/10/2026; trước đó là tab chi tiết PromotionTabs) */}
+      <section id="khuyen-mai" className="scroll-mt-28 bg-gray-100 md:scroll-mt-24">
+        <div className="mx-auto grid max-w-7xl lg:grid-cols-[1.15fr_1fr]">
+          <div className="relative aspect-[1440/583] lg:self-center">
+            <Image
+              src="/images/cars/promo-banner.jpg"
+              alt="Mitsubishi Xforce, Triton và Destinator"
+              fill
+              sizes="(min-width: 1280px) 690px, (min-width: 1024px) 54vw, 100vw"
+              className="object-cover"
+            />
+          </div>
+          <div className="px-6 py-10 md:px-12 md:py-14">
+            <p className="text-xs font-bold uppercase tracking-[0.25em] text-red-700">Khuyến mãi</p>
+            <h2 className="mt-3 text-3xl font-black tracking-tight md:text-4xl">Ưu đãi Mitsubishi tháng {monthLabel}</h2>
+            <ul className="mt-6 divide-y divide-gray-300 border-y border-gray-300">
+              {promoCars.map((car) => (
+                <li key={car.id}>
+                  <Link href={`/xe/${car.slug}`} className="flex items-center justify-between gap-4 py-2.5 transition hover:text-red-700">
+                    <span className="font-bold uppercase tracking-wide">{car.shortName}</span>
+                    <span className="text-sm font-semibold text-red-700">{car.promotionLabel}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3">
               <Link
-                href={article.href}
-                className="block rounded-xl border border-gray-200 bg-gray-50 p-4 transition hover:border-red-600"
+                href="/bang-gia-xe-mitsubishi"
+                className="border-2 border-gray-950 px-6 py-3 text-xs font-black uppercase tracking-[0.2em] transition hover:bg-gray-950 hover:text-white"
               >
-                <span className="font-bold text-gray-900">{article.title}</span>
-                <span className="mt-1 block text-sm leading-6 text-gray-600">{article.description}</span>
+                Ưu đãi từng phiên bản
               </Link>
-            </li>
-          ))}
-        </ul>
-        <Link href="/tu-van" className="mt-4 inline-block font-semibold text-red-700 hover:text-red-800">
-          Tất cả bài so sánh và tư vấn →
-        </Link>
-      </div>
+              {promotionArticle && (
+                <Link href={`/tin-tuc/${promotionArticle.slug}`} className="text-sm font-bold text-gray-900 underline-offset-4 hover:text-red-700 hover:underline">
+                  Toàn bộ chương trình →
+                </Link>
+              )}
+            </div>
+            <p className="mt-5 text-xs leading-5 text-gray-600">
+              * Chương trình của {currentPromotion.source}. Ưu đãi có thể là hỗ trợ lệ phí trước bạ, phiếu nhiên liệu hoặc phụ kiện, không phải tiền mặt.
+            </p>
+          </div>
+        </div>
+      </section>
 
-      <div>
-        <h3 className="text-lg font-bold">Tin Mitsubishi mới</h3>
-        <ul className="mt-4 space-y-3">
-          {latestNews.map((article) => (
-            <li key={article.slug}>
-              <Link
-                href={`/tin-tuc/${article.slug}`}
-                className="block rounded-xl border border-gray-200 bg-gray-50 p-4 transition hover:border-red-600"
-              >
-                <span className="text-xs font-semibold uppercase text-red-700">
-                  {article.publishedAt.split("-").reverse().join("/")}
-                </span>
-                <span className="mt-1 block font-bold text-gray-900">{article.seoTitle ?? article.title}</span>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
+      {/* NHẬN BÁO GIÁ: ngay sau Khuyến mãi, lúc khách đang có ý định mua */}
+      <Suspense fallback={<QuoteForm />}>
+        <QuoteFormFromUrl />
+      </Suspense>
 
-    <div className="mt-10 flex justify-center">
-      <Link
-        href="/tin-tuc"
-        className="inline-flex items-center rounded-lg bg-red-600 px-6 py-3 font-semibold text-white transition hover:bg-red-700"
-      >
-        Xem tất cả Tin tức & Tư vấn →
-      </Link>
-    </div>
-  </div>
-</section>
+      {/* BÀI VIẾT MỚI: 3 thẻ có ảnh; điện thoại vuốt ngang */}
+      <section id="tin-tuc" className="scroll-mt-28 bg-white md:scroll-mt-24">
+        <div className="reveal mx-auto max-w-7xl py-12 md:px-6 md:py-20">
+          <div className="flex flex-wrap items-end justify-between gap-4 px-6 md:px-0">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[0.25em] text-red-700">Tin tức & Tư vấn</p>
+              <h2 className="mt-2 text-3xl font-black tracking-tight md:text-5xl">Bài viết mới</h2>
+            </div>
+            <Link href="/tin-tuc" className="font-semibold text-red-700 hover:text-red-800">
+              Xem tất cả →
+            </Link>
+          </div>
+          <ul className="mt-8 flex snap-x snap-mandatory scroll-px-6 gap-4 overflow-x-auto px-6 pb-2 [scrollbar-width:none] md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:px-0 [&::-webkit-scrollbar]:hidden">
+            {latestPosts.map((post) => (
+              <li key={post.href} className="w-[80%] shrink-0 snap-start md:w-auto">
+                <Link href={post.href} className="group block">
+                  <span className="relative block aspect-[1200/630] overflow-hidden bg-gray-100">
+                    <Image
+                      src={post.image}
+                      alt=""
+                      fill
+                      unoptimized={post.og}
+                      sizes="(min-width: 768px) 400px, 80vw"
+                      className="object-cover transition duration-500 group-hover:scale-105"
+                    />
+                  </span>
+                  <span className="mt-4 block text-xs font-bold uppercase tracking-[0.15em] text-red-700">{post.label}</span>
+                  <span className="mt-1.5 line-clamp-2 block text-lg font-bold leading-snug text-gray-950 group-hover:text-red-700">{post.title}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
 
-{/* LIÊN HỆ */}
-<section id="lien-he" className="bg-neutral-950 text-white">
-  <div className="mx-auto max-w-7xl px-6 py-12 md:py-20">
-    <p className="text-xs font-bold uppercase tracking-[0.25em] text-red-500">
-      Liên hệ
-    </p>
-
-    <h2 className="mt-2 text-3xl font-black tracking-tight md:text-5xl">
-      Lưu Hoàng Phúc
-    </h2>
-
-    <p className="mt-2 text-lg font-semibold text-gray-200">
-      Tư vấn Kinh doanh Mitsubishi
-    </p>
-
-    <p className="mt-4 max-w-2xl leading-7 text-gray-300">
-      Tư vấn mua xe Mitsubishi, báo giá, chương trình ưu đãi, hỗ trợ trả góp
-      và đăng ký lái thử tại khu vực Bình Dương.
-    </p>
-
-    <div className="mt-8 grid gap-4 md:grid-cols-2">
-      {/* HOTLINE */}
-      <div className="rounded-xl border border-gray-700 bg-neutral-900 p-6">
-        <p className="text-sm text-gray-400">
-          Hotline tư vấn
-        </p>
-
-        <a
-          href={siteConfig.contact.phoneUrl}
-          className="mt-2 block text-xl font-bold text-white transition hover:text-red-500"
-        >
-          {siteConfig.sales.phoneDisplay}
-        </a>
-
-        <a
-          href={siteConfig.contact.phoneUrl}
-          className="mt-5 block rounded bg-red-600 px-4 py-3 text-center font-semibold text-white transition hover:bg-red-700"
-        >
-          Gọi ngay
-        </a>
-      </div>
-
-      {/* ZALO */}
-      <div className="rounded-xl border border-gray-700 bg-neutral-900 p-6">
-        <p className="text-sm text-gray-400">
-          Zalo tư vấn
-        </p>
-
-        <p className="mt-2 text-xl font-bold">
-          {siteConfig.sales.phoneDisplay}
-        </p>
-
-        <a
-          href={siteConfig.contact.zaloUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-5 block rounded border border-blue-500 px-4 py-3 text-center font-semibold text-blue-400 transition hover:bg-blue-500 hover:text-white"
-        >
-          Mở Zalo
-        </a>
-      </div>
-    </div>
-
-    {/* SHOWROOM: nơi anh Phúc làm việc (cho từ khóa "mitsubishi bình dương", "moveo new city") */}
-    <div className="mt-8 grid gap-6 rounded-xl border border-gray-700 bg-neutral-900 p-6 md:grid-cols-[1fr_auto] md:items-center">
-      <div>
-        <h3 className="text-xl font-bold">
-          Showroom {siteConfig.dealer.name}
-        </h3>
-        <p className="mt-3 leading-7 text-gray-300">
-          Phúc làm việc tại showroom {siteConfig.dealer.name}, khu vực {siteConfig.dealer.salesArea}.
-          Anh chị có thể đến xem xe, lái thử và làm thủ tục mua xe trực tiếp tại showroom, hoặc
-          nhận báo giá, tư vấn trả góp qua điện thoại và Zalo.{" "}
-          <Link href="/mua-xe-mitsubishi-toan-quoc" className="font-semibold text-white underline hover:text-red-400">
-            Khách ở tỉnh khác
-          </Link>{" "}
-          vẫn được hỗ trợ đăng ký và giao xe tận nơi.
-        </p>
-        <dl className="mt-4 grid gap-2 text-sm text-gray-300 sm:grid-cols-[auto_1fr] sm:gap-x-4">
-          <dt className="font-semibold text-white">Địa chỉ</dt>
-          <dd>{siteConfig.dealer.address}</dd>
-          <dt className="font-semibold text-white">Giờ làm việc</dt>
-          <dd>
-            {siteConfig.hours.display}. {siteConfig.hours.afterHours}
-          </dd>
-        </dl>
-      </div>
-      <div className="flex flex-col gap-3 sm:flex-row md:flex-col">
-        <a
-          href="https://www.google.com/maps/dir/?api=1&destination=Mitsubishi+Motors+Moveo+New+City+Binh+Duong"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="rounded bg-white px-5 py-3 text-center font-semibold text-neutral-950 transition hover:bg-gray-200"
-        >
-          Chỉ đường đến showroom
-        </a>
-        <Link
-          href="/gioi-thieu"
-          className="rounded border border-gray-600 px-5 py-3 text-center font-semibold transition hover:border-white"
-        >
-          Về Lưu Hoàng Phúc
-        </Link>
-      </div>
-    </div>
-
-    <div className="mt-10 border-t border-gray-800 pt-6 text-sm text-gray-400">
-      {siteConfig.dealer.name} • Tư vấn Kinh doanh: {siteConfig.sales.name}
-    </div>
-  </div>
-</section>
+      {/* LIÊN HỆ: dải gọn (bản đồ chi tiết ở /gioi-thieu và /lien-he) */}
+      <section id="lien-he" className="bg-neutral-950 text-white">
+        <div className="mx-auto grid max-w-7xl gap-8 px-6 py-12 md:py-16 lg:grid-cols-[1fr_auto] lg:items-center">
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.25em] text-red-500">Liên hệ</p>
+            <h2 className="mt-2 text-3xl font-black tracking-tight md:text-4xl">
+              {sales.name} · Showroom {dealer.name}
+            </h2>
+            <p className="mt-4 max-w-3xl leading-7 text-gray-300">
+              Tư vấn mua xe Mitsubishi tại {dealer.salesArea}: báo giá, trả góp, lái thử, thủ tục đăng ký.{" "}
+              <Link href="/mua-xe-mitsubishi-toan-quoc" className="font-semibold text-white underline hover:text-red-400">
+                Khách ở tỉnh khác
+              </Link>{" "}
+              vẫn được hỗ trợ đăng ký và giao xe tận nơi.
+            </p>
+            <dl className="mt-5 grid gap-x-6 gap-y-1 text-sm text-gray-300 sm:grid-cols-[auto_1fr]">
+              <dt className="font-semibold text-white">Địa chỉ</dt>
+              <dd>{dealer.address}</dd>
+              <dt className="font-semibold text-white">Giờ làm việc</dt>
+              <dd>
+                {siteConfig.hours.display}. {siteConfig.hours.afterHours}
+              </dd>
+            </dl>
+          </div>
+          <div className="flex flex-wrap gap-3 lg:flex-col">
+            <a href={siteConfig.contact.phoneUrl} className="bg-red-600 px-6 py-3.5 text-center text-xs font-black uppercase tracking-[0.2em] transition hover:bg-red-700">
+              Gọi {sales.phoneDisplay}
+            </a>
+            <a
+              href={siteConfig.contact.zaloUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="border border-white/60 px-6 py-3.5 text-center text-xs font-black uppercase tracking-[0.2em] transition hover:bg-white hover:text-gray-950"
+            >
+              Nhắn Zalo
+            </a>
+            <a
+              href="https://www.google.com/maps/dir/?api=1&destination=Mitsubishi+Motors+Moveo+New+City+Binh+Duong"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="border border-white/60 px-6 py-3.5 text-center text-xs font-black uppercase tracking-[0.2em] transition hover:bg-white hover:text-gray-950"
+            >
+              Chỉ đường
+            </a>
+          </div>
+        </div>
+      </section>
     </main>
   );
 }

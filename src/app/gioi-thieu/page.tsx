@@ -155,17 +155,17 @@ export default function GioiThieuPage() {
             </p>
 
             {/* SỐ LIỆU NỔI BẬT */}
-            <dl className="mt-8 grid max-w-xl grid-cols-3 divide-x divide-neutral-800 rounded-2xl border border-neutral-800 bg-neutral-900/60">
+            <dl className="mt-8 grid max-w-xl grid-cols-3 divide-x divide-white/15 border-y border-white/15">
               {[
                 { value: `${sales.yearsOfExperience}`, suffix: "năm", label: "kinh nghiệm tư vấn" },
                 { value: sales.carsDelivered.replace(/^Gần\s*/, ""), prefix: "Gần", label: "xe đã bàn giao" },
                 { value: "24/7", label: "hỗ trợ ngoài giờ" },
               ].map((stat) => (
-                <div key={stat.label} className="flex flex-col-reverse px-3 py-4 text-center sm:px-5">
-                  <dt className="mt-1 text-xs leading-4 text-neutral-400 sm:text-sm">
+                <div key={stat.label} className="flex flex-col-reverse px-3 py-4 first:pl-0 sm:px-6">
+                  <dt className="mt-1 text-[11px] uppercase leading-4 tracking-[0.15em] text-neutral-400 sm:text-xs">
                     {stat.label}
                   </dt>
-                  <dd className="text-2xl font-extrabold tabular-nums sm:text-3xl">
+                  <dd className="text-2xl font-black tabular-nums sm:text-4xl">
                     {stat.prefix && (
                       <span className="mr-1 align-middle text-sm font-semibold text-neutral-400">
                         {stat.prefix}
@@ -186,7 +186,7 @@ export default function GioiThieuPage() {
               href={googleReviewsUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-6 inline-flex items-center gap-3 rounded-full border border-neutral-700 bg-neutral-900/70 px-4 py-2 text-sm transition hover:border-neutral-500"
+              className="mt-6 inline-flex items-center gap-3 text-sm transition hover:text-white"
             >
               <Stars />
               <span>
@@ -222,7 +222,7 @@ export default function GioiThieuPage() {
             </div>
           </div>
 
-          <div className="relative mx-auto aspect-[4/5] w-full max-w-sm self-end overflow-clip rounded-t-[2.5rem] bg-gradient-to-b from-neutral-200 to-neutral-100 lg:max-w-none">
+          <div className="relative mx-auto aspect-[4/5] w-full max-w-sm self-end overflow-clip border-b-4 border-red-600 bg-gradient-to-b from-neutral-200 to-neutral-100 lg:max-w-none">
             <Image
               src="/images/about/luu-hoang-phuc.jpg"
               alt={`${sales.name} – ${sales.title}`}
@@ -236,7 +236,7 @@ export default function GioiThieuPage() {
       </section>
 
       {/* VÌ SAO CHỌN PHÚC */}
-      <section className="mx-auto max-w-7xl px-6 py-16 md:py-20">
+      <section className="mx-auto max-w-7xl px-6 py-12 md:py-20">
         <p className="text-xs font-bold uppercase tracking-[0.25em] text-red-700">
           Vì sao khách hàng chọn Phúc
         </p>
@@ -244,13 +244,13 @@ export default function GioiThieuPage() {
           Mua xe nhẹ nhàng, rõ ràng và được chăm sóc lâu dài
         </h2>
 
-        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-8 grid grid-cols-2 gap-3 sm:mt-10 sm:gap-5 lg:grid-cols-4">
           {reasons.map((reason) => (
             <div
               key={reason.title}
-              className="rounded-2xl border border-neutral-200 p-6 transition hover:border-red-200 hover:shadow-lg"
+              className="rounded-2xl border border-neutral-200 p-4 transition hover:border-red-200 hover:shadow-lg sm:p-6"
             >
-              <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-red-50 text-red-700">
+              <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-red-50 text-red-700 sm:h-11 sm:w-11">
                 <svg
                   aria-hidden="true"
                   viewBox="0 0 24 24"
@@ -264,8 +264,8 @@ export default function GioiThieuPage() {
                   <path d={reason.icon} />
                 </svg>
               </span>
-              <h3 className="mt-5 text-lg font-bold">{reason.title}</h3>
-              <p className="mt-2 leading-7 text-neutral-600">{reason.text}</p>
+              <h3 className="mt-3 font-bold leading-snug sm:mt-5 sm:text-lg">{reason.title}</h3>
+              <p className="mt-2 text-sm leading-6 text-neutral-600 sm:text-base sm:leading-7">{reason.text}</p>
             </div>
           ))}
         </div>
@@ -273,7 +273,7 @@ export default function GioiThieuPage() {
 
       {/* QUY TRÌNH */}
       <section className="bg-neutral-50">
-        <div className="mx-auto max-w-7xl px-6 py-16 md:py-20">
+        <div className="mx-auto max-w-7xl px-6 py-12 md:py-20">
           <p className="text-xs font-bold uppercase tracking-[0.25em] text-red-700">
             Quy trình mua xe
           </p>
@@ -281,14 +281,14 @@ export default function GioiThieuPage() {
             4 bước để sở hữu xe Mitsubishi
           </h2>
 
-          <ol className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+          <ol className="mt-8 grid grid-cols-2 gap-3 sm:mt-10 sm:gap-5 lg:grid-cols-4">
             {steps.map((step, index) => (
-              <li key={step.title} className="relative rounded-2xl bg-white p-6 shadow-sm">
-                <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-red-600 text-sm font-extrabold tabular-nums text-white">
+              <li key={step.title} className="relative rounded-2xl bg-white p-4 shadow-sm sm:p-6">
+                <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-red-600 text-xs font-extrabold tabular-nums text-white sm:h-10 sm:w-10 sm:text-sm">
                   {String(index + 1).padStart(2, "0")}
                 </span>
-                <h3 className="mt-4 text-lg font-bold">{step.title}</h3>
-                <p className="mt-2 leading-7 text-neutral-600">{step.text}</p>
+                <h3 className="mt-3 font-bold leading-snug sm:mt-4 sm:text-lg">{step.title}</h3>
+                <p className="mt-2 text-sm leading-6 text-neutral-600 sm:text-base sm:leading-7">{step.text}</p>
               </li>
             ))}
           </ol>
@@ -296,7 +296,7 @@ export default function GioiThieuPage() {
       </section>
 
       {/* KHOẢNH KHẮC BÀN GIAO */}
-      <section className="mx-auto max-w-7xl px-6 py-16 md:py-20">
+      <section className="mx-auto max-w-7xl px-6 py-12 md:py-20">
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.25em] text-red-700">
@@ -327,12 +327,12 @@ export default function GioiThieuPage() {
           </div>
         </div>
 
-        <div className="mt-10 grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
+        <div className="mt-8 grid grid-cols-3 gap-2 sm:gap-3 md:mt-10 md:grid-cols-4 md:gap-4">
           {deliveryPhotos.map((photo, index) => (
             <div
               key={photo.src}
-              className={`relative overflow-clip rounded-2xl bg-neutral-100 ${
-                index === 0 ? "col-span-2 row-span-2 aspect-square md:aspect-auto" : "aspect-[3/4]"
+              className={`relative overflow-clip rounded-xl bg-neutral-100 md:rounded-2xl ${
+                index === 0 ? "col-span-2 row-span-2" : "aspect-[3/4]"
               }`}
             >
               <Image
@@ -341,8 +341,8 @@ export default function GioiThieuPage() {
                 fill
                 sizes={
                   index === 0
-                    ? "(min-width: 768px) 50vw, 100vw"
-                    : "(min-width: 768px) 25vw, 50vw"
+                    ? "(min-width: 768px) 50vw, 66vw"
+                    : "(min-width: 768px) 25vw, 33vw"
                 }
                 className="object-cover transition duration-500 hover:scale-105"
               />
@@ -353,7 +353,7 @@ export default function GioiThieuPage() {
 
       {/* KHÁCH HÀNG NÓI GÌ */}
       <section className="bg-neutral-950 text-white">
-        <div className="mx-auto max-w-7xl px-6 py-16 md:py-20">
+        <div className="mx-auto max-w-7xl px-6 py-12 md:py-20">
           <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <div>
               <p className="text-xs font-bold uppercase tracking-[0.25em] text-red-500">
@@ -380,11 +380,16 @@ export default function GioiThieuPage() {
             </a>
           </div>
 
-          <div className="mt-10 grid gap-5 lg:grid-cols-3">
+          <div
+            role="region"
+            aria-label="Nhận xét của khách hàng"
+            tabIndex={0}
+            className="-mx-6 mt-8 flex snap-x snap-mandatory scroll-px-6 gap-4 overflow-x-auto px-6 pb-2 [scrollbar-width:none] md:mt-10 lg:mx-0 lg:grid lg:grid-cols-3 lg:gap-5 lg:overflow-visible lg:px-0 lg:pb-0 [&::-webkit-scrollbar]:hidden"
+          >
             {testimonials.map((item) => (
               <figure
                 key={item.name}
-                className="flex flex-col rounded-2xl border border-neutral-800 bg-neutral-900/60 p-7"
+                className="flex w-[85%] shrink-0 snap-start flex-col rounded-2xl border border-neutral-800 bg-neutral-900/60 p-6 sm:w-[55%] lg:w-auto lg:p-7"
               >
                 <Stars />
                 <blockquote className="mt-4 flex-1 leading-7 text-neutral-200">
