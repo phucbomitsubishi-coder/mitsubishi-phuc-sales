@@ -235,6 +235,7 @@ Alias import: `@/` → `src/`.
     (`src/components/PageSchema.tsx`, xuất Article/WebPage có tác giả `#person` + BreadcrumbList). Đã có ở bảng giá, `/tu-van/*`, `/du-toan/*`.
     Khi sửa nội dung bài tư vấn hoặc so sánh, nhớ cập nhật `dateModified`.
   - **Nhớ thêm trang vào `src/app/sitemap.ts`**.
+- **Ảnh KHÔNG qua tối ưu của Vercel** (21/10/2026): `next.config.ts` có `images: { unoptimized: true }` vì gói Hobby hết hạn mức Image Optimization (/_next/image trả 402, ảnh mới không hiện). `<Image>` vẫn dùng như cũ nhưng trình duyệt tải thẳng file gốc, nên ảnh trong public/ PHẢI nén trước (~1200–1600px, < 300 KB, dùng sharp). `npm run check-site -- https://www.mitsubishiauto.vn` bắt được lỗi 402 nếu tái diễn.
 - Next 16: thuộc tính `priority` của `<Image>` đã bị deprecate. Ảnh lớn ở đầu trang (LCP) dùng `preload`, các ảnh khác ở đầu trang dùng `loading="eager"`.
 - Thông tin liên hệ **luôn lấy từ `siteConfig`**, không ghi cứng số điện thoại, Zalo hay email trong trang
   (`siteConfig.contact.phoneUrl/zaloUrl/emailUrl`, `siteConfig.sales.phoneDisplay/email`). Riêng địa chỉ tách theo từng phần trong JSON-LD ở `layout.tsx` vẫn ghi cứng.

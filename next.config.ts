@@ -1,6 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Tắt tối ưu ảnh của Vercel (21/10/2026): gói Hobby hết hạn mức Image Optimization, /_next/image trả 402
+  // làm ảnh mới không hiện trên web thật. Ảnh trong public/ đã nén sẵn (~1200–1600px, < 300 KB) nên
+  // phục vụ thẳng file gốc qua CDN. Muốn bật lại (khi nâng gói Pro) thì xóa dòng này.
+  images: { unoptimized: true },
   async headers() {
     return [
       {
