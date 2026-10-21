@@ -23,7 +23,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     .filter((article) => !isRepublishedArticle(article))
     .map((article) => ({
   url: `${baseUrl}/tin-tuc/${article.slug}`,
-  lastModified: new Date(`${article.publishedAt}T00:00:00+07:00`),
+  lastModified: new Date(`${article.updatedAt ?? article.publishedAt}T00:00:00+07:00`),
   changeFrequency: "monthly" as const,
   priority: 0.7,
 }));

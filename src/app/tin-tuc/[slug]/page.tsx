@@ -97,6 +97,7 @@ export default async function NewsDetailPage({
   headline: article.title,
   description: article.excerpt,
   datePublished: article.publishedAt,
+  dateModified: article.updatedAt ?? article.publishedAt,
   image: `https://www.mitsubishiauto.vn${article.image}`,
   mainEntityOfPage: {
     "@type": "WebPage",
@@ -161,6 +162,7 @@ const breadcrumbSchema = {
 
               <span className="text-gray-400">
                 {formatDate(article.publishedAt)}
+                {article.updatedAt && ` · Cập nhật ${formatDate(article.updatedAt)}`}
               </span>
             </div>
 

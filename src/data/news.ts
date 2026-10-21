@@ -33,6 +33,9 @@ export type NewsArticle = {
   // Tiêu đề ngắn (~60 ký tự) cho Google; không có thì dùng `title`
   seoTitle?: string;
 
+  // Ngày sửa nội dung quan trọng (YYYY-MM-DD): hiện "Cập nhật", dateModified trong schema, lastModified trong sitemap
+  updatedAt?: string;
+
   // true: bài đã được viết lại bằng lời của mình (chỉ tham khảo `source`),
   // nên được Google lập chỉ mục. Xem isRepublishedArticle trong src/lib/news.ts.
   originalContent?: boolean;
@@ -464,18 +467,20 @@ export const newsArticles: NewsArticle[] = [
   {
     id: "news-1790842128387",
 
-    title: "Mitsubishi Pajero 2026 ra mắt Đông Nam Á: 3 phiên bản, máy dầu 2.4L 204 mã lực",
+    title: "Mitsubishi Pajero 2026 mở bán tại Thái Lan, giá từ 1,499 triệu baht: 3 phiên bản, máy dầu 2.4L 204 mã lực",
 
-    seoTitle: "Pajero 2026 ra mắt Đông Nam Á: 3 bản, máy dầu 2.4L",
+    seoTitle: "Pajero 2026 mở bán Thái Lan, giá từ 1,499 triệu baht",
 
     slug: "mitsubishi-pajero-2026-se-ra-mat-dong-nam-a-vao-thang-10-co-3-phien-ban-may-diesel-204-ma-luc",
 
     category: "Tin Mitsubishi",
 
     excerpt:
-      "Pajero trở lại với vai trò SUV 7 chỗ cao cấp nhất của Mitsubishi tại Đông Nam Á, dùng chung nền tảng với Triton. Tổng hợp thông số, trang bị từng phiên bản và khả năng về Việt Nam.",
+      "Pajero thế hệ mới mở bán tại Thái Lan từ 19/10/2026, giá 1,499 đến 1,999 triệu baht. Tổng hợp giá, thông số, trang bị từng phiên bản và khả năng về Việt Nam.",
 
     publishedAt: "2026-10-01",
+
+    updatedAt: "2026-10-21",
 
     image: "/images/news/mitsubishi-pajero-2026-se-ra-mat-dong-nam-a-vao-thang-10-co-3-phien-ban-may-diesel-204-ma-luc/official-cover.jpg",
 
@@ -486,7 +491,8 @@ export const newsArticles: NewsArticle[] = [
         heading: "Pajero trở lại, đứng trên Pajero Sport",
 
         paragraphs: [
-          "Mitsubishi Pajero thế hệ mới dự kiến ra mắt tại Thái Lan ngày 19/10/2026 với 3 phiên bản: GLS 2WD, GSR 2WD và Super Exceed 4WD. Giá dự kiến tại Thái Lan từ 1,6 đến 1,9 triệu baht, quy đổi khoảng 1,23 đến 1,47 tỷ đồng. Đây là giá tại Thái Lan, chưa phải giá bán tại Việt Nam.",
+          "Mitsubishi Pajero thế hệ mới đã mở bán tại Thái Lan từ ngày 19/10/2026 với 3 phiên bản. Giá chính thức theo bảng giá của Mitsubishi Motors Thái Lan: GLS 2WD 1.499.000 baht, GSR 2WD 1.699.000 baht và Super Exceed 4WD 1.999.000 baht. Bản GLS thấp hơn mức dự đoán trước đó (khoảng 1,6 triệu baht).",
+          "Quy đổi tham khảo theo tỷ giá chuyển khoản của Vietcombank ngày 21/10/2026 (755 đồng/baht), giá tại Thái Lan tương đương khoảng 1,13 tỷ đồng (GLS), 1,28 tỷ đồng (GSR) và 1,51 tỷ đồng (Super Exceed). Đây là giá bán tại Thái Lan, chưa phải giá bán tại Việt Nam: giá Việt Nam (nếu xe về) còn phụ thuộc thuế, phí và chính sách của Mitsubishi Motors Việt Nam.",
           "Xe dùng khung gầm rời (body-on-frame) phát triển từ nền tảng Triton thế hệ mới, được gia cố cho một mẫu SUV cỡ lớn. Kích thước dài 4.920 mm, rộng 1.925 mm, cao 1.900–1.910 mm, chiều dài cơ sở 2.870 mm, khoảng sáng gầm 230 mm. Góc tiếp cận, góc vượt đỉnh dốc và góc thoát lần lượt là 30,4, 22,6 và 25,8 độ, phù hợp với nhu cầu đi đường xấu.",
         ],
         images: [
@@ -549,7 +555,7 @@ export const newsArticles: NewsArticle[] = [
         heading: "Khi nào Pajero về Việt Nam?",
 
         paragraphs: [
-          "Pajero mới được Mitsubishi ra mắt toàn cầu ngày 2/9/2026 và sản xuất tại Thái Lan. Theo kế hoạch của hãng, xe bán tại Thái Lan trước, sau đó là Nhật Bản và Úc trong năm tài chính 2026, rồi mở rộng ra khoảng 100 quốc gia, gồm cả khu vực ASEAN, từ năm tài chính 2027.",
+          "Pajero mới được Mitsubishi ra mắt toàn cầu ngày 2/9/2026 và sản xuất tại Thái Lan. Thái Lan là thị trường mở bán đầu tiên (từ 19/10/2026). Theo kế hoạch của hãng, sau Thái Lan là Nhật Bản và Úc trong năm tài chính 2026, rồi mở rộng ra khoảng 100 quốc gia, gồm cả khu vực ASEAN, từ năm tài chính 2027.",
           "Mitsubishi Motors Việt Nam chưa công bố kế hoạch bán Pajero thế hệ mới. Nếu về Việt Nam, Pajero sẽ đứng trên Destinator (giá niêm yết 780–855 triệu đồng) trong dải SUV 7 chỗ của Mitsubishi, dành cho khách cần xe khung gầm rời, máy dầu và khả năng đi địa hình thật sự.",
           "Nếu bạn quan tâm, hãy để lại số điện thoại ở thẻ Pajero \"Sắp ra mắt\" trên trang chủ. Lưu Hoàng Phúc sẽ báo ngay khi có giá và lịch mở bán chính thức.",
         ],

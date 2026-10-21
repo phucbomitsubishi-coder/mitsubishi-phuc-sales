@@ -28,9 +28,8 @@ const province =
 const vnd = (value: number) => `${value.toLocaleString("vi-VN")} đ`;
 
 // "Ưu đãi tương đương 100% phí trước bạ (~ 78 triệu VNĐ)" -> "100% phí trước bạ (~ 78 triệu VNĐ)"
-function benefitText(label: string) {
-  return label.replace(/^Ưu đãi tương đương\s*/i, "").trim();
-}
+// (tiêu đề cột đã ghi "tương đương", tránh lặp ở mọi dòng)
+const benefitText = (label: string) => label.replace(/^Ưu đãi tương đương\s*/i, "").trim();
 
 const priceList = cars.map((car) => {
   const carPromotion = currentPromotion.cars.find(
@@ -55,6 +54,8 @@ const priceList = cars.map((car) => {
 
     return {
       name: variant.name,
+      // Năm sản xuất theo bài khuyến mãi MMV (không có thì để trống)
+      modelYear: promotion?.modelYear ?? "",
       price: variant.price,
       benefits,
       promotionValue,
@@ -63,8 +64,12 @@ const priceList = cars.map((car) => {
     };
   });
 
+  // Mọi phiên bản cùng năm sản xuất thì ghi 1 lần ở đầu xe, bỏ cột Năm SX
+  const years = [...new Set(variants.map((variant) => variant.modelYear))];
+
   return {
     car,
+    commonYear: years.length === 1 ? years[0] : null,
     shortName: car.name.replace(/^Mitsubishi /, ""),
     minPrice: Math.min(...variants.map((variant) => variant.price)),
     maxPromotion: Math.max(0, ...variants.map((variant) => variant.promotionValue)),
@@ -105,138 +110,111 @@ export default function PriceListPage() {
               Giá niêm yết, ưu đãi trong tháng và giá lăn bánh dự kiến của{" "}
               {priceList.length} dòng xe Mitsubishi đang bán tại Việt Nam. Giá lăn
               bánh tính cho xe đăng ký tại TP. Hồ Chí Minh (gồm cả khu vực Bình
-              Dương cũ), biển trắng.
+              Dương cũ), biển trắng. Mẫu xe có giá khởi điểm thấp nhất hiện nay là{" "}
+              {cheapest.car.name}, từ {formatMillion(cheapest.minPrice)} đồng.
             </p>
 
-            {/* Mục lục nhanh */}
-            <nav aria-label="Chọn dòng xe" className="mt-6 flex flex-wrap gap-2">
-              {priceList.map(({ car, shortName }) => (
-                <a
-                  key={car.id}
-                  href={`#${car.id}`}
-                  className="rounded-full border border-neutral-700 px-4 py-1.5 text-sm font-semibold text-white transition hover:border-red-500 hover:text-red-400"
-                >
-                  {shortName}
+          </div>
+        </section>
+
+        {/* TÓM TẮT + MỤC LỤC: mỗi xe 1 thẻ (giá từ, ưu đãi đến), bấm để tới bảng của xe đó */}
+        <section className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+          <h2 className="sr-only">Tóm tắt giá các dòng xe</h2>
+          <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-6">
+            {priceList.map(({ car, shortName, minPrice, maxPromotion }) => (
+              <li key={car.id}>
+                <a href={`#${car.id}`} className="group block h-full border border-gray-200 p-3 transition hover:border-gray-950">
+                  <span className="relative block h-16 sm:h-20">
+                    <Image src={featuredImages[car.id] ?? car.image} alt="" fill sizes="200px" className="object-contain" />
+                  </span>
+                  <span className="mt-2 block text-sm font-black uppercase tracking-wide group-hover:text-red-700">{shortName}</span>
+                  <span className="block text-sm text-gray-700">
+                    Từ <span className="font-semibold tabular-nums text-gray-950">{formatMillion(minPrice)}</span>
+                  </span>
+                  {maxPromotion > 0 && (
+                    <span className="block text-xs font-bold text-red-700">Ưu đãi đến {formatMillion(maxPromotion)}</span>
+                  )}
                 </a>
-              ))}
-            </nav>
-          </div>
+              </li>
+            ))}
+          </ul>
         </section>
 
-        {/* BẢNG TÓM TẮT */}
-        <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-bold">Tóm tắt giá các dòng xe</h2>
-          <p className="mt-2 text-gray-600">
-            Mẫu xe có giá khởi điểm thấp nhất hiện nay là {cheapest.car.name}, từ{" "}
-            {formatMillion(cheapest.minPrice)} đồng.
-          </p>
-
-          <div tabIndex={0} role="region" aria-label="Bảng tóm tắt giá các dòng xe" className="mt-5 overflow-x-auto rounded-xl border border-gray-200">
-            <table className="w-full min-w-[560px] text-left text-sm">
-              <thead className="bg-gray-50 text-gray-700">
-                <tr>
-                  <th scope="col" className="px-4 py-3 font-semibold">Dòng xe</th>
-                  <th scope="col" className="px-4 py-3 font-semibold">Loại xe</th>
-                  <th scope="col" className="px-4 py-3 text-right font-semibold">Giá từ</th>
-                  <th scope="col" className="px-4 py-3 text-right font-semibold">
-                    Ưu đãi tối đa
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-200">
-                {priceList.map(({ car, minPrice, maxPromotion, variants }) => (
-                  <tr key={car.id}>
-                    <th scope="row" className="px-4 py-3 font-semibold">
-                      <a href={`#${car.id}`} className="hover:text-red-700">
-                        {car.name}
-                      </a>
-                      <span className="block text-xs font-normal text-gray-600">
-                        {variants.length} phiên bản
+        {/* CHI TIẾT TỪNG DÒNG XE: bảng kiểu bài khuyến mãi MMV (21/10/2026): Phiên bản | Năm SX | Giá niêm yết |
+            Ưu đãi (từng khoản trong ô) | Lăn bánh sau ưu đãi; điện thoại mỗi phiên bản một khối dọc */}
+        <div className="border-t border-gray-200 bg-white">
+          <div className="mx-auto max-w-7xl divide-y divide-gray-200 px-4 sm:px-6 lg:px-8">
+            {priceList.map(({ car, shortName, minPrice, maxPromotion, commonYear, variants }) => (
+              <section key={car.id} id={car.id} className="scroll-mt-28 py-8 md:py-12">
+                <div className="grid items-center gap-4 md:grid-cols-[1fr_240px] md:gap-8">
+                  <div>
+                    <h2>
+                      <span className="block text-xs font-bold uppercase tracking-[0.25em] text-red-700">Giá xe Mitsubishi</span>{" "}
+                      <span className="mt-1 block text-3xl font-black uppercase tracking-tight md:text-4xl">{shortName}</span>
+                    </h2>
+                    <p className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-sm text-gray-700">
+                      <span>{variants.length} phiên bản</span>
+                      {commonYear && <span>Sản xuất {commonYear}</span>}
+                      <span>
+                        Từ <strong className="tabular-nums text-gray-950">{vnd(minPrice)}</strong>
                       </span>
-                    </th>
-                    <td className="px-4 py-3 text-gray-700">
-                      {car.category === "Pickup" ? "Bán tải" : car.category}
-                    </td>
-                    <td className="px-4 py-3 text-right font-semibold tabular-nums">
-                      {formatMillion(minPrice)}
-                    </td>
-                    <td className="px-4 py-3 text-right tabular-nums text-red-700">
-                      {maxPromotion > 0 ? formatMillion(maxPromotion) : "—"}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </section>
-
-        {/* CHI TIẾT TỪNG DÒNG XE */}
-        <div className="bg-gray-50">
-          <div className="mx-auto max-w-7xl space-y-8 px-4 py-10 sm:px-6 lg:px-8">
-            {priceList.map(({ car, shortName, minPrice, variants }) => (
-              <section
-                key={car.id}
-                id={car.id}
-                className="scroll-mt-24 rounded-2xl border border-gray-200 bg-white p-5 shadow-sm sm:p-8"
-              >
-                <div className="grid gap-6 md:grid-cols-[220px_1fr] md:items-center">
-                  <div className="relative h-32 md:h-36">
+                      {maxPromotion > 0 && <strong className="text-red-700">Ưu đãi đến {formatMillion(maxPromotion)}</strong>}
+                    </p>
+                  </div>
+                  <div className="relative order-first h-24 md:order-none md:h-28">
                     <Image
                       src={featuredImages[car.id] ?? car.image}
                       alt={car.name}
                       fill
-                      sizes="(min-width: 768px) 220px, 300px"
-                      className="object-contain"
+                      sizes="240px"
+                      className="object-contain object-left md:object-right"
                     />
-                  </div>
-
-                  <div>
-                    <h2 className="text-2xl font-bold">Giá xe {car.name}</h2>
-                    <p className="mt-2 leading-7 text-gray-600">
-                      {car.name} có {variants.length} phiên bản, giá niêm yết từ{" "}
-                      {vnd(minPrice)}. {car.shortDescription}
-                    </p>
                   </div>
                 </div>
 
-                <div tabIndex={0} role="region" aria-label={`Bảng giá ${car.name}`} className="mt-6 overflow-x-auto rounded-xl border border-gray-200">
-                  <table className="w-full min-w-[640px] text-left text-sm">
-                    <thead className="bg-gray-50 text-gray-700">
+                {/* Máy tính, tablet: bảng */}
+                <div tabIndex={0} role="region" aria-label={`Bảng giá ${car.name}`} className="mt-6 hidden overflow-x-auto border border-gray-200 md:block">
+                  <table className="w-full text-left text-sm">
+                    <thead className="bg-gray-950 text-xs uppercase tracking-wider text-white">
                       <tr>
-                        <th scope="col" className="px-4 py-3 font-semibold">Phiên bản</th>
-                        <th scope="col" className="px-4 py-3 text-right font-semibold">
-                          Giá niêm yết
-                        </th>
-                        <th scope="col" className="px-4 py-3 text-right font-semibold">
-                          Lăn bánh TP.HCM
-                        </th>
-                        <th scope="col" className="px-4 py-3 text-right font-semibold">
-                          Ưu đãi tháng {promotionMonthLabel}
-                        </th>
-                        <th scope="col" className="px-4 py-3 text-right font-semibold">
-                          Lăn bánh sau ưu đãi*
-                        </th>
+                        <th scope="col" className="px-4 py-3 font-bold">Phiên bản</th>
+                        {!commonYear && <th scope="col" className="px-4 py-3 font-bold">Năm SX</th>}
+                        <th scope="col" className="px-4 py-3 text-right font-bold">Giá niêm yết</th>
+                        <th scope="col" className="px-4 py-3 font-bold">Ưu đãi tương đương (tháng {promotionMonthLabel})</th>
+                        <th scope="col" className="px-4 py-3 text-right font-bold">Lăn bánh sau ưu đãi*</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-200">
                       {variants.map((variant) => (
-                        <tr key={variant.name}>
-                          <th scope="row" className="px-4 py-3 font-semibold">
-                            {variant.name}
-                          </th>
-                          <td className="px-4 py-3 text-right tabular-nums">
-                            {vnd(variant.price)}
+                        <tr key={variant.name} className="align-top">
+                          <th scope="row" className="px-4 py-4 font-bold">{variant.name}</th>
+                          {!commonYear && <td className="px-4 py-4 tabular-nums text-gray-700">{variant.modelYear}</td>}
+                          <td className="whitespace-nowrap px-4 py-4 text-right font-semibold tabular-nums">{vnd(variant.price)}</td>
+                          <td className="px-4 py-4">
+                            {variant.benefits.length > 0 ? (
+                              variant.benefits.length === 1 ? (
+                                <span className="font-bold text-red-700">{benefitText(variant.benefits[0].label)}</span>
+                              ) : (
+                                <>
+                                  <span className="block font-bold text-red-700">Tổng ~ {formatMillion(variant.promotionValue)}</span>
+                                  <ul className="mt-1 space-y-0.5 text-gray-700">
+                                    {variant.benefits.map((benefit) => (
+                                      <li key={benefit.label}>{benefitText(benefit.label)}</li>
+                                    ))}
+                                  </ul>
+                                </>
+                              )
+                            ) : (
+                              <span className="text-gray-600">—</span>
+                            )}
                           </td>
-                          <td className="px-4 py-3 text-right tabular-nums text-gray-700">
-                            {vnd(variant.onRoadPrice)}
-                          </td>
-                          <td className="px-4 py-3 text-right tabular-nums text-red-700">
-                            {variant.promotionValue > 0
-                              ? `− ${vnd(variant.promotionValue)}`
-                              : "—"}
-                          </td>
-                          <td className="px-4 py-3 text-right font-bold tabular-nums">
-                            {vnd(variant.onRoadAfterPromotion)}
+                          <td className="whitespace-nowrap px-4 py-4 text-right">
+                            <span className="block text-base font-black tabular-nums">{vnd(variant.onRoadAfterPromotion)}</span>
+                            {variant.promotionValue > 0 && (
+                              <span className="mt-0.5 block text-xs text-gray-600">
+                                Chưa trừ ưu đãi: <span className="tabular-nums">{vnd(variant.onRoadPrice)}</span>
+                              </span>
+                            )}
                           </td>
                         </tr>
                       ))}
@@ -244,47 +222,60 @@ export default function PriceListPage() {
                   </table>
                 </div>
 
-                {variants.some((variant) => variant.benefits.length > 0) && (
-                  <div className="mt-5">
-                    <h3 className="font-bold">
-                      Ưu đãi {shortName} tháng {promotionMonthLabel}
-                    </h3>
-                    <ul className="mt-2 space-y-1.5 text-sm leading-6 text-gray-700">
-                      {variants
-                        .filter((variant) => variant.benefits.length > 0)
-                        .map((variant) => (
-                          <li key={variant.name}>
-                            <span className="font-semibold text-gray-900">
-                              {variant.name}:
-                            </span>{" "}
-                            {variant.benefits
-                              .map((benefit) => benefitText(benefit.label))
-                              .join("; ")}
-                          </li>
-                        ))}
-                    </ul>
-                  </div>
-                )}
+                {/* Điện thoại: mỗi phiên bản một khối */}
+                <ul className="mt-6 divide-y divide-gray-200 border-y border-gray-200 md:hidden">
+                  {variants.map((variant) => (
+                    <li key={variant.name} className="py-4">
+                      <div className="flex items-baseline justify-between gap-3">
+                        <h3 className="font-bold">
+                          {variant.name}
+                          {!commonYear && variant.modelYear && <span className="ml-1.5 text-sm font-normal text-gray-600">{variant.modelYear}</span>}
+                        </h3>
+                        <span className="font-semibold tabular-nums">{vnd(variant.price)}</span>
+                      </div>
+                      {variant.benefits.length > 0 && (
+                        <div className="mt-2 text-sm leading-6">
+                          {variant.benefits.length === 1 ? (
+                            <p className="font-bold text-red-700">Ưu đãi tương đương {benefitText(variant.benefits[0].label)}</p>
+                          ) : (
+                            <>
+                              <p className="font-bold text-red-700">Ưu đãi tương đương ~ {formatMillion(variant.promotionValue)}</p>
+                              <ul className="text-gray-700">
+                                {variant.benefits.map((benefit) => (
+                                  <li key={benefit.label}>{benefitText(benefit.label)}</li>
+                                ))}
+                              </ul>
+                            </>
+                          )}
+                        </div>
+                      )}
+                      <p className="mt-2 flex items-baseline justify-between gap-3 bg-gray-50 px-3 py-2 text-sm">
+                        <span className="text-gray-700">Lăn bánh TP.HCM sau ưu đãi*</span>
+                        <span className="text-base font-black tabular-nums">{vnd(variant.onRoadAfterPromotion)}</span>
+                      </p>
+                    </li>
+                  ))}
+                </ul>
 
-                <div className="mt-6 flex flex-wrap gap-3">
+                <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3">
                   <Link
                     href={`/?car=${encodeURIComponent(car.name)}&nguon=Bang-gia#bao-gia`}
-                    className="rounded-lg bg-red-600 px-5 py-2.5 font-semibold text-white transition hover:bg-red-700"
+                    className="bg-red-600 px-5 py-3 text-xs font-black uppercase tracking-[0.18em] text-white transition hover:bg-red-700"
                   >
                     Nhận báo giá {shortName}
                   </Link>
                   <Link
                     href={`/xe/${car.slug}`}
-                    className="rounded-lg border border-gray-300 px-5 py-2.5 font-semibold text-gray-900 transition hover:border-red-600 hover:text-red-700"
+                    className="text-sm font-bold text-gray-950 underline-offset-4 hover:text-red-700 hover:underline"
                   >
-                    Thông số và hình ảnh {shortName}
+                    Xem chi tiết {shortName} →
                   </Link>
                 </div>
               </section>
             ))}
 
             {upcomingCars.length > 0 && (
-              <section className="rounded-2xl border border-dashed border-gray-300 bg-white p-5 sm:p-8">
+              <section className="my-10 rounded-2xl border border-dashed border-gray-300 bg-white p-5 sm:p-8">
                 <h2 className="text-2xl font-bold">Mẫu xe sắp ra mắt</h2>
                 <p className="mt-2 leading-7 text-gray-600">
                   {upcomingCars.map((car) => car.name).join(" và ")} chưa được
@@ -338,7 +329,7 @@ export default function PriceListPage() {
             </p>
           </div>
 
-          <div className="mt-8 rounded-2xl bg-neutral-950 p-6 text-white sm:p-8">
+          <div className="mt-8 bg-neutral-950 p-6 text-white sm:p-8">
             <h2 className="text-xl font-bold sm:text-2xl">
               Cần báo giá chính xác cho phiên bản bạn chọn?
             </h2>
@@ -349,7 +340,7 @@ export default function PriceListPage() {
             <div className="mt-5 flex flex-wrap gap-3">
               <a
                 href={contact.phoneUrl}
-                className="rounded-lg bg-red-600 px-5 py-2.5 font-semibold text-white transition hover:bg-red-700"
+                className="bg-red-600 px-5 py-3 text-xs font-black uppercase tracking-[0.18em] text-white transition hover:bg-red-700"
               >
                 Gọi {sales.phoneDisplay}
               </a>
@@ -357,7 +348,7 @@ export default function PriceListPage() {
                 href={contact.zaloUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-lg border border-neutral-600 px-5 py-2.5 font-semibold text-white transition hover:border-white"
+                className="border border-white/60 px-5 py-3 text-xs font-black uppercase tracking-[0.18em] text-white transition hover:bg-white hover:text-gray-950"
               >
                 Nhắn Zalo
               </a>
