@@ -304,10 +304,10 @@ export default function Home() {
             {latestPosts.map((post) => (
               <li key={post.href} className="w-[80%] shrink-0 snap-start md:w-auto">
                 <Link href={post.href} className="group block">
-                  <span className="relative block aspect-[1200/630] overflow-hidden bg-gray-100">
+                  <span aria-hidden="true" className="relative block aspect-[1200/630] overflow-hidden bg-gray-100">
                     <Image
                       src={post.image}
-                      alt=""
+                      alt={post.title}
                       fill
                       unoptimized={post.og}
                       sizes="(min-width: 768px) 400px, 80vw"

@@ -84,7 +84,8 @@ export default function HeroShowroom({ cars, heading, kicker }: { cars: Showroom
             <Image
               key={item.id}
               src={item.mobilePoster}
-              alt=""
+              alt={item.name}
+              aria-hidden={i !== index}
               fill
               preload={i === 0}
               sizes="100vw"
@@ -99,7 +100,7 @@ export default function HeroShowroom({ cars, heading, kicker }: { cars: Showroom
       <div className="absolute inset-0 -z-10 hidden md:block">
         {cars.map((item, i) =>
           i === 0 || pageLoaded ? (
-            <Image key={item.id} src={item.poster} alt="" fill sizes="100vw" className={`object-cover ${fade(i)}`} />
+            <Image key={item.id} src={item.poster} alt={item.name} aria-hidden={i !== index} fill sizes="100vw" className={`object-cover ${fade(i)}`} />
           ) : null
         )}
         {canPlayVideo && car.video && (

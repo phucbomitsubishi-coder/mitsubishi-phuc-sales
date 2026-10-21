@@ -153,14 +153,14 @@ export default function CarLineup({ cars, needs }: { cars: LineupCar[]; needs: {
               >
                 {car.hoverBg && (
                   <span aria-hidden="true" className="absolute inset-0 opacity-0 transition duration-500 group-hover:opacity-100">
-                    <Image src={car.hoverBg} alt="" fill sizes="(min-width: 1024px) 420px, 46vw" className="object-cover" />
+                    <Image src={car.hoverBg} alt={`${car.name} – ảnh nền`} fill sizes="(min-width: 1024px) 420px, 46vw" className="object-cover" />
                     <span className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
                   </span>
                 )}
                 <div className={`relative mx-auto h-36 w-full transition duration-500 sm:h-44 lg:h-52 ${isActive ? "scale-100 opacity-100" : "scale-90 opacity-35 group-hover:scale-100 group-hover:opacity-100"}`}>
                   <Image
                     src={car.sideImage ?? car.image}
-                    alt={clone ? "" : car.name}
+                    alt={car.name}
                     fill
                     sizes="(min-width: 1024px) 420px, (min-width: 640px) 46vw, 78vw"
                     className="object-contain"

@@ -19,7 +19,7 @@ export default function HandoverStrip() {
           >
             <Image
               src={photo.src}
-              alt={index < photos.length ? photo.alt : ""}
+              alt={photo.alt}
               fill
               sizes="(min-width: 640px) 208px, 160px"
               className="object-cover"

@@ -16,6 +16,7 @@
     "sync-accessories": "node scripts/sync-accessories.mjs",
     "indexnow": "node scripts/indexnow.mjs",
     "check-site": "node scripts/check-site.mjs",
+    "compress-images": "node scripts/compress-images.mjs",
     "compare-images": "node scripts/make-compare-images.mjs",
     "sync-dealer-promos": "node scripts/sync-dealer-promos.mjs"
   },
