@@ -9,7 +9,7 @@ import { siteConfig } from "@/config/site";
 // Bảo hành mở rộng (21/10/2026). Số liệu đối chiếu trang MMV:
 // https://www.mitsubishi-motors.com.vn/tin-tuc/bao-hanh-mo-rong-n152372.html
 // MMV đổi giá hoặc gói thì sửa mảng prices + cập nhật dateModified bên dưới.
-// Destinator, Xpander Cross không có trong bảng MMV: KHÔNG tự đoán giá. Anh Phúc xác nhận (21/10/2026): giá Triton là cho
+// Destinator không có trong bảng MMV: KHÔNG tự đoán giá. Anh Phúc xác nhận (21–22/10/2026): Xpander Cross dùng chung gói Xpander; giá Triton là cho
 // Triton thế hệ trước; All-New Triton (2024) và Destinator có bảo hành tiêu chuẩn 5 năm/150.000 km nên chưa áp dụng gói mở rộng.
 export const metadata: Metadata = createPageMetadata({
   title: "Bảo hành mở rộng Mitsubishi: gói, giá, điều kiện mua",
@@ -23,7 +23,7 @@ const sourceUrl = "https://www.mitsubishi-motors.com.vn/tin-tuc/bao-hanh-mo-rong
 // Giá chưa gồm VAT (đồng): [1 năm cơ bản, 1 năm cao cấp, 2 năm cơ bản, 2 năm cao cấp]
 const prices: { model: string; values: [number, number, number, number]; note?: string }[] = [
   { model: "Attrage", values: [1_600_000, 3_000_000, 3_100_000, 6_000_000] },
-  { model: "Xpander", values: [1_800_000, 3_500_000, 3_600_000, 7_000_000] },
+  { model: "Xpander, Xpander Cross", values: [1_800_000, 3_500_000, 3_600_000, 7_000_000], note: "Xpander Cross dùng chung gói và giá của Xpander." },
   { model: "Xforce", values: [2_000_000, 3_800_000, 4_000_000, 7_400_000] },
   {
     model: "Triton",
@@ -195,13 +195,10 @@ export default function ExtendedWarrantyPage() {
               </div>
             ))}
             <div className="flex flex-col justify-center bg-gray-100 p-6">
-              <h3 className="text-xl font-black uppercase tracking-wide">Destinator, All-New Triton, Xpander Cross</h3>
+              <h3 className="text-xl font-black uppercase tracking-wide">Destinator, All-New Triton</h3>
               <p className="mt-3 leading-7 text-gray-700">
                 <strong>Destinator</strong> và <strong>All-New Triton</strong> là các mẫu xe mới, đã có bảo hành tiêu chuẩn 5 năm hoặc
                 150.000 km, nên chưa áp dụng gói bảo hành mở rộng.
-              </p>
-              <p className="mt-2 leading-7 text-gray-700">
-                <strong>Xpander Cross</strong> chưa có trong bảng giá của Mitsubishi. Nhắn Phúc để hỏi gói cho xe của bạn.
               </p>
               <a
                 href={contact.zaloUrl}

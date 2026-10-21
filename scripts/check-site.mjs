@@ -70,9 +70,19 @@ ws.onmessage = (event) => {
   }
 };
 await new Promise((resolve) => (ws.onopen = resolve));
-const send = (method, params = {}) => new Promise((resolve) => {
-  pending[++seq] = resolve;
-  ws.send(JSON.stringify({ id: seq, method, params }));
+// Mỗi lệnh gửi trình duyệt chờ tối đa 30 giây (21/10/2026: từng bị treo 28 phút khi trình duyệt không trả lời)
+const TIMEOUT = 30000;
+const send = (method, params = {}) => new Promise((resolve, reject) => {
+  const id = ++seq;
+  const timer = setTimeout(() => {
+    delete pending[id];
+    reject(new Error(`Trình duyệt không phản hồi ${method} sau ${TIMEOUT / 1000} giây`));
+  }, TIMEOUT);
+  pending[id] = (result) => {
+    clearTimeout(timer);
+    resolve(result);
+  };
+  ws.send(JSON.stringify({ id, method, params }));
 });
 const evaluate = async (expression) => ((await send("Runtime.evaluate", { expression, returnByValue: true, awaitPromise: true })).result || {}).value;
 await send("Runtime.enable");
@@ -87,6 +97,7 @@ for (const [width, height, mobile] of [[390, 844, true], [1366, 900, false]]) {
     errors = [];
     badRequests = [];
     docStatus = 0;
+    try {
     await send("Page.navigate", { url });
     await sleep(2000);
     // Cuộn hết trang để ảnh tải chậm (lazy) cũng được tải
@@ -112,6 +123,12 @@ for (const [width, height, mobile] of [[390, 844, true], [1366, 900, false]]) {
     if (list.length) {
       problems.push(`${page}: ${list.join(" | ")}`);
       console.log(`✗ ${page}: ${list.join(" | ")}`);
+    }
+    } catch (error) {
+      // Trang bị treo: ghi thành lỗi rồi đi tiếp, không đứng chờ mãi
+      const page = `${url.replace(BASE, "") || "/"} @${width}`;
+      problems.push(`${page}: ${error.message}`);
+      console.log(`✗ ${page}: ${error.message}`);
     }
   }
 }
