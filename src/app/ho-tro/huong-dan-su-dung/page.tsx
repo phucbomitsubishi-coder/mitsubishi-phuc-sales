@@ -207,10 +207,10 @@ export default function UserGuidePage() {
               </Link>
 
               <Link
-                href="/ho-tro/phu-tung-chinh-hang"
+                href="/phu-kien-xe-mitsubishi"
                 className="border border-gray-200 bg-white p-5 font-semibold hover:border-red-500"
               >
-                Phụ tùng chính hãng →
+                Phụ kiện chính hãng →
               </Link>
 
               <Link

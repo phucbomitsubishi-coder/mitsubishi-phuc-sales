@@ -115,13 +115,6 @@ export default function SiteFooter() {
 </Link>
 
       <Link
-  href="/ho-tro/phu-tung-chinh-hang"
-  className="hover:text-white"
->
-  Phụ tùng chính hãng
-</Link>
-
-      <Link
   href="/ho-tro/huong-dan-su-dung"
   className="hover:text-white"
 >

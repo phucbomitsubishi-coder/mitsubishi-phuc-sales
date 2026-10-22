@@ -33,10 +33,10 @@ const supportItems = [
     number: "03",
   },
   {
-    title: "Phụ tùng chính hãng",
+    title: "Phụ kiện chính hãng",
     description:
-      "Thông tin về phụ tùng Mitsubishi chính hãng và lợi ích khi sử dụng đúng tiêu chuẩn.",
-    href: "/ho-tro/phu-tung-chinh-hang",
+      "Bảng phụ kiện theo từng dòng xe: camera hành trình, màn hình, lót sàn, trang trí; phụ kiện chính hãng MMV có giá niêm yết.",
+    href: "/phu-kien-xe-mitsubishi",
     number: "04",
   },
   {

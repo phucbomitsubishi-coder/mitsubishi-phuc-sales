@@ -25,6 +25,12 @@ const nextConfig: NextConfig = {
   async redirects() {
     // Link cũ trong footer dùng id xe (/xe/xforce) thay vì slug (/xe/mitsubishi-xforce)
     return [
+      // Trang Phụ tùng chính hãng (nội dung mỏng, noindex) gộp vào trang Phụ kiện (22/10/2026)
+      {
+        source: "/ho-tro/phu-tung-chinh-hang",
+        destination: "/phu-kien-xe-mitsubishi",
+        permanent: true,
+      },
       // Bài tin cũ trùng chủ đề và quá sơ sài, gộp vào bài tư vấn đầy đủ (10/2026)
       {
         source: "/tin-tuc/kinh-nghiem-chon-xe-mitsubishi-phu-hop",
