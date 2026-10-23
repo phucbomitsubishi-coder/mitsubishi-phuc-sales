@@ -6,8 +6,8 @@ export type ZaloCar = { id: string; slug: string; name: string };
 
 type Props = { cars: ZaloCar[] };
 
-// Bấm bất kỳ link zalo.me nào: chép sẵn tin nhắn theo trang đang xem (xe mới, xe cũ, landing)
-// rồi để link mở Zalo như bình thường. Zalo không cho điền sẵn tin nhắn qua link nên khách chỉ cần dán và gửi.
+// Bấm link zalo.me ở trang xe mới, chi tiết xe cũ hoặc landing /uu-dai/*: chép sẵn tin nhắn hỏi đúng xe đó
+// rồi để link mở Zalo như bình thường. Trang khác không chép, không hiện nhắc (anh Phúc chọn 23/10/2026). Zalo không cho điền sẵn tin nhắn qua link nên khách chỉ cần dán và gửi.
 // Link nằm trong phần tử có data-zalo-own (vd Báo giá nhanh) đã tự chép tin nhắn riêng nên bỏ qua.
 function buildMessage(pathname: string, cars: ZaloCar[]) {
   const [, section, key] = pathname.split("/");
@@ -19,7 +19,7 @@ function buildMessage(pathname: string, cars: ZaloCar[]) {
     const title = document.querySelector("h1")?.textContent?.trim();
     if (title) return `Chào anh Phúc, em quan tâm xe ${title} trên website. Xe còn không anh?`;
   }
-  return "Chào anh Phúc, em muốn được tư vấn mua xe Mitsubishi.";
+  return null;
 }
 
 export default function ZaloPrefill({ cars }: Props) {
@@ -30,7 +30,9 @@ export default function ZaloPrefill({ cars }: Props) {
     function onClick(event: MouseEvent) {
       const link = (event.target as Element | null)?.closest?.("a[href*='zalo.me']");
       if (!link || link.closest("[data-zalo-own]") || !navigator.clipboard) return;
-      navigator.clipboard.writeText(buildMessage(window.location.pathname, cars)).then(
+      const message = buildMessage(window.location.pathname, cars);
+      if (!message) return;
+      navigator.clipboard.writeText(message).then(
         () => {
           setShown(true);
           clearTimeout(timer);
