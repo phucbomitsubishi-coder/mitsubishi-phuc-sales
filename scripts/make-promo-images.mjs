@@ -148,7 +148,7 @@ function renderHtml(item) {
       <div class="who">Lưu Hoàng Phúc · Tư vấn bán hàng<small>Mitsubishi Moveo New City · Trả góp, lái thử tận nhà</small></div>
       <div class="phone"><small>HOTLINE / ZALO</small>${phone}</div>
     </div>
-    <div class="note">Giá niêm yết đã gồm VAT. Ưu đãi theo chương trình của Mitsubishi Motors Việt Nam tháng ${month}, gồm hỗ trợ tương đương lệ phí trước bạ, phiếu nhiên liệu hoặc quà tặng, không phải tiền mặt.</div>
+    <div class="note">Giá niêm yết đã gồm VAT. Ưu đãi theo chương trình của Mitsubishi Motors Việt Nam tháng ${month}, được trừ trực tiếp vào giá xe khi ký hợp đồng.</div>
   </footer>
 </body></html>`;
 }

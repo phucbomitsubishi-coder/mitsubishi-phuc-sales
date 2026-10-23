@@ -236,7 +236,7 @@ export default function OnRoadPriceCalculator({
 
       <p className="mt-3 text-xs leading-5 text-gray-600">
         * Số liệu tham khảo, có thể thay đổi theo địa phương và thời điểm. Ưu
-        đãi có thể là quà tặng, nhiên liệu, không phải tiền mặt.
+        đãi được trừ trực tiếp vào giá xe khi ký hợp đồng.
       </p>
     </div>
   );

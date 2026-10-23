@@ -277,7 +277,7 @@ export default function Home() {
               )}
             </div>
             <p className="mt-5 text-xs leading-5 text-gray-600">
-              * Chương trình của {currentPromotion.source}. Ưu đãi có thể là hỗ trợ lệ phí trước bạ, phiếu nhiên liệu hoặc phụ kiện, không phải tiền mặt.
+              * Chương trình của {currentPromotion.source}. Ưu đãi (hỗ trợ lệ phí trước bạ, phiếu nhiên liệu...) được trừ trực tiếp vào giá xe khi ký hợp đồng.
             </p>
           </div>
         </div>

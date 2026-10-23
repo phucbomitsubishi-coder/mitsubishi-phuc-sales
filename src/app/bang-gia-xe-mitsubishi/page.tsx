@@ -312,8 +312,8 @@ export default function PriceListPage() {
             </p>
             <p>
               * Cột &quot;Lăn bánh sau ưu đãi&quot; đã trừ tổng giá trị ưu đãi trong
-              tháng. Ưu đãi có thể là hỗ trợ lệ phí trước bạ, phiếu nhiên liệu hoặc
-              phụ kiện, không phải tiền mặt. Bảng giá chỉ mang tính tham khảo, chi phí
+              tháng. Ưu đãi (hỗ trợ lệ phí trước bạ, phiếu nhiên liệu...) được trừ trực
+              tiếp vào giá xe khi ký hợp đồng. Bảng giá chỉ mang tính tham khảo, chi phí
               thực tế có thể thay đổi theo thời điểm và hồ sơ đăng ký.
             </p>
             <p>

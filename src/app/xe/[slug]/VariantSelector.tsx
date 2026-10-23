@@ -463,7 +463,7 @@ const selectedImage =
                 >
                   Xem giá lăn bánh →
                 </button>
-                <p className="mt-3 text-xs leading-5 text-gray-600">Ưu đãi có thể là quà tặng, nhiên liệu, không phải tiền mặt.</p>
+                <p className="mt-3 text-xs leading-5 text-gray-600">Ưu đãi được trừ trực tiếp vào giá xe khi ký hợp đồng.</p>
               </div>
             )}
           </div>

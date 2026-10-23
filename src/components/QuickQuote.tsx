@@ -175,7 +175,7 @@ export default function QuickQuote({ cars, zaloUrl, phoneUrl }: Props) {
           </div>
 
           <p className="mt-2 text-xs leading-5 text-gray-600">
-            Số liệu tham khảo. Ưu đãi có thể là hỗ trợ lệ phí trước bạ hoặc quà tặng, không phải tiền mặt.
+            Số liệu tham khảo. Ưu đãi được trừ trực tiếp vào giá xe khi ký hợp đồng.
           </p>
 
           <div className="mt-4 grid gap-2">

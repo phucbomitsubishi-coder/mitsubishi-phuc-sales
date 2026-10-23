@@ -112,7 +112,7 @@ export default function AdLandingPage({ carSlug, extraCarSlugs = [], heading, de
                   ))}
                 </ul>
                 <p className="mt-3 text-sm text-gray-400">
-                  Ưu đãi là hỗ trợ có giá trị tương đương, không phải tiền mặt; áp dụng theo điều kiện ghi trong báo giá và hợp đồng.
+                  Ưu đãi được trừ trực tiếp vào giá xe khi ký hợp đồng; áp dụng theo điều kiện ghi trong báo giá và hợp đồng.
                 </p>
               </div>
             )}

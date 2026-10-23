@@ -4,6 +4,8 @@
 // Ưu đãi trên ảnh = khuyến mãi đại lý (PROMOS) + quyền linh động (QLĐ, phần tử đầu trong ../bao-gia-xe/.bi-mat/ngan-sach.json),
 // theo yêu cầu của anh Phúc (09/10/2026). KHÔNG đọc LNG mục tiêu (phần tử thứ hai). Quà tặng không ghi lên ảnh.
 // Website (promotions.ts) vẫn chỉ đăng ưu đãi nhà máy; ảnh ở đây dùng cho Fanpage/quảng cáo.
+// Bộ ảnh cho chiến dịch dẫn về web (landing /uu-dai/*): npm run ad-images -- xforce --web → <xe>-web-*.png
+// (nút "NHẬN BÁO GIÁ", ảnh xe webPhoto nếu có, bản Story chừa trống phía dưới cho nhãn liên kết của Facebook).
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
@@ -13,7 +15,8 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const appFile = path.resolve(root, "..", "bao-gia-xe", "index.html");
 const { siteConfig } = await import(pathToFileURL(path.join(root, "src/config/site.ts")).href);
-const pub = (p) => pathToFileURL(path.join(root, "public", p)).href;
+// Đường dẫn bắt đầu bằng "../" tính từ thư mục repo (ảnh đã chỉnh để ngoài repo, vd ../anh-facebook/nguon-anh/)
+const pub = (p) => pathToFileURL(p.startsWith("../") ? path.resolve(root, p) : path.join(root, "public", p)).href;
 
 // ---------- Đọc dữ liệu từ app báo giá ----------
 const app = fs.readFileSync(appFile, "utf8");
@@ -37,11 +40,12 @@ const QLD = fs.existsSync(budgetFile)
   : {};
 
 const million = (v) => (v / 1e6).toLocaleString("vi-VN", { maximumFractionDigits: 1 });
-function carData(id) {
+// Bộ ảnh --web KHÔNG cộng quyền linh động, để con số trên ảnh khớp trang landing (chỉ hiện chương trình đại lý).
+function carData(id, web) {
   const car = CARS.find((c) => c.id === id);
   const variants = car.variants.map(([name, price]) => {
     const promos = PROMOS[`${id}|${name}`] ?? [];
-    const qld = QLD[`${id}|${name}`] ?? 0;
+    const qld = web ? 0 : QLD[`${id}|${name}`] ?? 0;
     return { name, price, promos, total: promos.reduce((s, p) => s + p[2], 0) + qld, bhvc: BHVC.includes(`${id}|${name}`) };
   });
   const best = variants.reduce((a, b) => (b.total > a.total ? b : a));
@@ -58,18 +62,23 @@ function carData(id) {
 const ads = [
   { id: "destinator", model: "DESTINATOR", type: "SUV 7 chỗ",
     photo: "images/cars/destinator/gallery/exterior/exterior-01.jpg", pos: "30% 55%",
+    webPhoto: "images/cars/destinator/showroom/feature-exterior.jpg", webPos: "50% 60%",
     bullets: ["SUV 7 chỗ rộng rãi", "Bảo hành 5 năm", "Giao xe toàn quốc"] },
   { id: "xforce", model: "XFORCE", type: "SUV 5 chỗ",
     photo: "images/cars/xforce/gallery/exterior/exterior-01.jpg", pos: "40% 100%",
+    webPhoto: "images/cars/xforce/showroom/feature-exterior.jpg", webPos: "50% 62%",
     bullets: ["SUV gầm cao 5 chỗ", "Lái thử tận nhà", "Giao xe toàn quốc"] },
   { id: "xpander", model: "XPANDER", type: "MPV 7 chỗ",
     photo: "images/cars/xpander/gallery/exterior/exterior-01.jpg", pos: "35% 60%",
+    // Ảnh phố của MMV đã xóa nhãn "NEW"
+    webPhoto: "../anh-facebook/nguon-anh/xpander-pho.jpg", webPos: "50% 75%",
     bullets: ["7 chỗ cho cả nhà", "Lái thử tận nhà", "Giao xe toàn quốc"] },
   { id: "xpander-cross", model: "XPANDER CROSS", type: "Crossover 7 chỗ",
     photo: "images/cars/xpander-cross/gallery/exterior/exterior-01.jpg", pos: "40% 60%",
     bullets: ["7 chỗ gầm cao", "Lái thử tận nhà", "Giao xe toàn quốc"] },
   { id: "triton", model: "TRITON", type: "Bán tải",
     photo: "images/cars/triton/gallery/exterior/exterior-01.jpg", pos: "40% 0%", size: "auto 145%",
+    webPhoto: "images/cars/triton/showroom/feature-exterior.jpg", webPos: "50% 60%",
     bullets: ["Bán tải mạnh mẽ", "Bảo hành 5 năm", "Giao xe toàn quốc"] },
 ];
 
@@ -90,8 +99,11 @@ function headline(ad, d) {
     note: "Hỗ trợ 100% trước bạ hoặc quà tặng tùy phiên bản", extras };
 }
 
-function html(ad, d, h, w, H) {
+function html(ad, d, h, w, H, web) {
   const tall = H > 1500;
+  const photo = web && ad.webPhoto ? ad.webPhoto : ad.photo;
+  const pos = web && ad.webPhoto ? ad.webPos : ad.pos;
+  const lift = web && tall; // Story/Reels: nhãn liên kết của Facebook nằm ở khoảng 20% cuối ảnh
   const square = H === w; // 1:1 cho Instagram và các vị trí vuông: bỏ dòng chip, ghi chú, gạch đầu dòng cho vừa khung
   const v = (t, f, q) => (tall ? t : square ? q : f);
   const hookSize = h.hook[1].length > 16 ? 76 : h.hook[1].length > 10 ? 104 : 128;
@@ -102,8 +114,8 @@ function html(ad, d, h, w, H) {
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { width: ${w}px; height: ${H}px; overflow: hidden; }
 body { font-family: Roboto, Arial, sans-serif; color: #fff; background: #0a0a0a; position: relative; }
-.photo { position: absolute; left: 0; right: 0; top: ${v(520, 330, 250)}px; height: ${v(900, 640, 520)}px;
-  background: url('${pub(ad.photo)}') ${ad.pos} / ${ad.size ?? "cover"} no-repeat; }
+.photo { position: absolute; left: 0; right: 0; top: ${lift ? 420 : v(520, 330, 250)}px; height: ${lift ? 700 : v(900, 640, 520)}px;
+  background: url('${pub(photo)}') ${pos} / ${(web && ad.webPhoto) ? "cover" : ad.size ?? "cover"} no-repeat; }
 .photo::after { content: ""; position: absolute; inset: 0;
   background: linear-gradient(180deg, #0a0a0a 0%, rgba(10,10,10,0) 22%, rgba(10,10,10,0) 70%, #0a0a0a 100%); }
 .top { position: absolute; left: 56px; right: 56px; top: ${v(120, 52, 36)}px; }
@@ -115,14 +127,14 @@ ${square ? ".chip, .note, .extras, .bullets { display: none !important; } .legal
 .model b { color: #fff; }
 .hook1 { margin-top: 6px; font-size: 64px; font-weight: 900; line-height: 1; }
 .hook2 { font-size: ${hookSize}px; font-weight: 900; font-style: italic; line-height: 1.02; letter-spacing: -2px; color: #fde047; text-shadow: 0 8px 30px rgba(0,0,0,.6); }
-.badge { position: absolute; right: 48px; top: ${v(900, 640, 470)}px; width: 250px; height: 250px; border-radius: 50%;
+.badge { position: absolute; right: 48px; top: ${lift ? 760 : v(900, 640, 470)}px; width: 250px; height: 250px; border-radius: 50%;
   background: radial-gradient(circle at 30% 30%, #f87171, #b91c1c 70%); transform: rotate(-8deg);
   display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
   box-shadow: 0 20px 50px rgba(220,38,38,.55), 0 0 0 8px rgba(255,255,255,.15); }
 .badge small { font-size: ${/^[0-9]/.test(h.badge[0]) ? 46 : 22}px; line-height: 1; font-weight: 900; letter-spacing: 2px; color: #fde047; }
 .badge b { font-size: ${numeric ? (h.badge[1].length > 3 ? 64 : 92) : 40}px; margin: 4px 0; font-weight: 900; font-style: italic; line-height: 1; }
 .badge span { font-size: 24px; font-weight: 900; letter-spacing: 3px; }
-.bottom { position: absolute; left: 48px; right: 48px; bottom: ${v(150, 40, 20)}px; }
+.bottom { position: absolute; left: 48px; right: 48px; bottom: ${lift ? 400 : v(150, 40, 20)}px; }
 .price { font-size: 30px; color: #e5e7eb; }
 .price b { font-size: 44px; color: #fff; }
 .note { margin-top: 6px; font-size: 24px; color: #d1d5db; }
@@ -156,9 +168,9 @@ ${square ? ".chip, .note, .extras, .bullets { display: none !important; } .legal
   <div class="cta">
     <div class="avatar"></div>
     <div class="who"><b>${siteConfig.sales.name}</b><small>Tư vấn Mitsubishi · ${siteConfig.sales.phoneDisplay}</small></div>
-    <div class="btn">NHẮN TIN NGAY<small>Nhận báo giá lăn bánh</small></div>
+    <div class="btn">${web ? "NHẬN BÁO GIÁ<small>Lăn bánh từng phiên bản</small>" : "NHẮN TIN NGAY<small>Nhận báo giá lăn bánh</small>"}</div>
   </div>
-  <div class="legal">Ưu đãi theo chương trình của đại lý tháng ${promoMonth}, không phải tiền mặt, áp dụng tùy phiên bản. Giá niêm yết đã gồm VAT.</div>
+  <div class="legal">Ưu đãi đại lý tháng ${promoMonth}, trừ trực tiếp vào giá xe khi ký hợp đồng, tùy phiên bản. Giá niêm yết gồm VAT.</div>
 </div>
 </body></html>`;
 }
@@ -169,15 +181,16 @@ const [mm, yyyy] = promoMonth.split("/");
 const outDir = path.resolve(root, "..", "anh-facebook", `quang-cao-${mm}-${yyyy}`);
 fs.mkdirSync(outDir, { recursive: true });
 const work = fs.mkdtempSync(path.join(os.tmpdir(), "ad-img-"));
-const only = process.argv[2];
+const web = process.argv.includes("--web");
+const only = process.argv.slice(2).find((a) => !a.startsWith("--"));
 
 for (const ad of ads.filter((a) => !only || a.id === only)) {
-  const d = carData(ad.id);
+  const d = carData(ad.id, web);
   const h = headline(ad, d);
   for (const [w, H, suffix] of [[1080, 1350, "feed"], [1080, 1920, "story"], [1080, 1080, "vuong"]]) {
     const file = path.join(work, `${ad.id}-${suffix}.html`);
-    fs.writeFileSync(file, html(ad, d, h, w, H));
-    const out = path.join(outDir, `${ad.id}-${suffix}.png`);
+    fs.writeFileSync(file, html(ad, d, h, w, H, web));
+    const out = path.join(outDir, `${ad.id}${web ? "-web" : ""}-${suffix}.png`);
     execFileSync(edge, ["--headless", "--disable-gpu", "--hide-scrollbars", "--allow-file-access-from-files",
       `--user-data-dir=${path.join(work, `p-${ad.id}-${suffix}`)}`, `--window-size=${w},${H}`, "--virtual-time-budget=8000",
       `--screenshot=${out}`, pathToFileURL(file).href], { stdio: "ignore" });

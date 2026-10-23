@@ -160,7 +160,7 @@ export function PriceComparison({
         {promotionMonthLabel}. Giá {competitorShortName} là giá niêm yết tham khảo tháng{" "}
         {competitor.updated}
         {competitor.priceNote ? ` (${competitor.priceNote})` : ""}, chưa gồm ưu đãi của
-        đại lý. Ưu đãi có thể là hỗ trợ lệ phí trước bạ hoặc quà tặng, không phải tiền mặt.
+        đại lý. Ưu đãi của Mitsubishi được trừ trực tiếp vào giá xe khi ký hợp đồng.
         Xem giá các mẫu Mitsubishi khác tại{" "}
         <Link href="/bang-gia-xe-mitsubishi" className="font-semibold text-red-700 underline">
           bảng giá xe Mitsubishi

@@ -72,7 +72,7 @@ const faqGroups: { title: string; items: FaqItem[] }[] = [
       {
         question: "Ưu đãi “hỗ trợ lệ phí trước bạ” có được nhận tiền mặt không?",
         answer:
-          "Không. Đây là khoản hỗ trợ có giá trị tương đương lệ phí trước bạ theo chương trình của hãng, không phải tiền mặt. Cách áp dụng cụ thể được ghi trong báo giá và hợp đồng mua bán.",
+          "Không nhận riêng bằng tiền mặt. Khoản hỗ trợ được trừ trực tiếp vào giá xe khi ký hợp đồng, nên số tiền khách trả giảm đúng bằng giá trị ưu đãi. Cách áp dụng cụ thể được ghi trong báo giá và hợp đồng mua bán.",
       },
     ],
   },
