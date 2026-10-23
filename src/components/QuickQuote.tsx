@@ -178,7 +178,7 @@ export default function QuickQuote({ cars, zaloUrl, phoneUrl }: Props) {
             Số liệu tham khảo. Ưu đãi được trừ trực tiếp vào giá xe khi ký hợp đồng.
           </p>
 
-          <div className="mt-4 grid gap-2">
+          <div className="mt-4 grid gap-2" data-zalo-own>
             <a
               href={zaloUrl}
               target="_blank"

@@ -6,6 +6,7 @@ import QuickQuote, { type QuickQuoteCar } from "@/components/QuickQuote";
 import QuoteDialog, { type DialogCar } from "@/components/QuoteDialog";
 import MobileActionBar from "@/components/MobileActionBar";
 import OnRoadDialog, { type OnRoadCar } from "@/components/OnRoadDialog";
+import ZaloPrefill from "@/components/ZaloPrefill";
 import { cars } from "@/data/cars";
 import { currentPromotion } from "@/data/promotions";
 import "./globals.css";
@@ -167,6 +168,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   <HideOnLanding><QuoteDialog cars={dialogCars} /></HideOnLanding>
   <HideOnLanding><MobileActionBar cars={dialogCars} /></HideOnLanding>
   <HideOnLanding><OnRoadDialog cars={onRoadCars} /></HideOnLanding>
+  <ZaloPrefill cars={dialogCars} />
 </body>
     </html>
   );

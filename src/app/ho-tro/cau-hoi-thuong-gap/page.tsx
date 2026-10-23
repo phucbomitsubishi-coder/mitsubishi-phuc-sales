@@ -66,7 +66,7 @@ const faqGroups: { title: string; items: FaqItem[] }[] = [
     items: [
       {
         question: "Mitsubishi đang có khuyến mãi gì?",
-        answer: `Chương trình tháng ${promotionMonthLabel} có ưu đãi đến ${formatMillion(maxPromotion)} đồng tùy phiên bản, gồm hỗ trợ tương đương lệ phí trước bạ, phiếu nhiên liệu hoặc quà tặng. Mức ưu đãi khác nhau giữa các phiên bản và thay đổi mỗi tháng.`,
+        answer: `Chương trình tháng ${promotionMonthLabel} có ưu đãi đến ${formatMillion(maxPromotion)} đồng tùy phiên bản, gồm hỗ trợ tương đương lệ phí trước bạ, phiếu nhiên liệu hoặc quà tặng, được trừ trực tiếp vào giá xe khi ký hợp đồng. Mức ưu đãi khác nhau giữa các phiên bản và thay đổi mỗi tháng.`,
         link: { href: "/bang-gia-xe-mitsubishi", label: "Xem ưu đãi từng phiên bản" },
       },
       {
@@ -91,6 +91,11 @@ const faqGroups: { title: string; items: FaqItem[] }[] = [
           "Với cá nhân, hồ sơ thường gồm: căn cước công dân, giấy tờ về tình trạng hôn nhân, giấy tờ chứng minh thu nhập (hợp đồng lao động và sao kê lương, hoặc giấy phép kinh doanh). Mỗi ngân hàng có yêu cầu riêng, Phúc sẽ gửi danh sách cụ thể khi bạn chọn ngân hàng.",
       },
       {
+        question: "Mua trả góp có bắt buộc mua bảo hiểm thân vỏ không?",
+        answer:
+          "Pháp luật chỉ bắt buộc bảo hiểm trách nhiệm dân sự. Tuy nhiên khi vay mua xe, ngân hàng thường yêu cầu mua bảo hiểm vật chất (thân vỏ) trong thời gian vay vì xe là tài sản thế chấp. Phí bảo hiểm tùy giá xe và công ty bảo hiểm, Phúc sẽ ghi rõ trong báo giá.",
+      },
+      {
         question: "Lãi suất trên công cụ trả góp có phải lãi suất của ngân hàng không?",
         answer:
           "Không. Lãi suất trên công cụ do bạn tự nhập để tham khảo. Lãi suất thực tế do ngân hàng xét duyệt theo hồ sơ và thời điểm vay; thường có giai đoạn ưu đãi đầu kỳ rồi thả nổi, nên hỏi rõ lãi suất sau giai đoạn ưu đãi.",
@@ -105,6 +110,12 @@ const faqGroups: { title: string; items: FaqItem[] }[] = [
         answer:
           "Triton và Destinator: 5 năm hoặc 150.000 km. Các mẫu xe còn lại: 3 năm hoặc 100.000 km. Ắc-quy nguyên bản: 12 tháng hoặc 20.000 km. Tính theo điều kiện nào đến trước, kể từ ngày bàn giao xe.",
         link: { href: "/ho-tro/chinh-sach-bao-hanh", label: "Xem chính sách bảo hành" },
+      },
+      {
+        question: "Có mua thêm bảo hành mở rộng được không?",
+        answer:
+          "Được, với Xforce, Xpander, Xpander Cross, Attrage, Pajero Sport, Outlander và Triton thế hệ trước: gói 1 năm hoặc 25.000 km, hoặc 2 năm hoặc 50.000 km, nối tiếp sau bảo hành tiêu chuẩn. Destinator và All-New Triton đã có bảo hành tiêu chuẩn 5 năm hoặc 150.000 km nên chưa áp dụng gói mở rộng.",
+        link: { href: "/ho-tro/bao-hanh-mo-rong", label: "Xem gói và bảng giá bảo hành mở rộng" },
       },
       {
         question: "Bao lâu bảo dưỡng xe Mitsubishi một lần?",
@@ -139,6 +150,17 @@ const faqGroups: { title: string; items: FaqItem[] }[] = [
         link: { href: "/mua-xe-mitsubishi-toan-quoc", label: "Xem quy trình mua xe từ tỉnh khác" },
       },
       {
+        question: "Mua xe cần chuẩn bị giấy tờ gì?",
+        answer:
+          "Mua xe cá nhân trả thẳng thường chỉ cần căn cước công dân của người đứng tên. Mua tên công ty cần giấy phép kinh doanh, giấy giới thiệu và con dấu. Mua trả góp cần thêm hồ sơ vay theo yêu cầu của ngân hàng. Phúc sẽ gửi danh sách cụ thể theo trường hợp của bạn.",
+      },
+      {
+        question: "Giao xe về tỉnh khác có mất phí không?",
+        answer:
+          "Miễn phí giao xe trong bán kính 10 km. Xa hơn, phí vận chuyển tham khảo khoảng 30.000 đồng/km, Phúc báo chính xác theo địa chỉ của bạn trước khi đặt cọc. Bạn cũng có thể nhận xe trực tiếp tại showroom.",
+        link: { href: "/mua-xe-mitsubishi-toan-quoc", label: "Xem quy trình giao xe toàn quốc" },
+      },
+      {
         question: "Đặt cọc bao lâu thì nhận được xe?",
         answer:
           "Thường khoảng 7–10 ngày với khách TP.HCM và 10–15 ngày với khách ở tỉnh khác, tùy tiến độ thanh toán và việc xe có sẵn phiên bản, màu bạn chọn hay phải chờ hãng phân bổ. Khi báo giá, Phúc sẽ kiểm tra tình trạng xe và báo thời gian giao dự kiến trước khi bạn đặt cọc.",
@@ -152,6 +174,12 @@ const faqGroups: { title: string; items: FaqItem[] }[] = [
         question: "Website có bán xe Mitsubishi đã qua sử dụng không?",
         answer: `Có. Hiện có ${availableUsedCars} xe đang bán, mỗi xe ghi rõ năm sản xuất, số km, phiên bản, màu, giá và hình ảnh thực tế.`,
         link: { href: "/xe-cu", label: "Xem xe đã qua sử dụng" },
+      },
+      {
+        question: "Có thu xe cũ để đổi sang xe Mitsubishi mới không?",
+        answer:
+          "Có. Bạn gửi thông tin xe đang đi (hãng, dòng xe, năm sản xuất, số km, ảnh xe) để nhận giá thu tham khảo. Giá thu chính thức chốt sau khi kiểm tra xe thực tế tại showroom, và được cấn trừ vào khoản thanh toán xe mới; phần còn lại có thể mua trả góp.",
+        link: { href: "/thu-cu-doi-moi", label: "Gửi thông tin xe để định giá" },
       },
       {
         question: "Mua xe cũ nên kiểm tra những gì?",
@@ -173,7 +201,7 @@ export default function FAQPage() {
         parents={[{ name: "Hỗ trợ", path: "/ho-tro" }]}
         name="Câu hỏi thường gặp"
         type="WebPage"
-        dateModified="2026-10-09"
+        dateModified="2026-10-23"
       />
       <SiteHeader />
 
