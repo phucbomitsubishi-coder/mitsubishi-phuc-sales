@@ -6,12 +6,12 @@ import { siteConfig } from "@/config/site";
 export const metadata: Metadata = createPageMetadata({
   title: "Chính sách bảo mật thông tin | Lưu Hoàng Phúc",
   description:
-    "Chính sách thu thập, sử dụng và bảo vệ thông tin cá nhân khi khách hàng gửi yêu cầu báo giá hoặc đăng ký lái thử xe Mitsubishi trên website.",
+    "Chính sách thu thập, sử dụng và bảo vệ thông tin cá nhân khi khách hàng gửi yêu cầu báo giá, đăng ký lái thử hoặc đặt lịch bảo dưỡng xe Mitsubishi trên website.",
   path: "/chinh-sach-bao-mat",
 });
 
 // Cập nhật ngày này mỗi khi sửa nội dung chính sách
-const lastUpdated = "20/10/2026";
+const lastUpdated = "25/10/2026";
 
 export default function PrivacyPolicyPage() {
   const { sales, dealer, contact } = siteConfig;
@@ -20,14 +20,14 @@ export default function PrivacyPolicyPage() {
     {
       heading: "1. Thông tin được thu thập",
       paragraphs: [
-        "Website chỉ thu thập thông tin khi bạn chủ động gửi biểu mẫu Nhận báo giá, Đăng ký lái thử hoặc Thu cũ đổi mới, gồm: họ và tên, số điện thoại, mẫu xe và phiên bản quan tâm, thời gian dự định mua xe (nếu bạn chọn), thông tin xe đang sử dụng (dòng xe, năm sản xuất, số km, khu vực) và ghi chú bạn tự nhập (ví dụ thời gian hoặc địa chỉ lái thử tại nhà).",
+        "Website chỉ thu thập thông tin khi bạn chủ động gửi biểu mẫu Nhận báo giá, Đăng ký lái thử, Thu cũ đổi mới hoặc Đặt lịch bảo dưỡng, gồm: họ và tên, số điện thoại, mẫu xe và phiên bản quan tâm, thời gian dự định mua xe (nếu bạn chọn), thông tin xe đang sử dụng (dòng xe, năm sản xuất, số km, khu vực; với đặt lịch bảo dưỡng có thể gồm biển số và việc xe đã từng bảo dưỡng tại đại lý hay chưa), ngày và khung giờ mong muốn và ghi chú bạn tự nhập (ví dụ thời gian hoặc địa chỉ lái thử tại nhà).",
         "Website không yêu cầu tài khoản, không thu thập số CMND/CCCD, thông tin ngân hàng hay thẻ thanh toán. Cookie quảng cáo của Meta (Facebook) được mô tả ở mục 5.",
       ],
     },
     {
       heading: "2. Mục đích sử dụng",
       paragraphs: [
-        "Thông tin chỉ được dùng để liên hệ tư vấn, gửi báo giá, sắp xếp lịch lái thử và hỗ trợ thủ tục mua xe theo đúng yêu cầu bạn đã gửi.",
+        "Thông tin chỉ được dùng để liên hệ tư vấn, gửi báo giá, sắp xếp lịch lái thử, đặt lịch bảo dưỡng với xưởng dịch vụ và hỗ trợ thủ tục mua xe theo đúng yêu cầu bạn đã gửi.",
         "Thông tin không được bán, cho thuê hay trao đổi với bên thứ ba vì mục đích quảng cáo.",
       ],
     },
@@ -35,7 +35,7 @@ export default function PrivacyPolicyPage() {
       heading: "3. Lưu trữ và chia sẻ",
       paragraphs: [
         "Dữ liệu biểu mẫu được lưu trên dịch vụ Google (Google Apps Script và Google Sheets) do người tư vấn quản lý, có bảo vệ bằng tài khoản và mật khẩu.",
-        `Khi bạn đồng ý mua xe, đăng ký lái thử tại showroom hoặc làm hồ sơ trả góp, thông tin cần thiết sẽ được chuyển cho ${dealer.name}, ngân hàng hoặc công ty bảo hiểm mà bạn lựa chọn để hoàn tất thủ tục.`,
+        `Khi bạn đồng ý mua xe, đăng ký lái thử tại showroom, đặt lịch bảo dưỡng hoặc làm hồ sơ trả góp, thông tin cần thiết sẽ được chuyển cho ${dealer.name}, ngân hàng hoặc công ty bảo hiểm mà bạn lựa chọn để hoàn tất thủ tục.`,
         "Thông tin được lưu trong thời gian cần thiết để tư vấn và chăm sóc khách hàng, và sẽ được xóa khi bạn yêu cầu.",
       ],
     },

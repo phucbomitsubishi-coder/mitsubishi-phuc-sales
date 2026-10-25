@@ -186,6 +186,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
+      url: `${baseUrl}/xe-co-san`,
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
       url: `${baseUrl}/thu-cu-doi-moi`,
       changeFrequency: "monthly",
       priority: 0.7,
@@ -196,6 +201,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
 
+    {
+      url: `${baseUrl}/dat-lich-bao-duong`,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
     {
       url: `${baseUrl}/ho-tro/chinh-sach-bao-hanh`,
       changeFrequency: "monthly",

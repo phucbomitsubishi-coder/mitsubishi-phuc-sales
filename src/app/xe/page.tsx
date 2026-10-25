@@ -7,6 +7,7 @@ import { createPageMetadata } from "@/lib/metadata";
 import { carCards } from "@/lib/carCards";
 import { cars, upcomingCars } from "@/data/cars";
 import CarFinder, { type FinderCar } from "@/components/CarFinder";
+import { financingNote, monthlyLabel } from "@/data/financing";
 import { siteConfig } from "@/config/site";
 
 // Trang "Danh sách xe" kiểu trang Tất cả dòng xe của MMV (21/10/2026): lưới 2 cột, mỗi xe ảnh có cảnh nền,
@@ -76,6 +77,9 @@ export default function CarListPage() {
               <p className="mt-3 text-lg text-gray-800">
                 Giá từ <span className="tabular-nums">{car.priceFull}</span>
               </p>
+              <p className="mt-1 text-sm text-gray-700">
+                Trả góp từ {monthlyLabel(finderCars.find((item) => item.id === car.id)?.minPrice ?? 0)}*
+              </p>
               <p className="mx-auto mt-4 max-w-xl leading-7 text-gray-700">{car.description}</p>
               <ul className="mt-6 flex justify-center gap-8 text-xs font-bold uppercase tracking-[0.25em]">
                 <li className="flex items-center gap-2">
@@ -108,6 +112,8 @@ export default function CarListPage() {
             </article>
           ))}
         </section>
+
+        <p className="mx-auto max-w-7xl px-6 pb-8 text-xs leading-5 text-gray-600">* {financingNote}</p>
 
         <CarFinder cars={finderCars} />
 

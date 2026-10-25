@@ -3,6 +3,7 @@ export type MenuLink = { href: string; label: string; external?: boolean };
 
 export const buyLinks: MenuLink[] = [
   { href: "/bang-gia-xe-mitsubishi", label: "Bảng giá" },
+  { href: "/xe-co-san", label: "Xe có sẵn, giao ngay" },
   { href: "/du-toan/gia-lan-banh", label: "Tính giá lăn bánh" },
   { href: "/du-toan/tra-gop", label: "Dự tính trả góp" },
   { href: "/dang-ky-lai-thu", label: "Đăng ký lái thử" },
@@ -15,6 +16,7 @@ export const buyLinks: MenuLink[] = [
 
 // "Dịch vụ" (21/10/2026, theo menu MMV): các trang /ho-tro giữ nguyên đường dẫn; tra cứu triệu hồi dẫn sang trang MMV
 export const serviceLinks: MenuLink[] = [
+  { href: "/dat-lich-bao-duong", label: "Đặt lịch bảo dưỡng" },
   { href: "/ho-tro/chinh-sach-bao-hanh", label: "Chính sách bảo hành" },
   { href: "/ho-tro/bao-hanh-mo-rong", label: "Bảo hành mở rộng" },
   { href: "/ho-tro/bao-duong-dinh-ky", label: "Bảo dưỡng định kỳ" },

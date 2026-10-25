@@ -1,4 +1,5 @@
 import { cars, getCarBySlug } from "@/data/cars";
+import { stockByVariant, stockDateLabel } from "@/lib/stock";
 import SiteHeader from "@/components/SiteHeader";
 import { notFound } from "next/navigation";
 import VariantSelector from "./VariantSelector";
@@ -429,6 +430,8 @@ const breadcrumbSchema = {
         variants={car.variants}
         promotions={carPromotion?.variants}
         sideImages={showroom?.sideImages}
+        stock={stockByVariant(car.id)}
+        stockDate={stockDateLabel}
       />
 
       {showroom ? <ShowroomFeatures car={car} showroom={showroom} /> : <CarFeatures car={car} />}

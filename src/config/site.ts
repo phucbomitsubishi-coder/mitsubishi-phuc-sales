@@ -4,7 +4,7 @@ export const siteConfig = {
     title: "Tư vấn Kinh doanh Mitsubishi",
     phone: "0858678929",
     phoneDisplay: "0858 678 929",
-    // Số phụ của anh Phúc, hiện ở trang Liên hệ
+    // Số phụ của anh Phúc, hiện ở trang Liên hệ; cũng là hotline nhận lịch bảo dưỡng (/dat-lich-bao-duong, 25/10/2026)
     phone2: "0967354821",
     phone2Display: "0967 354 821",
     email: "phucbo.mitsubishi@gmail.com",

@@ -35,9 +35,11 @@ type Props = {
   // Cách hiển thị theo form chứa nó: "line" = ô gạch chân (hộp thoại), "box" = ô có khung (trang lái thử)
   look: "line" | "box";
   fieldClass: string;
+  // Chữ trong nhãn ngày: "lái thử" (mặc định) hoặc "mang xe tới" (đặt lịch bảo dưỡng)
+  noun?: string;
 };
 
-export default function TestDriveSlot({ ids, look, fieldClass }: Props) {
+export default function TestDriveSlot({ ids, look, fieldClass, noun = "lái thử" }: Props) {
   // Chuỗi ghép để giá trị ổn định giữa các lần render; lúc dựng sẵn (server) chưa có ngày
   const dayList = useSyncExternalStore(noSubscribe, () => upcomingDays().join("|"), () => "");
   const days = dayList ? dayList.split("|") : [];
@@ -46,9 +48,9 @@ export default function TestDriveSlot({ ids, look, fieldClass }: Props) {
   return (
     <>
       <div>
-        <label htmlFor={ids.day} className={label}>Ngày lái thử</label>
+        <label htmlFor={ids.day} className={label}>Ngày {noun}</label>
         <select id={ids.day} name="tdDay" defaultValue="" className={fieldClass}>
-          <option value="">{look === "box" ? "Chọn ngày (tùy chọn)" : "Ngày lái thử (tùy chọn)"}</option>
+          <option value="">{look === "box" ? "Chọn ngày (tùy chọn)" : `Ngày ${noun} (tùy chọn)`}</option>
           {days.map((day) => (
             <option key={day} value={day}>{day}</option>
           ))}

@@ -11,6 +11,7 @@ import Link from "next/link";
 import VariantCompare from "./VariantCompare";
 import { featuredColors } from "@/lib/carColors";
 import VariantLeadForm from "@/components/VariantLeadForm";
+import { financingNote, monthlyLabel } from "@/data/financing";
 
 type Props = {
   carName: string;
@@ -18,6 +19,9 @@ type Props = {
   promotions?: VariantPromotion[];
   // Ảnh xe nhìn ngang theo tên phiên bản (src/data/showroom.ts); có thì hiện hàng ảnh phiên bản kiểu trang MMV
   sideImages?: Record<string, Record<string, string>>;
+  // Tồn kho theo phiên bản (src/lib/stock.ts): màu có sẵn / đang về, không có số chiếc
+  stock?: Record<string, { available: string[]; incoming: string[] }>;
+  stockDate?: string;
 };
 
 // Trang bị nổi bật của một phiên bản: lấy lần lượt từ các nhóm trang bị (đã đối chiếu MMV)
@@ -141,6 +145,8 @@ export default function VariantSelector({
   variants,
   promotions,
   sideImages,
+  stock,
+  stockDate,
 }: Props) {
   // Link chia sẻ cấu hình (?phien-ban=&mau=, 25/10/2026, kiểu Audi/Mercedes): mở trang là chọn sẵn phiên bản + màu.
   // Đọc URL bằng useSyncExternalStore (trang dựng sẵn nên lúc build chưa có URL); khi khách tự chọn thì lựa chọn của khách được ưu tiên.
@@ -343,6 +349,12 @@ const selectedImage =
             <p className="mt-4 text-2xl font-extrabold tabular-nums">
               Giá: {selectedVariant.price.toLocaleString("vi-VN")} VNĐ
             </p>
+            <p className="mt-1 text-sm text-gray-700">
+              Trả góp từ <span className="font-bold text-gray-950">{monthlyLabel(selectedVariant.price)}</span>
+              <span title={financingNote}>*</span>{" "}
+              <Link href="/du-toan/tra-gop" className="text-red-700 underline underline-offset-4 hover:text-red-800">Tính trả góp</Link>
+            </p>
+            <p className="mt-1 text-xs leading-5 text-gray-600">* {financingNote}</p>
 
             {keyEquipment(selectedVariant, 999).length > 0 && (
               <>
@@ -445,6 +457,18 @@ const selectedImage =
       </div>
     </div>
   )}
+
+            {(stock?.[selectedVariant.name]?.available.length || stock?.[selectedVariant.name]?.incoming.length) ? (
+              <div className="mt-4 border-l-4 border-green-600 bg-green-50 px-4 py-3 text-sm leading-6">
+                {stock[selectedVariant.name].available.length > 0 && (
+                  <p><span className="font-bold text-green-800">Có sẵn, giao ngay:</span> {stock[selectedVariant.name].available.join(", ")}</p>
+                )}
+                {stock[selectedVariant.name].incoming.length > 0 && (
+                  <p><span className="font-bold text-gray-900">Đang về đại lý:</span> {stock[selectedVariant.name].incoming.join(", ")}</p>
+                )}
+                <p className="text-xs text-gray-600">Tại Moveo New City, cập nhật {stockDate}. <Link href="/xe-co-san" className="text-red-700 underline underline-offset-4 hover:text-red-800">Xem tất cả xe có sẵn</Link></p>
+              </div>
+            ) : null}
 
             <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2">
               <button

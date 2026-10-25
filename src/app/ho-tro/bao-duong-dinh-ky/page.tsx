@@ -223,6 +223,12 @@ export default function MaintenancePage() {
               </div>
 
               <div className="flex flex-wrap gap-3 lg:justify-end">
+                <Link
+                  href="/dat-lich-bao-duong"
+                  className="bg-white px-6 py-3 text-xs font-black uppercase tracking-[0.18em] text-gray-950 hover:bg-red-600 hover:text-white"
+                >
+                  Đặt lịch bảo dưỡng
+                </Link>
                 <a
                   href={contact.phoneUrl}
                   className="bg-red-600 px-6 py-3 text-xs font-black uppercase tracking-[0.18em] text-white hover:bg-red-700"
