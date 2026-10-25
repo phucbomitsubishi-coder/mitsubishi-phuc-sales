@@ -5,7 +5,7 @@
 // - mã HTTP, lỗi JavaScript, request hỏng cùng tên miền, ảnh lỗi, tràn ngang, số h1 và <main>
 // - axe-core (lỗi trợ năng, gồm độ tương phản chữ) ở khổ điện thoại
 // Sau đó kiểm tra mọi link nội bộ gom được. Có lỗi thì in ra và thoát mã 1 (không push).
-import { spawn } from "node:child_process";
+import { spawn, spawnSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
 
@@ -28,14 +28,37 @@ const ignoredRequest = (url) => url.includes("/_vercel/");
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const port = 9300 + Math.floor(Math.random() * 600);
 const profile = path.join(process.env.TEMP || ".", `check-site-${Date.now()}`);
+// 23/10/2026 từng treo 20–30 phút: Edge chạy ngầm của lần trước còn sót (proc.kill() chỉ tắt tiến trình cha trên Windows).
+// Nay: dọn Edge "check-site-*" cũ trước khi chạy, tắt cả cây tiến trình khi thoát, dừng hẳn nếu trình duyệt chết
+// hoặc 3 trang liền không phản hồi, và giới hạn tổng 20 phút.
+// Edge tự tách tiến trình nên tắt theo tên thư mục profile trong dòng lệnh (pattern "check-site-" = mọi lần chạy)
+function killBrowsersMatching(pattern) {
+  if (process.platform !== "win32") return;
+  const filter = "Name='msedge.exe'";
+  spawnSync("powershell", ["-NoProfile", "-Command",
+    `Get-CimInstance Win32_Process -Filter "${filter}" | Where-Object { $_.CommandLine -like '*${pattern}*' } | ForEach-Object { try { Stop-Process -Id $_.ProcessId -Force -ErrorAction Stop } catch {} }`], { stdio: "ignore" });
+}
+killBrowsersMatching("check-site-");
 const proc = spawn(browser, ["--headless=new", "--disable-gpu", "--hide-scrollbars", `--remote-debugging-port=${port}`, `--user-data-dir=${profile}`, "about:blank"], { stdio: "ignore" });
+let browserKilled = false;
+function killBrowser() {
+  if (browserKilled) return;
+  browserKilled = true;
+  if (process.platform === "win32") killBrowsersMatching(path.basename(profile));
+  else proc.kill();
+}
+process.on("exit", killBrowser);
+setTimeout(() => {
+  console.error("\nQuá 20 phút chưa xong: dừng kiểm tra. Chạy lại npm run check-site; nếu vẫn vậy thì báo lỗi công cụ, chưa kết luận web lỗi.");
+  process.exit(2);
+}, 20 * 60 * 1000).unref();
+const fetchT = (url, options = {}) => fetch(url, { ...options, signal: AbortSignal.timeout(20000) });
 
 let sitemap;
 try {
-  sitemap = await (await fetch(`${BASE}/sitemap.xml`)).text();
+  sitemap = await (await fetchT(`${BASE}/sitemap.xml`)).text();
 } catch {
   console.error(`Không mở được ${BASE}. Đã chạy "npx next start -p 3100" chưa?`);
-  proc.kill();
   process.exit(2);
 }
 const urls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1].replace(SITE, BASE));
@@ -44,12 +67,17 @@ for (const extra of ["/uu-dai/destinator", "/uu-dai/xforce", "/uu-dai/xpander", 
 let tabs;
 for (let i = 0; i < 160 && !tabs?.length; i++) {
   try {
-    tabs = await (await fetch(`http://127.0.0.1:${port}/json`)).json();
+    tabs = await (await fetchT(`http://127.0.0.1:${port}/json`)).json();
   } catch {
     await sleep(250);
   }
 }
+if (!tabs?.length) {
+  console.error("Không khởi động được trình duyệt kiểm tra (Edge). Chạy lại sau ít phút.");
+  process.exit(2);
+}
 const ws = new WebSocket(tabs.find((tab) => tab.type === "page").webSocketDebuggerUrl);
+let browserGone = false;
 let seq = 0;
 const pending = {};
 let errors = [];
@@ -69,6 +97,11 @@ ws.onmessage = (event) => {
     if (response.status >= 400 && response.url.startsWith(BASE) && !ignoredRequest(response.url)) badRequests.push(`${response.status} ${response.url.replace(BASE, "")}`);
   }
 };
+ws.onclose = () => {
+  browserGone = true;
+  // Trả lỗi ngay cho mọi lệnh đang chờ thay vì đợi hết 30 giây từng lệnh
+  for (const id of Object.keys(pending)) pending[id](undefined, new Error("Trình duyệt kiểm tra bị tắt giữa chừng"));
+};
 await new Promise((resolve) => (ws.onopen = resolve));
 // Mỗi lệnh gửi trình duyệt chờ tối đa 30 giây (21/10/2026: từng bị treo 28 phút khi trình duyệt không trả lời)
 const TIMEOUT = 30000;
@@ -78,10 +111,13 @@ const send = (method, params = {}) => new Promise((resolve, reject) => {
     delete pending[id];
     reject(new Error(`Trình duyệt không phản hồi ${method} sau ${TIMEOUT / 1000} giây`));
   }, TIMEOUT);
-  pending[id] = (result) => {
+  pending[id] = (result, error) => {
     clearTimeout(timer);
-    resolve(result);
+    delete pending[id];
+    if (error) reject(error);
+    else resolve(result);
   };
+  if (browserGone) return pending[id](undefined, new Error("Trình duyệt kiểm tra bị tắt giữa chừng"));
   ws.send(JSON.stringify({ id, method, params }));
 });
 const evaluate = async (expression) => ((await send("Runtime.evaluate", { expression, returnByValue: true, awaitPromise: true })).result || {}).value;
@@ -91,8 +127,11 @@ await send("Page.enable");
 
 const problems = [];
 const links = new Set();
+let consecutiveFailures = 0;
+let aborted = "";
 for (const [width, height, mobile] of [[390, 844, true], [1366, 900, false]]) {
   await send("Emulation.setDeviceMetricsOverride", { width, height, deviceScaleFactor: 1, mobile });
+  if (aborted) break;
   for (const url of urls) {
     errors = [];
     badRequests = [];
@@ -124,26 +163,39 @@ for (const [width, height, mobile] of [[390, 844, true], [1366, 900, false]]) {
       problems.push(`${page}: ${list.join(" | ")}`);
       console.log(`✗ ${page}: ${list.join(" | ")}`);
     }
+    consecutiveFailures = 0;
     } catch (error) {
       // Trang bị treo: ghi thành lỗi rồi đi tiếp, không đứng chờ mãi
       const page = `${url.replace(BASE, "") || "/"} @${width}`;
       problems.push(`${page}: ${error.message}`);
       console.log(`✗ ${page}: ${error.message}`);
+      consecutiveFailures++;
+      if (browserGone || consecutiveFailures >= 3) {
+        aborted = browserGone ? "trình duyệt kiểm tra bị tắt giữa chừng" : "3 trang liền không phản hồi";
+        break;
+      }
     }
   }
 }
 
+if (aborted) {
+  console.error(`
+Dừng kiểm tra vì ${aborted}. Đây thường là lỗi công cụ, không phải lỗi web: chạy lại npm run check-site.`);
+  process.exit(2);
+}
+
 // Link nội bộ
 for (const href of links) {
-  const res = await fetch(BASE + href, { redirect: "manual" }).catch(() => ({ status: 0 }));
+  const res = await fetchT(BASE + href, { redirect: "manual" }).catch(() => ({ status: 0 }));
   if (![200, 307, 308].includes(res.status)) problems.push(`Link hỏng ${res.status} ${href}`);
 }
 // Trang không tồn tại phải trả 404
-const missing = await fetch(`${BASE}/trang-khong-ton-tai-${Date.now()}`).catch(() => ({ status: 0 }));
+const missing = await fetchT(`${BASE}/trang-khong-ton-tai-${Date.now()}`).catch(() => ({ status: 0 }));
 if (missing.status !== 404) problems.push(`Trang không tồn tại trả mã ${missing.status} (đúng phải là 404)`);
 
+ws.onclose = null;
 ws.close();
-proc.kill();
+killBrowser();
 console.log(`\nĐã kiểm tra ${urls.length} trang × 2 khổ màn hình, ${links.size} link nội bộ${axe ? ", có axe-core" : " (không có axe-core)"}.`);
 if (problems.length) {
   console.log(`CÓ ${problems.length} LỖI:\n- ${problems.join("\n- ")}`);

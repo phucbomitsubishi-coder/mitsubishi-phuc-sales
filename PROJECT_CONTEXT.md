@@ -44,7 +44,7 @@ npm run price-image    # Tạo ảnh bảng giá tháng 1080×1350 để đăng 
 npm run promo-images   # Ảnh khuyến mãi từng dòng xe 1080×1350 + file caption/bình luận → ../anh-facebook/khuyen-mai-MM-YYYY/
 npm run sync-accessories # Đồng bộ bảng phụ kiện (CHỈ giá niêm yết của món " – MMV") từ ../bao-gia-xe/phu-kien.js → src/data/accessories.ts (tự sinh, không sửa tay)
 npm run compare-images # Ảnh 1080×1350 + caption cho các bài so sánh → ../anh-facebook/so-sanh/ (thêm bài mới: sửa mảng comparisons trong script; ảnh chỉ đặt câu hỏi trung lập, không số liệu hơn thua; ảnh xe đối thủ CHỈ lấy từ Wikimedia Commons CC BY/BY-SA, lưu ../anh-facebook/so-sanh/doi-thu/<khóa>.jpg + credits.json, ảnh tự in dòng ghi tác giả; ảnh anh Phúc tự chụp để ở ../anh-facebook/so-sanh/anh-tu-chup/<tên mẫu xe>.jpg được ưu tiên, không cần ghi tác giả)
-npm run check-site     # KIỂM TRA TRƯỚC KHI PUSH (21/10/2026): build + `npx next start -p 3100` rồi chạy; mọi URL sitemap + /uu-dai/* ở 390px và 1366px: mã HTTP, lỗi JS, request hỏng, ảnh lỗi, tràn ngang, h1/main, axe-core (điện thoại), link nội bộ, trang 404. Có lỗi thì thoát mã 1 → sửa xong mới push. Web thật: npm run check-site -- https://www.mitsubishiauto.vn
+npm run check-site     # KIỂM TRA TRƯỚC KHI PUSH (21/10/2026): build + `npx next start -p 3100` rồi chạy; mọi URL sitemap + /uu-dai/* ở 390px và 1366px: mã HTTP, lỗi JS, request hỏng, ảnh lỗi, tràn ngang, h1/main, axe-core (điện thoại), link nội bộ, trang 404. Có lỗi thì thoát mã 1 → sửa xong mới push. Từ 25/10/2026 tự dọn Edge "check-site-*" cũ, tắt Edge theo profile khi thoát, dừng (mã 2 = lỗi công cụ, chạy lại) nếu trình duyệt chết/3 trang liền treo/quá 20 phút. Web thật: npm run check-site -- https://www.mitsubishiauto.vn
 npm run compress-images # Nén ảnh public/images giữ nguyên tên (PNG → bảng màu, JPG > 150 KB → mozjpeg 80); BẮT BUỘC sau khi thêm ảnh mới vì web không qua tối ưu ảnh Vercel. 21/10/2026 đã nén 126 ảnh 24 MB → 12 MB
 npm run indexnow       # Báo Bing/IndexNow mọi URL trong sitemap (chạy SAU khi deploy xong; khóa ở public/<key>.txt). Cốc Cốc không còn webmaster tool, tự thu thập theo robots.txt
 npm run sync-dealer-promos # Đồng bộ CHƯƠNG TRÌNH ĐẠI LÝ (PROMO_MONTH, PROMOS) từ ../bao-gia-xe/index.html → src/data/dealerPromotions.ts (tự sinh; KHÔNG đọc .bi-mat). Chỉ landing page /uu-dai/* dùng
@@ -229,7 +229,7 @@ Alias import: `@/` → `src/`.
   Khi thêm trang tĩnh mới:
   - Dùng `export const metadata: Metadata = createPageMetadata({ title, description, path })` từ `@/lib/metadata`.
     Nếu chỉ khai báo `title/description`, trang sẽ kế thừa Open Graph của trang chủ, và khi chia sẻ qua Zalo/Facebook sẽ hiện sai tiêu đề và URL.
-    Hàm này tự thêm "| Lưu Hoàng Phúc" vào tiêu đề nếu thiếu.
+    Hàm này tự thêm "| Lưu Hoàng Phúc" vào tiêu đề nếu thiếu, nhưng `fitTitle` bỏ đuôi này khi tiêu đề vượt 65 ký tự (25/10/2026; dùng cả ở xe cũ, tin tức; trang xe đặt tiêu đề riêng, giữ nguyên).
   - Ảnh chia sẻ riêng (1200×630): tạo `opengraph-image.tsx` trong thư mục trang, gọi `renderOgImage({ kicker, title, subtitle, images, versus })`
     từ `@/lib/ogImage` (font Roboto ở `src/assets/fonts`), **và** thêm `hasOgImageFile: true` vào `createPageMetadata`.
     Nếu thiếu `hasOgImageFile`, ảnh mặc định `og-default.jpg` sẽ được dùng thay cho ảnh riêng. Đã có ảnh riêng cho: bảng giá (tự đổi theo tháng),

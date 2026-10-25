@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { fitTitle } from "@/lib/metadata";
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
 import { notFound } from "next/navigation";
@@ -39,7 +40,7 @@ export async function generateMetadata({
   const description = `${car.name}${variant} ${car.modelYear} đã qua sử dụng, đi ${car.mileage.toLocaleString("vi-VN")} km, giá ${car.price.toLocaleString("vi-VN")} đồng.${inspected ? " Xe đã kiểm định chính hãng 160 chi tiết." : ""} Xem xe và lái thử tại ${siteConfig.dealer.name}.`;
 
   return {
-    title: `${car.name} ${car.modelYear} đã qua sử dụng, ${car.mileage.toLocaleString("vi-VN")} km | Lưu Hoàng Phúc`,
+    title: fitTitle(`${car.name} ${car.modelYear} đã qua sử dụng, ${car.mileage.toLocaleString("vi-VN")} km | Lưu Hoàng Phúc`),
     description,
     alternates: {
       canonical: `/xe-cu/${slug}`,

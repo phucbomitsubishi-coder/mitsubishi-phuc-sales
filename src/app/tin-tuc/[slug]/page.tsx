@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { fitTitle } from "@/lib/metadata";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
@@ -46,7 +47,7 @@ export async function generateMetadata({
 
   // Tiêu đề hiện trên Google: dùng seoTitle ngắn (~60 ký tự) nếu có, vì tiêu đề bài thường dài và bị Google cắt
   return {
-    title: `${article.seoTitle ?? article.title} | Lưu Hoàng Phúc`,
+    title: fitTitle(`${article.seoTitle ?? article.title} | Lưu Hoàng Phúc`),
     description: article.excerpt,
     alternates: {
       canonical: `/tin-tuc/${slug}`,
