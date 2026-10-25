@@ -14,6 +14,7 @@ import { carCards } from "@/lib/carCards";
 import HandoverStrip from "@/components/HandoverStrip";
 import Link from "next/link";
 import Image from "next/image";
+import PromoCountdown from "@/components/PromoCountdown";
 
 export const metadata = {
   alternates: {
@@ -253,6 +254,7 @@ export default function Home() {
           <div className="px-6 py-10 md:px-12 md:py-14">
             <p className="text-xs font-bold uppercase tracking-[0.25em] text-red-700">Khuyến mãi</p>
             <h2 className="mt-3 text-3xl font-black tracking-tight md:text-4xl">Ưu đãi Mitsubishi tháng {monthLabel}</h2>
+            <PromoCountdown month={currentPromotion.month} year={currentPromotion.year} className="mt-2 text-sm font-bold text-red-700" />
             <ul className="mt-6 divide-y divide-gray-300 border-y border-gray-300">
               {promoCars.map((car) => (
                 <li key={car.id}>

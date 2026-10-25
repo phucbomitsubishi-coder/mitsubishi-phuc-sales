@@ -4,6 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import type { Showroom } from "@/data/showroom";
+import { currentPromotion } from "@/data/promotions";
+import PromoCountdown from "@/components/PromoCountdown";
 
 type Props = {
   showroom: Showroom;
@@ -95,6 +97,7 @@ export default function ShowroomHero({ showroom, carName, carId, priceLabel, pro
             </>
           )}
         </p>
+        {promotionLabel && <PromoCountdown month={currentPromotion.month} year={currentPromotion.year} className="mt-1 text-xs font-bold uppercase tracking-[0.18em] text-red-300" />}
 
         {/* Biểu tượng điểm nổi bật */}
         <ul className="mx-auto mt-7 grid max-w-6xl grid-cols-3 gap-x-3 gap-y-4 md:mt-10 md:flex md:flex-wrap md:justify-center md:gap-x-6 lg:flex-nowrap">

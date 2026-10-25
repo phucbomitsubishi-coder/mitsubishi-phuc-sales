@@ -4,6 +4,7 @@ import { FormEvent, Suspense, useState } from "react";
 import { cars } from "@/data/cars";
 import { useSearchParams } from "next/navigation";
 import PurchaseTimeline, { withTimeline } from "@/components/PurchaseTimeline";
+import TestDriveSlot, { slotNote } from "@/components/TestDriveSlot";
 import SiteHeader from "@/components/SiteHeader";
 import Link from "next/link";
 import { trackPixel } from "@/lib/metaPixel";
@@ -48,7 +49,10 @@ function DangKyLaiThuForm() {
     const phone = String(formData.get("phone") || "").trim();
     const carId = String(formData.get("car") || "").trim();
     const note = withTimeline(
-      String(formData.get("note") || "").trim(),
+      [
+        slotNote(String(formData.get("tdDay") || ""), String(formData.get("tdSlot") || "")),
+        String(formData.get("note") || "").trim(),
+      ].filter(Boolean).join(" | "),
       String(formData.get("timeline") || "").trim()
     );
 
@@ -209,6 +213,8 @@ function DangKyLaiThuForm() {
                 </select>
               </div>
 
+              <TestDriveSlot ids={{ day: "td-day", slot: "td-slot" }} look="box" fieldClass="w-full border border-gray-300 bg-white px-4 py-3 outline-none transition focus:border-red-600 focus:ring-2 focus:ring-red-100" />
+
               <PurchaseTimeline className="sm:col-span-2" />
 
               {/* GHI CHÚ */}
@@ -224,7 +230,7 @@ function DangKyLaiThuForm() {
                   id="note"
                   name="note"
                   rows={4}
-                  placeholder="Thời gian thuận tiện để lái thử. Muốn lái thử tại nhà, vui lòng ghi địa chỉ..."
+                  placeholder="Muốn lái thử tại nhà, vui lòng ghi địa chỉ. Hoặc ghi thời gian cụ thể khác..."
                   className="w-full resize-none border border-gray-300 px-4 py-3 outline-none transition focus:border-red-600 focus:ring-2 focus:ring-red-100"
                 />
               </div>

@@ -9,6 +9,7 @@ import { provinces, defaultProvinceId } from "@/data/registrationFees";
 import { calculateOnRoadPrice } from "@/lib/onRoadPrice";
 import LandingLeadForm from "@/components/LandingLeadForm";
 import MobileContactBar from "@/components/MobileContactBar";
+import PromoCountdown from "@/components/PromoCountdown";
 
 // Khuôn landing page chạy quảng cáo Facebook/Google (/uu-dai/<xe>, anh Phúc chọn "cách B" 16/10/2026):
 // ghi CHƯƠNG TRÌNH ĐẠI LÝ (dealerPromotions.ts, tự sinh từ app báo giá) vì trang chỉ dành cho người bấm quảng cáo:
@@ -103,6 +104,7 @@ export default function AdLandingPage({ carSlug, extraCarSlugs = [], heading, de
               <div className="mt-6 rounded-2xl border border-red-500/40 bg-red-600/10 p-5">
                 <p className="text-sm font-semibold uppercase tracking-wide text-red-400">Ưu đãi tháng {promoMonthLabel}</p>
                 <p className="mt-1 text-2xl font-bold md:text-3xl">Đến {million(maxBenefit)} đồng</p>
+                <PromoCountdown month={dealerPromotion.month} year={dealerPromotion.year} className="mt-1 text-sm font-semibold text-yellow-300" />
                 <ul className="mt-3 space-y-1.5 text-gray-200">
                   {rows.filter((row) => row.benefits.length > 0).map((row) => (
                     <li key={row.name}>

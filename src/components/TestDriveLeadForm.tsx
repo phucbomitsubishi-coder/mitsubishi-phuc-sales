@@ -5,6 +5,7 @@ import { FormEvent, useId, useState } from "react";
 import { trackPixel } from "@/lib/metaPixel";
 import { TEST_DRIVE_SCRIPT_URL } from "@/lib/leadScripts";
 import { purchaseTimelines } from "@/components/PurchaseTimeline";
+import TestDriveSlot, { slotNote } from "@/components/TestDriveSlot";
 
 type Props = {
   carName: string;
@@ -55,6 +56,7 @@ export default function TestDriveLeadForm({ carName, variantNames, selectedVaria
     const note = [
       variant && `Phiên bản: ${variant}`,
       `Lái thử ${place.toLowerCase()}`,
+      slotNote(get("tdDay"), get("tdSlot")),
       get("note"),
       get("timeline") && `Dự định mua: ${get("timeline")}`,
     ]
@@ -147,12 +149,16 @@ export default function TestDriveLeadForm({ carName, variantNames, selectedVaria
         </div>
       </fieldset>
 
-      <label htmlFor={`${uid}-note`} className="sr-only">Thời gian, địa chỉ lái thử</label>
+      <div className="mt-4 grid gap-4 sm:grid-cols-2">
+        <TestDriveSlot ids={{ day: `${uid}-day`, slot: `${uid}-slot` }} look="line" fieldClass={field} />
+      </div>
+
+      <label htmlFor={`${uid}-note`} className="sr-only">Địa chỉ, ghi chú lái thử</label>
       <input
         id={`${uid}-note`}
         name="note"
         type="text"
-        placeholder={place === "Tại nhà" ? "Địa chỉ và thời gian thuận tiện" : "Thời gian thuận tiện (tùy chọn)"}
+        placeholder={place === "Tại nhà" ? "Địa chỉ lái thử tại nhà" : "Ghi chú (tùy chọn)"}
         className={`${field} mt-4`}
       />
 

@@ -5,7 +5,8 @@ import SiteHeader from "@/components/SiteHeader";
 import PageSchema from "@/components/PageSchema";
 import { createPageMetadata } from "@/lib/metadata";
 import { carCards } from "@/lib/carCards";
-import { upcomingCars } from "@/data/cars";
+import { cars, upcomingCars } from "@/data/cars";
+import CarFinder, { type FinderCar } from "@/components/CarFinder";
 import { siteConfig } from "@/config/site";
 
 // Trang "Danh sách xe" kiểu trang Tất cả dòng xe của MMV (21/10/2026): lưới 2 cột, mỗi xe ảnh có cảnh nền,
@@ -16,6 +17,17 @@ export const metadata: Metadata = createPageMetadata({
     "Tất cả dòng xe Mitsubishi đang bán: Destinator, Triton, Xforce, Xpander Cross, Xpander, Attrage. Giá niêm yết từng xe, số chỗ, nhiên liệu và ưu đãi tháng.",
   path: "/xe",
 });
+
+const finderCars: FinderCar[] = carCards.map((card) => ({
+  id: card.id,
+  slug: card.slug,
+  name: card.name,
+  shortName: card.shortName,
+  image: card.sideImage ?? card.image,
+  seats: card.seats,
+  minPrice: Math.min(...(cars.find((car) => car.id === card.id)?.variants.map((variant) => variant.price) ?? [0])),
+  priceLabel: card.priceLabel,
+}));
 
 const fuelIcon = "M12 3s6 6.4 6 11a6 6 0 0 1-12 0c0-4.6 6-11 6-11z";
 const seatIcon = "M7 4v8l2 7h8v-3l-4-1-2-4V4H7z";
@@ -34,6 +46,9 @@ export default function CarListPage() {
             Từ SUV 7 chỗ, xe đô thị nhỏ gọn, xe gia đình đến bán tải, Mitsubishi có lựa chọn cho từng nhu cầu.
             Bấm vào từng xe để xem giá lăn bánh, phiên bản và ưu đãi tháng.
           </p>
+          <a href="#chon-xe" className="mt-4 inline-block text-sm font-bold text-red-700 underline-offset-4 hover:underline">
+            Chưa biết chọn xe nào? Trả lời 3 câu hỏi →
+          </a>
         </section>
 
         <section className="mx-auto grid max-w-7xl gap-x-12 gap-y-16 px-6 py-12 md:grid-cols-2 md:py-16">
@@ -93,6 +108,8 @@ export default function CarListPage() {
             </article>
           ))}
         </section>
+
+        <CarFinder cars={finderCars} />
 
         {upcomingCars.length > 0 && (
           <section className="mx-auto max-w-7xl px-6 pb-12">

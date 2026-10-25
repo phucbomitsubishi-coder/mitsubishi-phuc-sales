@@ -1,7 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
+
+const noSubscribe = () => () => {};
 import type { CarVariant } from "@/data/cars";
 import type { VariantPromotion } from "@/data/promotions";
 import OnRoadPriceCalculator from "@/components/OnRoadPriceCalculator";
@@ -140,14 +142,27 @@ export default function VariantSelector({
   promotions,
   sideImages,
 }: Props) {
-  const [selectedIndex, setSelectedIndex] = useState(0);
-const [selectedColor, setSelectedColor] = useState("");
+  // Link chia sẻ cấu hình (?phien-ban=&mau=, 25/10/2026, kiểu Audi/Mercedes): mở trang là chọn sẵn phiên bản + màu.
+  // Đọc URL bằng useSyncExternalStore (trang dựng sẵn nên lúc build chưa có URL); khi khách tự chọn thì lựa chọn của khách được ưu tiên.
+  // Canonical của trang không đổi nên không tạo trang trùng trên Google.
+  const search = useSyncExternalStore(noSubscribe, () => window.location.search, () => "");
+  const urlParams = new URLSearchParams(search);
+  const urlIndex = variants.findIndex((variant) => variant.name.toLowerCase() === urlParams.get("phien-ban")?.toLowerCase());
+  const urlColor = urlIndex >= 0 && variants[urlIndex].colors?.includes(urlParams.get("mau") ?? "") ? urlParams.get("mau") ?? "" : "";
+  const [pickedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [pickedColor, setSelectedColor] = useState<string | null>(null);
+  const selectedIndex = pickedIndex ?? (urlIndex >= 0 ? urlIndex : 0);
+  const selectedColor = pickedColor ?? urlColor;
   const [showAllEquipment, setShowAllEquipment] = useState(false);
   // Khung tính lăn bánh thu gọn, khách bấm "Xem giá lăn bánh" mới mở
   const [showCalculator, setShowCalculator] = useState(false);
   const selectedVariant = variants[selectedIndex];
   // Màu mặc định từng phiên bản (màu nổi bật, hạn chế trắng)
   const featured = featuredColors(variants, carName);
+  const [shareState, setShareState] = useState("");
+  useEffect(() => {
+    if (new URLSearchParams(window.location.search).get("phien-ban")) document.getElementById("phien-ban")?.scrollIntoView();
+  }, []);
 
   // Dùng chung cho thẻ phiên bản và tiêu đề cột trong bảng thông số
   const selectVariant = (index: number) => {
@@ -201,6 +216,23 @@ const selectedImage =
   "";
   
   const variantTitle = selectedVariant.name === carName.replace("Mitsubishi ", "") ? carName : `${carName} ${selectedVariant.name}`;
+
+  async function shareConfig() {
+    const params = new URLSearchParams({ "phien-ban": selectedVariant.name });
+    if (defaultColor) params.set("mau", defaultColor);
+    const url = `${window.location.origin}${window.location.pathname}?${params}#phien-ban`;
+    const title = `${variantTitle}${defaultColor ? ` màu ${defaultColor}` : ""}`;
+    try {
+      if (navigator.share) {
+        await navigator.share({ title, text: `Xem xe ${title}`, url });
+        return;
+      }
+      await navigator.clipboard.writeText(url);
+      setShareState("Đã chép link, dán vào Zalo hoặc Messenger để gửi.");
+    } catch {
+      // Khách bấm hủy chia sẻ: không cần báo gì
+    }
+  }
   const spec = selectedVariant.specifications;
   const summary = [spec?.engine, spec?.transmission, spec?.seats && `${spec.seats} chỗ`, spec?.groundClearance && `gầm ${spec.groundClearance}`]
     .filter(Boolean)
@@ -413,6 +445,17 @@ const selectedImage =
       </div>
     </div>
   )}
+
+            <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2">
+              <button
+                type="button"
+                onClick={shareConfig}
+                className="border border-gray-950 px-5 py-2.5 text-xs font-black uppercase tracking-[0.18em] transition hover:bg-gray-950 hover:text-white"
+              >
+                Chia sẻ xe này
+              </button>
+              <p aria-live="polite" className="text-xs text-gray-600">{shareState || "Gửi phiên bản và màu đang chọn cho người thân xem"}</p>
+            </div>
 
           </div>
         </div>

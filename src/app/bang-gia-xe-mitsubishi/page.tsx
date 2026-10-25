@@ -11,6 +11,7 @@ import { calculateOnRoadPrice } from "@/lib/onRoadPrice";
 import { formatMillion, promotionMonthLabel } from "@/lib/promotionItems";
 import { featuredImages } from "@/lib/carCards";
 import { siteConfig } from "@/config/site";
+import PromoCountdown from "@/components/PromoCountdown";
 
 // Toàn bộ số liệu lấy từ cars.ts, promotions.ts và registrationFees.ts.
 // Sang tháng mới chỉ cần cập nhật promotions.ts (npm run add-news), trang tự đổi theo.
@@ -113,6 +114,7 @@ export default function PriceListPage() {
               Dương cũ), biển trắng. Mẫu xe có giá khởi điểm thấp nhất hiện nay là{" "}
               {cheapest.car.name}, từ {formatMillion(cheapest.minPrice)} đồng.
             </p>
+            <PromoCountdown month={currentPromotion.month} year={currentPromotion.year} className="mt-5 inline-block border border-red-500 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-red-300" />
 
           </div>
         </section>
