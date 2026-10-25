@@ -46,6 +46,8 @@ function killBrowser() {
   browserKilled = true;
   if (process.platform === "win32") killBrowsersMatching(path.basename(profile));
   else proc.kill();
+  // Xóa profile Edge (~200 MB mỗi lần chạy) để TEMP không phình
+  try { fs.rmSync(profile, { recursive: true, force: true, maxRetries: 5, retryDelay: 300 }); } catch {}
 }
 process.on("exit", killBrowser);
 setTimeout(() => {

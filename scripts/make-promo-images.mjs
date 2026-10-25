@@ -188,6 +188,8 @@ if (!edge) throw new Error("Không tìm thấy Microsoft Edge để chụp ảnh
 const outDir = path.resolve(root, "..", "anh-facebook", `khuyen-mai-${monthNumber}-${currentPromotion.year}`);
 fs.mkdirSync(outDir, { recursive: true });
 const work = fs.mkdtempSync(path.join(os.tmpdir(), "promo-images-"));
+// Xóa thư mục tạm (profile Edge ~30 MB mỗi ảnh) khi script kết thúc; 25/10/2026 từng tích 6,5 GB rác trong TEMP
+process.on("exit", () => { try { fs.rmSync(work, { recursive: true, force: true, maxRetries: 3 }); } catch {} });
 
 for (const item of items) {
   const htmlFile = path.join(work, `${item.id}.html`);

@@ -181,6 +181,8 @@ const [mm, yyyy] = promoMonth.split("/");
 const outDir = path.resolve(root, "..", "anh-facebook", `quang-cao-${mm}-${yyyy}`);
 fs.mkdirSync(outDir, { recursive: true });
 const work = fs.mkdtempSync(path.join(os.tmpdir(), "ad-img-"));
+// Xóa thư mục tạm (profile Edge ~30 MB mỗi ảnh) khi script kết thúc; 25/10/2026 từng tích 6,5 GB rác trong TEMP
+process.on("exit", () => { try { fs.rmSync(work, { recursive: true, force: true, maxRetries: 3 }); } catch {} });
 const web = process.argv.includes("--web");
 const only = process.argv.slice(2).find((a) => !a.startsWith("--"));
 

@@ -186,6 +186,8 @@ ${link}
 }
 
 const work = fs.mkdtempSync(path.join(os.tmpdir(), "compare-images-"));
+// Xóa thư mục tạm (profile Edge ~30 MB mỗi ảnh) khi script kết thúc; 25/10/2026 từng tích 6,5 GB rác trong TEMP
+process.on("exit", () => { try { fs.rmSync(work, { recursive: true, force: true, maxRetries: 3 }); } catch {} });
 
 // Cắt sẵn ảnh xe Mitsubishi theo `crop` (nếu có)
 async function preparePhoto(carId) {
