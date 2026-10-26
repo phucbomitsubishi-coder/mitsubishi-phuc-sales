@@ -43,6 +43,89 @@ export type NewsArticle = {
 
 export const newsArticles: NewsArticle[] = [
   {
+    id: "news-1792980000000",
+
+    title: "Hàng ghế thứ 3 Mitsubishi Destinator có thoải mái cho người lớn không?",
+
+    seoTitle: "Hàng ghế 3 Destinator có thoải mái cho người lớn?",
+
+    slug: "hang-ghe-thu-3-mitsubishi-destinator-co-thoai-mai-cho-nguoi-lon",
+
+    category: "Tư vấn mua xe",
+
+    excerpt:
+      "Người cao bao nhiêu thì ngồi hàng ghế thứ 3 Destinator thoải mái, khoang hành lý chứa được gì khi đủ 7 người, ghế gập ra sao. Tổng hợp từ Mitsubishi Motors Việt Nam và kinh nghiệm tư vấn cho gia đình.",
+
+    publishedAt: "2026-10-26",
+
+    image: "/images/cars/destinator/showroom/feature-highlight.jpg",
+
+    featured: false,
+
+    content: [
+      {
+        heading: "Câu trả lời ngắn",
+        paragraphs: [
+          "Hàng ghế thứ 3 của Destinator ngồi được người lớn trong các chuyến đi hằng ngày và đi gần. Theo Mitsubishi Motors Việt Nam (MMV), người cao dưới khoảng 1,70 m có thể ngồi thoải mái cả khi đi xa; người cao 1,75–1,80 m vẫn ngồi được cho quãng đường ngắn nếu hàng ghế thứ 2 trượt lên phía trước một chút.",
+          "Mức thoải mái thực tế còn tùy vóc dáng, tư thế ngồi và thời gian di chuyển. Cách chắc chắn nhất là cả nhà ngồi thử trước khi mua.",
+        ],
+        images: [
+          {
+            src: "/images/cars/destinator/showroom/feature-interior.jpg",
+            alt: "Ba hàng ghế bên trong Mitsubishi Destinator",
+          },
+        ],
+      },
+      {
+        heading: "Vào và ra hàng ghế cuối",
+        paragraphs: [
+          "Muốn vào hàng ghế thứ 3, bạn gập hàng ghế thứ 2 rồi bước qua bệ cửa sau, người sẽ phải hơi cúi. Trẻ em và người trẻ ra vào khá dễ; với ông bà hoặc người lớn tuổi, nên để ngồi hàng ghế thứ 2 cho thuận tiện.",
+          "Theo MMV, hàng ghế thứ 2 gập theo tỷ lệ 40:20:40 và hàng ghế thứ 3 gập 50:50, nên có thể gập một phần để vừa chở người vừa chở đồ.",
+        ],
+      },
+      {
+        heading: "Tiện nghi cho người ngồi sau",
+        paragraphs: [
+          "Cả hai phiên bản Premium và Ultimate đều có điều hòa tự động hai vùng độc lập và cửa gió điều hòa cho hàng ghế sau, giúp người ngồi hàng 2, hàng 3 không bị nóng khi đi trưa. MMV cho biết hàng ghế 2 và 3 có cổng sạc USB Type A và Type C.",
+          "Màn hình cảm ứng 12,3 inch hỗ trợ Apple CarPlay và Android Auto có ở cả hai bản. Hệ thống âm thanh Yamaha 8 loa chỉ có trên bản Ultimate; bản Premium dùng hệ thống 6 loa.",
+        ],
+        images: [
+          {
+            src: "/images/cars/destinator/showroom/feature-audio.jpg",
+            alt: "Loa Yamaha trên Mitsubishi Destinator Ultimate",
+            caption: "Âm thanh Yamaha 8 loa chỉ có trên bản Ultimate",
+          },
+        ],
+      },
+      {
+        heading: "Khoang hành lý khi đủ 7 người",
+        paragraphs: [
+          "Khi dùng đủ 7 chỗ, theo MMV, cốp sau vẫn để được một vali xách tay cỡ 20 inch, một xe đẩy em bé loại gập gọn hoặc vài túi xách, ba lô. Đi chơi xa cả nhà 7 người với nhiều vali lớn thì nên gắn thêm giá nóc hoặc gập một nửa hàng ghế thứ 3.",
+          "Gập hàng ghế thứ 3 (chở 5 người): khoảng 494–844 lít. Gập cả hàng 2 và hàng 3 (chở 2 người): khoảng 819–1.668 lít. Đây là số ước tính MMV công bố, khoảng dao động tùy vị trí trượt và ngả của ghế.",
+        ],
+      },
+      {
+        heading: "Kích thước tham khảo",
+        paragraphs: [
+          "Destinator dài 4.680 mm, rộng 1.840 mm, cao 1.780 mm, chiều dài cơ sở 2.815 mm, khoảng sáng gầm 214 mm. Xe dùng máy xăng 1.5L turbo 163 PS, 250 Nm, hộp số CVT. Giá niêm yết 780 triệu (Premium) và 855 triệu (Ultimate).",
+        ],
+      },
+      {
+        heading: "Ngồi thử trước khi quyết định",
+        paragraphs: [
+          "Nếu gia đình bạn có người cao trên 1,75 m thường xuyên ngồi hàng cuối, hãy ngồi thử cả 3 hàng ghế trước khi mua. Phúc có thể mang xe tới tận nhà để cả nhà ngồi thử, hoặc bạn ghé showroom Mitsubishi Moveo New City. Đăng ký lái thử hoặc nhận báo giá lăn bánh Destinator ngay trên website.",
+        ],
+      },
+    ],
+
+    source: {
+      name: "Mitsubishi Motors Việt Nam",
+      url: "https://www.mitsubishi-motors.com.vn/tin-tuc/hang-ghe-thu-3-mitsubishi-destinator-co-thoai-mai-cho-nguoi-lon-khong-n154598.html",
+    },
+
+    originalContent: true,
+  },
+  {
     id: "news-1792392000000",
 
     title: "Mitsubishi Outlander thế hệ mới xuất hiện tại Việt Nam, hãng xác nhận mở bán trong năm 2026 với bản hybrid nhẹ",
@@ -650,11 +733,19 @@ export const newsArticles: NewsArticle[] = [
 
     publishedAt: "2026-10-01",
 
+    updatedAt: "2026-10-26",
+
     image: "/images/news/mitsubishi-outlander-the-he-moi-co-the-ra-mat-vao-nam-2028/elevance-cover.jpg",
 
     featured: false,
 
     content: [
+      {
+        heading: "Lưu ý: khác với Outlander về Việt Nam năm 2026",
+        paragraphs: [
+          "Bài này nói về thế hệ Outlander kế tiếp (thế hệ thứ năm), phát triển từ mẫu Elevance Concept và được báo chí nước ngoài dự đoán ra mắt toàn cầu khoảng năm 2028. Mẫu Outlander mà Mitsubishi Motors Việt Nam xác nhận đưa về nước trong năm 2026 (bản hybrid nhẹ) là thế hệ hiện đang bán ở nhiều nước. Xem bài \"Mitsubishi Outlander thế hệ mới xuất hiện tại Việt Nam\" trong mục Tin tức để biết thông tin mới nhất.",
+        ],
+      },
       {
         heading: "Vì sao Mitsubishi cần Outlander mới",
 

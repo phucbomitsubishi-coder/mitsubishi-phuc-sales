@@ -132,8 +132,13 @@ const links = new Set();
 let consecutiveFailures = 0;
 let aborted = "";
 for (const [width, height, mobile] of [[390, 844, true], [1366, 900, false]]) {
-  await send("Emulation.setDeviceMetricsOverride", { width, height, deviceScaleFactor: 1, mobile });
   if (aborted) break;
+  try {
+    await send("Emulation.setDeviceMetricsOverride", { width, height, deviceScaleFactor: 1, mobile });
+  } catch (error) {
+    aborted = `không đổi được khổ màn hình ${width}px (${error.message})`;
+    break;
+  }
   for (const url of urls) {
     errors = [];
     badRequests = [];
