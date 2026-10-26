@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import SiteHeader from "@/components/SiteHeader";
 import PageSchema from "@/components/PageSchema";
 import { createPageMetadata } from "@/lib/metadata";
+import { comparisonSeo } from "@/lib/comparisonSeo";
 import { getCarBySlug } from "@/data/cars";
 import { competitors, type CompetitorCar } from "@/data/competitors";
 import { formatMillion, promotionMonthLabel } from "@/lib/promotionItems";
@@ -17,10 +18,12 @@ import {
   TwoColumnLists,
 } from "@/components/CarComparison";
 
+// Tiêu đề/mô tả tự tính chênh lệch giá (src/lib/comparisonSeo.ts, 26/10/2026)
+const seo = comparisonSeo({ slug: "mitsubishi-triton", short: "Triton", rival: "fordRanger", rivalShort: "Ranger", variant: "2WD AT GLX", rivalVariant: "XLS 2.0L AT 4x2", scope: "số tự động" });
+
 export const metadata: Metadata = createPageMetadata({
-  title: "So sánh Mitsubishi Triton và Ford Ranger: nên mua bán tải nào?",
-  description:
-    "So sánh Mitsubishi Triton và Ford Ranger về giá niêm yết, giá lăn bánh, động cơ, hộp số, hệ dẫn động, trang bị và bảo hành. Gợi ý chọn xe bán tải theo nhu cầu.",
+  title: seo.title,
+  description: seo.description,
   path: "/tu-van/so-sanh-triton-va-ford-ranger",
   hasOgImageFile: true,
 });

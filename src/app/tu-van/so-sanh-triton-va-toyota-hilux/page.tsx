@@ -3,6 +3,7 @@ import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 import PageSchema from "@/components/PageSchema";
 import { createPageMetadata } from "@/lib/metadata";
+import { comparisonSeo } from "@/lib/comparisonSeo";
 import { getCarBySlug } from "@/data/cars";
 import { competitors, type CompetitorCar } from "@/data/competitors";
 import { formatMillion, promotionMonthLabel } from "@/lib/promotionItems";
@@ -18,10 +19,12 @@ import {
   TwoColumnLists,
 } from "@/components/CarComparison";
 
+// Tiêu đề/mô tả tự tính chênh lệch giá (src/lib/comparisonSeo.ts, 26/10/2026)
+const seo = comparisonSeo({ slug: "mitsubishi-triton", short: "Triton", rival: "toyotaHilux", rivalShort: "Hilux", variant: "2WD AT GLX", rivalVariant: "Pro 2.8 4x2 AT", scope: "số tự động" });
+
 export const metadata: Metadata = createPageMetadata({
-  title: "So sánh Mitsubishi Triton và Toyota Hilux: nên mua bán tải nào?",
-  description:
-    "So sánh Mitsubishi Triton và Toyota Hilux về giá niêm yết, giá lăn bánh, kích thước, khoảng sáng gầm, động cơ dầu, hộp số, hệ dẫn động 4WD và trang bị an toàn từng phiên bản. Gợi ý chọn bán tải theo nhu cầu.",
+  title: seo.title,
+  description: seo.description,
   path: "/tu-van/so-sanh-triton-va-toyota-hilux",
   hasOgImageFile: true,
 });

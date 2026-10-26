@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import SiteHeader from "@/components/SiteHeader";
 import PageSchema from "@/components/PageSchema";
 import { createPageMetadata } from "@/lib/metadata";
+import { comparisonSeo } from "@/lib/comparisonSeo";
 import { getCarBySlug } from "@/data/cars";
 import { competitors, type CompetitorCar } from "@/data/competitors";
 import { formatMillion, promotionMonthLabel } from "@/lib/promotionItems";
@@ -17,10 +18,12 @@ import {
   TwoColumnLists,
 } from "@/components/CarComparison";
 
+// Tiêu đề/mô tả tự tính chênh lệch giá (src/lib/comparisonSeo.ts, 26/10/2026)
+const seo = comparisonSeo({ slug: "mitsubishi-attrage", short: "Attrage", rival: "toyotaVios", rivalShort: "Vios" });
+
 export const metadata: Metadata = createPageMetadata({
-  title: "So sánh Mitsubishi Attrage và Toyota Vios: nên mua sedan nào?",
-  description:
-    "So sánh Mitsubishi Attrage và Toyota Vios về giá niêm yết, giá lăn bánh, kích thước, khoảng sáng gầm, động cơ, mức tiêu thụ nhiên liệu và trang bị an toàn. Gợi ý chọn sedan hạng B theo nhu cầu.",
+  title: seo.title,
+  description: seo.description,
   path: "/tu-van/so-sanh-attrage-va-toyota-vios",
   hasOgImageFile: true,
 });

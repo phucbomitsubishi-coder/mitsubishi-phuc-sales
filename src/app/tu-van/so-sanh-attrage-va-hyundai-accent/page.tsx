@@ -3,6 +3,7 @@ import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 import PageSchema from "@/components/PageSchema";
 import { createPageMetadata } from "@/lib/metadata";
+import { comparisonSeo } from "@/lib/comparisonSeo";
 import { getCarBySlug } from "@/data/cars";
 import { competitors, type CompetitorCar } from "@/data/competitors";
 import { formatMillion, promotionMonthLabel } from "@/lib/promotionItems";
@@ -18,10 +19,12 @@ import {
   TwoColumnLists,
 } from "@/components/CarComparison";
 
+// Tiêu đề/mô tả tự tính chênh lệch giá (src/lib/comparisonSeo.ts, 26/10/2026)
+const seo = comparisonSeo({ slug: "mitsubishi-attrage", short: "Attrage", rival: "hyundaiAccent", rivalShort: "Accent" });
+
 export const metadata: Metadata = createPageMetadata({
-  title: "So sánh Mitsubishi Attrage và Hyundai Accent: nên mua sedan nào?",
-  description:
-    "So sánh Mitsubishi Attrage và Hyundai Accent về giá niêm yết, giá lăn bánh, kích thước, khoảng sáng gầm, động cơ, hộp số và trang bị an toàn từng phiên bản. Gợi ý chọn sedan hạng B theo nhu cầu và ngân sách.",
+  title: seo.title,
+  description: seo.description,
   path: "/tu-van/so-sanh-attrage-va-hyundai-accent",
   hasOgImageFile: true,
 });

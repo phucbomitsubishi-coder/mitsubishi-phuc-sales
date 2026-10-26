@@ -3,6 +3,7 @@ import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 import PageSchema from "@/components/PageSchema";
 import { createPageMetadata } from "@/lib/metadata";
+import { comparisonSeo } from "@/lib/comparisonSeo";
 import { getCarBySlug } from "@/data/cars";
 import { competitors } from "@/data/competitors";
 import { formatMillion, promotionMonthLabel } from "@/lib/promotionItems";
@@ -18,10 +19,12 @@ import {
   TwoColumnLists,
 } from "@/components/CarComparison";
 
+// Tiêu đề/mô tả tự tính chênh lệch giá (src/lib/comparisonSeo.ts, 26/10/2026)
+const seo = comparisonSeo({ slug: "mitsubishi-xpander-cross", short: "Xpander Cross", rival: "suzukiXL7", rivalShort: "XL7 Hybrid" });
+
 export const metadata: Metadata = createPageMetadata({
-  title: "So sánh Mitsubishi Xpander Cross và Suzuki XL7 Hybrid: nên mua xe nào?",
-  description:
-    "So sánh Mitsubishi Xpander Cross và Suzuki XL7 Hybrid về giá niêm yết, giá lăn bánh, kích thước, khoảng sáng gầm, động cơ, mức tiêu thụ nhiên liệu và trang bị. Gợi ý chọn xe 7 chỗ phong cách SUV.",
+  title: seo.title,
+  description: seo.description,
   path: "/tu-van/so-sanh-xpander-cross-va-suzuki-xl7",
   hasOgImageFile: true,
 });

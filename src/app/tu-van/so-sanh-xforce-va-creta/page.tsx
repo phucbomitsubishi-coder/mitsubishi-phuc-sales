@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import SiteHeader from "@/components/SiteHeader";
 import PageSchema from "@/components/PageSchema";
 import { createPageMetadata } from "@/lib/metadata";
+import { comparisonSeo } from "@/lib/comparisonSeo";
 import { getCarBySlug } from "@/data/cars";
 import { competitors } from "@/data/competitors";
 import { promotionMonthLabel } from "@/lib/promotionItems";
@@ -16,10 +17,12 @@ import {
   TwoColumnLists,
 } from "@/components/CarComparison";
 
+// Tiêu đề/mô tả tự tính chênh lệch giá (src/lib/comparisonSeo.ts, 26/10/2026)
+const seo = comparisonSeo({ slug: "mitsubishi-xforce", short: "Xforce", rival: "hyundaiCreta", rivalShort: "Creta" });
+
 export const metadata: Metadata = createPageMetadata({
-  title: "So sánh Mitsubishi Xforce và Hyundai Creta: nên chọn xe nào?",
-  description:
-    "So sánh Mitsubishi Xforce và Hyundai Creta về giá niêm yết, giá lăn bánh, kích thước, khoảng sáng gầm, động cơ và trang bị. Gợi ý nên chọn xe nào theo nhu cầu.",
+  title: seo.title,
+  description: seo.description,
   path: "/tu-van/so-sanh-xforce-va-creta",
   hasOgImageFile: true,
 });

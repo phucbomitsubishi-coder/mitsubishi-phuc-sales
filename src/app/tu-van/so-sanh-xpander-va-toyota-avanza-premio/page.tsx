@@ -3,6 +3,7 @@ import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 import PageSchema from "@/components/PageSchema";
 import { createPageMetadata } from "@/lib/metadata";
+import { comparisonSeo } from "@/lib/comparisonSeo";
 import { getCarBySlug } from "@/data/cars";
 import { competitors, type CompetitorCar } from "@/data/competitors";
 import { formatMillion, promotionMonthLabel } from "@/lib/promotionItems";
@@ -18,10 +19,12 @@ import {
   TwoColumnLists,
 } from "@/components/CarComparison";
 
+// Tiêu đề/mô tả tự tính chênh lệch giá (src/lib/comparisonSeo.ts, 26/10/2026)
+const seo = comparisonSeo({ slug: "mitsubishi-xpander", short: "Xpander", rival: "toyotaAvanzaPremio", rivalShort: "Avanza Premio", variant: "AT", rivalVariant: "CVT", scope: "số tự động" });
+
 export const metadata: Metadata = createPageMetadata({
-  title: "So sánh Mitsubishi Xpander và Toyota Avanza Premio: nên mua MPV 7 chỗ nào?",
-  description:
-    "So sánh Mitsubishi Xpander và Toyota Avanza Premio về giá niêm yết, giá lăn bánh, kích thước, khoảng sáng gầm, động cơ, hộp số và trang bị an toàn từng phiên bản. Gợi ý chọn MPV 7 chỗ theo nhu cầu.",
+  title: seo.title,
+  description: seo.description,
   path: "/tu-van/so-sanh-xpander-va-toyota-avanza-premio",
   hasOgImageFile: true,
 });

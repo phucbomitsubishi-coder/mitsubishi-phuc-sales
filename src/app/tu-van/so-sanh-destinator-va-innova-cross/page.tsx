@@ -3,6 +3,7 @@ import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 import PageSchema from "@/components/PageSchema";
 import { createPageMetadata } from "@/lib/metadata";
+import { comparisonSeo } from "@/lib/comparisonSeo";
 import { getCarBySlug } from "@/data/cars";
 import { competitors } from "@/data/competitors";
 import { formatMillion, promotionMonthLabel } from "@/lib/promotionItems";
@@ -18,10 +19,12 @@ import {
   TwoColumnLists,
 } from "@/components/CarComparison";
 
+// Tiêu đề/mô tả tự tính chênh lệch giá (src/lib/comparisonSeo.ts, 26/10/2026)
+const seo = comparisonSeo({ slug: "mitsubishi-destinator", short: "Destinator", rival: "toyotaInnovaCross", rivalShort: "Innova Cross" });
+
 export const metadata: Metadata = createPageMetadata({
-  title: "So sánh Mitsubishi Destinator và Toyota Innova Cross: nên mua xe nào?",
-  description:
-    "So sánh Mitsubishi Destinator và Toyota Innova Cross về giá niêm yết, giá lăn bánh, kích thước, khoảng sáng gầm, động cơ turbo và hybrid, trang bị an toàn. Gợi ý chọn xe gầm cao 7–8 chỗ theo nhu cầu.",
+  title: seo.title,
+  description: seo.description,
   path: "/tu-van/so-sanh-destinator-va-innova-cross",
   hasOgImageFile: true,
 });
