@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import MetaPixel from "@/components/MetaPixel";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
 import QuickQuote, { type QuickQuoteCar } from "@/components/QuickQuote";
 import QuoteDialog, { type DialogCar } from "@/components/QuoteDialog";
 import MobileActionBar from "@/components/MobileActionBar";
@@ -164,6 +165,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   <HideOnLanding><SiteFooter /></HideOnLanding>
   <Analytics />
   <MetaPixel />
+  <GoogleAnalytics />
   <HideOnLanding><QuickQuote cars={quickQuoteCars} zaloUrl={siteConfig.contact.zaloUrl} phoneUrl={siteConfig.contact.phoneUrl} /></HideOnLanding>
   <HideOnLanding><QuoteDialog cars={dialogCars} /></HideOnLanding>
   <HideOnLanding><MobileActionBar cars={dialogCars} /></HideOnLanding>

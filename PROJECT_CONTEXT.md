@@ -48,7 +48,7 @@ npm run check-site     # KIỂM TRA TRƯỚC KHI PUSH (21/10/2026): build + `npx
 npm run compress-images # Nén ảnh public/images giữ nguyên tên (PNG → bảng màu, JPG > 150 KB → mozjpeg 80); BẮT BUỘC sau khi thêm ảnh mới vì web không qua tối ưu ảnh Vercel. 21/10/2026 đã nén 126 ảnh 24 MB → 12 MB
 npm run indexnow       # Báo Bing/IndexNow mọi URL trong sitemap (chạy SAU khi deploy xong; khóa ở public/<key>.txt). Cốc Cốc không còn webmaster tool, tự thu thập theo robots.txt
 npm run sync-dealer-promos # Đồng bộ CHƯƠNG TRÌNH ĐẠI LÝ (PROMO_MONTH, PROMOS) từ ../bao-gia-xe/index.html → src/data/dealerPromotions.ts (tự sinh; KHÔNG đọc .bi-mat). Chỉ landing page /uu-dai/* dùng
-npm run ad-images      # Ảnh QUẢNG CÁO Fanpage theo chương trình ĐẠI LÝ (đọc PROMOS/CARS/BHVC từ ../bao-gia-xe/index.html) → ../anh-facebook/quang-cao-MM-YYYY/. Thêm `-- <xe> --web`: bộ ảnh cho chiến dịch dẫn về landing (<xe>-web-*.png: nút NHẬN BÁO GIÁ, ảnh `webPhoto`, Story chừa 20% dưới, KHÔNG cộng quyền linh động để số khớp landing)
+npm run ad-images      # Ảnh QUẢNG CÁO Fanpage theo chương trình ĐẠI LÝ (đọc PROMOS/CARS/BHVC từ ../bao-gia-xe/index.html) → ../anh-facebook/quang-cao-MM-YYYY/. Thêm `-- <xe> --web`: bộ ảnh cho chiến dịch dẫn về landing (<xe>-web-*.png: nút NHẬN BÁO GIÁ, ảnh `webPhoto`, Story chừa 20% dưới, KHÔNG cộng quyền linh động để số khớp landing). Thêm `-- --chung` (28/10/2026): bộ ảnh dùng lâu dài KHÔNG ghi tháng/số ưu đãi (hook `evergreen` trong mảng ads, huy hiệu Lái thử tận nhà) → ../anh-facebook/quang-cao-chung/<xe>-chung-*.png, chạy qua giao tháng không phải thay
 ```
 
 ## 4. Cấu trúc thư mục
@@ -269,6 +269,7 @@ Alias import: `@/` → `src/`.
     Từ 19/10/2026 Pixel chỉ tải khi khách bắt đầu thao tác (cuộn, chạm, gõ) hoặc sau 4 giây để trang nhanh hơn (fbevents.js ~200 KB); landing /uu-dai/* vẫn tải ngay. Sự kiện theo dõi không đổi.
     Contact khi bấm link `tel:`/`zalo.me` (bắt bằng click toàn trang, nên link gọi/Zalo mới tự được đếm), Lead khi QuoteForm hoặc form lái thử gửi thành công (`trackPixel` trong `src/lib/metaPixel.ts`).
     Không gửi họ tên/SĐT cho Meta. Kiểm tra bằng Edge headless phải đặt user agent thường (UA "HeadlessEdg" bị Meta bỏ qua, không gửi /tr).
+  - **Google Analytics 4** (`src/components/GoogleAnalytics.tsx`, mã `siteConfig.tracking.gaMeasurementId` = G-8EWHTV0W7J, 28/10/2026; tài khoản "Phuc Mitsubishi", tài sản "mitsubishiauto.vn"): chỉ production, tải gtag.js cùng kiểu trì hoãn như Pixel (hàng đợi gtag có ngay). `trackPixel` trong `src/lib/metaPixel.ts` gửi luôn sang GA4: Lead → `generate_lead`, Contact → `contact` (form/nút mới chỉ cần gọi trackPixel). Lượt xem trang khi chuyển trang do Đo lường nâng cao của GA4 tự bắt. Khi bật Google Ads (tài khoản 995-477-7729): liên kết GA4 với Google Ads, đánh dấu `generate_lead` là sự kiện chính rồi nhập làm chuyển đổi.
   - Không dùng schema `aggregateRating`/`Review` cho chính mình (Google cấm đánh giá tự đăng). Điểm 5,0 (635) chỉ hiển thị dạng chữ.
 - **Mỗi trang tự bọc nội dung trong `<main>`** (layout chỉ dùng `<div className="flex-1">`). Trang mới phải có đúng 1 `<main>`, không lồng nhau (axe: landmark-no-duplicate-main).
 - Không có dark mode. Website luôn dùng nền trắng.

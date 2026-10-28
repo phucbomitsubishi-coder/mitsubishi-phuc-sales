@@ -44,6 +44,8 @@ export const siteConfig = {
   tracking: {
     // Meta Pixel (tập dữ liệu "mitsubishiauto.vn" trong Trình quản lý sự kiện của Fanpage)
     metaPixelId: "2239821823251751",
+    // Google Analytics 4 (tài sản "mitsubishiauto.vn", luồng "Website"), tạo 28/10/2026; liên kết Google Ads khi bật quảng cáo
+    gaMeasurementId: "G-8EWHTV0W7J",
   },
 
   contact: {

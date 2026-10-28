@@ -6,6 +6,8 @@
 // Website (promotions.ts) vẫn chỉ đăng ưu đãi nhà máy; ảnh ở đây dùng cho Fanpage/quảng cáo.
 // Bộ ảnh cho chiến dịch dẫn về web (landing /uu-dai/*): npm run ad-images -- xforce --web → <xe>-web-*.png
 // (nút "NHẬN BÁO GIÁ", ảnh xe webPhoto nếu có, bản Story chừa trống phía dưới cho nhãn liên kết của Facebook).
+// Bộ ảnh dùng lâu dài, không ghi tháng và số ưu đãi (chạy qua giao tháng không phải thay): npm run ad-images -- --chung
+// → ../anh-facebook/quang-cao-chung/<xe>-chung-*.png
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
@@ -63,10 +65,12 @@ const ads = [
   { id: "destinator", model: "DESTINATOR", type: "SUV 7 chỗ",
     photo: "images/cars/destinator/gallery/exterior/exterior-01.jpg", pos: "30% 55%",
     webPhoto: "images/cars/destinator/showroom/feature-exterior.jpg", webPos: "50% 60%",
+    evergreen: ["SUV 7 CHỖ", "RỘNG CHO CẢ NHÀ"],
     bullets: ["SUV 7 chỗ rộng rãi", "Bảo hành 5 năm", "Giao xe toàn quốc"] },
   { id: "xforce", model: "XFORCE", type: "SUV 5 chỗ",
     photo: "images/cars/xforce/gallery/exterior/exterior-01.jpg", pos: "40% 100%",
     webPhoto: "images/cars/xforce/showroom/feature-exterior.jpg", webPos: "50% 62%",
+    evergreen: ["SUV 5 CHỖ", "GẦM CAO 222 MM"],
     bullets: ["SUV gầm cao 5 chỗ", "Lái thử tận nhà", "Giao xe toàn quốc"] },
   { id: "xpander", model: "XPANDER", type: "MPV 7 chỗ",
     photo: "images/cars/xpander/gallery/exterior/exterior-01.jpg", pos: "35% 60%",
@@ -85,6 +89,10 @@ const ads = [
 // Tiêu đề lớn: ưu tiên quà "đổ xăng/dầu miễn phí", rồi "100% trước bạ" (nếu mọi phiên bản đều có), cuối cùng "ưu đãi đến".
 function headline(ad, d) {
   const extras = [];
+  if (evergreen) {
+    return { hook: ad.evergreen ?? [ad.type.toUpperCase(), "LÁI THỬ TẬN NHÀ"], badge: ["LÁI THỬ", "TẬN NHÀ", ""],
+      note: "Ưu đãi tháng này trừ trực tiếp vào giá xe khi ký hợp đồng", extras };
+  }
   if (d.fuel) {
     const label = d.fuel[1].replace(/^Tặng\s+0?/i, "").replace(/miễn phí/i, "").trim().toUpperCase();
     const fuelVariant = d.variants.find((v) => v.promos.includes(d.fuel));
@@ -154,7 +162,7 @@ ${square ? ".chip, .note, .extras, .bullets { display: none !important; } .legal
 </style></head><body>
 <div class="photo"></div>
 <div class="top">
-  <div class="chip"><i></i>${siteConfig.social.fanpageName} · Ưu đãi tháng ${promoMonth.split("/")[0]}</div>
+  <div class="chip"><i></i>${siteConfig.social.fanpageName}${evergreen ? "" : ` · Ưu đãi tháng ${promoMonth.split("/")[0]}`}</div>
   <div class="model">MITSUBISHI <b>${ad.model}</b></div>
   <div class="hook1">${h.hook[0]}</div>
   <div class="hook2">${h.hook[1]}</div>
@@ -170,7 +178,7 @@ ${square ? ".chip, .note, .extras, .bullets { display: none !important; } .legal
     <div class="who"><b>${siteConfig.sales.name}</b><small>Tư vấn Mitsubishi · ${siteConfig.sales.phoneDisplay}</small></div>
     <div class="btn">${web ? "NHẬN BÁO GIÁ<small>Lăn bánh từng phiên bản</small>" : "NHẮN TIN NGAY<small>Nhận báo giá lăn bánh</small>"}</div>
   </div>
-  <div class="legal">Ưu đãi đại lý tháng ${promoMonth}, trừ trực tiếp vào giá xe khi ký hợp đồng, tùy phiên bản. Giá niêm yết gồm VAT.</div>
+  <div class="legal">${evergreen ? "Giá niêm yết gồm VAT. Ưu đãi theo chương trình từng tháng, tùy phiên bản." : `Ưu đãi đại lý tháng ${promoMonth}, trừ trực tiếp vào giá xe khi ký hợp đồng, tùy phiên bản. Giá niêm yết gồm VAT.`}</div>
 </div>
 </body></html>`;
 }
@@ -178,7 +186,8 @@ ${square ? ".chip, .note, .extras, .bullets { display: none !important; } .legal
 const edge = ["C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe", "C:/Program Files/Microsoft/Edge/Application/msedge.exe"].find((p) => fs.existsSync(p));
 if (!edge) throw new Error("Không tìm thấy Microsoft Edge để chụp ảnh.");
 const [mm, yyyy] = promoMonth.split("/");
-const outDir = path.resolve(root, "..", "anh-facebook", `quang-cao-${mm}-${yyyy}`);
+const evergreen = process.argv.includes("--chung");
+const outDir = path.resolve(root, "..", "anh-facebook", evergreen ? "quang-cao-chung" : `quang-cao-${mm}-${yyyy}`);
 fs.mkdirSync(outDir, { recursive: true });
 const work = fs.mkdtempSync(path.join(os.tmpdir(), "ad-img-"));
 // Xóa thư mục tạm (profile Edge ~30 MB mỗi ảnh) khi script kết thúc; 25/10/2026 từng tích 6,5 GB rác trong TEMP
@@ -192,7 +201,7 @@ for (const ad of ads.filter((a) => !only || a.id === only)) {
   for (const [w, H, suffix] of [[1080, 1350, "feed"], [1080, 1920, "story"], [1080, 1080, "vuong"]]) {
     const file = path.join(work, `${ad.id}-${suffix}.html`);
     fs.writeFileSync(file, html(ad, d, h, w, H, web));
-    const out = path.join(outDir, `${ad.id}${web ? "-web" : ""}-${suffix}.png`);
+    const out = path.join(outDir, `${ad.id}${evergreen ? "-chung" : web ? "-web" : ""}-${suffix}.png`);
     execFileSync(edge, ["--headless", "--disable-gpu", "--hide-scrollbars", "--allow-file-access-from-files",
       `--user-data-dir=${path.join(work, `p-${ad.id}-${suffix}`)}`, `--window-size=${w},${H}`, "--virtual-time-budget=8000",
       `--screenshot=${out}`, pathToFileURL(file).href], { stdio: "ignore" });
