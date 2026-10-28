@@ -141,6 +141,8 @@ export const newsArticles: NewsArticle[] = [
 
     publishedAt: "2026-10-19",
 
+    updatedAt: "2026-10-28",
+
     image: "/images/news/anh-thuc-te-mitsubishi-outlander-phev-2026-tai-dna-suv-co-c-manh-302-ma-luc-chay-100-km-khong-ton-xang-official.jpg",
 
     featured: false,
@@ -151,6 +153,15 @@ export const newsArticles: NewsArticle[] = [
         paragraphs: [
           "Ngày 19/10/2026, Tuổi Trẻ và CafeF (dẫn lại Đời sống & Pháp luật) đăng hình ảnh một chiếc Mitsubishi Outlander thế hệ mới màu đen nằm trên xe chở ô tô, được người chia sẻ cho biết chụp trên cao tốc Bắc – Nam đoạn qua Nghệ An.",
           "Đây là thế hệ Outlander đang bán ở nhiều nước, khác với Outlander từng được phân phối chính hãng tại Việt Nam (bản nâng cấp năm 2020 của thế hệ trước). Mitsubishi chưa công bố lý do chiếc xe có mặt, nên chưa thể biết đây là xe chạy thử hay xe chuẩn bị cho lễ ra mắt.",
+        ],
+      },
+      {
+        heading: "Cập nhật 28/10: Outlander mới lộ diện ở Hà Nội, có logo S-AWC",
+        paragraphs: [
+          "Ngày 22–23/10/2026, Đời sống & Pháp luật (Soha dẫn lại) và Tuổi Trẻ đăng ảnh một chiếc Outlander màu đen bóng tại trung tâm kiểm định khí thải ở Hà Nội. Logo trên thân xe được che kín. Các báo nhận định nhiều khả năng đây là xe nhập khẩu chính hãng đang làm thủ tục trước khi mở bán.",
+          "Đây là bản nâng cấp giữa vòng đời mới nhất của Outlander. Bên ngoài, xe có lưới tản nhiệt phía trên dạng kín màu đen bóng với sọc bạc nằm ngang, mâm đa chấu 20 inch và đèn hậu LED thiết kế mới. Gần kính sau có logo S-AWC, hệ dẫn động 4 bánh của Mitsubishi, nên khả năng cao bản về Việt Nam có dẫn động 4 bánh.",
+          "Bên trong, ghế và tấm ốp cửa bọc da màu nâu, chỉ khâu hình kim cương, giữa taplo là màn hình cảm ứng 12,3 inch. Những trang bị khác như màn hình sau vô lăng, hiển thị trên kính lái, âm thanh Yamaha, cửa sổ trời toàn cảnh hay điều hòa 3 vùng hiện mới là trang bị của bản nước ngoài; hãng chưa xác nhận cho Việt Nam.",
+          "Mitsubishi Motors Việt Nam vẫn chưa công bố ngày ra mắt và giá bán. Phúc sẽ cập nhật bài khi có thông tin chính thức.",
         ],
       },
       {
@@ -165,7 +176,7 @@ export const newsArticles: NewsArticle[] = [
         paragraphs: [
           "Các số liệu dưới đây là của Outlander bán tại nước ngoài, được Tuổi Trẻ và CafeF dẫn lại. Bản Việt Nam có thể khác khi hãng công bố chính thức.",
           "Kích thước: dài 4.710 mm, rộng 1.862 mm, cao 1.740 mm, chiều dài cơ sở 2.706 mm, khoảng sáng gầm khoảng 210 mm. Xe có cấu hình 7 chỗ (5+2).",
-          "Động cơ bản hybrid nhẹ tại Bắc Mỹ: xăng 1.5L tăng áp 4 xi-lanh kết hợp hệ điện 48V, công suất 174 mã lực, mô-men xoắn 279 Nm, hộp số CVT, dẫn động 4 bánh S-AWC. Chưa rõ bản Việt Nam có dùng dẫn động 4 bánh hay không.",
+          "Động cơ bản hybrid nhẹ tại Bắc Mỹ: xăng 1.5L tăng áp 4 xi-lanh kết hợp hệ điện 48V, công suất 174 mã lực, mô-men xoắn 279 Nm, hộp số CVT, dẫn động 4 bánh S-AWC. Chiếc xe bắt gặp ở Hà Nội có logo S-AWC, nhưng hãng chưa công bố cấu hình chính thức cho Việt Nam.",
         ],
       },
       {
@@ -184,7 +195,7 @@ export const newsArticles: NewsArticle[] = [
     ],
 
     source: {
-      name: "Tuổi Trẻ (tham khảo thêm CafeF, Dân trí)",
+      name: "Tuổi Trẻ (tham khảo thêm CafeF, Dân trí, Đời sống & Pháp luật)",
       url: "https://tuoitre.vn/mitsubishi-outlander-2026-xuat-hien-o-viet-nam-du-kien-som-ra-mat-dau-honda-cr-v-mazda-cx-5-100261019084038131.htm",
     },
 
