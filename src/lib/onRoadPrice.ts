@@ -33,7 +33,8 @@ export function calculateOnRoadPrice({
   const registrationTax = price * registrationTaxRate;
   const licensePlateFee =
     plateFeeByArea[isTriton ? "pickup" : "car"][province.plateArea];
-  const inspectionFee = 90000;
+  // Phí đăng kiểm từ 26/10/2026 (thông báo đại lý): xe con 98.860, bán tải 78.860; phí đường bộ không đổi
+  const inspectionFee = isTriton ? 78860 : 98860;
   const roadUseFee = isTriton
     ? 2160000
     : plateType === "yellow"

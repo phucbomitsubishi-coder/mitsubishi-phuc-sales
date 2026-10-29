@@ -8,6 +8,7 @@ import TestDriveSlot, { slotNote } from "@/components/TestDriveSlot";
 import SiteHeader from "@/components/SiteHeader";
 import Link from "next/link";
 import { trackPixel } from "@/lib/metaPixel";
+import { siteConfig } from "@/config/site";
 import { TEST_DRIVE_SCRIPT_URL as SCRIPT_URL, toLeadSource } from "@/lib/leadScripts";
 
 const carNames: Record<string, string> = {
@@ -50,6 +51,7 @@ function DangKyLaiThuForm() {
     const carId = String(formData.get("car") || "").trim();
     const note = withTimeline(
       [
+        String(formData.get("place") || "").trim(),
         slotNote(String(formData.get("tdDay") || ""), String(formData.get("tdSlot") || "")),
         String(formData.get("note") || "").trim(),
       ].filter(Boolean).join(" | "),
@@ -210,6 +212,30 @@ function DangKyLaiThuForm() {
                       {car.name}
                     </option>
                   ))}
+                </select>
+              </div>
+
+              {/* NƠI LÁI THỬ: 3 showroom Phúc tiếp khách hoặc tại nhà (siteConfig.dealer.showrooms) */}
+              <div className="sm:col-span-2">
+                <label
+                  htmlFor="place"
+                  className="mb-2 block text-sm font-semibold text-gray-700"
+                >
+                  Nơi lái thử
+                </label>
+
+                <select
+                  id="place"
+                  name="place"
+                  defaultValue={`Lái thử tại showroom ${siteConfig.dealer.showrooms[0].short}`}
+                  className="w-full border border-gray-300 bg-white px-4 py-3 outline-none transition focus:border-red-600 focus:ring-2 focus:ring-red-100"
+                >
+                  {siteConfig.dealer.showrooms.map((showroom) => (
+                    <option key={showroom.short} value={`Lái thử tại showroom ${showroom.short}`}>
+                      Showroom {showroom.short}
+                    </option>
+                  ))}
+                  <option value="Lái thử tại nhà">Tại nhà (ghi địa chỉ ở ô ghi chú)</option>
                 </select>
               </div>
 

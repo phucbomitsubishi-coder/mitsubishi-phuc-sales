@@ -29,6 +29,14 @@ export const siteConfig = {
     salesArea: "Bình Dương cũ (TP. Hồ Chí Minh mới)",
     // Điểm Google Maps của SHOWROOM (không phải đánh giá cá nhân), chỉ hiển thị dạng chữ, không đưa vào schema
     googleRating: { score: "5,0", count: 635 },
+    // 3 showroom Phúc tiếp khách (anh Phúc xác nhận 29/10/2026; địa chỉ 2 điểm sau theo moveobinhduong.com.vn/lien-he).
+    // Chỉ dùng cho lựa chọn nơi gặp trong form + trang Liên hệ; schema và footer vẫn chỉ ghi New City (nơi làm việc chính).
+    // Không ghi hotline của showroom khác: khách liên hệ qua Phúc.
+    showrooms: [
+      { short: "Moveo New City", name: "Mitsubishi Moveo New City", address: "Lô C1C, Đường Hùng Vương, Phường Bình Dương, TP. Hồ Chí Minh" },
+      { short: "Moveo Bình Dương", name: "Mitsubishi Moveo Bình Dương", address: "561A Đại lộ Bình Dương, Khu phố 1, Phường Thủ Dầu Một, TP. Hồ Chí Minh" },
+      { short: "Moveo Thuận An", name: "Mitsubishi Moveo Thuận An", address: "Số 20 Đại lộ Bình Dương, Khu phố Tây, Phường Lái Thiêu, TP. Hồ Chí Minh" },
+    ],
   },
 
   social: {

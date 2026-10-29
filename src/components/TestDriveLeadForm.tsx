@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { FormEvent, useId, useState } from "react";
 import { trackPixel } from "@/lib/metaPixel";
+import { siteConfig } from "@/config/site";
 import { TEST_DRIVE_SCRIPT_URL } from "@/lib/leadScripts";
 import { purchaseTimelines } from "@/components/PurchaseTimeline";
 import TestDriveSlot, { slotNote } from "@/components/TestDriveSlot";
@@ -17,7 +18,8 @@ type Props = {
 const field =
   "w-full border-0 border-b border-gray-300 bg-transparent px-0 py-3 text-base text-gray-900 outline-none transition placeholder:text-sm placeholder:uppercase placeholder:tracking-wide placeholder:text-gray-600 focus:border-gray-950";
 
-const places = ["Tại showroom", "Tại nhà"];
+// Nơi lái thử: 3 showroom Phúc tiếp khách + tại nhà (siteConfig.dealer.showrooms)
+const places = [...siteConfig.dealer.showrooms.map((item) => item.short), "Tại nhà"];
 
 // Form đăng ký lái thử trong hộp thoại trang xe (cùng kiểu form báo giá VariantLeadForm).
 // Gửi vào script lái thử như trang /dang-ky-lai-thu (type "test-drive"); phiên bản, nơi lái thử,
@@ -55,7 +57,7 @@ export default function TestDriveLeadForm({ carName, variantNames, selectedVaria
 
     const note = [
       variant && `Phiên bản: ${variant}`,
-      `Lái thử ${place.toLowerCase()}`,
+      place === "Tại nhà" ? "Lái thử tại nhà" : `Lái thử tại showroom ${place}`,
       slotNote(get("tdDay"), get("tdSlot")),
       get("note"),
       get("timeline") && `Dự định mua: ${get("timeline")}`,
