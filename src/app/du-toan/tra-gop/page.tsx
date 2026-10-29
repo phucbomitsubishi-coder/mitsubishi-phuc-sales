@@ -5,7 +5,7 @@ import PageSchema from "@/components/PageSchema";
 import InstallmentCalculator from "@/components/InstallmentCalculator";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Dự tính trả góp xe Mitsubishi | Lưu Hoàng Phúc",
+  title: "Tính trả góp xe Mitsubishi: trả trước, lãi suất, góp hằng tháng",
   description:
     "Công cụ dự tính khoản vay và số tiền trả góp hàng tháng khi mua xe Mitsubishi theo mẫu xe, phiên bản, số tiền trả trước và thời hạn vay.",
   path: "/du-toan/tra-gop",

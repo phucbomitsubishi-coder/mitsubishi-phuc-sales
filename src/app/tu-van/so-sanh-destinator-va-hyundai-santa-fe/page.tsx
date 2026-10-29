@@ -3,6 +3,7 @@ import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 import PageSchema from "@/components/PageSchema";
 import { createPageMetadata } from "@/lib/metadata";
+import { comparisonSeo } from "@/lib/comparisonSeo";
 import { getCarBySlug } from "@/data/cars";
 import { competitors, type CompetitorCar } from "@/data/competitors";
 import { formatMillion, promotionMonthLabel } from "@/lib/promotionItems";
@@ -18,8 +19,11 @@ import {
   TwoColumnLists,
 } from "@/components/CarComparison";
 
+// Tiêu đề Google tự tính chênh lệch giá (src/lib/comparisonSeo.ts), mô tả giữ bản viết riêng
+const seo = comparisonSeo({ slug: "mitsubishi-destinator", short: "Destinator", rival: "hyundaiSantaFe", rivalShort: "Santa Fe" });
+
 export const metadata: Metadata = createPageMetadata({
-  title: "So sánh Mitsubishi Destinator và Hyundai Santa Fe: SUV 7 chỗ nào hợp hơn?",
+  title: seo.title,
   description:
     "So sánh Mitsubishi Destinator và Hyundai Santa Fe về giá niêm yết, giá lăn bánh, kích thước, khoảng sáng gầm, động cơ 1.5 turbo và 2.5L, trang bị an toàn. Gợi ý chọn SUV 7 chỗ theo nhu cầu và ngân sách.",
   path: "/tu-van/so-sanh-destinator-va-hyundai-santa-fe",

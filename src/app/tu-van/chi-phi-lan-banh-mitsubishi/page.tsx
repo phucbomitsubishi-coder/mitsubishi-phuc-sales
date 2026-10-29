@@ -12,7 +12,7 @@ import { formatMillion, promotionMonthLabel } from "@/lib/promotionItems";
 import { currentPromotion } from "@/data/promotions";
 
 export const metadata: Metadata = createPageMetadata({
-  title: `Giá lăn bánh xe Mitsubishi gồm những khoản nào? Cách tính chi tiết ${promotionMonthLabel} | Lưu Hoàng Phúc`,
+  title: `Giá lăn bánh xe Mitsubishi gồm những khoản nào? Cách tính ${promotionMonthLabel}`,
   description:
     "Cách tính giá lăn bánh xe Mitsubishi: lệ phí trước bạ 10–12%, biển số 14 triệu tại TP.HCM, phí đường bộ, đăng kiểm, bảo hiểm bắt buộc. Bảng lăn bánh 6 dòng xe và ví dụ tính từng khoản.",
   path: "/tu-van/chi-phi-lan-banh-mitsubishi",

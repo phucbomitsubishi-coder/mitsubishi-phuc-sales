@@ -5,7 +5,7 @@ import PageSchema from "@/components/PageSchema";
 import OnRoadPricePage from "@/components/OnRoadPricePage";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Tính giá lăn bánh Mitsubishi | Lưu Hoàng Phúc",
+  title: "Tính giá lăn bánh xe Mitsubishi tại TP.HCM và 34 tỉnh, thành",
   description:
     "Dự tính chi phí lăn bánh xe Mitsubishi theo mẫu xe, phiên bản và khu vực đăng ký.",
   path: "/du-toan/gia-lan-banh",

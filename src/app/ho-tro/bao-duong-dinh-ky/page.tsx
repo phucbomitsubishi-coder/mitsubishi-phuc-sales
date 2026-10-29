@@ -5,7 +5,7 @@ import SiteHeader from "@/components/SiteHeader";
 import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Bảo dưỡng định kỳ Mitsubishi | Lưu Hoàng Phúc",
+  title: "Bảo dưỡng định kỳ xe Mitsubishi: lịch bảo dưỡng, đặt hẹn",
   description:
     "Thông tin tham khảo về chu kỳ bảo dưỡng định kỳ xe Mitsubishi và hỗ trợ khách hàng tại Mitsubishi Moveo New City.",
   path: "/ho-tro/bao-duong-dinh-ky",

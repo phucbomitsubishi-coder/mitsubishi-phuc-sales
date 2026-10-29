@@ -9,7 +9,7 @@ import Image from "next/image";
 import UsedCarList from "./UsedCarList";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Xe Mitsubishi đã qua sử dụng | Lưu Hoàng Phúc",
+  title: "Mua xe Mitsubishi cũ tại Bình Dương: Xpander, Xforce, Triton",
   description:
     "Thông tin xe Mitsubishi đã qua sử dụng, xe cũ đang có sẵn và tư vấn lựa chọn xe phù hợp.",
   path: "/xe-cu",

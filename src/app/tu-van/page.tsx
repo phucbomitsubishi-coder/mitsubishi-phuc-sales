@@ -6,7 +6,7 @@ import PageSchema from "@/components/PageSchema";
 import { advisoryArticles } from "@/data/advisory";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Tư vấn mua xe Mitsubishi",
+  title: "Tư vấn mua xe Mitsubishi: so sánh đối thủ, chọn phiên bản",
   description:
     "Thông tin tư vấn giúp khách hàng chọn mẫu xe Mitsubishi phù hợp, lựa chọn phiên bản, tham khảo chi phí lăn bánh và nhận báo giá.",
   path: "/tu-van",

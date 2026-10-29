@@ -11,7 +11,7 @@ import { calculateOnRoadPrice } from "@/lib/onRoadPrice";
 import { formatMillion, promotionMonthLabel } from "@/lib/promotionItems";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Mua xe Mitsubishi từ tỉnh khác: cọc online, đăng ký, giao xe toàn quốc | Lưu Hoàng Phúc",
+  title: "Mua xe Mitsubishi từ tỉnh khác: cọc online, giao xe toàn quốc",
   description:
     "Mua xe Mitsubishi khi ở tỉnh khác: báo giá qua Zalo, đặt cọc online, ký hợp đồng trước, hỗ trợ đăng ký xe, nhận xe sau 10–15 ngày. Giá lăn bánh 6 dòng xe tại 34 tỉnh, thành.",
   path: "/mua-xe-mitsubishi-toan-quoc",

@@ -4,7 +4,7 @@ import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Hỗ trợ khách hàng Mitsubishi",
+  title: "Dịch vụ xe Mitsubishi: bảo hành, bảo dưỡng, phụ kiện, hỏi đáp",
   description:
     "Thông tin bảo hành, bảo dưỡng định kỳ, phụ tùng chính hãng, hướng dẫn sử dụng và giải đáp các câu hỏi thường gặp dành cho khách hàng Mitsubishi.",
   path: "/ho-tro",

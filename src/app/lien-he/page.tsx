@@ -5,7 +5,7 @@ import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Liên hệ tư vấn Mitsubishi",
+  title: "Liên hệ tư vấn xe Mitsubishi Bình Dương: hotline, Zalo, showroom",
   description:
     "Liên hệ tư vấn xe Mitsubishi, báo giá, ưu đãi, trả góp và đăng ký lái thử tại Mitsubishi Moveo New City.",
   path: "/lien-he",

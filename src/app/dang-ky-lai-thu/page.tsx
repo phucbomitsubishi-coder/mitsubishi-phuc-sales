@@ -346,6 +346,66 @@ export default function DangKyLaiThuPage() {
         >
           <DangKyLaiThuForm />
         </Suspense>
+
+        {/* NỘI DUNG TĨNH: ngoài Suspense để Google đọc được (form ở trên chỉ hiện sau khi tải JS) */}
+        <section className="border-t border-gray-200 bg-white">
+          <div className="mx-auto max-w-7xl px-6 py-14">
+            <p className="text-xs font-bold uppercase tracking-[0.25em] text-red-700">Lái thử cùng Phúc</p>
+            <h2 className="mt-2 text-2xl font-black tracking-tight text-gray-950 md:text-3xl">
+              Lái thử tại nhà hoặc tại 3 showroom ở Bình Dương
+            </h2>
+
+            <ol className="mt-8 grid gap-4 md:grid-cols-3">
+              {[
+                { title: "Đăng ký", text: "Chọn mẫu xe, nơi lái thử và thời gian mong muốn ở form trên, hoặc gọi, nhắn Zalo cho Phúc." },
+                { title: "Xác nhận lịch", text: "Phúc gọi lại xác nhận lịch và phiên bản xe. Lái thử tại nhà tùy lịch xe lái thử trong khu vực." },
+                { title: "Lái thử, hỏi kỹ", text: "Bạn lái trên cung đường quen, cả nhà ngồi thử đủ các hàng ghế, hỏi giá lăn bánh và ưu đãi tháng." },
+              ].map((step, index) => (
+                <li key={step.title} className="border border-gray-200 p-6">
+                  <span className="flex h-9 w-9 items-center justify-center rounded-full bg-red-600 text-sm font-black text-white">{index + 1}</span>
+                  <h3 className="mt-4 text-lg font-black text-gray-950">{step.title}</h3>
+                  <p className="mt-2 leading-7 text-gray-600">{step.text}</p>
+                </li>
+              ))}
+            </ol>
+
+            <div className="mt-10 grid gap-8 md:grid-cols-2">
+              <div>
+                <h3 className="text-lg font-black text-gray-950">Nơi lái thử</h3>
+                <ul className="mt-3 space-y-3 leading-7 text-gray-600">
+                  {siteConfig.dealer.showrooms.map((showroom) => (
+                    <li key={showroom.short}>
+                      <span className="font-semibold text-gray-950">{showroom.name}:</span> {showroom.address}
+                    </li>
+                  ))}
+                  <li>
+                    <span className="font-semibold text-gray-950">Tại nhà:</span> trong khu vực {siteConfig.dealer.salesArea}, Phúc mang xe đến tận nơi.
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h3 className="text-lg font-black text-gray-950">Cần chuẩn bị gì?</h3>
+                <ul className="mt-3 list-disc space-y-2 pl-5 leading-7 text-gray-600">
+                  <li>Giấy phép lái xe ô tô còn hạn của người lái thử.</li>
+                  <li>Nếu cả nhà cùng đi, nên ngồi thử đủ các hàng ghế để chọn đúng xe.</li>
+                  <li>Lái thử không mất phí và không bắt buộc đặt cọc.</li>
+                </ul>
+                <p className="mt-4 leading-7 text-gray-600">
+                  Các mẫu xe có thể lái thử:{" "}
+                  {cars.map((car, index) => (
+                    <span key={car.id}>
+                      {index > 0 && ", "}
+                      <Link href={`/xe/${car.slug}`} className="font-semibold text-red-700 underline">
+                        {car.name.replace("Mitsubishi ", "")}
+                      </Link>
+                    </span>
+                  ))}
+                  .
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
     </>
   );

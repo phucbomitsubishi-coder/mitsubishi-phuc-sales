@@ -12,7 +12,7 @@ import { featuredImages } from "@/lib/carCards";
 import OpenDetailsFromHash from "@/components/OpenDetailsFromHash";
 
 export const metadata: Metadata = createPageMetadata({
-  title: `Bảng giá phụ kiện xe Mitsubishi ${accessoriesMonth}: Xpander, Xforce, Destinator, Triton`,
+  title: `Phụ kiện xe Mitsubishi chính hãng: bảng giá ${accessoriesMonth}`,
   description:
     "Phụ kiện cho Xpander, Xpander Cross, Xforce, Destinator, Triton, Attrage: lót sàn, vè che mưa, phim cách nhiệt, phủ gầm, camera hành trình. Giá niêm yết phụ kiện chính hãng MMV, các món khác liên hệ để nhận giá theo gói.",
   path: "/phu-kien-xe-mitsubishi",
