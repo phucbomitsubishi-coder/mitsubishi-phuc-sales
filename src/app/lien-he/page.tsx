@@ -135,115 +135,96 @@ export default function ContactPage() {
           </div>
         </section>
 
-        {/* ĐỊA CHỈ + HÀNH ĐỘNG */}
+        {/* 3 SHOWROOM PHÚC TIẾP KHÁCH (siteConfig.dealer.showrooms) */}
         <section className="bg-neutral-100">
-          <div className="mx-auto grid max-w-7xl gap-8 px-6 py-14 md:grid-cols-2 md:py-16">
-            {/* ĐỊA CHỈ */}
-            <div className="bg-white p-7 shadow-sm md:p-9">
-              <p className="text-xs font-bold uppercase tracking-[0.25em] text-red-600">
-                Địa chỉ
-              </p>
+          <div className="mx-auto max-w-7xl px-6 py-14 md:py-16">
+            <p className="text-xs font-bold uppercase tracking-[0.25em] text-red-700">
+              Địa chỉ
+            </p>
 
-              <h2 className="mt-2 text-2xl font-black text-neutral-950 tracking-tight">
-                Showroom Mitsubishi Moveo New City
-              </h2>
+            <h2 className="mt-2 text-3xl font-black tracking-tight text-neutral-950 md:text-4xl">
+              Hẹn gặp Phúc tại showroom gần bạn
+            </h2>
 
-              <p className="mt-5 leading-8 text-neutral-600">
-                Lô C1C, Đường Hùng Vương,
-                <br />
-                Phường Bình Dương, Thành phố Hồ Chí Minh.
-              </p>
+            <p className="mt-4 max-w-3xl leading-7 text-neutral-600">
+              Phúc tiếp khách tại 3 showroom Mitsubishi Moveo ở {siteConfig.dealer.salesArea}. Gọi
+              hoặc nhắn Zalo trước khi đến để Phúc có mặt và chuẩn bị đúng xe bạn muốn xem.
+            </p>
 
-              <p className="mt-5 bg-neutral-100 p-4 text-sm leading-6 text-neutral-600">
-                Khu vực phục vụ: Bình Dương cũ (TP. Hồ Chí Minh mới).
-              </p>
+            <ul className="mt-8 grid gap-4 md:grid-cols-3">
+              {siteConfig.dealer.showrooms.map((showroom) => (
+                <li key={showroom.short} className="flex flex-col bg-white p-6 shadow-sm md:p-7">
+                  <h3 className="text-lg font-black tracking-tight text-neutral-950">{showroom.name}</h3>
+                  <p className="mt-3 leading-7 text-neutral-600">{showroom.address}</p>
+                  <p className="mb-6 mt-3 text-sm text-neutral-600">{siteConfig.hours.display}</p>
+                  <a
+                    href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${showroom.name}, ${showroom.address}`)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-auto self-start border border-neutral-950 px-5 py-3 text-xs font-black uppercase tracking-[0.18em] text-neutral-950 transition hover:bg-neutral-950 hover:text-white"
+                  >
+                    Chỉ đường
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
 
-              {/* 3 showroom Phúc tiếp khách (siteConfig.dealer.showrooms) */}
-              <h3 className="mt-7 text-sm font-black uppercase tracking-[0.18em] text-neutral-950">
-                Hẹn gặp Phúc tại showroom gần bạn
-              </h3>
-              <ul className="mt-3 divide-y divide-neutral-200 border-y border-neutral-200">
-                {siteConfig.dealer.showrooms.map((showroom) => (
-                  <li key={showroom.short} className="flex flex-wrap items-start justify-between gap-3 py-4">
-                    <div className="min-w-0 flex-1">
-                      <p className="font-bold text-neutral-950">{showroom.name}</p>
-                      <p className="mt-1 text-sm leading-6 text-neutral-600">{showroom.address}</p>
-                    </div>
-                    <a
-                      href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${showroom.name}, ${showroom.address}`)}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="border border-neutral-300 px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-neutral-950 transition hover:border-neutral-950"
-                    >
-                      Chỉ đường
-                    </a>
-                  </li>
-                ))}
-              </ul>
-              <p className="mt-4 text-sm leading-6 text-neutral-600">
-                Gọi hoặc nhắn Zalo cho Phúc trước khi đến để được tiếp đón và xem đúng xe bạn quan tâm.
-              </p>
-            </div>
-
-            {/* CTA */}
-            <div className="bg-neutral-950 p-7 text-white shadow-sm md:p-9">
+        {/* HÀNH ĐỘNG */}
+        <section className="bg-neutral-950 text-white">
+          <div className="mx-auto grid max-w-7xl gap-8 px-6 py-12 md:grid-cols-2 md:items-center md:py-14">
+            <div>
               <p className="text-xs font-bold uppercase tracking-[0.25em] text-red-500">
                 Bạn đang quan tâm xe Mitsubishi?
               </p>
 
-              <h2 className="mt-2 text-2xl font-black tracking-tight">
+              <h2 className="mt-2 text-2xl font-black tracking-tight md:text-3xl">
                 Chọn hình thức hỗ trợ phù hợp
               </h2>
 
               <p className="mt-4 leading-7 text-neutral-300">
-                Bạn có thể nhận báo giá, đăng ký lái thử hoặc dự toán chi phí
-                trước khi quyết định mua xe.
+                Nhận báo giá, đăng ký lái thử hoặc dự toán chi phí trước khi quyết định mua xe.
               </p>
 
-              <div className="mt-7 flex flex-wrap gap-3">
-                <Link
-                  href="/?nguon=Lien-he#bao-gia"
-                  className="bg-red-600 px-5 py-3 text-xs font-black uppercase tracking-[0.18em] text-white transition hover:bg-red-700"
+              <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2">
+                <span className="text-sm text-neutral-400">Hotline tư vấn</span>
+                <a
+                  href={siteConfig.contact.phoneUrl}
+                  className="font-bold text-white transition hover:text-red-500"
                 >
-                  Nhận báo giá
-                </Link>
-
-                <Link
-                  href="/dang-ky-lai-thu?nguon=Lien-he"
-                  className="border border-neutral-600 px-5 py-3 text-xs font-black uppercase tracking-[0.18em] text-white transition hover:border-white"
+                  {siteConfig.sales.phoneDisplay}
+                </a>
+                <a
+                  href={`tel:${siteConfig.sales.phone2}`}
+                  className="font-bold text-white transition hover:text-red-500"
                 >
-                  Đăng ký lái thử
-                </Link>
-
-                <Link
-                  href="/du-toan/gia-lan-banh"
-                  className="border border-neutral-600 px-5 py-3 text-xs font-black uppercase tracking-[0.18em] text-white transition hover:border-white"
-                >
-                  Dự toán chi phí
-                </Link>
+                  {siteConfig.sales.phone2Display}
+                </a>
               </div>
+            </div>
 
-              <div className="mt-8 border-t border-neutral-800 pt-6">
-                <p className="text-sm text-neutral-400">
-                  Hotline tư vấn
-                </p>
+            <div className="flex flex-wrap gap-3 md:justify-end">
+              <Link
+                href="/?nguon=Lien-he#bao-gia"
+                className="bg-red-600 px-5 py-3 text-xs font-black uppercase tracking-[0.18em] text-white transition hover:bg-red-700"
+              >
+                Nhận báo giá
+              </Link>
 
-                <div className="mt-2 flex flex-wrap gap-x-6 gap-y-2">
-                  <a
-                    href={siteConfig.contact.phoneUrl}
-                    className="font-bold text-white transition hover:text-red-500"
-                  >
-                    {siteConfig.sales.phoneDisplay}
-                  </a>
+              <Link
+                href="/dang-ky-lai-thu?nguon=Lien-he"
+                className="border border-neutral-600 px-5 py-3 text-xs font-black uppercase tracking-[0.18em] text-white transition hover:border-white"
+              >
+                Đăng ký lái thử
+              </Link>
 
-                  <a
-                    href={`tel:${siteConfig.sales.phone2}`}
-                    className="font-bold text-white transition hover:text-red-500"
-                  >
-                    {siteConfig.sales.phone2Display}
-                  </a>
-                </div>
-              </div>
+              <Link
+                href="/du-toan/gia-lan-banh"
+                className="border border-neutral-600 px-5 py-3 text-xs font-black uppercase tracking-[0.18em] text-white transition hover:border-white"
+              >
+                Dự toán chi phí
+              </Link>
             </div>
           </div>
         </section>
