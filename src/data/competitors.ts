@@ -500,6 +500,38 @@ export const competitors = {
     ],
   },
 
+  // Stargazer nâng cấp (ra mắt 3/2026): VnExpress v-car + Bonbanh (10/2026) khớp giá 2 bản Đặc biệt, Cao cấp.
+  // Bản Tiêu chuẩn 489 triệu chỉ còn ở một số bảng giá (Bonbanh và đại lý ghi đã thôi bán) nên bỏ.
+  // Chiều cao, mâm, mức tiêu hao các nguồn ghi khác nhau nên không đưa lên.
+  hyundaiStargazer: {
+    name: "Hyundai Stargazer",
+    seats: 7,
+    updated: "10/2026",
+    variants: [
+      { name: "Đặc biệt", price: 569_000_000 },
+      { name: "Cao cấp", price: 615_000_000 },
+    ],
+    specs: {
+      type: "MPV 7 chỗ",
+      dimensions: "Dài 4.575 mm, rộng 1.780 mm",
+      wheelbase: "2.780 mm",
+      groundClearance: "195 mm (Đặc biệt), 205 mm (Cao cấp)",
+      engine: "Xăng 1.5L Smartstream",
+      power: "115 PS / 6.300 vòng/phút",
+      torque: "144 Nm / 4.500 vòng/phút",
+      transmission: "Vô cấp (CVT)",
+      drivetrain: "Cầu trước",
+      airbags: "2 túi khí (Đặc biệt), 6 túi khí (Cao cấp)",
+    },
+    sources: [
+      {
+        name: "VnExpress – Hyundai Stargazer: giá lăn bánh, thông số kỹ thuật",
+        url: "https://vnexpress.net/oto-xe-may/v-car/dong-xe/hyundai-stargazer-210",
+      },
+      { name: "Bonbanh – Bảng giá và thông số Hyundai Stargazer 10/2026", url: "https://bonbanh.com/oto/hyundai-stargazer" },
+    ],
+  },
+
   // Giá theo Bonbanh (10/2026) + VnExpress v-car + Báo Quốc tế (9/2026), khớp nhau.
   // Chiều cao các nguồn ghi khác nhau (1.720 và 1.770 mm) nên chỉ ghi dài × rộng.
   hyundaiSantaFe: {

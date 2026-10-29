@@ -142,7 +142,7 @@ Alias import: `@/` → `src/`.
 - **Bài tư vấn** (`/tu-van/...`): danh sách nằm ở `src/data/advisory.ts`, dùng chung cho trang `/tu-van`, khối "Tư vấn chọn xe"
   trên `/tin-tuc` và trang xe (bài có `carIds` chứa id xe hiện ở mục "So sánh và tư vấn" của trang xe đó).
   Thêm bài mới: tạo trang, thêm vào `advisory.ts` và `sitemap.ts`. `/tu-van` có link ở footer và menu mobile.
-- **Bài so sánh với xe đối thủ** (`/tu-van/so-sanh-...`: Xforce–Creta, Xpander–Veloz Cross, Triton–Ranger, Attrage–Vios, Destinator–Innova Cross, Xpander Cross–XL7, Xforce–Yaris Cross, Triton–Hilux, Xpander–Avanza Premio, Attrage–Accent, Xforce–Kia Seltos, Xpander–Kia Carens, Destinator–Hyundai Santa Fe):
+- **Bài so sánh với xe đối thủ** (`/tu-van/so-sanh-...`: Xforce–Creta, Xpander–Veloz Cross, Triton–Ranger, Attrage–Vios, Destinator–Innova Cross, Xpander Cross–XL7, Xforce–Yaris Cross, Triton–Hilux, Xpander–Avanza Premio, Attrage–Accent, Xforce–Kia Seltos, Xpander–Kia Carens, Destinator–Hyundai Santa Fe, Xpander–Hyundai Stargazer):
   giá, thông số và nguồn của xe đối thủ nằm ở `src/data/competitors.ts` (có `updated` = tháng của giá; khi hãng đổi giá chỉ sửa ở đó).
   Giao diện dùng chung trong `src/components/CarComparison.tsx` (bảng giá + lăn bánh, bảng thông số, 2 cột danh sách, CTA, nguồn);
   phần nhận xét viết riêng trong từng trang. Xe bán tải đối thủ có `isPickup: true` để tính trước bạ 60% như Triton.

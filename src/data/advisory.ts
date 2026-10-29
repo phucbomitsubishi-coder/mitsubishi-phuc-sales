@@ -136,4 +136,12 @@ export const advisoryArticles: AdvisoryArticle[] = [
     href: "/tu-van/so-sanh-destinator-va-hyundai-santa-fe",
     carIds: ["destinator"],
   },
+  {
+    number: "17",
+    title: "So sánh Xpander và Hyundai Stargazer",
+    description:
+      "So sánh giá, giá lăn bánh, kích thước, khoảng sáng gầm, hộp số và trang bị an toàn từng phiên bản của hai mẫu MPV 7 chỗ dưới 700 triệu.",
+    href: "/tu-van/so-sanh-xpander-va-hyundai-stargazer",
+    carIds: ["xpander"],
+  },
 ];
