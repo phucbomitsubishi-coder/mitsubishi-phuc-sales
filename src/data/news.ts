@@ -43,6 +43,92 @@ export type NewsArticle = {
 
 export const newsArticles: NewsArticle[] = [
   {
+    id: "news-1793250000000",
+
+    title: "Mitsubishi Xpander có mấy chỗ? Cách xếp ghế cho gia đình 4 đến 7 người",
+
+    seoTitle: "Xpander có mấy chỗ? Xếp ghế cho gia đình 4–7 người",
+
+    slug: "mitsubishi-xpander-co-may-cho-cach-xep-ghe-cho-gia-dinh",
+
+    category: "Tư vấn mua xe",
+
+    excerpt:
+      "Xpander có 7 chỗ ở mọi phiên bản, xếp 2+3+2. Ai nên ngồi hàng ghế 3, gập ghế thế nào khi đi 4–5 người hay đủ 7 người, cốp chứa được gì. Tổng hợp từ Mitsubishi Motors Việt Nam và kinh nghiệm tư vấn cho gia đình.",
+
+    publishedAt: "2026-10-29",
+
+    image: "/images/cars/xpander/showroom/feature-highlight.jpg",
+
+    featured: false,
+
+    content: [
+      {
+        heading: "Câu trả lời ngắn: 7 chỗ, xếp 2+3+2",
+        paragraphs: [
+          "Mitsubishi Xpander có 7 chỗ ngồi trên cả 4 phiên bản đang bán: MT, AT, AT Premium và Xpander Cross. Ghế xếp thành 3 hàng: 2 ghế trước, 3 ghế hàng giữa và 2 ghế hàng cuối.",
+          "Cả 4 bản có chung chiều dài cơ sở 2.775 mm và khoảng sáng gầm 225 mm, nên không gian ngồi như nhau. Khác nhau chủ yếu ở trang bị: bản AT Premium và Xpander Cross có 6 túi khí, bản MT và AT có 2 túi khí.",
+        ],
+        images: [
+          {
+            src: "/images/cars/xpander/showroom/feature-interior.jpg",
+            alt: "Ba hàng ghế bên trong Mitsubishi Xpander",
+          },
+        ],
+      },
+      {
+        heading: "Hàng ghế 2: chỗ ngồi tốt nhất cho người lớn và trẻ nhỏ",
+        paragraphs: [
+          "Hàng ghế giữa ngồi được 3 người lớn. Theo Mitsubishi Motors Việt Nam (MMV), ghế trượt tới lui để chia chỗ để chân với hàng cuối, ngả lưng được và gập theo tỷ lệ 60:40. Hàng này có cửa gió điều hòa riêng, cổng USB và bệ tỳ tay có chỗ để ly.",
+          "Đây là hàng dễ ra vào nhất, nên dành cho ông bà hoặc người lớn tuổi. Ghế trẻ em cũng nên đặt ở hàng 2 vì có điểm neo ISOFIX.",
+        ],
+      },
+      {
+        heading: "Hàng ghế 3: hợp với ai?",
+        paragraphs: [
+          "Theo MMV, hàng cuối phù hợp người lớn cao dưới khoảng 1,75 m khi đi trong phố hoặc quãng đường dưới 100 km. Hàng này có cửa gió, cổng sạc và hộc để đồ hai bên.",
+          "Nếu người cao trên 1,75 m phải ngồi hàng cuối khi đi xa, chân sẽ dễ mỏi. Khi đó nên đẩy hàng 2 lên một chút và dừng nghỉ khoảng 15–20 phút sau mỗi 2 giờ lái.",
+        ],
+      },
+      {
+        heading: "Xếp ghế theo số người đi",
+        paragraphs: [
+          "Đi 4–5 người: gập hàng ghế 3 (gập riêng từng bên theo tỷ lệ 50:50) để có cốp rộng. Theo MMV, lúc này cốp chở được 4–5 vali lớn, xe đẩy em bé, bộ gậy golf hoặc lều cắm trại.",
+          "Đi 6–7 người: dựng đủ 3 hàng, đẩy hàng 2 lên vừa phải để hàng 3 có chỗ để chân, ưu tiên trẻ em hoặc người dưới khoảng 1,70 m ngồi hàng cuối. Cốp còn chứa khoảng 2–3 vali cỡ vừa hoặc ba lô đặt đứng, nên mang túi gọn hoặc gắn thêm thùng đồ trên nóc nếu đi xa.",
+          "Đi 6 người kèm đồ: dựng một bên hàng 3, gập bên còn lại để vừa có chỗ ngồi vừa có chỗ để vali. Khi cần chở đồ dài, gập phẳng cả hàng 2 và hàng 3 để có sàn phẳng.",
+        ],
+      },
+      {
+        heading: "Gợi ý theo gia đình",
+        paragraphs: [
+          "Gia đình trẻ 3–4 người: hằng ngày gập hết hàng 3, cốp rộng cho xe đẩy và đồ đi chợ; về quê có ông bà thì dựng hàng 3 lên.",
+          "Gia đình 5–6 người: trượt hàng 2 lên một chút, dựng 1 hoặc 2 ghế hàng 3 tùy số người.",
+          "Gia đình 7 người: dựng đủ 3 hàng, người lớn tuổi ngồi hàng 2, trẻ em ngồi hàng 3.",
+        ],
+      },
+      {
+        heading: "Thông số và giá tham khảo",
+        paragraphs: [
+          "Xpander MT, AT dài 4.595 mm, rộng 1.750 mm, cao 1.730 mm; bản AT Premium cao 1.750 mm; Xpander Cross rộng 1.790 mm, cao 1.750 mm. Động cơ xăng 1.5L MIVEC 105 PS, 141 Nm. Mức tiêu hao kết hợp theo MMV: 6,80 lít/100 km (MT), 7,10 (AT), 6,99 (AT Premium), 7,23 (Xpander Cross).",
+          "Giá niêm yết: Xpander từ 568 triệu đồng, Xpander Cross 699 triệu đồng. Giá lăn bánh và ưu đãi tháng từng phiên bản xem ở trang xe Xpander hoặc bảng giá xe Mitsubishi.",
+        ],
+      },
+      {
+        heading: "Ngồi thử cả nhà trước khi mua",
+        paragraphs: [
+          "Cách chắc chắn nhất là cả nhà cùng ngồi thử đủ 3 hàng ghế. Phúc có thể mang Xpander tới tận nhà, hoặc hẹn bạn tại showroom Mitsubishi Moveo New City, Moveo Bình Dương hay Moveo Thuận An. Đăng ký lái thử hoặc nhận báo giá lăn bánh ngay trên website.",
+        ],
+      },
+    ],
+
+    source: {
+      name: "Mitsubishi Motors Việt Nam",
+      url: "https://www.mitsubishi-motors.com.vn/tin-tuc/mitsubishi-xpander-co-may-cho-danh-gia-khong-gian-thuc-te-cho-gia-dinh-47-nguoi-n154584.html",
+    },
+
+    originalContent: true,
+  },
+  {
     id: "news-1792980000000",
 
     title: "Hàng ghế thứ 3 Mitsubishi Destinator có thoải mái cho người lớn không?",

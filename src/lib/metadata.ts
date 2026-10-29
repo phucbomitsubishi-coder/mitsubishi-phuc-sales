@@ -16,15 +16,15 @@ type PageMetadataInput = {
   hasOgImageFile?: boolean;
 };
 
-// Google chỉ hiện khoảng 60–65 ký tự tiêu đề. Đuôi " | Lưu Hoàng Phúc" chỉ thêm khi còn chỗ,
-// để phần bị cắt không phải nội dung chính (25/10/2026). Ảnh chia sẻ (Open Graph) vẫn giữ tiêu đề đầy đủ.
-const TITLE_LIMIT = 65;
+// Tiêu đề trên Google KHÔNG có đuôi " | Lưu Hoàng Phúc" (anh Phúc chọn 29/10/2026, giống các web tư vấn khác):
+// dành chỗ cho từ khóa; tên miền đã hiện phía trên tiêu đề, tên Phúc nằm trong mô tả.
+// Ảnh chia sẻ (Open Graph) vẫn giữ tiêu đề đầy đủ có tên Phúc.
 export function fitTitle(title: string) {
   const brand = siteConfig.sales.name;
-  const suffix = ` | ${brand}`;
-  const base = title.endsWith(suffix) ? title.slice(0, -suffix.length) : title.endsWith(` | Mitsubishi ${brand}`) ? title.slice(0, -` | Mitsubishi ${brand}`.length) : title;
-  const withBrand = `${base} | ${brand}`;
-  return [...withBrand].length <= TITLE_LIMIT ? withBrand : base;
+  for (const suffix of [` | Mitsubishi ${brand}`, ` | ${brand}`]) {
+    if (title.endsWith(suffix)) return title.slice(0, -suffix.length);
+  }
+  return title;
 }
 
 // Metadata cho trang tĩnh: tiêu đề luôn có tên thương hiệu, và có Open Graph riêng

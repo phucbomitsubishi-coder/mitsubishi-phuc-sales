@@ -65,7 +65,7 @@ export async function generateMetadata({
   }
 
   // Tiêu đề, mô tả tự đổi theo tháng của currentPromotion (khách hay tìm "giá xe ... tháng", "lăn bánh")
-  const title = `Giá xe ${car.name} tháng ${promotionMonthLabel}: lăn bánh, ưu đãi | Lưu Hoàng Phúc`;
+  const title = `Giá xe ${car.name} tháng ${promotionMonthLabel}: lăn bánh, ưu đãi`;
   const prices = car.variants.map((variant) => variant.price).filter((price) => price > 0);
   const maxPromotion = getMaxPromotionValue(car.id);
   const description = [

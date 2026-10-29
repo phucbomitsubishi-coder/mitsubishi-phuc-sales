@@ -21,11 +21,11 @@ const roboto = Roboto({
 });
 
 const { sales, dealer } = siteConfig;
-const siteDescription = `Mitsubishi Bình Dương - Tư vấn mua xe Mitsubishi, báo giá, khuyến mãi, hỗ trợ trả góp và đăng ký lái thử. Liên hệ ${sales.name}: ${sales.phoneDisplay}.`;
+const siteDescription = `Tư vấn mua xe Mitsubishi Bình Dương cùng ${sales.name} (${dealer.name}): báo giá lăn bánh, khuyến mãi tháng, trả góp, lái thử tận nhà. Gọi/Zalo ${sales.phoneDisplay}.`;
 
 export const metadata: Metadata = {
    metadataBase: new URL("https://www.mitsubishiauto.vn"),
-  title: "Mitsubishi Bình Dương | Lưu Hoàng Phúc",
+  title: "Mitsubishi Bình Dương: giá xe, khuyến mãi, lái thử tận nhà",
   description: siteDescription,
   alternates: {
     canonical: "/",

@@ -15,8 +15,11 @@ import HandoverStrip from "@/components/HandoverStrip";
 import Link from "next/link";
 import Image from "next/image";
 import PromoCountdown from "@/components/PromoCountdown";
+import { promotionMonthLabel } from "@/lib/promotionItems";
 
+// Tiêu đề trang chủ tự đổi theo tháng khuyến mãi (khách hay tìm "giá xe Mitsubishi Bình Dương tháng ...")
 export const metadata = {
+  title: `Mitsubishi Bình Dương: giá xe, khuyến mãi tháng ${promotionMonthLabel}`,
   alternates: {
     canonical: "/",
   },
