@@ -120,7 +120,7 @@ equipment: [
   "name": "Mitsubishi Xforce",
   "slug": "mitsubishi-xforce-2024-003",
   "modelYear": 2024,
-  "firstRegistration": "07/072024",
+  "firstRegistration": "07/2024",
   "owners": "1 chủ từ mới",
   "variant": "Ultimate",
   "mileage": 61161,

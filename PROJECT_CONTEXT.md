@@ -115,7 +115,7 @@ Alias import: `@/` → `src/`.
 - **UsedCar**: `id`, `slug`, `modelYear`, `mileage` (km), `price` (đồng), `status` (`available` hoặc `sold`),
   `image`, `images[]`, `equipment[]`, `commitments[]`, ...
   Xe cũ lấy từ kho Ucar Moveo (https://ucarmoveo.com/inventory/, Moveo New City tham gia MMV UCAR). 15/10/2026 thêm 12 xe (005–016): chỉ lấy năm, phiên bản, odo, màu, giá, phần mô tả và cam kết;
-  **không** lấy danh sách "Trang bị" mẫu của Ucar (hay sai, ví dụ ghi ghế Nappa cho Xpander). Ảnh bỏ banner PNG, tối đa 10 ảnh, nén 1280px. Thông tin không xác định để chuỗi rỗng (`firstRegistration`, `owners`, `serviceHistory`) hoặc `equipment: []`, trang chi tiết tự ẩn mục đó (anh Phúc chọn bỏ qua phần không xác định).
+  **không** lấy danh sách "Trang bị" mẫu của Ucar (hay sai, ví dụ ghi ghế Nappa cho Xpander). Ảnh bỏ banner PNG, tối đa 10 ảnh, nén 1280px. Thông tin không xác định để chuỗi rỗng (`firstRegistration`, `owners`, `serviceHistory`) hoặc `equipment: []`, trang chi tiết tự ẩn mục đó (anh Phúc chọn bỏ qua phần không xác định). Khối "Nhận xét của Phúc" (29/10/2026, `src/lib/usedCarReview.ts`) tự viết từ đời xe, km/năm, giá và giá lăn bánh xe mới cùng phiên bản (chỉ so số khi trùng tên phiên bản); KHÔNG nói về tình trạng xe. Dòng xe mới thì thêm câu vào `modelNotes`; `firstRegistration` phải đúng dạng MM/YYYY.
 - **NewsArticle**: có thể thêm `seoTitle` (khoảng 60 ký tự) làm tiêu đề trên Google, vì `title` bài thường dài và bị cắt. Sửa nội dung quan trọng (vd giá mới) thì thêm `updatedAt: "YYYY-MM-DD"`: bài hiện "Cập nhật", schema có dateModified, sitemap lấy ngày này. Bài Pajero 2026 cập nhật giá Thái Lan chính thức 21/10/2026 (quy đổi theo tỷ giá chuyển khoản Vietcombank, ghi rõ ngày; Pajero vẫn ẩn trong cars.ts vì chưa có giá Việt Nam). `slug`, `category` (union `NewsCategory`), `publishedAt` (`YYYY-MM-DD`), `image`,
   `content[]` gồm các khối `{ heading?, paragraphs[], images? }`, `source?`.
 - **PromotionProgram** (`currentPromotion`): `month`, `year`, `cars[]` gồm `carId` → `variants[]` → `benefits[]`
@@ -240,7 +240,7 @@ Alias import: `@/` → `src/`.
   Khi thêm trang tĩnh mới:
   - Dùng `export const metadata: Metadata = createPageMetadata({ title, description, path })` từ `@/lib/metadata`.
     Nếu chỉ khai báo `title/description`, trang sẽ kế thừa Open Graph của trang chủ, và khi chia sẻ qua Zalo/Facebook sẽ hiện sai tiêu đề và URL.
-    Hàm này tự thêm "| Lưu Hoàng Phúc" vào tiêu đề nếu thiếu, nhưng `fitTitle` bỏ đuôi này khi tiêu đề vượt 65 ký tự (25/10/2026; dùng cả ở xe cũ, tin tức; trang xe đặt tiêu đề riêng, giữ nguyên).
+    Từ 29/10/2026 tiêu đề trên Google KHÔNG có đuôi "| Lưu Hoàng Phúc" (`fitTitle` luôn bỏ, anh Phúc chọn); tên Phúc nằm trong mô tả và tiêu đề ảnh chia sẻ (Open Graph). Viết tiêu đề 50–65 ký tự, đủ từ khóa.
   - Ảnh chia sẻ riêng (1200×630): tạo `opengraph-image.tsx` trong thư mục trang, gọi `renderOgImage({ kicker, title, subtitle, images, versus })`
     từ `@/lib/ogImage` (font Roboto ở `src/assets/fonts`), **và** thêm `hasOgImageFile: true` vào `createPageMetadata`.
     Nếu thiếu `hasOgImageFile`, ảnh mặc định `og-default.jpg` sẽ được dùng thay cho ảnh riêng. Đã có ảnh riêng cho: bảng giá (tự đổi theo tháng),

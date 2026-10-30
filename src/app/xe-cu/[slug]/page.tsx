@@ -8,6 +8,7 @@ import BackToPrevious from "@/components/BackToPrevious";
 import UsedCarGallery from "@/components/UsedCarGallery";
 import UsedCarGifts from "@/components/UsedCarGifts";
 import { usedCars } from "@/data/usedCars";
+import { usedCarReview } from "@/lib/usedCarReview";
 
 type Props = {
   params: Promise<{
@@ -74,6 +75,8 @@ export default async function UsedCarDetailPage({ params }: Props) {
   if (!car) {
     notFound();
   }
+
+  const review = usedCarReview(car);
   const vehicleSchema = {
     "@context": "https://schema.org",
     "@type": "Vehicle",
@@ -218,6 +221,21 @@ export default async function UsedCarDetailPage({ params }: Props) {
   </div>
   )}
 </div>
+
+              {/* Nhận xét tự viết từ số liệu của xe (src/lib/usedCarReview.ts) */}
+              <div className="mt-6 border border-gray-200 bg-white p-6">
+                <h2 className="text-xl font-black text-gray-900 tracking-tight">Nhận xét của Phúc</h2>
+                <div className="mt-3 space-y-3 leading-7 text-gray-600">
+                  {review.paragraphs.map((text) => (
+                    <p key={text}>{text}</p>
+                  ))}
+                </div>
+                {review.newCar && (
+                  <Link href={`/xe/${review.newCar.slug}`} className="mt-4 inline-block text-sm font-semibold text-red-700 underline">
+                    Xem giá và ưu đãi {review.newCar.name} mới
+                  </Link>
+                )}
+              </div>
 
               {car.status === "available" && <UsedCarGifts className="mt-6" />}
 
