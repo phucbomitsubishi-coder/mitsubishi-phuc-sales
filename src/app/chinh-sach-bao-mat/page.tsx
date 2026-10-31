@@ -11,7 +11,7 @@ export const metadata: Metadata = createPageMetadata({
 });
 
 // Cập nhật ngày này mỗi khi sửa nội dung chính sách
-const lastUpdated = "28/10/2026";
+const lastUpdated = "31/10/2026";
 
 export default function PrivacyPolicyPage() {
   const { sales, dealer, contact } = siteConfig;
@@ -21,7 +21,7 @@ export default function PrivacyPolicyPage() {
       heading: "1. Thông tin được thu thập",
       paragraphs: [
         "Website chỉ thu thập thông tin khi bạn chủ động gửi biểu mẫu Nhận báo giá, Đăng ký lái thử, Thu cũ đổi mới hoặc Đặt lịch bảo dưỡng, gồm: họ và tên, số điện thoại, mẫu xe và phiên bản quan tâm, thời gian dự định mua xe (nếu bạn chọn), thông tin xe đang sử dụng (dòng xe, năm sản xuất, số km, khu vực; với đặt lịch bảo dưỡng có thể gồm biển số và việc xe đã từng bảo dưỡng tại đại lý hay chưa), ngày và khung giờ mong muốn và ghi chú bạn tự nhập (ví dụ thời gian hoặc địa chỉ lái thử tại nhà).",
-        "Website không yêu cầu tài khoản, không thu thập số CMND/CCCD, thông tin ngân hàng hay thẻ thanh toán. Cookie của Meta (Facebook) và Google Analytics được mô tả ở mục 5.",
+        "Website không yêu cầu tài khoản, không thu thập số CMND/CCCD, thông tin ngân hàng hay thẻ thanh toán. Cookie của Meta (Facebook), Google Analytics và Google Ads được mô tả ở mục 5.",
       ],
     },
     {
@@ -54,6 +54,7 @@ export default function PrivacyPolicyPage() {
         "Website dùng Meta Pixel của Meta (Facebook) để đo hiệu quả quảng cáo trên Facebook và Instagram: ghi nhận trang bạn đã xem, lượt bấm gọi điện hoặc Zalo, và việc gửi biểu mẫu thành công. Meta Pixel dùng cookie và có thể nhận địa chỉ IP, thông tin trình duyệt; họ tên và số điện thoại bạn nhập vào biểu mẫu không được gửi cho Meta.",
         "Meta dùng dữ liệu này theo Chính sách quyền riêng tư của Meta, ví dụ để hiển thị quảng cáo Mitsubishi cho người đã xem website. Bạn có thể tắt quảng cáo dựa trên hoạt động bên ngoài Meta trong phần Cài đặt quảng cáo của tài khoản Facebook, hoặc chặn cookie bên thứ ba trong trình duyệt.",
         "Website dùng Google Analytics 4 của Google để thống kê lượt truy cập và đo hiệu quả quảng cáo trên Google: trang bạn đã xem, bạn đến từ đâu (Google, Facebook, Zalo…), lượt bấm gọi điện hoặc Zalo và việc gửi biểu mẫu thành công. Google Analytics dùng cookie và có thể nhận địa chỉ IP, thông tin trình duyệt; họ tên và số điện thoại bạn nhập vào biểu mẫu không được gửi cho Google. Bạn có thể chặn cookie trong trình duyệt hoặc dùng tiện ích chặn Google Analytics của Google.",
+        "Khi bạn đến từ quảng cáo trên Google Tìm kiếm, thẻ Google Ads (dùng chung thẻ với Google Analytics) ghi nhận việc gửi biểu mẫu thành công để đo hiệu quả quảng cáo. Thẻ này dùng cookie của Google; họ tên, số điện thoại bạn nhập không được gửi cho Google. Bạn có thể tắt quảng cáo được cá nhân hóa tại trang Cài đặt quảng cáo của Google (adssettings.google.com).",
       ],
     },
     {

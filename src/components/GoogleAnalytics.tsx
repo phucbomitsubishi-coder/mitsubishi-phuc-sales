@@ -34,6 +34,8 @@ export default function GoogleAnalytics() {
       };
       w.gtag("js", new Date());
       w.gtag("config", measurementId);
+      // Google Ads dùng chung gtag.js (thẻ Google "Website" đã liên kết 2 đích G- và AW-, 31/10/2026)
+      w.gtag("config", siteConfig.tracking.googleAdsId);
     }
     if (window.location.pathname.startsWith("/uu-dai/")) {
       loadScript();

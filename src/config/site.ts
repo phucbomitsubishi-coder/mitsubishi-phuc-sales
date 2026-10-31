@@ -54,6 +54,10 @@ export const siteConfig = {
     metaPixelId: "2239821823251751",
     // Google Analytics 4 (tài sản "mitsubishiauto.vn", luồng "Website"), tạo 28/10/2026; liên kết Google Ads khi bật quảng cáo
     gaMeasurementId: "G-8EWHTV0W7J",
+    // Google Ads 995-477-7729 (31/10/2026): chuyển đổi "Lượt yêu cầu thông tin báo giá", gửi khi form gửi thành công (trackPixel "Lead").
+    // Đo thẳng bằng thẻ Ads nên KHÔNG nhập thêm generate_lead từ GA4 vào Google Ads (tránh đếm 2 lần).
+    googleAdsId: "AW-18539646093",
+    googleAdsLeadLabel: "T2JzCLyhpa8dEI2ZsohF",
   },
 
   contact: {
