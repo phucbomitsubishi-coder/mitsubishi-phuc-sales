@@ -118,7 +118,7 @@ export default function MobileMenu({ cars }: MobileMenuProps) {
         <nav
           id="mobile-menu"
           aria-label="Menu"
-          className="fixed inset-x-0 bottom-0 top-16 z-40 overflow-y-auto bg-[linear-gradient(115deg,#ffffff_55%,#f3f3f3_55%)] px-6 pb-28 pt-2 text-gray-950"
+          className="fixed inset-x-0 bottom-0 top-[var(--header-bottom,4rem)] z-40 overflow-y-auto bg-[linear-gradient(115deg,#ffffff_55%,#f3f3f3_55%)] px-6 pb-28 pt-2 text-gray-950"
         >
           <ul>
             <Section id="san-pham" expanded={section === "san-pham"} onToggle={() => setSection(section === "san-pham" ? null : "san-pham")} title="Sản phẩm">

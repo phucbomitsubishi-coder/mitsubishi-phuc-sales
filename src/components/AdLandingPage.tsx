@@ -10,6 +10,7 @@ import { calculateOnRoadPrice } from "@/lib/onRoadPrice";
 import LandingLeadForm from "@/components/LandingLeadForm";
 import MobileContactBar from "@/components/MobileContactBar";
 import PromoCountdown from "@/components/PromoCountdown";
+import DisclosureBar from "@/components/DisclosureBar";
 
 // Khuôn landing page chạy quảng cáo Facebook/Google (/uu-dai/<xe>, anh Phúc chọn "cách B" 16/10/2026):
 // ghi CHƯƠNG TRÌNH ĐẠI LÝ (dealerPromotions.ts, tự sinh từ app báo giá) vì trang chỉ dành cho người bấm quảng cáo:
@@ -63,6 +64,7 @@ export default function AdLandingPage({ carSlug, extraCarSlugs = [], heading, de
 
   return (
     <main className="bg-white pb-24 md:pb-0">
+      <DisclosureBar />
       {/* Đầu trang: chỉ logo tên người tư vấn + nút gọi, không có menu */}
       <header className="border-b border-gray-200">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">

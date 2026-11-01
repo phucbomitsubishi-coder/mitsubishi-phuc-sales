@@ -4,7 +4,8 @@ import { useEffect } from "react";
 
 // Mọi màn hình (máy tính từ 20/10/2026): ẩn thanh trên cùng khi khách cuộn xuống, hiện lại khi cuộn lên
 // (giống web Mitsubishi Việt Nam), để nội dung không bị che. Không ẩn khi menu đang mở.
-// Đặt biến CSS --header-offset (chiều cao header đang hiện, hoặc 0) cho các thanh bám đầu trang khác.
+// Đặt biến CSS --header-offset (chiều cao header đang hiện, hoặc 0) cho các thanh bám đầu trang khác,
+// và --header-bottom (mép dưới header trên màn hình) cho bảng menu (vì có DisclosureBar phía trên header, 01/11/2026).
 export default function HeaderAutoHide() {
   useEffect(() => {
     const header = document.getElementById("site-header");
@@ -20,8 +21,11 @@ export default function HeaderAutoHide() {
       root.style.setProperty("--header-offset", hide ? "0px" : `${header.offsetHeight}px`);
     };
 
+    const setBottom = () => root.style.setProperty("--header-bottom", `${Math.max(0, header.getBoundingClientRect().bottom)}px`);
+
     const update = () => {
       ticking = false;
+      setBottom();
       const y = window.scrollY;
       const menuOpen = !!header.querySelector('[aria-expanded="true"]');
       if (menuOpen || y < 120) {
@@ -44,6 +48,7 @@ export default function HeaderAutoHide() {
     };
 
     apply(false);
+    setBottom();
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
     return () => {

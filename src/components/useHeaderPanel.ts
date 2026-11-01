@@ -57,4 +57,4 @@ export const panelButtonClass = (highlight: boolean) =>
   `relative flex h-full items-center whitespace-nowrap uppercase transition hover:text-white ${highlight ? "text-white" : "text-white/80"}`;
 
 export const panelClass =
-  "fixed inset-x-0 bottom-0 top-[104px] z-40 overflow-y-auto bg-[linear-gradient(115deg,#ffffff_45%,#f1f1f1_45%)] normal-case tracking-normal text-gray-950";
+  "fixed inset-x-0 bottom-0 top-[var(--header-bottom,104px)] z-40 overflow-y-auto bg-[linear-gradient(115deg,#ffffff_45%,#f1f1f1_45%)] normal-case tracking-normal text-gray-950";

@@ -9,6 +9,7 @@ import ProductMenu from "@/components/ProductMenu";
 import BuyMenu from "@/components/BuyMenu";
 import ServiceMenu from "@/components/ServiceMenu";
 import { carCards } from "@/lib/carCards";
+import DisclosureBar from "@/components/DisclosureBar";
 
 // Thanh menu 2 tầng kiểu trang chủ MMV (21/10/2026): máy tính cao ~104px, logo lớn; tầng trên link phụ chữ nhỏ
 // (Khuyến mãi, Bảng giá, Lái thử, Liên hệ, số điện thoại); tầng dưới menu chính chữ in hoa đậm giãn chữ
@@ -24,15 +25,17 @@ const topLinks = [
 
 export default function SiteHeader() {
   return (
+    <>
+    <DisclosureBar />
     <header id="site-header" className="site-header sticky top-0 z-50 border-b border-white/10 bg-black text-white">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-8 px-4 md:px-6 xl:h-[104px]">
         <ScrollTopLink href="/" aria-label="Về trang chủ" className="inline-flex shrink-0 items-center">
           <Image
-            src="/images/logo/logo-mobile-new.webp"
-            alt="Mitsubishi Motors - Vững Tiến"
-            width={900}
-            height={300}
-            sizes="(min-width: 1280px) 260px, 160px"
+            src="/images/logo/logo-mmc.webp"
+            alt="Mitsubishi Motors - Drive your Ambition"
+            width={545}
+            height={470}
+            sizes="(min-width: 1280px) 100px, 60px"
             loading="eager"
             className="h-12 w-auto object-contain md:h-[52px] xl:h-[84px]"
           />
@@ -81,5 +84,6 @@ export default function SiteHeader() {
       </div>
       <HeaderAutoHide />
     </header>
+    </>
   );
 }
