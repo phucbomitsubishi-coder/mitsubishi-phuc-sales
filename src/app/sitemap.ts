@@ -155,6 +155,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
+      url: `${baseUrl}/tu-van/so-sanh-xforce-va-honda-hr-v`,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
       url: `${baseUrl}/tu-van/so-sanh-xpander-va-hyundai-stargazer`,
       changeFrequency: "monthly",
       priority: 0.8,

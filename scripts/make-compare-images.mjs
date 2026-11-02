@@ -39,6 +39,7 @@ const comparisons = [
   { slug: "so-sanh-xforce-va-kia-seltos", carId: "xforce", rival: "kiaSeltos", hook: "SUV 5 chỗ tầm 550–720 triệu: gầm cao hay máy turbo?", topics: ["Giá lăn bánh", "Kích thước, gầm xe", "Động cơ 1.5L và Turbo", "Trang bị an toàn"] },
   { slug: "so-sanh-xpander-va-kia-carens", carId: "xpander", rival: "kiaCarens", hook: "Xe 7 chỗ gia đình dưới 700 triệu: chọn mẫu nào cho cả nhà?", topics: ["Giá lăn bánh", "Kích thước, gầm xe", "Động cơ, hộp số", "Trang bị an toàn"] },
   { slug: "so-sanh-destinator-va-hyundai-santa-fe", carId: "destinator", rival: "hyundaiSantaFe", hook: "SUV 7 chỗ: dưới 900 triệu hay hơn 1 tỷ, khác nhau những gì?", topics: ["Giá lăn bánh", "Kích thước, gầm xe", "Động cơ", "Trang bị an toàn"] },
+  { slug: "so-sanh-xforce-va-honda-hr-v", carId: "xforce", rival: "hondaHRV", hook: "SUV 5 chỗ đô thị: gầm cao giá mềm hay hybrid tiết kiệm xăng?", topics: ["Giá lăn bánh", "Kích thước, gầm xe", "Động cơ xăng và hybrid", "Trang bị an toàn"] },
   { slug: "so-sanh-xpander-va-hyundai-stargazer", carId: "xpander", rival: "hyundaiStargazer", hook: "MPV 7 chỗ dưới 700 triệu: gầm cao hay hộp số vô cấp?", topics: ["Giá lăn bánh", "Kích thước, gầm xe", "Động cơ, hộp số", "Trang bị an toàn"] },
 ];
 

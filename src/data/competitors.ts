@@ -500,6 +500,39 @@ export const competitors = {
     ],
   },
 
+  // Giá theo VnExpress v-car + đại lý Honda Phước Thọ (10/2026), khớp nhau (Honda giảm G 699→669, RS 869→835 từ 1/7).
+  // Bonbanh ghi RS 836 nên lấy số 2 nguồn khớp. Thông số theo Honda Phước Thọ + Bonbanh (khớp). Phụ phí màu các nguồn
+  // ghi 7–8 triệu khác nhau nên chỉ ghi chú chung. Túi khí: VnExpress ghi 8, 2 nguồn kia ghi 4/6 → bỏ, không đưa lên.
+  hondaHRV: {
+    name: "Honda HR-V",
+    seats: 5,
+    updated: "10/2026",
+    priceNote: "một số màu sơn có phụ phí vài triệu đồng",
+    variants: [
+      { name: "G", price: 669_000_000 },
+      { name: "L", price: 750_000_000 },
+      { name: "e:HEV RS", price: 835_000_000 },
+    ],
+    specs: {
+      type: "SUV đô thị 5 chỗ",
+      dimensions: "4.347 × 1.790 × 1.590 mm (e:HEV RS dài 4.385 mm)",
+      wheelbase: "2.610 mm",
+      groundClearance: "195 mm (G, L), 190 mm (e:HEV RS)",
+      engine: "Xăng 1.5L i-VTEC (G, L); hybrid e:HEV 1.5L (RS)",
+      power: "119 mã lực (G, L); mô-tơ điện 129 mã lực (RS)",
+      torque: "145 Nm (G, L); mô-tơ điện 253 Nm (RS)",
+      transmission: "Vô cấp CVT (G, L), e-CVT (RS)",
+      drivetrain: "Cầu trước",
+      wheels: "17 inch (G, L), 18 inch (RS)",
+      fuelConsumption: "6,7 L/100 km (G, L), 4,44 L/100 km (RS), kết hợp",
+    },
+    sources: [
+      { name: "VnExpress – Honda HR-V: giá lăn bánh, thông số kỹ thuật", url: "https://vnexpress.net/oto-xe-may/v-car/dong-xe/honda-hr-v-43" },
+      { name: "Honda Phước Thọ – Honda HR-V 2026: giá, thông số", url: "https://hondaphuctho.vn/san-pham/o-to/honda-hrv" },
+      { name: "Bonbanh – Thông số kỹ thuật Honda HR-V 2026", url: "https://bonbanh.com/thong-so-ky-thuat-xe-honda-hrv-nam-2026" },
+    ],
+  },
+
   // Stargazer nâng cấp (ra mắt 3/2026): VnExpress v-car + Bonbanh (10/2026) khớp giá 2 bản Đặc biệt, Cao cấp.
   // Bản Tiêu chuẩn 489 triệu chỉ còn ở một số bảng giá (Bonbanh và đại lý ghi đã thôi bán) nên bỏ.
   // Chiều cao, mâm, mức tiêu hao các nguồn ghi khác nhau nên không đưa lên.

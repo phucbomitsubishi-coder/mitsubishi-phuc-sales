@@ -144,4 +144,12 @@ export const advisoryArticles: AdvisoryArticle[] = [
     href: "/tu-van/so-sanh-xpander-va-hyundai-stargazer",
     carIds: ["xpander"],
   },
+  {
+    number: "18",
+    title: "So sánh Xforce và Honda HR-V",
+    description:
+      "So sánh giá, giá lăn bánh, kích thước, khoảng sáng gầm, động cơ xăng và hybrid, trang bị từng phiên bản của hai mẫu SUV 5 chỗ đô thị.",
+    href: "/tu-van/so-sanh-xforce-va-honda-hr-v",
+    carIds: ["xforce"],
+  },
 ];
