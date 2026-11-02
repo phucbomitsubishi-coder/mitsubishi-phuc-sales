@@ -3,13 +3,13 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { siteConfig } from "@/config/site";
+import ZaloIcon from "@/components/ZaloIcon";
 
 type BarCar = { id: string; slug: string; name: string };
 
 const icons = {
   quote: "M5 3h14v18H5zM8 7h8M8 11h8M8 15h5",
   testDrive: "M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 6a4 4 0 1 1 0 8 4 4 0 0 1 0-8Zm-9.5 4h5.5m8 0h5.5M12 16v5.5",
-  zalo: "M4 5h16v11H9l-5 4z",
   phone: "M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2",
 };
 
@@ -44,7 +44,7 @@ export default function MobileActionBar({ cars }: { cars: BarCar[] }) {
           Lái thử
         </Link>
         <a href={siteConfig.contact.zaloUrl} target="_blank" rel="noopener noreferrer" className={`${item} text-blue-700`}>
-          <Icon d={icons.zalo} />
+          <ZaloIcon className="h-6 w-6" />
           Zalo
         </a>
         <a href={siteConfig.contact.phoneUrl} className={`${item} text-gray-900`}>

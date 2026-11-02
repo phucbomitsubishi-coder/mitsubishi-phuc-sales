@@ -10,6 +10,7 @@ import BuyMenu from "@/components/BuyMenu";
 import ServiceMenu from "@/components/ServiceMenu";
 import { carCards } from "@/lib/carCards";
 import DisclosureBar from "@/components/DisclosureBar";
+import ZaloIcon from "@/components/ZaloIcon";
 
 // Thanh menu 2 tầng kiểu trang chủ MMV (21/10/2026): máy tính cao ~104px, logo lớn; tầng trên link phụ chữ nhỏ
 // (Khuyến mãi, Bảng giá, Lái thử, Liên hệ, số điện thoại); tầng dưới menu chính chữ in hoa đậm giãn chữ
@@ -71,8 +72,9 @@ export default function SiteHeader() {
                 href={siteConfig.contact.zaloUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-red-600 px-5 py-2.5 text-xs font-bold uppercase tracking-[0.18em] text-white transition hover:bg-red-700"
+                className="inline-flex items-center gap-2 bg-[#0068FF] px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-white transition hover:bg-[#0054cc]"
               >
+                <ZaloIcon variant="white" className="h-6 w-6" />
                 Nhắn Zalo
               </a>
             </div>
