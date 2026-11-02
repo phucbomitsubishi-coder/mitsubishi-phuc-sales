@@ -1,3 +1,4 @@
+import ZaloIcon from "@/components/ZaloIcon";
 type MobileContactBarProps = {
   zaloUrl: string;
   phoneUrl: string;
@@ -14,8 +15,9 @@ export default function MobileContactBar({
           href={zaloUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex-1 rounded border border-blue-600 bg-white px-4 py-3 text-center font-semibold text-blue-600"
+          className="inline-flex flex-1 rounded border border-blue-600 bg-white px-4 py-3 font-semibold text-blue-600 items-center justify-center gap-2"
         >
+                <ZaloIcon className="h-5 w-5 shrink-0" />
           Zalo
         </a>
 

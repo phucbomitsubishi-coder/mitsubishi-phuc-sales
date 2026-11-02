@@ -1,3 +1,4 @@
+import ZaloIcon from "@/components/ZaloIcon";
 import type { Metadata } from "next";
 import { fitTitle } from "@/lib/metadata";
 import Link from "next/link";
@@ -418,8 +419,9 @@ const tableContent = hasTable
                   href={contact.zaloUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="border border-blue-500 px-6 py-3 text-xs font-black uppercase tracking-[0.18em] text-blue-400 hover:bg-blue-500 hover:text-white"
+                  className="inline-flex border border-blue-500 px-6 py-3 text-xs font-black uppercase tracking-[0.18em] text-blue-400 hover:bg-blue-500 hover:text-white items-center justify-center gap-2"
                 >
+                <ZaloIcon className="h-5 w-5 shrink-0" variant="white" />
                   Mở Zalo
                 </a>
               </div>

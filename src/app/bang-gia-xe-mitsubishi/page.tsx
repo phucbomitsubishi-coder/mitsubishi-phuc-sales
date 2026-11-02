@@ -1,3 +1,4 @@
+import ZaloIcon from "@/components/ZaloIcon";
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
@@ -350,8 +351,9 @@ export default function PriceListPage() {
                 href={contact.zaloUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="border border-white/60 px-5 py-3 text-xs font-black uppercase tracking-[0.18em] text-white transition hover:bg-white hover:text-gray-950"
+                className="inline-flex border border-white/60 px-5 py-3 text-xs font-black uppercase tracking-[0.18em] text-white transition hover:bg-white hover:text-gray-950 items-center justify-center gap-2"
               >
+                <ZaloIcon className="h-5 w-5 shrink-0" />
                 Nhắn Zalo
               </a>
             </div>

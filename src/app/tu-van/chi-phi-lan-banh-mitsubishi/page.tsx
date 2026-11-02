@@ -1,3 +1,4 @@
+import ZaloIcon from "@/components/ZaloIcon";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { createPageMetadata } from "@/lib/metadata";
@@ -308,8 +309,9 @@ export default function MitsubishiOnRoadCostGuidePage() {
               href={siteConfig.contact.zaloUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded border border-blue-600 bg-white px-5 py-3 text-xs font-black uppercase tracking-[0.18em] text-blue-700 transition hover:bg-blue-50"
+              className="inline-flex rounded border border-blue-600 bg-white px-5 py-3 text-xs font-black uppercase tracking-[0.18em] text-blue-700 transition hover:bg-blue-50 items-center justify-center gap-2"
             >
+                <ZaloIcon className="h-5 w-5 shrink-0" variant="white" />
               Tư vấn Zalo
             </a>
           </div>

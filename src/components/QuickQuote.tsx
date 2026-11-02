@@ -1,5 +1,6 @@
 "use client";
 
+import ZaloIcon from "@/components/ZaloIcon";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { provinces, defaultProvinceId } from "@/data/registrationFees";
@@ -184,8 +185,9 @@ export default function QuickQuote({ cars, zaloUrl, phoneUrl }: Props) {
               target="_blank"
               rel="noopener noreferrer"
               onClick={copyMessage}
-              className="rounded-lg bg-blue-600 px-4 py-3 text-center font-semibold text-white transition hover:bg-blue-700"
+              className="inline-flex rounded-lg bg-blue-600 px-4 py-3 font-semibold text-white transition hover:bg-blue-700 items-center justify-center gap-2"
             >
+                <ZaloIcon className="h-5 w-5 shrink-0" variant="white" />
               Nhận báo giá chi tiết qua Zalo
             </a>
             {copied && (

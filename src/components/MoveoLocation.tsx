@@ -1,3 +1,4 @@
+import ZaloIcon from "@/components/ZaloIcon";
 import { siteConfig } from "@/config/site";
 
 type Props = {
@@ -55,8 +56,9 @@ export default function MoveoLocation({ milestones = [] }: Props) {
               href={contact.zaloUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="border-2 border-gray-900 px-6 py-4 text-center text-sm font-bold uppercase tracking-[0.15em] text-gray-900 transition hover:bg-gray-900 hover:text-white"
+              className="inline-flex border-2 border-gray-900 px-6 py-4 text-sm font-bold uppercase tracking-[0.15em] text-gray-900 transition hover:bg-gray-900 hover:text-white items-center justify-center gap-2"
             >
+                <ZaloIcon className="h-5 w-5 shrink-0" />
               Hẹn xem xe qua Zalo
             </a>
           </div>

@@ -1,3 +1,4 @@
+import ZaloIcon from "@/components/ZaloIcon";
 import { cars, getCarBySlug } from "@/data/cars";
 import { stockByVariant, stockDateLabel } from "@/lib/stock";
 import SiteHeader from "@/components/SiteHeader";
@@ -368,8 +369,9 @@ const breadcrumbSchema = {
               href={siteConfig.contact.zaloUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="border border-white/30 px-5 py-3 text-center text-xs font-black uppercase tracking-[0.18em] transition hover:border-white hover:bg-white/10 sm:px-7"
+              className="inline-flex border border-white/30 px-5 py-3 text-xs font-black uppercase tracking-[0.18em] transition hover:border-white hover:bg-white/10 sm:px-7 items-center justify-center gap-2"
             >
+                <ZaloIcon className="h-5 w-5 shrink-0" />
               Tư vấn Zalo
             </a>
             {brochure && (
@@ -521,8 +523,9 @@ const breadcrumbSchema = {
               href={siteConfig.contact.zaloUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="border border-white/40 px-6 py-4 text-sm font-bold uppercase tracking-[0.2em] transition hover:border-white hover:bg-white/10"
+              className="inline-flex border border-white/40 px-6 py-4 text-sm font-bold uppercase tracking-[0.2em] transition hover:border-white hover:bg-white/10 items-center justify-center gap-2"
             >
+                <ZaloIcon className="h-5 w-5 shrink-0" />
               Nhắn Zalo
             </a>
           </div>

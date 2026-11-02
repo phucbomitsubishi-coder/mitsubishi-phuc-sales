@@ -1,3 +1,4 @@
+import ZaloIcon from "@/components/ZaloIcon";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -49,7 +50,8 @@ export default function StockPage() {
               <a href={siteConfig.contact.phoneUrl} className="bg-red-600 px-6 py-3 text-xs font-black uppercase tracking-[0.18em] text-white hover:bg-red-700">
                 Gọi {siteConfig.sales.phoneDisplay}
               </a>
-              <a href={siteConfig.contact.zaloUrl} target="_blank" rel="noopener noreferrer" className="border-2 border-gray-950 px-6 py-2.5 text-xs font-black uppercase tracking-[0.18em] hover:bg-gray-950 hover:text-white">
+              <a href={siteConfig.contact.zaloUrl} target="_blank" rel="noopener noreferrer" className="inline-flex border-2 border-gray-950 px-6 py-2.5 text-xs font-black uppercase tracking-[0.18em] hover:bg-gray-950 hover:text-white items-center justify-center gap-2">
+                <ZaloIcon className="h-5 w-5 shrink-0" />
                 Nhắn Zalo
               </a>
             </div>

@@ -1,3 +1,4 @@
+import ZaloIcon from "@/components/ZaloIcon";
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
 import { cars } from "@/data/cars";
@@ -151,8 +152,9 @@ export default function SiteFooter() {
         href={contact.zaloUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="hover:text-white"
+        className="inline-flex hover:text-white items-center justify-center gap-2"
       >
+                <ZaloIcon className="h-5 w-5 shrink-0" />
         Zalo: {sales.phoneDisplay}
       </a>
 

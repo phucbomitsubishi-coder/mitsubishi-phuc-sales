@@ -1,3 +1,4 @@
+import ZaloIcon from "@/components/ZaloIcon";
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
@@ -171,8 +172,9 @@ export default function AccessoriesPage() {
                         href={zaloUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="rounded bg-blue-600 px-3 py-1.5 font-semibold text-white transition hover:bg-blue-700"
+                        className="inline-flex rounded bg-blue-600 px-3 py-1.5 font-semibold text-white transition hover:bg-blue-700 items-center justify-center gap-2"
                       >
+                <ZaloIcon className="h-5 w-5 shrink-0" variant="white" />
                         Hỏi giá phụ kiện qua Zalo
                       </a>
                       <Link href={`/xe/${car.slug}`} className="font-semibold text-red-700 underline hover:text-red-800">
@@ -226,8 +228,9 @@ export default function AccessoriesPage() {
                 href={zaloUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded bg-blue-600 px-5 py-3 text-xs font-black uppercase tracking-[0.18em] text-white transition hover:bg-blue-700"
+                className="inline-flex rounded bg-blue-600 px-5 py-3 text-xs font-black uppercase tracking-[0.18em] text-white transition hover:bg-blue-700 items-center justify-center gap-2"
               >
+                <ZaloIcon className="h-5 w-5 shrink-0" variant="white" />
                 Nhắn Zalo
               </a>
               <Link

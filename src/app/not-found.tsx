@@ -1,3 +1,4 @@
+import ZaloIcon from "@/components/ZaloIcon";
 import type { Metadata } from "next";
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
@@ -70,8 +71,9 @@ export default function NotFound() {
                 href={contact.zaloUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="border border-blue-600 px-6 py-3 text-xs font-black uppercase tracking-[0.18em] text-blue-600 transition hover:bg-blue-50"
+                className="inline-flex border border-blue-600 px-6 py-3 text-xs font-black uppercase tracking-[0.18em] text-blue-600 transition hover:bg-blue-50 items-center justify-center gap-2"
               >
+                <ZaloIcon className="h-5 w-5 shrink-0" variant="white" />
                 Nhắn Zalo
               </a>
             </div>

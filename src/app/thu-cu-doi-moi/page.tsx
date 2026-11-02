@@ -1,3 +1,4 @@
+import ZaloIcon from "@/components/ZaloIcon";
 import type { Metadata } from "next";
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
@@ -128,8 +129,9 @@ export default function TradeInPage() {
                 href={siteConfig.contact.zaloUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded bg-blue-600 px-5 py-3 text-xs font-black uppercase tracking-[0.18em] text-white transition hover:bg-blue-700"
+                className="inline-flex rounded bg-blue-600 px-5 py-3 text-xs font-black uppercase tracking-[0.18em] text-white transition hover:bg-blue-700 items-center justify-center gap-2"
               >
+                <ZaloIcon className="h-5 w-5 shrink-0" variant="white" />
                 Gửi ảnh qua Zalo
               </a>
               <a

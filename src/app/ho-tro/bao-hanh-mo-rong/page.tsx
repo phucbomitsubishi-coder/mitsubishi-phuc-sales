@@ -1,3 +1,4 @@
+import ZaloIcon from "@/components/ZaloIcon";
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
@@ -81,8 +82,9 @@ export default function ExtendedWarrantyPage() {
                   href={contact.zaloUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-red-600 px-6 py-3.5 text-xs font-black uppercase tracking-[0.2em] text-white transition hover:bg-red-700"
+                  className="inline-flex bg-red-600 px-6 py-3.5 text-xs font-black uppercase tracking-[0.2em] text-white transition hover:bg-red-700 items-center justify-center gap-2"
                 >
+                <ZaloIcon className="h-5 w-5 shrink-0" />
                   Hỏi gói cho xe của bạn
                 </a>
                 <a
@@ -204,8 +206,9 @@ export default function ExtendedWarrantyPage() {
                 href={contact.zaloUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-4 inline-flex w-fit text-sm font-bold uppercase tracking-[0.15em] text-red-700 hover:text-red-800"
+                className="mt-4 inline-flex w-fit text-sm font-bold uppercase tracking-[0.15em] text-red-700 hover:text-red-800 items-center justify-center gap-2"
               >
+                <ZaloIcon className="h-5 w-5 shrink-0" />
                 Nhắn Zalo →
               </a>
             </div>
@@ -270,8 +273,9 @@ export default function ExtendedWarrantyPage() {
                 href={contact.zaloUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="border border-white/60 px-6 py-3.5 text-xs font-black uppercase tracking-[0.2em] transition hover:bg-white hover:text-gray-950"
+                className="inline-flex border border-white/60 px-6 py-3.5 text-xs font-black uppercase tracking-[0.2em] transition hover:bg-white hover:text-gray-950 items-center justify-center gap-2"
               >
+                <ZaloIcon className="h-5 w-5 shrink-0" />
                 Nhắn Zalo
               </a>
             </div>

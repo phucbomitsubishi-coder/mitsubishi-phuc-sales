@@ -1,3 +1,4 @@
+import ZaloIcon from "@/components/ZaloIcon";
 import Image from "next/image";
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
@@ -209,8 +210,9 @@ export default function GioiThieuPage() {
                 href={contact.zaloUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="border border-white px-6 py-3.5 text-sm font-bold uppercase tracking-[0.15em] text-white transition hover:bg-white hover:text-neutral-950"
+                className="inline-flex border border-white px-6 py-3.5 text-sm font-bold uppercase tracking-[0.15em] text-white transition hover:bg-white hover:text-neutral-950 items-center justify-center gap-2"
               >
+                <ZaloIcon className="h-5 w-5 shrink-0" />
                 Nhắn Zalo
               </a>
               <Link
@@ -443,8 +445,9 @@ export default function GioiThieuPage() {
               href={contact.zaloUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="border border-white/40 px-6 py-4 text-sm font-bold uppercase tracking-[0.2em] transition hover:border-white hover:bg-white/10"
+              className="inline-flex border border-white/40 px-6 py-4 text-sm font-bold uppercase tracking-[0.2em] transition hover:border-white hover:bg-white/10 items-center justify-center gap-2"
             >
+                <ZaloIcon className="h-5 w-5 shrink-0" />
               Nhắn Zalo
             </a>
           </div>
