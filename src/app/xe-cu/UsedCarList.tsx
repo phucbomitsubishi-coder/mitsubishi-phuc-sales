@@ -14,6 +14,8 @@ export type UsedCarCard = {
   color: string;
   price: number;
   image: string;
+  // "Trả góp từ X triệu/tháng" tính sẵn ở trang (src/data/financing.ts usedFinancing); không có khi xe quá tuổi vay
+  monthly?: string;
 };
 
 const sorts = {
@@ -116,6 +118,7 @@ export default function UsedCarList({ cars }: { cars: UsedCarCard[] }) {
                 <p className="mt-2 font-bold tabular-nums text-red-700 sm:text-lg">
                   {car.price.toLocaleString("vi-VN")} đ
                 </p>
+                {car.monthly && <p className="mt-0.5 text-xs text-gray-600 sm:text-sm">Trả góp từ {car.monthly}*</p>}
               </div>
             </Link>
           );

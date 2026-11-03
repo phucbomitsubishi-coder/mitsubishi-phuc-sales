@@ -10,6 +10,7 @@ import UsedCarGallery from "@/components/UsedCarGallery";
 import UsedCarGifts from "@/components/UsedCarGifts";
 import { usedCars } from "@/data/usedCars";
 import { usedCarReview } from "@/lib/usedCarReview";
+import { monthlyLabel, usedCarFinanceable, usedFinancing, usedFinancingNote } from "@/data/financing";
 
 type Props = {
   params: Promise<{
@@ -167,6 +168,16 @@ export default async function UsedCarDetailPage({ params }: Props) {
               <p className={`mt-4 text-3xl font-bold ${car.status === "sold" ? "text-gray-500 line-through" : "text-red-600"}`}>
                 {car.price.toLocaleString("vi-VN")} đ
               </p>
+              {car.status === "available" && usedCarFinanceable(car.modelYear) && (
+                <p className="mt-2 text-sm text-gray-700">
+                  Trả góp từ <strong className="text-gray-950">{monthlyLabel(car.price, usedFinancing)}</strong>
+                  <span title={usedFinancingNote}>*</span>{" "}
+                  <Link href="/du-toan/tra-gop" className="font-semibold text-red-700 underline underline-offset-2">
+                    Xem lãi suất các ngân hàng
+                  </Link>
+                  <span className="mt-1 block text-xs leading-5 text-gray-600">* {usedFinancingNote}</span>
+                </p>
+              )}
 
               <div className="mt-8 grid grid-cols-2 gap-4">
                 <Info label="Năm sản xuất" value={String(car.modelYear)} />

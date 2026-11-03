@@ -26,9 +26,9 @@ export type PromotionProgram = {
 };
 
 export const currentPromotion: PromotionProgram = {
-  "month": 10,
+  "month": 11,
   "year": 2026,
-  "title": "CHƯƠNG TRÌNH KHUYẾN MÃI MUA XE THÁNG 10/2026 - Mitsubishi Motors Việt Nam",
+  "title": "CHƯƠNG TRÌNH KHUYẾN MÃI MUA XE THÁNG 11/2026 - Mitsubishi Motors Việt Nam",
   "source": "Mitsubishi Motors Việt Nam",
   "cars": [
     {
@@ -121,9 +121,8 @@ export const currentPromotion: PromotionProgram = {
               "calculable": false
             },
             {
-              "label": "Phiếu nhiên liệu (~ 24 triệu VNĐ)",
-              "value": 24000000,
-              "description": "Phiếu nhiên liệu (~ 24 triệu VNĐ)",
+              "label": "Tặng camera toàn cảnh 360 (xe đời MY27)",
+              "description": "Tặng camera toàn cảnh 360 (xe đời MY27)",
               "calculable": false
             }
           ]
@@ -145,9 +144,8 @@ export const currentPromotion: PromotionProgram = {
               "calculable": false
             },
             {
-              "label": "Phiếu nhiên liệu (~ 20 triệu VNĐ)",
-              "value": 20000000,
-              "description": "Phiếu nhiên liệu (~ 20 triệu VNĐ)",
+              "label": "Tặng camera toàn cảnh 360 (xe đời MY27)",
+              "description": "Tặng camera toàn cảnh 360 (xe đời MY27)",
               "calculable": false
             }
           ]
@@ -207,9 +205,9 @@ export const currentPromotion: PromotionProgram = {
           "retailPrice": 380000000,
           "benefits": [
             {
-              "label": "Ưu đãi tương đương 100% phí trước bạ (38 triệu VNĐ)",
+              "label": "Ưu đãi tương đương 100% phí trước bạ (~ 38 triệu VNĐ)",
               "value": 38000000,
-              "description": "Ưu đãi tương đương 100% phí trước bạ (38 triệu VNĐ)",
+              "description": "Ưu đãi tương đương 100% phí trước bạ (~ 38 triệu VNĐ)",
               "calculable": false
             },
             {
@@ -232,9 +230,9 @@ export const currentPromotion: PromotionProgram = {
           "retailPrice": 490000000,
           "benefits": [
             {
-              "label": "Ưu đãi tương đương 50% phí trước bạ (24,5 triệu VNĐ)",
+              "label": "Ưu đãi tương đương 50% phí trước bạ (~ 24,5 triệu VNĐ)",
               "value": 24500000,
-              "description": "Ưu đãi tương đương 50% phí trước bạ (24,5 triệu VNĐ)",
+              "description": "Ưu đãi tương đương 50% phí trước bạ (~ 24,5 triệu VNĐ)",
               "calculable": false
             },
             {

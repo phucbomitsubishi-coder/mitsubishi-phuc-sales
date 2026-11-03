@@ -3,6 +3,8 @@ import { createPageMetadata } from "@/lib/metadata";
 import SiteHeader from "@/components/SiteHeader";
 import PageSchema from "@/components/PageSchema";
 import InstallmentCalculator from "@/components/InstallmentCalculator";
+import BankRateTable from "@/components/BankRateTable";
+import { bankPackagesUpdated, newCarBankPackages, usedCarBankPackages } from "@/data/financing";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Tính trả góp xe Mitsubishi: trả trước, lãi suất, góp hằng tháng",
@@ -49,6 +51,25 @@ export default function TraGopPage() {
     <InstallmentCalculator />
   </div>
 </div>
+
+            {/* Gói vay ngân hàng đối tác (src/data/financing.ts, theo chương trình MMV Auto Finance) */}
+            <section className="mt-8 border border-gray-200 bg-white p-6 shadow-sm">
+              <h2 className="text-xl font-black tracking-tight text-gray-900">
+                Lãi suất vay mua xe Mitsubishi tháng {bankPackagesUpdated}
+              </h2>
+              <p className="mt-2 text-sm leading-6 text-gray-600">
+                Các gói vay ưu đãi của ngân hàng đối tác trong chương trình Mitsubishi Auto Finance. Hết thời
+                gian cố định, lãi suất tính bằng lãi suất tham chiếu của ngân hàng cộng biên độ.
+              </p>
+              <div className="mt-6 space-y-8">
+                <BankRateTable packages={newCarBankPackages} caption="Mua xe mới" />
+                <BankRateTable packages={usedCarBankPackages} caption="Mua xe Mitsubishi đã qua sử dụng" />
+              </div>
+              <p className="mt-4 text-xs leading-5 text-gray-600">
+                Lãi suất áp dụng cho hồ sơ được ngân hàng phê duyệt, có thể thay đổi theo thông báo của ngân hàng.
+                Phúc hỗ trợ làm hồ sơ vay và so sánh gói phù hợp với thu nhập của bạn.
+              </p>
+            </section>
 
             <p className="mt-6 text-sm leading-6 text-gray-500">
               Kết quả tính toán chỉ mang tính tham khảo. Lãi suất, điều kiện vay,

@@ -8,6 +8,7 @@ import { usedCars } from "@/data/usedCars";
 import Link from "next/link";
 import Image from "next/image";
 import UsedCarList from "./UsedCarList";
+import { monthlyLabel, usedCarFinanceable, usedFinancing, usedFinancingNote } from "@/data/financing";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Mua xe Mitsubishi cũ tại Bình Dương: Xpander, Xforce, Triton",
@@ -86,6 +87,7 @@ export default function UsedCarsPage() {
                 </div>
               </div>
             ) : (
+              <>
               <UsedCarList
                 cars={availableCars.map((car) => ({
                   id: car.id,
@@ -97,8 +99,11 @@ export default function UsedCarsPage() {
                   color: car.color,
                   price: car.price,
                   image: car.image,
+                  monthly: usedCarFinanceable(car.modelYear) ? monthlyLabel(car.price, usedFinancing) : undefined,
                 }))}
               />
+              <p className="mt-4 text-xs leading-5 text-gray-600">* {usedFinancingNote}</p>
+              </>
             )}
                         {soldCars.length > 0 && (
               <div className="mt-16 border-t border-gray-200 pt-10">

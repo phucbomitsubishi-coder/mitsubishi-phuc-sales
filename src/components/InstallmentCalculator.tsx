@@ -1,13 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import { financing } from "@/data/financing";
 import { cars } from "@/data/cars";
 import Link from "next/link";
 
 export default function InstallmentCalculator() {
       const [downPaymentPercent, setDownPaymentPercent] = useState(20);
       const [loanYears, setLoanYears] = useState(8);
-      const [interestRate, setInterestRate] = useState(8);
+      const [interestRate, setInterestRate] = useState(financing.ratePercent);
   const [selectedCarId, setSelectedCarId] = useState(cars[0]?.id ?? "");
 
   const selectedCar =
