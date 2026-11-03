@@ -3,7 +3,7 @@
 // Đổi tháng: sửa month/year/gifts. Hết tháng mà chưa cập nhật thì khối tự ẩn ở lần build sau.
 
 export const usedCarPromotion = {
-  month: 10,
+  month: 11,
   year: 2026,
   gifts: [
     "Miễn phí công chứng",
