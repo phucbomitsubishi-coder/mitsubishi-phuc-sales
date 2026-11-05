@@ -111,7 +111,7 @@ export const currentPromotion: PromotionProgram = {
         },
         {
           "variantName": "AT Premium",
-          "modelYear": "2026",
+          "modelYear": "2026 (MY26)",
           "retailPrice": 659000000,
           "benefits": [
             {
@@ -121,8 +121,8 @@ export const currentPromotion: PromotionProgram = {
               "calculable": false
             },
             {
-              "label": "Tặng camera toàn cảnh 360 (xe đời MY27)",
-              "description": "Tặng camera toàn cảnh 360 (xe đời MY27)",
+              "label": "Xe đời MY27 (dự kiến về cuối tháng 11): giá 662 triệu, ưu đãi 100% phí trước bạ (~ 66 triệu) và trang bị thêm camera toàn cảnh 360",
+              "description": "Xe đời MY27 (dự kiến về cuối tháng 11): giá 662 triệu, ưu đãi 100% phí trước bạ (~ 66 triệu) và trang bị thêm camera toàn cảnh 360",
               "calculable": false
             }
           ]
@@ -134,7 +134,7 @@ export const currentPromotion: PromotionProgram = {
       "variants": [
         {
           "variantName": "Xpander Cross",
-          "modelYear": "2026",
+          "modelYear": "2026 (MY26)",
           "retailPrice": 699000000,
           "benefits": [
             {
@@ -144,8 +144,14 @@ export const currentPromotion: PromotionProgram = {
               "calculable": false
             },
             {
-              "label": "Tặng camera toàn cảnh 360 (xe đời MY27)",
-              "description": "Tặng camera toàn cảnh 360 (xe đời MY27)",
+              "label": "Phiếu nhiên liệu (~ 20 triệu VNĐ)",
+              "value": 20000000,
+              "description": "Phiếu nhiên liệu (~ 20 triệu VNĐ)",
+              "calculable": false
+            },
+            {
+              "label": "Xe đời MY27 (dự kiến về cuối tháng 11): giá 702 triệu, ưu đãi 100% phí trước bạ (~ 70 triệu) và trang bị thêm camera toàn cảnh 360",
+              "description": "Xe đời MY27 (dự kiến về cuối tháng 11): giá 702 triệu, ưu đãi 100% phí trước bạ (~ 70 triệu) và trang bị thêm camera toàn cảnh 360",
               "calculable": false
             }
           ]
@@ -269,19 +275,6 @@ export const currentPromotion: PromotionProgram = {
               "label": "Phiếu nhiên liệu (~ 10 triệu VNĐ)",
               "value": 10000000,
               "description": "Phiếu nhiên liệu (~ 10 triệu VNĐ)",
-              "calculable": false
-            }
-          ]
-        },
-        {
-          "variantName": "2WD AT Premium",
-          "modelYear": "2026",
-          "retailPrice": 782000000,
-          "benefits": [
-            {
-              "label": "Ưu đãi tương đương 100% phí trước bạ (~ 46 triệu VNĐ)",
-              "value": 46000000,
-              "description": "Ưu đãi tương đương 100% phí trước bạ (~ 46 triệu VNĐ)",
               "calculable": false
             }
           ]
