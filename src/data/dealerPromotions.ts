@@ -7,7 +7,7 @@ export type DealerPromotionVariant = {
 };
 
 export const dealerPromotion = {
-  month: 10,
+  month: 11,
   year: 2026,
   cars: {
     "xforce": [
@@ -57,17 +57,16 @@ export const dealerPromotion = {
             "value": 46000000
           },
           {
-            "label": "Phiếu nhiên liệu",
-            "value": 12000000
-          }
-        ]
-      },
-      {
-        "variant": "2WD AT Premium",
-        "benefits": [
+            "label": "Bộ thảm cao su chính hãng",
+            "value": 0
+          },
           {
-            "label": "Ưu đãi 100% lệ phí trước bạ",
-            "value": 46000000
+            "label": "Ty thủy lực cốp sau chính hãng",
+            "value": 0
+          },
+          {
+            "label": "Camera hành trình IROAD FX2 PRO",
+            "value": 0
           }
         ]
       },
@@ -120,6 +119,19 @@ export const dealerPromotion = {
         ]
       },
       {
+        "variant": "AT Premium MY27",
+        "benefits": [
+          {
+            "label": "Ưu đãi 100% lệ phí trước bạ",
+            "value": 66000000
+          },
+          {
+            "label": "Camera 360",
+            "value": 0
+          }
+        ]
+      },
+      {
         "variant": "AT",
         "benefits": [
           {
@@ -145,6 +157,19 @@ export const dealerPromotion = {
           {
             "label": "Tặng 03 năm đổ xăng miễn phí",
             "value": 90000000
+          }
+        ]
+      },
+      {
+        "variant": "MY27",
+        "benefits": [
+          {
+            "label": "Ưu đãi 100% lệ phí trước bạ",
+            "value": 70000000
+          },
+          {
+            "label": "Camera 360",
+            "value": 0
           }
         ]
       }

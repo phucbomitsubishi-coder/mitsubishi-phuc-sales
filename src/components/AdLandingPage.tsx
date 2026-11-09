@@ -111,7 +111,7 @@ export default function AdLandingPage({ carSlug, extraCarSlugs = [], heading, de
                   {rows.filter((row) => row.benefits.length > 0).map((row) => (
                     <li key={row.name}>
                       <span className="font-semibold text-white">{row.name}:</span>{" "}
-                      {row.benefits.map((b) => `${b.label.replace(/^Ưu đãi /, "ưu đãi tương đương ")} (~${million(b.value)})`).join(", ")}
+                      {row.benefits.map((b) => `${b.label.replace(/^Ưu đãi /, "ưu đãi tương đương ")}${b.value > 0 ? ` (~${million(b.value)})` : ""}`).join(", ")}
                     </li>
                   ))}
                 </ul>
