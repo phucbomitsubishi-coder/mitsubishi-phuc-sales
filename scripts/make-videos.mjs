@@ -27,7 +27,7 @@ const { usedCarReview } = await load("src/lib/usedCarReview.ts");
 const { financing, firstMonthPayment, usedFinancing, usedCarFinanceable, newCarBankPackages } = await load("src/data/financing.ts");
 const { plateFeeByArea } = await load("src/data/registrationFees.ts");
 
-const [template, target] = args.filter((arg, index) => !arg.startsWith("--") && !(index > 0 && args[index - 1].startsWith("--") && ["--ban", "--tinh"].includes(args[index - 1])));
+const [template, target] = args.filter((arg, index) => !arg.startsWith("--") && !(index > 0 && args[index - 1].startsWith("--") && ["--ban", "--tinh", "--giao-dien"].includes(args[index - 1])));
 const fileUrl = (publicPath) => pathToFileURL(path.join(root, "public", publicPath)).href;
 const shortOf = (car) => car.name.replace(/^Mitsubishi /, "");
 const num1 = (value) => (value / 1_000_000).toLocaleString("vi-VN", { maximumFractionDigits: 1 });
@@ -220,7 +220,7 @@ function lanBanhTinh(car) {
         ${byRate
           .map(
             (list, index) => `<div class="spec" data-at="${(0.12 + index * 0.2).toFixed(2)}"><i>${escapeHtml(names(list))}</i>
-            <div class="vals"><b style="grid-column:1/span 2;color:#e11d2a">${percent(rates[index] * (isPickup ? 0.6 : 1))} · ${trieu(v.price * rates[index] * (isPickup ? 0.6 : 1))}</b></div></div>`
+            <div class="vals"><b style="grid-column:1/span 2;color:var(--accent)">${percent(rates[index] * (isPickup ? 0.6 : 1))} · ${trieu(v.price * rates[index] * (isPickup ? 0.6 : 1))}</b></div></div>`
           )
           .join("")}
         ${box(`Mỗi 1% ~ ${trieu((v.price / 100) * (isPickup ? 0.6 : 1))}`, 0.7)}
@@ -355,7 +355,7 @@ function diemNoiBat(car) {
       html: `<p class="kicker" data-at="0.02">Mitsubishi</p>
         <h2 class="big" data-at="0.04">${escapeHtml(shortOf(car))}</h2>
         <p class="sub serif" data-at="0.12">${escapeHtml(showroom.slogan)}</p>
-        <div class="chips" data-at="0.35"><span>Giá từ ${escapeHtml(trieu(minPrice))}</span>${maxOffer ? `<span style="color:#ef2b36">Ưu đãi đến ${escapeHtml(trieu(maxOffer))}</span>` : ""}</div>`,
+        <div class="chips" data-at="0.35"><span>Giá từ ${escapeHtml(trieu(minPrice))}</span>${maxOffer ? `<span style="color:var(--accent-2)">Ưu đãi đến ${escapeHtml(trieu(maxOffer))}</span>` : ""}</div>`,
     },
     ...features.map((feature, index) => {
       const items = feature.from ? topVariantItems(car, feature.from).slice(0, 3) : [];

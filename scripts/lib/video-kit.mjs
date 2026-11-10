@@ -46,7 +46,7 @@ const option = (name) => {
   const index = args.indexOf(`--${name}`);
   return index >= 0 ? args[index + 1] : undefined;
 };
-const optionValues = new Set(["tinh", "ban"].map(option).filter(Boolean));
+const optionValues = new Set(["tinh", "ban", "giao-dien"].map(option).filter(Boolean));
 const wanted = args.filter((arg) => !arg.startsWith("--") && !optionValues.has(arg));
 const FPS = flag("nhanh") ? 15 : 30;
 const province = provinces.find((item) => item.id === (option("tinh") ?? defaultProvinceId));
@@ -229,9 +229,96 @@ async function openBrowser() {
   return { send, evaluate, close };
 }
 
+
+// ---------- Giao diện ----------
+// Cùng nội dung, khác màu / phông / khung / cách chữ hiện (fx) / cách chuyển cảnh (out), để video không nhàm.
+// Mặc định mỗi video tự nhận 1 giao diện theo tên (chạy lại vẫn giữ giao diện đó); --giao-dien <id> chọn riêng,
+// --giao-dien tat-ca xuất mỗi giao diện một file (video-<id>.mp4) để đăng lại cùng nội dung với vẻ khác.
+// fx: up (trượt lên, mờ dần) | left (trượt từ trái) | pop (bật to) | fade (hiện dần)
+// out: blur (nhòe) | slide (đẩy lên) | zoom (phóng to) | wipe (quét ngang) | fade (mờ dần)
+const skins = [
+  { id: "co-dien", name: "Cổ điển đen trắng đỏ (như video mẫu)", fx: "up", out: "blur", css: "" },
+  {
+    id: "bao-chi", name: "Báo chí: nền giấy, chữ có chân, khung đổ bóng", fx: "left", out: "slide",
+    css: `
+  .skin-bao-chi { --accent: #b42318; --accent-2: #f87171; --glow: rgba(255,255,255,.16); --tint: rgba(180,35,24,.08);
+    --light-bg: repeating-linear-gradient(0deg, rgba(0,0,0,.025) 0 2px, transparent 2px 7px), #f3eee3; --light-fade: #f3eee3;
+    --dark-bg: radial-gradient(ellipse 80% 55% at 50% 35%, #213659 0%, #13213b 60%, #0c1628 100%); --dark-fade: #0c1628;
+    --box-bg: #b42318; --box-shadow: 12px 12px 0 #111; --black-box: #13213b; }
+  .skin-bao-chi .dark { --box-shadow: 12px 12px 0 rgba(0,0,0,.55); }
+  .skin-bao-chi h2 { font-family: "Playfair Display", Georgia, serif; font-style: italic; font-size: 74px; letter-spacing: 0; }
+  .skin-bao-chi .content::before { content: ""; width: 150px; height: 9px; background: var(--accent); margin: -44px 0 35px; }
+  .skin-bao-chi .dark .content::before { background: #f3eee3; }
+  .skin-bao-chi .content { top: 255px; }
+  .skin-bao-chi .row { border-bottom-style: dashed; }
+  .skin-bao-chi .box { transform: rotate(-1.2deg); }
+  .skin-bao-chi .timeline::before, .skin-bao-chi .timeline .fill { height: 8px; }`,
+  },
+  {
+    id: "cong-nghe", name: "Công nghệ: nền tối có lưới, chữ phát sáng xanh", fx: "pop", out: "zoom",
+    css: `
+  .skin-cong-nghe { --accent: #22d3ee; --accent-2: #22d3ee; --glow: rgba(34,211,238,.45); --tint: rgba(34,211,238,.10);
+    --light-bg: linear-gradient(rgba(34,211,238,.07) 2px, transparent 2px) 0 0 / 100% 90px, linear-gradient(90deg, rgba(34,211,238,.07) 2px, transparent 2px) 0 0 / 90px 100%, radial-gradient(ellipse 80% 55% at 50% 32%, #172347 0%, #0b1020 70%);
+    --light-ink: #f1f5f9; --light-fade: #0b1020;
+    --dark-bg: radial-gradient(ellipse 75% 50% at 50% 34%, #24205a 0%, #0b0a1f 70%); --dark-fade: #0b0a1f;
+    --box-bg: linear-gradient(90deg, #22d3ee, #818cf8); --box-ink: #04111a; --box-shadow: 0 0 46px rgba(34,211,238,.45);
+    --black-box: #f1f5f9; --black-box-ink: #0b1020; }
+  .skin-cong-nghe .row i, .skin-cong-nghe .sub, .skin-cong-nghe .pair i, .skin-cong-nghe .spec i, .skin-cong-nghe .fine, .skin-cong-nghe .equip small, .skin-cong-nghe .brand { color: #94a3b8 !important; }
+  .skin-cong-nghe .note, .skin-cong-nghe .lead, .skin-cong-nghe .para, .skin-cong-nghe .spec.same .vals b, .skin-cong-nghe .spec.upgrade .vals b:first-child { color: #e2e8f0 !important; }
+  .skin-cong-nghe .row, .skin-cong-nghe .spec, .skin-cong-nghe .equip li, .skin-cong-nghe .pair { border-color: rgba(148,163,184,.25) !important; }
+  .skin-cong-nghe .spec-head { border-color: #22d3ee; }
+  .skin-cong-nghe h2, .skin-cong-nghe .serif-title { font-family: RobotoLocal, Roboto, sans-serif; font-style: normal; font-weight: 900; text-transform: uppercase; letter-spacing: 3px; font-size: 54px; }
+  .skin-cong-nghe .row b, .skin-cong-nghe .pair b.red, .skin-cong-nghe .price, .skin-cong-nghe h2 em { text-shadow: 0 0 26px rgba(34,211,238,.6); }
+  .skin-cong-nghe .cars img { filter: drop-shadow(0 0 40px rgba(34,211,238,.35)) !important; }
+  .skin-cong-nghe .equip .icon { color: #04111a; }`,
+  },
+  {
+    id: "do-vang", name: "Đỏ vàng nổi bật: tiêu đề khối đen, khung vàng", fx: "left", out: "wipe",
+    css: `
+  .skin-do-vang { --accent: #c8102e; --accent-2: #facc15; --glow: rgba(255,255,255,.35); --tint: rgba(200,16,46,.07);
+    --light-bg: #ffffff; --light-fade: #ffffff;
+    --dark-bg: repeating-linear-gradient(135deg, rgba(255,255,255,.06) 0 28px, transparent 28px 56px), #c8102e; --dark-fade: #c8102e;
+    --box-bg: #facc15; --box-ink: #111; --black-box: #c8102e; --black-box-ink: #fff; }
+  .skin-do-vang h2 { text-transform: uppercase; font-size: 56px; letter-spacing: 0; }
+  .skin-do-vang .light h2 { background: #111; color: #fff; padding: 12px 28px 16px; }
+  .skin-do-vang .dark .row b, .skin-do-vang .dark .pair b.red, .skin-do-vang .dark .price, .skin-do-vang .dark .kicker, .skin-do-vang .dark h2 em, .skin-do-vang .dark .contact span, .skin-do-vang .dark .brand small { color: #facc15; }
+  .skin-do-vang .dark .sub, .skin-do-vang .dark .pair i, .skin-do-vang .dark .row i, .skin-do-vang .dark .note { color: #fee2e2 !important; }
+  .skin-do-vang .light .row { border-bottom: 4px solid #111; }
+  .skin-do-vang .dark .row { border-color: rgba(255,255,255,.35); }
+  .skin-do-vang .timeline .fill { background: #facc15; height: 6px; }`,
+  },
+  {
+    id: "toi-gian", name: "Tối giản xanh: số thứ tự trong hình tròn, chữ nhẹ", fx: "fade", out: "fade",
+    css: `
+  .skin-toi-gian { --accent: #0f766e; --accent-2: #5eead4; --glow: rgba(94,234,212,.3); --tint: rgba(15,118,110,.08);
+    --light-bg: radial-gradient(ellipse 80% 55% at 50% 30%, #f7faf9 0%, #e7efec 70%); --light-fade: #e7efec;
+    --dark-bg: radial-gradient(ellipse 80% 55% at 50% 35%, #1d4d45 0%, #10302b 65%, #0a201c 100%); --dark-fade: #0a201c;
+    --box-bg: #0f766e; --black-box: #10302b; }
+  .skin-toi-gian .dark { --box-bg: #5eead4; --box-ink: #0a201c; }
+  .skin-toi-gian h2 { font-weight: 700; font-size: 60px; align-items: center; }
+  .skin-toi-gian h2 em { font-family: RobotoLocal, Roboto, sans-serif; font-style: normal; font-weight: 900; font-size: 58px; line-height: 96px; width: 96px; height: 96px; display: inline-block; text-align: center; border-radius: 50%; background: var(--accent); color: #fff; }
+  .skin-toi-gian .row { border-bottom: 2px solid rgba(15,118,110,.25); }
+  .skin-toi-gian .box { padding: 16px 42px 20px; }`,
+  },
+];
+function skinsFor(key) {
+  const wanted = option("giao-dien");
+  if (wanted === "tat-ca") return skins;
+  if (wanted) {
+    const found = skins.find((skin) => skin.id === wanted);
+    if (!found) {
+      console.error(`Không có giao diện "${wanted}". Các giao diện: ${skins.map((skin) => `${skin.id} (${skin.name})`).join("; ")}, tat-ca`);
+      process.exit(1);
+    }
+    return [found];
+  }
+  const hash = [...key].reduce((sum, char) => (sum * 31 + char.charCodeAt(0)) % 100003, 7);
+  return [skins[hash % skins.length]];
+}
+
 // ---------- HTML ----------
 const fontUrl = (file) => pathToFileURL(path.join(root, "src/assets/fonts", file)).href;
-function renderHtml(scenes, timings, total, extraCss = "") {
+function renderHtml(scenes, timings, total, extraCss = "", skin = skins[0]) {
   return `<!doctype html>
 <html lang="vi"><head><meta charset="utf-8">
 <style>
@@ -239,16 +326,22 @@ function renderHtml(scenes, timings, total, extraCss = "") {
   @font-face { font-family: "RobotoLocal"; src: url("${fontUrl("Roboto-Medium.ttf")}"); font-weight: 500 700; }
   @font-face { font-family: "Playfair Display"; font-style: italic; src: url("${fontUrl("PlayfairDisplay-BoldItalic.ttf")}"); font-weight: 400 800; }
   @font-face { font-family: "Playfair Display"; font-style: italic; src: url("${fontUrl("PlayfairDisplay-BlackItalic.ttf")}"); font-weight: 900; }
+  :root {
+    --accent: #e11d2a; --accent-2: #ef2b36; --glow: rgba(225,29,42,.55); --tint: rgba(225,29,42,.07);
+    --light-bg: radial-gradient(ellipse 80% 55% at 50% 32%, #fbfaf8 0%, #efeeeb 55%, #e3e2df 100%); --light-ink: #111; --light-fade: #efeeeb;
+    --dark-bg: radial-gradient(ellipse 75% 50% at 50% 34%, #3b3b3b 0%, #262626 55%, #161616 100%); --dark-ink: #fff; --dark-fade: #161616;
+    --box-bg: var(--accent); --box-ink: #fff; --box-shadow: none; --black-box: #0b0b0b; --black-box-ink: #fff;
+  }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { width: 1080px; height: 1920px; overflow: hidden; background: #000; }
   body { font-family: RobotoLocal, Roboto, "Segoe UI", Arial, sans-serif; color: #111; }
   .serif, .row i, .pair i, .note, .serif-title, figcaption { font-family: "Playfair Display", Georgia, "Times New Roman", serif; font-style: italic; }
   .scene { position: absolute; inset: 0; display: none; }
-  .scene.light { background: radial-gradient(ellipse 80% 55% at 50% 32%, #fbfaf8 0%, #efeeeb 55%, #e3e2df 100%); }
-  .scene.dark { background: radial-gradient(ellipse 75% 50% at 50% 34%, #3b3b3b 0%, #262626 55%, #161616 100%); color: #fff; }
+  .scene.light { background: var(--light-bg); color: var(--light-ink); }
+  .scene.dark { background: var(--dark-bg); color: var(--dark-ink); }
   .content { position: absolute; left: 0; right: 0; top: 300px; display: flex; flex-direction: column; align-items: center; }
   h2 { font-weight: 900; font-size: 64px; letter-spacing: -1px; display: flex; align-items: baseline; gap: 26px; }
-  h2 em { font-family: "Playfair Display", Georgia, serif; font-style: italic; font-weight: 900; color: #e11d2a; font-size: 112px; line-height: .6; }
+  h2 em { font-family: "Playfair Display", Georgia, serif; font-style: italic; font-weight: 900; color: var(--accent); font-size: 112px; line-height: .6; }
   .serif-title { font-size: 62px; font-weight: 800; letter-spacing: 0; margin-bottom: 20px; }
   .sub { font-size: 38px; color: #6b7280; margin-top: 18px; }
   .dark .sub { color: #a3a3a3; }
@@ -261,37 +354,37 @@ function renderHtml(scenes, timings, total, extraCss = "") {
   .spec .vals { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 4px; }
   .spec .vals b { font-size: 46px; font-weight: 900; line-height: 1.18; letter-spacing: -0.3px; }
   .spec.same .vals b { grid-column: 1 / span 2; color: #1f2937; }
-  .spec.diff { background: linear-gradient(90deg, rgba(225,29,42,0), rgba(225,29,42,.07) 50%, rgba(225,29,42,0)); }
-  .spec.diff .vals b { color: #e11d2a; }
+  .spec.diff { background: linear-gradient(90deg, transparent, var(--tint) 50%, transparent); }
+  .spec.diff .vals b { color: var(--accent); }
   .spec.upgrade .vals b { font-size: 40px; }
   .spec.upgrade .vals b:first-child { color: #6b7280; }
   .backdrop { position: absolute; left: 0; right: 0; top: 0; height: 1180px; overflow: hidden; }
   .backdrop .photo { position: absolute; inset: 0; background-size: cover; background-position: center; }
-  .backdrop::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.35) 0%, rgba(0,0,0,0) 22%, rgba(0,0,0,0) 55%, var(--fade, #161616) 100%); }
-  .light .backdrop { --fade: #efeeeb; }
-  .kicker { font-size: 30px; font-weight: 900; letter-spacing: 6px; text-transform: uppercase; color: #ef2b36; }
+  .backdrop::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.35) 0%, rgba(0,0,0,0) 22%, rgba(0,0,0,0) 55%, var(--fade, var(--dark-fade)) 100%); }
+  .light .backdrop { --fade: var(--light-fade); }
+  .kicker { font-size: 30px; font-weight: 900; letter-spacing: 6px; text-transform: uppercase; color: var(--accent-2); }
   .big { font-size: 84px; font-weight: 900; letter-spacing: -2px; line-height: 1.02; text-align: center; max-width: 980px; margin-top: 10px; }
   .bullets { list-style: none; width: 920px; margin-top: 26px; }
   .bullets li { display: flex; gap: 20px; align-items: flex-start; font-size: 36px; font-weight: 700; line-height: 1.22; padding: 8px 0; }
-  .bullets li::before { content: ""; flex: none; width: 14px; height: 14px; background: #e11d2a; margin-top: 15px; }
+  .bullets li::before { content: ""; flex: none; width: 14px; height: 14px; background: var(--accent); margin-top: 15px; }
   .para { font-size: 40px; font-weight: 700; line-height: 1.35; text-align: center; max-width: 940px; margin-top: 24px; }
   .dark .para, .dark .bullets li { color: #f3f4f6; }
   .chips { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-top: 24px; max-width: 980px; }
   .chips span { border: 3px solid currentColor; padding: 8px 20px; font-size: 34px; font-weight: 900; }
-  .price { font-size: 110px; font-weight: 900; color: #ef2b36; letter-spacing: -3px; line-height: 1; margin-top: 16px; }
+  .price { font-size: 110px; font-weight: 900; color: var(--accent-2); letter-spacing: -3px; line-height: 1; margin-top: 16px; }
   .cars.one img { width: 820px; height: 420px; object-fit: contain; filter: drop-shadow(0 30px 24px rgba(0,0,0,.22)); }
   .cars.one.compact img { height: 320px; }
   .cars.two { gap: 30px; }
   .cars.two figure { width: 440px; position: relative; }
   .cars.two img { width: 440px; height: 230px; object-fit: contain; position: relative; }
   .dark .cars figure::before { content: ""; position: absolute; left: 10%; right: 10%; top: 6%; height: 70%; border-radius: 50%;
-    background: radial-gradient(ellipse at center, rgba(225,29,42,.55), rgba(225,29,42,0) 70%); filter: blur(18px); }
+    background: radial-gradient(ellipse at center, var(--glow), transparent 70%); filter: blur(18px); }
   figure { text-align: center; }
   figcaption { font-size: 46px; font-weight: 800; margin-top: 14px; }
   .cars.two figcaption { font-family: RobotoLocal, Roboto, sans-serif; font-style: normal; font-weight: 900; font-size: 38px; margin-top: 6px; position: relative; }
   .row { width: 880px; display: flex; justify-content: space-between; align-items: baseline; padding: 18px 6px 16px; border-bottom: 3px solid #cfcfcc; margin-top: 8px; }
   .row i { font-size: 42px; color: #4b5563; font-weight: 600; }
-  .row b { font-size: 66px; font-weight: 900; color: #e11d2a; letter-spacing: -1px; }
+  .row b { font-size: 66px; font-weight: 900; color: var(--accent); letter-spacing: -1px; }
   .row.small b { font-size: 54px; }
   .row.small i { font-size: 36px; }
   .dark .row { border-color: #4b4b4b; }
@@ -299,38 +392,40 @@ function renderHtml(scenes, timings, total, extraCss = "") {
   .table { margin-top: 10px; }
   .pair { width: 900px; display: grid; grid-template-columns: 1fr 230px 1fr; align-items: baseline; text-align: center; margin-top: 18px; }
   .pair b { font-size: 50px; font-weight: 900; letter-spacing: -0.5px; }
-  .pair b.red { color: #ef2b36; }
+  .pair b.red { color: var(--accent-2); }
+  .light .pair b.red, .light .price, .light .kicker { color: var(--accent); }
   .pair i { font-size: 30px; color: #9ca3af; font-weight: 600; }
   .light .pair i { color: #6b7280; }
   .pair.head b { font-size: 46px; }
   .light .pair:not(.head) { border-bottom: 3px solid #d6d6d3; padding-bottom: 12px; }
   .box { margin-top: 56px; padding: 12px 34px 16px; font-weight: 900; font-size: 62px; letter-spacing: -0.5px; color: #fff; line-height: 1.12; text-align: center; max-width: 980px; }
-  .box.red { background: #e11d2a; }
+  .box.red { background: var(--box-bg); color: var(--box-ink); box-shadow: var(--box-shadow); }
   .box.long { font-size: 52px; }
   .box.longer { font-size: 45px; padding: 14px 26px 18px; }
-  .box.black { background: #0b0b0b; }
+  .box.black { background: var(--black-box); color: var(--black-box-ink); }
   .box span { display: inline-block; }
   .note { margin-top: 26px; font-size: 42px; font-weight: 600; color: #374151; text-align: center; max-width: 940px; }
   .dark .note { color: #e5e5e5; }
   .steps { list-style: none; width: 720px; margin-top: 10px; }
   .steps li { display: flex; align-items: center; gap: 30px; font-size: 54px; font-weight: 900; padding: 20px 0; }
-  .steps .icon { width: 66px; height: 66px; flex: none; display: grid; place-items: center; border: 5px solid #e11d2a; color: #e11d2a; font-size: 44px; line-height: 1; }
+  .steps .icon { width: 66px; height: 66px; flex: none; display: grid; place-items: center; border: 5px solid var(--accent); color: var(--accent); font-size: 44px; line-height: 1; }
   .lead { font-size: 46px; font-weight: 900; margin-top: 26px; }
   .contact { margin-top: 30px; display: flex; flex-direction: column; align-items: center; gap: 6px; }
   .contact b { font-size: 44px; font-weight: 900; }
-  .contact span { font-size: 40px; font-weight: 900; color: #e11d2a; }
+  .contact span { font-size: 40px; font-weight: 900; color: var(--accent); }
   .fine { margin-top: 26px; font-size: 26px; line-height: 1.5; color: #6b7280; text-align: center; max-width: 880px; }
   /* Thanh thời gian có vạch như video mẫu, phần đã chạy tô đỏ */
   .timeline { position: absolute; left: 60px; right: 60px; top: 1440px; height: 40px; }
   .timeline::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 3px; background: rgba(140,140,140,.45); }
-  .timeline .fill { position: absolute; left: 0; top: 0; height: 3px; background: #e11d2a; }
+  .timeline .fill { position: absolute; left: 0; top: 0; height: 3px; background: var(--accent); }
   .timeline .ticks { position: absolute; inset: 0; background: repeating-linear-gradient(90deg, rgba(140,140,140,.55) 0 3px, transparent 3px 107px); clip-path: inset(0 0 0 0); height: 30px; top: 0; }
   .brand { position: absolute; right: 60px; top: 1462px; text-align: right; font-weight: 900; font-size: 30px; line-height: 1.2; opacity: .85; }
-  .brand small { display: block; font-size: 26px; font-weight: 700; color: #e11d2a; }
+  .brand small { display: block; font-size: 26px; font-weight: 700; color: var(--accent); }
   .dark .brand { color: #fff; }
 ${extraCss}
+${skin.css}
 </style></head>
-<body>
+<body class="skin-${skin.id}">
 ${scenes
   .map(
     (scene, index) => `<section class="scene ${scene.theme}" data-start="${timings[index].start}" data-dur="${timings[index].duration}" data-speak="${timings[index].speak}">
@@ -343,6 +438,7 @@ ${scenes
   .join("\n")}
 <script>
   const TOTAL = ${total};
+  const SKIN = ${JSON.stringify({ fx: skin.fx, out: skin.out })};
   const clamp = (v) => Math.max(0, Math.min(1, v));
   const easeOut = (p) => 1 - Math.pow(1 - p, 3);
   const scenes = [...document.querySelectorAll(".scene")].map((el) => ({
@@ -350,7 +446,7 @@ ${scenes
     content: el.querySelector(".content"),
     fill: el.querySelector(".timeline .fill"),
     start: +el.dataset.start, dur: +el.dataset.dur, speak: +el.dataset.speak,
-    items: [...el.querySelectorAll("[data-at]")].map((node) => ({ node, at: +node.dataset.at, fx: node.dataset.fx || "up" })),
+    items: [...el.querySelectorAll("[data-at]")].map((node) => ({ node, at: +node.dataset.at, fx: node.dataset.fx || SKIN.fx })),
   }));
   window.renderAt = (t) => {
     for (const s of scenes) {
@@ -361,9 +457,18 @@ ${scenes
       // Vào cảnh: nội dung hiện từ mờ; ra cảnh (trừ cảnh cuối): nhòe dần rồi cắt sang cảnh sau
       const isLast = s === scenes[scenes.length - 1];
       const out = isLast ? 0 : clamp((lt - (s.dur - 0.28)) / 0.28);
-      s.content.style.opacity = String(1 - out);
-      s.content.style.filter = out > 0 ? "blur(" + (out * 18).toFixed(1) + "px)" : "none";
-      s.content.style.transform = "scale(" + (1 + out * 0.04) + ")";
+      const c = s.content.style;
+      c.opacity = String(1 - out);
+      c.filter = "none";
+      c.transform = "none";
+      c.clipPath = "none";
+      if (out > 0) {
+        if (SKIN.out === "slide") c.transform = "translateY(" + (-90 * out).toFixed(1) + "px)";
+        else if (SKIN.out === "zoom") { c.transform = "scale(" + (1 + 0.22 * out).toFixed(3) + ")"; c.filter = "blur(" + (out * 6).toFixed(1) + "px)"; }
+        else if (SKIN.out === "wipe") { c.opacity = "1"; c.clipPath = "inset(0 0 0 " + (out * 100).toFixed(1) + "%)"; }
+        else if (SKIN.out === "fade") c.transform = "scale(" + (1 - 0.02 * out).toFixed(3) + ")";
+        else { c.filter = "blur(" + (out * 18).toFixed(1) + "px)"; c.transform = "scale(" + (1 + out * 0.04) + ")"; }
+      }
       s.fill.style.width = (clamp(t / TOTAL) * 100).toFixed(2) + "%";
       for (const item of s.items) {
         const begin = item.at * s.speak;
@@ -380,6 +485,18 @@ ${scenes
           n.opacity = String(p);
           n.transform = "translateX(" + ((1 - p) * -70).toFixed(1) + "px) scale(" + (0.94 + 0.06 * p).toFixed(3) + ")";
           n.filter = p < 1 ? "blur(" + ((1 - p) * 14).toFixed(1) + "px)" : "none";
+        } else if (item.fx === "left") {
+          n.opacity = String(p);
+          n.transform = "translateX(" + ((1 - p) * -90).toFixed(1) + "px)";
+        } else if (item.fx === "pop") {
+          // easeOutBack: bật quá một chút rồi về đúng cỡ
+          const k = 1.7;
+          const b = 1 + (k + 1) * Math.pow(raw - 1, 3) + k * Math.pow(raw - 1, 2);
+          n.opacity = String(p);
+          n.transform = "scale(" + (0.72 + 0.28 * b).toFixed(3) + ")";
+        } else if (item.fx === "fade") {
+          n.opacity = String(p);
+          n.transform = "scale(" + (0.97 + 0.03 * p).toFixed(3) + ")";
         } else {
           n.opacity = String(p);
           n.transform = "translateY(" + ((1 - p) * 36).toFixed(1) + "px)";
@@ -425,79 +542,86 @@ async function makeVideo(job, browser) {
   const total = +start.toFixed(3);
   const voices = timings.filter((timing) => timing.file);
 
-  const htmlFile = path.join(work, `${key}.html`);
-  fs.writeFileSync(htmlFile, renderHtml(scenes, timings, total, job.css));
-  await browser.send("Page.navigate", { url: pathToFileURL(htmlFile).href });
-  for (let i = 0; i < 80; i++) {
-    await sleep(250);
-    if ((await browser.evaluate("document.readyState").catch(() => "")) === "complete") break;
-  }
-  const broken = await browser.evaluate("window.ready()");
-  if (broken?.length) console.warn(`  Ảnh không tải được: ${broken.join(", ")}`);
-  const fonts = await browser.evaluate(`document.fonts.check('italic 800 40px "Playfair Display"')`);
-  if (!fonts) console.warn("  Không nạp được phông Playfair Display (src/assets/fonts), dùng phông Georgia thay thế.");
-
-  // --xem-truoc: chỉ chụp hình cuối mỗi cảnh (PNG) để duyệt nhanh, không dựng video
-  if (flag("xem-truoc")) {
-    const previewDir = path.join(outDir, "xem-truoc");
-    fs.rmSync(previewDir, { recursive: true, force: true });
-    fs.mkdirSync(previewDir, { recursive: true });
-    for (const [index, timing] of timings.entries()) {
-      await browser.evaluate(`renderAt(${(timing.start + timing.duration - 0.45 - (scenes[index].tail ?? 0)).toFixed(3)})`);
-      const { data } = await browser.send("Page.captureScreenshot", { format: "png" });
-      fs.writeFileSync(path.join(previewDir, `${String(index + 1).padStart(2, "0")}.png`), Buffer.from(data, "base64"));
+  const chosenSkins = skinsFor(key);
+  const many = chosenSkins.length > 1;
+  const outputs = [];
+  for (const skin of chosenSkins) {
+    const htmlFile = path.join(work, `${key}-${skin.id}.html`);
+    fs.writeFileSync(htmlFile, renderHtml(scenes, timings, total, job.css, skin));
+    await browser.send("Page.navigate", { url: pathToFileURL(htmlFile).href });
+    for (let i = 0; i < 80; i++) {
+      await sleep(250);
+      if ((await browser.evaluate("document.readyState").catch(() => "")) === "complete") break;
     }
-    console.log(`  Xem trước ${scenes.length} cảnh → ${previewDir}`);
-    return;
-  }
+    const broken = await browser.evaluate("window.ready()");
+    if (broken?.length) console.warn(`  Ảnh không tải được: ${broken.join(", ")}`);
+    const fonts = await browser.evaluate(`document.fonts.check('italic 800 40px "Playfair Display"')`);
+    if (!fonts) console.warn("  Không nạp được phông Playfair Display (src/assets/fonts), dùng phông Georgia thay thế.");
 
-  // Chụp từng hình rồi đẩy thẳng vào ffmpeg
-  const silent = path.join(work, `${key}-silent.mp4`);
-  const encoder = spawn(ffmpeg, [
-    "-y", "-loglevel", "error", "-f", "image2pipe", "-framerate", String(FPS), "-c:v", "mjpeg", "-i", "-",
-    "-c:v", "libx264", "-preset", "medium", "-crf", "19", "-pix_fmt", "yuv420p", "-r", String(FPS), silent,
-  ], { stdio: ["pipe", "ignore", "pipe"] });
-  let encoderError = "";
-  encoder.stderr.on("data", (chunk) => (encoderError += chunk));
-  const encoded = new Promise((resolve) => encoder.on("close", resolve));
-  const frames = Math.ceil(total * FPS);
-  const began = Date.now();
-  for (let frame = 0; frame < frames; frame++) {
-    await browser.evaluate(`renderAt(${(frame / FPS).toFixed(4)})`);
-    const { data } = await browser.send("Page.captureScreenshot", { format: "jpeg", quality: 92 });
-    if (!encoder.stdin.write(Buffer.from(data, "base64"))) await new Promise((resolve) => encoder.stdin.once("drain", resolve));
-    if (frame % (FPS * 5) === 0) process.stdout.write(`\r  Đang dựng ${Math.round((frame / frames) * 100)}%`);
-  }
-  encoder.stdin.end();
-  if ((await encoded) !== 0) throw new Error(`ffmpeg lỗi: ${encoderError.slice(-1500)}`);
-  process.stdout.write(`\r  Đã dựng ${frames} hình trong ${Math.round((Date.now() - began) / 1000)} giây\n`);
-
-  // Ghép giọng đọc (đặt đúng đầu từng cảnh) + nhạc nền nếu có
-  const outFile = path.join(outDir, "video.mp4");
-  const music = ["mp3", "m4a", "wav"].map((ext) => path.join(outDir, `nhac-nen.${ext}`)).find((file) => fs.existsSync(file));
-  if (voices.length === 0 && !music) {
-    fs.copyFileSync(silent, outFile);
-  } else {
-    const inputs = ["-i", silent];
-    const filters = [];
-    const labels = [];
-    voices.forEach((timing, index) => {
-      inputs.push("-i", timing.file);
-      const delay = Math.round((timing.start + LEAD) * 1000);
-      filters.push(`[${index + 1}:a]aresample=44100,aformat=channel_layouts=stereo,adelay=${delay}|${delay}[v${index}]`);
-      labels.push(`[v${index}]`);
-    });
-    if (music) {
-      inputs.push("-stream_loop", "-1", "-i", music);
-      const index = voices.length + 1;
-      // Nhạc nền nhỏ (15%) khi có giọng, tắt dần 1,5 giây cuối
-      filters.push(`[${index}:a]aresample=44100,aformat=channel_layouts=stereo,volume=${voices.length ? 0.15 : 0.6},atrim=0:${total},afade=t=out:st=${Math.max(0, total - 1.5)}:d=1.5[m]`);
-      labels.push("[m]");
+    // --xem-truoc: chỉ chụp hình cuối mỗi cảnh (PNG) để duyệt nhanh, không dựng video
+    if (flag("xem-truoc")) {
+      const previewDir = path.join(outDir, many ? `xem-truoc-${skin.id}` : "xem-truoc");
+      fs.rmSync(previewDir, { recursive: true, force: true });
+      fs.mkdirSync(previewDir, { recursive: true });
+      for (const [index, timing] of timings.entries()) {
+        await browser.evaluate(`renderAt(${(timing.start + timing.duration - 0.45 - (scenes[index].tail ?? 0)).toFixed(3)})`);
+        const { data } = await browser.send("Page.captureScreenshot", { format: "png" });
+        fs.writeFileSync(path.join(previewDir, `${String(index + 1).padStart(2, "0")}.png`), Buffer.from(data, "base64"));
+      }
+      console.log(`  Xem trước ${scenes.length} cảnh (${skin.id}) → ${previewDir}`);
+      continue;
     }
-    filters.push(`${labels.join("")}amix=inputs=${labels.length}:normalize=0:duration=longest,apad,atrim=0:${total}[a]`);
-    run(ffmpeg, ["-y", "-loglevel", "error", ...inputs, "-filter_complex", filters.join(";"), "-map", "0:v", "-map", "[a]",
-      "-c:v", "copy", "-c:a", "aac", "-b:a", "160k", "-t", String(total), "-movflags", "+faststart", outFile]);
+
+    // Chụp từng hình rồi đẩy thẳng vào ffmpeg
+    const silent = path.join(work, `${key}-${skin.id}-silent.mp4`);
+    const encoder = spawn(ffmpeg, [
+      "-y", "-loglevel", "error", "-f", "image2pipe", "-framerate", String(FPS), "-c:v", "mjpeg", "-i", "-",
+      "-c:v", "libx264", "-preset", "medium", "-crf", "19", "-pix_fmt", "yuv420p", "-r", String(FPS), silent,
+    ], { stdio: ["pipe", "ignore", "pipe"] });
+    let encoderError = "";
+    encoder.stderr.on("data", (chunk) => (encoderError += chunk));
+    const encoded = new Promise((resolve) => encoder.on("close", resolve));
+    const frames = Math.ceil(total * FPS);
+    const began = Date.now();
+    for (let frame = 0; frame < frames; frame++) {
+      await browser.evaluate(`renderAt(${(frame / FPS).toFixed(4)})`);
+      const { data } = await browser.send("Page.captureScreenshot", { format: "jpeg", quality: 92 });
+      if (!encoder.stdin.write(Buffer.from(data, "base64"))) await new Promise((resolve) => encoder.stdin.once("drain", resolve));
+      if (frame % (FPS * 5) === 0) process.stdout.write(`\r  Đang dựng ${Math.round((frame / frames) * 100)}%`);
+    }
+    encoder.stdin.end();
+    if ((await encoded) !== 0) throw new Error(`ffmpeg lỗi: ${encoderError.slice(-1500)}`);
+    process.stdout.write(`\r  Đã dựng ${frames} hình trong ${Math.round((Date.now() - began) / 1000)} giây\n`);
+
+    // Ghép giọng đọc (đặt đúng đầu từng cảnh) + nhạc nền nếu có
+    const outFile = path.join(outDir, many ? `video-${skin.id}.mp4` : "video.mp4");
+    outputs.push(`${outFile} (giao diện ${skin.id})`);
+    const music = ["mp3", "m4a", "wav"].map((ext) => path.join(outDir, `nhac-nen.${ext}`)).find((file) => fs.existsSync(file));
+    if (voices.length === 0 && !music) {
+      fs.copyFileSync(silent, outFile);
+    } else {
+      const inputs = ["-i", silent];
+      const filters = [];
+      const labels = [];
+      voices.forEach((timing, index) => {
+        inputs.push("-i", timing.file);
+        const delay = Math.round((timing.start + LEAD) * 1000);
+        filters.push(`[${index + 1}:a]aresample=44100,aformat=channel_layouts=stereo,adelay=${delay}|${delay}[v${index}]`);
+        labels.push(`[v${index}]`);
+      });
+      if (music) {
+        inputs.push("-stream_loop", "-1", "-i", music);
+        const index = voices.length + 1;
+        // Nhạc nền nhỏ (15%) khi có giọng, tắt dần 1,5 giây cuối
+        filters.push(`[${index}:a]aresample=44100,aformat=channel_layouts=stereo,volume=${voices.length ? 0.15 : 0.6},atrim=0:${total},afade=t=out:st=${Math.max(0, total - 1.5)}:d=1.5[m]`);
+        labels.push("[m]");
+      }
+      filters.push(`${labels.join("")}amix=inputs=${labels.length}:normalize=0:duration=longest,apad,atrim=0:${total}[a]`);
+      run(ffmpeg, ["-y", "-loglevel", "error", ...inputs, "-filter_complex", filters.join(";"), "-map", "0:v", "-map", "[a]",
+        "-c:v", "copy", "-c:a", "aac", "-b:a", "160k", "-t", String(total), "-movflags", "+faststart", outFile]);
+    }
   }
+  if (flag("xem-truoc")) return;
 
   // Lời đọc từng cảnh, kèm mốc thời gian để canh trong CapCut nếu không dùng file giong-doc
   const stamp = (seconds) => `${Math.floor(seconds / 60)}:${(seconds % 60).toFixed(1).padStart(4, "0")}`;
@@ -515,7 +639,7 @@ async function makeVideo(job, browser) {
   );
   if (job.caption) fs.writeFileSync(path.join(outDir, "caption.txt"), job.caption);
   console.log(`  ${voices.length ? `Có giọng đọc ${voices.length}/${scenes.length} cảnh` : "Chưa có giọng đọc (video chưa có tiếng)"}, dài ${total.toFixed(1)} giây`);
-  console.log(`  → ${outFile}`);
+  for (const output of outputs) console.log(`  → ${output}`);
 }
 
 export {
@@ -523,5 +647,5 @@ export {
   args, flag, option, wanted, FPS, province, otherProvince, provinceShort,
   num, tr, trieu, escapeHtml, monthNumber, month, siteUrl, phone, shortBenefit, slugWords, variantImage,
   pair, pairRed, box, note, row, heading, twoCars, oneCar, diffWord,
-  openBrowser, makeVideo,
+  openBrowser, makeVideo, skins,
 };

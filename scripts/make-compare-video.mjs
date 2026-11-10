@@ -282,7 +282,7 @@ const css = `
   .small-title h2 em { font-size: 96px; }
   .equip { list-style: none; width: 940px; margin-top: 30px; }
   .equip li { display: flex; align-items: flex-start; gap: 24px; padding: 18px 0; border-bottom: 2px solid #d3d3d0; font-size: 42px; font-weight: 900; line-height: 1.2; }
-  .equip .icon { width: 56px; height: 56px; flex: none; display: grid; place-items: center; background: #e11d2a; color: #fff; font-size: 36px; margin-top: 2px; }
+  .equip .icon { width: 56px; height: 56px; flex: none; display: grid; place-items: center; background: var(--accent); color: #fff; font-size: 36px; margin-top: 2px; }
   .equip small { display: block; font-family: "Playfair Display", Georgia, serif; font-style: italic; font-weight: 600; font-size: 28px; color: #6b7280; margin-top: 4px; }
 `;
 
