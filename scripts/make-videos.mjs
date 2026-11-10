@@ -733,7 +733,7 @@ function chiPhi(car) {
     ["Bảo hiểm vật chất", "Nên có. Vay ngân hàng thường phải mua"],
     ["Phụ kiện", isPickup ? "Nắp thùng, phim cách nhiệt, camera hành trình…" : "Phim cách nhiệt, camera hành trình, lót sàn…"],
     ["Phủ gầm, phủ ceramic", "Tùy nhu cầu, chống gỉ và giữ sơn"],
-    ["Bảo hành mở rộng", ["triton", "destinator"].includes(car.id) ? `Chưa cần: đã có ${warrantyOf(car)}` : `Mua thêm khi hết ${warrantyOf(car)}`],
+    ["Bảo hành mở rộng", ["triton", "destinator"].includes(car.id) ? `Chưa cần, đã có ${warrantyOf(car)}` : `Mua thêm khi hết ${warrantyOf(car)}`],
   ];
   const scenes = [
     {
