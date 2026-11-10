@@ -37,8 +37,8 @@ const [template, target] = args.filter((arg, index) => !arg.startsWith("--") && 
 const fileUrl = (publicPath) => pathToFileURL(path.join(root, "public", publicPath)).href;
 const shortOf = (car) => car.name.replace(/^Mitsubishi /, "");
 const num1 = (value) => (value / 1_000_000).toLocaleString("vi-VN", { maximumFractionDigits: 1 });
-// Số nhỏ hơn 1 triệu ghi theo nghìn ("350 nghìn" thay vì "0,35 triệu")
-const money = (value) => (value < 1_000_000 ? `${(value / 1000).toLocaleString("vi-VN")} nghìn` : trieu(value));
+// Số nhỏ hơn 1 triệu ghi đủ số đồng ("350.000 đồng" thay vì "0,35 triệu")
+const money = (value) => (value < 1_000_000 ? `${Math.round(value).toLocaleString("vi-VN")} đồng` : trieu(value));
 const lowerFirst = (text) => text.charAt(0).toLowerCase() + text.slice(1);
 const percent = (value) => `${(value * 100).toLocaleString("vi-VN", { maximumFractionDigits: 1 })}%`;
 const photo = (src, position = "center") =>
@@ -748,7 +748,7 @@ function chiPhi(car) {
     },
     {
       theme: "light",
-      voice: `Bắt buộc, phần một: ${firstHalf.map((fee) => `${lowerFirst(shortFee(fee.label))} ${money(fee.value)}`).join(", ")}.`,
+      voice: `Bắt buộc, phần một: ${firstHalf.map((fee) => `${lowerFirst(shortFee(fee.label)).replace(/\s*\((.*)\)/, " $1")} ${money(fee.value)}`).join(", ")}.`,
       html: `${heading(1, "Bắt buộc (1/2)")}
         <p class="sub serif" data-at="0">nộp khi đăng ký xe tại ${escapeHtml(provinceShort(province))}</p>
         ${firstHalf.map((fee, index) => row(shortFee(fee.label), money(fee.value), 0.12 + index * 0.2, "small")).join("")}
@@ -777,7 +777,7 @@ function chiPhi(car) {
     {
       theme: "light",
       minSpeak: 7,
-      voice: `Không bắt buộc: ${optional.map(([name, why]) => `${lowerFirst(name)}, ${lowerFirst(why)}`).join(". ")}.`,
+      voice: `Các khoản không bắt buộc. ${optional.map(([name, why]) => `${name}: ${lowerFirst(why).replace(/…$/, "")}.`).join(" ").replace(/\.\./g, ".")}`,
       html: `${heading(isPickup ? 3 : 2, "Không bắt buộc")}
         <div class="table" style="width:940px">${optional
           .map(
