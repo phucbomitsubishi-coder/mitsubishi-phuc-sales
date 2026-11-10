@@ -14,6 +14,7 @@
     "promo-images": "node scripts/make-promo-images.mjs",
     "price-video": "node scripts/make-price-video.mjs",
     "compare-video": "node scripts/make-compare-video.mjs",
+    "video": "node scripts/make-videos.mjs",
     "ad-images": "node scripts/make-ad-images.mjs",
     "sync-accessories": "node scripts/sync-accessories.mjs",
     "indexnow": "node scripts/indexnow.mjs",

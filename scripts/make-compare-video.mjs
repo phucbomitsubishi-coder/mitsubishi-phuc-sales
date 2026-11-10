@@ -280,17 +280,6 @@ function buildScenes(car, a, b) {
 const css = `
   .small-title h2 { font-size: 50px; gap: 20px; }
   .small-title h2 em { font-size: 96px; }
-  .spec-head { width: 960px; display: grid; grid-template-columns: 1fr 1fr; text-align: center; margin-top: 34px; padding-bottom: 12px; border-bottom: 5px solid #111; }
-  .spec-head b { font-size: 44px; font-weight: 900; }
-  .spec { width: 960px; padding: 14px 0 14px; border-bottom: 2px solid #d3d3d0; text-align: center; }
-  .spec i { display: block; font-size: 34px; font-weight: 600; color: #6b7280; }
-  .spec .vals { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 4px; }
-  .spec .vals b { font-size: 46px; font-weight: 900; line-height: 1.18; letter-spacing: -0.3px; }
-  .spec.same .vals b { grid-column: 1 / span 2; color: #1f2937; }
-  .spec.diff { background: linear-gradient(90deg, rgba(225,29,42,0), rgba(225,29,42,.07) 50%, rgba(225,29,42,0)); }
-  .spec.diff .vals b { color: #e11d2a; }
-  .spec.upgrade .vals b { font-size: 40px; }
-  .spec.upgrade .vals b:first-child { color: #6b7280; }
   .equip { list-style: none; width: 940px; margin-top: 30px; }
   .equip li { display: flex; align-items: flex-start; gap: 24px; padding: 18px 0; border-bottom: 2px solid #d3d3d0; font-size: 42px; font-weight: 900; line-height: 1.2; }
   .equip .icon { width: 56px; height: 56px; flex: none; display: grid; place-items: center; background: #e11d2a; color: #fff; font-size: 36px; margin-top: 2px; }
