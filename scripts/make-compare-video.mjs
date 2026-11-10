@@ -94,8 +94,10 @@ const readable = ["groundClearance", "seats", "power", "torque", "engine", "tran
 //   hoặc cùng là camera / mâm ("Camera lùi" / "Camera toàn cảnh 360 độ"). "Cảnh báo điểm mù" và "Cảnh báo lệch làn" KHÔNG phải một cặp.
 const genericFirst = new Set(["cảnh", "hỗ", "kiểm", "hệ", "đèn", "cửa", "chế", "kết", "cảm"]);
 function sameKind(first, second) {
-  const x = first.toLowerCase().split(/\s+/);
-  const y = second.toLowerCase().split(/\s+/);
+  // Bỏ số đầu dòng để "3 túi khí" và "7 túi khí" thành một cặp
+  const words = (text) => text.toLowerCase().split(/\s+/).filter((word, index) => index > 0 || !/^\d+$/.test(word));
+  const x = words(first);
+  const y = words(second);
   let common = 0;
   while (common < x.length && common < y.length && x[common] === y[common]) common += 1;
   if (common >= 3) return true;
@@ -180,7 +182,8 @@ function buildScenes(car, a, b) {
   for (const entry of [...onlyA]) {
     const match = onlyB.find((other) => sameKind(entry[0], other[0]));
     if (!match) continue;
-    upgrades.push({ from: entry[0], to: match[0], group: match[1] });
+    // Bản cao chỉ ghi gọn hơn ("Cổng sạc USB-A và USB-C" so với "... cho cả hai hàng ghế"): coi như giống nhau, không phải nâng cấp
+    if (!entry[0].toLowerCase().startsWith(match[0].toLowerCase())) upgrades.push({ from: entry[0], to: match[0], group: match[1] });
     onlyA = onlyA.filter((item) => item !== entry);
     onlyB = onlyB.filter((item) => item !== match);
   }

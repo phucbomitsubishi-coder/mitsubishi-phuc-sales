@@ -96,7 +96,7 @@ const pair = (left, right, middle = "") => `<div class="pair"><b>${left}</b><i>$
 const pairRed = (left, right, middle, at, redLeft, redRight) =>
   `<div class="pair" data-at="${at}"><b class="${redLeft ? "red" : ""}">${left}</b><i>${middle}</i><b class="${redRight ? "red" : ""}">${right}</b></div>`;
 const box = (text, at, kind = "red") =>
-  `<div class="box ${kind}${text.length > 30 ? " long" : ""}" data-at="${at}" data-fx="wipe"><span data-at="${at + 0.05}">${escapeHtml(text)}</span></div>`;
+  `<div class="box ${kind}${text.length > 34 ? " longer" : text.length > 30 ? " long" : ""}" data-at="${at}" data-fx="wipe"><span data-at="${at + 0.05}">${escapeHtml(text)}</span></div>`;
 const note = (text, at) => `<p class="note" data-at="${at}">${escapeHtml(text)}</p>`;
 const row = (label, value, at, extra = "") =>
   `<div class="row ${extra}" data-at="${at}"><i>${escapeHtml(label)}</i><b>${escapeHtml(value)}</b></div>`;
@@ -270,6 +270,7 @@ function renderHtml(scenes, timings, total, extraCss = "") {
   .box { margin-top: 56px; padding: 12px 34px 16px; font-weight: 900; font-size: 62px; letter-spacing: -0.5px; color: #fff; line-height: 1.12; text-align: center; max-width: 980px; }
   .box.red { background: #e11d2a; }
   .box.long { font-size: 52px; }
+  .box.longer { font-size: 45px; padding: 14px 26px 18px; }
   .box.black { background: #0b0b0b; }
   .box span { display: inline-block; }
   .note { margin-top: 26px; font-size: 42px; font-weight: 600; color: #374151; text-align: center; max-width: 940px; }
