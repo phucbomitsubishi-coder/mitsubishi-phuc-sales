@@ -111,7 +111,7 @@ const box = (text, at, kind = "red") =>
   `<div class="box ${kind}${text.length > 34 ? " longer" : text.length > 30 ? " long" : ""}" data-at="${at}" data-fx="wipe"><span data-at="${at + 0.05}">${escapeHtml(text)}</span></div>`;
 const note = (text, at) => `<p class="note" data-at="${at}">${escapeHtml(text)}</p>`;
 const row = (label, value, at, extra = "") =>
-  `<div class="row ${extra}" data-at="${at}"><i>${escapeHtml(label)}</i><b>${escapeHtml(value)}</b></div>`;
+  `<div class="row ${extra}" data-at="${at}"><i>${escapeHtml(label)}</i><b${String(value).length > 26 ? ' class="longer"' : String(value).length > 16 ? ' class="long"' : ""}>${escapeHtml(value)}</b></div>`;
 const heading = (index, text, at = 0) =>
   `<h2 data-at="${at}">${index ? `<em>${index}</em>` : ""}${escapeHtml(text)}</h2>`;
 const twoCars = (left, right, at) => `<div class="cars two" data-at="${at}" data-fx="car">
@@ -387,6 +387,9 @@ function renderHtml(scenes, timings, total, extraCss = "", skin = skins[0]) {
   .row b { font-size: 66px; font-weight: 900; color: var(--accent); letter-spacing: -1px; }
   .row.small b { font-size: 54px; }
   .row.small i { font-size: 36px; }
+  .row b.long { font-size: 46px !important; text-align: right; }
+  .row b.longer { font-size: 36px !important; text-align: right; max-width: 600px; line-height: 1.15; }
+  .row i { flex: none; max-width: 420px; padding-right: 20px; }
   .dark .row { border-color: #4b4b4b; }
   .dark .row i { color: #d4d4d4; }
   .table { margin-top: 10px; }
@@ -509,7 +512,11 @@ ${scenes
     await Promise.all(['italic 700 40px "Playfair Display"', 'italic 900 40px "Playfair Display"', '900 40px RobotoLocal', '500 40px RobotoLocal'].map((font) => document.fonts.load(font)));
     await document.fonts.ready;
     await Promise.all([...document.images].map((img) => img.complete ? null : new Promise((r) => { img.onload = img.onerror = r; })));
-    return [...document.images].filter((img) => !img.naturalWidth).map((img) => img.src);
+    // Ảnh nền (.photo dùng background-image) không nằm trong document.images: tải và giải mã trước khi chụp
+    const backgrounds = [...document.querySelectorAll(".photo")].map((el) => (el.style.backgroundImage.match(/url\(["']?(.*?)["']?\)/) || [])[1]).filter(Boolean);
+    const failed = [];
+    await Promise.all(backgrounds.map((src) => new Promise((r) => { const img = new Image(); img.onload = () => img.decode().then(r, r); img.onerror = () => { failed.push(src); r(); }; img.src = src; })));
+    return [...[...document.images].filter((img) => !img.naturalWidth).map((img) => img.src), ...failed];
   };
 </script>
 </body></html>`;

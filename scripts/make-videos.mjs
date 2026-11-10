@@ -7,6 +7,10 @@
 //   npm run video -- diem-noi-bat <xe>   Điểm nổi bật: ảnh lớn của MMV (showroom.ts) + trang bị bản cao nhất
 //   npm run video -- xe-cu <slug|tat-ca> Xe cũ đang bán: ảnh thật, thông tin, nhận xét của Phúc (usedCarReview), trả góp
 //   npm run video -- chon-xe             Có X triệu mua Mitsubishi nào? (lăn bánh sau ưu đãi theo khoảng ngân sách)
+//   npm run video -- noi-ngoai-that <xe> Ảnh ngoại thất, nội thất (gallery) + trang bị bản cao nhất, kích thước, màu xe
+//   npm run video -- gioi-thieu <xe>     Giới thiệu xe: xe gì, kích thước, vận hành, trang bị nổi bật, phiên bản, bảo hành
+//   npm run video -- chi-phi <xe>        Mua xe gồm phí nào: bắt buộc (5 khoản) / không bắt buộc; Triton có cảnh "vì sao ít phí"
+//   npm run video -- phu-kien <xe>       Phụ kiện nên lắp (accessories.ts) + phụ kiện chính hãng MMV có giá; ảnh ở scripts/video-assets/phu-kien/
 //   (video giá: npm run price-video, so sánh phiên bản: npm run compare-video)
 //
 // <xe>: destinator, xforce, triton, xpander, xpander-cross, attrage hoặc tat-ca. Thêm --ban "<phiên bản>" để chọn bản,
@@ -26,6 +30,8 @@ const { usedCars } = await load("src/data/usedCars.ts");
 const { usedCarReview } = await load("src/lib/usedCarReview.ts");
 const { financing, firstMonthPayment, usedFinancing, usedCarFinanceable, newCarBankPackages } = await load("src/data/financing.ts");
 const { plateFeeByArea } = await load("src/data/registrationFees.ts");
+const { accessoryGroups } = await load("src/data/accessories.ts");
+const { categorizeGroup } = await load("src/lib/accessoryCategories.ts");
 
 const [template, target] = args.filter((arg, index) => !arg.startsWith("--") && !(index > 0 && args[index - 1].startsWith("--") && ["--ban", "--tinh", "--giao-dien"].includes(args[index - 1])));
 const fileUrl = (publicPath) => pathToFileURL(path.join(root, "public", publicPath)).href;
@@ -533,6 +539,391 @@ function chonXe() {
   };
 }
 
+// ---------- Dùng chung cho 4 mẫu giới thiệu ----------
+const categoryLabel = { SUV: "SUV", MPV: "MPV", Sedan: "Sedan", Pickup: "Bán tải" };
+const topVariant = (car) => [...car.variants].sort((a, b) => b.price - a.price)[0];
+const galleryImages = (car, kind) => {
+  const dir = path.join(root, "public/images/cars", car.id, "gallery", kind);
+  return fs.existsSync(dir) ? fs.readdirSync(dir).filter((file) => /\.(jpe?g|png|webp)$/i.test(file)).sort().map((file) => fileUrl(`images/cars/${car.id}/gallery/${kind}/${file}`)) : [];
+};
+// Bảo hành tiêu chuẩn theo trang Hỏi đáp (/ho-tro/cau-hoi-thuong-gap)
+const warrantyOf = (car) => (["triton", "destinator"].includes(car.id) ? "5 năm hoặc 150.000 km" : "3 năm hoặc 100.000 km");
+const specOf = (car, key) => topVariant(car).specifications?.[key];
+const chunk = (list, size) => Array.from({ length: Math.ceil(list.length / size) }, (_, index) => list.slice(index * size, (index + 1) * size));
+
+// ---------- Mẫu: nội thất, ngoại thất ----------
+function noiNgoaiThat(car) {
+  const top = topVariant(car);
+  const exterior = galleryImages(car, "exterior");
+  const interior = galleryImages(car, "interior");
+  if (!exterior.length && !interior.length) {
+    console.error(`${car.name} chưa có ảnh trong public/images/cars/${car.id}/gallery/.`);
+    process.exit(1);
+  }
+  const exteriorItems = top.equipment?.exterior ?? [];
+  const interiorItems = [...(top.equipment?.interior ?? []), ...(top.equipment?.convenience ?? [])];
+  const photoScenes = (images, items, kicker) => {
+    const groups = chunk(items, Math.max(2, Math.ceil(items.length / Math.max(images.length, 1))));
+    return images.map((src, index) => {
+      const list = (groups[index] ?? []).slice(0, 3);
+      return {
+        theme: "dark",
+        backdrop: photo(src),
+        contentTop: 1040,
+        minSpeak: 3.5,
+        voice: list.length ? `${kicker}: ${list.map(lowerFirst).join(", ")}.` : `${kicker} ${shortOf(car)}.`,
+        html: `<p class="kicker" data-at="0.02">${escapeHtml(kicker)} · ${index + 1}/${images.length}</p>
+          ${list.length ? `<ul class="bullets">${list.map((item, row_) => `<li data-at="${(0.12 + row_ * 0.22).toFixed(2)}">${escapeHtml(item)}</li>`).join("")}</ul>` : ""}`,
+      };
+    });
+  };
+  const dims = [["Kích thước D × R × C", specOf(car, "dimensions")], ["Chiều dài cơ sở", specOf(car, "wheelbase")], ["Khoảng sáng gầm", specOf(car, "groundClearance")], ["Mâm xe", specOf(car, "wheels")?.split(" - ").pop()]].filter(([, value]) => value);
+  const scenes = [
+    {
+      theme: "dark",
+      backdrop: photo(exterior[0] ?? interior[0]),
+      contentTop: 1040,
+      voice: `Cùng xem ngoại thất và nội thất ${car.name}${top.name !== shortOf(car) ? `, bản ${top.name}` : ""}.`,
+      html: `<p class="kicker" data-at="0.02">Mitsubishi</p>
+        <h2 class="big" data-at="0.05">${escapeHtml(shortOf(car))}</h2>
+        <p class="sub serif" data-at="0.15">Ngoại thất & nội thất</p>
+        <div class="chips" data-at="0.35"><span>${escapeHtml(categoryLabel[car.category] ?? car.category)}</span><span>${specOf(car, "seats") ?? car.specifications.seats} chỗ</span></div>`,
+    },
+    // Ảnh đầu đã dùng ở cảnh mở đầu: các cảnh ngoại thất bắt đầu từ ảnh thứ hai (nếu còn đủ ảnh)
+    ...photoScenes(exterior.length > 2 ? exterior.slice(1) : exterior, exteriorItems, "Ngoại thất"),
+    ...(dims.length
+      ? [{
+          theme: "light",
+          voice: `Kích thước: ${dims.map(([label, value]) => `${lowerFirst(label)} ${value}`).join(", ")}.`,
+          html: `${heading("", "Kích thước")}
+            ${dims.map(([label, value], index) => row(label, value, 0.1 + index * 0.17, "small")).join("")}`,
+        }]
+      : []),
+    ...photoScenes(interior, interiorItems, "Nội thất"),
+    ...(car.colors?.length
+      ? [{
+          theme: "light",
+          voice: `${shortOf(car)} có ${car.colors.length} màu: ${car.colors.join(", ")}. Anh chị thích màu nào?`,
+          html: `${heading("", `${car.colors.length} màu xe`)}
+            ${oneCar({ hero: fileUrl(car.image) }, 0.02, "", "compact")}
+            <div class="chips" data-at="0.3">${car.colors.map((color) => `<span>${escapeHtml(color)}</span>`).join("")}</div>`,
+        }]
+      : []),
+    ctaScene(`Phúc gửi ảnh thật ${shortOf(car)} tại showroom`, "Bình luận màu bạn thích", fileUrl(car.image),
+      `Anh chị thích màu nào? Lưu video và bình luận, Phúc gửi ảnh thật và báo giá ${shortOf(car)}.`),
+  ];
+  return {
+    key: car.id,
+    scenes,
+    title: `NỘI THẤT, NGOẠI THẤT ${shortOf(car).toUpperCase()}`,
+    caption: footerCaption([
+      `Ngoại thất, nội thất ${car.name} 👇`,
+      `Bản ${top.name}: ${[...exteriorItems.slice(0, 2), ...interiorItems.slice(0, 2)].join(", ")}.`,
+      "Bình luận màu anh chị thích, Phúc gửi ảnh thật tại showroom.",
+      `#Mitsubishi #${shortOf(car).replace(/\s+/g, "")} #NoiThat #NgoaiThat`,
+      `👉 Xem xe: ${siteUrl}/xe/${car.slug}`,
+    ]),
+  };
+}
+
+// ---------- Mẫu: giới thiệu xe ----------
+function gioiThieu(car) {
+  const top = topVariant(car);
+  const showroom = showrooms[car.id];
+  const variants = [...car.variants].sort((a, b) => a.price - b.price).map((variant) => variantData(car, variant));
+  const maxOffer = Math.max(...variants.map((variant) => variant.offer));
+  const spec = (key) => specOf(car, key);
+  const kind = `${categoryLabel[car.category] ?? car.category} ${spec("seats") ?? car.specifications.seats} chỗ`;
+  const basics = [["Kiểu xe", kind], ["Động cơ", spec("engine")], ["Hộp số", spec("transmission")], ["Dẫn động", spec("drivetrain")], ["Nhiên liệu", spec("fuel")]].filter(([, value]) => value);
+  const sizes = [["Dài × rộng × cao", spec("dimensions")], ["Chiều dài cơ sở", spec("wheelbase")], ["Khoảng sáng gầm", spec("groundClearance")], ["Bán kính quay vòng", spec("turningRadius")], ["Bình nhiên liệu", spec("fuelTank")]].filter(([, value]) => value);
+  const power = [["Công suất", spec("power")], ["Mô-men xoắn", spec("torque")], ["Tiêu hao kết hợp", spec("fuelConsumptionCombined")]].filter(([, value]) => value);
+  const notable = [
+    ...(top.safetyTechnologies ?? []).map((tech) => tech.name).filter((name) => /thích ứng|va chạm|điểm mù|lệch làn|360/i.test(name)),
+    ...(top.equipment?.safety ?? []).filter((name) => /túi khí|360/i.test(name)),
+    ...(top.equipment?.convenience ?? []).slice(0, 2),
+  ].filter((item, index, list) => list.indexOf(item) === index).slice(0, 4);
+  const spoken = (value) => String(value).split(" / ")[0];
+  const scenes = [
+    {
+      theme: "dark",
+      backdrop: photo(fileUrl(showroom?.mobilePoster ?? car.image)),
+      contentTop: 1030,
+      voice: `Giới thiệu ${car.name}${showroom ? `: ${showroom.slogan}` : ""}. ${car.shortDescription}`,
+      html: `<p class="kicker" data-at="0.02">Giới thiệu xe</p>
+        <h2 class="big" data-at="0.05">${escapeHtml(car.name)}</h2>
+        ${showroom ? `<p class="sub serif" data-at="0.12">${escapeHtml(showroom.slogan)}</p>` : ""}
+        <p class="para" data-at="0.3" style="font-size:36px">${escapeHtml(car.shortDescription)}</p>`,
+    },
+    {
+      theme: "light",
+      voice: `${shortOf(car)} là ${lowerFirst(kind)}, ${basics.slice(1).map(([label, value]) => `${lowerFirst(label)} ${spoken(value)}`).join(", ")}.`,
+      html: `${heading(1, "Xe gì?")}
+        ${oneCar({ hero: fileUrl(car.image) }, 0.02, "", "compact")}
+        ${basics.map(([label, value], index) => row(label, value, 0.1 + index * (0.7 / basics.length), "small")).join("")}`,
+    },
+    ...(sizes.length
+      ? [{
+          theme: "light",
+          voice: `Kích thước: ${sizes.filter(([label]) => !label.startsWith("Dài")).map(([label, value]) => `${lowerFirst(label)} ${value}`).join(", ")}.`,
+          html: `${heading(2, "Kích thước")}
+            ${sizes.map(([label, value], index) => row(label, value, 0.08 + index * (0.7 / sizes.length), "small")).join("")}`,
+        }]
+      : []),
+    ...(power.length
+      ? [{
+          theme: "dark",
+          voice: `Vận hành: ${power.map(([label, value]) => `${lowerFirst(label)} ${spoken(value)}`).join(", ")}.`,
+          html: `${heading(3, "Vận hành")}
+            <p class="sub serif" data-at="0">${escapeHtml(spec("engine") ?? "")}</p>
+            ${power.map(([label, value], index) => row(label, value, 0.12 + index * 0.2, "small")).join("")}`,
+        }]
+      : []),
+    ...(notable.length
+      ? [{
+          theme: "dark",
+          backdrop: showroom?.highlight?.image ? photo(fileUrl(showroom.highlight.image)) : showroom?.features?.[0] ? photo(fileUrl(showroom.features[0].image)) : "",
+          contentTop: 1000,
+          voice: `Trang bị nổi bật trên bản ${top.name}: ${notable.map(lowerFirst).join(", ")}.`,
+          html: `<p class="kicker" data-at="0.02">4 · Trang bị nổi bật</p>
+            <p class="sub serif" data-at="0.05">bản ${escapeHtml(top.name)}</p>
+            <ul class="bullets">${notable.map((item, index) => `<li data-at="${(0.15 + index * 0.18).toFixed(2)}">${escapeHtml(item)}</li>`).join("")}</ul>`,
+        }]
+      : []),
+    {
+      theme: "light",
+      minSpeak: 2 + variants.length * 0.8,
+      voice: `${variants.length > 1 ? `${variants.length} phiên bản` : "Giá niêm yết"}: ${variants.map((variant) => `${variant.name === shortOf(car) ? "" : `${variant.name} `}${trieu(variant.price)}`).join(", ")}.${maxOffer ? ` Ưu đãi tháng ${currentPromotion.month} đến ${trieu(maxOffer)}.` : ""}`,
+      html: `${heading(5, variants.length > 1 ? `${variants.length} phiên bản` : "Giá xe")}
+        <p class="sub serif" data-at="0">giá niêm yết</p>
+        ${variants.map((variant, index) => row(variant.name, trieu(variant.price), 0.1 + index * (0.55 / variants.length), variants.length > 2 ? "small" : "")).join("")}
+        ${maxOffer ? box(`Ưu đãi đến ${trieu(maxOffer)}`, 0.72) : ""}`,
+    },
+    {
+      theme: "light",
+      voice: `Bảo hành chính hãng ${warrantyOf(car)}, tùy điều kiện nào đến trước.`,
+      html: `${heading(6, "Bảo hành")}
+        ${box(warrantyOf(car), 0.15, "black")}
+        ${note("Chính hãng, điều kiện nào đến trước", 0.45)}`,
+    },
+    ctaScene(`Phúc gửi báo giá ${shortOf(car)}`, "Bình luận phiên bản", fileUrl(car.image),
+      `Anh chị muốn tìm hiểu thêm về ${shortOf(car)}? Lưu video và bình luận phiên bản, Phúc gửi báo giá và mời lái thử.`),
+  ];
+  return {
+    key: car.id,
+    scenes,
+    title: `GIỚI THIỆU ${car.name.toUpperCase()}`,
+    caption: footerCaption([
+      `Giới thiệu ${car.name}${showroom ? `: ${showroom.slogan}` : ""} 👇`,
+      `${kind}, giá từ ${num1(variants[0].price)} triệu, bảo hành ${warrantyOf(car)}.`,
+      "Bình luận phiên bản anh chị quan tâm, Phúc gửi báo giá và mời lái thử.",
+      `#Mitsubishi #${shortOf(car).replace(/\s+/g, "")} #XeMoi`,
+      `👉 Xem xe: ${siteUrl}/xe/${car.slug}`,
+    ]),
+  };
+}
+
+// ---------- Mẫu: chi phí khi mua xe (bắt buộc / không bắt buộc) ----------
+function chiPhi(car) {
+  const v = variantData(car, chooseVariant(car));
+  const isPickup = car.name === "Mitsubishi Triton";
+  const fees = v.feeList;
+  const shortFee = (label) => label.replace("Lệ phí trước bạ theo giá niêm yết", "Trước bạ").replace("Lệ phí đăng ký & biển số", "Đăng ký, biển số").replace("Phí đường bộ (12 tháng)", "Đường bộ 12 tháng").replace("Bảo hiểm TNDS bắt buộc", "Bảo hiểm TNDS");
+  const [firstHalf, secondHalf] = [fees.slice(0, 3), fees.slice(3)];
+  const optional = [
+    ["Bảo hiểm vật chất", "Nên có. Vay ngân hàng thường phải mua"],
+    ["Phụ kiện", isPickup ? "Nắp thùng, phim cách nhiệt, camera hành trình…" : "Phim cách nhiệt, camera hành trình, lót sàn…"],
+    ["Phủ gầm, phủ ceramic", "Tùy nhu cầu, chống gỉ và giữ sơn"],
+    ["Bảo hành mở rộng", ["triton", "destinator"].includes(car.id) ? `Chưa cần: đã có ${warrantyOf(car)}` : `Mua thêm khi hết ${warrantyOf(car)}`],
+  ];
+  const scenes = [
+    {
+      theme: "dark",
+      voice: `Mua ${v.label} hết bao nhiêu tiền? Ngoài giá xe ${trieu(v.price)}, có ${fees.length} khoản bắt buộc khoảng ${trieu(v.fees)}, và vài khoản không bắt buộc. Cùng xem khoản nào bắt buộc, khoản nào không.`,
+      html: `${heading("", `Mua ${shortOf(car)} hết bao nhiêu?`)}
+        <p class="sub serif" data-at="0">khoản nào bắt buộc, khoản nào không</p>
+        ${oneCar(v, 0.02, v.label, "compact")}
+        ${row("Giá xe", trieu(v.price), 0.3)}
+        ${row(`${fees.length} khoản bắt buộc`, `+ ${trieu(v.fees)}`, 0.48)}
+        ${box(`Lăn bánh ${trieu(v.onRoad)}`, 0.68, "black")}`,
+    },
+    {
+      theme: "light",
+      voice: `Bắt buộc, phần một: ${firstHalf.map((fee) => `${lowerFirst(shortFee(fee.label))} ${money(fee.value)}`).join(", ")}.`,
+      html: `${heading(1, "Bắt buộc (1/2)")}
+        <p class="sub serif" data-at="0">nộp khi đăng ký xe tại ${escapeHtml(provinceShort(province))}</p>
+        ${firstHalf.map((fee, index) => row(shortFee(fee.label), money(fee.value), 0.12 + index * 0.2, "small")).join("")}
+        ${note(isPickup ? "Bán tải chở hàng: trước bạ 60% mức ô tô con" : "Trước bạ tính trên giá niêm yết", 0.8)}`,
+    },
+    {
+      theme: "light",
+      voice: `Bắt buộc, phần hai: ${secondHalf.map((fee) => `${lowerFirst(shortFee(fee.label))} ${money(fee.value)}`).join(", ")}. Tổng ${fees.length} khoản bắt buộc khoảng ${trieu(v.fees)}.`,
+      html: `${heading(1, "Bắt buộc (2/2)")}
+        ${secondHalf.map((fee, index) => row(shortFee(fee.label), money(fee.value), 0.12 + index * 0.2, "small")).join("")}
+        ${box(`Tổng bắt buộc ~ ${trieu(v.fees)}`, 0.62)}
+        ${note("Không có phí dịch vụ đăng ký", 0.85)}`,
+    },
+    ...(isPickup
+      ? [{
+          theme: "dark",
+          voice: `Vì sao Triton ít phí hơn xe con? Bán tải chở hàng chỉ tính trước bạ 60%, biển số tại TP.HCM ${money(plateFeeByArea.pickup.I)} thay vì ${money(plateFeeByArea.car.I)}. Đổi lại phí đường bộ tính theo xe tải.`,
+          html: `${heading(2, "Vì sao Triton ít phí?")}
+            <p class="sub serif" data-at="0">bán tải chở hàng</p>
+            ${row("Trước bạ", "60% mức xe con", 0.15, "small")}
+            ${row("Biển số HN, TP.HCM", `${money(plateFeeByArea.pickup.I)}`, 0.32, "small")}
+            ${row("Xe con cùng nơi", money(plateFeeByArea.car.I), 0.45, "small")}
+            ${box("Đường bộ tính theo xe tải", 0.65)}`,
+        }]
+      : []),
+    {
+      theme: "light",
+      minSpeak: 7,
+      voice: `Không bắt buộc: ${optional.map(([name, why]) => `${lowerFirst(name)}, ${lowerFirst(why)}`).join(". ")}.`,
+      html: `${heading(isPickup ? 3 : 2, "Không bắt buộc")}
+        <div class="table" style="width:940px">${optional
+          .map(
+            ([name, why], index) => `<div class="spec" data-at="${(0.1 + index * 0.18).toFixed(2)}" style="width:940px;text-align:left"><div class="vals" style="grid-template-columns:1fr"><b style="font-size:48px">${escapeHtml(name)}</b></div><i style="text-align:left;font-size:34px">${escapeHtml(why)}</i></div>`
+          )
+          .join("")}</div>`,
+    },
+    ...(v.offer
+      ? [{
+          theme: "dark",
+          voice: `Cuối cùng, ưu đãi tháng ${currentPromotion.month} khoảng ${trieu(v.offer)} được trừ trực tiếp vào giá xe khi ký hợp đồng. ${v.label} lăn bánh còn khoảng ${trieu(v.net)}, chưa gồm các khoản không bắt buộc.`,
+          html: `${heading("", "Sau ưu đãi")}
+            ${row("Lăn bánh", trieu(v.onRoad), 0.12)}
+            ${row("Ưu đãi", `– ${trieu(v.offer)}`, 0.3)}
+            ${box(`Còn ${trieu(v.net)}`, 0.55)}
+            ${note("Chưa gồm khoản không bắt buộc", 0.78)}`,
+        }]
+      : []),
+    ctaScene("Phúc gửi bảng chi phí đầy đủ", "Bình luận tỉnh của bạn", v.hero,
+      `Lưu video và bình luận tỉnh đăng ký, Phúc gửi bảng chi phí đầy đủ cả khoản bắt buộc và không bắt buộc.`),
+  ];
+  return {
+    key: `${car.id}-${slugWords(v.name).join("-")}`,
+    scenes,
+    title: `CHI PHÍ KHI MUA ${v.label.toUpperCase()}`,
+    caption: footerCaption([
+      `Mua ${v.label} gồm những phí nào? Khoản nào bắt buộc, khoản nào không 👇`,
+      `${fees.length} khoản bắt buộc ~${num1(v.fees)} triệu tại ${provinceShort(province)}.`,
+      "Bình luận tỉnh đăng ký, Phúc gửi bảng chi phí đầy đủ.",
+      `#Mitsubishi #${shortOf(car).replace(/\s+/g, "")} #LanBanh #ChiPhiMuaXe`,
+    ]),
+  };
+}
+
+// ---------- Mẫu: phụ kiện nên lắp ----------
+// Ảnh phụ kiện: scripts/video-assets/phu-kien/<id xe>/<id gợi ý>.jpg (hoặc .../chung/<id gợi ý>.jpg dùng cho mọi xe).
+// Gợi ý chưa có ảnh thì cảnh dùng khung chữ; tool in ra tên file ảnh còn thiếu.
+const accessoryPhotoDir = path.join(root, "scripts/video-assets/phu-kien");
+function accessoryPhoto(carId, id) {
+  for (const folder of [carId, "chung"]) {
+    for (const ext of ["jpg", "jpeg", "png", "webp"]) {
+      const file = path.join(accessoryPhotoDir, folder, `${id}.${ext}`);
+      if (fs.existsSync(file)) return pathToFileURL(file).href;
+    }
+  }
+  return null;
+}
+const accessoryIdeas = {
+  triton: [
+    { id: "nap-thung", title: "Nắp thùng", why: "Che mưa nắng cho hàng hóa, khóa được, xe gọn dáng", test: /^Nắp/ },
+    { id: "thanh-the-thao", title: "Thanh thể thao", why: "Dáng xe thể thao, chắn cho kính sau khi chở hàng", test: /Thanh thể thao|stylingbar|Khung (thể thao|ống)/ },
+    { id: "ty-bung-thung", title: "Ty nâng hạ bửng thùng", why: "Đóng mở bửng thùng nhẹ tay, không đập mạnh", test: /Ty hỗ trợ/ },
+  ],
+};
+const commonIdeas = [
+  { id: "phim-cach-nhiet", title: "Phim cách nhiệt", why: "Giảm nóng cabin, chống tia UV, bảo vệ nội thất", group: "Phim cách nhiệt", brands: true },
+  { id: "camera-hanh-trinh", title: "Camera hành trình", why: "Lưu hình ảnh đường đi, có bằng chứng khi va chạm", category: "Camera hành trình, giám sát hành trình" },
+  { id: "lot-san", title: "Lót sàn", why: "Dễ vệ sinh, giữ sàn xe sạch khi đi mưa", category: "Lót sàn, thảm", ownGroup: true },
+  { id: "phu-gam", title: "Phủ gầm", why: "Chống gỉ sét, giảm ồn từ gầm, hợp đường ngập", category: "Phủ gầm" },
+  { id: "cam-bien-ap-suat-lop", title: "Cảm biến áp suất lốp", why: "Báo non hơi, thủng lốp sớm", category: "Cảm biến áp suất lốp, bơm lốp", skipIfStandard: /áp suất lốp/i },
+];
+function phuKien(car) {
+  const seats = specOf(car, "seats") ?? car.specifications.seats;
+  const fits = (item) => !item.seats || item.seats === seats || (seats > 5 && item.seats === 7) || (seats <= 5 && item.seats === 5);
+  const groupKey = car.id === "xpander-cross" ? "xpander" : car.id;
+  const ownGroup = accessoryGroups.find((group) => group.carId === groupKey);
+  const general = accessoryGroups.filter((group) => !group.carId);
+  const allVariantsHave = (pattern) => car.variants.every((variant) => [...(variant.equipment?.safety ?? []), ...(variant.equipment?.convenience ?? [])].some((item) => pattern.test(item)));
+  const clean = (name) => name.replace(/\s+–\s+Vy Khang$/, "").replace(new RegExp(`\\s*${shortOf(car).split(" ")[0]}\\s*$`), "").trim();
+  const ideas = [...(accessoryIdeas[car.id] ?? []), ...commonIdeas]
+    .map((idea) => {
+      if (idea.skipIfStandard && allVariantsHave(idea.skipIfStandard)) return null;
+      let items = [];
+      if (idea.test && ownGroup) items = ownGroup.items.filter((item) => idea.test.test(item.name));
+      else if (idea.ownGroup && ownGroup) items = categorizeGroup(ownGroup).find((cat) => cat.name === idea.category)?.items ?? [];
+      else if (idea.brands) items = categorizeGroup(general.find((group) => group.name === idea.group)).map((cat) => ({ name: cat.name, price: null }));
+      else for (const group of general) items.push(...(categorizeGroup(group).find((cat) => cat.name === idea.category)?.items ?? []));
+      items = items.filter((item) => !("seats" in item) || fits(item));
+      if (!items.length) return null;
+      return { ...idea, items, image: accessoryPhoto(car.id, idea.id) };
+    })
+    .filter(Boolean)
+    .slice(0, 6);
+  const mmv = (ownGroup?.items ?? []).filter((item) => / – MMV$/.test(item.name) && item.price);
+  const missing = ideas.filter((idea) => !idea.image).map((idea) => `${idea.id}.jpg`);
+  if (missing.length) console.log(`  Chưa có ảnh (thêm vào scripts/video-assets/phu-kien/${car.id}/): ${missing.join(", ")}`);
+  const ideaScene = (idea, index) => {
+    const examples = idea.items.slice(0, 4).map((item) => clean(item.name));
+    const voice = `${index + 1}. ${idea.title}: ${lowerFirst(idea.why)}. Có các loại như ${examples.slice(0, 3).map(lowerFirst).join(", ")}.`;
+    if (idea.image) {
+      return {
+        theme: "dark", backdrop: photo(idea.image), contentTop: 1000, minSpeak: 4, voice,
+        html: `<p class="kicker" data-at="0.02">${index + 1} · Nên lắp</p>
+          <h2 class="big" data-at="0.05" style="font-size:72px">${escapeHtml(idea.title)}</h2>
+          <p class="para" data-at="0.2">${escapeHtml(idea.why)}</p>
+          <div class="chips" data-at="0.45">${examples.map((name) => `<span style="font-size:28px">${escapeHtml(name)}</span>`).join("")}</div>`,
+      };
+    }
+    // Chưa có ảnh phụ kiện: cảnh chữ lớn, số thứ tự to, danh sách các loại
+    return {
+      theme: index % 2 ? "dark" : "light", contentTop: 380, minSpeak: 4.5, voice,
+      html: `<p class="kicker" data-at="0.02">Nên lắp</p>
+        <p class="price" data-at="0.04" style="font-size:200px">${index + 1}</p>
+        <h2 class="big" data-at="0.08" style="font-size:88px">${escapeHtml(idea.title)}</h2>
+        <p class="para" data-at="0.22" style="font-size:44px">${escapeHtml(idea.why)}</p>
+        <ul class="bullets" style="margin-top:40px">${examples.map((name, row_) => `<li data-at="${(0.4 + row_ * 0.12).toFixed(2)}" style="font-size:38px">${escapeHtml(name)}</li>`).join("")}</ul>`,
+    };
+  };
+  const scenes = [
+    {
+      theme: "dark",
+      backdrop: showrooms[car.id]?.accessoriesImage ? photo(fileUrl(showrooms[car.id].accessoriesImage)) : photo(fileUrl(car.image)),
+      contentTop: 1040,
+      voice: `Mua ${shortOf(car)} nên lắp thêm phụ kiện gì? Phúc gợi ý ${ideas.length} món đáng tiền${mmv.length ? `, và ${mmv.length} phụ kiện chính hãng MMV` : ""}.`,
+      html: `<p class="kicker" data-at="0.02">Phụ kiện</p>
+        <h2 class="big" data-at="0.05" style="font-size:70px">Mua ${escapeHtml(shortOf(car))} nên lắp gì?</h2>
+        <p class="sub serif" data-at="0.2">${ideas.length} món đáng tiền</p>`,
+    },
+    ...ideas.map(ideaScene),
+    ...(mmv.length
+      ? chunk(mmv, 5).map((page, pageIndex, pages) => ({
+          theme: "light",
+          minSpeak: 2 + page.length * 0.8,
+          voice: `${pageIndex ? "Tiếp theo" : `Phụ kiện chính hãng MMV cho ${shortOf(car)}`}: ${page.map((item) => `${lowerFirst(item.name.replace(/\s+–\s+MMV$/, ""))} ${trieu(item.price)}`).join(", ")}.`,
+          html: `${heading("", "Chính hãng MMV")}
+            <p class="sub serif" data-at="0">giá niêm yết đã gồm VAT${pages.length > 1 ? ` (${pageIndex + 1}/${pages.length})` : ""}</p>
+            ${page.map((item, index) => row(item.name.replace(/\s+–\s+MMV$/, ""), trieu(item.price), 0.1 + index * (0.65 / page.length), "small")).join("")}`,
+        }))
+      : []),
+    ctaScene("Phúc gửi bảng giá phụ kiện", "Bình luận món bạn cần", fileUrl(car.image),
+      `Anh chị muốn lắp món nào? Lưu video và bình luận, Phúc gửi bảng giá phụ kiện cho ${shortOf(car)}.`),
+  ];
+  return {
+    key: car.id,
+    scenes,
+    title: `PHỤ KIỆN NÊN LẮP CHO ${shortOf(car).toUpperCase()}`,
+    caption: footerCaption([
+      `Mua ${shortOf(car)} nên lắp thêm phụ kiện gì? 👇`,
+      ideas.map((idea) => idea.title).join(" · "),
+      "Bình luận món anh chị cần, Phúc gửi bảng giá phụ kiện.",
+      `#Mitsubishi #${shortOf(car).replace(/\s+/g, "")} #PhuKienOto`,
+      `👉 Bảng phụ kiện: ${siteUrl}/phu-kien-xe-mitsubishi#${car.id}`,
+    ]),
+  };
+}
+
 // ---------- Chạy ----------
 const templates = {
   "tra-gop": { perCar: true, build: traGop },
@@ -541,6 +932,10 @@ const templates = {
   "diem-noi-bat": { perCar: true, build: diemNoiBat },
   "xe-cu": { build: null },
   "chon-xe": { build: chonXe },
+  "noi-ngoai-that": { perCar: true, build: noiNgoaiThat },
+  "gioi-thieu": { perCar: true, build: gioiThieu },
+  "chi-phi": { perCar: true, build: chiPhi },
+  "phu-kien": { perCar: true, build: phuKien },
 };
 if (!templates[template]) {
   console.log(`Cách dùng: npm run video -- <mẫu> [xe]\nMẫu: ${Object.keys(templates).join(", ")}\nXe: ${cars.map((car) => car.id).join(", ")}, tat-ca`);
