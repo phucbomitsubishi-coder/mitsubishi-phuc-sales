@@ -11,6 +11,7 @@
 //   npm run video -- gioi-thieu <xe>     Giới thiệu xe: xe gì, kích thước, vận hành, trang bị nổi bật, phiên bản, bảo hành
 //   npm run video -- chi-phi <xe>        Mua xe gồm phí nào: bắt buộc (5 khoản) / không bắt buộc; Triton có cảnh "vì sao ít phí"
 //   npm run video -- phu-kien <xe>       Phụ kiện nên lắp (accessories.ts) + phụ kiện chính hãng MMV có giá; ảnh ở scripts/video-assets/phu-kien/
+//   npm run video -- chon-phien-ban <xe> Tư vấn chọn phiên bản: mỗi bản thêm gì, hợp với ai, gợi ý theo nhu cầu (xe ≥ 2 bản)
 //   (video giá: npm run price-video, so sánh phiên bản: npm run compare-video)
 //
 // <xe>: destinator, xforce, triton, xpander, xpander-cross, attrage hoặc tat-ca. Thêm --ban "<phiên bản>" để chọn bản,
@@ -924,6 +925,105 @@ function phuKien(car) {
   };
 }
 
+// ---------- Mẫu: tư vấn chọn phiên bản ----------
+// Mỗi bản: giá + sau ưu đãi, lên từ bản thấp hơn thì thêm gì (trang bị, hộp số, dẫn động, mâm), hợp với ai.
+// "Hợp với ai" suy ra từ số liệu (số sàn, 2 cầu, an toàn chủ động, rẻ nhất...), là gợi ý tư vấn, không khẳng định "nhất".
+const allItemsOf = (variant) => {
+  const items = [];
+  for (const key of ["safety", "drivingSupport", "convenience", "interior", "exterior"]) items.push(...(variant.equipment?.[key] ?? []));
+  for (const tech of variant.safetyTechnologies ?? []) items.push(tech.name);
+  return [...new Set(items)];
+};
+const isManual = (variant) => /số sàn|MT\b/i.test(`${variant.specifications?.transmission ?? ""} ${variant.name}`);
+const isFourWheel = (variant) => /4WD|2 cầu|hai cầu|Super Select/i.test(`${variant.specifications?.drivetrain ?? ""} ${variant.name}`);
+const hasActiveSafety = (variant) => (variant.safetyTechnologies ?? []).some((tech) => /thích ứng|va chạm/i.test(tech.name));
+function personaOf(variant, index, list) {
+  const top = index === list.length - 1;
+  if (isManual(variant)) return "Chạy dịch vụ, quen số sàn, cần giá thấp";
+  if (isFourWheel(variant)) return top && hasActiveSafety(variant) ? "Cần 2 cầu và đủ an toàn chủ động" : "Đi công trình, đường đồi núi, cần 2 cầu";
+  if (top && hasActiveSafety(variant)) return "Đi đường dài, cần an toàn chủ động";
+  if (list.slice(0, index).every(isManual)) return variant.__pickup ? "Chở hàng, đi phố, tối ưu ngân sách" : "Gia đình đi phố, tối ưu ngân sách";
+  return top ? "Muốn đủ tiện nghi của dòng xe" : "Cân bằng giá và trang bị";
+}
+function chonPhienBan(car) {
+  const list = [...car.variants].sort((a, b) => a.price - b.price).map((variant) => ({ ...variant, __pickup: car.category === "Pickup" }));
+  if (list.length < 2) return null;
+  const data = list.map((variant) => variantData(car, variant));
+  const specKeys = [["transmission", "Hộp số"], ["drivetrain", "Dẫn động"], ["wheels", "Mâm"], ["power", "Công suất"]];
+  const steps = list.map((variant, index) => {
+    if (index === 0) return { added: [], specs: [] };
+    const before = new Set(allItemsOf(list[index - 1]));
+    const added = allItemsOf(variant).filter((item) => !before.has(item));
+    const specs = specKeys
+      .map(([key, label]) => [label, list[index - 1].specifications?.[key], variant.specifications?.[key]])
+      .filter(([, a, b]) => b && a !== b)
+      .map(([label, , b]) => {
+        const value = String(b).split(" - ").pop().split(" / ")[0];
+        return label === "Mâm" ? value : `${label} ${value}`;
+      })
+      // Bỏ thông số đã có trong tên trang bị ("Dẫn động Super Select 4WD-II" trùng "Hệ dẫn động Super Select 4WD-II")
+      .filter((text) => !added.some((item) => item.toLowerCase().includes(text.split(" ").slice(-2).join(" ").toLowerCase())));
+    return { added, specs };
+  });
+  const personas = list.map((variant, index) => personaOf(variant, index, list));
+  const scenes = [
+    {
+      theme: "dark",
+      voice: `${shortOf(car)} có ${list.length} phiên bản, chênh nhau ${trieu(list[list.length - 1].price - list[0].price)}. Chọn bản nào cho đúng nhu cầu? Cùng phân tích từng bản.`,
+      html: `${heading("", `${shortOf(car)}: chọn bản nào?`)}
+        <p class="sub serif" data-at="0">${list.length} phiên bản, giá niêm yết</p>
+        ${oneCar({ hero: fileUrl(car.image) }, 0.02, "", "compact")}
+        ${data.map((variant, index) => row(variant.name, trieu(variant.price), 0.25 + index * (0.5 / data.length), "small")).join("")}`,
+    },
+    ...data.map((variant, index) => {
+      const step = steps[index];
+      const highlights = [...step.specs, ...step.added].slice(0, 3);
+      const more = step.specs.length + step.added.length - highlights.length;
+      const previous = index ? data[index - 1] : null;
+      return {
+        theme: index % 2 ? "dark" : "light",
+        contentTop: 240,
+        minSpeak: 3 + highlights.length * 0.8,
+        voice: index === 0
+          ? `Bản ${variant.name}: niêm yết ${trieu(variant.price)}${variant.offer ? `, sau ưu đãi lăn bánh khoảng ${trieu(variant.net)}` : ""}. Đây là bản dễ tiếp cận, hợp với: ${lowerFirst(personas[index])}.`
+          : `Bản ${variant.name}: ${variant.price === previous.price ? `cùng giá với bản ${previous.name}` : `thêm ${trieu(variant.price - previous.price)} so với bản ${previous.name}`}${highlights.length ? `, có thêm ${highlights.map(lowerFirst).join(", ")}${more > 0 ? ` và ${more} món khác` : ""}` : ""}. Hợp với: ${lowerFirst(personas[index])}.`,
+        html: `${heading(index + 1, variant.name)}
+          ${oneCar(variant, 0.02, "", "compact")}
+          ${row("Niêm yết", trieu(variant.price), 0.12, "small")}
+          ${variant.offer ? row("Lăn bánh sau ưu đãi", trieu(variant.net), 0.22, "small") : ""}
+          ${index === 0
+            ? note("Bản dễ tiếp cận của dòng xe", 0.35)
+            : `<p class="sub serif" data-at="0.3">${variant.price === previous.price ? `cùng giá với ${escapeHtml(previous.name)}` : `thêm ${escapeHtml(trieu(variant.price - previous.price))} so với ${escapeHtml(previous.name)}`}</p>
+               <ul class="bullets" style="margin-top:8px">${highlights.map((item, row_) => `<li data-at="${(0.35 + row_ * 0.1).toFixed(2)}" style="font-size:34px;padding:5px 0">${escapeHtml(item)}</li>`).join("")}${more > 0 ? `<li data-at="0.68" style="font-size:34px;padding:5px 0">và ${more} món khác</li>` : ""}</ul>`}
+          <div class="box black" data-at="0.8" data-fx="wipe" style="margin-top:30px;font-size:42px;max-width:960px"><span data-at="0.85">Hợp với: ${escapeHtml(personas[index])}</span></div>`,
+      };
+    }),
+    {
+      theme: "light",
+      minSpeak: 2 + list.length * 1,
+      voice: `Phúc gợi ý theo nhu cầu: ${data.map((variant, index) => `${lowerFirst(personas[index])}, chọn ${variant.name}`).join("; ")}.`,
+      html: `${heading("", "Phúc gợi ý")}
+        <p class="sub serif" data-at="0">chọn theo nhu cầu</p>
+        ${data.map((variant, index) => `<div class="spec" data-at="${(0.1 + index * (0.6 / data.length)).toFixed(2)}" style="text-align:left"><i style="text-align:left">${escapeHtml(personas[index])}</i><div class="vals" style="grid-template-columns:1fr"><b style="color:var(--accent);text-align:left">→ ${escapeHtml(variant.name)}</b></div></div>`).join("")}
+        ${note("Gợi ý tham khảo, Phúc tư vấn theo nhu cầu thực tế", 0.85)}`,
+    },
+    ctaScene("Phúc tư vấn bản hợp với bạn", "Bình luận nhu cầu của bạn", fileUrl(car.image),
+      `Anh chị dùng xe để làm gì, đi phố, đi tỉnh hay chở hàng? Lưu video và bình luận, Phúc tư vấn phiên bản hợp nhu cầu.`),
+  ];
+  return {
+    key: car.id,
+    scenes,
+    title: `CHỌN PHIÊN BẢN ${shortOf(car).toUpperCase()}`,
+    caption: footerCaption([
+      `${shortOf(car)} có ${list.length} bản, chọn bản nào? 👇`,
+      data.map((variant, index) => `${variant.name}: ${personas[index].toLowerCase()}`).join("\n"),
+      "Bình luận nhu cầu của anh chị, Phúc tư vấn bản phù hợp.",
+      `#Mitsubishi #${shortOf(car).replace(/\s+/g, "")} #ChonXe #TuVanMuaXe`,
+      `👉 So sánh trang bị từng bản: ${siteUrl}/xe/${car.slug}#trang-bi`,
+    ]),
+  };
+}
+
 // ---------- Chạy ----------
 const templates = {
   "tra-gop": { perCar: true, build: traGop },
@@ -936,6 +1036,7 @@ const templates = {
   "gioi-thieu": { perCar: true, build: gioiThieu },
   "chi-phi": { perCar: true, build: chiPhi },
   "phu-kien": { perCar: true, build: phuKien },
+  "chon-phien-ban": { perCar: true, build: chonPhienBan },
 };
 if (!templates[template]) {
   console.log(`Cách dùng: npm run video -- <mẫu> [xe]\nMẫu: ${Object.keys(templates).join(", ")}\nXe: ${cars.map((car) => car.id).join(", ")}, tat-ca`);
@@ -958,7 +1059,8 @@ if (template === "xe-cu") {
   }
   jobs = pickCars()
     .filter((car) => template !== "diem-noi-bat" || showrooms[car.id])
-    .map((car) => templates[template].build(car));
+    .map((car) => templates[template].build(car))
+    .filter(Boolean);
 } else {
   jobs = [templates[template].build()];
 }

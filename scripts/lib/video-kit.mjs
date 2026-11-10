@@ -628,7 +628,7 @@ async function makeVideo(job, browser) {
         "-c:v", "copy", "-c:a", "aac", "-b:a", "160k", "-t", String(total), "-movflags", "+faststart", outFile]);
     }
   }
-  if (flag("xem-truoc")) return;
+  // Xem trước vẫn ghi loi-doc.txt và caption.txt để duyệt lời đọc cùng lúc
 
   // Lời đọc từng cảnh, kèm mốc thời gian để canh trong CapCut nếu không dùng file giong-doc
   const stamp = (seconds) => `${Math.floor(seconds / 60)}:${(seconds % 60).toFixed(1).padStart(4, "0")}`;
