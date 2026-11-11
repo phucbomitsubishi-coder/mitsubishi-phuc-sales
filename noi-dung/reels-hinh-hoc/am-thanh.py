@@ -4,7 +4,7 @@ Moc thoi gian phai khop dong `const CD0=...` trong file tap."""
 import sys, wave, numpy as np
 SR = 48000
 out = sys.argv[1] if len(sys.argv) > 1 else "am-thanh.wav"
-CD0, CD1, RV0, RV1, DUR, N = [float(x) for x in sys.argv[2:8]] if len(sys.argv) >= 8 else (1.2, 9.2, 9.6, 12.0, 15.5, 20)
+CD0, CD1, RV0, RV1, DUR, N = [float(x) for x in sys.argv[2:8]] if len(sys.argv) >= 8 else (2.5, 12.5, 13.0, 18.0, 22.5, 20)
 N = int(N)
 mix = np.zeros(int(SR * DUR))
 rng = np.random.default_rng(1)
