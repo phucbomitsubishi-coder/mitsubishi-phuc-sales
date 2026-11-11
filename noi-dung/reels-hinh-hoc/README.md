@@ -7,7 +7,7 @@ Không liên quan đến website, không được build hay deploy.
 
 | Tập | File | Nội dung | Video + caption |
 | --- | --- | --- | --- |
-| 1 | `tap-01.html` | "Khối này có bao nhiêu mặt?" – nhị thập diện đều, đếm ngược 8 giây, gợi ý, đáp án 20 mặt (15,5 giây) | `video/cau-do-hinh-hoc-tap-1.mp4`, `.txt` |
+| 1 | `tap-01.html` | "Khối này có bao nhiêu mặt?" – nhị thập diện đều, đếm ngược 8 giây, gợi ý, đáp án 20 mặt (15,5 giây), có hiệu ứng âm thanh | `video/cau-do-hinh-hoc-tap-1.mp4`, `.txt` |
 
 ## Xuất lại video
 
@@ -17,8 +17,14 @@ Cần Node, ffmpeg và một trình duyệt Chromium hoặc Edge.
 cd noi-dung/reels-hinh-hoc
 npm install
 npx playwright install chromium        # hoặc dùng Edge có sẵn: đặt PW_CHANNEL=msedge
-node render.mjs tap-01.html video/cau-do-hinh-hoc-tap-1.mp4
+node render.mjs tap-01.html video/hinh.mp4          # 1. xuất hình (không tiếng)
+python3 am-thanh.py video/am-thanh.wav              # 2. tạo hiệu ứng âm thanh (cần numpy)
+ffmpeg -i video/hinh.mp4 -i video/am-thanh.wav -map 0:v -map 1:a -c:v copy -c:a aac -b:a 192k -shortest -movflags +faststart video/cau-do-hinh-hoc-tap-1.mp4   # 3. ghép
 ```
+
+`am-thanh.py` tạo: tiếng vút mở đầu, tích tắc mỗi giây đếm ngược (3 giây cuối cao và to hơn), còi hết giờ,
+tiếng "ting" cao dần cho từng mặt sáng lên, chuông hợp âm khi hiện đáp án. Mốc thời gian truyền thêm sau tên file
+(`python3 am-thanh.py ra.wav CD0 CD1 RV0 RV1 DUR SO_MAT`), mặc định khớp tập 1; tập mới đổi mốc thì truyền lại cho khớp.
 
 - `DUR=15.5` (biến môi trường) đặt độ dài video theo giây.
 - `ONLY=60,240,440` chỉ chụp các khung hình đó ra `frame-<số>.jpg` để xem nhanh bố cục.
@@ -28,5 +34,5 @@ node render.mjs tap-01.html video/cau-do-hinh-hoc-tap-1.mp4
 
 - Chữ chỉ đặt trong khoảng 12%–80% chiều cao, chừa lề phải ~150px (giao diện Reels che đáy và cột nút bên phải).
 - Có câu mồi ngay giây đầu; đếm ngược ~8 giây kèm gợi ý giữa chừng.
-- Video không có tiếng: chọn nhạc thịnh hành trong thư viện Reels khi đăng.
+- Video đã có hiệu ứng âm thanh. Nếu thêm nhạc Reels khi đăng, kéo nhạc xuống khoảng 20–30% để vẫn nghe rõ tích tắc.
 - Caption kết thúc bằng câu hỏi để kéo bình luận.
