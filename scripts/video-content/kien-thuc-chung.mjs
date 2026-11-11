@@ -1,0 +1,151 @@
+// Nội dung series "Kiến thức ô tô" (11/11/2026): kiến thức chung, không gắn hãng, cho `npm run video -- kien-thuc-chung <id|tat-ca>`.
+// Mỗi tập: hook (câu mở đầu), points (3–5 ý: t = tiêu đề ngắn trên màn hình, d = 1 câu giải thích), recap (tóm tắt 1 câu),
+// image (ảnh nền trong public/images), sources (ghi trong caption). Cảnh cuối mời THEO DÕI KÊNH, không mời liên hệ.
+// Nguyên tắc: chỉ ghi điều các nguồn cùng khuyên; số liệu pháp lý phải có văn bản và ngày tra; không so sánh hay nói xấu hãng nào.
+// Thêm tập: thêm 1 mục vào mảng (thứ tự mảng = số tập). Sửa nội dung xong chạy lại lệnh để dựng lại video.
+
+export const seriesName = "Kiến thức ô tô";
+
+export const episodes = [
+  {
+    id: "den-bao-taplo",
+    title: "Đèn báo taplo nói gì?",
+    hook: "Đèn báo trên taplo sáng lên: lúc nào phải dừng xe ngay?",
+    image: "images/cars/xpander-cross/gallery/interior/interior-04.jpg",
+    points: [
+      { t: "Màu đỏ: dừng xe an toàn", d: "Đèn đỏ là cảnh báo nguy hiểm, như áp suất dầu, nhiệt độ nước làm mát, hệ thống phanh. Tìm chỗ an toàn dừng xe và kiểm tra." },
+      { t: "Màu vàng, cam: kiểm tra sớm", d: "Đèn vàng là lỗi cần xem sớm, như đèn động cơ, ABS, áp suất lốp. Xe vẫn đi được nhưng nên đưa đi kiểm tra." },
+      { t: "Màu xanh, trắng: đang bật", d: "Đèn xanh hoặc trắng chỉ báo một tính năng đang hoạt động, như đèn pha, ga tự động. Không phải lỗi." },
+      { t: "Đèn nhấp nháy: nghiêm trọng hơn", d: "Đèn cảnh báo nhấp nháy thường nghiêm trọng hơn đèn sáng đứng. Ý nghĩa cụ thể xem sổ hướng dẫn của xe." },
+    ],
+    recap: "Đỏ dừng xe, vàng kiểm tra sớm, xanh là đang bật.",
+    sources: ["Sổ hướng dẫn sử dụng của từng xe"],
+  },
+  {
+    id: "so-tu-dong-at-cvt",
+    title: "Số tự động AT và CVT khác gì?",
+    hook: "Cùng là số tự động, AT và CVT khác nhau ở đâu?",
+    image: "images/cars/xforce/gallery/interior/interior-04.jpg",
+    points: [
+      { t: "AT: có các cấp số", d: "Hộp số AT có số cấp cố định, ví dụ 4 hoặc 6 cấp. Khi tăng tốc bạn cảm nhận được từng lần chuyển số." },
+      { t: "CVT: không có cấp số", d: "CVT thay đổi tỷ số truyền liên tục bằng dây đai và puly, nên tăng tốc mượt, không có cú giật chuyển số." },
+      { t: "CVT: êm, tiết kiệm khi đi phố", d: "CVT giữ động cơ ở vòng tua phù hợp, thường êm và tiết kiệm xăng khi đi phố." },
+      { t: "Chăm đúng hạn là bền", d: "Loại nào cũng bền nếu thay dầu hộp số đúng loại, đúng hạn theo sổ bảo dưỡng." },
+    ],
+    recap: "AT có cấp số, CVT mượt liên tục. Bền hay không là do bảo dưỡng.",
+    sources: ["Sổ hướng dẫn sử dụng và sổ bảo dưỡng của từng xe"],
+  },
+  {
+    id: "ap-suat-lop",
+    title: "Kiểm tra áp suất lốp đúng cách",
+    hook: "Bơm lốp bao nhiêu là đủ, và đo lúc nào mới đúng?",
+    image: "images/cars/attrage/gallery/exterior/exterior-04.jpg",
+    points: [
+      { t: "Xem tem ở khung cửa", d: "Áp suất chuẩn ghi trên tem ở khung cửa bên ghế lái hoặc trong sổ hướng dẫn, không phải con số in trên lốp." },
+      { t: "Đo khi lốp nguội", d: "Đo khi xe chưa chạy hoặc đã nghỉ vài giờ. Lốp nóng cho số cao hơn thực tế." },
+      { t: "Mỗi tháng một lần", d: "Kiểm tra ít nhất mỗi tháng và trước chuyến đi xa, kể cả lốp dự phòng." },
+      { t: "Có cảm biến vẫn nên đo", d: "Đèn cảm biến áp suất thường chỉ báo khi lốp đã non khá nhiều, nên vẫn nên đo bằng đồng hồ." },
+    ],
+    recap: "Đúng số trên tem, đo lúc nguội, mỗi tháng một lần.",
+    sources: ["Hankook Tire Việt Nam: Hướng dẫn chăm sóc lốp, áp suất lốp (hankooktire.com/vn)"],
+  },
+  {
+    id: "vach-mon-lop",
+    title: "Lốp mòn đến đâu phải thay?",
+    hook: "Lốp mòn đến đâu thì phải thay? Nhìn vạch này là biết.",
+    image: "images/cars/triton/gallery/exterior/exterior-04.jpg",
+    points: [
+      { t: "Tìm dấu ▲ trên hông lốp", d: "Hông lốp có dấu tam giác nhỏ, chỉ vị trí gờ báo mòn nằm trong rãnh gai." },
+      { t: "Gai ngang gờ: khoảng 1,6 mm", d: "Khi mặt gai mòn ngang gờ báo mòn, độ sâu gai còn khoảng 1,6 mm: đến lúc thay lốp." },
+      { t: "Hay đi mưa: thay sớm hơn", d: "Gai mòn làm lốp thoát nước kém, dễ trượt khi mưa, nên thay sớm hơn mốc này." },
+      { t: "Nứt, phồng: thay ngay", d: "Lốp nứt chân chim, phồng hoặc lộ bố thì thay ngay dù gai còn sâu." },
+    ],
+    recap: "Gai ngang gờ báo mòn hoặc lốp nứt, phồng: thay lốp.",
+    sources: ["VnExpress: Đừng thay lốp quá muộn", "Pháp Luật TP.HCM (plo.vn): Lốp mòn đến mức này là đã chạm ngưỡng nguy hiểm"],
+  },
+  {
+    id: "ac-quy-yeu",
+    title: "Dấu hiệu ắc-quy sắp hết",
+    hook: "Sáng ra đề máy không nổ? Ắc-quy thường báo trước mấy dấu hiệu này.",
+    image: "images/cars/attrage/showroom/feature-performance.jpg",
+    points: [
+      { t: "Đề máy nặng, chậm", d: "Máy đề quay chậm, phải đề lâu mới nổ, nhất là buổi sáng." },
+      { t: "Đèn mờ khi đề máy", d: "Đèn và màn hình tối đi rõ rệt mỗi lần đề." },
+      { t: "Đèn báo ắc-quy sáng", d: "Đèn hình ắc-quy trên taplo sáng khi xe đang chạy là lỗi sạc, nên kiểm tra sớm." },
+      { t: "Cọc bám bột trắng", d: "Cọc ắc-quy có lớp bột trắng xanh làm tiếp xúc kém, cần vệ sinh hoặc kiểm tra." },
+    ],
+    recap: "Đề nặng, đèn mờ, đèn báo sáng: đi đo ắc-quy trước khi chết máy giữa đường.",
+    sources: ["Sổ hướng dẫn sử dụng của từng xe"],
+  },
+  {
+    id: "thoi-quen-ton-xang",
+    title: "Thói quen làm xe tốn xăng",
+    hook: "Cùng một chiếc xe, có người đi tốn xăng hơn hẳn. Vì sao?",
+    image: "images/cars/xpander/showroom/feature-ayc.jpg",
+    points: [
+      { t: "Tăng tốc, phanh gấp", d: "Đạp ga mạnh rồi phanh gấp liên tục làm tốn xăng hơn hẳn so với lái đều chân." },
+      { t: "Nổ máy chờ lâu", d: "Xe đứng yên nổ máy vẫn đốt xăng. Chờ lâu thì nên tắt máy khi an toàn." },
+      { t: "Lốp non hơi", d: "Lốp thiếu hơi làm lực cản lăn tăng, xe tốn xăng hơn và lốp mòn nhanh." },
+      { t: "Chở đồ không cần thiết", d: "Đồ nặng để lâu trong cốp, giá nóc để trống làm xe nặng và cản gió." },
+      { t: "Chạy quá nhanh", d: "Ở tốc độ cao, lực cản gió tăng nhanh nên xe tốn xăng hơn." },
+    ],
+    recap: "Lái đều chân, đủ hơi lốp, bớt đồ thừa là tiết kiệm xăng.",
+    sources: ["Bộ Năng lượng Hoa Kỳ: fueleconomy.gov, Driving more efficiently"],
+  },
+  {
+    id: "di-duong-ngap",
+    title: "Đi đường ngập không bị thủy kích",
+    hook: "Nước ngập bao nhiêu thì không nên cho xe đi qua?",
+    image: "images/cars/xforce/showroom/feature-drive-modes.jpg",
+    points: [
+      { t: "Quá nửa bánh xe: đừng đi", d: "Nước ngập quá nửa bánh xe thì không nên cho xe lội. Không biết mực nước thì đừng liều." },
+      { t: "Đi chậm, giữ đều ga", d: "Đi chậm và đều, không tăng tốc đột ngột để nước không tràn vào đường hút gió." },
+      { t: "Tránh sóng xe lớn", d: "Giữ khoảng cách với xe lớn, sóng nước chúng tạo ra có thể dâng cao hơn xe bạn." },
+      { t: "Chết máy: không đề lại", d: "Xe chết máy trong nước thì tuyệt đối không đề lại, gọi cứu hộ để tránh thủy kích." },
+    ],
+    recap: "Nước quá nửa bánh thì quay đầu. Chết máy thì không đề lại.",
+    sources: ["Pháp Luật TP.HCM (plo.vn): Cách lái ô tô vượt qua đường ngập nước", "Tiền Phong: Lái xe đường ngập nước, đề phòng thủy kích", "VnExpress: Cách đối phó với nạn thủy kích"],
+  },
+  {
+    id: "xuong-doc-dai",
+    title: "Xuống dốc dài, đổ đèo an toàn",
+    hook: "Đổ đèo mà cứ rà phanh suốt là rất nguy hiểm. Vì sao?",
+    image: "images/cars/xforce/showroom/feature-exterior.jpg",
+    points: [
+      { t: "Về số thấp trước khi xuống", d: "Chọn số thấp (số tự động: L, 1, 2 hoặc chế độ số tay) trước khi xuống dốc để động cơ hãm bớt tốc độ." },
+      { t: "Không rà phanh liên tục", d: "Rà phanh suốt làm má phanh và đĩa nóng quá mức, phanh kém dần, có thể mất phanh." },
+      { t: "Phanh dứt khoát rồi nhả", d: "Khi cần, đạp phanh dứt khoát để giảm tốc rồi nhả hẳn, cho phanh kịp nguội." },
+      { t: "Không về số N", d: "Không để xe trôi ở số N khi xuống dốc: xe mất phanh động cơ và khó kiểm soát." },
+    ],
+    recap: "Số thấp trước khi xuống, phanh dứt khoát, không về N.",
+    sources: ["VnExpress: Kỹ thuật đổ đèo để không mất phanh", "Báo Văn Hóa: Mất phanh khi xuống dốc dài"],
+  },
+  {
+    id: "xe-cu-ngap-nuoc",
+    title: "Nhận biết xe cũ từng ngập nước",
+    hook: "Mua xe cũ: làm sao biết xe từng bị ngập nước?",
+    image: "images/cars/attrage/gallery/interior/interior-01.jpg",
+    points: [
+      { t: "Ngửi mùi ẩm mốc", d: "Đóng kín cửa rồi ngửi. Bật điều hòa, nếu có mùi hôi ẩm từ cửa gió là đáng ngờ." },
+      { t: "Lật thảm, sờ sàn", d: "Kiểm tra bùn đất, vệt nước dưới thảm và sàn xe." },
+      { t: "Soi gỉ sét chỗ khuất", d: "Dùng đèn pin soi ốc vít chân ghế, bản lề cửa, cốp: gỉ sét bất thường là dấu hiệu nước vào." },
+      { t: "Xem giắc điện, đèn pha", d: "Giắc điện bị oxy hóa, đèn pha mờ hơi nước, thiết bị điện chập chờn đều đáng ngờ." },
+    ],
+    recap: "Mùi ẩm, bùn dưới thảm, gỉ chỗ khuất: nhờ gara uy tín kiểm tra kỹ trước khi mua.",
+    sources: ["Pháp Luật TP.HCM (plo.vn): Khi mua ô tô cũ cần kiểm tra các vị trí này", "Pháp Luật TP.HCM (plo.vn): Mẹo nhận biết ô tô có lịch sử ngập nước"],
+  },
+  {
+    id: "bao-hiem-o-to",
+    title: "Bảo hiểm bắt buộc và bảo hiểm thân vỏ",
+    hook: "Đã mua bảo hiểm bắt buộc, xe mình bị đâm có được đền không?",
+    image: "images/cars/destinator/showroom/feature-exterior.jpg",
+    points: [
+      { t: "Bắt buộc: đền cho người khác", d: "Bảo hiểm trách nhiệm dân sự bắt buộc bồi thường thiệt hại bạn gây ra cho người khác, không đền xe của bạn." },
+      { t: "Phí theo nghị định", d: "Xe cá nhân dưới 6 chỗ 480.700 đồng một năm, 6 đến 11 chỗ 873.400 đồng (đã gồm VAT)." },
+      { t: "Thân vỏ: đền xe của bạn", d: "Bảo hiểm vật chất (thân vỏ) là tự nguyện, bồi thường hư hỏng cho chính xe bạn theo điều khoản hợp đồng." },
+      { t: "Đọc kỹ điều khoản bổ sung", d: "Ngập nước, thủy kích, mất cắp bộ phận… thường là điều khoản bổ sung, cần hỏi rõ khi mua." },
+    ],
+    recap: "Bắt buộc đền cho người khác, thân vỏ mới đền xe mình.",
+    sources: ["Nghị định 67/2023/NĐ-CP, Phụ lục I (mức phí bảo hiểm TNDS bắt buộc)"],
+  },
+];

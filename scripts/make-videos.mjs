@@ -17,6 +17,7 @@
 //   npm run video -- xep-hang <gam-cao|tiet-kiem-xang|manh|rong|re|tat-ca>          Xếp hạng trong dòng xe Mitsubishi
 //   npm run video -- so-sanh-xe <xe A> <xe B> | tat-ca                               So 2 mẫu Mitsubishi (không so hãng khác)
 //   npm run video -- do-vui <doan-gia [xe]|dung-sai|chon-1|tat-ca>                    Đố vui: đoán giá, đúng/sai, chọn 1 trong 2
+//   npm run video -- kien-thuc-chung <id tập|tat-ca>   Series "Kiến thức ô tô" (chung, không gắn hãng), nội dung ở scripts/video-content/kien-thuc-chung.mjs; cảnh cuối mời theo dõi kênh
 //   (video giá: npm run price-video, so sánh phiên bản: npm run compare-video)
 //
 // <xe>: destinator, xforce, triton, xpander, xpander-cross, attrage hoặc tat-ca. Thêm --ban "<phiên bản>" để chọn bản,
@@ -1335,6 +1336,83 @@ function doVui(kind, carArg) {
   process.exit(1);
 }
 
+// ---------- Series "Kiến thức ô tô" (kiến thức chung, không gắn hãng; cảnh cuối mời THEO DÕI KÊNH) ----------
+// Nội dung ở scripts/video-content/kien-thuc-chung.mjs (anh Phúc duyệt trước khi dựng).
+const { episodes: knowledgeEpisodes, seriesName } = await import(pathToFileURL(path.join(root, "scripts/video-content/kien-thuc-chung.mjs")).href);
+const followCss = pillarCss + `
+  .follow { display: inline-flex; align-items: center; gap: 22px; margin-top: 40px; padding: 26px 56px; background: var(--box-bg); color: var(--box-ink); font-size: 72px; font-weight: 900; letter-spacing: 2px; box-shadow: var(--box-shadow); }
+  .follow b { font-size: 90px; line-height: .8; }
+  .next { margin-top: 46px; text-align: center; }
+  .next small { display: block; font-size: 30px; font-weight: 800; letter-spacing: 5px; text-transform: uppercase; color: var(--accent); }
+  .dark .next small { color: var(--accent-2); }
+  .next span { display: block; font-size: 52px; font-weight: 900; margin-top: 10px; max-width: 940px; }
+  .pt { font-size: 62px; font-weight: 900; text-align: center; line-height: 1.12; max-width: 960px; letter-spacing: -1px; margin-top: 18px; }
+`;
+function kienThucChung(id) {
+  const index = knowledgeEpisodes.findIndex((ep) => ep.id === id);
+  if (index < 0) {
+    console.error(`Không có tập "${id}". Các tập: ${knowledgeEpisodes.map((ep) => ep.id).join(", ")}`);
+    process.exit(1);
+  }
+  const ep = knowledgeEpisodes[index];
+  const n = index + 1;
+  const next = knowledgeEpisodes[index + 1];
+  const scenes = [
+    {
+      theme: "dark",
+      backdrop: photo(fileUrl(ep.image)),
+      contentTop: 1000,
+      voice: ep.hook,
+      html: `<p class="kicker" data-at="0">${escapeHtml(seriesName)} · Tập ${n}</p>
+        <p class="q" data-at="0.03" style="margin-top:16px">${escapeHtml(ep.hook)}</p>`,
+    },
+    ...ep.points.map((point, i) => ({
+      theme: i % 2 ? "dark" : "light",
+      minSpeak: 4,
+      voice: `${i + 1}. ${point.t}. ${point.d}`,
+      html: `<p class="rank" data-at="0.02">${i + 1}</p>
+        <p class="pt" data-at="0.06">${escapeHtml(point.t)}</p>
+        <p class="why" data-at="0.3">${escapeHtml(point.d)}</p>`,
+    })),
+    {
+      theme: "dark",
+      minSpeak: 2.5 + ep.points.length * 0.6,
+      voice: `Nhớ nhanh: ${ep.recap}`,
+      html: `${heading("", "Nhớ nhanh")}
+        <ul class="steps2">${ep.points.map((point, i) => `<li data-at="${(0.05 + i * 0.12).toFixed(2)}"><b>${i + 1}</b><span>${escapeHtml(point.t)}</span></li>`).join("")}</ul>
+        <p class="why" data-at="0.7">${escapeHtml(ep.recap)}</p>`,
+    },
+    {
+      theme: "light",
+      tail: 1.5,
+      voice: next ? `Bấm theo dõi để không bỏ lỡ tập sau: ${next.title}` : `Bấm theo dõi để xem thêm các tập kiến thức ô tô.`,
+      html: `<p class="kicker" data-at="0">${escapeHtml(seriesName)}</p>
+        <h2 data-at="0.03" style="font-size:76px;text-align:center">Thấy hữu ích?</h2>
+        <div class="follow" data-at="0.15" data-fx="pop"><b>+</b>THEO DÕI</div>
+        ${next ? `<div class="next" data-at="0.4"><small>Tập ${n + 1}</small><span>${escapeHtml(next.title)}</span></div>` : `<div class="next" data-at="0.4"><small>Còn nhiều tập nữa</small><span>Kiến thức ô tô dễ hiểu mỗi tuần</span></div>`}
+        <p class="fine" data-at="0.6">Thông tin tham khảo. Thông số và cách dùng cụ thể xem sổ hướng dẫn của xe bạn.</p>`,
+    },
+  ];
+  return {
+    key: `${String(n).padStart(2, "0")}-${ep.id}`,
+    css: followCss,
+    brand: `${escapeHtml(seriesName)}<small>Tập ${n}</small>`,
+    scenes,
+    title: `${seriesName.toUpperCase()} · TẬP ${n}: ${ep.title.toUpperCase()}`,
+    caption: `${ep.title} 👇
+${ep.hook}
+
+${ep.points.map((point) => `✅ ${point.t}`).join("\n")}
+
+📌 ${ep.recap}
+${next ? `👉 Theo dõi kênh để xem tập ${n + 1}: ${next.title}` : "👉 Theo dõi kênh để xem thêm kiến thức ô tô"}
+
+Nguồn tham khảo: ${ep.sources.join("; ")}.
+#KienThucOto #MeoLaiXe #LaiXeAnToan #OtoChoNguoiMoi #ChamSocXe
+`,
+  };
+}
+
 // ---------- Chạy ----------
 const templates = {
   "tra-gop": { perCar: true, build: traGop },
@@ -1352,6 +1430,7 @@ const templates = {
   "kien-thuc": { arg: true, build: kienThuc, all: ["quy-trinh-mua-xe", "bao-hanh", "bao-duong", "lai-suat"] },
   "xep-hang": { arg: true, build: xepHang, all: Object.keys(rankCriteria) },
   "so-sanh-xe": { pair: true },
+  "kien-thuc-chung": { arg: true, build: kienThucChung, all: knowledgeEpisodes.map((ep) => ep.id) },
   "do-vui": { arg: true, build: (kind) => doVui(kind, positional[2]), all: ["doan-gia", "dung-sai", "chon-1"] },
 };
 if (!templates[template]) {

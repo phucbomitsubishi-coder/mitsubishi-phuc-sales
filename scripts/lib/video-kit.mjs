@@ -318,7 +318,7 @@ function skinsFor(key) {
 
 // ---------- HTML ----------
 const fontUrl = (file) => pathToFileURL(path.join(root, "src/assets/fonts", file)).href;
-function renderHtml(scenes, timings, total, extraCss = "", skin = skins[0]) {
+function renderHtml(scenes, timings, total, extraCss = "", skin = skins[0], brandHtml = null) {
   return `<!doctype html>
 <html lang="vi"><head><meta charset="utf-8">
 <style>
@@ -441,7 +441,7 @@ ${scenes
     (scene, index) => `<section class="scene ${scene.theme}" data-start="${timings[index].start}" data-dur="${timings[index].duration}" data-speak="${timings[index].speak}">
   ${scene.backdrop ? `<div class="backdrop">${scene.backdrop}</div>` : ""}
   <div class="content"${scene.contentTop ? ` style="top:${scene.contentTop}px"` : ""}>${scene.html}</div>
-  ${index < scenes.length - 1 ? `<div class="brand">Lưu Hoàng Phúc<small>Zalo ${escapeHtml(phone)}</small></div>` : ""}
+  ${index < scenes.length - 1 ? `<div class="brand">${brandHtml ?? `Lưu Hoàng Phúc<small>Zalo ${escapeHtml(phone)}</small>`}</div>` : ""}
   <div class="timeline"><div class="ticks"></div><div class="fill"></div></div>
 </section>`
   )
@@ -564,7 +564,7 @@ async function makeVideo(job, browser) {
   const outputs = [];
   for (const skin of chosenSkins) {
     const htmlFile = path.join(work, `${key}-${skin.id}.html`);
-    fs.writeFileSync(htmlFile, renderHtml(scenes, timings, total, job.css, skin));
+    fs.writeFileSync(htmlFile, renderHtml(scenes, timings, total, job.css, skin, job.brand));
     await browser.send("Page.navigate", { url: pathToFileURL(htmlFile).href });
     for (let i = 0; i < 80; i++) {
       await sleep(250);
