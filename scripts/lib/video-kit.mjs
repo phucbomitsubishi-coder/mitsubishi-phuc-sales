@@ -396,6 +396,9 @@ function renderHtml(scenes, timings, total, extraCss = "", skin = skins[0]) {
   .dark .row b, .dark .price, .dark .kicker, .dark h2 em, .dark .contact span, .dark .brand small, .dark .spec.diff .vals b { color: var(--accent-2); }
   .dark .bullets li::before { background: var(--accent-2); }
   .dark .box.black { background: rgba(255,255,255,.14); color: #fff; }
+  .dark .spec.same .vals b { color: inherit; }
+  .dark .spec, .dark .spec-head { border-color: rgba(255,255,255,.22); }
+  .dark .spec i { color: #cbd5e1; }
   .table { margin-top: 10px; }
   .pair { width: 900px; display: grid; grid-template-columns: 1fr 230px 1fr; align-items: baseline; text-align: center; margin-top: 18px; }
   .pair b { font-size: 50px; font-weight: 900; letter-spacing: -0.5px; }
@@ -453,7 +456,7 @@ ${scenes
     content: el.querySelector(".content"),
     fill: el.querySelector(".timeline .fill"),
     start: +el.dataset.start, dur: +el.dataset.dur, speak: +el.dataset.speak,
-    items: [...el.querySelectorAll("[data-at]")].map((node) => ({ node, at: +node.dataset.at, fx: node.dataset.fx || SKIN.fx })),
+    items: [...el.querySelectorAll("[data-at]")].map((node) => ({ node, at: +node.dataset.at, until: node.dataset.until ? +node.dataset.until : null, fx: node.dataset.fx || SKIN.fx })),
   }));
   window.renderAt = (t) => {
     for (const s of scenes) {
@@ -479,6 +482,9 @@ ${scenes
       s.fill.style.width = (clamp(t / TOTAL) * 100).toFixed(2) + "%";
       for (const item of s.items) {
         const begin = item.at * s.speak;
+        // data-until: phần tử chỉ hiện tới mốc này rồi tắt nhanh (đếm ngược 3-2-1, câu hỏi trước khi hé lộ đáp án)
+        const gone = item.until != null ? clamp((lt - item.until * s.speak) / 0.15) : 0;
+        item.node.style.visibility = gone >= 1 ? "hidden" : "visible";
         const raw = clamp((lt - begin) / (item.fx === "wipe" ? 0.32 : 0.42));
         const p = easeOut(raw);
         const n = item.node.style;

@@ -12,6 +12,11 @@
 //   npm run video -- chi-phi <xe>        Mua xe gồm phí nào: bắt buộc (5 khoản) / không bắt buộc; Triton có cảnh "vì sao ít phí"
 //   npm run video -- phu-kien <xe>       Phụ kiện nên lắp (accessories.ts) + phụ kiện chính hãng MMV có giá; ảnh ở scripts/video-assets/phu-kien/
 //   npm run video -- chon-phien-ban <xe> Tư vấn chọn phiên bản: mỗi bản thêm gì, hợp với ai, gợi ý theo nhu cầu (xe ≥ 2 bản)
+//   3 TRỤ CỘT (11/11/2026):
+//   npm run video -- kien-thuc <quy-trinh-mua-xe|bao-hanh|bao-duong|lai-suat|tat-ca>   Kiến thức (dữ liệu từ các trang web)
+//   npm run video -- xep-hang <gam-cao|tiet-kiem-xang|manh|rong|re|tat-ca>          Xếp hạng trong dòng xe Mitsubishi
+//   npm run video -- so-sanh-xe <xe A> <xe B> | tat-ca                               So 2 mẫu Mitsubishi (không so hãng khác)
+//   npm run video -- do-vui <doan-gia [xe]|dung-sai|chon-1|tat-ca>                    Đố vui: đoán giá, đúng/sai, chọn 1 trong 2
 //   (video giá: npm run price-video, so sánh phiên bản: npm run compare-video)
 //
 // <xe>: destinator, xforce, triton, xpander, xpander-cross, attrage hoặc tat-ca. Thêm --ban "<phiên bản>" để chọn bản,
@@ -22,18 +27,19 @@ import path from "node:path";
 import { pathToFileURL } from "node:url";
 import {
   root, load, cars, currentPromotion, provinces, calculateOnRoadPrice, args, option, province, provinceShort,
-  tr, trieu, escapeHtml, month, siteUrl, phone, shortBenefit, variantImage, slugWords,
+  tr, trieu, escapeHtml, month, siteUrl, phone, shortBenefit, variantImage, slugWords, siteConfig,
   box, note, row, heading, oneCar, openBrowser, makeVideo,
 } from "./lib/video-kit.mjs";
 
 const { showrooms } = await load("src/data/showroom.ts");
 const { usedCars } = await load("src/data/usedCars.ts");
 const { usedCarReview } = await load("src/lib/usedCarReview.ts");
-const { financing, firstMonthPayment, usedFinancing, usedCarFinanceable, newCarBankPackages } = await load("src/data/financing.ts");
+const { financing, firstMonthPayment, usedFinancing, usedCarFinanceable, newCarBankPackages, bankPackagesUpdated } = await load("src/data/financing.ts");
 const { plateFeeByArea } = await load("src/data/registrationFees.ts");
 const { accessoryGroups } = await load("src/data/accessories.ts");
 const { categorizeGroup } = await load("src/lib/accessoryCategories.ts");
 
+const positional = args.filter((arg, index) => !arg.startsWith("--") && !(index > 0 && args[index - 1].startsWith("--") && ["--ban", "--tinh", "--giao-dien"].includes(args[index - 1])));
 const [template, target] = args.filter((arg, index) => !arg.startsWith("--") && !(index > 0 && args[index - 1].startsWith("--") && ["--ban", "--tinh", "--giao-dien"].includes(args[index - 1])));
 const fileUrl = (publicPath) => pathToFileURL(path.join(root, "public", publicPath)).href;
 const shortOf = (car) => car.name.replace(/^Mitsubishi /, "");
@@ -1041,6 +1047,294 @@ function chonPhienBan(car) {
   };
 }
 
+// ================= 3 TRỤ CỘT: KIẾN THỨC · SO SÁNH · GIẢI TRÍ (11/11/2026) =================
+const pillarCss = `
+  .count { position: relative; width: 980px; height: 300px; margin-top: 40px; }
+  .count span { position: absolute; inset: 0; display: grid; place-items: center; font-size: 260px; font-weight: 900; color: var(--accent); line-height: 1; }
+  .dark .count span { color: var(--accent-2); }
+  .q { font-size: 64px; font-weight: 900; text-align: center; line-height: 1.15; max-width: 960px; letter-spacing: -1px; margin-top: 30px; }
+  .verdict { font-size: 120px; font-weight: 900; letter-spacing: 4px; margin-top: 30px; }
+  .verdict.yes { color: #16a34a; } .verdict.no { color: var(--accent); } .dark .verdict.no { color: var(--accent-2); }
+  .dark .verdict.yes { color: #4ade80; }
+  .why { font-size: 40px; font-weight: 700; text-align: center; max-width: 920px; line-height: 1.3; margin-top: 18px; }
+  .rank { font-size: 180px; font-weight: 900; line-height: .9; color: var(--accent); }
+  .dark .rank { color: var(--accent-2); }
+  .bigval { font-size: 110px; font-weight: 900; letter-spacing: -3px; margin-top: 10px; }
+  .vs { display: grid; grid-template-columns: 1fr 120px 1fr; align-items: center; width: 1000px; margin-top: 20px; }
+  .vs figure img { width: 100%; height: 230px; object-fit: contain; }
+  .vs figcaption { font-family: RobotoLocal, Roboto, sans-serif; font-style: normal; font-weight: 900; font-size: 42px; }
+  .vs .mid { font-size: 80px; font-weight: 900; color: var(--accent); text-align: center; font-style: italic; }
+  .dark .vs .mid { color: var(--accent-2); }
+  .steps2 { list-style: none; width: 920px; margin-top: 20px; }
+  .steps2 li { display: grid; grid-template-columns: 90px 1fr; gap: 20px; align-items: start; padding: 16px 0; border-bottom: 2px solid var(--rule, #d3d3d0); }
+  .steps2 b { font-size: 70px; font-weight: 900; color: var(--accent); line-height: .9; }
+  .dark .steps2 b { color: var(--accent-2); }
+  .steps2 span { font-size: 40px; font-weight: 800; line-height: 1.2; }
+  .grid9 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 30px; width: 940px; margin-top: 26px; }
+  .grid9 div { font-size: 36px; font-weight: 800; padding: 14px 0 14px 22px; border-left: 8px solid var(--accent); }
+  .dark .grid9 div { border-color: var(--accent-2); }
+`;
+const firstSentence = (text) => String(text).split(/(?<=[.!?])\s/)[0];
+const numOf = (text) => parseFloat(String(text ?? "").replace(/\./g, "").replace(",", ".").match(/[\d.]+/)?.[0] ?? "NaN");
+const qaScene = ({ theme = "dark", kicker, question, answer, why, voiceQ, voiceA, image }) => ({
+  theme,
+  minSpeak: 6.5,
+  voice: `${voiceQ} ... Ba, hai, một. ${voiceA}`,
+  html: `<p class="kicker" data-at="0.02">${escapeHtml(kicker)}</p>
+    <p class="q" data-at="0.04">${escapeHtml(question)}</p>
+    ${image ? `<div class="cars one compact" data-at="0.05" data-fx="car"><figure><img src="${image}"></figure></div>` : ""}
+    <div class="count">
+      <span data-at="0.30" data-until="0.42" data-fx="pop">3</span>
+      <span data-at="0.42" data-until="0.54" data-fx="pop">2</span>
+      <span data-at="0.54" data-until="0.66" data-fx="pop">1</span>
+      <span data-at="0.66" data-fx="pop" style="font-size:90px;color:inherit;text-align:center;line-height:1.1">${escapeHtml(answer)}</span>
+    </div>
+    ${why ? `<p class="why" data-at="0.78">${escapeHtml(why)}</p>` : ""}`,
+});
+
+// ---------- Kiến thức ----------
+function readPurchasePage() {
+  const src = fs.readFileSync(path.join(root, "src/app/mua-xe-mitsubishi-toan-quoc/page.tsx"), "utf8");
+  const block = src.slice(src.indexOf("const steps = ["), src.indexOf("];", src.indexOf("const steps = [")));
+  const steps = [...block.matchAll(/title:\s*"([^"]+)",\s*text:\s*(?:"([^"]+)"|`([^`]+)`)/g)].map((m) => ({
+    title: m[1],
+    text: (m[2] ?? m[3]).replace(/\$\{siteConfig\.dealer\.name\}/g, siteConfig.dealer?.name ?? "showroom"),
+  }));
+  const days = src.match(/deliveryDays\s*=\s*\{\s*hcm:\s*"([^"]+)",\s*province:\s*"([^"]+)"/);
+  return { steps, hcm: days?.[1], province: days?.[2] };
+}
+function kienThuc(topic) {
+  const hero = fileUrl(cars[0].image);
+  if (topic === "quy-trinh-mua-xe") {
+    const { steps, hcm, province: prov } = readPurchasePage();
+    return {
+      key: topic, css: pillarCss, title: "KIẾN THỨC: QUY TRÌNH MUA XE",
+      scenes: [
+        { theme: "dark", voice: `Mua xe ô tô gồm mấy bước? Chỉ ${steps.length} bước, ở tỉnh nào cũng mua được, không cần lên showroom nhiều lần.`,
+          html: `<p class="kicker" data-at="0">Kiến thức mua xe</p><p class="q" data-at="0.03">Mua xe ô tô gồm mấy bước?</p>${oneCar({ hero }, 0.05, "", "compact")}${box(`${steps.length} bước, ở đâu cũng mua được`, 0.5)}` },
+        { theme: "light", minSpeak: 3 + steps.length * 1.2, voice: steps.map((step, i) => `Bước ${i + 1}: ${lowerFirst(step.title)}.`).join(" "),
+          html: `${heading("", `${steps.length} bước mua xe`)}<ul class="steps2">${steps.map((step, i) => `<li data-at="${(0.06 + i * 0.16).toFixed(2)}"><b>${i + 1}</b><span>${escapeHtml(step.title)}</span></li>`).join("")}</ul>` },
+        ...steps.map((step, i) => ({ theme: i % 2 ? "dark" : "light", voice: `Bước ${i + 1}, ${lowerFirst(step.title)}: ${lowerFirst(firstSentence(step.text))}`,
+          html: `<p class="rank" data-at="0.02">${i + 1}</p><h2 data-at="0.05" style="font-size:60px;text-align:center;max-width:960px">${escapeHtml(step.title)}</h2><p class="why" data-at="0.25">${escapeHtml(firstSentence(step.text))}</p>` })),
+        ...(hcm ? [{ theme: "dark", voice: `Bao lâu nhận xe? Tại TP.HCM khoảng ${hcm}, các tỉnh khoảng ${prov}.`,
+          html: `${heading("", "Bao lâu nhận xe?")}${row("TP.HCM", hcm, 0.15)}${row("Tỉnh khác", prov, 0.35)}${note("Tùy xe có sẵn hay phải đặt", 0.7)}` }] : []),
+        ctaScene("Phúc gửi báo giá đúng tỉnh của bạn", "Lưu lại khi đi mua xe", hero, "Lưu video lại để khi mua xe làm đúng từng bước. Bình luận tỉnh của anh chị, Phúc báo giá lăn bánh đúng nơi đăng ký."),
+      ],
+      caption: footerCaption([`Mua xe ô tô gồm mấy bước? 👇 ${steps.map((s, i) => `${i + 1}. ${s.title}`).join(" · ")}`, "Lưu lại khi đi mua xe. Bình luận tỉnh của anh chị, Phúc báo giá lăn bánh.", "#MuaXeOto #KinhNghiemMuaXe #Mitsubishi"]),
+    };
+  }
+  if (topic === "bao-hanh") {
+    const five = cars.filter((car) => ["triton", "destinator"].includes(car.id));
+    const three = cars.filter((car) => !["triton", "destinator"].includes(car.id));
+    return {
+      key: topic, css: pillarCss, title: "KIẾN THỨC: BẢO HÀNH XE MITSUBISHI",
+      scenes: [
+        qaScene({ kicker: "Đố vui kiến thức", question: "Xe Mitsubishi được bảo hành bao lâu?", answer: "3 hoặc 5 năm", voiceQ: "Xe Mitsubishi được bảo hành bao lâu?", voiceA: "Đáp án: 3 hoặc 5 năm, tùy dòng xe.", why: "Tùy dòng xe, điều kiện nào đến trước", image: hero }),
+        { theme: "light", minSpeak: 6, voice: `${five.map(shortOf).join(" và ")} bảo hành 5 năm hoặc 150.000 km. ${three.map(shortOf).join(", ")} bảo hành 3 năm hoặc 100.000 km. Tùy điều kiện nào đến trước.`,
+          html: `${heading("", "Bảo hành tiêu chuẩn")}${row(five.map(shortOf).join(", "), "5 năm / 150.000 km", 0.12, "small")}${row(three.map(shortOf).join(", "), "3 năm / 100.000 km", 0.35, "small")}${note("Tính từ ngày nhận xe, điều kiện nào đến trước", 0.65)}` },
+        { theme: "dark", voice: "Ắc quy nguyên bản được bảo hành 12 tháng hoặc 20.000 km.",
+          html: `${heading("", "Ắc-quy nguyên bản")}${box("12 tháng / 20.000 km", 0.2)}` },
+        { theme: "light", voice: `Hết bảo hành 3 năm, có thể mua thêm 1 hoặc 2 năm bảo hành mở rộng chính hãng, tổng thời gian được bảo vệ lên tới 5 năm hoặc 150.000 km. Có gói Cơ bản và gói Cao cấp.`,
+          html: `${heading("", "Hết bảo hành thì sao?")}${row("Mua thêm", "1 hoặc 2 năm", 0.12)}${row("Tổng tối đa", "5 năm / 150.000 km", 0.3, "small")}${row("Gói", "Cơ bản · Cao cấp", 0.48, "small")}${note("Áp dụng các dòng bảo hành 3 năm", 0.75)}` },
+        ctaScene("Phúc gửi chi tiết bảo hành từng xe", "Bình luận xe bạn đang đi", fileUrl(five[0]?.image ?? cars[0].image), "Anh chị đang đi xe gì? Lưu video và bình luận, Phúc gửi chi tiết bảo hành và gói mở rộng."),
+      ],
+      caption: footerCaption(["Xe Mitsubishi bảo hành bao lâu? 👇", `${five.map(shortOf).join(", ")}: 5 năm/150.000 km · ${three.map(shortOf).join(", ")}: 3 năm/100.000 km`, "#Mitsubishi #BaoHanhOto #KinhNghiemMuaXe", `👉 Bảo hành mở rộng: ${siteUrl}/ho-tro/bao-hanh-mo-rong`]),
+    };
+  }
+  if (topic === "bao-duong") {
+    const items = ["Dầu động cơ và lọc dầu", "Hệ thống phanh", "Lốp xe và áp suất lốp", "Nước làm mát", "Ắc-quy", "Hệ thống đèn và điện", "Lọc gió động cơ", "Lọc gió điều hòa", "Các loại dầu và chất lỏng"];
+    return {
+      key: topic, css: pillarCss, title: "KIẾN THỨC: BẢO DƯỠNG ĐỊNH KỲ",
+      scenes: [
+        qaScene({ kicker: "Đố vui kiến thức", question: "Xe Mitsubishi bao lâu bảo dưỡng một lần?", answer: "5.000 km", voiceQ: "Xe Mitsubishi bao lâu phải bảo dưỡng một lần?", voiceA: "Đáp án: đa số các dòng là 5.000 km hoặc 3 tháng.", why: "hoặc 3 tháng, tùy điều kiện nào đến trước", image: fileUrl(cars[0].image) }),
+        { theme: "light", voice: "Đa số mẫu xe Mitsubishi bảo dưỡng mỗi 5.000 km hoặc 3 tháng. Riêng All-New Triton động cơ 4N16 là 10.000 km hoặc 6 tháng.",
+          html: `${heading("", "Mốc bảo dưỡng")}${row("Đa số mẫu xe", "5.000 km / 3 tháng", 0.12, "small")}${row("All-New Triton 4N16", "10.000 km / 6 tháng", 0.38, "small")}${note("Tùy điều kiện nào đến trước", 0.7)}` },
+        { theme: "dark", minSpeak: 8, voice: `Mỗi lần bảo dưỡng thường kiểm tra ${items.length} hạng mục: ${items.map(lowerFirst).join(", ")}.`,
+          html: `${heading("", `${items.length} hạng mục kiểm tra`)}<div class="grid9">${items.map((item, i) => `<div data-at="${(0.05 + i * 0.08).toFixed(2)}">${escapeHtml(item)}</div>`).join("")}</div>` },
+        { theme: "light", voice: "Lịch cụ thể có thể khác theo mẫu xe và điều kiện vận hành, nên xem sổ hướng dẫn đi kèm xe.",
+          html: `${heading("", "Lưu ý")}<p class="why" data-at="0.1">Lịch cụ thể khác nhau theo mẫu xe, phiên bản, điều kiện vận hành.</p>${box("Xem sổ hướng dẫn đi kèm xe", 0.5, "black")}` },
+        ctaScene("Phúc giúp đặt lịch bảo dưỡng", "Bình luận số km xe bạn", fileUrl(cars[0].image), "Xe anh chị đang chạy bao nhiêu km rồi? Lưu video và bình luận, Phúc nhắc lịch bảo dưỡng."),
+      ],
+      caption: footerCaption(["Xe Mitsubishi bao lâu bảo dưỡng một lần? 👇", "Đa số 5.000 km/3 tháng · All-New Triton 4N16: 10.000 km/6 tháng", "#BaoDuongOto #Mitsubishi #KinhNghiemLaiXe", `👉 Đặt lịch bảo dưỡng: ${siteUrl}/dat-lich-bao-duong`]),
+    };
+  }
+  if (topic === "lai-suat") {
+    const banks = newCarBankPackages;
+    const months = [...new Set(banks.flatMap((bank) => bank.fixed.map((item) => item.months)))].sort((a, b) => a - b);
+    return {
+      key: topic, css: pillarCss, title: "KIẾN THỨC: LÃI SUẤT VAY MUA XE",
+      scenes: [
+        { theme: "dark", voice: `Vay mua xe, ${banks.length} ngân hàng ${banks.map((b) => b.bank).join(", ")} đang cho lãi bao nhiêu? Cùng xem bảng tháng ${month}.`,
+          html: `<p class="kicker" data-at="0">Kiến thức trả góp</p><p class="q" data-at="0.03">Vay mua xe, ngân hàng nào lãi bao nhiêu?</p>${box(`${banks.length} ngân hàng · tháng ${month}`, 0.5)}` },
+        ...months.map((m, mi) => ({
+          theme: mi % 2 ? "dark" : "light",
+          voice: `Lãi cố định ${m} tháng đầu: ${banks.filter((b) => b.fixed.some((f) => f.months === m)).map((b) => `${b.bank} ${b.fixed.find((f) => f.months === m).ratePercent.toLocaleString("vi-VN")}%`).join(", ")} một năm.`,
+          html: `${heading(mi + 1, `Cố định ${m} tháng`)}${banks.filter((b) => b.fixed.some((f) => f.months === m)).map((b, i) => row(b.bank, `${b.fixed.find((f) => f.months === m).ratePercent.toLocaleString("vi-VN")}%/năm`, 0.12 + i * 0.2)).join("")}`,
+        })),
+        { theme: "light", minSpeak: 6, voice: `Hết thời gian cố định, lãi thả nổi bằng lãi tham chiếu cộng biên độ: ${banks.map((b) => `${b.bank} ${b.marginPercent}%`).join(", ")}. Vay tối đa: ${banks.map((b) => `${b.bank} ${b.maxLoanPercent}`).join(", ")}.`,
+          html: `${heading("", "Sau thời gian cố định")}${banks.map((b, i) => row(b.bank, `+ ${b.marginPercent}%`, 0.1 + i * 0.15, "small")).join("")}${note("Biên độ cộng vào lãi tham chiếu", 0.6)}${banks.map((b, i) => row(`${b.bank} vay tối đa`, b.maxLoanPercent, 0.68 + i * 0.08, "small")).join("")}` },
+        ctaScene("Phúc tính góp theo từng ngân hàng", "Bình luận ngân hàng bạn quen", fileUrl(cars[0].image), "Anh chị quen ngân hàng nào? Lưu video và bình luận, Phúc tính bảng góp theo đúng ngân hàng đó."),
+      ],
+      caption: footerCaption([`Lãi suất vay mua xe tháng ${month} 👇`, banks.map((b) => `${b.bank}: ${b.fixed.map((f) => `${f.months}T ${f.ratePercent.toLocaleString("vi-VN")}%`).join(", ")}`).join("\n"), `Theo công văn MMV Auto Finance ${bankPackagesUpdated}. Lãi thực tế theo ngân hàng duyệt.`, "#TraGopOto #LaiSuatVayMuaXe #Mitsubishi", `👉 Bảng lãi suất: ${siteUrl}/du-toan/tra-gop`]),
+    };
+  }
+  console.error("Chủ đề kiến thức: quy-trinh-mua-xe, bao-hanh, bao-duong, lai-suat");
+  process.exit(1);
+}
+
+// ---------- So sánh: xếp hạng trong dòng xe ----------
+const rankCriteria = {
+  "gam-cao": { title: "gầm cao", key: "groundClearance", desc: true, unit: "mm" },
+  "tiet-kiem-xang": { title: "tiết kiệm xăng", key: "fuelConsumptionCombined", desc: false, unit: "L/100 km" },
+  "manh": { title: "mạnh (công suất)", key: "power", desc: true, unit: "PS" },
+  "rong": { title: "rộng (chiều dài cơ sở)", key: "wheelbase", desc: true, unit: "mm" },
+  "re": { title: "dễ mua (lăn bánh sau ưu đãi)", key: "net", desc: false, unit: "" },
+};
+function xepHang(criterion) {
+  const crit = rankCriteria[criterion];
+  if (!crit) { console.error(`Tiêu chí: ${Object.keys(rankCriteria).join(", ")}`); process.exit(1); }
+  const rows = cars.map((car) => {
+    const top = topVariant(car);
+    if (crit.key === "net") {
+      const cheapest = [...car.variants].sort((a, b) => a.price - b.price)[0];
+      const v = variantData(car, cheapest);
+      return { car, value: v.net, label: trieu(v.net), note: cheapest.name === shortOf(car) ? "" : `bản ${cheapest.name}` };
+    }
+    // Lấy giá trị tốt của dòng xe theo tiêu chí (tiết kiệm xăng: bản tiêu hao thấp nhất; còn lại: bản cao nhất)
+    const values = car.variants.map((variant) => ({ variant, raw: variant.specifications?.[crit.key] })).filter((item) => item.raw && Number.isFinite(numOf(item.raw)));
+    if (!values.length) return null;
+    const pick = values.sort((a, b) => (crit.desc ? numOf(b.raw) - numOf(a.raw) : numOf(a.raw) - numOf(b.raw)))[0];
+    return { car, value: numOf(pick.raw), label: String(pick.raw).split(" / ")[0], note: "" };
+  }).filter(Boolean).sort((a, b) => (crit.desc ? b.value - a.value : a.value - b.value));
+  // Đồng hạng: bằng giá trị thì cùng hạng (vd Xpander và Xpander Cross cùng gầm 225 mm)
+  rows.forEach((item) => { item.rank = 1 + rows.filter((other) => (crit.desc ? other.value > item.value : other.value < item.value)).length; });
+  rows.forEach((item) => { item.tied = rows.filter((other) => other.rank === item.rank).length > 1; });
+  const countdown = [...rows].reverse();
+  const skipped = cars.filter((car) => !rows.some((item) => item.car === car)).map(shortOf);
+  return {
+    key: criterion, css: pillarCss, title: `XẾP HẠNG XE MITSUBISHI ${crit.title.toUpperCase()}`,
+    scenes: [
+      { theme: "dark", voice: `Trong ${rows.length} dòng xe Mitsubishi, xe nào ${crit.title.replace(/\s*\(.*\)/, "")} nhất? Đếm ngược từ hạng ${rows.length}.`,
+        html: `<p class="kicker" data-at="0">Xếp hạng trong dòng xe Mitsubishi</p><p class="q" data-at="0.03">Xe Mitsubishi nào ${escapeHtml(crit.title.replace(/\s*\(.*\)/, ""))} nhất?</p><div class="cars two" data-at="0.08" data-fx="car">${rows.slice(0, 2).map((item) => `<figure><img src="${fileUrl(item.car.image)}"></figure>`).join("")}</div>${box(`Đếm ngược ${rows.length} → 1`, 0.55)}${note(crit.title.match(/\((.*)\)/)?.[1] ? `Tiêu chí: ${crit.title.match(/\((.*)\)/)[1]}` : "", 0.75)}` },
+      ...countdown.map((item, i) => {
+        const rank = item.rank;
+        return { theme: rank === 1 ? "dark" : "light",
+          voice: `${item.tied ? "Đồng hạng" : "Hạng"} ${rank === 1 ? "nhất" : rank}: ${shortOf(item.car)}, ${item.label}${item.note ? `, ${item.note}` : ""}.`,
+          html: `<p class="rank" data-at="0.02">#${rank}</p>${item.tied ? `<p class="kicker" data-at="0.04">Đồng hạng</p>` : ""}${oneCar({ hero: fileUrl(item.car.image) }, 0.05, shortOf(item.car), "compact")}<p class="bigval" data-at="0.3">${escapeHtml(item.label)}</p>${item.note ? note(item.note, 0.45) : ""}` };
+      }),
+      { theme: "light", minSpeak: 2 + rows.length * 0.7, voice: `Tóm lại: ${rows.map((item) => `hạng ${item.rank} ${shortOf(item.car)}`).join(", ")}.`,
+        html: `${heading("", "Bảng xếp hạng")}${rows.map((item, i) => row(`#${item.rank} ${shortOf(item.car)}`, item.label, 0.08 + i * 0.1, "small")).join("")}${skipped.length ? note(`Chưa có số liệu: ${skipped.join(", ")}`, 0.8) : note("Số liệu theo Mitsubishi Motors Việt Nam", 0.8)}` },
+      ctaScene("Phúc tư vấn xe hợp nhu cầu", "Bình luận xe bạn chọn", fileUrl(rows[0].car.image), "Anh chị chọn xe nào? Lưu video và bình luận, Phúc gửi thông số và báo giá chi tiết."),
+    ],
+    caption: footerCaption([`Xe Mitsubishi nào ${crit.title.replace(/\s*\(.*\)/, "")} nhất? 👇`, rows.map((item) => `#${item.rank} ${shortOf(item.car)}: ${item.label}`).join(" · "), "Bình luận xe anh chị chọn.", "#Mitsubishi #XepHangXe #ChonXe"]),
+  };
+}
+
+// ---------- So sánh: 2 mẫu xe Mitsubishi ----------
+const pairPresets = [["xforce", "xpander-cross"], ["xpander", "xpander-cross"], ["destinator", "xpander-cross"], ["attrage", "xforce"]];
+function soSanhXe(idA, idB) {
+  const carA = cars.find((car) => car.id === idA);
+  const carB = cars.find((car) => car.id === idB);
+  if (!carA || !carB) { console.error(`Cần 2 id xe Mitsubishi: ${cars.map((car) => car.id).join(", ")}`); process.exit(1); }
+  const info = (car) => {
+    const variants = car.variants.map((variant) => variantData(car, variant)).sort((a, b) => a.price - b.price);
+    const top = topVariant(car).specifications ?? {};
+    const fuelLow = car.variants.map((v) => v.specifications?.fuelConsumptionCombined).filter(Boolean).sort((a, b) => numOf(a) - numOf(b))[0];
+    return { car, name: shortOf(car), min: variants[0].price, max: variants[variants.length - 1].price, net: variants[0].net, seats: top.seats ?? car.specifications.seats, kind: `${categoryLabel[car.category] ?? car.category}`, gc: top.groundClearance, wb: top.wheelbase, power: top.power ? String(top.power).split(" / ")[0] : "", fuel: fuelLow, engine: top.engine, image: fileUrl(car.image) };
+  };
+  const a = info(carA); const b = info(carB);
+  const rowsAB = [
+    ["Kiểu xe", `${a.kind} ${a.seats} chỗ`, `${b.kind} ${b.seats} chỗ`],
+    ["Giá niêm yết", a.min === a.max ? tr(a.min) : `${tr(a.min)} – ${tr(a.max)}`, b.min === b.max ? tr(b.min) : `${tr(b.min)} – ${tr(b.max)}`],
+    ["Lăn bánh từ (sau ưu đãi)", tr(a.net), tr(b.net)],
+    ["Khoảng sáng gầm", a.gc, b.gc],
+    ["Chiều dài cơ sở", a.wb, b.wb],
+    ["Công suất", a.power, b.power],
+    ["Tiêu hao kết hợp", a.fuel, b.fuel],
+  ].filter(([, x, y]) => x && y);
+  const pages = chunk(rowsAB, 4);
+  const pickA = []; const pickB = [];
+  if (a.seats !== b.seats) (a.seats > b.seats ? pickA : pickB).push(`cần ${Math.max(a.seats, b.seats)} chỗ cho gia đình đông người`), (a.seats > b.seats ? pickB : pickA).push(`gia đình ${Math.min(a.seats, b.seats)} người, xe gọn đi phố`);
+  if (a.net !== b.net) (a.net < b.net ? pickA : pickB).push(`ưu tiên chi phí thấp hơn`);
+  if (numOf(a.gc) !== numOf(b.gc)) (numOf(a.gc) > numOf(b.gc) ? pickA : pickB).push(`hay đi đường ngập, đường xấu (gầm cao hơn)`);
+  if (a.fuel && b.fuel && numOf(a.fuel) !== numOf(b.fuel)) (numOf(a.fuel) < numOf(b.fuel) ? pickA : pickB).push("đi nhiều, muốn tiết kiệm xăng");
+  return {
+    key: `${a.car.id}-va-${b.car.id}`, css: pillarCss, title: `SO SÁNH ${a.name.toUpperCase()} VÀ ${b.name.toUpperCase()}`,
+    scenes: [
+      { theme: "dark", voice: `${a.name} hay ${b.name}? Hai mẫu Mitsubishi tầm giá gần nhau, chọn xe nào? Cùng so từng tiêu chí.`,
+        html: `<p class="kicker" data-at="0">So sánh 2 mẫu Mitsubishi</p><p class="q" data-at="0.03">${escapeHtml(a.name)} hay ${escapeHtml(b.name)}?</p><div class="vs" data-at="0.08" data-fx="car"><figure><img src="${a.image}"><figcaption>${escapeHtml(a.name)}</figcaption></figure><div class="mid">VS</div><figure><img src="${b.image}"><figcaption>${escapeHtml(b.name)}</figcaption></figure></div>${box("Chọn xe nào?", 0.6)}` },
+      ...pages.map((page, pi) => ({ theme: pi % 2 ? "dark" : "light", minSpeak: 2 + page.length * 1.1,
+        voice: page.map(([label, x, y]) => `${label}: ${a.name} ${String(x).split(" – ")[0]}, ${b.name} ${String(y).split(" – ")[0]}`).join(". ") + ".",
+        html: `${heading(pi + 1, pi ? "So tiếp" : "So nhanh")}<div class="spec-head" data-at="0.03"><b>${escapeHtml(a.name)}</b><b>${escapeHtml(b.name)}</b></div>${page.map(([label, x, y], i) => `<div class="spec ${x === y ? "same" : "diff"}" data-at="${(0.1 + i * 0.18).toFixed(2)}"><i>${escapeHtml(label)}</i><div class="vals">${x === y ? `<b>${escapeHtml(x)}</b>` : `<b>${escapeHtml(x)}</b><b>${escapeHtml(y)}</b>`}</div></div>`).join("")}` })),
+      { theme: "light", minSpeak: 7, voice: `Chọn ${a.name} nếu ${pickA.join(", ") || "thích phong cách xe này"}. Chọn ${b.name} nếu ${pickB.join(", ") || "thích phong cách xe này"}.`,
+        html: `${heading("", "Chọn xe nào?")}<div class="spec" data-at="0.1" style="text-align:left"><i style="text-align:left">Chọn ${escapeHtml(a.name)} nếu</i><ul class="bullets" style="margin-top:6px">${(pickA.length ? pickA : ["thích phong cách xe này"]).map((t) => `<li style="font-size:36px;color:inherit">${escapeHtml(t)}</li>`).join("")}</ul></div><div class="spec" data-at="0.5" style="text-align:left"><i style="text-align:left">Chọn ${escapeHtml(b.name)} nếu</i><ul class="bullets" style="margin-top:6px">${(pickB.length ? pickB : ["thích phong cách xe này"]).map((t) => `<li style="font-size:36px;color:inherit">${escapeHtml(t)}</li>`).join("")}</ul></div>` },
+      ctaScene("Phúc gửi báo giá cả 2 xe", "Bình luận xe bạn chọn", b.image, `Anh chị chọn ${a.name} hay ${b.name}? Lưu video và bình luận, Phúc gửi báo giá lăn bánh cả hai xe.`),
+    ],
+    caption: footerCaption([`${a.name} hay ${b.name}? 👇`, rowsAB.slice(0, 4).map(([l, x, y]) => `${l}: ${x} | ${y}`).join("\n"), "Bình luận xe anh chị chọn, Phúc gửi báo giá cả 2 xe.", `#Mitsubishi #${a.name.replace(/\s+/g, "")} #${b.name.replace(/\s+/g, "")} #SoSanhXe`]),
+  };
+}
+
+// ---------- Giải trí: đố vui ----------
+function doVui(kind, carArg) {
+  const pool = carArg && carArg !== "tat-ca" ? cars.filter((car) => car.id === carArg) : cars;
+  if (kind === "doan-gia") {
+    const picks = pool.map((car) => { const cheapest = [...car.variants].sort((a, b) => a.price - b.price)[0]; return { car, v: variantData(car, cheapest) }; }).slice(0, 4);
+    return {
+      key: `doan-gia-${carArg ?? "tat-ca"}`, css: pillarCss, title: "ĐỐ VUI: ĐOÁN GIÁ LĂN BÁNH",
+      scenes: [
+        { theme: "dark", voice: `Đoán giá lăn bánh xe Mitsubishi! Niêm yết thì ai cũng biết, nhưng lăn bánh sau ưu đãi tháng ${currentPromotion.month} là bao nhiêu? Đoán trước khi đáp án hiện ra.`,
+          html: `<p class="kicker" data-at="0">Đố vui</p><p class="q" data-at="0.03">Đoán giá lăn bánh!</p><div class="cars two" data-at="0.08" data-fx="car">${picks.slice(0, 2).map((p) => `<figure><img src="${p.v.hero}"></figure>`).join("")}</div>${box(`${picks.length} câu · có đáp án`, 0.55)}` },
+        ...picks.map((p, i) => qaScene({ theme: i % 2 ? "light" : "dark", kicker: `Câu ${i + 1} · niêm yết ${trieu(p.v.price)}`, question: `${p.v.label} lăn bánh ${provinceShort(province)} sau ưu đãi?`, answer: trieu(p.v.net), why: p.v.offer ? `Đã trừ ưu đãi ~${trieu(p.v.offer)}` : "Chưa có ưu đãi tháng này", image: p.v.hero,
+          voiceQ: `Câu ${i + 1}: ${p.v.label} niêm yết ${trieu(p.v.price)}, lăn bánh ${provinceShort(province)} sau ưu đãi là bao nhiêu?`, voiceA: `Đáp án: ${trieu(p.v.net)}.` })),
+        ctaScene("Phúc gửi bảng lăn bánh đầy đủ", "Bình luận bạn đoán đúng mấy câu", picks[0].v.hero, "Anh chị đoán đúng mấy câu? Bình luận nhé, Phúc gửi bảng lăn bánh đầy đủ."),
+      ],
+      caption: footerCaption(["Đoán giá lăn bánh xe Mitsubishi, anh chị đúng mấy câu? 🤔👇", "Bình luận số câu đúng!", "#DoVui #Mitsubishi #GiaXe #LanBanh"]),
+    };
+  }
+  if (kind === "dung-sai") {
+    const byId = Object.fromEntries(cars.map((car) => [car.id, car]));
+    const gc = (id) => numOf(topVariant(byId[id]).specifications?.groundClearance);
+    const facts = [
+      byId.triton && { q: "Triton tính lệ phí trước bạ thấp hơn xe con", a: true, why: "Bán tải chở hàng tính 60% mức của xe con" },
+      byId.xpander && byId.xforce && { q: "Xpander gầm cao hơn Xforce", a: gc("xpander") > gc("xforce"), why: `Xpander ${gc("xpander")} mm, Xforce ${gc("xforce")} mm` },
+      byId.attrage && byId.xforce && { q: "Attrage gầm cao hơn Xforce", a: gc("attrage") > gc("xforce"), why: `Attrage ${gc("attrage")} mm, Xforce ${gc("xforce")} mm` },
+      byId.destinator && { q: "Destinator được bảo hành 3 năm", a: false, why: "Destinator bảo hành 5 năm hoặc 150.000 km" },
+      { q: "Biển số xe con ở TP.HCM 14 triệu", a: plateFeeByArea.car.I === 14_000_000, why: `Hà Nội, TP.HCM ${trieu(plateFeeByArea.car.I)}; tỉnh khác ${(plateFeeByArea.car.II / 1000).toLocaleString("vi-VN")} nghìn` },
+      byId.destinator && { q: "Destinator là xe 7 chỗ", a: topVariant(byId.destinator).specifications?.seats === 7, why: `Destinator ${topVariant(byId.destinator).specifications?.seats} chỗ` },
+    ].filter(Boolean);
+    return {
+      key: "dung-sai", css: pillarCss, title: "ĐỐ VUI: ĐÚNG HAY SAI",
+      scenes: [
+        { theme: "dark", voice: `Đúng hay sai? ${facts.length} câu về xe Mitsubishi, anh chị trả lời được mấy câu?`,
+          html: `<p class="kicker" data-at="0">Đố vui</p><p class="q" data-at="0.03" style="font-size:96px">ĐÚNG hay SAI?</p>${oneCar({ hero: fileUrl(cars[0].image) }, 0.08, "", "compact")}${box(`${facts.length} câu về xe Mitsubishi`, 0.55)}` },
+        ...facts.map((f, i) => ({ theme: i % 2 ? "light" : "dark", minSpeak: 6,
+          voice: `Câu ${i + 1}: ${f.q}. Đúng hay sai? ... Ba, hai, một. ${f.a ? "Đúng" : "Sai"}! ${f.why}.`,
+          html: `<p class="kicker" data-at="0.02">Câu ${i + 1}/${facts.length}</p><p class="q" data-at="0.04">${escapeHtml(f.q)}</p><div class="count"><span data-at="0.32" data-until="0.44" data-fx="pop">3</span><span data-at="0.44" data-until="0.56" data-fx="pop">2</span><span data-at="0.56" data-until="0.68" data-fx="pop">1</span></div><p class="verdict ${f.a ? "yes" : "no"}" data-at="0.68" data-fx="pop" style="margin-top:-300px">${f.a ? "ĐÚNG" : "SAI"}</p><p class="why" data-at="0.78" style="margin-top:200px">${escapeHtml(f.why)}</p>` })),
+        ctaScene("Phúc giải đáp mọi câu hỏi về xe", "Bình luận bạn đúng mấy câu", fileUrl(cars[0].image), "Anh chị đúng mấy câu? Bình luận nhé, câu nào chưa rõ Phúc giải thích thêm."),
+      ],
+      caption: footerCaption(["Đúng hay sai? Kiểm tra hiểu biết về xe Mitsubishi 🤔👇", "Bình luận số câu đúng!", "#DoVui #Mitsubishi #KienThucOto"]),
+    };
+  }
+  if (kind === "chon-1") {
+    const pairs = pairPresets.map(([x, y]) => [cars.find((c) => c.id === x), cars.find((c) => c.id === y)]).filter(([x, y]) => x && y);
+    return {
+      key: "chon-1", css: pillarCss, title: "GIẢI TRÍ: CHỌN 1 TRONG 2",
+      scenes: [
+        { theme: "dark", voice: `Chọn 1 trong 2! ${pairs.length} cặp xe Mitsubishi, anh chị chọn xe nào? Ghi lại lựa chọn, bình luận cuối video.`,
+          html: `<p class="kicker" data-at="0">Giải trí</p><p class="q" data-at="0.03" style="font-size:90px">Chọn 1 trong 2</p>${box(`${pairs.length} cặp xe Mitsubishi`, 0.4)}${note("Ghi lại lựa chọn của bạn", 0.65)}` },
+        ...pairs.map(([x, y], i) => { const vx = variantData(x, [...x.variants].sort((p, q) => p.price - q.price)[0]); const vy = variantData(y, [...y.variants].sort((p, q) => p.price - q.price)[0]);
+          return { theme: i % 2 ? "light" : "dark", minSpeak: 5,
+            voice: `Cặp ${i + 1}: ${shortOf(x)}, lăn bánh từ ${trieu(vx.net)}, hay ${shortOf(y)}, từ ${trieu(vy.net)}?`,
+            html: `<p class="kicker" data-at="0.02">Cặp ${i + 1}/${pairs.length}</p><div class="vs" data-at="0.05" data-fx="car"><figure><img src="${vx.hero}"><figcaption>${escapeHtml(shortOf(x))}</figcaption></figure><div class="mid">A/B</div><figure><img src="${vy.hero}"><figcaption>${escapeHtml(shortOf(y))}</figcaption></figure></div><div class="pair" data-at="0.3"><b>${tr(vx.net)}</b><i>lăn bánh từ</i><b>${tr(vy.net)}</b></div><div class="pair" data-at="0.45"><b>${x.variants[0].specifications?.seats ?? ""} chỗ</b><i>số chỗ</i><b>${y.variants[0].specifications?.seats ?? ""} chỗ</b></div>${box("A hay B?", 0.65)}` }; }),
+        ctaScene("Phúc tư vấn theo lựa chọn của bạn", "Bình luận: A A B B…", fileUrl(cars[0].image), "Bình luận lựa chọn của anh chị theo thứ tự, ví dụ A, B, A, B. Phúc tư vấn xe hợp nhất với lựa chọn đó."),
+      ],
+      caption: footerCaption(["Chọn 1 trong 2: anh chị chọn xe nào? 👇", "Bình luận theo thứ tự, ví dụ: A B A B", "#Mitsubishi #Chon1Trong2 #DoVui"]),
+    };
+  }
+  console.error("Kiểu đố vui: doan-gia [xe], dung-sai, chon-1");
+  process.exit(1);
+}
+
 // ---------- Chạy ----------
 const templates = {
   "tra-gop": { perCar: true, build: traGop },
@@ -1054,6 +1348,11 @@ const templates = {
   "chi-phi": { perCar: true, build: chiPhi },
   "phu-kien": { perCar: true, build: phuKien },
   "chon-phien-ban": { perCar: true, build: chonPhienBan },
+  // 3 trụ cột (tham số thứ 2 là chủ đề/tiêu chí/kiểu, không phải xe)
+  "kien-thuc": { arg: true, build: kienThuc, all: ["quy-trinh-mua-xe", "bao-hanh", "bao-duong", "lai-suat"] },
+  "xep-hang": { arg: true, build: xepHang, all: Object.keys(rankCriteria) },
+  "so-sanh-xe": { pair: true },
+  "do-vui": { arg: true, build: (kind) => doVui(kind, positional[2]), all: ["doan-gia", "dung-sai", "chon-1"] },
 };
 if (!templates[template]) {
   console.log(`Cách dùng: npm run video -- <mẫu> [xe]\nMẫu: ${Object.keys(templates).join(", ")}\nXe: ${cars.map((car) => car.id).join(", ")}, tat-ca`);
@@ -1069,6 +1368,12 @@ if (template === "xe-cu") {
     process.exit(1);
   }
   jobs = chosen.map(xeCu);
+} else if (templates[template].arg) {
+  const list = !target || target === "tat-ca" ? templates[template].all : [target];
+  jobs = list.map((item) => templates[template].build(item));
+} else if (templates[template].pair) {
+  const pairs = !target || target === "tat-ca" ? pairPresets : [[target, positional[2]]];
+  jobs = pairs.map(([x, y]) => soSanhXe(x, y));
 } else if (templates[template].perCar) {
   if (!target) {
     console.error(`Mẫu ${template} cần tên xe: ${cars.map((car) => car.id).join(", ")} hoặc tat-ca`);
@@ -1094,7 +1399,7 @@ try {
       key: `${template}-${job.key}`,
       outDir,
       title: `LỜI ĐỌC VIDEO ${job.title} (giá tháng ${month}, lăn bánh tại ${provinceShort(province)})`,
-      rerun: `npm run video -- ${template}${target ? ` ${target === "tat-ca" ? job.key : target}` : ""}${option("ban") ? ` --ban "${option("ban")}"` : ""}`,
+      rerun: `npm run video -- ${template}${target ? ` ${target === "tat-ca" ? job.key.replace(/-va-/, " ") : positional.slice(1).join(" ")}` : ""}${option("ban") ? ` --ban "${option("ban")}"` : ""}`,
     }, browser);
   }
 } finally {
