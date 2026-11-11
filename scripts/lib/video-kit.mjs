@@ -174,6 +174,9 @@ const pronunciations = [
   [/\bVAT\b/g, "vát"],
   [/\bTNDS\b/g, "trách nhiệm dân sự"],
   [/\bTP\.? ?HCM\b/g, "thành phố Hồ Chí Minh"],
+  [/(\d)\s?mm\b/g, "$1 mi li mét"],
+  [/▲/g, "tam giác"],
+  [/số tự động: L, 1, 2/g, "số tự động: e lờ, một, hai"],
 ];
 const spokenText = (text) => pronunciations.reduce((result, [pattern, sound]) => result.replace(pattern, sound), text);
 async function speakFpt(text, file) {

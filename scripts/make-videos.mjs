@@ -1385,12 +1385,14 @@ function kienThucChung(id) {
       contentTop: 1000,
       voice: ep.hook,
       html: `<p class="kicker" data-at="0">${escapeHtml(seriesName)} · Tập ${n}</p>
-        <p class="q" data-at="0.03" style="margin-top:16px">${escapeHtml(ep.hook)}</p>`,
+        <p class="q" data-at="0.03" style="margin-top:16px">${escapeHtml(ep.hook)}</p>
+        <p class="hooktag" data-at="0.45" data-fx="pop" style="margin-top:28px">${ep.points.length} điều cần nhớ</p>`,
     },
     ...ep.points.map((point, i) => ({
       theme: i % 2 ? "dark" : "light",
       minSpeak: 4,
-      voice: `${i + 1}. ${point.t}. ${point.d}`,
+      // Ý cuối mở bằng "Cuối cùng" để giữ người xem tới hết
+      voice: `${i === ep.points.length - 1 ? "Và cuối cùng" : i + 1}. ${point.t}. ${point.d}`,
       contentTop: 220,
       // Hình minh họa tự vẽ (minh-hoa.mjs): thiếu thì cảnh vẫn hiện chữ như cũ
       html: `<p class="ptnum" data-at="0.02">${i + 1}/${ep.points.length}</p>
@@ -1401,19 +1403,22 @@ function kienThucChung(id) {
     {
       theme: "dark",
       minSpeak: 2.5 + ep.points.length * 0.6,
-      voice: `Nhớ nhanh: ${ep.recap}`,
+      // Mời LƯU video: lượt lưu là tín hiệu mạnh với Facebook/TikTok
+      voice: `Lưu video lại để nhớ: ${ep.recap}`,
       html: `${heading("", "Nhớ nhanh")}
+        <p class="hooktag" data-at="0" data-fx="pop" style="margin-bottom:20px">🔖 Lưu lại để nhớ</p>
         <ul class="steps2">${ep.points.map((point, i) => `<li data-at="${(0.05 + i * 0.12).toFixed(2)}"><b>${i + 1}</b><span>${escapeHtml(point.t)}</span></li>`).join("")}</ul>
         <p class="why" data-at="0.7">${escapeHtml(ep.recap)}</p>`,
     },
     {
       theme: "light",
-      tail: 1.5,
-      voice: next ? `Bấm theo dõi để không bỏ lỡ tập sau: ${next.title}` : `Bấm theo dõi để xem thêm các tập kiến thức ô tô.`,
+      tail: 0.8,
+      // Câu hỏi mời bình luận + theo dõi; cảnh cuối ngắn vì người xem hay lướt đi ở đây
+      voice: `${ep.ask ? `${ep.ask} Bình luận cho mình biết nhé. ` : ""}${next ? `Theo dõi để xem tập sau: ${next.title}` : `Theo dõi để xem thêm kiến thức ô tô.`}`,
       html: `<p class="kicker" data-at="0">${escapeHtml(seriesName)}</p>
-        <h2 data-at="0.03" style="font-size:76px;text-align:center">Thấy hữu ích?</h2>
-        <div class="follow" data-at="0.15" data-fx="pop"><b>+</b>THEO DÕI</div>
-        ${next ? `<div class="next" data-at="0.4"><small>Tập ${n + 1}</small><span>${escapeHtml(next.title)}</span></div>` : `<div class="next" data-at="0.4"><small>Còn nhiều tập nữa</small><span>Kiến thức ô tô dễ hiểu mỗi tuần</span></div>`}
+        ${ep.ask ? `<h2 data-at="0.02" style="font-size:66px;text-align:center;max-width:960px">💬 ${escapeHtml(ep.ask)}</h2>` : `<h2 data-at="0.03" style="font-size:76px;text-align:center">Thấy hữu ích?</h2>`}
+        <div class="follow" data-at="0.5" data-fx="pop"><b>+</b>THEO DÕI</div>
+        ${next ? `<div class="next" data-at="0.7"><small>Tập ${n + 1}</small><span>${escapeHtml(next.title)}</span></div>` : `<div class="next" data-at="0.7"><small>Còn nhiều tập nữa</small><span>Kiến thức ô tô dễ hiểu mỗi tuần</span></div>`}
         <p class="fine" data-at="0.6">Thông tin tham khảo. Thông số và cách dùng cụ thể xem sổ hướng dẫn của xe bạn.</p>`,
     },
   ];
@@ -1425,10 +1430,10 @@ function kienThucChung(id) {
     title: `${seriesName.toUpperCase()} · TẬP ${n}: ${ep.title.toUpperCase()}`,
     caption: `${ep.title} 👇
 ${ep.hook}
-
+${ep.ask ? `💬 ${ep.ask} Bình luận bên dưới nhé!\n` : ""}
 ${ep.points.map((point) => `✅ ${point.t}`).join("\n")}
 
-📌 ${ep.recap}
+📌 Lưu lại để nhớ: ${ep.recap}
 ${next ? `👉 Theo dõi kênh để xem tập ${n + 1}: ${next.title}` : "👉 Theo dõi kênh để xem thêm kiến thức ô tô"}
 
 Nguồn tham khảo: ${ep.sources.join("; ")}.
