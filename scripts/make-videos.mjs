@@ -1339,6 +1339,7 @@ function doVui(kind, carArg) {
 // ---------- Series "Kiến thức ô tô" (kiến thức chung, không gắn hãng; cảnh cuối mời THEO DÕI KÊNH) ----------
 // Nội dung ở scripts/video-content/kien-thuc-chung.mjs (anh Phúc duyệt trước khi dựng).
 const { episodes: knowledgeEpisodes, seriesName } = await import(pathToFileURL(path.join(root, "scripts/video-content/kien-thuc-chung.mjs")).href);
+const { art: knowledgeArt } = await import(pathToFileURL(path.join(root, "scripts/video-content/minh-hoa.mjs")).href);
 const followCss = pillarCss + `
   .follow { display: inline-flex; align-items: center; gap: 22px; margin-top: 40px; padding: 26px 56px; background: var(--box-bg); color: var(--box-ink); font-size: 72px; font-weight: 900; letter-spacing: 2px; box-shadow: var(--box-shadow); }
   .follow b { font-size: 90px; line-height: .8; }
@@ -1347,6 +1348,13 @@ const followCss = pillarCss + `
   .dark .next small { color: var(--accent-2); }
   .next span { display: block; font-size: 52px; font-weight: 900; margin-top: 10px; max-width: 940px; }
   .pt { font-size: 62px; font-weight: 900; text-align: center; line-height: 1.12; max-width: 960px; letter-spacing: -1px; margin-top: 18px; }
+  .art { width: 780px; height: 546px; margin-top: 26px; }
+  .art svg { width: 100%; height: 100%; }
+  /* Nền đỏ (giao diện Đỏ vàng): nét đỏ của hình minh họa đổi sang vàng cho khỏi chìm */
+  .skin-do-vang .dark .art [stroke="#e11d2a"] { stroke: #facc15; }
+  .skin-do-vang .dark .art [fill="#e11d2a"] { fill: #facc15; }
+  .ptnum { font-size: 34px; font-weight: 900; letter-spacing: 6px; color: var(--accent); }
+  .dark .ptnum { color: var(--accent-2); }
 `;
 function kienThucChung(id) {
   const index = knowledgeEpisodes.findIndex((ep) => ep.id === id);
@@ -1370,8 +1378,11 @@ function kienThucChung(id) {
       theme: i % 2 ? "dark" : "light",
       minSpeak: 4,
       voice: `${i + 1}. ${point.t}. ${point.d}`,
-      html: `<p class="rank" data-at="0.02">${i + 1}</p>
-        <p class="pt" data-at="0.06">${escapeHtml(point.t)}</p>
+      contentTop: 220,
+      // Hình minh họa tự vẽ (minh-hoa.mjs): thiếu thì cảnh vẫn hiện chữ như cũ
+      html: `<p class="ptnum" data-at="0.02">${i + 1}/${ep.points.length}</p>
+        <p class="pt" data-at="0.04">${escapeHtml(point.t)}</p>
+        ${point.art && knowledgeArt[point.art] ? `<div class="art" data-at="0.1" data-fx="pop">${knowledgeArt[point.art]()}</div>` : ""}
         <p class="why" data-at="0.3">${escapeHtml(point.d)}</p>`,
     })),
     {
