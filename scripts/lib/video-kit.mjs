@@ -164,6 +164,18 @@ const GAP = 0.45; // nghỉ sau mỗi câu trước khi chuyển cảnh (giống
 const TTS_URL = "https://token-api.fpt.ai/v1/audio/speech";
 const ttsVoice = option("giong") ?? process.env.FPT_TTS_VOICE ?? "fci_vietkhoa";
 const ttsSpeed = Number(option("toc-do") ?? 1) || 1;
+// Cách đọc cho giọng AI: chữ trên hình giữ nguyên, chỉ lời gửi FPT được viết lại theo âm (anh Phúc nghe thử 11/11/2026: "taplo", "ABS" đọc chưa ổn).
+// Thêm từ đọc sai vào đây: [biểu thức, cách đọc].
+const pronunciations = [
+  [/\btaplo\b/gi, "táp lô"],
+  [/\bABS\b/g, "a bê ét"],
+  [/\bCVT\b/g, "xê vê tê"],
+  [/\bAT\b/g, "a tê"],
+  [/\bVAT\b/g, "vát"],
+  [/\bTNDS\b/g, "trách nhiệm dân sự"],
+  [/\bTP\.? ?HCM\b/g, "thành phố Hồ Chí Minh"],
+];
+const spokenText = (text) => pronunciations.reduce((result, [pattern, sound]) => result.replace(pattern, sound), text);
 async function speakFpt(text, file) {
   const response = await fetch(TTS_URL, {
     method: "POST",
@@ -185,7 +197,7 @@ async function makeVoices(scenes, voiceDir) {
     return;
   }
   for (const [index, scene] of scenes.entries()) {
-    const text = (scene.speak ?? scene.voice).trim();
+    const text = spokenText((scene.speak ?? scene.voice).trim());
     const stampFile = path.join(voiceDir, `${index + 1}.txt`);
     const stamp = `${ttsVoice}|${ttsSpeed}|${text}`;
     const existing = voiceFile(voiceDir, index);
