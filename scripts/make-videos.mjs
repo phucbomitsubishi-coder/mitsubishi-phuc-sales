@@ -1488,7 +1488,8 @@ try {
       ...job,
       key: `${template}-${job.key}`,
       outDir,
-      title: `LỜI ĐỌC VIDEO ${job.title} (giá tháng ${month}, lăn bánh tại ${provinceShort(province)})`,
+      // Series kiến thức chung không có giá, không ghi tháng/tỉnh
+      title: template === "kien-thuc-chung" ? `LỜI ĐỌC VIDEO ${job.title}` : `LỜI ĐỌC VIDEO ${job.title} (giá tháng ${month}, lăn bánh tại ${provinceShort(province)})`,
       rerun: `npm run video -- ${template}${target ? ` ${target === "tat-ca" ? job.key.replace(/-va-/, " ") : positional.slice(1).join(" ")}` : ""}${option("ban") ? ` --ban "${option("ban")}"` : ""}`,
     }, browser);
   }
