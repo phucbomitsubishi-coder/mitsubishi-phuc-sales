@@ -1,5 +1,6 @@
 // Nội dung series "Kiến thức ô tô" (11/11/2026): kiến thức chung, không gắn hãng, cho `npm run video -- kien-thuc-chung <id|tat-ca>`.
 // Mỗi tập: hook (câu mở đầu), points (3–5 ý: t = tiêu đề ngắn trên màn hình, d = 1 câu giải thích), recap (tóm tắt 1 câu),
+// opener (11/11/2026): cảnh hook 2–3 giây đầu video (nhãn, hình lớn, 1 câu gây chú ý; chỉ nói điều phần nội dung chứng minh), trước cảnh câu hỏi hook.
 // image (ảnh nền cảnh mở đầu, trong public/images), art (hình minh họa tự vẽ cho từng ý, tên hàm trong minh-hoa.mjs), sources (ghi trong caption). Cảnh cuối mời THEO DÕI KÊNH, không mời liên hệ.
 // Nguyên tắc: chỉ ghi điều các nguồn cùng khuyên; số liệu pháp lý phải có văn bản và ngày tra; không so sánh hay nói xấu hãng nào.
 // Thêm tập: thêm 1 mục vào mảng (thứ tự mảng = số tập). Sửa nội dung xong chạy lại lệnh để dựng lại video.
@@ -11,6 +12,7 @@ export const episodes = [
     id: "den-bao-taplo",
     title: "Đèn báo taplo nói gì?",
     hook: "Đèn báo trên taplo sáng lên: lúc nào phải dừng xe ngay?",
+    opener: { tag: "Cảnh báo", art: "denDo", text: "Đèn đỏ sáng mà vẫn chạy tiếp?", voice: "Đèn đỏ này sáng mà vẫn chạy tiếp, máy có thể hỏng nặng." },
     image: "images/cars/xpander-cross/gallery/interior/interior-04.jpg",
     points: [
       { art: "denDo", t: "Màu đỏ: dừng xe an toàn", d: "Đèn đỏ là cảnh báo nguy hiểm, như áp suất dầu, nhiệt độ nước làm mát, hệ thống phanh. Tìm chỗ an toàn dừng xe và kiểm tra." },
@@ -25,6 +27,7 @@ export const episodes = [
     id: "so-tu-dong-at-cvt",
     title: "Số tự động AT và CVT khác gì?",
     hook: "Cùng là số tự động, AT và CVT khác nhau ở đâu?",
+    opener: { tag: "Bạn có biết?", art: "cvtDai", text: "Xe bạn là AT hay CVT?", voice: "Xe số tự động của bạn là AT hay CVT? Không phải ai cũng biết." },
     image: "images/cars/xforce/gallery/interior/interior-04.jpg",
     points: [
       { art: "atCapSo", t: "AT: có các cấp số", d: "Hộp số AT có số cấp cố định, ví dụ 4 hoặc 6 cấp. Khi tăng tốc bạn cảm nhận được từng lần chuyển số." },
@@ -39,6 +42,7 @@ export const episodes = [
     id: "ap-suat-lop",
     title: "Kiểm tra áp suất lốp đúng cách",
     hook: "Bơm lốp bao nhiêu là đủ, và đo lúc nào mới đúng?",
+    opener: { tag: "Hay nhầm", art: "lopNon", text: "Bơm theo số in trên lốp? Sai rồi!", voice: "Bơm lốp theo con số in trên lốp? Sai rồi." },
     image: "images/cars/attrage/gallery/exterior/exterior-04.jpg",
     points: [
       { art: "temCua", t: "Xem tem ở khung cửa", d: "Áp suất chuẩn ghi trên tem ở khung cửa bên ghế lái hoặc trong sổ hướng dẫn, không phải con số in trên lốp." },
@@ -53,6 +57,7 @@ export const episodes = [
     id: "vach-mon-lop",
     title: "Lốp mòn đến đâu phải thay?",
     hook: "Lốp mòn đến đâu thì phải thay? Nhìn vạch này là biết.",
+    opener: { tag: "Kiểm tra ngay", art: "gaiMon", text: "Lốp mòn thế này còn đi được?", voice: "Lốp mòn thế này, còn đi được không?" },
     image: "images/cars/triton/gallery/exterior/exterior-04.jpg",
     points: [
       { art: "dauTamGiac", t: "Tìm dấu ▲ trên hông lốp", d: "Hông lốp có dấu tam giác nhỏ, chỉ vị trí gờ báo mòn nằm trong rãnh gai." },
@@ -67,6 +72,7 @@ export const episodes = [
     id: "ac-quy-yeu",
     title: "Dấu hiệu ắc-quy sắp hết",
     hook: "Sáng ra đề máy không nổ? Ắc-quy thường báo trước mấy dấu hiệu này.",
+    opener: { tag: "Dấu hiệu", art: "deNang", text: "Đề máy thấy nặng?", voice: "Đề máy thấy nặng, coi chừng ắc-quy sắp hết." },
     image: "images/cars/attrage/showroom/feature-performance.jpg",
     points: [
       { art: "deNang", t: "Đề máy nặng, chậm", d: "Máy đề quay chậm, phải đề lâu mới nổ, nhất là buổi sáng." },
@@ -81,6 +87,7 @@ export const episodes = [
     id: "thoi-quen-ton-xang",
     title: "Thói quen làm xe tốn xăng",
     hook: "Cùng một chiếc xe, có người đi tốn xăng hơn hẳn. Vì sao?",
+    opener: { tag: "Tốn xăng", art: "phanhGap", text: "Lái kiểu này là đốt tiền", voice: "Đạp ga rồi phanh gấp liên tục, là đang đốt tiền xăng." },
     image: "images/cars/xpander/showroom/feature-ayc.jpg",
     points: [
       { art: "phanhGap", t: "Tăng tốc, phanh gấp", d: "Đạp ga mạnh rồi phanh gấp liên tục làm tốn xăng hơn hẳn so với lái đều chân." },
@@ -96,6 +103,7 @@ export const episodes = [
     id: "di-duong-ngap",
     title: "Đi đường ngập không bị thủy kích",
     hook: "Nước ngập bao nhiêu thì không nên cho xe đi qua?",
+    opener: { tag: "Nhớ kỹ", art: "khongDe", text: "Chết máy trong nước: đừng đề lại!", voice: "Xe chết máy giữa đường ngập, việc đầu tiên là đừng đề lại." },
     image: "images/cars/xforce/showroom/feature-drive-modes.jpg",
     points: [
       { art: "nuaBanh", t: "Quá nửa bánh xe: đừng đi", d: "Nước ngập quá nửa bánh xe thì không nên cho xe lội. Không biết mực nước thì đừng liều." },
@@ -110,6 +118,7 @@ export const episodes = [
     id: "xuong-doc-dai",
     title: "Xuống dốc dài, đổ đèo an toàn",
     hook: "Đổ đèo mà cứ rà phanh suốt là rất nguy hiểm. Vì sao?",
+    opener: { tag: "Nguy hiểm", art: "khongN", text: "Xuống dốc mà về số N?", voice: "Xuống dốc dài mà về số N cho xe trôi, rất nguy hiểm." },
     image: "images/cars/xforce/showroom/feature-exterior.jpg",
     points: [
       { art: "soThap", t: "Về số thấp trước khi xuống", d: "Chọn số thấp (số tự động: L, 1, 2 hoặc chế độ số tay) trước khi xuống dốc để động cơ hãm bớt tốc độ." },
@@ -124,6 +133,7 @@ export const episodes = [
     id: "xe-cu-ngap-nuoc",
     title: "Nhận biết xe cũ từng ngập nước",
     hook: "Mua xe cũ: làm sao biết xe từng bị ngập nước?",
+    opener: { tag: "Mua xe cũ", art: "muiAm", text: "Đẹp long lanh, nhưng từng ngập?", voice: "Xe cũ nhìn đẹp long lanh, nhưng có thể đã từng ngập nước." },
     image: "images/cars/attrage/gallery/interior/interior-01.jpg",
     points: [
       { art: "muiAm", t: "Ngửi mùi ẩm mốc", d: "Đóng kín cửa rồi ngửi. Bật điều hòa, nếu có mùi hôi ẩm từ cửa gió là đáng ngờ." },
@@ -138,6 +148,7 @@ export const episodes = [
     id: "bao-hiem-o-to",
     title: "Bảo hiểm bắt buộc và bảo hiểm thân vỏ",
     hook: "Đã mua bảo hiểm bắt buộc, xe mình bị đâm có được đền không?",
+    opener: { tag: "Bảo hiểm", art: "baoHiemNguoiKhac", text: "Có bảo hiểm, xe hư vẫn tự trả?", voice: "Có bảo hiểm rồi, xe mình hư vẫn có thể phải tự trả tiền." },
     image: "images/cars/destinator/showroom/feature-exterior.jpg",
     points: [
       { art: "baoHiemNguoiKhac", t: "Bắt buộc: đền cho người khác", d: "Bảo hiểm trách nhiệm dân sự bắt buộc bồi thường thiệt hại bạn gây ra cho người khác, không đền xe của bạn." },

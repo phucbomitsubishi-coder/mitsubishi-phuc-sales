@@ -1,6 +1,6 @@
 // Bộ dựng video dọc 9:16 dùng chung cho make-price-video.mjs và make-compare-video.mjs (10/11/2026).
 // Mỗi cảnh là 1 khối HTML 1080×1920; phần tử có data-at (0..1 = lúc hiện, tính theo thời lượng lời đọc của cảnh)
-// và data-fx (up | car | wipe). Trình duyệt (Edge/Chrome, qua CDP) chụp từng hình, ffmpeg nén thành MP4 rồi ghép giọng đọc.
+// và data-fx (up | left | pop | fade | car | wipe | zoom | punch). Trình duyệt (Edge/Chrome, qua CDP) chụp từng hình, ffmpeg nén thành MP4 rồi ghép giọng đọc.
 // Giọng đọc: giong-doc/<số cảnh>.mp3 trong thư mục kết quả; có thì cảnh dài đúng bằng giọng, không thì ước theo số chữ.
 import fs from "node:fs";
 import os from "node:os";
@@ -160,10 +160,10 @@ const GAP = 0.45; // nghỉ sau mỗi câu trước khi chuyển cảnh (giống
 // ---------- Giọng AI FPT (11/11/2026) ----------
 // --tao-giong: cảnh nào chưa có giong-doc/N.* thì gọi FPT.TTS-pro tạo N.mp3 (khóa API trong biến môi trường FPT_API_KEY).
 // Bên cạnh mỗi file tự tạo có N.txt ghi giọng + lời đọc; lời đọc đổi thì tự tạo lại. File anh tự đặt (không có N.txt) không bị ghi đè.
-// --giong <id>: fci_vietkhoa (mặc định, nam miền Bắc), fci_xuantoan, fci_phuongan, std_banmai, std_quanganh. --toc-do 1.1 = đọc nhanh hơn.
+// --giong <id>: fci_vietkhoa (mặc định, nam miền Bắc), fci_xuantoan, fci_phuongan, std_banmai, std_quanganh. --toc-do: mặc định 0.9 (1 = tốc độ gốc FPT).
 const TTS_URL = "https://token-api.fpt.ai/v1/audio/speech";
 const ttsVoice = option("giong") ?? process.env.FPT_TTS_VOICE ?? "fci_vietkhoa";
-const ttsSpeed = Number(option("toc-do") ?? 1) || 1;
+const ttsSpeed = Number(option("toc-do") ?? 0.9) || 0.9; // anh Phúc nghe 1x thấy hơi nhanh (11/11/2026)
 // Cách đọc cho giọng AI: chữ trên hình giữ nguyên, chỉ lời gửi FPT được viết lại theo âm (anh Phúc nghe thử 11/11/2026: "taplo", "ABS" đọc chưa ổn).
 // Thêm từ đọc sai vào đây: [biểu thức, cách đọc].
 const pronunciations = [
@@ -545,6 +545,12 @@ ${scenes
           // Ảnh lớn: hiện dần và phóng chậm suốt cảnh (hiệu ứng Ken Burns)
           n.opacity = String(p);
           n.transform = "scale(" + (1.14 - 0.14 * easeOut(clamp(lt / s.dur))).toFixed(4) + ")";
+        } else if (item.fx === "punch") {
+          // Hook đầu video: lao vào từ cỡ lớn, nhòe → rõ trong 0,3 giây, rồi tiến chậm suốt cảnh
+          const q = easeOut(clamp((lt - begin) / 0.3));
+          n.opacity = String(q);
+          n.transform = "scale(" + (1.6 - 0.6 * q + 0.06 * clamp(lt / s.dur)).toFixed(4) + ")";
+          n.filter = q < 1 ? "blur(" + ((1 - q) * 18).toFixed(1) + "px)" : "none";
         } else if (item.fx === "wipe") {
           n.clipPath = "inset(0 " + ((1 - p) * 100).toFixed(1) + "% 0 0)";
         } else if (item.fx === "car") {

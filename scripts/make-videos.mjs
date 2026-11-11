@@ -1353,6 +1353,10 @@ const followCss = pillarCss + `
   /* Nền đỏ (giao diện Đỏ vàng): nét đỏ của hình minh họa đổi sang vàng cho khỏi chìm */
   .skin-do-vang .dark .art [stroke="#e11d2a"] { stroke: #facc15; }
   .skin-do-vang .dark .art [fill="#e11d2a"] { fill: #facc15; }
+  /* Cảnh hook đầu video: nhãn đỏ, hình lớn, câu chữ to */
+  .hooktag { padding: 14px 34px; background: var(--accent); color: #fff; font-size: 40px; font-weight: 900; letter-spacing: 6px; text-transform: uppercase; }
+  .art.big { width: 900px; height: 630px; margin-top: 40px; }
+  .hooktext { font-size: 86px; font-weight: 900; text-align: center; line-height: 1.08; max-width: 980px; letter-spacing: -2px; margin-top: 30px; }
   .ptnum { font-size: 34px; font-weight: 900; letter-spacing: 6px; color: var(--accent); }
   .dark .ptnum { color: var(--accent-2); }
 `;
@@ -1365,7 +1369,16 @@ function kienThucChung(id) {
   const ep = knowledgeEpisodes[index];
   const n = index + 1;
   const next = knowledgeEpisodes[index + 1];
+  const opener = ep.opener && {
+    theme: "dark",
+    contentTop: 230,
+    voice: ep.opener.voice,
+    html: `<p class="hooktag" data-at="0" data-fx="pop">${escapeHtml(ep.opener.tag)}</p>
+      ${knowledgeArt[ep.opener.art] ? `<div class="art big" data-at="0" data-fx="punch">${knowledgeArt[ep.opener.art]()}</div>` : ""}
+      <p class="hooktext" data-at="0.08">${escapeHtml(ep.opener.text)}</p>`,
+  };
   const scenes = [
+    ...(opener ? [opener] : []),
     {
       theme: "dark",
       backdrop: photo(fileUrl(ep.image)),
