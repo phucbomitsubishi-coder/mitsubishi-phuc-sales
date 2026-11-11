@@ -46,7 +46,7 @@ const option = (name) => {
   const index = args.indexOf(`--${name}`);
   return index >= 0 ? args[index + 1] : undefined;
 };
-const optionValues = new Set(["tinh", "ban", "giao-dien"].map(option).filter(Boolean));
+const optionValues = new Set(["tinh", "ban", "giao-dien", "giong", "toc-do"].map(option).filter(Boolean));
 const wanted = args.filter((arg) => !arg.startsWith("--") && !optionValues.has(arg));
 const FPS = flag("nhanh") ? 15 : 30;
 const province = provinces.find((item) => item.id === (option("tinh") ?? defaultProvinceId));
@@ -156,6 +156,47 @@ const voiceFile = (dir, index) =>
 const estimate = (text) => Math.max(3.5, text.split(/\s+/).length / 4 + 0.6);
 const LEAD = 0.25; // giọng bắt đầu sau khi cảnh hiện 0,25 giây
 const GAP = 0.45; // nghỉ sau mỗi câu trước khi chuyển cảnh (giống khoảng lặng ~0,5 giây trong video mẫu)
+
+// ---------- Giọng AI FPT (11/11/2026) ----------
+// --tao-giong: cảnh nào chưa có giong-doc/N.* thì gọi FPT.TTS-pro tạo N.mp3 (khóa API trong biến môi trường FPT_API_KEY).
+// Bên cạnh mỗi file tự tạo có N.txt ghi giọng + lời đọc; lời đọc đổi thì tự tạo lại. File anh tự đặt (không có N.txt) không bị ghi đè.
+// --giong <id>: fci_vietkhoa (mặc định, nam miền Bắc), fci_xuantoan, fci_phuongan, std_banmai, std_quanganh. --toc-do 1.1 = đọc nhanh hơn.
+const TTS_URL = "https://token-api.fpt.ai/v1/audio/speech";
+const ttsVoice = option("giong") ?? process.env.FPT_TTS_VOICE ?? "fci_vietkhoa";
+const ttsSpeed = Number(option("toc-do") ?? 1) || 1;
+async function speakFpt(text, file) {
+  const response = await fetch(TTS_URL, {
+    method: "POST",
+    headers: { Authorization: `Bearer ${process.env.FPT_API_KEY}`, "Content-Type": "application/json" },
+    body: JSON.stringify({ model: "FPT.TTS-pro", input: text, voice: ttsVoice, speed: ttsSpeed }),
+  });
+  const body = Buffer.from(await response.arrayBuffer());
+  if (!response.ok) throw new Error(`FPT ${response.status}: ${body.toString().slice(0, 300)}`);
+  // FPT trả WAV nhỏ tiếng; chuẩn âm lượng -16 LUFS (mức video mạng xã hội) rồi đổi sang MP3
+  const raw = `${file}.wav`;
+  fs.writeFileSync(raw, body);
+  const result = spawnSync(ffmpeg, ["-y", "-v", "error", "-i", raw, "-af", "loudnorm=I=-16:TP=-1.5:LRA=11", "-ar", "44100", "-codec:a", "libmp3lame", "-q:a", "3", file]);
+  fs.rmSync(raw, { force: true });
+  if (result.status !== 0) throw new Error(`ffmpeg không đổi được giọng sang MP3: ${result.stderr}`);
+}
+async function makeVoices(scenes, voiceDir) {
+  if (!process.env.FPT_API_KEY) {
+    console.warn("  --tao-giong: chưa có FPT_API_KEY. Đặt khóa: setx FPT_API_KEY \"<khóa>\" (rồi mở lại cửa sổ dòng lệnh). Bỏ qua tạo giọng.");
+    return;
+  }
+  for (const [index, scene] of scenes.entries()) {
+    const text = (scene.speak ?? scene.voice).trim();
+    const stampFile = path.join(voiceDir, `${index + 1}.txt`);
+    const stamp = `${ttsVoice}|${ttsSpeed}|${text}`;
+    const existing = voiceFile(voiceDir, index);
+    if (existing && (!fs.existsSync(stampFile) || fs.readFileSync(stampFile, "utf8") === stamp)) continue;
+    if (existing) fs.rmSync(existing);
+    process.stdout.write(`  Tạo giọng cảnh ${index + 1}/${scenes.length}... `);
+    await speakFpt(text, path.join(voiceDir, `${index + 1}.mp3`));
+    fs.writeFileSync(stampFile, stamp);
+    console.log("xong");
+  }
+}
 
 // ---------- Trình duyệt (CDP) ----------
 function findBrowser() {
@@ -543,6 +584,7 @@ async function makeVideo(job, browser) {
   const { key, outDir, scenes } = job;
   const voiceDir = path.join(outDir, "giong-doc");
   fs.mkdirSync(voiceDir, { recursive: true });
+  if (flag("tao-giong")) await makeVoices(scenes, voiceDir);
 
   // Thời lượng: theo file giọng đọc nếu có, không thì ước theo lời đọc
   let start = 0;
