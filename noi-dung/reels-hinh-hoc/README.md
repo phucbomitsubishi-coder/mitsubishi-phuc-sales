@@ -42,6 +42,8 @@ tiếng "ting" cao dần cho từng mặt sáng lên, chuông hợp âm khi hi�
 
 ## Quy tắc khi làm tập mới
 
+- Phong cách (anh Phúc chê bản nền tối + neon là "xấu", 11/2026): nền kem sáng, vật thể chất liệu thật có phản chiếu (RoomEnvironment) + bóng đổ mềm, viền mảnh màu đen, MỘT màu nhấn cam đỏ `#e4572e`, chữ đen viết thường, ít chữ. Không neon, không bloom, không nền tối. Mẫu: `doi-song-01.html`.
+
 - Chữ chỉ đặt trong khoảng 12%–80% chiều cao, chừa lề phải ~150px (giao diện Reels che đáy và cột nút bên phải).
 - Có câu mồi ngay giây đầu, cho 2–3 giây đọc câu hỏi; đếm ngược ~10 giây kèm gợi ý giữa chừng; đếm đáp án chậm (~0,25 giây/mặt) để người xem đếm theo (anh Phúc góp ý 8 giây vẫn quá nhanh).
 - Video đã có hiệu ứng âm thanh. Nếu thêm nhạc Reels khi đăng, kéo nhạc xuống khoảng 20–30% để vẫn nghe rõ tích tắc.

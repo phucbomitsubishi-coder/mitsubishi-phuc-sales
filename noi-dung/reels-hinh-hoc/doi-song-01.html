@@ -2,161 +2,148 @@
 <style>
 @font-face{font-family:R;src:url(Roboto-Black.ttf);font-weight:900}
 @font-face{font-family:R;src:url(Roboto-Medium.ttf);font-weight:500}
-html,body{margin:0;width:1080px;height:1920px;overflow:hidden;background:#05060f;font-family:R}
-#bg{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 46%,#16305a 0%,#0a1428 45%,#03060d 80%)}
+:root{--ink:#16161a;--mute:#6b6760;--acc:#e4572e}
+html,body{margin:0;width:1080px;height:1920px;overflow:hidden;font-family:R;background:#f3efe7}
+#bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 55% at 50% 46%,#fbf9f4 0%,#f3efe7 55%,#e7e1d5 100%)}
 canvas{position:absolute;inset:0}
-.t{position:absolute;left:90px;right:150px;text-align:center;color:#fff}
-#tag{top:230px;font-weight:900;font-size:32px;letter-spacing:7px;color:#7dffb0}
-.h{top:290px;font-weight:900;font-size:80px;line-height:1.06;text-shadow:0 0 30px rgba(0,0,0,.6)}
-.h b{color:#ffcf4d}
-.s{top:500px;font-weight:500;font-size:40px;color:#d3d9f2}
-.s b{color:#ffcf4d;font-weight:900}
-.lo{top:1230px;font-weight:900;font-size:58px;line-height:1.15}
-.lo small{display:block;font-weight:500;font-size:38px;color:#d3d9f2;margin-top:10px}
-.lo .y{color:#ffcf4d}.lo .k{color:#9aa4b8}
+.t{position:absolute;left:120px;right:120px;text-align:center;color:var(--ink)}
+#tag{top:250px;font-weight:500;font-size:28px;letter-spacing:9px;color:var(--acc)}
+.h{top:305px;font-weight:900;font-size:76px;line-height:1.08;letter-spacing:-1.5px}
+.s{top:500px;font-weight:500;font-size:38px;color:var(--mute)}
+.lo{top:1320px}
+.big{font-weight:900;font-size:150px;line-height:1;letter-spacing:-4px}
+.big .acc{color:var(--acc)}
+.cap{font-weight:500;font-size:38px;color:var(--mute);margin-top:12px}
+.name{font-weight:900;font-size:56px;letter-spacing:-1px}
 </style>
 <script type="importmap">{"imports":{"three":"./node_modules/three/build/three.module.js","three/addons/":"./node_modules/three/examples/jsm/"}}</script>
 </head><body>
 <div id="bg"></div>
-<div class="t" id="tag">HÌNH HỌC TRONG ĐỜI SỐNG · TẬP 1</div>
-<div class="t h" id="h1">QUẢ BÓNG ĐÁ<br><b>LÀM TỪ HÌNH GÌ?</b></div>
-<div class="t h" id="h2">BẮT ĐẦU TỪ<br><b>KHỐI 20 MẶT</b></div>
-<div class="t h" id="h3">CẮT BỎ<br><b>12 ĐỈNH</b></div>
-<div class="t h" id="h4">ĐẾM LẠI<br><b>CÁC MẶT</b></div>
-<div class="t h" id="h5">BƠM CĂNG<br><b>THÀNH QUẢ BÓNG!</b></div>
-<div class="t h" id="h6">KHỐI 20 MẶT<br><b>CẮT CỤT</b></div>
-<div class="t s" id="s1">Xem tới cuối để thấy điều bất ngờ</div>
-<div class="t s" id="s2">Mỗi mặt là một <b>tam giác đều</b></div>
-<div class="t s" id="s3">Mỗi đỉnh bị cắt thành <b>1 ngũ giác</b></div>
+<div class="t" id="tag">HÌNH HỌC TRONG ĐỜI SỐNG</div>
+<div class="t h" id="h1">Quả bóng đá được<br>làm từ hình gì?</div>
+<div class="t h" id="h2">Bắt đầu từ<br>khối 20 mặt</div>
+<div class="t h" id="h3">Cắt bỏ 12 đỉnh</div>
+<div class="t h" id="h4">Đếm lại các mặt</div>
+<div class="t h" id="h5">Bơm căng lên…</div>
+<div class="t h" id="h6">…là thành<br>quả bóng</div>
+<div class="t s" id="s2">Mỗi mặt là một tam giác đều</div>
+<div class="t s" id="s3">Mỗi đỉnh bị cắt thành một ngũ giác</div>
 <div class="t s" id="s6">Bạn còn thấy hình học ở đâu quanh mình?</div>
-<div class="t lo" id="l2">20 mặt <span class="k">·</span> 12 đỉnh</div>
-<div class="t lo" id="l3"><span id="cut">0</span> / 12 đỉnh đã cắt<small>Tam giác → lục giác</small></div>
-<div class="t lo" id="l4"><span class="y">12</span> ngũ giác + <span class="y">20</span> lục giác<br>= <span class="y" style="font-size:96px">32 MẶT</span></div>
-<div class="t lo" id="l6">Mẫu bóng Telstar<br>World Cup 1970<small>Tập sau: Vì sao tổ ong là lục giác?</small></div>
+<div class="t lo" id="l3"><div class="big"><span class="acc" id="cut">0</span>/12</div><div class="cap">đỉnh đã cắt</div></div>
+<div class="t lo" id="l4"><div class="big"><span id="n4">32</span> mặt</div><div class="cap"><span style="color:var(--acc)">12 ngũ giác</span> + 20 lục giác</div></div>
+<div class="t lo" id="l6"><div class="name">Khối 20 mặt cắt cụt</div><div class="cap">Mẫu bóng Telstar, World Cup 1970</div></div>
 <script type="module">
 import * as THREE from 'three';
-import {EffectComposer} from 'three/addons/postprocessing/EffectComposer.js';
-import {RenderPass} from 'three/addons/postprocessing/RenderPass.js';
-import {UnrealBloomPass} from 'three/addons/postprocessing/UnrealBloomPass.js';
-import {OutputPass} from 'three/addons/postprocessing/OutputPass.js';
+import {RoomEnvironment} from 'three/addons/environments/RoomEnvironment.js';
 import {LineSegments2} from 'three/addons/lines/LineSegments2.js';
 import {LineSegmentsGeometry} from 'three/addons/lines/LineSegmentsGeometry.js';
 import {LineMaterial} from 'three/addons/lines/LineMaterial.js';
 
 const W=1080,H=1920;
 const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true,preserveDrawingBuffer:true});
-renderer.setSize(W,H);renderer.setClearColor(0,0);document.body.insertBefore(renderer.domElement,document.getElementById('tag'));
+renderer.setPixelRatio(1);renderer.setSize(W,H);renderer.setClearColor(0,0);
+renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.0;
+document.body.insertBefore(renderer.domElement,document.getElementById('tag'));
 const scene=new THREE.Scene();
-const cam=new THREE.PerspectiveCamera(32,W/H,0.1,100);cam.position.set(0,0,9);
-const visH=2*9*Math.tan(THREE.MathUtils.degToRad(16));
-scene.add(new THREE.HemisphereLight(0xdfe8ff,0x202030,1.1));
-const dl=new THREE.DirectionalLight(0xffffff,2.4);dl.position.set(3,5,6);scene.add(dl);
-const rim=new THREE.DirectionalLight(0x7dbbff,1.2);rim.position.set(-5,-2,-3);scene.add(rim);
-const pivot=new THREE.Group();pivot.position.y=0.03*visH;scene.add(pivot);
+const pm=new THREE.PMREMGenerator(renderer);scene.environment=pm.fromScene(new RoomEnvironment(),0.04).texture;
+const cam=new THREE.PerspectiveCamera(30,W/H,0.1,100);cam.position.set(0,0.9,9.5);cam.lookAt(0,0.05,0);
+const key=new THREE.DirectionalLight(0xfff4e6,1.6);key.position.set(-3,5,4);scene.add(key);
+const pivot=new THREE.Group();scene.add(pivot);
 const ball=new THREE.Group();pivot.add(ball);
 
-// --- icosahedron topology
+// icosahedron topology
 const ig=new THREE.IcosahedronGeometry(1,0),ip=ig.attributes.position;
-const V=[],key=v=>v.toArray().map(x=>x.toFixed(4)).join(),idx=new Map(),F=[];
-for(let i=0;i<ip.count;i++){const v=new THREE.Vector3().fromBufferAttribute(ip,i);const k=key(v);if(!idx.has(k)){idx.set(k,V.length);V.push(v);}}
-for(let f=0;f<ip.count/3;f++){F.push([0,1,2].map(j=>idx.get(key(new THREE.Vector3().fromBufferAttribute(ip,f*3+j)))));}
+const V=[],kf=v=>v.toArray().map(x=>x.toFixed(4)).join(),idx=new Map(),F=[];
+for(let i=0;i<ip.count;i++){const v=new THREE.Vector3().fromBufferAttribute(ip,i);const k=kf(v);if(!idx.has(k)){idx.set(k,V.length);V.push(v);}}
+for(let f=0;f<ip.count/3;f++)F.push([0,1,2].map(j=>idx.get(kf(new THREE.Vector3().fromBufferAttribute(ip,f*3+j)))));
 const nb=V.map(()=>new Set());F.forEach(([a,b,c])=>{nb[a].add(b).add(c);nb[b].add(a).add(c);nb[c].add(a).add(b);});
 const ring=V.map((v,i)=>{const n=v.clone().normalize();const a=new THREE.Vector3(0.3,0.7,0.2).cross(n).normalize();const b=n.clone().cross(a);
-  return [...nb[i]].sort((p,q)=>Math.atan2(V[p].clone().sub(v).dot(b),V[p].clone().sub(v).dot(a))-Math.atan2(V[q].clone().sub(v).dot(b),V[q].clone().sub(v).dot(a)));});
+  const ang=j=>{const d=V[j].clone().sub(v);return Math.atan2(d.dot(b),d.dot(a));};return [...nb[i]].sort((p,q)=>ang(p)-ang(q));});
 const lerp=(a,b,t)=>a.clone().lerp(b,t);
 const hexPts=tv=>F.map(([a,b,c])=>{const A=V[a],B=V[b],C=V[c];return [lerp(A,B,tv[a]),lerp(B,A,tv[b]),lerp(B,C,tv[b]),lerp(C,B,tv[c]),lerp(C,A,tv[c]),lerp(A,C,tv[a])];});
 const pentPts=tv=>V.map((v,i)=>ring[i].map(j=>lerp(v,V[j],tv[i])));
 const all=x=>V.map(()=>x);
 const RS=hexPts(all(1/3))[0][0].length();
-const order=V.map((v,i)=>i).sort((a,b)=>(V[b].y-V[a].y)||(Math.atan2(V[a].z,V[a].x)-Math.atan2(V[b].z,V[b].x))); // sphere radius = truncated vertex radius
+const order=V.map((v,i)=>i).sort((a,b)=>(V[b].y-V[a].y)||(Math.atan2(V[a].z,V[a].x)-Math.atan2(V[b].z,V[b].x)));
 
-// --- polygon meshes (fan + subdivided) that can inflate onto a sphere
-const SUB=7;
-function makePoly(nCorners,mat){
-  const tris=nCorners;const per=(SUB+1)*(SUB+2)/2;
-  const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(new Float32Array(tris*per*3),3));
-  const ind=[];for(let k=0;k<tris;k++){const o=k*per;const id=(i,j)=>o+i*(SUB+1)-i*(i-1)/2+j;
+const SUB=16;
+function makePoly(n,mat){const per=(SUB+1)*(SUB+2)/2;const g=new THREE.BufferGeometry();
+  g.setAttribute('position',new THREE.Float32BufferAttribute(new Float32Array(n*per*3),3));
+  const ind=[];for(let k=0;k<n;k++){const o=k*per;const id=(i,j)=>o+i*(SUB+1)-i*(i-1)/2+j;
     for(let i=0;i<SUB;i++)for(let j=0;j<SUB-i;j++){ind.push(id(i,j),id(i+1,j),id(i,j+1));if(j<SUB-i-1)ind.push(id(i+1,j),id(i+1,j+1),id(i,j+1));}}
-  g.setIndex(ind);const m=new THREE.Mesh(g,mat);ball.add(m);return {g,m,n:nCorners,per};
-}
-function fillPoly(P,pts,inf,scale){
-  const c=pts.reduce((s,p)=>s.add(p),new THREE.Vector3()).divideScalar(pts.length);
+  g.setIndex(ind);const m=new THREE.Mesh(g,mat);ball.add(m);return {g,m,n};}
+function fillPoly(P,pts,inf){const c=pts.reduce((s,p)=>s.add(p),new THREE.Vector3()).divideScalar(pts.length);
   const arr=P.g.attributes.position.array;let w=0;
   for(let k=0;k<P.n;k++){const a=pts[k],b=pts[(k+1)%P.n];
     for(let i=0;i<=SUB;i++)for(let j=0;j<=SUB-i;j++){const u=i/SUB,v=j/SUB;
       const p=c.clone().multiplyScalar(1-u-v).add(a.clone().multiplyScalar(u)).add(b.clone().multiplyScalar(v));
-      const q=p.lengthSq()>1e-9?p.clone().setLength(RS):p;p.lerp(q,inf).multiplyScalar(scale);arr[w++]=p.x;arr[w++]=p.y;arr[w++]=p.z;}}
-  P.g.attributes.position.needsUpdate=true;P.g.computeVertexNormals();P.g.computeBoundingSphere();
-}
-const mk=(c)=>new THREE.MeshStandardMaterial({color:c,roughness:.4,metalness:.05,side:THREE.DoubleSide,transparent:true,polygonOffset:true,polygonOffsetFactor:1,polygonOffsetUnits:1});
-const hexes=F.map(()=>makePoly(6,mk(0xffffff)));
-const pents=V.map(()=>makePoly(5,mk(0x111111)));
-// seams
-const SEG=8;const nSeg=(20*6+12*5)*SEG;
-const lg=new LineSegmentsGeometry();lg.setPositions(new Float32Array(nSeg*6));
-const lm=new LineMaterial({color:0x4de8ff,linewidth:4,resolution:new THREE.Vector2(W,H),transparent:true});
-const seams=new LineSegments2(lg,lm);ball.add(seams);
-function fillSeams(polys,inf,scale){const out=new Float32Array(nSeg*6);let w=0;
-  const pt=(p)=>{const q=p.clone();q.lerp(q.clone().setLength(RS),inf);return q.multiplyScalar(scale*1.004);};
+      if(p.lengthSq()>1e-9)p.lerp(p.clone().setLength(RS),inf);arr[w++]=p.x;arr[w++]=p.y;arr[w++]=p.z;}}
+  P.g.attributes.position.needsUpdate=true;P.g.computeVertexNormals();P.g.computeBoundingSphere();}
+const mat=c=>new THREE.MeshPhysicalMaterial({color:c,roughness:.42,clearcoat:.8,clearcoatRoughness:.25,side:THREE.DoubleSide,polygonOffset:true,polygonOffsetFactor:1,polygonOffsetUnits:1});
+const hexes=F.map(()=>makePoly(6,mat(0xf6f4ef)));
+const pents=V.map(()=>makePoly(5,mat(0x151515)));pents.forEach(P=>{P.m.material.roughness=0.55;P.m.material.clearcoat=0.35;P.m.material.clearcoatRoughness=0.45;});
+const SEG=16,nSeg=(20*6+12*5)*SEG;const lg=new LineSegmentsGeometry();lg.setPositions(new Float32Array(nSeg*6));
+const lm=new LineMaterial({color:0x1d1d1f,linewidth:3,resolution:new THREE.Vector2(W,H)});ball.add(new LineSegments2(lg,lm));
+function fillSeams(polys,inf){const out=new Float32Array(nSeg*6);let w=0;
+  const pt=p=>{const q=p.clone();if(q.lengthSq()>1e-9)q.lerp(q.clone().setLength(RS),inf);return q.multiplyScalar(1.003);};
   polys.forEach(pts=>{for(let k=0;k<pts.length;k++){const a=pts[k],b=pts[(k+1)%pts.length];
-    for(let s=0;s<SEG;s++){const p=pt(lerp(a,b,s/SEG)),q=pt(lerp(a,b,(s+1)/SEG));out.set([p.x,p.y,p.z,q.x,q.y,q.z],w);w+=6;}}});
-  lg.setPositions(out);}
-// soft shadow
-const sc=document.createElement('canvas');sc.width=sc.height=128;const sx=sc.getContext('2d');const gr=sx.createRadialGradient(64,64,0,64,64,64);gr.addColorStop(0,'rgba(0,0,0,.55)');gr.addColorStop(1,'rgba(0,0,0,0)');sx.fillStyle=gr;sx.fillRect(0,0,128,128);
-const shadow=new THREE.Mesh(new THREE.PlaneGeometry(2.6,0.6),new THREE.MeshBasicMaterial({map:new THREE.CanvasTexture(sc),transparent:true,depthWrite:false}));
-shadow.position.set(0,-1.1,-0.5);pivot.add(shadow);
-
-const comp=new EffectComposer(renderer);comp.setSize(W,H);comp.addPass(new RenderPass(scene,cam));
-const bloom=new UnrealBloomPass(new THREE.Vector2(W,H),0.35,0.4,0.6);comp.addPass(bloom);comp.addPass(new OutputPass());
+    for(let s=0;s<SEG;s++){const p=pt(lerp(a,b,s/SEG)),q=pt(lerp(a,b,(s+1)/SEG));out.set([p.x,p.y,p.z,q.x,q.y,q.z],w);w+=6;}}});lg.setPositions(out);}
+// contact shadow
+const sc=document.createElement('canvas');sc.width=sc.height=256;const sx=sc.getContext('2d');const gr=sx.createRadialGradient(128,128,0,128,128,128);
+gr.addColorStop(0,'rgba(60,45,30,.45)');gr.addColorStop(.5,'rgba(60,45,30,.18)');gr.addColorStop(1,'rgba(60,45,30,0)');sx.fillStyle=gr;sx.fillRect(0,0,256,256);
+const shadow=new THREE.Mesh(new THREE.PlaneGeometry(2.6,2.6),new THREE.MeshBasicMaterial({map:new THREE.CanvasTexture(sc),transparent:true,depthWrite:false,toneMapped:false}));
+shadow.rotation.x=-Math.PI/2;scene.add(shadow);
+const FLOOR=-0.78;shadow.position.y=FLOOR;
 
 const $=id=>document.getElementById(id);
 const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
 const ease=x=>{x=clamp(x);return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2};
-const pop=x=>{x=clamp(x);const c=1.7;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2)};
-const win=(t,a,b,f=0.35)=>clamp((t-a)/f)*clamp((b-t)/f);
-function show(id,o,s=1){const e=$(id);e.style.opacity=o;e.style.transform=`scale(${s})`;}
-const cyan=new THREE.Color(0x4de8ff),white=new THREE.Color(0xffffff),black=new THREE.Color(0x141414),pentHi=new THREE.Color(0xffcf4d),dark=new THREE.Color(0x222233);
+const out=x=>1-Math.pow(1-clamp(x),3);
+const win=(t,a,b,f=0.4)=>clamp((t-a)/f)*clamp((b-t)/f);
+function show(id,o,dy=0){const e=$(id);e.style.opacity=o;e.style.transform=`translateY(${dy}px)`;}
+const rise=(t,a)=>(1-out((t-a)/0.6))*24;
+const WHITE=new THREE.Color(0xf6f4ef),BLACK=new THREE.Color(0x151515),ACC=new THREE.Color(0xe4572e);
 
-// timeline
-const T={hook:0,rew0:3.5,rew1:5.5,cut0:9,cut1:15,cnt0:15,cnt1:19,inf0:19,inf1:22.5,end:22.5,DUR:27};
+const T={def0:3.2,def1:4.6,unt1:6.0,cut0:9,cut1:15,cnt0:15,inf0:19,inf1:22.5,end:22.5};
+const SCALE=0.88;
 window.renderFrame=(t)=>{
-  let tr,inf,phase;
-  if(t<T.rew0){tr=1/3;inf=1;phase=0;}
-  else if(t<T.rew1){const k=ease((t-T.rew0)/(T.rew1-T.rew0));tr=(1-k)/3;inf=1-k;phase=k;}
-  else if(t<T.cut0){tr=0;inf=0;phase=1;}
-  else if(t<T.cut1){tr=null;inf=0;phase=1;}
-  else if(t<T.inf0){tr=1/3;inf=0;phase=1;}
-  else if(t<T.inf1){tr=1/3;inf=ease((t-T.inf0)/(T.inf1-T.inf0));phase=1-inf;}
-  else{tr=1/3;inf=1;phase=0;}
-  // phase: 0 = real ball look, 1 = geometry look
-  const scale=0.85;
+  let tv,inf,acc; // acc: 0 ball colors, 1 geometry colors
   const CUTD=1.0,STEP=(T.cut1-T.cut0-CUTD)/11;let done=0;
-  const tv=tr!==null?all(tr):V.map(()=>0);
-  if(tr===null)order.forEach((vi,k)=>{const x=clamp((t-T.cut0-k*STEP)/CUTD);tv[vi]=ease(x)/3;if(x>=1)done++;});
+  if(t<T.def0){tv=all(1/3);inf=1;acc=0;}
+  else if(t<T.def1){const k=ease((t-T.def0)/(T.def1-T.def0));tv=all(1/3);inf=1-k;acc=k;}
+  else if(t<T.unt1){tv=all((1-ease((t-T.def1)/(T.unt1-T.def1)))/3);inf=0;acc=1;}
+  else if(t<T.cut0){tv=all(0);inf=0;acc=1;}
+  else if(t<T.cut1){tv=all(0);order.forEach((vi,k)=>{const x=clamp((t-T.cut0-k*STEP)/CUTD);tv[vi]=ease(x)/3;if(x>=1)done++;});inf=0;acc=1;}
+  else if(t<T.inf0){tv=all(1/3);inf=0;acc=1;done=12;}
+  else if(t<T.inf1){tv=all(1/3);const k=ease((t-T.inf0)/(T.inf1-T.inf0));inf=k;acc=1-k;}
+  else{tv=all(1/3);inf=1;acc=0;}
   const hp=hexPts(tv),pp=pentPts(tv);
-  hexes.forEach((P,i)=>fillPoly(P,hp[i],inf,scale));pents.forEach((P,i)=>fillPoly(P,pp[i],inf,scale));
-  fillSeams([...hp,...pp],inf,scale);
-  const cutK=tr===null?done/12+0.0001:clamp(tr*3);const pk=V.map((v,i)=>clamp(tv[i]*3));
-  const hl=t>=T.cnt0&&t<T.inf0?0.5+0.5*Math.sin((t-T.cnt0)*4):0;
-  hexes.forEach(P=>{P.m.material.color.copy(cyan).lerp(dark,0.55).lerp(white,0.85*clamp(cutK)).lerp(white,1-phase);P.m.material.opacity=0.55+0.45*Math.max(cutK,1-phase);P.m.material.emissive=P.m.material.emissive||new THREE.Color();P.m.material.emissive.setRGB(0,0,0);});
-  pents.forEach((P,i)=>{P.m.material.color.copy(black).lerp(pentHi,phase*0.85*(0.6+0.4*hl)*(t<T.cut1&&t>=T.cut0?0.4+0.6*pk[i]:1));P.m.material.opacity=1;});
-  lm.color.copy(cyan).lerp(new THREE.Color(0x333333),1-phase);lm.linewidth=2+3*phase;
-  lm.opacity=1;
-  ball.rotation.set(0.35+0.15*Math.sin(t*0.4),t*0.4,0.08);
-  const intro=pop(t/0.6);pivot.scale.setScalar(Math.max(0.001,intro));
-  shadow.material.opacity=0.8;
-  // bounce on final
-  if(t>T.end){const k=t-T.end;pivot.position.y=0.03*visH+Math.abs(Math.sin(k*3.2))*0.18*Math.exp(-k*0.8);}else pivot.position.y=0.03*visH;
+  hexes.forEach((P,i)=>fillPoly(P,hp[i],inf));pents.forEach((P,i)=>fillPoly(P,pp[i],inf));fillSeams([...hp,...pp],inf);
+  const pulse=t>=T.cnt0&&t<T.inf0?0.5+0.5*Math.sin((t-T.cnt0)*5):0;
+  pents.forEach(P=>P.m.material.color.copy(BLACK).lerp(ACC,acc).offsetHSL(0,0,0.06*pulse));
+  hexes.forEach(P=>{P.m.material.color.copy(WHITE);P.m.material.roughness=0.42+0.3*acc;P.m.material.clearcoat=0.8*(1-acc);});
+  lm.linewidth=1.6+1.8*acc;lm.color.set(acc>0.5?0x1d1d1f:0x2a2a2a);
+  // motion
+  ball.rotation.set(0.38+0.12*Math.sin(t*0.35),t*0.42,0.06);
+  const intro=out(t/0.9);
+  let y=0.15;
+  if(t<0.9)y+= (1-intro)*1.2;
+  if(t>T.end){const k=t-T.end;y+=Math.abs(Math.sin(k*3.4+0.0))*0.45*Math.exp(-k*1.1);}
+  if(t>T.inf0&&t<=T.end){y+=0.08*Math.sin(clamp((t-T.inf0)/(T.inf1-T.inf0))*Math.PI);}
+  pivot.position.y=y;pivot.scale.setScalar(SCALE);
+  const h=y-0.15;shadow.scale.setScalar(1-0.25*h);shadow.material.opacity=clamp(1-0.9*h)*intro;
+  shadow.position.y=FLOOR;
   // text
-  show('tag',clamp(t/0.3));
-  show('h1',win(t,0,T.rew0),pop(t/0.5));show('s1',win(t,0.6,T.rew0));
-  show('h2',win(t,T.rew0,T.cut0),pop((t-T.rew0)/0.5));show('s2',win(t,T.rew1,T.cut0));show('l2',win(t,T.rew1+0.4,T.cut0));
-  show('h3',win(t,T.cut0,T.cnt0),pop((t-T.cut0)/0.5));show('s3',win(t,T.cut0+0.3,T.cnt0));show('l3',win(t,T.cut0+0.3,T.cnt0));
-  $('cut').textContent=tr===null?done:(t>=T.cut1?12:0);
-  show('h4',win(t,T.cnt0,T.inf0),pop((t-T.cnt0)/0.5));show('l4',win(t,T.cnt0+0.4,T.inf0),pop((t-T.cnt0-0.4)/0.5));
-  show('h5',win(t,T.inf0,T.end+0.2),pop((t-T.inf0)/0.5));
-  show('h6',win(t,T.end+0.2,99),pop((t-T.end-0.2)/0.5));show('s6',win(t,T.end+2,99));show('l6',win(t,T.end+0.8,99),pop((t-T.end-0.8)/0.5));
-  comp.render();
+  show('tag',clamp(t/0.4));
+  show('h1',win(t,0.2,T.def0),rise(t,0.2));
+  show('h2',win(t,T.def0+0.2,T.cut0),rise(t,T.def0+0.2));show('s2',win(t,T.unt1-0.4,T.cut0),rise(t,T.unt1-0.4));
+  show('h3',win(t,T.cut0,T.cnt0),rise(t,T.cut0));show('s3',win(t,T.cut0+0.4,T.cnt0),rise(t,T.cut0+0.4));
+  show('l3',win(t,T.cut0+0.3,T.cnt0),rise(t,T.cut0+0.3));$('cut').textContent=done;
+  show('h4',win(t,T.cnt0,T.inf0),rise(t,T.cnt0));show('l4',win(t,T.cnt0+0.5,T.inf0),rise(t,T.cnt0+0.5));
+  $('n4').textContent=Math.round(32*out((t-T.cnt0-0.5)/1.2));
+  show('h5',win(t,T.inf0,T.end+0.1),rise(t,T.inf0));
+  show('h6',win(t,T.end+0.1,99),rise(t,T.end+0.1));show('l6',win(t,T.end+0.9,99),rise(t,T.end+0.9));show('s6',win(t,T.end+2.2,99),rise(t,T.end+2.2));
+  renderer.render(scene,cam);
 };
 window.ready=true;
 </script></body></html>
