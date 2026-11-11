@@ -5,9 +5,19 @@ Không liên quan đến website, không được build hay deploy.
 
 ## Các tập
 
+### Câu đố hình học
+
 | Tập | File | Nội dung | Video + caption |
 | --- | --- | --- | --- |
 | 1 | `tap-01.html` | "Khối này có bao nhiêu mặt?" – nhị thập diện đều, đọc câu hỏi 2,5 giây, đếm ngược 10 giây, gợi ý, đếm 20 mặt trong 5 giây, đáp án (22,5 giây), có hiệu ứng âm thanh | `video/cau-do-hinh-hoc-tap-1.mp4`, `.txt` |
+
+### Hình học trong đời sống
+
+| Tập | File | Nội dung | Video + caption |
+| --- | --- | --- | --- |
+| 1 | `doi-song-01.html` + `am-thanh-doi-song-01.py` | "Quả bóng đá làm từ hình gì?": bóng tua ngược về khối 20 mặt, cắt lần lượt 12 đỉnh, đếm 12 ngũ giác + 20 lục giác = 32 mặt, bơm căng thành bóng, kết: khối 20 mặt cắt cụt, Telstar World Cup 1970, hé lộ tập sau (tổ ong). 27 giây, có âm thanh | `video/hinh-hoc-doi-song-tap-1-qua-bong.mp4`, `.txt` |
+
+Xuất: `DUR=27 node render.mjs doi-song-01.html video/hinh.mp4`, `python3 am-thanh-doi-song-01.py video/am-thanh.wav`, rồi ghép bằng lệnh ffmpeg như dưới.
 
 ## Xuất lại video
 
@@ -35,4 +45,5 @@ tiếng "ting" cao dần cho từng mặt sáng lên, chuông hợp âm khi hi�
 - Chữ chỉ đặt trong khoảng 12%–80% chiều cao, chừa lề phải ~150px (giao diện Reels che đáy và cột nút bên phải).
 - Có câu mồi ngay giây đầu, cho 2–3 giây đọc câu hỏi; đếm ngược ~10 giây kèm gợi ý giữa chừng; đếm đáp án chậm (~0,25 giây/mặt) để người xem đếm theo (anh Phúc góp ý 8 giây vẫn quá nhanh).
 - Video đã có hiệu ứng âm thanh. Nếu thêm nhạc Reels khi đăng, kéo nhạc xuống khoảng 20–30% để vẫn nghe rõ tích tắc.
-- Caption kết thúc bằng câu hỏi để kéo bình luận.
+- Caption kết thúc bằng câu hỏi tự nhiên. KHÔNG viết kiểu "Comment A/B", "Tag bạn bè", "Share nếu…": Facebook hạ phân phối bài mồi tương tác.
+- Anh Phúc thấy dạng câu đố (hỏi → đếm ngược → đáp án) ít tương tác; ưu tiên series "Hình học trong đời sống" (vật quen thuộc → bóc ra hình học bên trong).
