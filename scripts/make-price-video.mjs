@@ -2,7 +2,7 @@
 //   0 Mở đầu nền tối: 2 phiên bản, niêm yết chênh X → sau ưu đãi chênh Y
 //   1 Quên phí đăng ký   (niêm yết + phí đăng ký = lăn bánh)
 //   2 Quên trừ ưu đãi    (lăn bánh − ưu đãi = còn ...)
-//   3 Bản cao ưu đãi cao? (so ưu đãi 2 bản; xe 1 phiên bản: các khoản ưu đãi)
+//   3 Ưu đãi mỗi bản mỗi khác (so ưu đãi 2 bản; xe 1 phiên bản: các khoản ưu đãi)
 //   4 Phí đăng ký nền tối (phí từng bản khác nhau; xe 1 phiên bản: so 2 tỉnh)
 //   5 Cách đọc đúng      (danh sách 4 bước → = Số tiền thực tế)
 //   6 Lưu video và bình luận phiên bản
@@ -75,8 +75,12 @@ function buildScenes(item) {
   const where = provinceShort(province);
   const scenes = [];
 
-  // 0. Mở đầu
-  if (!single) {
+  // 0. Mở đầu. Chênh lệch sau ưu đãi gần như bằng chênh niêm yết (vd Xforce 115 → 114,5 triệu) thì mở đầu kiểu
+  // "niêm yết chênh X, thực tế chỉ còn gần X" nghe vô nghĩa (anh Phúc hỏi "làm nhầm nội dung à", 11/11/2026):
+  // khi đó dùng mở đầu "niêm yết bao nhiêu, thực trả bao nhiêu" của bản rẻ nhất.
+  const gapShift = single ? 0 : Math.abs(hi.net - lo.net - (hi.price - lo.price));
+  const weakGap = !single && gapShift < Math.max(5_000_000, 0.1 * (hi.price - lo.price));
+  if (!single && !weakGap) {
     const listDiff = hi.price - lo.price;
     const netDiff = hi.net - lo.net;
     const trend = netDiff > listDiff ? "lên tới" : netDiff < listDiff ? "chỉ còn" : "vẫn là";
@@ -94,10 +98,10 @@ function buildScenes(item) {
   } else {
     scenes.push({
       theme: "dark",
-      voice: `${shortName} niêm yết ${trieu(lo.price)}. Nhưng đó chưa phải số tiền anh chị thực trả. Lăn bánh tại ${where} là ${trieu(lo.onRoad)}, trừ ưu đãi tháng ${currentPromotion.month} còn ${trieu(lo.net)}. Đọc sai báo giá là lệch cả kế hoạch.`,
+      voice: `${single ? shortName : `${shortName} ${lo.name}`} niêm yết ${trieu(lo.price)}. Nhưng đó chưa phải số tiền anh chị thực trả. Lăn bánh tại ${where} là ${trieu(lo.onRoad)}, trừ ưu đãi tháng ${currentPromotion.month} còn ${trieu(lo.net)}. Đọc sai báo giá là lệch cả kế hoạch.`,
       html: `${heading("", `Niêm yết ${trieu(lo.price)}`)}
         <p class="sub serif" data-at="0">Số tiền thực trả là bao nhiêu?</p>
-        ${oneCar(lo, 0.02, shortName, "compact")}
+        ${oneCar(lo, 0.02, single ? shortName : `${shortName} ${lo.name}`, "compact")}
         ${row("Lăn bánh", trieu(lo.onRoad), 0.35)}
         ${row("Sau ưu đãi", trieu(lo.net), 0.55)}
         ${box("Niêm yết chưa phải số thực trả", 0.7)}
@@ -146,8 +150,9 @@ function buildScenes(item) {
           : "Hai bản ưu đãi bằng nhau";
     scenes.push({
       theme: "light",
-      voice: `Thứ ba: nghĩ bản cao thì ưu đãi cao. Tháng này ${lo.name} ưu đãi ${trieu(lo.offer)}, ${hi.name} ưu đãi ${trieu(hi.offer)}. ${verdict}. Mua bản nào, hỏi đúng ưu đãi bản đó.`,
-      html: `${heading(3, "Bản cao ưu đãi cao?")}
+      // Không mở bằng "nghĩ bản cao thì ưu đãi cao" vì nhiều tháng bản cao ưu đãi cao thật, nghe như tự mâu thuẫn
+      voice: `Thứ ba: ưu đãi mỗi phiên bản mỗi khác. Tháng này ${lo.name} ưu đãi ${trieu(lo.offer)}, ${hi.name} ưu đãi ${trieu(hi.offer)}. ${verdict}. Mua bản nào, hỏi đúng ưu đãi bản đó.`,
+      html: `${heading(3, "Ưu đãi mỗi bản mỗi khác")}
         <p class="sub serif" data-at="0.02">${escapeHtml(shortName)}</p>
         ${oneCar(hi, 0.02, "")}
         <div class="table">
