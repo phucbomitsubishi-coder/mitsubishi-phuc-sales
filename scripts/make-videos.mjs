@@ -833,12 +833,15 @@ const accessoryIdeas = {
     { id: "ty-bung-thung", title: "Ty nâng hạ bửng thùng", why: "Đóng mở bửng thùng nhẹ tay, không đập mạnh", test: /Ty hỗ trợ/ },
   ],
 };
+// Nhóm phụ kiện trên web gộp nhiều loại (vd "Camera hành trình, giám sát hành trình"), nên mỗi gợi ý có
+// `only` (tên phải khớp) và `exclude` (tên bị loại) để không lẫn: giám sát hành trình (hộp đen) không phải camera,
+// bơm lốp không phải cảm biến áp suất lốp, thảm taplo không phải lót sàn, phim PPF không phải phim cách nhiệt.
 const commonIdeas = [
-  { id: "phim-cach-nhiet", title: "Phim cách nhiệt", why: "Giảm nóng cabin, chống tia UV, bảo vệ nội thất", group: "Phim cách nhiệt", brands: true },
-  { id: "camera-hanh-trinh", title: "Camera hành trình", why: "Lưu hình ảnh đường đi, có bằng chứng khi va chạm", category: "Camera hành trình, giám sát hành trình" },
-  { id: "lot-san", title: "Lót sàn", why: "Dễ vệ sinh, giữ sàn xe sạch khi đi mưa", category: "Lót sàn, thảm", ownGroup: true },
+  { id: "phim-cach-nhiet", title: "Phim cách nhiệt", why: "Giảm nóng cabin, chống tia UV, bảo vệ nội thất", group: "Phim cách nhiệt", brands: true, exclude: /PPF/i },
+  { id: "camera-hanh-trinh", title: "Camera hành trình", why: "Lưu hình ảnh đường đi, có bằng chứng khi va chạm", category: "Camera hành trình, giám sát hành trình", only: /^(Cam|Camera) hành trình/i, exclude: /giám sát hành trình|hộp đen/i },
+  { id: "lot-san", title: "Lót sàn", why: "Dễ vệ sinh, giữ sàn xe sạch khi đi mưa", category: "Lót sàn, thảm", ownGroup: true, exclude: /taplo/i },
   { id: "phu-gam", title: "Phủ gầm", why: "Chống gỉ sét, giảm ồn từ gầm, hợp đường ngập", category: "Phủ gầm" },
-  { id: "cam-bien-ap-suat-lop", title: "Cảm biến áp suất lốp", why: "Báo non hơi, thủng lốp sớm", category: "Cảm biến áp suất lốp, bơm lốp", skipIfStandard: /áp suất lốp/i },
+  { id: "cam-bien-ap-suat-lop", title: "Cảm biến áp suất lốp", why: "Báo non hơi, thủng lốp sớm", category: "Cảm biến áp suất lốp, bơm lốp", skipIfStandard: /áp suất lốp/i, only: /áp suất lốp/i, exclude: /bơm/i },
 ];
 function phuKien(car) {
   const seats = specOf(car, "seats") ?? car.specifications.seats;
@@ -856,7 +859,9 @@ function phuKien(car) {
       else if (idea.ownGroup && ownGroup) items = categorizeGroup(ownGroup).find((cat) => cat.name === idea.category)?.items ?? [];
       else if (idea.brands) items = categorizeGroup(general.find((group) => group.name === idea.group)).map((cat) => ({ name: cat.name, price: null }));
       else for (const group of general) items.push(...(categorizeGroup(group).find((cat) => cat.name === idea.category)?.items ?? []));
-      items = items.filter((item) => !("seats" in item) || fits(item));
+      items = items
+        .filter((item) => !("seats" in item) || fits(item))
+        .filter((item) => (!idea.only || idea.only.test(item.name)) && (!idea.exclude || !idea.exclude.test(item.name)));
       if (!items.length) return null;
       return { ...idea, items, image: accessoryPhoto(car.id, idea.id) };
     })
@@ -866,8 +871,20 @@ function phuKien(car) {
   const missing = ideas.filter((idea) => !idea.image).map((idea) => `${idea.id}.jpg`);
   if (missing.length) console.log(`  Chưa có ảnh (thêm vào scripts/video-assets/phu-kien/${car.id}/): ${missing.join(", ")}`);
   const ideaScene = (idea, index) => {
-    const examples = idea.items.slice(0, 4).map((item) => clean(item.name));
-    const voice = `${index + 1}. ${idea.title}: ${lowerFirst(idea.why)}. Có các loại như ${examples.slice(0, 3).map(lowerFirst).join(", ")}.`;
+    // Ví dụ: bỏ tiền tố trùng tên gợi ý ("Cam hành trình Vietmap TS-C1L" → "Vietmap TS-C1L"), mỗi hãng một mẫu cho đa dạng,
+    // "– MMV" đọc thành "chính hãng MMV"
+    // Chỉ camera và cảm biến áp suất lốp có tên bắt đầu bằng loại + hãng, nên mới bỏ tiền tố và chọn mỗi hãng một mẫu
+    const brandLed = ["camera-hanh-trinh", "cam-bien-ap-suat-lop"].includes(idea.id);
+    const prefix = /^(Cam hành trình|Camera hành trình|Cảm biến áp suất lốp)\s+/i;
+    const named = idea.items.map((item) => clean(item.name).replace(/\s+–\s+MMV$/, " chính hãng MMV").replace(brandLed ? prefix : /^$/, "").trim());
+    const seen = new Set();
+    const diverse = brandLed ? named.filter((name) => { const brand = name.split(/[\s-]/)[0].toLowerCase(); if (seen.has(brand)) return false; seen.add(brand); return true; }) : [];
+    const examples = [...diverse, ...named]
+      .filter((name, i, list) => list.indexOf(name) === i)
+      .slice(0, 4);
+    // Tên hãng (Ntech, 3M, Vietmap...) giữ chữ hoa; tên chung ("lót sàn 5D") viết thường khi đọc giữa câu
+    const speakName = (name) => (/^[A-Z0-9]/.test(name) && !/^(Lót|Nắp|Thanh|Ty|Khung|Phủ|Ốp|Thảm)/.test(name) ? name : lowerFirst(name));
+    const voice = `${index + 1}. ${idea.title}: ${lowerFirst(idea.why)}. Có các loại như ${examples.slice(0, 3).map(speakName).join(", ")}.`;
     if (idea.image) {
       return {
         theme: "dark", backdrop: photo(idea.image), contentTop: 1000, minSpeak: 4, voice,
