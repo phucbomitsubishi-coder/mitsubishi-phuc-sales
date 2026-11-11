@@ -392,6 +392,10 @@ function renderHtml(scenes, timings, total, extraCss = "", skin = skins[0]) {
   .row i { flex: none; max-width: 420px; padding-right: 20px; }
   .dark .row { border-color: #4b4b4b; }
   .dark .row i { color: #d4d4d4; }
+  /* Trên nền tối dùng màu nhấn sáng (--accent-2): màu nhấn đậm của Tối giản (xanh) và Báo chí (đỏ) chìm vào nền tối */
+  .dark .row b, .dark .price, .dark .kicker, .dark h2 em, .dark .contact span, .dark .brand small, .dark .spec.diff .vals b { color: var(--accent-2); }
+  .dark .bullets li::before { background: var(--accent-2); }
+  .dark .box.black { background: rgba(255,255,255,.14); color: #fff; }
   .table { margin-top: 10px; }
   .pair { width: 900px; display: grid; grid-template-columns: 1fr 230px 1fr; align-items: baseline; text-align: center; margin-top: 18px; }
   .pair b { font-size: 50px; font-weight: 900; letter-spacing: -0.5px; }
