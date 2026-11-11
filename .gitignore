@@ -42,3 +42,7 @@ next-env.d.ts
 
 # script backups
 scripts/*.backup.mjs
+
+# noi dung video (reels)
+/noi-dung/**/node_modules
+/noi-dung/**/frame-*.jpg

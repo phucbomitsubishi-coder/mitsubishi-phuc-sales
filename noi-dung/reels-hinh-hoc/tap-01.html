@@ -1,0 +1,139 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:R;src:url(Roboto-Black.ttf);font-weight:900}
+@font-face{font-family:R;src:url(Roboto-Medium.ttf);font-weight:500}
+html,body{margin:0;width:1080px;height:1920px;overflow:hidden;background:#05060f;font-family:R}
+#bg{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 44%,#1b1f4d 0%,#0a0b22 45%,#04050d 80%)}
+canvas{position:absolute;inset:0}
+.t{position:absolute;left:90px;right:150px;text-align:center;color:#fff;will-change:transform,opacity}
+#tag{top:230px;font-weight:900;font-size:34px;letter-spacing:8px;color:#4de8ff}
+#hook{top:300px;font-weight:900;font-size:84px;line-height:1.05;text-shadow:0 0 30px rgba(77,232,255,.35)}
+#hook b{color:#ffcf4d}
+#sub{top:520px;font-weight:500;font-size:40px;color:#c9cdf0}
+#cd{top:1230px;height:250px}
+#ring{position:absolute;left:50%;top:0;transform:translateX(-50%)}
+#num{position:absolute;left:0;right:0;top:40px;font-weight:900;font-size:150px;line-height:170px}
+#ans{top:1215px;}
+#big{font-weight:900;font-size:150px;line-height:1;color:#ffcf4d;text-shadow:0 0 40px rgba(255,207,77,.6)}
+#name{font-weight:900;font-size:56px;margin-top:10px}
+#meta{font-weight:500;font-size:40px;color:#c9cdf0;margin-top:8px}
+#end{top:525px;font-weight:500;font-size:36px;color:#4de8ff}
+</style>
+<script type="importmap">{"imports":{"three":"./node_modules/three/build/three.module.js","three/addons/":"./node_modules/three/examples/jsm/"}}</script>
+</head><body>
+<div id="bg"></div>
+<div class="t" id="tag">CÂU ĐỐ HÌNH HỌC · TẬP 1</div>
+<div class="t" id="hook">KHỐI NÀY CÓ<br><b>BAO NHIÊU MẶT?</b></div>
+<div class="t" id="hint" style="top:525px;font-weight:900;font-size:42px;color:#ffcf4d">Gợi ý: mỗi mặt là một tam giác đều</div>
+<div class="t" id="sub">Bình luận đáp án trước khi hết giờ</div>
+<div class="t" id="cd"><svg id="ring" width="250" height="250" viewBox="0 0 250 250">
+<circle cx="125" cy="125" r="110" fill="none" stroke="rgba(255,255,255,.15)" stroke-width="12"/>
+<circle id="arc" cx="125" cy="125" r="110" fill="none" stroke="#4de8ff" stroke-width="12" stroke-linecap="round" transform="rotate(-90 125 125)" stroke-dasharray="691" stroke-dashoffset="0"/></svg>
+<div id="num">5</div></div>
+<div class="t" id="ans"><div id="big">20 MẶT</div><div id="name">Nhị thập diện đều</div><div id="meta">12 đỉnh · 30 cạnh · mỗi mặt là tam giác đều</div></div>
+<div class="t" id="end">Bạn đoán đúng không? Theo dõi để xem Tập 2</div>
+<script type="module">
+import * as THREE from 'three';
+import {EffectComposer} from 'three/addons/postprocessing/EffectComposer.js';
+import {RenderPass} from 'three/addons/postprocessing/RenderPass.js';
+import {UnrealBloomPass} from 'three/addons/postprocessing/UnrealBloomPass.js';
+import {OutputPass} from 'three/addons/postprocessing/OutputPass.js';
+import {LineSegments2} from 'three/addons/lines/LineSegments2.js';
+import {LineSegmentsGeometry} from 'three/addons/lines/LineSegmentsGeometry.js';
+import {LineMaterial} from 'three/addons/lines/LineMaterial.js';
+
+const W=1080,H=1920;
+const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true,preserveDrawingBuffer:true});
+renderer.setSize(W,H);renderer.setClearColor(0,0);document.body.insertBefore(renderer.domElement,document.getElementById('tag'));
+const scene=new THREE.Scene();
+const cam=new THREE.PerspectiveCamera(32,W/H,0.1,100);cam.position.set(0,0,9);
+const visH=2*9*Math.tan(THREE.MathUtils.degToRad(16));
+scene.add(new THREE.AmbientLight(0x8890ff,0.6));
+const dl=new THREE.DirectionalLight(0xffffff,2.2);dl.position.set(3,4,5);scene.add(dl);
+const pivot=new THREE.Group();pivot.position.y=0.03*visH;scene.add(pivot);
+const solid=new THREE.Group();pivot.add(solid);
+
+const R=0.85;
+const geo=new THREE.IcosahedronGeometry(R,0);const pos=geo.attributes.position;
+const faces=[];
+for(let f=0;f<pos.count/3;f++){
+  const g=new THREE.BufferGeometry();const arr=[];
+  for(let k=0;k<3;k++){arr.push(pos.getX(f*3+k),pos.getY(f*3+k),pos.getZ(f*3+k));}
+  g.setAttribute('position',new THREE.Float32BufferAttribute(arr,3));g.computeVertexNormals();
+  const m=new THREE.MeshStandardMaterial({color:0x1a2a6a,emissive:0xff3fa4,emissiveIntensity:0,metalness:.3,roughness:.35,transparent:true,opacity:.42,side:THREE.DoubleSide,depthWrite:false});
+  const mesh=new THREE.Mesh(g,m);solid.add(mesh);
+  const c=new THREE.Vector3(arr[0]+arr[3]+arr[6],arr[1]+arr[4]+arr[7],arr[2]+arr[5]+arr[8]).divideScalar(3);
+  faces.push({mesh,m,c});
+}
+// reveal order: sweep top to bottom, around
+faces.sort((a,b)=>(Math.round(b.c.y*3)-Math.round(a.c.y*3))||(Math.atan2(a.c.z,a.c.x)-Math.atan2(b.c.z,b.c.x)));
+const edges=new THREE.EdgesGeometry(geo);
+const lg=new LineSegmentsGeometry().setPositions(edges.attributes.position.array);
+const lm=new LineMaterial({color:0x4de8ff,linewidth:5,resolution:new THREE.Vector2(W,H)});
+solid.add(new LineSegments2(lg,lm));
+const vg=new THREE.SphereGeometry(0.035,16,16),vm=new THREE.MeshBasicMaterial({color:0xcfffff});
+const seen=new Set();
+for(let i=0;i<pos.count;i++){const k=[pos.getX(i),pos.getY(i),pos.getZ(i)].map(v=>v.toFixed(3)).join();if(seen.has(k))continue;seen.add(k);const s=new THREE.Mesh(vg,vm);s.position.set(pos.getX(i),pos.getY(i),pos.getZ(i));solid.add(s);}
+// starfield
+const sp=[];for(let i=0;i<400;i++){sp.push((Math.random()-.5)*30,(Math.random()-.5)*50,-10-Math.random()*20);}
+const sg=new THREE.BufferGeometry();sg.setAttribute('position',new THREE.Float32BufferAttribute(sp,3));
+const stars=new THREE.Points(sg,new THREE.PointsMaterial({color:0x8fa0ff,size:0.08,transparent:true,opacity:.6}));scene.add(stars);
+
+const comp=new EffectComposer(renderer);comp.setSize(W,H);
+comp.addPass(new RenderPass(scene,cam));
+const bloom=new UnrealBloomPass(new THREE.Vector2(W,H),0.6,0.4,0.35);comp.addPass(bloom);
+comp.addPass(new OutputPass());
+
+const $=id=>document.getElementById(id);
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const ease=x=>{x=clamp(x);return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2};
+const pop=x=>{x=clamp(x);const c=1.7;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2)};
+function show(el,o,s=1,dy=0){el.style.opacity=o;el.style.transform=`translateY(${dy}px) scale(${s})`;}
+
+const CD0=1.2,CD1=9.2,RV0=9.6,RV1=12.0;
+window.renderFrame=(t)=>{
+  // rotation: fast then slow at reveal
+  const slow=ease((t-CD1)/1.2);
+  const ang=t<CD1?t*0.5:CD1*0.5+(t-CD1)*(0.5-0.2*slow);
+  solid.rotation.set(0.45+Math.sin(t*0.6)*0.25,ang,0.1);
+  const sIn=pop(t/0.6);solid.scale.setScalar(Math.max(0.001,sIn));
+  stars.rotation.z=t*0.02;
+  // faces
+  const per=(RV1-RV0)/faces.length;let lit=0;
+  faces.forEach((f,i)=>{const ti=RV0+i*per;const k=clamp((t-ti)/0.25);if(t>=ti)lit=i+1;
+    const flash=k<1?k:Math.max(0,1-(t-ti-0.25)/0.6)*0.6;
+    f.m.emissiveIntensity=k*0.45+flash*0.7+(t>RV1+0.3?0.12*Math.sin((t-RV1)*5)+0.08:0);
+    f.m.opacity=0.42+0.45*k;});
+  lm.color.set(t>=RV0?0xffffff:0x4de8ff);
+  bloom.strength=0.6+(t>RV1?0.3*Math.max(0,1-(t-RV1)/0.8):0);
+  // overlays
+  show($('tag'),clamp(t/0.3),1,(1-ease(t/0.4))*-30);
+  const hIn=pop(t/0.5);
+  show($('hook'),clamp(t/0.2),hIn);
+  const H0=CD0+4;show($('sub'),clamp((t-0.5)/0.4)*(t<H0?1:clamp(1-(t-H0)/0.3)),1);show($('hint'),clamp((t-H0-0.2)/0.3)*(t<RV1?1:clamp(1-(t-RV1)/0.3)),pop((t-H0-0.2)/0.4));
+  // countdown
+  const inCd=t>=CD0-0.3&&t<RV0;
+  let n=Math.ceil(CD1-t);n=clamp(n,1,8);
+  const local=(t-CD0)%1;
+  $('num').textContent=t<CD1?n:'HẾT GIỜ!';
+  $('num').style.fontSize=t<CD1?'150px':'92px';
+  $('num').style.color=t<CD1?(n<=3?'#ff4d6d':'#fff'):'#ff4d6d';
+  $('arc').setAttribute('stroke',n<=3?'#ff4d6d':'#4de8ff');
+  $('arc').style.strokeDashoffset=691*clamp((t-CD0)/(CD1-CD0));
+  $('ring').style.opacity=t<CD1?1:0;
+  const cdPulse=t<CD1&&t>CD0?1+0.25*Math.max(0,1-local/0.25):(t>=CD1?pop((t-CD1)/0.3):1);
+  show($('cd'),inCd?clamp((t-(CD0-0.3))/0.3)*(t<RV0-0.2?1:clamp((RV0-t)/0.2)):0,1);
+  $('num').style.transform=`scale(${cdPulse})`;
+  // answer counter
+  const a=$('ans');
+  if(t>=RV0){a.style.opacity=1;
+    if(t<RV1){$('big').textContent=lit+' MẶT';$('big').style.transform=`scale(${1+0.08*((t-RV0)%per<0.08?1:0)})`;$('name').style.opacity=0;$('meta').style.opacity=0;}
+    else{$('big').textContent='20 MẶT';$('big').style.transform=`scale(${pop((t-RV1)/0.4)*1})`;$('name').style.opacity=clamp((t-RV1-0.2)/0.3);$('meta').style.opacity=clamp((t-RV1-0.5)/0.3);}
+  } else a.style.opacity=0;
+  // hook change
+  if(t>=RV1){$('hook').innerHTML='ĐÁP ÁN:<br><b>20 MẶT</b>';show($('hook'),1,pop((t-RV1)/0.4));}
+  show($('end'),clamp((t-RV1-1)/0.4),1,(1-ease((t-RV1-1)/0.4))*20);
+  comp.render();
+};
+window.ready=true;
+</script></body></html>

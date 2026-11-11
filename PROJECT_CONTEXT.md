@@ -78,6 +78,7 @@ src/
     sitemap.ts, robots.ts # Sitemap được sinh từ cars/usedCars/news và danh sách trang tĩnh
     not-found.tsx         # Trang 404 tiếng Việt (có header, nút về trang chủ, gọi, Zalo)
     favicon.ico, icon.svg, apple-icon.png  # Icon logo 3 hình thoi Mitsubishi (cắt từ logo-black.svg)
+noi-dung/reels-hinh-hoc/   # Video Reels hình học 3D (Three.js + Playwright → MP4), KHÔNG thuộc website; xem README trong đó
 scripts/                  # Script Node ESM tương tác bằng readline, sửa trực tiếp file trong src/data
 public/images/
   cars/<id>/ , cars/<id>.png   # Ảnh xe mới
