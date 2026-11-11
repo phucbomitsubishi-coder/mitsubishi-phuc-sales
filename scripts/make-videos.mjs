@@ -47,7 +47,8 @@ const shortOf = (car) => car.name.replace(/^Mitsubishi /, "");
 const num1 = (value) => (value / 1_000_000).toLocaleString("vi-VN", { maximumFractionDigits: 1 });
 // Số nhỏ hơn 1 triệu ghi đủ số đồng ("350.000 đồng" thay vì "0,35 triệu")
 const money = (value) => (value < 1_000_000 ? `${Math.round(value).toLocaleString("vi-VN")} đồng` : trieu(value));
-const lowerFirst = (text) => text.charAt(0).toLowerCase() + text.slice(1);
+// Giữ nguyên chữ viết tắt đầu câu (AT, CVT): "aT" làm giọng AI đọc sai
+const lowerFirst = (text) => (/^\p{Lu}{2}/u.test(text) ? text : text.charAt(0).toLowerCase() + text.slice(1));
 const percent = (value) => `${(value * 100).toLocaleString("vi-VN", { maximumFractionDigits: 1 })}%`;
 const photo = (src, position = "center") =>
   `<div class="photo" data-at="0" data-fx="zoom" style="background-image:url('${src}');background-position:${position}"></div>`;
