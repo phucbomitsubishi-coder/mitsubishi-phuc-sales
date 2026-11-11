@@ -8,6 +8,7 @@ import path from "node:path";
 import { spawn, spawnSync } from "node:child_process";
 import { register } from "node:module";
 import { fileURLToPath, pathToFileURL } from "node:url";
+import { readNumbers } from "./doc-so.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 // Cho phép import thẳng file trong src/ có dùng alias "@/..." của Next (onRoadPrice.ts, usedCarReview.ts...),
@@ -174,12 +175,13 @@ const pronunciations = [
   [/\bVAT\b/g, "vát"],
   [/\bTNDS\b/g, "trách nhiệm dân sự"],
   [/\bTP\.? ?HCM\b/g, "thành phố Hồ Chí Minh"],
-  [/(\d)\s?mm\b/g, "$1 mi li mét"],
   [/▲/g, "tam giác"],
   [/số tự động: L, 1, 2/g, "số tự động: e lờ, một, hai"],
 ];
-const spokenText = (text) => pronunciations.reduce((result, [pattern, sound]) => result.replace(pattern, sound), text);
-async function speakFpt(text, file) {
+// Số và đơn vị đọc thành chữ (doc-so.mjs) vì FPT đọc số ngọng, sai (anh Phúc nghe 11/11/2026)
+const spokenText = (text) => readNumbers(pronunciations.reduce((result, [pattern, sound]) => result.replace(pattern, sound), text));
+const PAUSE = 0.3; // nghỉ lấy hơi giữa các câu (giây)
+async function ttsPiece(text, file) {
   const response = await fetch(TTS_URL, {
     method: "POST",
     headers: { Authorization: `Bearer ${process.env.FPT_API_KEY}`, "Content-Type": "application/json" },
@@ -187,12 +189,24 @@ async function speakFpt(text, file) {
   });
   const body = Buffer.from(await response.arrayBuffer());
   if (!response.ok) throw new Error(`FPT ${response.status}: ${body.toString().slice(0, 300)}`);
-  // FPT trả WAV nhỏ tiếng; chuẩn âm lượng -16 LUFS (mức video mạng xã hội) rồi đổi sang MP3
-  const raw = `${file}.wav`;
-  fs.writeFileSync(raw, body);
-  const result = spawnSync(ffmpeg, ["-y", "-v", "error", "-i", raw, "-af", "loudnorm=I=-16:TP=-1.5:LRA=11", "-ar", "44100", "-codec:a", "libmp3lame", "-q:a", "3", file]);
-  fs.rmSync(raw, { force: true });
-  if (result.status !== 0) throw new Error(`ffmpeg không đổi được giọng sang MP3: ${result.stderr}`);
+  fs.writeFileSync(file, body);
+}
+async function speakFpt(text, file) {
+  // Đọc TỪNG CÂU rồi ghép, nghỉ PAUSE giây giữa các câu: đọc cả đoạn một hơi nghe hụt hơi
+  const sentences = text.split(/(?<=[.?!…])\s+/).map((part) => part.trim()).filter(Boolean);
+  const pieces = [];
+  for (const [i, sentence] of sentences.entries()) {
+    const piece = `${file}.${i}.wav`;
+    await ttsPiece(sentence, piece);
+    pieces.push(piece);
+  }
+  // Cắt khoảng lặng đầu/cuối mỗi câu, thêm nghỉ đều, ghép, chuẩn âm lượng -16 LUFS (mức video mạng xã hội), đổi sang MP3
+  const trim = "silenceremove=start_periods=1:start_threshold=-45dB,areverse,silenceremove=start_periods=1:start_threshold=-45dB,areverse";
+  const filters = pieces.map((_, i) => `[${i}:a]aresample=44100,${trim}${i < pieces.length - 1 ? `,apad=pad_dur=${PAUSE}` : ""}[p${i}]`);
+  const graph = `${filters.join(";")};${pieces.map((_, i) => `[p${i}]`).join("")}concat=n=${pieces.length}:v=0:a=1,loudnorm=I=-16:TP=-1.5:LRA=11[out]`;
+  const result = spawnSync(ffmpeg, ["-y", "-v", "error", ...pieces.flatMap((piece) => ["-i", piece]), "-filter_complex", graph, "-map", "[out]", "-ar", "44100", "-codec:a", "libmp3lame", "-q:a", "3", file]);
+  for (const piece of pieces) fs.rmSync(piece, { force: true });
+  if (result.status !== 0) throw new Error(`ffmpeg không ghép được giọng: ${result.stderr}`);
 }
 async function makeVoices(scenes, voiceDir) {
   if (!process.env.FPT_API_KEY) {
@@ -202,7 +216,7 @@ async function makeVoices(scenes, voiceDir) {
   for (const [index, scene] of scenes.entries()) {
     const text = spokenText((scene.speak ?? scene.voice).trim());
     const stampFile = path.join(voiceDir, `${index + 1}.txt`);
-    const stamp = `${ttsVoice}|${ttsSpeed}|${text}`;
+    const stamp = `v2|${ttsVoice}|${ttsSpeed}|${text}`; // v2: đọc từng câu + số thành chữ
     const existing = voiceFile(voiceDir, index);
     if (existing && (!fs.existsSync(stampFile) || fs.readFileSync(stampFile, "utf8") === stamp)) continue;
     if (existing) fs.rmSync(existing);
