@@ -193,7 +193,13 @@ async function ttsPiece(text, file) {
 }
 async function speakFpt(text, file) {
   // Đọc TỪNG CÂU rồi ghép, nghỉ PAUSE giây giữa các câu: đọc cả đoạn một hơi nghe hụt hơi
-  const sentences = text.split(/(?<=[.?!…])\s+/).map((part) => part.trim()).filter(Boolean);
+  // Câu quá ngắn (dưới 4 tiếng, vd "Một.") ghép vào câu sau: đọc riêng bị ngắn, dễ mất tiếng
+  const sentences = [];
+  for (const part of text.split(/(?<=[.?!…])\s+/).map((item) => item.trim()).filter(Boolean)) {
+    const last = sentences.at(-1);
+    if (last && last.split(/\s+/).length < 4) sentences[sentences.length - 1] = `${last.replace(/[.…]$/, ",")} ${part}`;
+    else sentences.push(part);
+  }
   const pieces = [];
   for (const [i, sentence] of sentences.entries()) {
     const piece = `${file}.${i}.wav`;
@@ -201,7 +207,7 @@ async function speakFpt(text, file) {
     pieces.push(piece);
   }
   // Cắt khoảng lặng đầu/cuối mỗi câu, thêm nghỉ đều, ghép, chuẩn âm lượng -16 LUFS (mức video mạng xã hội), đổi sang MP3
-  const trim = "silenceremove=start_periods=1:start_threshold=-45dB,areverse,silenceremove=start_periods=1:start_threshold=-45dB,areverse";
+  const trim = "silenceremove=start_periods=1:start_threshold=-50dB:start_silence=0.05,areverse,silenceremove=start_periods=1:start_threshold=-50dB:start_silence=0.08,areverse";
   const filters = pieces.map((_, i) => `[${i}:a]aresample=44100,${trim}${i < pieces.length - 1 ? `,apad=pad_dur=${PAUSE}` : ""}[p${i}]`);
   const graph = `${filters.join(";")};${pieces.map((_, i) => `[p${i}]`).join("")}concat=n=${pieces.length}:v=0:a=1,loudnorm=I=-16:TP=-1.5:LRA=11[out]`;
   const result = spawnSync(ffmpeg, ["-y", "-v", "error", ...pieces.flatMap((piece) => ["-i", piece]), "-filter_complex", graph, "-map", "[out]", "-ar", "44100", "-codec:a", "libmp3lame", "-q:a", "3", file]);
@@ -216,7 +222,7 @@ async function makeVoices(scenes, voiceDir) {
   for (const [index, scene] of scenes.entries()) {
     const text = spokenText((scene.speak ?? scene.voice).trim());
     const stampFile = path.join(voiceDir, `${index + 1}.txt`);
-    const stamp = `v2|${ttsVoice}|${ttsSpeed}|${text}`; // v2: đọc từng câu + số thành chữ
+    const stamp = `v3|${ttsVoice}|${ttsSpeed}|${text}`; // v3: đọc từng câu (câu ngắn ghép câu sau) + số thành chữ
     const existing = voiceFile(voiceDir, index);
     if (existing && (!fs.existsSync(stampFile) || fs.readFileSync(stampFile, "utf8") === stamp)) continue;
     if (existing) fs.rmSync(existing);

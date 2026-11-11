@@ -1392,7 +1392,8 @@ function kienThucChung(id) {
       theme: i % 2 ? "dark" : "light",
       minSpeak: 4,
       // Ý cuối mở bằng "Cuối cùng" để giữ người xem tới hết
-      voice: `${i === ep.points.length - 1 ? "Và cuối cùng" : i + 1}. ${point.t}. ${point.d}`,
+      // "Thứ nhất, …" đọc liền với ý: số "1." đứng riêng giọng AI đọc quá ngắn, nghe mất (anh Phúc 11/11/2026)
+      voice: `${i === ep.points.length - 1 ? "Và cuối cùng" : `Thứ ${["nhất", "hai", "ba", "tư", "năm", "sáu"][i]}`}, ${lowerFirst(point.t)}. ${point.d}`,
       contentTop: 220,
       // Hình minh họa tự vẽ (minh-hoa.mjs): thiếu thì cảnh vẫn hiện chữ như cũ
       html: `<p class="ptnum" data-at="0.02">${i + 1}/${ep.points.length}</p>
