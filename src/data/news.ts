@@ -43,6 +43,167 @@ export type NewsArticle = {
 
 export const newsArticles: NewsArticle[] = [
   {
+    id: "news-1794380000001",
+
+
+    title: "Thu cũ đổi mới xe Mitsubishi đến 31/12/2026: hỗ trợ 5 đến 20 triệu, trừ thẳng vào giá xe mới",
+
+    seoTitle: "Thu cũ đổi mới Mitsubishi: hỗ trợ đến 20 triệu (đến 31/12)",
+
+    slug: "thu-cu-doi-moi-xe-mitsubishi-ho-tro-den-20-trieu",
+
+    category: "Tư vấn mua xe",
+
+    excerpt:
+      "Từ 01/11 đến 31/12/2026, đổi ô tô cũ lấy xe Mitsubishi mới được hỗ trợ 5–20 triệu đồng, trừ trực tiếp vào giá xe mới. Mức hỗ trợ từng trường hợp, cách nhận và những điểm nên hỏi trước khi ký hợp đồng.",
+
+    publishedAt: "2026-11-12",
+
+    image: "/images/cars/destinator/showroom/feature-exterior.jpg",
+
+    featured: false,
+
+    content: [
+      {
+        heading: "Chương trình áp dụng đến hết năm 2026",
+        paragraphs: [
+          "Mitsubishi Motors Việt Nam (MMV) triển khai chương trình Thu cũ – Đổi mới từ 01/11/2026 đến 31/12/2026 tại các nhà phân phối ủy quyền trên toàn quốc có kinh doanh xe qua sử dụng chính hãng. Khách đổi một chiếc ô tô đã qua sử dụng để mua xe Mitsubishi mới được hỗ trợ một khoản tiền, trừ trực tiếp vào giá mua xe mới.",
+          "Xe cũ không bắt buộc là xe Mitsubishi. Đang đi xe hãng khác vẫn được nhận hỗ trợ, chỉ là mức thấp hơn.",
+        ],
+      },
+      {
+        heading: "Mức hỗ trợ theo từng trường hợp",
+        paragraphs: [
+          "[TABLE]\nXe cũ đang đi | Đổi sang Destinator | Đổi sang dòng Mitsubishi khác\nXe Mitsubishi | 20 triệu đồng | 10 triệu đồng\nXe hãng khác | 15 triệu đồng | 5 triệu đồng\n[/TABLE]",
+          "Ví dụ: đang đi Xpander đời cũ, đổi lên Destinator thì được hỗ trợ 20 triệu đồng. Đang đi một mẫu sedan của hãng khác, đổi lên Xforce hoặc Xpander thì được hỗ trợ 5 triệu đồng.",
+          "Đổi sang Destinator có mức hỗ trợ cao nhất, và khách đang đi xe Mitsubishi nhận nhiều hơn khách đi xe hãng khác 5 triệu đồng.",
+        ],
+      },
+      {
+        heading: "Cách nhận hỗ trợ",
+        paragraphs: [
+          "Nhà phân phối kiểm tra và định giá xe cũ, thu mua xe cũ và bàn giao xe mới tại cùng một địa điểm. Tiền thu xe cũ và khoản hỗ trợ đều được cấn trừ vào khoản thanh toán xe mới, phần còn lại có thể trả góp.",
+          "Mitsubishi Moveo New City nằm trong hệ thống xe qua sử dụng chính hãng MMV UCAR, nên thẩm định xe cũ miễn phí và làm trọn thủ tục bán cũ, mua mới tại showroom. Quy trình chi tiết và giấy tờ cần chuẩn bị có ở trang Thu cũ đổi mới trên website.",
+        ],
+        images: [
+          {
+            src: "/images/cars/destinator/showroom/feature-interior.jpg",
+            alt: "Nội thất Mitsubishi Destinator, mẫu xe có mức hỗ trợ thu cũ đổi mới cao nhất",
+          },
+        ],
+      },
+      {
+        heading: "Nên hỏi rõ trước khi ký hợp đồng",
+        paragraphs: [
+          "Thông báo của MMV chưa nêu chi tiết điều kiện giấy tờ xe cũ, yêu cầu về người đứng tên xe, và khoản hỗ trợ này có được áp dụng cùng ưu đãi tháng (ví dụ ưu đãi tương đương lệ phí trước bạ) hay không. Các điểm này do nhà phân phối hướng dẫn.",
+          "Trước khi ký hợp đồng, bạn nên nhờ người tư vấn ghi rõ trong báo giá: giá thu xe cũ, khoản hỗ trợ thu cũ đổi mới, ưu đãi tháng của xe mới và số tiền còn phải trả. Phúc luôn gửi báo giá đầy đủ các dòng này để bạn so sánh.",
+        ],
+      },
+      {
+        heading: "Khách đang dùng xe Mitsubishi có thể nhận thêm quà",
+        paragraphs: [
+          "Ngoài khoản hỗ trợ trên, người đang hoặc đã từng sở hữu xe Mitsubishi có thể nhận thêm phiếu dịch vụ 3 triệu đồng từ chương trình \"Nâng cấp hành trình, Thăng hạng ưu đãi\" của MMV, nếu đăng ký trên ứng dụng Mitsubishi Connect+ trước khi mua xe mới (hoặc không quá 180 ngày sau khi mua) và mua trong vòng 6 tháng kể từ khi đăng ký. Phiếu không quy đổi thành tiền mặt.",
+          "Muốn biết xe của mình được thu khoảng bao nhiêu, bạn gửi ảnh xe và số km qua Zalo hoặc điền form ở trang Thu cũ đổi mới. Phúc hẹn lịch thẩm định miễn phí tại showroom Mitsubishi Moveo New City hoặc nơi bạn tiện.",
+        ],
+      },
+    ],
+
+    source: {
+      name: "Mitsubishi Motors Việt Nam",
+      url: "https://www.mitsubishi-motors.com.vn/tin-tuc/chuong-trinh-thu-cu-8211-doi-moi-xe-mitsubishi-uu-dai-len-den-20-trieu-dong-n154629.html",
+    },
+
+    originalContent: true,
+  },
+  {
+    id: "news-1794380000000",
+
+
+    title: "Mitsubishi Xforce có hợp vừa đi làm vừa chở gia đình? Chọn bản nào và khi nào không nên mua",
+
+    seoTitle: "Xforce có hợp đi làm và chở gia đình? Nên chọn bản nào",
+
+    slug: "mitsubishi-xforce-co-hop-di-lam-va-cho-gia-dinh",
+
+    category: "Tư vấn mua xe",
+
+    excerpt:
+      "Xforce hợp với người đi làm trong phố và gia đình 2–5 người hay đi chơi cuối tuần. So sánh GLX, Luxury, Ultimate theo nhu cầu, mức tiêu hao nhiên liệu theo MMV và những trường hợp nên chọn xe khác.",
+
+    publishedAt: "2026-11-12",
+
+    image: "/images/cars/xforce/showroom/feature-highlight.jpg",
+
+    featured: false,
+
+    content: [
+      {
+        heading: "Câu trả lời ngắn",
+        paragraphs: [
+          "Có, nếu bạn chủ yếu đi làm trong phố và gia đình có 2–5 người. Mitsubishi Xforce là SUV 5 chỗ cỡ nhỏ, gọn để len lỏi giờ cao điểm nhưng vẫn có gầm cao và hàng ghế sau rộng cho chuyến đi chơi cuối tuần.",
+          "Xforce không hợp nếu nhà bạn thường xuyên đi 6–7 người, hay chở nhiều đồ cồng kềnh, hoặc cần xe hai cầu để đi đường xấu. Phần cuối bài có gợi ý xe khác cho các trường hợp này.",
+        ],
+      },
+      {
+        heading: "Đi làm trong phố: gọn, gầm cao, có Auto Hold",
+        paragraphs: [
+          "Xe dài 4.390 mm, rộng 1.810 mm, bán kính quay vòng tối thiểu 5,2 m, nên quay đầu và lùi chuồng không khó. Khoảng sáng gầm 219 mm ở bản GLX và 222 mm ở bản Luxury, Ultimate, đủ để qua gờ cao hay đoạn đường ngập nhẹ sau mưa.",
+          "Cả 3 phiên bản đều có phanh tay điện tử và Auto Hold: dừng đèn đỏ hay kẹt xe chỉ cần đạp phanh một lần rồi thả chân. Cả 3 bản đều có cảm biến lùi, đèn pha và gạt mưa tự động. Bản GLX và Luxury có camera lùi, bản Ultimate có camera toàn cảnh 360 độ.",
+          "Động cơ xăng 1.5L MIVEC 105 PS, 141 Nm, hộp số vô cấp CVT, bình xăng 42 lít. Theo MMV, mức tiêu hao nhiên liệu theo thử nghiệm tiêu chuẩn là 7,70 lít/100 km trong đô thị, 5,50 lít ngoài đô thị và 6,30 lít hỗn hợp. Số thực tế còn tùy mật độ xe, tải trọng, điều hòa và cách lái.",
+        ],
+      },
+      {
+        heading: "Chở gia đình: hàng ghế sau là điểm cộng",
+        paragraphs: [
+          "Chiều dài cơ sở 2.650 mm cho hàng ghế sau rộng so với xe cùng cỡ. Lưng ghế sau ngả được 8 nấc, có bệ tỳ tay với khay để cốc, cửa gió điều hòa riêng, cổng sạc USB Type-A và Type-C, cùng điểm neo ISOFIX để lắp ghế trẻ em.",
+          "Hàng ghế sau gập theo tỷ lệ 40:20:40: gập phần giữa là chở được đồ dài mà vẫn còn 2 chỗ ngồi hai bên. Nếu nhà có con nhỏ, bạn nên mang ghế trẻ em khi đi xem xe để thử lắp thực tế.",
+        ],
+        images: [
+          {
+            src: "/images/cars/xforce/showroom/feature-interior.jpg",
+            alt: "Nội thất và hàng ghế Mitsubishi Xforce",
+          },
+        ],
+      },
+      {
+        heading: "Chọn phiên bản theo nhu cầu",
+        paragraphs: [
+          "[TABLE]\nPhiên bản | Giá niêm yết | Hợp với ai | Trang bị đáng chú ý\nGLX | 605 triệu đồng | Ngân sách vừa phải, chủ yếu đi phố | 4 túi khí, màn hình 8 inch, camera lùi\nLuxury | 665 triệu đồng | Đa số gia đình | 6 túi khí, màn hình 12,3 inch, ghế lái chỉnh điện, cảnh báo điểm mù (BSW), cảnh báo phương tiện cắt ngang khi lùi (RCTA), cảm biến áp suất lốp, 4 chế độ lái\nUltimate | 720 triệu đồng | Hay đi cao tốc, đi xa | Thêm kiểm soát hành trình thích ứng (ACC), cảnh báo và giảm thiểu va chạm phía trước (FCM), camera 360 độ, âm thanh Yamaha 8 loa, sạc không dây, cốp điện rảnh tay\n[/TABLE]",
+          "Theo kinh nghiệm tư vấn của Phúc, bản Luxury là lựa chọn cân bằng nhất cho gia đình: chênh 60 triệu so với GLX nhưng có thêm 2 túi khí, màn hình lớn và các tính năng cảnh báo hữu ích khi đi phố đông. Bản Ultimate đáng tiền nếu bạn thường xuyên chạy cao tốc, vì ACC giúp đỡ mỏi chân trên đường dài.",
+          "Các hệ thống hỗ trợ lái không thay thế được sự quan sát của người lái. Camera và radar có thể kém chính xác khi mưa lớn hoặc kính, cảm biến bị bẩn.",
+        ],
+        images: [
+          {
+            src: "/images/cars/xforce/showroom/feature-safety.jpg",
+            alt: "Công nghệ an toàn trên Mitsubishi Xforce",
+          },
+        ],
+      },
+      {
+        heading: "Khi nào nên chọn xe khác",
+        paragraphs: [
+          "Thường xuyên chở 6–7 người: nên xem Xpander hoặc Destinator, hai mẫu 7 chỗ của Mitsubishi.",
+          "Hay chở nhiều hành lý cồng kềnh, hoặc thường đi đèo dốc dài khi xe chở đủ người và đồ: động cơ 1.5L của Xforce đủ cho nhu cầu hằng ngày nhưng không dư sức khi cần vượt xe ở tải nặng. Nên lái thử đúng cung đường bạn hay đi trước khi quyết định.",
+          "Cần đi đường rừng, bùn sâu, đường ngập nặng: Xforce dẫn động cầu trước, không phải xe hai cầu. Khi đó nên cân nhắc xe có dẫn động hai cầu, như các bản 4WD của Triton.",
+        ],
+      },
+      {
+        heading: "Giá và ưu đãi tháng 11/2026",
+        paragraphs: [
+          "Giá niêm yết đã gồm VAT: GLX 605 triệu, Luxury 665 triệu, Ultimate 720 triệu đồng. Trong tháng 11/2026, MMV có ưu đãi tương đương 100% lệ phí trước bạ cho cả 3 phiên bản (khoảng 60–72 triệu đồng tùy bản), trừ trực tiếp vào giá xe khi ký hợp đồng.",
+          "Giá lăn bánh từng phiên bản xem ở trang xe Xforce hoặc bảng giá xe Mitsubishi. Phúc có thể mang Xforce tới tận nhà để cả nhà ngồi thử, hoặc hẹn bạn tại showroom Mitsubishi Moveo New City. Đăng ký lái thử hoặc nhận báo giá lăn bánh ngay trên website.",
+        ],
+      },
+    ],
+
+    source: {
+      name: "Mitsubishi Motors Việt Nam",
+      url: "https://www.mitsubishi-motors.com.vn/tin-tuc/mitsubishi-xforce-co-phu-hop-vua-di-lam-vua-phuc-vu-gia-dinh-khong-n154636.html",
+    },
+
+    originalContent: true,
+  },
+  {
     id: "news-1793250000000",
 
     title: "Mitsubishi Xpander có mấy chỗ? Cách xếp ghế cho gia đình 4 đến 7 người",

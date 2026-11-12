@@ -7,10 +7,22 @@ import TradeInForm from "@/components/TradeInForm";
 import { createPageMetadata } from "@/lib/metadata";
 import { siteConfig } from "@/config/site";
 
+// Chương trình "Thu cũ – Đổi mới" của MMV (bài n154629 ngày 03/11/2026, đọc 12/11/2026): hỗ trợ trừ trực tiếp vào giá xe mới.
+// MMV không nêu điều kiện giấy tờ, chủ xe, cộng gộp ưu đãi khác. Tính lúc build: quá `end` thì khối này và câu trong mô tả tự ẩn.
+const tradeInBonus = {
+  start: "01/11/2026",
+  end: new Date("2026-12-31T23:59:59+07:00"),
+  rows: [
+    { oldCar: "Xe Mitsubishi", destinator: "20 triệu đồng", others: "10 triệu đồng" },
+    { oldCar: "Xe hãng khác", destinator: "15 triệu đồng", others: "5 triệu đồng" },
+  ],
+};
+const tradeInBonusActive = Date.now() <= tradeInBonus.end.getTime();
+
 export const metadata: Metadata = createPageMetadata({
   title: "Thu cũ đổi mới xe Mitsubishi: thẩm định miễn phí, MMV UCAR",
   description:
-    "Thu cũ đổi mới tại Mitsubishi Moveo New City, nhà phân phối trong hệ thống MMV UCAR: thẩm định xe miễn phí, định giá minh bạch, bán cũ mua mới tại cùng một nơi. Khách đang dùng xe Mitsubishi có thêm phiếu dịch vụ 3 triệu đồng và lãi suất vay ưu đãi.",
+    `Thu cũ đổi mới tại Mitsubishi Moveo New City, nhà phân phối trong hệ thống MMV UCAR: thẩm định xe miễn phí, định giá minh bạch, bán cũ mua mới tại cùng một nơi.${tradeInBonusActive ? " Hỗ trợ 5–20 triệu đồng khi đổi lên xe Mitsubishi mới đến 31/12/2026." : ""} Khách đang dùng xe Mitsubishi có thêm phiếu dịch vụ 3 triệu đồng.`,
   path: "/thu-cu-doi-moi",
 });
 
@@ -75,7 +87,7 @@ export default function TradeInPage() {
         name="Thu cũ đổi mới"
         type="WebPage"
         datePublished="2026-10-12"
-        dateModified="2026-11-03"
+        dateModified="2026-11-12"
       />
       <SiteHeader />
 
@@ -118,6 +130,43 @@ export default function TradeInPage() {
               </li>
             ))}
           </ul>
+
+          {tradeInBonusActive && (
+            <>
+              <h2 className="mt-12 text-2xl font-black md:text-3xl tracking-tight">
+                Hỗ trợ đến 20 triệu khi đổi lên xe Mitsubishi mới
+              </h2>
+              <p className="mt-3 leading-7 text-gray-700">
+                Từ {tradeInBonus.start} đến 31/12/2026, Mitsubishi Motors Việt Nam hỗ trợ khách đổi ô tô đã qua sử dụng (kể cả xe
+                hãng khác) lấy xe Mitsubishi mới. Khoản hỗ trợ được trừ trực tiếp vào giá mua xe mới:
+              </p>
+              <div tabIndex={0} role="region" aria-label="Bảng mức hỗ trợ thu cũ đổi mới" className="mt-4 overflow-x-auto border border-gray-200 bg-white">
+                <table className="w-full min-w-[480px] text-left">
+                  <thead className="bg-gray-100 text-sm">
+                    <tr>
+                      <th scope="col" className="px-4 py-3 font-bold">Xe cũ đang đi</th>
+                      <th scope="col" className="px-4 py-3 font-bold">Đổi sang Destinator</th>
+                      <th scope="col" className="px-4 py-3 font-bold">Đổi sang dòng Mitsubishi khác</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {tradeInBonus.rows.map((row) => (
+                      <tr key={row.oldCar} className="border-t border-gray-200">
+                        <th scope="row" className="px-4 py-3 font-semibold">{row.oldCar}</th>
+                        <td className="px-4 py-3 font-black text-red-700">{row.destinator}</td>
+                        <td className="px-4 py-3 font-black text-red-700">{row.others}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <p className="mt-4 text-sm leading-6 text-gray-600">
+                Áp dụng tại nhà phân phối ủy quyền có kinh doanh xe qua sử dụng chính hãng. Điều kiện giấy tờ xe cũ, người đứng
+                tên và việc áp dụng cùng ưu đãi tháng do nhà phân phối hướng dẫn: Phúc ghi rõ từng khoản trong báo giá trước khi
+                bạn ký hợp đồng.
+              </p>
+            </>
+          )}
 
           <h2 className="mt-12 text-2xl font-black md:text-3xl tracking-tight">Ưu đãi cho khách đang dùng xe Mitsubishi</h2>
           <p className="mt-3 leading-7 text-gray-700">
